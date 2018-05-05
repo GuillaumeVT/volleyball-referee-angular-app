@@ -1,0 +1,256 @@
+<div class="modal-header">
+  <h5 class="modal-title vbr-text" *ngIf="rules && crudType && (crudType === 1)">Create rules</h5>
+  <h5 class="modal-title vbr-text" *ngIf="rules && crudType && (crudType === 2)">Update rules {{rules.name}}</h5>
+  <h5 class="modal-title vbr-text" *ngIf="rules && crudType && (crudType === 4)">View rules {{rules.name}}</h5>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="rules && crudType">
+  <form class="needs-validation" (submit)="onSubmitForm()" novalidate autocomplete="off">
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="name" *ngIf="!invalidName">Rules name</label>
+        <label class="vbr-error-text" for="name" *ngIf="invalidName">Rules name</label>
+        <input type="text" class="vbr-text form-control" id="name" placeholder="" required [attr.disabled]="(crudType === 2 || crudType === 4) ? true : null"/>
+      </div>
+    </div>
+
+    <hr class="mb-3"/>
+
+    <h5 class="vbr-text">General</h5>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="sets-per-game">Number of sets per game</label>
+        <select class="custom-select vbr-text" id="sets-per-game" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="5">Game of 5 sets</option>
+          <option value="3">Game of 3 sets</option>
+          <option value="1">Game of 1 set</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="points-per-set">Number of points per set</label>
+        <select class="custom-select vbr-text" id="points-per-set" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="30">Set of 30 points</option>
+          <option value="29">Set of 29 points</option>
+          <option value="28">Set of 28 points</option>
+          <option value="27">Set of 27 points</option>
+          <option value="26">Set of 26 points</option>
+          <option value="25">Set of 25 points</option>
+          <option value="24">Set of 24 points</option>
+          <option value="23">Set of 23 points</option>
+          <option value="22">Set of 22 points</option>
+          <option value="21">Set of 21 points</option>
+          <option value="20">Set of 20 points</option>
+          <option value="19">Set of 19 points</option>
+          <option value="18">Set of 18 points</option>
+          <option value="17">Set of 17 points</option>
+          <option value="16">Set of 16 points</option>
+          <option value="15">Set of 15 points</option>
+          <option value="14">Set of 14 points</option>
+          <option value="13">Set of 13 points</option>
+          <option value="12">Set of 12 points</option>
+          <option value="11">Set of 11 points</option>
+          <option value="10">Set of 10 points</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="tie-break" [attr.disabled]="crudType === 4 ? true : null" (change)="onTieBreakChanged()"/>
+      <label class="custom-control-label vbr-text" for="tie-break">Tie break in last set</label>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="points-per-set">Number of points in tie break</label>
+        <select class="custom-select vbr-text" id="points-in-tie-break" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="30">Set of 30 points</option>
+          <option value="29">Set of 29 points</option>
+          <option value="28">Set of 28 points</option>
+          <option value="27">Set of 27 points</option>
+          <option value="26">Set of 26 points</option>
+          <option value="25">Set of 25 points</option>
+          <option value="24">Set of 24 points</option>
+          <option value="23">Set of 23 points</option>
+          <option value="22">Set of 22 points</option>
+          <option value="21">Set of 21 points</option>
+          <option value="20">Set of 20 points</option>
+          <option value="19">Set of 19 points</option>
+          <option value="18">Set of 18 points</option>
+          <option value="17">Set of 17 points</option>
+          <option value="16">Set of 16 points</option>
+          <option value="15">Set of 15 points</option>
+          <option value="14">Set of 14 points</option>
+          <option value="13">Set of 13 points</option>
+          <option value="12">Set of 12 points</option>
+          <option value="11">Set of 11 points</option>
+          <option value="10">Set of 10 points</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="two-points" [attr.disabled]="crudType === 4 ? true : null"/>
+      <label class="custom-control-label vbr-text" for="two-points">Two points difference to win set</label>
+    </div>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="sanctions" [attr.disabled]="crudType === 4 ? true : null"/>
+      <label class="custom-control-label vbr-text" for="sanctions">Sanctions</label>
+    </div>
+
+    <hr class="mb-3"/>
+
+    <h5 class="vbr-text">Timeout</h5>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="team-timeouts" [attr.disabled]="crudType === 4 ? true : null" (change)="onTeamTimeoutsChanged()"/>
+      <label class="custom-control-label vbr-text" for="team-timeouts">Team timeouts</label>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="team-timeouts-number">Number of team timeouts per set</label>
+        <select class="custom-select vbr-text" id="team-timeouts-number" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="2">2 team timeouts per set</option>
+          <option value="1">1 team timeout per set</option>
+          <option value="0">No team timeout per set</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="team-timeouts-duration">Duration of a team timeout</label>
+        <select class="custom-select vbr-text" id="team-timeouts-duration" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="60">60 seconds</option>
+          <option value="45">45 seconds</option>
+          <option value="30">30 seconds</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="technical-timeouts" [attr.disabled]="crudType === 4 ? true : null" (change)="onTechnicalTimeoutsChanged()"/>
+      <label class="custom-control-label vbr-text" for="technical-timeouts">Technical timeouts</label>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="technical-timeouts-duration">Duration of a technical timeout</label>
+        <select class="custom-select vbr-text" id="technical-timeouts-duration" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="60">60 seconds</option>
+          <option value="45">45 seconds</option>
+          <option value="30">30 seconds</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="game-intervals" [attr.disabled]="crudType === 4 ? true : null" (change)="onGameIntervalsChanged()"/>
+      <label class="custom-control-label vbr-text" for="game-intervals">Game intervals</label>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="game-intervals-duration">Duration of a game interval</label>
+        <select class="custom-select vbr-text" id="game-intervals-duration" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="180">3 minutes</option>
+          <option value="120">2 minutes</option>
+          <option value="60">1 minute</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="mb-3"/>
+
+    <h5 class="vbr-text">Indoor Volleyball</h5>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="substitutions-number">Number of team substitutions per set</label>
+        <select class="custom-select vbr-text" id="substitutions-number" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="12">12 substitutions per set</option>
+          <option value="6">6 substitutions per set</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="mb-3"/>
+
+    <h5 class="vbr-text">Beach Volleyball</h5>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="change-sides-beach" [attr.disabled]="crudType === 4 ? true : null" (change)="onChangeSidesBeachChanged()"/>
+      <label class="custom-control-label vbr-text" for="change-sides-beach">Change sides</label>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="change-sides-period">Sides change period in normal set</label>
+        <select class="custom-select vbr-text" id="change-sides-period" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="10">Every 10 points</option>
+          <option value="9">Every 9 points</option>
+          <option value="8">Every 8 points</option>
+          <option value="7">Every 7 points</option>
+          <option value="6">Every 6 points</option>
+          <option value="5">Every 5 points</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="change-sides-period-tie-break">Sides change period in tie break</label>
+        <select class="custom-select vbr-text" id="change-sides-period-tie-break" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="10">Every 10 points</option>
+          <option value="9">Every 9 points</option>
+          <option value="8">Every 8 points</option>
+          <option value="7">Every 7 points</option>
+          <option value="6">Every 6 points</option>
+          <option value="5">Every 5 points</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="mb-3"/>
+
+    <h5 class="vbr-text">Custom rules for specific leagues</h5>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="consecutive-serves">Limit of consecutive serves per player</label>
+        <select class="custom-select vbr-text" id="consecutive-serves" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="9999">Unlimited</option>
+          <option value="5">5 serves</option>
+          <option value="4">4 serves</option>
+          <option value="3">3 serves</option>
+          <option value="2">2 serves</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="invalidResponse">
+      <div class="col-12 col-sm-10">
+        <p class="alert alert-danger" *ngIf="crudType === 1">
+          The rules could not be created. Is the name already taken?
+        </p>
+        <p class="alert alert-danger" *ngIf="crudType === 2">
+          The rules could not be updated. Do they still exist?
+        </p>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn cancel-button" *ngIf="crudType === 4" (click)="close()">Close</button>
+      <button type="button" class="btn cancel-button" *ngIf="crudType !== 4" (click)="close()">Cancel</button>
+      <button type="submit" class="btn vbr-button" *ngIf="crudType === 1">Create</button>
+      <button type="submit" class="btn vbr-button" *ngIf="crudType === 2">Update</button>
+    </div>
+  </form>
+</div>

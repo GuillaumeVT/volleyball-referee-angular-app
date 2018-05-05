@@ -1,0 +1,28 @@
+.nav-bar {
+  background-color: #1f4294;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search-form {
+  background-color: #f3f3f3;
+}
+
+.brand-img-size {
+  width: 40px;
+  height: auto;
+}
+
+.user-image {
+  width: 24px;
+  height: auto;
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 1200px) {
+  .brand-img-size {
+    width: 32px;
+  }
+}

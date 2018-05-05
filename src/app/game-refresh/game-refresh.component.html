@@ -1,0 +1,4 @@
+<div class="comp-container">
+  <button class="btn vbr-button rounded-circle" (click)="updateGame()" *ngIf="game && game.status === 'LIVE'"><i class="fa fa-refresh"></i></button>
+  <button class="btn vbr-button rounded-circle" (click)="downloadPdfGame()" *ngIf="game && game.status === 'COMPLETED'"><i class="fa fa-download"></i></button>
+</div>

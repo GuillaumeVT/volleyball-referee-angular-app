@@ -1,0 +1,4 @@
+.comp-container {
+  z-index: 3;
+  position: fixed;
+}

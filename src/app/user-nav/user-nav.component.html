@@ -1,0 +1,9 @@
+<div class="text-center">
+  <ul class="list-unstyled list-inline">
+    <li class="list-inline-item my-1"><a [ngClass]="getLinkClass(0)" [routerLink]="getUserDashboardUrl()">Dashboard</a></li>
+    <li class="list-inline-item my-1"><a [ngClass]="getLinkClass(1)" [routerLink]="getUserLeaguesUrl()">Tournaments</a></li>
+    <li class="list-inline-item my-1"><a [ngClass]="getLinkClass(2)" [routerLink]="getUserGamesUrl()">Games</a></li>
+    <li class="list-inline-item my-1"><a [ngClass]="getLinkClass(3)" [routerLink]="getUserTeamsUrl()">Teams</a></li>
+    <li class="list-inline-item my-1"><a [ngClass]="getLinkClass(4)" [routerLink]="getUserRulesUrl()">Rules</a></li>
+  </ul>
+</div>

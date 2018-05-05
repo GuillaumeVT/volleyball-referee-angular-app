@@ -1,0 +1,10 @@
+.div-players {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  width: inherit;
+  align-items: center;
+  justify-items: start;
+  align-content: center;
+  justify-content: start;
+}

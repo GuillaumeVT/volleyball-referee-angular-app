@@ -1,0 +1,72 @@
+.mixed-button {
+  background-color: inherit;
+  color: #006232;
+  border-color: #006232;
+}
+
+.mixed-button:hover {
+  background-color: #006232;
+  color: white;
+  border-color: #006232;
+}
+
+.ladies-button {
+  background-color: inherit;
+  color: #c2185b;
+  border-color: #c2185b;
+}
+
+.ladies-button:hover {
+  background-color: #c2185b;
+  color: white;
+  border-color: #c2185b;
+}
+
+.gents-button {
+  background-color: inherit;
+  color: #1f4294;
+  border-color: #1f4294;
+}
+
+.gents-button:hover {
+  background-color: #1f4294;
+  color: white;
+  border-color: #1f4294;
+}
+
+.color-input {
+  background-color: inherit;
+}
+
+.color-input:hover {
+  box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+}
+
+.div-players {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  width: inherit;
+  align-items: center;
+  justify-items: start;
+  align-content: center;
+  justify-content: start;
+}
+
+.form-button {
+  width: 60px;
+  height: 45px;
+}
+
+.form-button:hover {
+  box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+}
+
+.player-button {
+  width: 50px;
+  height: 45px;
+}
+
+.player-button:hover {
+  box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+}

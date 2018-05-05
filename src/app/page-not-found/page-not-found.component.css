@@ -1,0 +1,24 @@
+.div-content {
+  position: relative;
+  text-align: center;
+}
+
+.not-found-image {
+  width: 80%;
+  max-width: 900px;
+  height: auto;
+}
+
+.not-found-text {
+  color: white;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 1200px) {
+  .not-found-text {
+    font-size: 1.2em;
+  }
+}

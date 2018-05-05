@@ -1,0 +1,35 @@
+.mixed-button {
+  background-color: inherit;
+  color: #006232;
+  border-color: #006232;
+}
+
+.mixed-button:hover {
+  background-color: #006232;
+  color: white;
+  border-color: #006232;
+}
+
+.ladies-button {
+  background-color: inherit;
+  color: #c2185b;
+  border-color: #c2185b;
+}
+
+.ladies-button:hover {
+  background-color: #c2185b;
+  color: white;
+  border-color: #c2185b;
+}
+
+.gents-button {
+  background-color: inherit;
+  color: #1f4294;
+  border-color: #1f4294;
+}
+
+.gents-button:hover {
+  background-color: #1f4294;
+  color: white;
+  border-color: #1f4294;
+}

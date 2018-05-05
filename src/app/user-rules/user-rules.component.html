@@ -1,0 +1,34 @@
+<div class="div-header">
+  <app-navigation-bar></app-navigation-bar>
+</div>
+<div>
+  <app-user-nav [selectedIndex]="4"></app-user-nav>
+</div>
+<div class="div-user text-center" *ngIf="signedIn">
+  <div class="jumbotron div-jumbotron p-4 m-1">
+    <p class="lead vbr-text">My rules</p>
+    <hr class="mt-2 mb-4"/>
+    <button class="btn vbr-button-inverted" (click)="createRules()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Create</button>
+  </div>
+  <div *ngFor="let rules of rulesList" class="card div-card my-3 mx-1 py-2">
+    <div class="row align-items-center m-1">
+      <div class="vbr-text col-12 col-sm-4 p-1 text-left">{{rules.name}}</div>
+      <div class="vbr-text col-7 col-sm-4 p-1 text-left">
+        <span class="icon-text">Last updated on&nbsp;</span>{{rules.date | date : 'dd MMM yyyy, HH:mm:ss'}}
+      </div>
+      <div class="vbr-text col-5 col-sm-4 p-1 text-right">
+        <div class="btn-group">
+          <button type="button" class="btn vbr-button-inverted" (click)="viewRules(rules)">
+            <i class="fa fa-eye"></i><span class="icon-text">&nbsp;&nbsp;View</span>
+          </button>
+          <button type="button" class="btn vbr-button-inverted" (click)="updateRules(rules)">
+            <i class="fa fa-pencil"></i><span class="icon-text">&nbsp;&nbsp;Edit</span>
+          </button>
+          <button type="button" class="btn vbr-button-inverted" (click)="deleteRules(rules)">
+            <i class="fa fa-trash"></i><span class="icon-text">&nbsp;&nbsp;Delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

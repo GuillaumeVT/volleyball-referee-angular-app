@@ -1,0 +1,141 @@
+.position-1-l {
+  align-self: center;
+  justify-self: start;
+  grid-column: 2;
+  grid-row: 3;
+  text-align: center;
+}
+
+.position-2-l {
+  align-self: center;
+  justify-self: center;
+  grid-column: 3;
+  grid-row: 3;
+  text-align: center;
+}
+
+.position-3-l {
+  align-self: center;
+  justify-self: center;
+  grid-column: 3;
+  grid-row: 2;
+  text-align: center;
+}
+
+.position-4-l {
+  align-self: center;
+  justify-self: center;
+  grid-column: 3;
+  grid-row: 1;
+  text-align: center;
+}
+
+.position-5-l {
+  align-self: center;
+  justify-self: start;
+  grid-column: 2;
+  grid-row: 1;
+  text-align: center;
+}
+
+.position-6-l {
+  align-self: center;
+  justify-self: start;
+  grid-column: 2;
+  grid-row: 2;
+  text-align: center;
+}
+
+.position-1-r {
+  align-self: center;
+  justify-self: end;
+  grid-column: 5;
+  grid-row: 1;
+  text-align: center;
+}
+
+.position-2-r {
+  align-self: center;
+  justify-self: center;
+  grid-column: 4;
+  grid-row: 1;
+  text-align: center;
+}
+
+.position-3-r {
+  align-self: center;
+  justify-self: center;
+  grid-column: 4;
+  grid-row: 2;
+  text-align: center;
+}
+
+.position-4-r {
+  align-self: center;
+  justify-self: center;
+  grid-column: 4;
+  grid-row: 3;
+  text-align: center;
+}
+
+.position-5-r {
+  align-self: center;
+  justify-self: end;
+  grid-column: 5;
+  grid-row: 3;
+  text-align: center;
+}
+
+.position-6-r {
+  align-self: center;
+  justify-self: end;
+  grid-column: 5;
+  grid-row: 2;
+  text-align: center;
+}
+
+.serve-1-l {
+  align-self: center;
+  justify-self: center;
+  grid-column: 1;
+  grid-row: 3;
+  text-align: center;
+}
+
+.serve-1-r {
+  align-self: center;
+  justify-self: center;
+  grid-column: 6;
+  grid-row: 1;
+  text-align: center;
+}
+
+.serve {
+  width: 24px;
+  height: auto;
+}
+
+.div-court {
+  display: grid;
+  grid-template-columns: 16fr 17fr 17fr 17fr 17fr 16fr;
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  background-size: 100% 100%;
+  background-image: url(../../assets/indoor_court.png);
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .div-court {
+    width: 75%;
+    max-width: 300px;
+    height: 130px;
+  }
+
+  .serve {
+    width: 16px;
+  }
+}

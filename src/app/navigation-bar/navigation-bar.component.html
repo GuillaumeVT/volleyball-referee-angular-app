@@ -1,0 +1,22 @@
+<div class="material-design-shadow mb-3">
+	<div class="nav-bar pl-2">
+		<a class="navbar-brand" [routerLink]="getHomeUrl()"><img class="brand-img-size" src="../../assets/vbr_toolbar.png" alt="vbr"></a>
+		<button class="btn vbr-button" (click)="onShowSearchClicked()"><i class="fa fa-search"></i><span class="icon-text">&nbsp;&nbsp;Search games</span></button>
+		<a class="btn vbr-button" [routerLink]="getLiveUrl()"><i class="fa fa-mixcloud vbr-button-color"></i><span class="icon-text vbr-button-color">&nbsp;&nbsp;Live games</span></a>
+		<a class="btn vbr-button" [routerLink]="getUserUrl()"><i *ngIf="!image" class="fa fa-user vbr-button-color"></i><img *ngIf="image" [src]="image" class="user-image"/><span class="icon-text vbr-button-color">&nbsp;&nbsp;My data</span></a>
+	</div>
+	<div class="search-form py-3 px-1" *ngIf="searchShown">
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<button class="btn vbr-button" (click)="onSearchTokenClicked(searchedToken)"><i class="fa fa-search"></i></button>
+			</div>
+			<input type="text" class="form-control vbr-text-color" placeholder="By team / league / referee" #searchedToken (keyup.enter)="onSearchTokenClicked(searchedToken)"/>
+		</div>
+		<div class="input-group">
+			<div class="input-group-prepend">
+				<button class="btn vbr-button" (click)="onSearchDateClicked()"><i class="fa fa-search"></i></button>
+			</div>
+			<input type="date" class="form-control vbr-text-color" min="2018-01-02" max="2038-01-02" [ngModel]="dateModel | date:'yyyy-MM-dd'" (ngModelChange)="dateModel = $event"/>
+		</div>
+	</div>
+</div>

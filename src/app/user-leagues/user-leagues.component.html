@@ -1,0 +1,63 @@
+<div class="div-header">
+  <app-navigation-bar></app-navigation-bar>
+</div>
+<div>
+  <app-user-nav [selectedIndex]="1"></app-user-nav>
+</div>
+<div class="div-user text-center" *ngIf="signedIn">
+  <div class="jumbotron div-jumbotron p-4 m-1">
+    <p class="lead vbr-text">My Tournaments and Leagues</p>
+    <hr class="mt-2 mb-4"/>
+    <div class="btn-group text-center">
+      <button class="btn vbr-button-inverted" (click)="createLeague('INDOOR')">
+        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="icon-text">Create</span>&nbsp;6x6
+      </button>
+      <button class="btn vbr-button-inverted" (click)="createLeague('BEACH')">
+        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="icon-text">Create</span>&nbsp;Beach
+      </button>
+      <button class="btn vbr-button-inverted" (click)="createLeague('INDOOR_4X4')">
+        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="icon-text">Create</span>&nbsp;4x4
+      </button>
+    </div>
+  </div>
+  <div class="my-3 mx-1 text-left" *ngIf="leagueFilter.leagues && leagueFilter.leagues.length > 0">
+    <input type="text" class="form-control vbr-text-color mb-2" placeholder="Filter" #textFilter (input)="leagueFilter.filterFromText(textFilter)"/>
+    <div class="text-left">
+      <ul class="list-unstyled list-inline">
+        <button id="beach-button" class="btn vbr-beach-button list-inline-item my-1" (click)="leagueFilter.toggleBeach()"><i class="fa fa-sun-o"></i>&nbsp;&nbsp;Beach</button>
+        <button id="indoor-button" class="btn vbr-indoor-button list-inline-item my-1" (click)="leagueFilter.toggleIndoor()">6x6</button>
+        <button id="indoor-4x4-button" class="btn vbr-indoor-button list-inline-item my-1" (click)="leagueFilter.toggleIndoor4x4()">4x4</button>
+      </ul>
+    </div>
+  </div>
+  <div *ngFor="let league of leagueFilter.filteredLeagues" class="card div-card my-3 mx-1 py-2">
+    <div class="row align-items-center m-1">
+      <div class="vbr-text col-12 col-sm-4 p-1 text-left">
+        {{league.name}}
+      </div>
+      <div class="vbr-text col-11 col-sm-2 p-1 text-left">
+        <a class="btn vbr-button-inverted" [routerLink]="getLeaguePublicUrl(league)" placement="top" ngbTooltip="Navigate to the public section of the tournament. Share this URL with everyone.">
+          Public Page »
+        </a>
+      </div>
+      <div class="vbr-text col-1 col-sm-1 p-1 text-left">
+        <i class="fa fa-sun-o vbr-sun-text ml-1" *ngIf="league.kind === 'BEACH'"></i>
+        <span class="badge text-center vbr-indoor-text ml-1" *ngIf="league.kind === 'INDOOR'">6</span>
+        <span class="badge text-center vbr-indoor-text ml-1" *ngIf="league.kind === 'INDOOR_4X4'">4</span>
+      </div>
+      <div class="vbr-text col-7 col-sm-2 p-1 text-left">
+        <span class="icon-text">Created on&nbsp;</span>{{league.date | date : 'dd MMM yyyy, HH:mm'}}
+      </div>
+      <div class="vbr-text col-5 col-sm-3 p-1 text-right">
+        <div class="btn-group">
+          <button type="button" class="btn vbr-button-inverted" (click)="viewLeague(league)">
+            <i class="fa fa-eye"></i>&nbsp;&nbsp;{{countsMap.get(league.name)}}<span class="icon-text">&nbsp;Games</span>
+          </button>
+          <button type="button" class="btn vbr-button-inverted" (click)="deleteLeague(league)">
+            <i class="fa fa-trash"></i><span class="icon-text">&nbsp;&nbsp;Delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

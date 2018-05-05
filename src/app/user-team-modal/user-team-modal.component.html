@@ -1,0 +1,127 @@
+<div class="modal-header">
+  <h5 class="modal-title vbr-text" *ngIf="team && crudType && (crudType === 1)">Create team</h5>
+  <h5 class="modal-title vbr-text" *ngIf="team && crudType && (crudType === 2)">Update team {{team.name}}</h5>
+  <h5 class="modal-title vbr-text" *ngIf="team && crudType && (crudType === 4)">View team {{team.name}}</h5>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="team && crudType">
+  <form class="needs-validation" (submit)="onSubmitForm()" novalidate autocomplete="off">
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="name" *ngIf="!invalidName">Team name</label>
+        <label class="vbr-error-text" for="name" *ngIf="invalidName">Team name</label>
+        <input type="text" class="vbr-text form-control" id="name" placeholder="" required [attr.disabled]="(crudType === 2 || crudType === 4) ? true : null"/>
+      </div>
+    </div>
+
+    <hr class="mb-3"/>
+
+    <div class="row align-items-center mb-3">
+      <div class="col-6 col-sm-4">
+        <label class="vbr-text">Gender</label>
+      </div>
+      <div class="col-6 col-sm-8">
+        <button type="button" class="btn form-button" [ngClass]="getGenderButton()" id="gender" (click)="nextGender()" [attr.disabled]="(crudType === 2 || crudType === 4) ? true : null">
+          <i class="p-1" [ngClass]="getGenderIcon()"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-3">
+      <div class="col-6 col-sm-4">
+        <label class="vbr-text" for="shirt-color">Shirt color</label>
+      </div>
+      <div class="col-6 col-sm-8">
+        <input type="color" class="form-control form-button" id="shirt-color" (change)="onShirtColorChanged()" [attr.disabled]="crudType === 4 ? true : null"/>
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-3" *ngIf="!moreNumbers" [hidden]="team.kind === 'BEACH'">
+      <div class="col-12 col-sm-12">
+        <label class="vbr-text" for="players">Team players (including liberos)</label>
+        <div class="div-players" id="players">
+          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:0:25;" (click)="onPlayerSelected(playerItem.shirtNumber)"
+            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [innerHTML]="playerItem.player" [attr.disabled]="crudType === 4 ? true : null"></button>
+          <button type="button" class="btn vbr-button-inverted m-1" (click)="showMoreNumbers()">More numbers</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-3" *ngIf="moreNumbers" [hidden]="team.kind === 'BEACH'">
+      <div class="col-12 col-sm-12">
+        <label class="vbr-text" for="players">Team players (including liberos)</label>
+        <div class="div-players" id="players">
+          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players" (click)="onPlayerSelected(playerItem.shirtNumber)"
+            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [innerHTML]="playerItem.player" [attr.disabled]="crudType === 4 ? true : null"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-3">
+      <div class="col-6 col-sm-4">
+        <label class="vbr-text" for="captain" *ngIf="!invalidCaptain">Team captain</label>
+        <label class="vbr-error-text" for="captain" *ngIf="invalidCaptain">Team captain</label>
+      </div>
+      <div class="col-6 col-sm-6">
+        <select class="custom-select vbr-text" id="captain" [attr.disabled]="crudType === 4 ? true : null">
+          <option *ngFor="let playerItem of players" [value]="playerItem.shirtNumber">{{playerItem.shirtNumber}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-3" [hidden]="team.kind === 'BEACH'">
+      <div class="col-6 col-sm-4">
+        <label class="vbr-text" for="libero-shirt-color">Libero shirt color</label>
+      </div>
+      <div class="col-6 col-sm-6">
+        <input type="color" class="form-control form-button" id="libero-shirt-color" (change)="onLiberoShirtColorChanged()" [attr.disabled]="crudType === 4 ? true : null"/>
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-3" [hidden]="team.kind === 'BEACH'">
+      <div class="col-12 col-sm-12">
+        <label class="vbr-text" for="liberos">Team liberos</label>
+        <div class="div-players" id="liberos">
+          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of liberos" (click)="onLiberoSelected(playerItem.shirtNumber)"
+            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [innerHTML]="playerItem.player" [attr.disabled]="crudType === 4 ? true : null"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="invalidCaptain">
+      <div class="col-12 col-sm-10">
+        <p class="alert alert-danger">
+          Please use a selected player as captain.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="availablePlayers < minPlayers">
+      <div class="col-12 col-sm-10">
+        <p class="alert alert-danger">
+          Please select at least {{minPlayers - availablePlayers}} more players.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="invalidResponse">
+      <div class="col-12 col-sm-10">
+        <p class="alert alert-danger" *ngIf="crudType === 1">
+          The team could not be created. Is the name already taken?
+        </p>
+        <p class="alert alert-danger" *ngIf="crudType === 2">
+          The team could not be updated. Does it still exist?
+        </p>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn cancel-button" *ngIf="crudType === 4" (click)="close()">Close</button>
+      <button type="button" class="btn cancel-button" *ngIf="crudType !== 4" (click)="close()">Cancel</button>
+      <button type="submit" class="btn vbr-button" *ngIf="crudType === 1">Create</button>
+      <button type="submit" class="btn vbr-button" *ngIf="crudType === 2">Update</button>
+    </div>
+  </form>
+</div>

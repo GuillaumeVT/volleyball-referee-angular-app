@@ -1,0 +1,10 @@
+.div-timeouts {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  width: inherit;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  justify-content: center;
+}

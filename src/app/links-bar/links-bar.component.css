@@ -1,0 +1,19 @@
+.btn-android {
+	color: white;
+	background-color: #6ab344;
+	border-color: #6ab344;
+}
+
+.btn-android:hover {
+  box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+}
+
+.btn-facebook {
+	color: white;
+	background-color: #4267a8;
+	border-color: #4267a8;
+}
+
+.btn-facebook:hover {
+  box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+}

@@ -1,0 +1,13 @@
+<div class="div-content">
+  <div class="div-summary card div-card">
+    <app-game-summary class="game-summary" [date]="date" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (teamsSwapped)="onTeamsSwapped()"></app-game-summary>
+    <app-set-selector class="set-selector" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-set-selector>
+    <app-set-summary class="set-summary" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-set-summary>
+  </div>
+  <div class="div-secondary card div-card">
+    <app-beach-court class="beach-court" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-beach-court>
+    <app-set-timeouts class="timeouts" *ngIf="game" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-set-timeouts>
+  </div>
+  <app-ladder class="ladder card div-card" [game]="game" [setIndex]="currentSet" [topTeam]="leftTeam" [bottomTeam]="rightTeam"></app-ladder>
+  <app-game-sanctions class="sanctions card div-card" *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-game-sanctions>
+</div>
