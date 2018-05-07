@@ -88,9 +88,8 @@ export class UserService {
     return this.http.get<Team[]>(this.userTeamUrl, { params: params });
   }
 
-  getTeamsWithKindInLeague(kind: string, league: string): Observable<Team[]> {
-    const userId = this.getUserId();
-    let params = new HttpParams().set("socialId", userId.socialId).set("provider", userId.provider).set("kind", kind).set('league', league);
+  getTeamsWithKindInLeaguePublic(date: number): Observable<Team[]> {
+    let params = new HttpParams().set("date", String(date));
     return this.http.get<Team[]>(this.userTeamUrl, { params: params });
   }
 
@@ -146,12 +145,6 @@ export class UserService {
     return this.http.get<GameDescription[]>(this.userGameUrl, { params: params });
   }
 
-  getGamesOfLeagueForTeam(kind: string, league: string, gender: string): Observable<GameDescription[]> {
-    const userId = this.getUserId();
-    let params = new HttpParams().set("socialId", userId.socialId).set("provider", userId.provider).set('kind', kind).set('league', league).set('gender', gender);
-    return this.http.get<GameDescription[]>(this.userGameUrl, { params: params });
-  }
-
   getGame(id: number): Observable<GameDescription> {
     const userId = this.getUserId();
     let params = new HttpParams().set("id", String(id)).set("socialId", userId.socialId).set("provider", userId.provider);
@@ -195,6 +188,11 @@ export class UserService {
     const userId = this.getUserId();
     let params = new HttpParams().set("socialId", userId.socialId).set("provider", userId.provider).set('kind', kind);
     return this.http.get<League[]>(this.userLeagueUrl, { params: params });
+  }
+
+  getLeaguePublic(date: number): Observable<League> {
+    let params = new HttpParams().set("date", String(date));
+    return this.http.get<League>(this.userLeagueUrl, { params: params });
   }
 
   getLeague(date: number): Observable<League> {

@@ -3,7 +3,7 @@ import { GameDescription } from './model/gamedescription';
 import { GameStatistics } from './model/gamestatistics';
 import { Injectable } from '@angular/core';
 import { Set } from './model/set';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { environment } from '../environments/environment';
@@ -11,10 +11,11 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class GameService {
 
-  private apiUrl        = environment.api;
-  private viewGameUrl   = this.apiUrl + '/view/game';
-  private searchGameUrl = this.apiUrl + '/search/game';
-  private gameStatsUrl  = this.apiUrl + '/stats/game';
+  private apiUrl          = environment.api;
+  private viewGameUrl     = this.apiUrl + '/view/game';
+  private searchGameUrl   = this.apiUrl + '/search/game';
+  private searchLeagueUrl = this.searchGameUrl + '/league';
+  private gameStatsUrl    = this.apiUrl + '/stats/game';
 
   constructor(private http: HttpClient) { }
 
@@ -50,6 +51,32 @@ export class GameService {
     } else {
       return of([]);
     }
+  }
+
+  searchGamesInLeague(id: number): Observable<GameDescription[]> {
+    const url = `${this.searchLeagueUrl}/${id}`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  searchGamesOfTeamInLeague(id: number, team: string, gender: string): Observable<GameDescription[]> {
+    let params = new HttpParams().set('team', team).set('gender', gender);
+    const url = `${this.searchLeagueUrl}/${id}`;
+    return this.http.get<GameDescription[]>(url, { params: params });
+  }
+
+  searchLiveGamesInLeague(id: number): Observable<GameDescription[]> {
+    const url = `${this.searchLeagueUrl}/${id}/live`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  searchLast10GamesInLeague(id: number): Observable<GameDescription[]> {
+    const url = `${this.searchLeagueUrl}/${id}/last10`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  searchNext10GamesInLeague(id: number): Observable<GameDescription[]> {
+    const url = `${this.searchLeagueUrl}/${id}/next10`;
+    return this.http.get<GameDescription[]>(url);
   }
 
   getGameStatistics() : Observable<GameStatistics> {

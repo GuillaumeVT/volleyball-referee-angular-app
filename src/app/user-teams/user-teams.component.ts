@@ -6,6 +6,7 @@ import { UserService } from '../user.service';
 import { AuthService } from 'angularx-social-login';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserTeamModalComponent } from '../user-team-modal/user-team-modal.component';
 import { OkCancelModalComponent } from '../ok-cancel-modal/ok-cancel-modal.component';
@@ -21,7 +22,8 @@ export class UserTeamsComponent implements OnInit {
   signedIn:   boolean;
   teamFilter: TeamFilter;
 
-  constructor(private router: Router, private authService: AuthService, private userService: UserService, private modalService: NgbModal, private utils: Utils, private toastr: ToastrService) {
+  constructor(private titleService: Title, private router: Router, private authService: AuthService, private userService: UserService, private modalService: NgbModal, private utils: Utils, private toastr: ToastrService) {
+    this.titleService.setTitle('Volleyball Referee - User');
     this.signedIn = false;
     this.teamFilter = new TeamFilter();
   }
@@ -33,9 +35,15 @@ export class UserTeamsComponent implements OnInit {
       if (this.signedIn) {
         this.refreshTeams();
       } else {
-        this.router.navigateByUrl('user');
+        setTimeout(() => this.navigateToUser(), 1000);
       }
     });
+  }
+
+  navigateToUser(): void {
+    if (!this.signedIn) {
+      this.router.navigateByUrl('user')
+    }
   }
 
   refreshTeams(): void {

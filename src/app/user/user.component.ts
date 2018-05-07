@@ -1,5 +1,6 @@
 import { UserService } from '../user.service';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 
 @Component({
@@ -18,7 +19,8 @@ export class UserComponent implements OnInit {
   numberOfGames:   number;
   numberOfLeagues: number;
 
-  constructor(private authService: AuthService, private userService: UserService) {
+  constructor(private titleService: Title, private authService: AuthService, private userService: UserService) {
+    this.titleService.setTitle('Volleyball Referee - User');
     this.signedIn = false;
     this.showGreetings1 = true;
     this.showGreetings2 = true;

@@ -9,6 +9,7 @@ import { UserService } from '../user.service';
 import { AuthService } from 'angularx-social-login';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserGameModalComponent } from '../user-game-modal/user-game-modal.component';
 import { OkCancelModalComponent } from '../ok-cancel-modal/ok-cancel-modal.component';
@@ -30,7 +31,8 @@ export class UserGamesComponent implements OnInit {
   selectedLeague: string;
   selectedKind:   string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private userService: UserService, private modalService: NgbModal, private utils: Utils, private toastr: ToastrService) {
+  constructor(private titleService: Title, private router: Router, private route: ActivatedRoute, private authService: AuthService, private userService: UserService, private modalService: NgbModal, private utils: Utils, private toastr: ToastrService) {
+    this.titleService.setTitle('Volleyball Referee - User');
     this.signedIn = false;
     this.rules = [];
     this.defaultRules = [];
@@ -49,9 +51,15 @@ export class UserGamesComponent implements OnInit {
         this.refreshGames();
         this.refreshRules();
       } else {
-        this.router.navigateByUrl('user');
+        setTimeout(() => this.navigateToUser(), 1000);
       }
     });
+  }
+
+  navigateToUser(): void {
+    if (!this.signedIn) {
+      this.router.navigateByUrl('user')
+    }
   }
 
   refreshGames(): void {

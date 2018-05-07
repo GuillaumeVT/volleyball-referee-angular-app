@@ -4,6 +4,7 @@ import { UserService } from '../user.service';
 import { AuthService } from 'angularx-social-login';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserLeaguesModalComponent } from '../user-leagues-modal/user-leagues-modal.component';
 import { OkCancelModalComponent } from '../ok-cancel-modal/ok-cancel-modal.component';
@@ -20,7 +21,8 @@ export class UserLeaguesComponent implements OnInit {
   leagueFilter: LeagueFilter;
   countsMap:    Map<string,number>;
 
-  constructor(private router: Router, private authService: AuthService, private userService: UserService, private modalService: NgbModal, private toastr: ToastrService) {
+  constructor(private titleService: Title, private router: Router, private authService: AuthService, private userService: UserService, private modalService: NgbModal, private toastr: ToastrService) {
+    this.titleService.setTitle('Volleyball Referee - User');
     this.signedIn = false;
     this.leagueFilter = new LeagueFilter();
     this.countsMap = new Map();
@@ -33,9 +35,15 @@ export class UserLeaguesComponent implements OnInit {
       if (this.signedIn) {
         this.refreshLeagues();
       } else {
-        this.router.navigateByUrl('user');
+        setTimeout(() => this.navigateToUser(), 1000);
       }
     });
+  }
+
+  navigateToUser(): void {
+    if (!this.signedIn) {
+      this.router.navigateByUrl('user')
+    }
   }
 
   refreshLeagues(): void {

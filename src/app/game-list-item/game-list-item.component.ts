@@ -10,6 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class GameListItemComponent implements OnInit {
 
   @Input() gameDescription: GameDescription;
+  @Input() inLeague:        boolean;
 
   constructor(private utils: Utils) { }
 

@@ -63,6 +63,7 @@ import { UserGameModalComponent } from './user-game-modal/user-game-modal.compon
 import { UserNavComponent } from './user-nav/user-nav.component';
 import { UserLeaguesComponent } from './user-leagues/user-leagues.component';
 import { UserLeaguesModalComponent } from './user-leagues-modal/user-leagues-modal.component';
+import { LeagueComponent } from './league/league.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { UserLeaguesModalComponent } from './user-leagues-modal/user-leagues-mod
     UserNavComponent,
     UserLeaguesComponent,
     UserLeaguesModalComponent,
+    LeagueComponent,
   ],
   imports: [
     BrowserModule,
