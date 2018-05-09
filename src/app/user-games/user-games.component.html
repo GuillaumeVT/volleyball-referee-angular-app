@@ -41,6 +41,7 @@
       <div class="vbr-text col-12 col-sm-4 p-1 text-left">
         {{game.hName}} - {{game.gName}}
         <span *ngIf="game.league && game.league.length" class="text-muted"><br/>{{game.league}}</span>
+        <span *ngIf="game.referee && game.referee.length" class="text-muted"> <br/><i class="fa fa-user mr-1"></i>by {{game.referee}}</span>
       </div>
       <div class="vbr-text col-10 col-sm-2 p-1 text-left list-unstyled list-inline">
         <a class="btn vbr-button-inverted list-inline-item my-1" [routerLink]="getGamePublicUrl(game)" placement="top" ngbTooltip="Navigate to the public page for this game. Share this URL with everyone.">
