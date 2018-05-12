@@ -52,9 +52,9 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
     (<HTMLInputElement>document.getElementById('game-intervals')).checked = this.rules.gameIntervals;
     (<HTMLInputElement>document.getElementById('game-intervals-duration')).value = String(this.rules.gameIntervalDuration);
     (<HTMLInputElement>document.getElementById('substitutions-number')).value = String(this.rules.teamSubstitutionsPerSet);
-    (<HTMLInputElement>document.getElementById('change-sides-beach')).checked = this.rules.changeSidesBeach;
-    (<HTMLInputElement>document.getElementById('change-sides-period')).value = String(this.rules.changeSidesPeriod);
-    (<HTMLInputElement>document.getElementById('change-sides-period-tie-break')).value = String(this.rules.changeSidesPeriodTieBreak);
+    (<HTMLInputElement>document.getElementById('beach-court-switches')).checked = this.rules.beachCourtSwitches;
+    (<HTMLInputElement>document.getElementById('beach-switch-court-frequency')).value = String(this.rules.beachCourtSwitchFreq);
+    (<HTMLInputElement>document.getElementById('beach-switch-court-frequency-tie-break')).value = String(this.rules.beachCourtSwitchFreqTieBreak);
     (<HTMLInputElement>document.getElementById('consecutive-serves')).value = String(this.rules.customConsecutiveServesPerPlayer);
 
     this.onTeamTimeoutsChanged();
@@ -86,9 +86,9 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
       this.rules.gameIntervals = (<HTMLInputElement>document.getElementById('game-intervals')).checked;
       this.rules.gameIntervalDuration = Number((<HTMLInputElement>document.getElementById('game-intervals-duration')).value);
       this.rules.teamSubstitutionsPerSet = Number((<HTMLInputElement>document.getElementById('substitutions-number')).value);
-      this.rules.changeSidesBeach = (<HTMLInputElement>document.getElementById('change-sides-beach')).checked;
-      this.rules.changeSidesPeriod = Number((<HTMLInputElement>document.getElementById('change-sides-period')).value);
-      this.rules.changeSidesPeriodTieBreak = Number((<HTMLInputElement>document.getElementById('change-sides-period-tie-break')).value);
+      this.rules.beachCourtSwitches = (<HTMLInputElement>document.getElementById('beach-court-switches')).checked;
+      this.rules.beachCourtSwitchFreq = Number((<HTMLInputElement>document.getElementById('beach-switch-court-frequency')).value);
+      this.rules.beachCourtSwitchFreqTieBreak = Number((<HTMLInputElement>document.getElementById('beach-switch-court-frequency-tie-break')).value);
       this.rules.customConsecutiveServesPerPlayer = Number((<HTMLInputElement>document.getElementById('consecutive-serves')).value);
 
       if (this.crudType === CrudType.Create) {
@@ -146,13 +146,13 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onChangeSidesBeachChanged(): void {
-    const checked: boolean = (<HTMLInputElement>document.getElementById('change-sides-beach')).checked;
+  onBeachCourtSwitchesChanged(): void {
+    const checked: boolean = (<HTMLInputElement>document.getElementById('beach-court-switches')).checked;
 
     if (this.crudType === 1 || this.crudType === 2) {
       const disabled = checked ? null : true;
-      (<HTMLInputElement>document.getElementById('change-sides-period')).disabled = disabled;
-      (<HTMLInputElement>document.getElementById('change-sides-period-tie-break')).disabled = disabled;
+      (<HTMLInputElement>document.getElementById('beach-switch-court-frequency')).disabled = disabled;
+      (<HTMLInputElement>document.getElementById('beach-switch-court-frequency-tie-break')).disabled = disabled;
     }
   }
 }

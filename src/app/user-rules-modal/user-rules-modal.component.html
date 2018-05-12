@@ -186,14 +186,14 @@
     <h5 class="vbr-text">Beach Volleyball</h5>
 
     <div class="mb-2 custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="change-sides-beach" [attr.disabled]="crudType === 4 ? true : null" (change)="onChangeSidesBeachChanged()"/>
-      <label class="custom-control-label vbr-text" for="change-sides-beach">Court switches</label>
+      <input type="checkbox" class="custom-control-input" id="beach-court-switches" [attr.disabled]="crudType === 4 ? true : null" (change)="onBeachCourtSwitchesChanged()"/>
+      <label class="custom-control-label vbr-text" for="beach-court-switches">Court switches</label>
     </div>
 
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
-        <label class="vbr-text" for="change-sides-period">Court switch period in normal set</label>
-        <select class="custom-select vbr-text" id="change-sides-period" [attr.disabled]="crudType === 4 ? true : null">
+        <label class="vbr-text" for="beach-switch-court-frequency">Court switch period in normal set</label>
+        <select class="custom-select vbr-text" id="beach-switch-court-frequency" [attr.disabled]="crudType === 4 ? true : null">
           <option value="10">Switch every 10 points</option>
           <option value="9">Switch every 9 points</option>
           <option value="8">Switch every 8 points</option>
@@ -206,8 +206,8 @@
 
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
-        <label class="vbr-text" for="change-sides-period-tie-break">Court switch period in tie break</label>
-        <select class="custom-select vbr-text" id="change-sides-period-tie-break" [attr.disabled]="crudType === 4 ? true : null">
+        <label class="vbr-text" for="beach-switch-court-frequency-tie-break">Court switch period in tie break</label>
+        <select class="custom-select vbr-text" id="beach-switch-court-frequency-tie-break" [attr.disabled]="crudType === 4 ? true : null">
           <option value="10">Switch every 10 points</option>
           <option value="9">Switch every 9 points</option>
           <option value="8">Switch every 8 points</option>

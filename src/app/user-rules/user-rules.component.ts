@@ -67,9 +67,9 @@ export class UserRulesComponent implements OnInit {
     rules.gameIntervals = true;
     rules.gameIntervalDuration = 180;
     rules.teamSubstitutionsPerSet = 6;
-    rules.changeSidesBeach = true;
-    rules.changeSidesPeriod = 7;
-    rules.changeSidesPeriodTieBreak = 5;
+    rules.beachCourtSwitches = true;
+    rules.beachCourtSwitchFreq = 7;
+    rules.beachCourtSwitchFreqTieBreak = 5;
     rules.customConsecutiveServesPerPlayer = 9999;
 
     const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });

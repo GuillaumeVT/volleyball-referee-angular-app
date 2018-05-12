@@ -18,8 +18,8 @@ export class Rules {
   gameIntervals:                    boolean;
   gameIntervalDuration:             number;
   teamSubstitutionsPerSet:          number;
-  changeSidesBeach:                 boolean;
-  changeSidesPeriod:                number;
-  changeSidesPeriodTieBreak:        number;
+  beachCourtSwitches:               boolean;
+  beachCourtSwitchFreq:             number;
+  beachCourtSwitchFreqTieBreak:     number;
   customConsecutiveServesPerPlayer: number;
 }
