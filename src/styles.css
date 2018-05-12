@@ -54,6 +54,7 @@
   background-color: #1f4294;
   border-color: #1f4294;
   color: white;
+  filter: brightness(120%);
 }
 
 .vbr-button-inverted {
@@ -76,6 +77,7 @@
 
 .cancel-button:hover {
 	box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  filter: brightness(120%);
 }
 
 .vbr-live-button {
@@ -86,6 +88,7 @@
 
 .vbr-live-button:hover {
   box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  filter: brightness(120%);
 }
 
 .vbr-beach-button {
@@ -96,6 +99,7 @@
 
 .vbr-beach-button:hover {
   box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  filter: brightness(120%);
 }
 
 .vbr-indoor-button {
@@ -106,6 +110,7 @@
 
 .vbr-indoor-button:hover {
   box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  filter: brightness(120%);
 }
 
 .vbr-time-button {
@@ -116,6 +121,7 @@
 
 .vbr-time-button:hover {
   box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  filter: brightness(120%);
 }
 
 .vbr-mixed-button {
@@ -126,6 +132,7 @@
 
 .vbr-mixed-button:hover {
   box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  filter: brightness(120%);
 }
 
 .vbr-ladies-button {
@@ -136,6 +143,7 @@
 
 .vbr-ladies-button:hover {
   box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  filter: brightness(120%);
 }
 
 .vbr-gents-button {
@@ -146,6 +154,7 @@
 
 .vbr-gents-button:hover {
   box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  filter: brightness(120%);
 }
 
 .vbr-button-unchecked {

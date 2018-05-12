@@ -79,6 +79,13 @@
       </div>
     </div>
 
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="referee">Referee</label>
+        <input type="text" class="vbr-text form-control" id="referee" required [attr.disabled]="crudType === 4 ? true : null"/>
+      </div>
+    </div>
+
     <div class="row mb-3" *ngIf="invalidGender">
       <div class="col-12 col-sm-10">
         <p class="alert alert-danger">

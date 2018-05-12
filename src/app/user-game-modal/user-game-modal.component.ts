@@ -59,6 +59,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
     (<HTMLInputElement>document.getElementById('hTeam')).value = this.game.hName;
     (<HTMLInputElement>document.getElementById('gTeam')).value = this.game.gName;
     (<HTMLInputElement>document.getElementById('rules')).value = this.game.rules;
+    (<HTMLInputElement>document.getElementById('referee')).value = this.game.referee;
 
     setTimeout(() => this.gender = this.game.gender, 0);
   }
@@ -69,6 +70,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
     const hName: string = (<HTMLInputElement>document.getElementById('hTeam')).value;
     const gName: string = (<HTMLInputElement>document.getElementById('gTeam')).value;
     const rules: string = (<HTMLInputElement>document.getElementById('rules')).value;
+    const referee: string = (<HTMLInputElement>document.getElementById('referee')).value;
 
     if (hName.length === 0) {
       this.invalidHTeam = true;
@@ -114,6 +116,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
       this.game.hName = hName;
       this.game.gName = gName;
       this.game.rules = rules;
+      this.game.referee = referee;
 
       if (this.crudType === CrudType.Create) {
         this.userService.createGame(this.game).subscribe(game => this.onValidResponse(), error => this.onInvalidResponse(error));
