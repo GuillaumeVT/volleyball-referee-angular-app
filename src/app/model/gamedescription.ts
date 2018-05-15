@@ -1,7 +1,5 @@
-import { UserId } from './userid';
-
 export class GameDescription {
-  userId:   UserId;
+  userId:   string;
   kind:     string;
   date:     number;
   schedule: number;

@@ -1,7 +1,5 @@
-import { UserId } from './userid';
-
 export class Rules {
-  userId:                           UserId;
+  userId:                           string;
   name:                             string;
   date:                             number;
   setsPerGame:                      number;

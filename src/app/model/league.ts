@@ -1,7 +1,5 @@
-import { UserId } from './userid';
-
 export class League {
-  userId:      UserId;
+  userId:      string;
   name:        string;
   kind:        string;
   date:        number;

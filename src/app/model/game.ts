@@ -1,11 +1,10 @@
-import { UserId } from './userid';
 import { Team } from './team';
 import { Set } from './set';
 import { Sanction } from './sanction';
 import { Rules } from './rules';
 
 export class Game {
-  userId:   UserId;
+  userId:   string;
   kind:     string;
   date:     number;
   schedule: number;
