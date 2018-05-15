@@ -31,7 +31,7 @@ export class UserService {
   }
 
   getUserId(): string {
-    return this.user.id + '@' + this.user.provider;
+    return this.user.id + '@' + this.user.provider.toLowerCase();
   }
 
   getNumberOfRules(): Observable<number> {
