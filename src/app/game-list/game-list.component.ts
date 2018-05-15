@@ -15,6 +15,7 @@ export class GameListComponent implements OnInit, OnChanges {
   @Input() date:       string;
   @Input() leagueDate: number;
   @Input() team:       Team;
+  @Input() live:       boolean;
 
   gameFilter: GameFilter;
 
@@ -35,7 +36,7 @@ export class GameListComponent implements OnInit, OnChanges {
       } else {
         this.gameService.searchGamesOfTeamInLeague(this.leagueDate, this.team.name, this.team.gender).subscribe(games => this.gameFilter.updateGames(games), error => this.gameFilter.updateGames([]));
       }
-    } else {
+    } else if (this.live) {
       this.gameService.searchLiveGames().subscribe(liveGames => this.gameFilter.updateGames(liveGames), error => this.gameFilter.updateGames([]));
     }
   }
