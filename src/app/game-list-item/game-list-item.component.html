@@ -13,8 +13,8 @@
       <i class="fa fa-mixcloud vbr-live-text list-inline-item" *ngIf="gameDescription.status === 'LIVE'"></i>
       <i class="fa fa-hourglass-2 vbr-time-text list-inline-item" *ngIf="gameDescription.kind === 'TIME'"></i>
       <i class="fa fa-sun-o vbr-sun-text list-inline-item" *ngIf="gameDescription.kind === 'BEACH'"></i>
-      <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="gameDescription.kind === 'INDOOR'">6</span>
-      <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="gameDescription.kind === 'INDOOR_4X4'">4</span>
+      <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="gameDescription.kind === 'INDOOR'">6x6</span>
+      <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="gameDescription.kind === 'INDOOR_4X4'">4x4</span>
       <i class="list-inline-item" [ngClass]="utils.getGenderIcon(gameDescription.gender)"></i>
     </div>
     <div class="vbr-text text-muted secondary-text col-7 col-sm-7 p-1 text-left">
