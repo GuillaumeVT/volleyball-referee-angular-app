@@ -6,7 +6,7 @@ import { CrudType } from '../model/crudtype';
 import { GameFilter } from '../utils/gamefilter';
 import { Utils } from '../utils/utils';
 import { UserService } from '../user.service';
-import { AuthService } from 'angularx-social-login';
+import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';

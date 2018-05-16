@@ -7,7 +7,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { environment } from '../environments/environment';
-import { AuthService, SocialUser } from 'angularx-social-login';
+import { AuthService } from './auth.service';
+import { SocialUser } from './login/entities/user';
 
 @Injectable()
 export class UserService {

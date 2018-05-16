@@ -2,7 +2,7 @@ import { GameService } from '../game.service';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { AuthService } from 'angularx-social-login';
+import { AuthService } from '../auth.service';
 import { DatePipe } from '@angular/common';
 
 @Component({

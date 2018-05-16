@@ -1,7 +1,7 @@
 import { Rules } from '../model/rules';
 import { CrudType } from '../model/crudtype';
 import { UserService } from '../user.service';
-import { AuthService } from 'angularx-social-login';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';

@@ -6,16 +6,6 @@ import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
-
-export function getAuthServiceConfigs() {
-  let config = new AuthServiceConfig([
-    { id: GoogleLoginProvider.PROVIDER_ID, provider: new GoogleLoginProvider("802590775795-kdff0cnflla62jr2dj0pleqbiv05q97l.apps.googleusercontent.com") },
-    { id: FacebookLoginProvider.PROVIDER_ID, provider: new FacebookLoginProvider("2086514551632301") }
-  ]);
-  return config;
-}
-
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
@@ -64,6 +54,22 @@ import { UserNavComponent } from './user-nav/user-nav.component';
 import { UserLeaguesComponent } from './user-leagues/user-leagues.component';
 import { UserLeaguesModalComponent } from './user-leagues-modal/user-leagues-modal.component';
 import { LeagueComponent } from './league/league.component';
+
+import { AuthService, AuthServiceConfig } from './auth.service';
+import { GoogleLoginProvider } from './login/providers/google-login-provider';
+import { FacebookLoginProvider } from './login/providers/facebook-login-provider';
+
+export function configFactory(config: AuthServiceConfig) {
+  return config;
+}
+
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig([
+    { id: GoogleLoginProvider.PROVIDER_ID, provider: new GoogleLoginProvider("802590775795-kdff0cnflla62jr2dj0pleqbiv05q97l.apps.googleusercontent.com") },
+    { id: FacebookLoginProvider.PROVIDER_ID, provider: new FacebookLoginProvider("2086514551632301") }
+  ]);
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -117,12 +123,12 @@ import { LeagueComponent } from './league/league.component';
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     FormsModule,
-    SocialLoginModule,
     ToastrModule.forRoot(),
   ],
   providers: [
     GameService,
     UserService,
+    AuthService,
     Utils,
     DatePipe,
     { provide: AuthServiceConfig, useFactory: getAuthServiceConfigs }
@@ -136,4 +142,4 @@ import { LeagueComponent } from './league/league.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

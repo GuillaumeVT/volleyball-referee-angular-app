@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, SocialUser } from 'angularx-social-login';
+import { AuthService } from '../auth.service';
+import { SocialUser } from '../login/entities/user';
 import { DatePipe } from '@angular/common';
 
 @Component({

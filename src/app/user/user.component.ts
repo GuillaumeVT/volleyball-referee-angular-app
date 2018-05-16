@@ -1,7 +1,10 @@
 import { UserService } from '../user.service';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+import { AuthService } from '../auth.service';
+import { GoogleLoginProvider } from '../login/providers/google-login-provider';
+import { FacebookLoginProvider } from '../login/providers/facebook-login-provider';
+import { SocialUser } from '../login/entities/user';
 
 @Component({
   selector: 'app-user',
