@@ -47,15 +47,16 @@
         <a class="btn vbr-button-inverted list-inline-item my-1" [routerLink]="getGamePublicUrl(game)" placement="top" ngbTooltip="Navigate to the public page for this game. Share this URL with everyone.">
           Game page »
         </a>
-        <button class="btn btn-code list-inline-item my-1" (click)="viewCode(game)" *ngIf="!codeMap.has(game.date) && game.status !== 'COMPLETED'" placement="top" ngbTooltip="Obtain a code to give to another referee so he/she can referee this game">
+        <button class="btn btn-code list-inline-item my-1" (click)="viewCode(game)" *ngIf="!codeMap.has(game.date) && game.status !== 'COMPLETED' && game.kind !== 'TIME'" placement="top" ngbTooltip="Obtain a code to give to another referee so he/she can referee this game">
           Get code
         </button>
-        <span class="badge badge-code list-inline-item my-1" *ngIf="codeMap.has(game.date) && game.status !== 'COMPLETED'" placement="top" ngbTooltip="Give this code to another referee so he/she can referee this game">
+        <span class="badge badge-code list-inline-item my-1" *ngIf="codeMap.has(game.date) && game.status !== 'COMPLETED' && game.kind !== 'TIME'" placement="top" ngbTooltip="Give this code to another referee so he/she can referee this game">
           Code: {{codeMap.get(game.date)}}
         </span>
       </div>
       <div class="vbr-text col-2 col-sm-1 p-1 text-left list-unstyled list-inline">
         <i class="fa fa-mixcloud vbr-live-text list-inline-item" *ngIf="game.status === 'LIVE'"></i>
+        <i class="fa fa-hourglass-2 vbr-time-text list-inline-item" *ngIf="game.kind === 'TIME'"></i>
         <i class="fa fa-sun-o vbr-sun-text list-inline-item" *ngIf="game.kind === 'BEACH'"></i>
         <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="game.kind === 'INDOOR'">6x6</span>
         <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="game.kind === 'INDOOR_4X4'">4x4</span>
