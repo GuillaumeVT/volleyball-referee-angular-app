@@ -45,7 +45,7 @@
       </div>
       <div class="vbr-text col-10 col-sm-2 p-1 text-left list-unstyled list-inline">
         <a class="btn vbr-button-inverted list-inline-item my-1" [routerLink]="getGamePublicUrl(game)" placement="top" ngbTooltip="Navigate to the public page for this game. Share this URL with everyone.">
-          Game Page »
+          Game page »
         </a>
         <button class="btn btn-code list-inline-item my-1" (click)="viewCode(game)" *ngIf="!codeMap.has(game.date) && game.status !== 'COMPLETED'" placement="top" ngbTooltip="Obtain a code to give to another referee so he/she can referee this game">
           Get code
@@ -71,6 +71,9 @@
           </button>
           <button type="button" class="btn vbr-button-inverted" (click)="updateGame(game)" *ngIf="game.status === 'SCHEDULED'">
             <i class="fa fa-pencil"></i><span class="icon-text">&nbsp;&nbsp;Edit</span>
+          </button>
+          <button type="button" class="btn vbr-button-inverted" (click)="downloadPdfScoreSheet(game)" *ngIf="game.status === 'COMPLETED'">
+            <i class="fa fa-download"></i><span class="icon-text">&nbsp;&nbsp;Sheet</span>
           </button>
           <button type="button" class="btn vbr-button-inverted" (click)="deleteGame(game)">
             <i class="fa fa-trash"></i><span class="icon-text">&nbsp;&nbsp;Delete</span>

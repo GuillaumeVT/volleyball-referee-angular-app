@@ -58,7 +58,7 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onGamePdfReceived(response: HttpResponse<any>): void {
-    const dateStr = this.datePipe.transform(this.date, 'dd_MM_yyyy');
+    const dateStr = this.datePipe.transform(this.game.schedule, 'dd_MM_yyyy');
     const filename = this.game.hTeam.name + '_' + this.game.gTeam.name + '_' + dateStr + '.pdf';
     const blob = new Blob([response.body], { type: 'pdf' });
     saveAs(response, filename);

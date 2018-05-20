@@ -6,6 +6,7 @@ import { CrudType } from '../model/crudtype';
 import { GameFilter } from '../utils/gamefilter';
 import { Utils } from '../utils/utils';
 import { UserService } from '../user.service';
+import { GameService } from '../game.service';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -15,6 +16,9 @@ import { UserGameModalComponent } from '../user-game-modal/user-game-modal.compo
 import { OkCancelModalComponent } from '../ok-cancel-modal/ok-cancel-modal.component';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { HttpResponse } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
   selector: 'app-user-games',
@@ -31,7 +35,9 @@ export class UserGamesComponent implements OnInit {
   selectedLeague: string;
   selectedKind:   string;
 
-  constructor(private titleService: Title, private router: Router, private route: ActivatedRoute, private authService: AuthService, private userService: UserService, private modalService: NgbModal, private utils: Utils, private toastr: ToastrService) {
+  constructor(private titleService: Title, private router: Router, private route: ActivatedRoute, private datePipe: DatePipe,
+    private authService: AuthService, private userService: UserService, private gameService: GameService,
+    private modalService: NgbModal, private utils: Utils, private toastr: ToastrService) {
     this.titleService.setTitle('Volleyball Referee - User');
     this.signedIn = false;
     this.rules = [];
@@ -196,5 +202,16 @@ export class UserGamesComponent implements OnInit {
 
   getGamePublicUrl(game: GameDescription): string {
     return `/game/${game.date}`;
+  }
+
+  downloadPdfScoreSheet(game: GameDescription): void {
+    this.gameService.getPdfGame(game.date).subscribe(response => this.onPdfScoreSheetReceived(response, game), error => this.onPdfScoreSheetReceived(null, game));
+  }
+
+  onPdfScoreSheetReceived(response: HttpResponse<any>, game: GameDescription): void {
+    const dateStr = this.datePipe.transform(game.schedule, 'dd_MM_yyyy');
+    const filename = game.hName + '_' + game.gName + '_' + dateStr + '.pdf';
+    const blob = new Blob([response.body], { type: 'pdf' });
+    saveAs(response, filename);
   }
 }
