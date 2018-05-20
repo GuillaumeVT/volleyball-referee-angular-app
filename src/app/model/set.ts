@@ -10,6 +10,7 @@ export class Set {
   gTimeouts:        number;
   ladder:           string[];
   serving:          string;
+  firstServing:     string;
   hCurrentPlayers:  Player[];
   gCurrentPlayers:  Player[];
   hStartingPlayers: Player[];
