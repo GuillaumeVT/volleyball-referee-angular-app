@@ -5,6 +5,13 @@
       <span *ngIf="!inLeague && gameDescription.league && gameDescription.league.length" class="text-muted secondary-text">
         <br/>{{gameDescription.league}}
       </span>
+      <span *ngIf="!inLeague && gameDescription.league && gameDescription.league.length && gameDescription.division && gameDescription.division.length" class="text-muted secondary-text">
+        &nbsp;/&nbsp;
+      </span>
+      <span *ngIf="(inLeague || !gameDescription.league || !gameDescription.league.length) && gameDescription.division && gameDescription.division.length" class="text-muted secondary-text">
+        <br/>
+      </span>
+      <span *ngIf="gameDescription.division && gameDescription.division.length" class="text-muted secondary-text">{{gameDescription.division}}</span>
       <span *ngIf="gameDescription.referee && gameDescription.referee.length" class="text-muted secondary-text">
         <br/><i class="fa fa-user mr-1"></i>by {{gameDescription.referee}}
       </span>

@@ -165,6 +165,11 @@ export class UserService {
     return this.http.get<League[]>(this.userLeagueUrl, { params: params });
   }
 
+  getDivisionsWithKind(kind: string): Observable<string[]> {
+    let params = new HttpParams().set("userId", this.getUserId()).set('kind', kind);
+    return this.http.get<string[]>(`${this.userLeagueUrl}/division`, { params: params });
+  }
+
   getLeaguesWithKind(kind: string): Observable<League[]> {
     let params = new HttpParams().set("userId", this.getUserId()).set('kind', kind);
     return this.http.get<League[]>(this.userLeagueUrl, { params: params });
@@ -182,10 +187,6 @@ export class UserService {
 
   createLeague(league: League): Observable<League> {
     return this.http.post<League>(this.userLeagueUrl, league);
-  }
-
-  updateLeague(league: League): Observable<League> {
-    return this.http.put<League>(this.userLeagueUrl, league);
   }
 
   deleteLeague(date: number): Observable<Object> {

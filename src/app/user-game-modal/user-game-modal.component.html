@@ -18,11 +18,23 @@
 
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
-        <label class="vbr-text" for="league">League</label>
+        <label class="vbr-text" for="league">Tournament / League</label>
         <input type="text" class="vbr-text form-control" id="league" list="leagueList" required [attr.disabled]="crudType === 4 ? true : null"/>
         <datalist id="leagueList">
           <option *ngFor="let league of leagues">
             {{league.name}}
+          </option>
+        </datalist>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="division">Pool / Division</label>
+        <input type="text" class="vbr-text form-control" id="division" list="divisionList" required [attr.disabled]="crudType === 4 ? true : null"/>
+        <datalist id="divisionList">
+          <option *ngFor="let division of divisions">
+            {{division}}
           </option>
         </datalist>
       </div>

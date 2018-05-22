@@ -96,6 +96,7 @@ export class UserGamesComponent implements OnInit {
     } else {
       game.league = '';
     }
+    game.division = '';
     game.hName = '';
     game.gName = '';
     game.hSets = 0;
@@ -104,17 +105,19 @@ export class UserGamesComponent implements OnInit {
 
     forkJoin(
       this.userService.getTeamsWithKind(game.kind),
-      this.userService.getLeaguesWithKind(game.kind)
+      this.userService.getLeaguesWithKind(game.kind),
+      this.userService.getDivisionsWithKind(game.kind)
     )
-    .subscribe(([teams, leagues]) => {
-      this.launchCreateGame(game, leagues, teams);
+    .subscribe(([teams, leagues, divisions]) => {
+      this.launchCreateGame(game, leagues, divisions, teams);
     });
   }
 
-  launchCreateGame(game: GameDescription, leagues: League[], teams: Team[]): void {
+  launchCreateGame(game: GameDescription, leagues: League[], divisions: String[], teams: Team[]): void {
     const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
     modalRef.componentInstance.game = game;
     modalRef.componentInstance.leagues = leagues;
+    modalRef.componentInstance.divisions = divisions;
     modalRef.componentInstance.teams = teams;
     modalRef.componentInstance.rules = this.rules;
     modalRef.componentInstance.defaultRules = this.defaultRules;
@@ -125,17 +128,19 @@ export class UserGamesComponent implements OnInit {
   viewGame(game: GameDescription): void {
     forkJoin(
       this.userService.getTeamsWithKind(game.kind),
-      this.userService.getLeaguesWithKind(game.kind)
+      this.userService.getLeaguesWithKind(game.kind),
+      this.userService.getDivisionsWithKind(game.kind)
     )
-    .subscribe(([teams, leagues]) => {
-      this.launchViewGame(game, leagues, teams);
+    .subscribe(([teams, leagues, divisions]) => {
+      this.launchViewGame(game, leagues, divisions, teams);
     });
   }
 
-  launchViewGame(game: GameDescription, leagues: League[], teams: Team[]): void {
+  launchViewGame(game: GameDescription, leagues: League[], divisions: String[], teams: Team[]): void {
     const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
     modalRef.componentInstance.game = game;
     modalRef.componentInstance.leagues = leagues;
+    modalRef.componentInstance.divisions = divisions;
     modalRef.componentInstance.teams = teams;
     modalRef.componentInstance.rules = this.rules;
     modalRef.componentInstance.defaultRules = this.defaultRules;
@@ -145,17 +150,19 @@ export class UserGamesComponent implements OnInit {
   updateGame(game: GameDescription): void {
     forkJoin(
       this.userService.getTeamsWithKind(game.kind),
-      this.userService.getLeaguesWithKind(game.kind)
+      this.userService.getLeaguesWithKind(game.kind),
+      this.userService.getDivisionsWithKind(game.kind)
     )
-    .subscribe(([teams, leagues]) => {
-      this.launchUpdateGame(game, leagues, teams);
+    .subscribe(([teams, leagues, divisions]) => {
+      this.launchUpdateGame(game, leagues, divisions, teams);
     });
   }
 
-  launchUpdateGame(game: GameDescription, leagues: League[], teams: Team[]): void {
+  launchUpdateGame(game: GameDescription, leagues: League[], divisions: String[], teams: Team[]): void {
     const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
     modalRef.componentInstance.game = game;
     modalRef.componentInstance.leagues = leagues;
+    modalRef.componentInstance.divisions = divisions;
     modalRef.componentInstance.teams = teams;
     modalRef.componentInstance.rules = this.rules;
     modalRef.componentInstance.defaultRules = this.defaultRules;

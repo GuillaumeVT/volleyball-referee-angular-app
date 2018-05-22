@@ -8,6 +8,7 @@ export class GameDescription {
   status:   string;
   referee:  string;
   league:   string;
+  division: string;
   hName:    string;
   gName:    string;
   hSets:    number;

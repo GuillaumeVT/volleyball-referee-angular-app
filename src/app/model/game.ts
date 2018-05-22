@@ -13,6 +13,7 @@ export class Game {
   status:   string;
   referee:  string;
   league:   string;
+  division: string;
   hTeam:    Team;
   gTeam:    Team;
   hSets:    number;

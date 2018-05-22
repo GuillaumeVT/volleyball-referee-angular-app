@@ -22,6 +22,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   @Input() defaultRules: Rules[];
   @Input() teams:        Team[];
   @Input() leagues:      League[];
+  @Input() divisions:    string[];
   @Output() gameUpdated = new EventEmitter();
 
   invalidGender:    boolean;
@@ -56,6 +57,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   initForm(): void {
     (<HTMLInputElement>document.getElementById('schedule')).value =  this.datePipe.transform(this.game.schedule, 'yyyy-MM-ddTHH:mm');
     (<HTMLInputElement>document.getElementById('league')).value = this.game.league;
+    (<HTMLInputElement>document.getElementById('division')).value = this.game.division;
     (<HTMLInputElement>document.getElementById('hTeam')).value = this.game.hName;
     (<HTMLInputElement>document.getElementById('gTeam')).value = this.game.gName;
     (<HTMLInputElement>document.getElementById('rules')).value = this.game.rules;
@@ -67,6 +69,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   onSubmitForm(): void {
     const schedule: number = new Date((<HTMLInputElement>document.getElementById('schedule')).value).getTime();
     const league: string = (<HTMLInputElement>document.getElementById('league')).value;
+    const division: string = (<HTMLInputElement>document.getElementById('division')).value;
     const hName: string = (<HTMLInputElement>document.getElementById('hTeam')).value;
     const gName: string = (<HTMLInputElement>document.getElementById('gTeam')).value;
     const rules: string = (<HTMLInputElement>document.getElementById('rules')).value;
@@ -112,6 +115,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
     if (!this.invalidGender && !this.invalidHTeam && !this.invalidGTeam && !this.invalidRules) {
       this.game.schedule = schedule;
       this.game.league = league;
+      this.game.division = division;
       this.game.gender = this.gender;
       this.game.hName = hName;
       this.game.gName = gName;
