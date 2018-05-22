@@ -41,7 +41,8 @@ export class GameFilter {
       if (this.textFilter.trim()) {
         if ((game.gName.toLowerCase().indexOf(this.textFilter) === -1)
           && (game.hName.toLowerCase().indexOf(this.textFilter) === -1)
-          && (game.league.toLowerCase().indexOf(this.textFilter) === -1)) {
+          && (game.league.toLowerCase().indexOf(this.textFilter) === -1)
+          && (game.division.toLowerCase().indexOf(this.textFilter) === -1)) {
             mustAdd = false;
         }
       }
