@@ -66,6 +66,7 @@ export class UserLeaguesComponent implements OnInit {
     league.kind = kind;
     league.date = new Date().getTime();
     league.name = '';
+    league.divisions = [];
 
     const modalRef = this.modalService.open(UserLeaguesModalComponent, { size: 'lg' });
     modalRef.componentInstance.league = league;
@@ -100,5 +101,9 @@ export class UserLeaguesComponent implements OnInit {
 
   getLeaguePublicUrl(league: League): string {
     return `/league/${league.date}`;
+  }
+
+  createDropdownId(league: League): string {
+    return `dropdown-${league.name}`;
   }
 }

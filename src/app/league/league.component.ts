@@ -67,7 +67,7 @@ export class LeagueComponent implements OnInit, OnDestroy {
   }
 
   refreshTeams(): void {
-    this.userService.getTeamsWithKindInLeaguePublic(this.league.date).subscribe(teams => this.teams = teams, error => this.teams = []);
+    this.userService.getTeamsInLeaguePublic(this.league.date).subscribe(teams => this.teams = teams, error => this.teams = []);
   }
 
   getLinkClass(index: number): string {

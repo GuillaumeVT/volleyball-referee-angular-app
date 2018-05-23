@@ -53,9 +53,14 @@
           <button type="button" class="btn vbr-button-inverted" (click)="viewLeague(league)">
             <i class="fa fa-eye"></i>&nbsp;&nbsp;{{countsMap.get(league.name)}}<span class="icon-text">&nbsp;Games</span>
           </button>
-          <button type="button" class="btn vbr-button-inverted" (click)="downloadCSV(league)">
-            <i class="fa fa-download"></i><span class="icon-text">&nbsp;&nbsp;CSV</span>
-          </button>
+          <div class="btn-group">
+            <button type="button" [id]="createDropdownId(league)" class="btn vbr-button-inverted dropdown-toggle" ngbDropdownToggle>
+              <i class="fa fa-download"></i><span class="icon-text">&nbsp;&nbsp;CSV</span>
+            </button>
+            <div ngbDropdownMenu [attr.aria-labelledby]="createDropdownId(league)">
+              <button *ngFor="let division of league.divisions" class="dropdown-item">{{division}}</button>
+            </div>
+          </div>
           <button type="button" class="btn vbr-button-inverted" (click)="deleteLeague(league)">
             <i class="fa fa-trash"></i><span class="icon-text">&nbsp;&nbsp;Delete</span>
           </button>

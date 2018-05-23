@@ -81,7 +81,7 @@ export class UserService {
     return this.http.get<Team[]>(this.userTeamUrl, { params: params });
   }
 
-  getTeamsWithKindInLeaguePublic(date: number): Observable<Team[]> {
+  getTeamsInLeaguePublic(date: number): Observable<Team[]> {
     let params = new HttpParams().set("date", String(date));
     return this.http.get<Team[]>(this.userTeamUrl, { params: params });
   }
