@@ -58,8 +58,8 @@
               <i class="fa fa-download"></i><span class="icon-text">&nbsp;&nbsp;CSV</span>
             </button>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <button class="dropdown-item" (click)="downloadCsvLeague(league, '')">All</button>
-              <button *ngFor="let division of league.divisions" class="dropdown-item" (click)="downloadCsvLeague(league, division)">{{division}}</button>
+              <button class="dropdown-item" (click)="downloadCsvLeague(league.name, '')">All</button>
+              <button *ngFor="let division of league.divisions" class="dropdown-item" (click)="downloadCsvLeague(league.name, division)">{{division}}</button>
             </div>
           </div>
           <button type="button" class="btn vbr-button-inverted" (click)="deleteLeague(league)">

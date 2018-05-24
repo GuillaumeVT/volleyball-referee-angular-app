@@ -197,7 +197,6 @@ export class UserService {
   getCsvLeague(league: string, division: string): Observable<any> {
     const url = `${this.userLeagueUrl}/csv`;
     let params = new HttpParams().set("userId", this.getUserId()).set('league', league).set('division', division);
-    const options = {headers: { 'Content-Type': 'application/json', 'Accept': 'text/csv'}, responseType: 'blob' as 'json'};
-    return this.http.get<any>(url, options);
+    return this.http.get<any>(url, { params: params, headers: { 'Content-Type': 'application/json', 'Accept': 'text/csv'}, responseType: 'blob' as 'json' });
   }
 }
