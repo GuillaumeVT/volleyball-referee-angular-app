@@ -9,6 +9,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserLeaguesModalComponent } from '../user-leagues-modal/user-leagues-modal.component';
 import { OkCancelModalComponent } from '../ok-cancel-modal/ok-cancel-modal.component';
 import { ToastrService } from 'ngx-toastr';
+import { HttpResponse } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
   selector: 'app-user-leagues',
@@ -21,7 +24,8 @@ export class UserLeaguesComponent implements OnInit {
   leagueFilter: LeagueFilter;
   countsMap:    Map<string,number>;
 
-  constructor(private titleService: Title, private router: Router, private authService: AuthService, private userService: UserService, private modalService: NgbModal, private toastr: ToastrService) {
+  constructor(private titleService: Title, private router: Router, private authService: AuthService, private userService: UserService,
+    private modalService: NgbModal, private toastr: ToastrService, private datePipe: DatePipe) {
     this.titleService.setTitle('Volleyball Referee - User');
     this.signedIn = false;
     this.leagueFilter = new LeagueFilter();
@@ -103,7 +107,15 @@ export class UserLeaguesComponent implements OnInit {
     return `/league/${league.date}`;
   }
 
-  createDropdownId(league: League): string {
-    return `dropdown-${league.name}`;
+  downloadCsvLeague(league: string, division: string): void {
+    this.userService.getCsvLeague(league, division).subscribe(response => this.onCsvLeagueReceived(response, league, division), error => this.onCsvLeagueReceived(null, league, division));
+  }
+
+  onCsvLeagueReceived(response: HttpResponse<any>, league: string, division: string): void {
+    const date = new Date();
+    const dateStr = this.datePipe.transform(date.getTime(), 'dd_MM_yyyy__HH_mm');
+    const filename = league + '_' + division + '_' + dateStr + '.csv';
+    const blob = new Blob([response.body], { type: 'csv' });
+    saveAs(response, filename);
   }
 }

@@ -193,4 +193,11 @@ export class UserService {
     let params = new HttpParams().set("date", String(date)).set("userId", this.getUserId());
     return this.http.delete(this.userLeagueUrl, { params: params });
   }
+
+  getCsvLeague(league: string, division: string): Observable<any> {
+    const url = `${this.userLeagueUrl}/csv`;
+    let params = new HttpParams().set("userId", this.getUserId()).set('league', league).set('division', division);
+    const options = {headers: { 'Content-Type': 'application/json', 'Accept': 'text/csv'}, responseType: 'blob' as 'json'};
+    return this.http.get<any>(url, options);
+  }
 }

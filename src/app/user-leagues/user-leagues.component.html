@@ -32,7 +32,7 @@
   </div>
   <div *ngFor="let league of leagueFilter.filteredLeagues" class="card div-card my-3 mx-1 py-2">
     <div class="row align-items-center m-1">
-      <div class="vbr-text col-12 col-sm-4 p-1 text-left">
+      <div class="vbr-text col-12 col-sm-3 p-1 text-left">
         {{league.name}}
       </div>
       <div class="vbr-text col-10 col-sm-2 p-1 text-left">
@@ -48,17 +48,18 @@
       <div class="vbr-text col-7 col-sm-2 p-1 text-left">
         <span class="icon-text">Created on&nbsp;</span>{{league.date | date : 'dd MMM yyyy, HH:mm'}}
       </div>
-      <div class="vbr-text col-5 col-sm-3 p-1 text-right">
+      <div class="vbr-text col-5 col-sm-4 p-1 text-right">
         <div class="btn-group">
           <button type="button" class="btn vbr-button-inverted" (click)="viewLeague(league)">
             <i class="fa fa-eye"></i>&nbsp;&nbsp;{{countsMap.get(league.name)}}<span class="icon-text">&nbsp;Games</span>
           </button>
-          <div class="btn-group">
-            <button type="button" [id]="createDropdownId(league)" class="btn vbr-button-inverted dropdown-toggle" ngbDropdownToggle>
+          <div class="btn-group" ngbDropdown role="group">
+            <button type="button" class="btn vbr-button-inverted" ngbDropdownToggle>
               <i class="fa fa-download"></i><span class="icon-text">&nbsp;&nbsp;CSV</span>
             </button>
-            <div ngbDropdownMenu [attr.aria-labelledby]="createDropdownId(league)">
-              <button *ngFor="let division of league.divisions" class="dropdown-item">{{division}}</button>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <button class="dropdown-item" (click)="downloadCsvLeague(league, '')">All</button>
+              <button *ngFor="let division of league.divisions" class="dropdown-item" (click)="downloadCsvLeague(league, division)">{{division}}</button>
             </div>
           </div>
           <button type="button" class="btn vbr-button-inverted" (click)="deleteLeague(league)">
