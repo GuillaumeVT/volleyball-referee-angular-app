@@ -7,6 +7,9 @@
     <span class="badge text-center set-badge" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)" [innerHTML]="getTeamSets(rightTeam)"></span>
     <span class="card-text vbr-text text-center small-line" [innerHTML]="getTeamName(rightTeam)"></span>
   </span>
-  <span class="card-text vbr-text text-center" *ngIf="game && game.league.length">{{game.league}}</span>
+  <span class="card-text vbr-text text-center" *ngIf="game && game.league.length">
+    {{game.league}}
+    <span *ngIf="game.division && game.division.length">&nbsp;/&nbsp;{{game.division}}</span>
+  </span>
   <span class="card-text vbr-text text-center" *ngIf="game.referee && game.referee.length"><i class="fa fa-user mx-1"></i>by {{game.referee}}</span>
 </div>

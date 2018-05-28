@@ -40,8 +40,10 @@
     <div class="row align-items-center m-1">
       <div class="vbr-text col-12 col-sm-4 p-1 text-left">
         {{game.hName}} - {{game.gName}}
-        <span *ngIf="game.league && game.league.length" class="text-muted"><br/>{{game.league}}</span>
-        <span *ngIf="game.league && game.league.length && game.division && game.division.length" class="text-muted"> / {{game.division}}</span>
+        <span *ngIf="game.league && game.league.length" class="text-muted">
+          <br/>{{game.league}}
+          <span *ngIf="game.division && game.division.length">&nbsp;/&nbsp;{{game.division}}</span>
+        </span>
         <span *ngIf="game.referee && game.referee.length" class="text-muted"> <br/><i class="fa fa-user mr-1"></i>by {{game.referee}}</span>
       </div>
       <div class="vbr-text col-10 col-sm-2 p-1 text-left list-unstyled list-inline">
