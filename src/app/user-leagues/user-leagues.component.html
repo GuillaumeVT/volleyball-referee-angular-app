@@ -45,10 +45,10 @@
         <span class="badge text-center vbr-indoor-text ml-1" *ngIf="league.kind === 'INDOOR'">6x6</span>
         <span class="badge text-center vbr-indoor-text ml-1" *ngIf="league.kind === 'INDOOR_4X4'">4x4</span>
       </div>
-      <div class="vbr-text col-7 col-sm-2 p-1 text-left">
+      <div class="vbr-text col-6 col-sm-2 p-1 text-left">
         <span class="icon-text">Created on&nbsp;</span>{{league.date | date : 'dd MMM yyyy, HH:mm'}}
       </div>
-      <div class="vbr-text col-5 col-sm-4 p-1 text-right">
+      <div class="vbr-text col-6 col-sm-4 p-1 text-right">
         <div class="btn-group">
           <button type="button" class="btn vbr-button-inverted" (click)="viewLeague(league)">
             <i class="fa fa-eye"></i>&nbsp;&nbsp;{{countsMap.get(league.name)}}<span class="icon-text">&nbsp;Games</span>

@@ -1,6 +1,6 @@
 <div class="card div-card mx-1 my-3" *ngIf="gameDescription">
-  <div class="row align-items-center m-1">
-    <div class="vbr-text col-10 col-sm-10 p-1 text-left">
+  <div class="row align-items-start m-1">
+    <div class="vbr-text col-9 col-sm-10 p-1 text-left">
       {{gameDescription.hName}} {{gameDescription.hSets}} - {{gameDescription.gSets}} {{gameDescription.gName}}
       <span *ngIf="!inLeague && gameDescription.league && gameDescription.league.length" class="text-muted secondary-text">
         <br/>{{gameDescription.league}}
@@ -16,7 +16,7 @@
         <br/><i class="fa fa-user mr-1"></i>by {{gameDescription.referee}}
       </span>
     </div>
-    <div class="text-right col-2 col-sm-2 p-1 list-unstyled list-inline">
+    <div class="text-right col-3 col-sm-2 p-1 list-unstyled list-inline">
       <i class="fa fa-mixcloud vbr-live-text list-inline-item" *ngIf="gameDescription.status === 'LIVE'"></i>
       <i class="fa fa-hourglass-2 vbr-time-text list-inline-item" *ngIf="gameDescription.kind === 'TIME'"></i>
       <i class="fa fa-sun-o vbr-sun-text list-inline-item" *ngIf="gameDescription.kind === 'BEACH'"></i>
