@@ -54,6 +54,7 @@ import { UserNavComponent } from './user-nav/user-nav.component';
 import { UserLeaguesComponent } from './user-leagues/user-leagues.component';
 import { UserLeaguesModalComponent } from './user-leagues-modal/user-leagues-modal.component';
 import { LeagueComponent } from './league/league.component';
+import { PrivatePolicyComponent } from './private-policy/private-policy.component';
 
 import { AuthService, AuthServiceConfig } from './auth.service';
 import { GoogleLoginProvider } from './login/providers/google-login-provider';
@@ -115,6 +116,7 @@ export function getAuthServiceConfigs() {
     UserLeaguesComponent,
     UserLeaguesModalComponent,
     LeagueComponent,
+    PrivatePolicyComponent,
   ],
   imports: [
     BrowserModule,

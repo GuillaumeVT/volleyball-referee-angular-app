@@ -75,6 +75,10 @@ export class UserComponent implements OnInit {
     return '/user/leagues';
   }
 
+  getPrivatePolicyUrl(): string {
+    return '/private-policy';
+  }
+
   hideGreetings1(): void {
     this.showGreetings1 = false;
   }

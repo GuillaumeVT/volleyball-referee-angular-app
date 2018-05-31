@@ -8,6 +8,11 @@
 	margin: 0 auto;
 }
 
+.div-private-policy {
+	max-width: 1500px;
+	margin: 0 auto;
+}
+
 .btn-facebook {
 	color: white;
 	background-color: #4267a8;

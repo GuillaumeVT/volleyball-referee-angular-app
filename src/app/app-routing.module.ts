@@ -10,6 +10,7 @@ import { UserTeamsComponent } from './user-teams/user-teams.component';
 import { UserGamesComponent } from './user-games/user-games.component';
 import { UserLeaguesComponent } from './user-leagues/user-leagues.component';
 import { LeagueComponent } from './league/league.component';
+import { PrivatePolicyComponent } from './private-policy/private-policy.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'user/leagues', component: UserLeaguesComponent },
   { path: 'user/leagues/:league/:kind', component: UserGamesComponent },
   { path: 'league/:date', component: LeagueComponent },
+  { path: 'private-policy', component: PrivatePolicyComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -53,6 +53,9 @@
 <div class="div-sign-out text-right" *ngIf="signedIn">
   <button class="btn btn-sign-out m-2" (click)="signOut()"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Sign out</button>
 </div>
+<div class="div-private-policy text-right">
+  <a class="btn vbr-button-inverted m-2" [routerLink]="getPrivatePolicyUrl()" role="button">Private Policy</a>
+</div>
 <div class="div-footer">
   <app-links-bar></app-links-bar>
 </div>
