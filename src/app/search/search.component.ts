@@ -51,4 +51,8 @@ export class SearchComponent implements OnInit {
     return '/user';
   }
 
+  getPrivatePolicyUrl(): string {
+    return '/private-policy';
+  }
+
 }

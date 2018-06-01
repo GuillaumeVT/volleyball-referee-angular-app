@@ -1,5 +1,6 @@
 <div class="div-user-profile text-right my-2">
-  <a class="btn vbr-button-inverted" [routerLink]="getUserUrl()"><i *ngIf="!image" class="fa fa-user"></i><img *ngIf="image" [src]="image" class="user-image"/>&nbsp;&nbsp;My data</a>
+  <a class="btn vbr-button-inverted m-2" [routerLink]="getPrivatePolicyUrl()" role="button">Private Policy</a>
+  <a class="btn vbr-button-inverted m-2" [routerLink]="getUserUrl()"><i *ngIf="!image" class="fa fa-user"></i><img *ngIf="image" [src]="image" class="user-image"/>&nbsp;&nbsp;My data</a>
 </div>
 <div class="my-3 container-fluid text-center">
   <span class="h2 vbr-text-color"><img class="app-img" src="../../assets/vbr_title.png" alt="vbr">&nbsp;Volleyball Referee</span>
