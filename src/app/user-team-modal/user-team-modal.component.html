@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    <div class="row align-items-center mb-3" [hidden]="team.kind === 'BEACH'">
+    <div class="row align-items-center mb-3" [hidden]="team.kind === 'BEACH' || team.kind === 'INDOOR_4X4'">
       <div class="col-6 col-sm-4">
         <label class="vbr-text" for="libero-shirt-color">Libero shirt color</label>
       </div>
@@ -80,7 +80,7 @@
       </div>
     </div>
 
-    <div class="row align-items-center mb-3" [hidden]="team.kind === 'BEACH'">
+    <div class="row align-items-center mb-3" [hidden]="team.kind === 'BEACH' || team.kind === 'INDOOR_4X4'">
       <div class="col-12 col-sm-12">
         <label class="vbr-text" for="liberos">Team liberos</label>
         <div class="div-players" id="liberos">
