@@ -70,6 +70,11 @@ export class UserService {
     return this.http.delete(this.userRulesUrl, { params: params });
   }
 
+  deleteAllRules(): Observable<Object> {
+    let params = new HttpParams().set("userId", this.getUserId());
+    return this.http.delete(this.userRulesUrl, { params: params });
+  }
+
   getNumberOfTeams(): Observable<number> {
     let params = new HttpParams().set("userId", this.getUserId());
     const url = `${this.userTeamUrl}/count`;
@@ -91,8 +96,8 @@ export class UserService {
     return this.http.get<Team[]>(this.userTeamUrl, { params: params });
   }
 
-  getTeam(name: string, gender: string): Observable<Team> {
-    let params = new HttpParams().set("name", name).set("userId", this.getUserId()).set("gender", gender);
+  getTeam(name: string, gender: string, kind: string): Observable<Team> {
+    let params = new HttpParams().set("name", name).set("userId", this.getUserId()).set("gender", gender).set("kind", kind);
     return this.http.get<Team>(this.userTeamUrl, { params: params });
   }
 
@@ -104,8 +109,13 @@ export class UserService {
     return this.http.put<Team>(this.userTeamUrl, team);
   }
 
-  deleteTeam(name: string, gender: string): Observable<Object> {
-    let params = new HttpParams().set("name", name).set("userId", this.getUserId()).set("gender", gender);
+  deleteTeam(name: string, gender: string, kind: string): Observable<Object> {
+    let params = new HttpParams().set("name", name).set("userId", this.getUserId()).set("gender", gender).set("kind", kind);
+    return this.http.delete(this.userTeamUrl, { params: params });
+  }
+
+  deleteAllTeams(): Observable<Object> {
+    let params = new HttpParams().set("userId", this.getUserId());
     return this.http.delete(this.userTeamUrl, { params: params });
   }
 

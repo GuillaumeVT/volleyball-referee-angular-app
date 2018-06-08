@@ -92,7 +92,7 @@ export class UserTeamsComponent implements OnInit {
     modalRef.componentInstance.title = 'Delete team';
     modalRef.componentInstance.message = `Do you want to delete the team named ${team.name}?`;
     modalRef.componentInstance.okClicked.subscribe(ok =>
-      this.userService.deleteTeam(team.name, team.gender).subscribe(deleted => this.onTeamDeleted(), error => this.onTeamNotDeleted()));
+      this.userService.deleteTeam(team.name, team.gender, team.kind).subscribe(deleted => this.onTeamDeleted(), error => this.onTeamNotDeleted()));
   }
 
   onTeamCreated(): void {
