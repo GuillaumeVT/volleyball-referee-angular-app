@@ -77,7 +77,7 @@ export class UserGamesComponent implements OnInit {
   }
 
   refreshRules(): void {
-    this.userService.getRules().subscribe(rules => this.rules = rules, error => this.rules = []);
+    this.userService.getRules().subscribe(rules => this.rules = this.utils.sortRules(rules), error => this.rules = []);
     this.userService.getDefaultRules().subscribe(rules => this.defaultRules = rules, error => this.defaultRules = []);
   }
 
@@ -114,6 +114,10 @@ export class UserGamesComponent implements OnInit {
   }
 
   launchCreateGame(game: GameDescription, leagues: League[], divisions: String[], teams: Team[]): void {
+    leagues = this.utils.sortLeagues(leagues);
+    teams = this.utils.sortTeams(teams);
+    divisions = divisions.sort((d1, d2) => (d1 > d2) ? 1 : ((d2 > d1) ? -1 : 0));
+
     const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
     modalRef.componentInstance.game = game;
     modalRef.componentInstance.leagues = leagues;
@@ -159,6 +163,10 @@ export class UserGamesComponent implements OnInit {
   }
 
   launchUpdateGame(game: GameDescription, leagues: League[], divisions: String[], teams: Team[]): void {
+    leagues = this.utils.sortLeagues(leagues);
+    teams = this.utils.sortTeams(teams);
+    divisions = divisions.sort((d1, d2) => (d1 > d2) ? 1 : ((d2 > d1) ? -1 : 0));
+
     const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
     modalRef.componentInstance.game = game;
     modalRef.componentInstance.leagues = leagues;

@@ -1,4 +1,5 @@
 import { Team } from '../model/team';
+import { Utils } from '../utils/utils';
 
 export class TeamFilter {
 
@@ -13,6 +14,8 @@ export class TeamFilter {
   teams:         Team[];
   filteredTeams: Team[];
 
+  utils: Utils;
+
   constructor() {
     this.textFilter = '';
     this.isBeachChecked = true;
@@ -24,7 +27,7 @@ export class TeamFilter {
   }
 
   updateTeams(teams: Team[]): void {
-    this.teams = teams.sort((t1, t2) => (t1.name > t2.name) ? 1 : ((t2.name > t1.name) ? -1 : 0));
+    this.teams = this.utils.sortTeams(teams);
     this.filterTeams();
   }
 

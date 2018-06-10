@@ -1,4 +1,5 @@
 import { League } from '../model/league';
+import { Utils } from '../utils/utils';
 
 export class LeagueFilter {
 
@@ -10,15 +11,18 @@ export class LeagueFilter {
   leagues:         League[];
   filteredLeagues: League[];
 
+  utils: Utils;
+
   constructor() {
     this.textFilter = '';
     this.isBeachChecked = true;
     this.isIndoorChecked = true;
     this.isIndoor4x4Checked = true;
+    this.utils = new Utils();
   }
 
   updateLeagues(leagues: League[]): void {
-    this.leagues = leagues.sort((l1, l2) => (l1.name > l2.name) ? 1 : ((l2.name > l1.name) ? -1 : 0));
+    this.leagues =  this.utils.sortLeagues(leagues);
     this.filterLeagues();
   }
 

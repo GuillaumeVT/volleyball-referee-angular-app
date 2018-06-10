@@ -1,4 +1,5 @@
 import { GameDescription } from '../model/gamedescription';
+import { Utils } from '../utils/utils';
 
 export class GameFilter {
 
@@ -15,6 +16,8 @@ export class GameFilter {
   games:         GameDescription[];
   filteredGames: GameDescription[];
 
+  utils: Utils;
+
   constructor() {
     this.textFilter = '';
     this.isLiveChecked = true;
@@ -25,10 +28,11 @@ export class GameFilter {
     this.isMixedChecked = true;
     this.isLadiesChecked = true;
     this.isGentsChecked = true;
+    this.utils = new Utils();
   }
 
   updateGames(games: GameDescription[]): void {
-    this.games = games.sort((g1, g2) => g2.schedule - g1.schedule);
+    this.games = this.utils.sortGames(games);
     this.filterGames();
   }
 
