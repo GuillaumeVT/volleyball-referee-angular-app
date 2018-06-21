@@ -16,6 +16,17 @@
       </div>
     </div>
 
+    <div class="mb-3">
+      <div class="custom-control custom-radio custom-control-inline">
+        <input class="custom-control-input" type="radio" name="indexed" id="public">
+        <label class="custom-control-label vbr-text" for="public">Public</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input class="custom-control-input" type="radio" name="indexed" id="private">
+        <label class="custom-control-label vbr-text" for="private">Private</label>
+      </div>
+    </div>
+
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="league">Tournament / League</label>
@@ -101,7 +112,15 @@
     <div class="row mb-3" *ngIf="invalidGender">
       <div class="col-12 col-sm-10">
         <p class="alert alert-danger">
-          Both teams and game genders are different.
+          Teams gender and game gender must be identical.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="invalidTeams">
+      <div class="col-12 col-sm-10">
+        <p class="alert alert-danger">
+          Home and guest teams must be different.
         </p>
       </div>
     </div>

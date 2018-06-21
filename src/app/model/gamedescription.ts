@@ -6,6 +6,7 @@ export class GameDescription {
   gender:   string;
   usage:    string;
   status:   string;
+  indexed:  boolean;
   referee:  string;
   league:   string;
   division: string;

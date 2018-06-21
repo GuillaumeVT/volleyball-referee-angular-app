@@ -26,6 +26,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   @Output() gameUpdated = new EventEmitter();
 
   invalidGender:    boolean;
+  invalidTeams:     boolean;
   invalidHTeam:     boolean;
   invalidGTeam:     boolean;
   invalidRules:     boolean;
@@ -34,6 +35,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
 
   constructor(private activeModal: NgbActiveModal, private userService: UserService, private utils: Utils, private datePipe: DatePipe) {
     this.invalidGender = false;
+    this.invalidTeams = false;
     this.invalidHTeam = false;
     this.invalidGTeam = false;
     this.invalidRules = false;
@@ -56,6 +58,8 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
 
   initForm(): void {
     (<HTMLInputElement>document.getElementById('schedule')).value =  this.datePipe.transform(this.game.schedule, 'yyyy-MM-ddTHH:mm');
+    (<HTMLInputElement>document.getElementById('public')).checked = (this.game.indexed === true);
+    (<HTMLInputElement>document.getElementById('private')).checked = (this.game.indexed === false);
     (<HTMLInputElement>document.getElementById('league')).value = this.game.league;
     (<HTMLInputElement>document.getElementById('division')).value = this.game.division;
     (<HTMLInputElement>document.getElementById('hTeam')).value = this.game.hName;
@@ -68,6 +72,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
 
   onSubmitForm(): void {
     const schedule: number = new Date((<HTMLInputElement>document.getElementById('schedule')).value).getTime();
+    const indexed: boolean = (<HTMLInputElement>document.getElementById('public')).checked;
     const league: string = (<HTMLInputElement>document.getElementById('league')).value;
     const division: string = (<HTMLInputElement>document.getElementById('division')).value;
     const hName: string = (<HTMLInputElement>document.getElementById('hTeam')).value;
@@ -93,7 +98,13 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
       this.invalidRules = false;
     }
 
-    if (!this.invalidHTeam && !this.invalidGTeam) {
+     if (hName === gName) {
+       this.invalidTeams = true;
+     } else {
+       this.invalidTeams = false;
+     }
+
+    if (!this.invalidHTeam && !this.invalidGTeam && !this.invalidTeams) {
       var hTeam: Team;
       var gTeam: Team;
 
@@ -112,8 +123,9 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
       }
     }
 
-    if (!this.invalidGender && !this.invalidHTeam && !this.invalidGTeam && !this.invalidRules) {
+    if (!this.invalidGender && !this.invalidHTeam && !this.invalidGTeam && !this.invalidRules && !this.invalidTeams) {
       this.game.schedule = schedule;
+      this.game.indexed = indexed;
       this.game.league = league;
       this.game.division = division;
       this.game.gender = this.gender;

@@ -90,6 +90,7 @@ export class UserGamesComponent implements OnInit {
     game.gender = 'MIXED';
     game.usage = 'NORMAL';
     game.status = 'SCHEDULED';
+    game.indexed = true;
     game.referee = '';
     if (this.selectedLeague) {
       game.league = this.selectedLeague;
