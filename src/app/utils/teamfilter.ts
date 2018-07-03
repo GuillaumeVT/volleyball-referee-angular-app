@@ -24,6 +24,7 @@ export class TeamFilter {
     this.isMixedChecked = true;
     this.isLadiesChecked = true;
     this.isGentsChecked = true;
+    this.utils = new Utils();
   }
 
   updateTeams(teams: Team[]): void {
