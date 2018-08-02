@@ -53,14 +53,14 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  downloadPdfGame(): void {
-    this.gameService.getPdfGame(this.date).subscribe(response => this.onGamePdfReceived(response), error => this.onGamePdfReceived(null));
+  downloadScoreSheet(): void {
+    this.gameService.getScoreSheet(this.date).subscribe(response => this.onScoreSheetReceived(response), error => this.onScoreSheetReceived(null));
   }
 
-  onGamePdfReceived(response: HttpResponse<any>): void {
+  onScoreSheetReceived(response: HttpResponse<any>): void {
     const dateStr = this.datePipe.transform(this.game.schedule, 'dd_MM_yyyy');
-    const filename = this.game.hTeam.name + '_' + this.game.gTeam.name + '_' + dateStr + '.pdf';
-    const blob = new Blob([response.body], { type: 'pdf' });
+    const filename = this.game.hTeam.name + '_' + this.game.gTeam.name + '_' + dateStr + '.html';
+    const blob = new Blob([response.body], { type: 'html' });
     saveAs(response, filename);
   }
 

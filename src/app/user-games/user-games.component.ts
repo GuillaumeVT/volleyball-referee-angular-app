@@ -220,14 +220,14 @@ export class UserGamesComponent implements OnInit {
     return `/game/${game.date}`;
   }
 
-  downloadPdfScoreSheet(game: GameDescription): void {
-    this.gameService.getPdfGame(game.date).subscribe(response => this.onPdfScoreSheetReceived(response, game), error => this.onPdfScoreSheetReceived(null, game));
+  downloadScoreSheet(game: GameDescription): void {
+    this.gameService.getScoreSheet(game.date).subscribe(response => this.onScoreSheetReceived(response, game), error => this.onScoreSheetReceived(null, game));
   }
 
-  onPdfScoreSheetReceived(response: HttpResponse<any>, game: GameDescription): void {
+  onScoreSheetReceived(response: HttpResponse<any>, game: GameDescription): void {
     const dateStr = this.datePipe.transform(game.schedule, 'dd_MM_yyyy');
-    const filename = game.hName + '_' + game.gName + '_' + dateStr + '.pdf';
-    const blob = new Blob([response.body], { type: 'pdf' });
+    const filename = game.hName + '_' + game.gName + '_' + dateStr + '.html';
+    const blob = new Blob([response.body], { type: 'html' });
     saveAs(response, filename);
   }
 }

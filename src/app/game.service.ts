@@ -24,9 +24,9 @@ export class GameService {
     return this.http.get<Game>(url);
   }
 
-  getPdfGame(id: number): Observable<any> {
-    const url = `${this.viewGameUrl}/pdf/${id}`;
-    const options = {headers: { 'Content-Type': 'application/json', 'Accept': 'application/pdf'}, responseType: 'blob' as 'json'};
+  getScoreSheet(id: number): Observable<any> {
+    const url = `${this.viewGameUrl}/score-sheet/${id}`;
+    const options = {headers: { 'Content-Type': 'application/json', 'Accept': 'text/html'}, responseType: 'blob' as 'json'};
     return this.http.get<any>(url, options);
   }
 
