@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -57,6 +57,7 @@ import { LeagueComponent } from './league/league.component';
 import { PrivatePolicyComponent } from './private-policy/private-policy.component';
 
 import { AuthService, AuthServiceConfig } from './auth.service';
+import { TokenInterceptor } from './token.interceptor';
 import { GoogleLoginProvider } from './login/providers/google-login-provider';
 import { FacebookLoginProvider } from './login/providers/facebook-login-provider';
 
@@ -133,7 +134,8 @@ export function getAuthServiceConfigs() {
     AuthService,
     Utils,
     DatePipe,
-    { provide: AuthServiceConfig, useFactory: getAuthServiceConfigs }
+    { provide: AuthServiceConfig, useFactory: getAuthServiceConfigs },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   entryComponents: [
     UserRulesModalComponent,
