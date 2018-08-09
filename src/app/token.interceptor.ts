@@ -22,8 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${this.user.idToken}`,
-          Application: 'WEB',
-          AuthProvider: this.user.provider.toLowerCase()
+          AuthenticationProvider: this.user.provider.toLowerCase()
         }
       });
     }
