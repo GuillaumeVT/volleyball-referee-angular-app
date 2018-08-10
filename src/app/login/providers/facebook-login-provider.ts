@@ -40,6 +40,7 @@ export class FacebookLoginProvider extends BaseLoginProvider {
                 user.firstName = fbUser.first_name;
                 user.lastName = fbUser.last_name;
                 user.authToken = authResponse.accessToken;
+                user.idToken = authResponse.accessToken;
 
                 resolve(user);
               });

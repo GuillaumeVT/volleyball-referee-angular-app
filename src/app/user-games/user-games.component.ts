@@ -15,10 +15,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserGameModalComponent } from '../user-game-modal/user-game-modal.component';
 import { OkCancelModalComponent } from '../ok-cancel-modal/ok-cancel-modal.component';
 import { ToastrService } from 'ngx-toastr';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import { HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { saveAs } from 'file-saver/FileSaver';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-user-games',
@@ -64,7 +64,7 @@ export class UserGamesComponent implements OnInit {
 
   navigateToUser(): void {
     if (!this.signedIn) {
-      this.router.navigateByUrl('user')
+      this.router.navigateByUrl('user');
     }
   }
 

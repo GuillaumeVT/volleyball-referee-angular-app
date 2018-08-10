@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { TimerObservable } from "rxjs/observable/TimerObservable";
-import "rxjs/add/operator/takeWhile";
+import { timer } from "rxjs";
+import { takeWhile } from 'rxjs/operators';
 import { League } from '../model/league';
 import { GameDescription } from '../model/gamedescription';
 import { Team } from '../model/team';
@@ -57,7 +57,7 @@ export class LeagueComponent implements OnInit, OnDestroy {
   onLeagueUpdated(league: League): void  {
     this.league = league;
     this.refreshTeams();
-    TimerObservable.create(0, 120000).takeWhile(() => this.autoRefresh).subscribe(() => this.refreshGames());
+    timer(0, 120000).pipe(takeWhile(() => this.autoRefresh)).subscribe(() => this.refreshGames());
   }
 
   refreshGames(): void {

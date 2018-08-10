@@ -2,9 +2,8 @@ import { Game } from '../model/game';
 import { GameService } from '../game.service';
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from "rxjs";
-import { TimerObservable } from "rxjs/observable/TimerObservable";
-import "rxjs/add/operator/takeWhile";
+import { timer } from "rxjs";
+import { takeWhile } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { saveAs } from 'file-saver/FileSaver';
@@ -31,7 +30,7 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.date) {
-      TimerObservable.create(0, 60000).takeWhile(() => this.isLive).subscribe(() => this.updateGame());
+      timer(0, 60000).pipe(takeWhile(() => this.isLive)).subscribe(() => this.updateGame());
     }
   }
 
