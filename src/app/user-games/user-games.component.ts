@@ -83,7 +83,7 @@ export class UserGamesComponent implements OnInit {
 
   createGame(kind: string): void {
     const game = new GameDescription();
-    game.userId = this.userService.getUserId();
+    game.userId = '';
     game.kind = kind;
     game.date = new Date().getTime();
     game.schedule = new Date().getTime();

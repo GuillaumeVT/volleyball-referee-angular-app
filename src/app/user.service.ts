@@ -6,53 +6,37 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../environments/environment';
-import { AuthService } from './auth.service';
-import { SocialUser } from './login/entities/user';
 
 @Injectable()
 export class UserService {
 
-  private user:     SocialUser;
-  private signedIn: boolean;
+  private userUrl             = environment.api + '/user';
+  private userRulesUrl        = this.userUrl + '/rules';
+  private userTeamUrl         = this.userUrl + '/team';
+  private userGameUrl         = this.userUrl + '/game';
+  private userCodeUrl         = this.userGameUrl + '/code';
+  private userLeagueUrl       = this.userUrl + '/league';
+  private userTeamPublicUrl   = environment.api + '/view/team';
+  private userLeaguePublicUrl = environment.api + '/view/league';
 
-  private userUrl        = environment.api + '/user';
-  private userRulesUrl   = this.userUrl + '/rules';
-  private userTeamUrl    = this.userUrl + '/team';
-  private userGameUrl    = this.userUrl + '/game';
-  private userCodeUrl    = this.userGameUrl + '/code';
-  private userLeagueUrl  = this.userUrl + '/league';
-
-  constructor(private http: HttpClient, private authService: AuthService) {
-    this.signedIn = false;
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.signedIn = (user != null);
-    });
-  }
-
-  getUserId(): string {
-    return this.user.id + '@' + this.user.provider.toLowerCase();
-  }
+  constructor(private http: HttpClient) { }
 
   getNumberOfRules(): Observable<number> {
-    let params = new HttpParams().set("userId", this.getUserId());
     const url = `${this.userRulesUrl}/count`;
-    return this.http.get<number>(url, { params: params });
+    return this.http.get<number>(url);
   }
 
   getRules(): Observable<Rules[]> {
-    let params = new HttpParams().set("userId", this.getUserId());
-    return this.http.get<Rules[]>(this.userRulesUrl, { params: params });
+    return this.http.get<Rules[]>(this.userRulesUrl);
   }
 
   getDefaultRules(): Observable<Rules[]> {
-    let params = new HttpParams().set("userId", this.getUserId());
     const url = `${this.userRulesUrl}/default`;
-    return this.http.get<Rules[]>(url, { params: params });
+    return this.http.get<Rules[]>(url);
   }
 
   getSingleRules(name: string): Observable<Rules> {
-    let params = new HttpParams().set("name", name).set("userId", this.getUserId());
+    let params = new HttpParams().set("name", name);
     return this.http.get<Rules>(this.userRulesUrl, { params: params });
   }
 
@@ -65,38 +49,34 @@ export class UserService {
   }
 
   deleteRules(name: string): Observable<Object> {
-    let params = new HttpParams().set("name", name).set("userId", this.getUserId());
+    let params = new HttpParams().set("name", name);
     return this.http.delete(this.userRulesUrl, { params: params });
   }
 
   deleteAllRules(): Observable<Object> {
-    let params = new HttpParams().set("userId", this.getUserId());
-    return this.http.delete(this.userRulesUrl, { params: params });
+    return this.http.delete(this.userRulesUrl);
   }
 
   getNumberOfTeams(): Observable<number> {
-    let params = new HttpParams().set("userId", this.getUserId());
     const url = `${this.userTeamUrl}/count`;
-    return this.http.get<number>(url, { params: params });
+    return this.http.get<number>(url);
   }
 
   getTeams(): Observable<Team[]> {
-    let params = new HttpParams().set("userId", this.getUserId());
-    return this.http.get<Team[]>(this.userTeamUrl, { params: params });
+    return this.http.get<Team[]>(this.userTeamUrl);
   }
 
   getTeamsInLeaguePublic(date: number): Observable<Team[]> {
-    let params = new HttpParams().set("date", String(date));
-    return this.http.get<Team[]>(this.userTeamUrl, { params: params });
+    return this.http.get<Team[]>(`${this.userTeamPublicUrl}/${date}`);
   }
 
   getTeamsWithKind(kind: string): Observable<Team[]> {
-    let params = new HttpParams().set("userId", this.getUserId()).set("kind", kind);
+    let params = new HttpParams().set("kind", kind);
     return this.http.get<Team[]>(this.userTeamUrl, { params: params });
   }
 
   getTeam(name: string, gender: string, kind: string): Observable<Team> {
-    let params = new HttpParams().set("name", name).set("userId", this.getUserId()).set("gender", gender).set("kind", kind);
+    let params = new HttpParams().set("name", name).set("gender", gender).set("kind", kind);
     return this.http.get<Team>(this.userTeamUrl, { params: params });
   }
 
@@ -109,44 +89,41 @@ export class UserService {
   }
 
   deleteTeam(name: string, gender: string, kind: string): Observable<Object> {
-    let params = new HttpParams().set("name", name).set("userId", this.getUserId()).set("gender", gender).set("kind", kind);
+    let params = new HttpParams().set("name", name).set("gender", gender).set("kind", kind);
     return this.http.delete(this.userTeamUrl, { params: params });
   }
 
   deleteAllTeams(): Observable<Object> {
-    let params = new HttpParams().set("userId", this.getUserId());
-    return this.http.delete(this.userTeamUrl, { params: params });
+    return this.http.delete(this.userTeamUrl);
   }
 
   getNumberOfGames(): Observable<number> {
-    let params = new HttpParams().set("userId", this.getUserId());
     const url = `${this.userGameUrl}/count`;
-    return this.http.get<number>(url, { params: params });
+    return this.http.get<number>(url);
   }
 
   getNumberOfGamesInLeague(kind: string, league: string): Observable<number> {
-    let params = new HttpParams().set("userId", this.getUserId()).set("kind", kind).set("league", league);
+    let params = new HttpParams().set("kind", kind).set("league", league);
     const url = `${this.userGameUrl}/count`;
     return this.http.get<number>(url, { params: params });
   }
 
   getGames(): Observable<GameDescription[]> {
-    let params = new HttpParams().set("userId", this.getUserId());
-    return this.http.get<GameDescription[]>(this.userGameUrl, { params: params });
+    return this.http.get<GameDescription[]>(this.userGameUrl);
   }
 
   getGamesOfLeague(kind: string, league: string): Observable<GameDescription[]> {
-    let params = new HttpParams().set("userId", this.getUserId()).set('kind', kind).set('league', league);
+    let params = new HttpParams().set('kind', kind).set('league', league);
     return this.http.get<GameDescription[]>(this.userGameUrl, { params: params });
   }
 
   getGame(id: number): Observable<GameDescription> {
-    let params = new HttpParams().set("id", String(id)).set("userId", this.getUserId());
+    let params = new HttpParams().set("id", String(id));
     return this.http.get<GameDescription>(this.userGameUrl, { params: params });
   }
 
   getGameCode(id: number): Observable<number> {
-    let params = new HttpParams().set("id", String(id)).set("userId", this.getUserId());
+    let params = new HttpParams().set("id", String(id));
     return this.http.get<number>(this.userCodeUrl, { params: params });
   }
 
@@ -159,38 +136,35 @@ export class UserService {
   }
 
   deleteGame(id: number): Observable<Object> {
-    let params = new HttpParams().set("id", String(id)).set("userId", this.getUserId());
+    let params = new HttpParams().set("id", String(id));
     return this.http.delete(this.userGameUrl, { params: params });
   }
 
   getNumberOfLeagues(): Observable<number> {
-    let params = new HttpParams().set("userId", this.getUserId());
     const url = `${this.userLeagueUrl}/count`;
-    return this.http.get<number>(url, { params: params });
+    return this.http.get<number>(url);
   }
 
   getLeagues(): Observable<League[]> {
-    let params = new HttpParams().set("userId", this.getUserId());
-    return this.http.get<League[]>(this.userLeagueUrl, { params: params });
+    return this.http.get<League[]>(this.userLeagueUrl);
   }
 
   getDivisionsWithKind(kind: string): Observable<string[]> {
-    let params = new HttpParams().set("userId", this.getUserId()).set('kind', kind);
+    let params = new HttpParams().set('kind', kind);
     return this.http.get<string[]>(`${this.userLeagueUrl}/division`, { params: params });
   }
 
   getLeaguesWithKind(kind: string): Observable<League[]> {
-    let params = new HttpParams().set("userId", this.getUserId()).set('kind', kind);
+    let params = new HttpParams().set('kind', kind);
     return this.http.get<League[]>(this.userLeagueUrl, { params: params });
   }
 
   getLeaguePublic(date: number): Observable<League> {
-    let params = new HttpParams().set("date", String(date));
-    return this.http.get<League>(this.userLeagueUrl, { params: params });
+    return this.http.get<League>(`${this.userLeaguePublicUrl}/${date}`);
   }
 
   getLeague(date: number): Observable<League> {
-    let params = new HttpParams().set("date", String(date)).set("userId", this.getUserId());
+    let params = new HttpParams().set("date", String(date));
     return this.http.get<League>(this.userLeagueUrl, { params: params });
   }
 
@@ -199,13 +173,13 @@ export class UserService {
   }
 
   deleteLeague(date: number): Observable<Object> {
-    let params = new HttpParams().set("date", String(date)).set("userId", this.getUserId());
+    let params = new HttpParams().set("date", String(date));
     return this.http.delete(this.userLeagueUrl, { params: params });
   }
 
   getCsvLeague(league: string, division: string): Observable<any> {
     const url = `${this.userLeagueUrl}/csv`;
-    let params = new HttpParams().set("userId", this.getUserId()).set('league', league).set('division', division);
+    let params = new HttpParams().set('league', league).set('division', division);
     return this.http.get<any>(url, { params: params, headers: { 'Content-Type': 'application/json', 'Accept': 'text/csv'}, responseType: 'blob' as 'json' });
   }
 }

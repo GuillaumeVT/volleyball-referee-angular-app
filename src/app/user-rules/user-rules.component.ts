@@ -50,7 +50,7 @@ export class UserRulesComponent implements OnInit {
 
   createRules(): void {
     const rules = new Rules();
-    rules.userId = this.userService.getUserId();
+    rules.userId = '';
     rules.name = '';
     rules.date = new Date().getTime();
     rules.setsPerGame = 5;

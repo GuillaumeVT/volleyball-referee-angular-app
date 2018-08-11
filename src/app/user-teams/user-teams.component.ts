@@ -52,7 +52,7 @@ export class UserTeamsComponent implements OnInit {
 
   createTeam(kind: string): void {
     const team = new Team();
-    team.userId = this.userService.getUserId();
+    team.userId = '';
     team.name = '';
     team.kind = kind;
     team.date = new Date().getTime();

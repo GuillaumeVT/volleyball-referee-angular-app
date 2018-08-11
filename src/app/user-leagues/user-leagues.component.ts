@@ -66,7 +66,7 @@ export class UserLeaguesComponent implements OnInit {
 
   createLeague(kind: string): void {
     const league = new League();
-    league.userId = this.userService.getUserId();
+    league.userId = '';
     league.kind = kind;
     league.date = new Date().getTime();
     league.name = '';
