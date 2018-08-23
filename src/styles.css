@@ -1,3 +1,7 @@
+html * {
+  font-family: 'Roboto', sans-serif;
+}
+
 .vbr-body {
   background-color: #e4e2e4;
   width: 100%;
