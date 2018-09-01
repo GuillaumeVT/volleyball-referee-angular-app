@@ -1,16 +1,12 @@
 <div class="card div-card text-left mx-1 my-3 p-3" *ngIf="gameDescription">
   <div class="game-header">
-    <div class="game-icons">
-      <i class="fa fa-mixcloud vbr-live-text mr-2" *ngIf="gameDescription.status === 'LIVE'"></i>
-      <i class="fa fa-hourglass-2 vbr-time-text mr-2" *ngIf="gameDescription.kind === 'TIME'"></i>
-      <i class="fa fa-sun-o vbr-sun-text mr-2" *ngIf="gameDescription.kind === 'BEACH'"></i>
-      <span class="badge text-center vbr-indoor-text mr-2" *ngIf="gameDescription.kind === 'INDOOR'">6x6</span>
-      <span class="badge text-center vbr-indoor-text mr-2" *ngIf="gameDescription.kind === 'INDOOR_4X4'">4x4</span>
-      <i class="mr-2" [ngClass]="utils.getGenderIcon(gameDescription.gender)"></i>
-    </div>
-    <div class="game-schedule">
-      <span class="vbr-text text-muted secondary-text">{{gameDescription.schedule | date : 'dd MMM yyyy, HH:mm'}}</span>
-    </div>
+    <i class="fa fa-mixcloud game-icon vbr-live-text mr-2" *ngIf="gameDescription.status === 'LIVE'"></i>
+    <i class="fa fa-hourglass-2 game-icon vbr-time-text mr-2" *ngIf="gameDescription.kind === 'TIME'"></i>
+    <i class="fa fa-sun-o game-icon vbr-sun-text mr-2" *ngIf="gameDescription.kind === 'BEACH'"></i>
+    <span class="game-icon badge text-center vbr-indoor-text mr-2" *ngIf="gameDescription.kind === 'INDOOR'">6x6</span>
+    <span class="game-icon badge text-center vbr-indoor-text mr-2" *ngIf="gameDescription.kind === 'INDOOR_4X4'">4x4</span>
+    <i class="game-icon mr-2" [ngClass]="utils.getGenderIcon(gameDescription.gender)"></i>
+    <span class="game-schedule vbr-text text-muted secondary-text">{{gameDescription.schedule | date : 'dd MMM yyyy, HH:mm'}}</span>
   </div>
   <hr/>
   <a [routerLink]="getMatchUrl()" class="game-title">
