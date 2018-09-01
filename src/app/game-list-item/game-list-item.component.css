@@ -2,21 +2,25 @@
   font-size: 0.9em;
 }
 
-.game-header {
+.game-item-header {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
 }
 
-.game-icon {
-  font-size: 1.2em;
+.game-item-icon {
+  font-size: 1.4em;
 }
 
-.game-schedule {
+.game-item-badge {
+  font-size: 1em;
+}
+
+.game-item-schedule {
   margin-left: auto;
 }
 
-.game-title {
+.game-item-title {
   font-size: 1.1em;
   color: #1f4294;
 }
