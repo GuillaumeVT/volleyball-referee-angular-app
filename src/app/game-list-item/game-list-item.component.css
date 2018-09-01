@@ -2,11 +2,18 @@
   font-size: 0.9em;
 }
 
-.game-icon-bar {
-  font-size: 1.2em;
+.game-header {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+}
+
+.game-icons {
+  font-size: 1.2em;
+}
+
+.game-schedule {
+  margin-left: auto;
 }
 
 .game-title {

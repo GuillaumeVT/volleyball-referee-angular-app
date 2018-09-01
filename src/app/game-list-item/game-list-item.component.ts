@@ -21,4 +21,16 @@ export class GameListItemComponent implements OnInit {
     return `/game/${this.gameDescription.date}`;
   }
 
+  showLeague(): boolean {
+    return !this.inLeague && this.gameDescription.league && this.gameDescription.league.length > 0;
+  }
+
+  showDivision(): boolean {
+    return this.gameDescription.division && this.gameDescription.division.length > 0;
+  }
+
+  showReferee(): boolean {
+    return this.gameDescription.referee && this.gameDescription.referee.length > 0;
+  }
+
 }

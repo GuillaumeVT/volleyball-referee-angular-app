@@ -1,23 +1,26 @@
 <div class="card div-card text-left mx-1 my-3 p-3" *ngIf="gameDescription">
-  <div class="game-icon-bar">
-    <i class="fa fa-mixcloud vbr-live-text list-inline-item" *ngIf="gameDescription.status === 'LIVE'"></i>
-    <i class="fa fa-hourglass-2 vbr-time-text list-inline-item" *ngIf="gameDescription.kind === 'TIME'"></i>
-    <i class="fa fa-sun-o vbr-sun-text list-inline-item" *ngIf="gameDescription.kind === 'BEACH'"></i>
-    <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="gameDescription.kind === 'INDOOR'">6x6</span>
-    <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="gameDescription.kind === 'INDOOR_4X4'">4x4</span>
-    <i class="list-inline-item" [ngClass]="utils.getGenderIcon(gameDescription.gender)"></i>
+  <div class="game-header">
+    <div class="game-icons">
+      <i class="fa fa-mixcloud vbr-live-text mr-2" *ngIf="gameDescription.status === 'LIVE'"></i>
+      <i class="fa fa-hourglass-2 vbr-time-text mr-2" *ngIf="gameDescription.kind === 'TIME'"></i>
+      <i class="fa fa-sun-o vbr-sun-text mr-2" *ngIf="gameDescription.kind === 'BEACH'"></i>
+      <span class="badge text-center vbr-indoor-text mr-2" *ngIf="gameDescription.kind === 'INDOOR'">6x6</span>
+      <span class="badge text-center vbr-indoor-text mr-2" *ngIf="gameDescription.kind === 'INDOOR_4X4'">4x4</span>
+      <i class="mr-2" [ngClass]="utils.getGenderIcon(gameDescription.gender)"></i>
+    </div>
+    <div class="game-schedule">
+      <span class="vbr-text text-muted secondary-text">{{gameDescription.schedule | date : 'dd MMM yyyy, HH:mm'}}</span>
+    </div>
   </div>
   <hr/>
-  <a [routerLink]="getMatchUrl()" class="game-title mb-3">
+  <a [routerLink]="getMatchUrl()" class="game-title">
     {{gameDescription.hName}} {{gameDescription.hSets}} - {{gameDescription.gSets}} {{gameDescription.gName}}
   </a>
-  <div class="vbr-text secondary-text">
-    <span *ngIf="!inLeague && gameDescription.league && gameDescription.league.length">{{gameDescription.league}}&nbsp;</span>
-    <span *ngIf="!inLeague && gameDescription.league && gameDescription.league.length && gameDescription.division && gameDescription.division.length">/&nbsp;</span>
-    <span *ngIf="gameDescription.division && gameDescription.division.length">{{gameDescription.division}}&nbsp;</span>
-    <span *ngIf="gameDescription.referee && gameDescription.referee.length"><i class="fa fa-user mr-1"></i>by {{gameDescription.referee}}</span>
-  </div>
-  <div class="vbr-text text-muted secondary-text">
-    <span>{{gameDescription.schedule | date : 'dd MMM yyyy, HH:mm'}}</span>
+  <div class="vbr-text secondary-text mt-3" *ngIf="showLeague() || showDivision() || showReferee()">
+    <span *ngIf="showLeague()">{{gameDescription.league}}&nbsp;</span>
+    <span *ngIf="showLeague() && showDivision()">/&nbsp;</span>
+    <span *ngIf="showDivision()">{{gameDescription.division}}</span>
+    <br *ngIf="(showLeague() || showDivision()) && showReferee()" />
+    <span *ngIf="showReferee()"><i class="fa fa-user mr-1"></i>by {{gameDescription.referee}}</span>
   </div>
 </div>
