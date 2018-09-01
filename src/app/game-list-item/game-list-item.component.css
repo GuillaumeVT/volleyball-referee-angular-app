@@ -4,6 +4,9 @@
 
 .game-icon-bar {
   font-size: 1.2em;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
 }
 
 .game-title {
