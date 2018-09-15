@@ -51,6 +51,7 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
     (<HTMLInputElement>document.getElementById('technical-timeouts-duration')).value = String(this.rules.technicalTimeoutDuration);
     (<HTMLInputElement>document.getElementById('game-intervals')).checked = this.rules.gameIntervals;
     (<HTMLInputElement>document.getElementById('game-intervals-duration')).value = String(this.rules.gameIntervalDuration);
+    (<HTMLInputElement>document.getElementById('substitution-type')).value = String(this.rules.substitutionType);
     (<HTMLInputElement>document.getElementById('substitutions-number')).value = String(this.rules.teamSubstitutionsPerSet);
     (<HTMLInputElement>document.getElementById('beach-court-switches')).checked = this.rules.beachCourtSwitches;
     (<HTMLInputElement>document.getElementById('beach-switch-court-frequency')).value = String(this.rules.beachCourtSwitchFreq);
@@ -85,6 +86,7 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
       this.rules.technicalTimeoutDuration = Number((<HTMLInputElement>document.getElementById('technical-timeouts-duration')).value);
       this.rules.gameIntervals = (<HTMLInputElement>document.getElementById('game-intervals')).checked;
       this.rules.gameIntervalDuration = Number((<HTMLInputElement>document.getElementById('game-intervals-duration')).value);
+      this.rules.substitutionType = Number((<HTMLInputElement>document.getElementById('substitution-type')).value);
       this.rules.teamSubstitutionsPerSet = Number((<HTMLInputElement>document.getElementById('substitutions-number')).value);
       this.rules.beachCourtSwitches = (<HTMLInputElement>document.getElementById('beach-court-switches')).checked;
       this.rules.beachCourtSwitchFreq = Number((<HTMLInputElement>document.getElementById('beach-switch-court-frequency')).value);
@@ -153,6 +155,16 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
       const disabled = checked ? null : true;
       (<HTMLInputElement>document.getElementById('beach-switch-court-frequency')).disabled = disabled;
       (<HTMLInputElement>document.getElementById('beach-switch-court-frequency-tie-break')).disabled = disabled;
+    }
+  }
+
+  checkSubstitutions(): void {
+    var substitutionType: number = Number((<HTMLInputElement>document.getElementById('substitution-type')).value);
+    var teamSubstitutionsPerSet: number = Number((<HTMLInputElement>document.getElementById('substitutions-number')).value);
+
+    if (substitutionType === 1 && teamSubstitutionsPerSet > 12) {
+      teamSubstitutionsPerSet = 12;
+      (<HTMLInputElement>document.getElementById('substitutions-number')).value = String(teamSubstitutionsPerSet);
     }
   }
 }

@@ -175,10 +175,39 @@
 
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="substitution-type">Substitution type</label>
+        <select class="custom-select vbr-text" name="substitution-type" id="substitution-type" [attr.disabled]="crudType === 4 ? true : null" (change)="checkSubstitutions()">
+          <option value="1">Allow substituting each starting player with a single substitute player (Conventional)</option>
+          <option value="2">Allow substituting each starting player with several substitute players</option>
+          <option value="3">Free substitutions</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
         <label class="vbr-text" for="substitutions-number">Number of team substitutions per set</label>
-        <select class="custom-select vbr-text" name="substitutions-number" id="substitutions-number" [attr.disabled]="crudType === 4 ? true : null">
+        <select class="custom-select vbr-text" name="substitutions-number" id="substitutions-number" [attr.disabled]="crudType === 4 ? true : null" (change)="checkSubstitutions()">
+          <option value="18">18 substitutions per set</option>
+          <option value="15">15 substitutions per set</option>
           <option value="12">12 substitutions per set</option>
           <option value="6">6 substitutions per set</option>
+          <option value="5">5 substitutions per set</option>
+          <option value="4">4 substitutions per set</option>
+          <option value="3">3 substitutions per set</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="consecutive-serves">Limit of consecutive serves per player</label>
+        <select class="custom-select vbr-text" name="consecutive-serves" id="consecutive-serves" [attr.disabled]="crudType === 4 ? true : null">
+          <option value="9999">Unlimited</option>
+          <option value="5">5 serves</option>
+          <option value="4">4 serves</option>
+          <option value="3">3 serves</option>
+          <option value="2">2 serves</option>
         </select>
       </div>
     </div>
@@ -216,23 +245,6 @@
           <option value="7">Switch every 7 points</option>
           <option value="6">Switch every 6 points</option>
           <option value="5">Switch every 5 points</option>
-        </select>
-      </div>
-    </div>
-
-    <hr class="mb-3"/>
-
-    <h5 class="vbr-text">Custom rules for specific leagues</h5>
-
-    <div class="row mb-3">
-      <div class="col-12 col-sm-10">
-        <label class="vbr-text" for="consecutive-serves">Limit of consecutive serves per player</label>
-        <select class="custom-select vbr-text" name="consecutive-serves" id="consecutive-serves" [attr.disabled]="crudType === 4 ? true : null">
-          <option value="9999">Unlimited</option>
-          <option value="5">5 serves</option>
-          <option value="4">4 serves</option>
-          <option value="3">3 serves</option>
-          <option value="2">2 serves</option>
         </select>
       </div>
     </div>
