@@ -66,7 +66,7 @@ export class UserRulesComponent implements OnInit {
     rules.technicalTimeoutDuration = 60;
     rules.gameIntervals = true;
     rules.gameIntervalDuration = 180;
-    rules.substitutionType = 1;
+    rules.substitutionsLimitation = 1;
     rules.teamSubstitutionsPerSet = 6;
     rules.beachCourtSwitches = true;
     rules.beachCourtSwitchFreq = 7;

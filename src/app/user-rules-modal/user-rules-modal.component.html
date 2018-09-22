@@ -58,6 +58,7 @@
           <option value="12">Set of 12 points</option>
           <option value="11">Set of 11 points</option>
           <option value="10">Set of 10 points</option>
+          <option value="9">Set of 9 points</option>
         </select>
       </div>
     </div>
@@ -92,6 +93,7 @@
           <option value="12">Tie break of 12 points</option>
           <option value="11">Tie break of 11 points</option>
           <option value="10">Tie break of 10 points</option>
+          <option value="9">Tie break of 9 points</option>
         </select>
       </div>
     </div>
@@ -175,12 +177,32 @@
 
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
-        <label class="vbr-text" for="substitution-type">Substitution type</label>
-        <select class="custom-select vbr-text" name="substitution-type" id="substitution-type" [attr.disabled]="crudType === 4 ? true : null" (change)="checkSubstitutions()">
-          <option value="1">Allow substituting each starting player with a single substitute player (Conventional)</option>
-          <option value="2">Allow substituting each starting player with several substitute players</option>
-          <option value="3">Free substitutions</option>
+        <label class="vbr-text" for="substitutions-limitation">Substitutions limitation</label>
+        <select class="custom-select vbr-text" name="substitutions-limitation" id="substitutions-limitation" [attr.disabled]="crudType === 4 ? true : null" (change)="checkSubstitutions()">
+          <option value="1">FIVB limitation</option>
+          <option value="2">Alternative limitation 1</option>
+          <option value="3">Alternative limitation 2</option>
+          <option value="4">No limitation</option>
         </select>
+        <div class="div-info-icon mt-2">
+          <i class="mx-3 fa fa-info-circle"></i>
+          <div class="vbr-text rule-description" *ngIf="selectedSubstitutionsLimitation === 1">
+            <div class="mb-2">A player of the starting line-up may leave the game, but only once in a set, and re-enter, but only once in a set, and only to his/her previous position in the line-up.</div>
+            <div>A substitute player may enter the game in place of a player of the starting line-up, but only once per set, and he/she can only be substituted by the same starting player.</div>
+          </div>
+          <div class="vbr-text rule-description" *ngIf="selectedSubstitutionsLimitation === 2">
+            <div class="mb-2">A player of the starting line-up may leave the game, several times in a set, and re-enter, an unlimited amount of times per set within the number of allowed team substitutions, and only to his/her previous position in the line-up.</div>
+            <div>A substitute player may enter the game in place of a player of the starting line-up, an unlimited amount of times per set within the number of allowed team substitutions, and he/she can only be substituted by the same starting player.</div>
+          </div>
+          <div class="vbr-text rule-description" *ngIf="selectedSubstitutionsLimitation === 3">
+            <div class="mb-2">A player of the starting line-up may leave the game, several times in a set, and re-enter, an unlimited amount of times per set within the number of allowed team substitutions, and only to his/her previous position in the line-up.</div>
+            <div class="mb-2">A substitute player may enter the game in place of a player of the starting line-up, an unlimited amount of times per set within the number of allowed team substitutions.</div>
+            <div>More than one substitute may enter the set in each position.</div>
+          </div>
+          <div class="vbr-text rule-description" *ngIf="selectedSubstitutionsLimitation === 4">
+            <div>Players can leave and re-enter the game on any position, an unlimited amount of times per set within the number of allowed team substitutions.</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -188,8 +210,8 @@
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="substitutions-number">Number of team substitutions per set</label>
         <select class="custom-select vbr-text" name="substitutions-number" id="substitutions-number" [attr.disabled]="crudType === 4 ? true : null" (change)="checkSubstitutions()">
-          <option value="18">18 substitutions per set</option>
-          <option value="15">15 substitutions per set</option>
+          <option value="18">18 substitutions per set (according to substitutions limitation)</option>
+          <option value="15">15 substitutions per set (according to substitutions limitation)</option>
           <option value="12">12 substitutions per set</option>
           <option value="6">6 substitutions per set</option>
           <option value="5">5 substitutions per set</option>

@@ -13,7 +13,10 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
 
   @Input() rules:    Rules;
   @Input() crudType: CrudType;
+
   @Output() rulesUpdated = new EventEmitter();
+
+  selectedSubstitutionsLimitation: number;
 
   invalidName:     boolean;
   invalidResponse: boolean;
@@ -21,6 +24,7 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
   constructor(private activeModal: NgbActiveModal, private userService: UserService) {
     this.invalidName = false;
     this.invalidResponse =  false;
+    this.selectedSubstitutionsLimitation = 1;
   }
 
   ngOnInit() {
@@ -51,7 +55,7 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
     (<HTMLInputElement>document.getElementById('technical-timeouts-duration')).value = String(this.rules.technicalTimeoutDuration);
     (<HTMLInputElement>document.getElementById('game-intervals')).checked = this.rules.gameIntervals;
     (<HTMLInputElement>document.getElementById('game-intervals-duration')).value = String(this.rules.gameIntervalDuration);
-    (<HTMLInputElement>document.getElementById('substitution-type')).value = String(this.rules.substitutionType);
+    (<HTMLInputElement>document.getElementById('substitutions-limitation')).value = String(this.rules.substitutionsLimitation);
     (<HTMLInputElement>document.getElementById('substitutions-number')).value = String(this.rules.teamSubstitutionsPerSet);
     (<HTMLInputElement>document.getElementById('beach-court-switches')).checked = this.rules.beachCourtSwitches;
     (<HTMLInputElement>document.getElementById('beach-switch-court-frequency')).value = String(this.rules.beachCourtSwitchFreq);
@@ -61,6 +65,7 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
     this.onTeamTimeoutsChanged();
     this.onTechnicalTimeoutsChanged();
     this.onGameIntervalsChanged();
+    setTimeout(() => this.checkSubstitutions(), 0);
   }
 
   onSubmitForm(): void {
@@ -86,7 +91,7 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
       this.rules.technicalTimeoutDuration = Number((<HTMLInputElement>document.getElementById('technical-timeouts-duration')).value);
       this.rules.gameIntervals = (<HTMLInputElement>document.getElementById('game-intervals')).checked;
       this.rules.gameIntervalDuration = Number((<HTMLInputElement>document.getElementById('game-intervals-duration')).value);
-      this.rules.substitutionType = Number((<HTMLInputElement>document.getElementById('substitution-type')).value);
+      this.rules.substitutionsLimitation = Number((<HTMLInputElement>document.getElementById('substitutions-limitation')).value);
       this.rules.teamSubstitutionsPerSet = Number((<HTMLInputElement>document.getElementById('substitutions-number')).value);
       this.rules.beachCourtSwitches = (<HTMLInputElement>document.getElementById('beach-court-switches')).checked;
       this.rules.beachCourtSwitchFreq = Number((<HTMLInputElement>document.getElementById('beach-switch-court-frequency')).value);
@@ -159,12 +164,15 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
   }
 
   checkSubstitutions(): void {
-    var substitutionType: number = Number((<HTMLInputElement>document.getElementById('substitution-type')).value);
+    var substitutionsLimitation: number = Number((<HTMLInputElement>document.getElementById('substitutions-limitation')).value);
     var teamSubstitutionsPerSet: number = Number((<HTMLInputElement>document.getElementById('substitutions-number')).value);
 
-    if (substitutionType === 1 && teamSubstitutionsPerSet > 12) {
+    this.selectedSubstitutionsLimitation = substitutionsLimitation;
+
+    if (substitutionsLimitation === 1 && teamSubstitutionsPerSet > 12) {
       teamSubstitutionsPerSet = 12;
       (<HTMLInputElement>document.getElementById('substitutions-number')).value = String(teamSubstitutionsPerSet);
     }
   }
+
 }
