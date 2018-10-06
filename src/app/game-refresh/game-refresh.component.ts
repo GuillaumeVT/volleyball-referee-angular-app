@@ -6,7 +6,7 @@ import { timer } from "rxjs";
 import { takeWhile } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-import { saveAs } from 'file-saver/FileSaver';
+import { saveAs }from 'file-saver';
 
 @Component({
   selector: 'app-game-refresh',

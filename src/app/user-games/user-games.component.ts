@@ -17,7 +17,7 @@ import { OkCancelModalComponent } from '../ok-cancel-modal/ok-cancel-modal.compo
 import { ToastrService } from 'ngx-toastr';
 import { HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-import { saveAs } from 'file-saver/FileSaver';
+import { saveAs }from 'file-saver';
 import { forkJoin } from 'rxjs';
 
 @Component({
