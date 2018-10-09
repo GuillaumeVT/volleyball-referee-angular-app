@@ -15,7 +15,7 @@ export class Rules {
   technicalTimeoutDuration:         number;
   gameIntervals:                    boolean;
   gameIntervalDuration:             number;
-  substitutionsLimitation:                 number;   
+  substitutionsLimitation:          number;   
   teamSubstitutionsPerSet:          number;
   beachCourtSwitches:               boolean;
   beachCourtSwitchFreq:             number;
