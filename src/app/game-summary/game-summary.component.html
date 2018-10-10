@@ -11,6 +11,6 @@
     {{game.league}}
     <span *ngIf="game.division && game.division.length">&nbsp;/&nbsp;{{game.division}}</span>
   </span>
-  <span class="card-text vbr-text text-center" *ngIf="game.referee && game.referee.length"><i class="fa fa-user mx-1"></i>by {{game.referee}}</span>
-  <button type="button" class="btn vbr-button-inverted ml-3" (click)="viewRules()" ngbTooltip="View rules"><i class="fa fa-book"></i></button>
+  <span class="card-text vbr-text text-center" *ngIf="game.referee && game.referee.length"><i class="fa fa-user ml-1 mr-3"></i>by {{game.referee}}</span>
+  <button type="button" class="btn vbr-button-inverted" (click)="viewRules()" ngbTooltip="View rules"><i class="fa fa-book"></i></button>
 </div>
