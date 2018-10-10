@@ -13,5 +13,5 @@
   </span>
   <span class="card-text vbr-text text-center" *ngIf="game.referee && game.referee.length"><i class="fa fa-user mx-1"></i>by {{game.referee}}</span>
   <span class="ml-3" *ngIf="(game.league && game.league.length) || game.division && game.division.length || game.referee && game.referee.length"></span>
-  <button type="button" class="btn vbr-button-inverted" (click)="viewRules()" ngbTooltip="View rules"><i class="fa fa-book"></i></button>
+  <button type="button" class="btn btn-sm vbr-button-inverted rounded-circle" (click)="viewRules()"><i class="fa fa-book"></i></button>
 </div>
