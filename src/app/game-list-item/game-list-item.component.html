@@ -10,7 +10,8 @@
   </div>
   <hr/>
   <a [routerLink]="getMatchUrl()" class="game-item-title">
-    {{gameDescription.hName}} {{gameDescription.hSets}} - {{gameDescription.gSets}} {{gameDescription.gName}}
+    <span *ngIf="gameDescription.status !== 'SCHEDULED'">{{gameDescription.hName}} {{gameDescription.hSets}} - {{gameDescription.gSets}} {{gameDescription.gName}}<span>
+    <span *ngIf="gameDescription.status === 'SCHEDULED'">{{gameDescription.hName}} - {{gameDescription.gName}}<span>
   </a>
   <div class="vbr-text secondary-text mt-3" *ngIf="showLeague() || showDivision() || showReferee()">
     <span *ngIf="showLeague()">{{gameDescription.league}}&nbsp;</span>
