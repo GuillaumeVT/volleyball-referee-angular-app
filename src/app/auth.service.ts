@@ -60,7 +60,6 @@ export interface LoginOpt {
     select_account
       The authorization server prompts the user to select a user account. This allows a user who has multiple accounts at the authorization
       server to select amongst the multiple accounts that they may have current sessions for.
-
    If no value is specified and the user has not previously authorized access, then the user is shown a consent screen.
   */
   prompt?: string;
@@ -87,20 +86,31 @@ export class AuthService {
 
   private _user: SocialUser = null;
   private _authState: BehaviorSubject<SocialUser> = new BehaviorSubject(null);
+  private _readyState: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
   get authState(): Observable<SocialUser> {
     return this._authState.asObservable();
+  }
+  /** Provides an array of provider ID's as they become ready */
+  get readyState(): Observable<string[]> {
+    return this._readyState.asObservable();
   }
 
   constructor(config: AuthServiceConfig) {
     this.providers = config.providers;
 
     this.providers.forEach((provider: LoginProvider, key: string) => {
-      provider.initialize().then((user: SocialUser) => {
-        user.provider = key;
+      provider.initialize().then(() => {
+        let readyProviders = this._readyState.getValue();
+        readyProviders.push(key);
+        this._readyState.next(readyProviders);
 
-        this._user = user;
-        this._authState.next(user);
+        provider.getLoginStatus().then((user) => {
+          user.provider = key;
+
+          this._user = user;
+          this._authState.next(user);
+        });
       }).catch((err) => {
         // this._authState.next(null);
       });
