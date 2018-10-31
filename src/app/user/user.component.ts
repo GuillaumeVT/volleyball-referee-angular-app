@@ -34,7 +34,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
+    this.authService.authState.subscribe(user => {
       this.user = user;
       this.signedIn = (user != null);
 

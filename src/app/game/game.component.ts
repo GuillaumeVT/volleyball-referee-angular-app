@@ -16,12 +16,14 @@ export class GameComponent implements OnInit {
   currentSet: number;
   leftTeam:   TeamType;
   rightTeam:  TeamType;
+  rate:       number;
 
   constructor(private titleService: Title, private route: ActivatedRoute) {
     this.titleService.setTitle('Volleyball Referee - Match');
     this.currentSet = 0;
     this.leftTeam = TeamType.Home;
-    this.rightTeam = TeamType.Guest;
+    this.rightTeam = TeamType.Guest
+    this.rate = 60000;
   }
 
   ngOnInit() {
@@ -47,4 +49,7 @@ export class GameComponent implements OnInit {
     }
   }
 
+  onCurrentRateUpdated(rate: number): void {
+    this.rate = rate;
+  }
 }

@@ -7,8 +7,6 @@ import { takeWhile } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { saveAs }from 'file-saver';
-import { AuthService } from '../auth.service';
-import { SocialUser } from '../login/entities/user';
 
 @Component({
   selector: 'app-game-refresh',
@@ -18,13 +16,14 @@ import { SocialUser } from '../login/entities/user';
 export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() date: number;
+  @Input() rate: number;
   @Output() currentGameUpdated = new EventEmitter();
 
   game:         Game;
   isLive:       boolean;
   subscription: Subscription;
 
-  constructor(private router: Router, private gameService: GameService, private datePipe: DatePipe, private authService: AuthService) {
+  constructor(private router: Router, private gameService: GameService, private datePipe: DatePipe) {
     this.isLive = true;
   }
 
@@ -32,13 +31,11 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.date) {
-      this.authService.authState.subscribe(user => {
-        if (this.subscription) {
-          this.subscription.unsubscribe();
-        }
-        this.subscription = timer(0, user ? 20000 : 60000).pipe(takeWhile(() => this.isLive)).subscribe(() => this.updateGame());
-      });
+    if (this.date && this.rate) {
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
+      this.subscription = timer(0, this.rate).pipe(takeWhile(() => this.isLive)).subscribe(() => this.updateGame());
     }
   }
 

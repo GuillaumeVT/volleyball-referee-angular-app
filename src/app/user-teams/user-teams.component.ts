@@ -29,7 +29,7 @@ export class UserTeamsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
+    this.authService.authState.subscribe(user => {
       this.signedIn = (user != null);
 
       if (this.signedIn) {

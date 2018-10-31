@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
+    this.authService.authState.subscribe(user => {
       if (user) {
         this.image = user.photoUrl;
       } else {

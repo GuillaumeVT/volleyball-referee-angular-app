@@ -13,7 +13,7 @@ export class TokenInterceptor implements HttpInterceptor {
   signedIn:        boolean;
 
   constructor(private authService: AuthService, private router: Router) {
-    this.authService.authState.subscribe((user) => {
+    this.authService.authState.subscribe(user => {
       this.user = user;
       this.signedIn = (user != null);
     });

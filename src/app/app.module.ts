@@ -55,6 +55,7 @@ import { UserLeaguesComponent } from './user-leagues/user-leagues.component';
 import { UserLeaguesModalComponent } from './user-leagues-modal/user-leagues-modal.component';
 import { LeagueComponent } from './league/league.component';
 import { PrivatePolicyComponent } from './private-policy/private-policy.component';
+import { RoleSelectorComponent } from './role-selector/role-selector.component';
 
 import { AuthService, AuthServiceConfig } from './auth.service';
 import { TokenInterceptor } from './token.interceptor';
@@ -118,6 +119,7 @@ export function getAuthServiceConfigs() {
     UserLeaguesModalComponent,
     LeagueComponent,
     PrivatePolicyComponent,
+    RoleSelectorComponent,
   ],
   imports: [
     BrowserModule,
