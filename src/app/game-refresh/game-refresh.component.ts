@@ -2,11 +2,13 @@ import { Game } from '../model/game';
 import { GameService } from '../game.service';
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { timer } from "rxjs";
+import { Subscription, timer } from "rxjs";
 import { takeWhile } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { saveAs }from 'file-saver';
+import { AuthService } from '../auth.service';
+import { SocialUser } from '../login/entities/user';
 
 @Component({
   selector: 'app-game-refresh',
@@ -18,10 +20,11 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
   @Input() date: number;
   @Output() currentGameUpdated = new EventEmitter();
 
-  game:   Game;
-  isLive: boolean;
+  game:         Game;
+  isLive:       boolean;
+  subscription: Subscription;
 
-  constructor(private router: Router, private gameService: GameService, private datePipe: DatePipe) {
+  constructor(private router: Router, private gameService: GameService, private datePipe: DatePipe, private authService: AuthService) {
     this.isLive = true;
   }
 
@@ -30,12 +33,19 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.date) {
-      timer(0, 60000).pipe(takeWhile(() => this.isLive)).subscribe(() => this.updateGame());
+      this.authService.authState.subscribe(user => {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+        this.subscription = timer(0, user ? 20000 : 60000).pipe(takeWhile(() => this.isLive)).subscribe(() => this.updateGame());
+      });
     }
   }
 
   ngOnDestroy(){
-    this.isLive = false;
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   updateGame(): void {
