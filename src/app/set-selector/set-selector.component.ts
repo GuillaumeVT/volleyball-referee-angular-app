@@ -43,13 +43,13 @@ export class SetSelectorComponent implements OnInit, OnChanges {
 
   activateSelectedButton(): void {
     var selector = document.getElementById("selector");
-    var buttons = selector.getElementsByClassName("btn-set");
+    var buttons = selector.getElementsByClassName("vbr-button-unselected");
     for (var index = 0; index < buttons.length; index++) {
       var buttonClasses = buttons[index].classList;
-      buttonClasses.remove("active");
+      buttonClasses.remove("vbr-button-selected");
 
       if (index === this.currentSet) {
-        buttonClasses.add("active");
+        buttonClasses.add("vbr-button-selected");
       }
     }
   }

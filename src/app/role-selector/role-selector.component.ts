@@ -48,12 +48,12 @@ export class RoleSelectorComponent implements OnInit {
     var publicButton = document.getElementById("public-role");
     var refereeButton = document.getElementById("referee-role");
     if (publicButton && refereeButton) {
-      publicButton.classList.remove("active");
-      refereeButton.classList.remove("active");
+      publicButton.classList.remove("vbr-button-selected");
+      refereeButton.classList.remove("vbr-button-selected");
       if (this.refereeRole) {
-        refereeButton.classList.add("active");
+        refereeButton.classList.add("vbr-button-selected");
       } else {
-        publicButton.classList.add("active");
+        publicButton.classList.add("vbr-button-selected");
       }
     }
   }

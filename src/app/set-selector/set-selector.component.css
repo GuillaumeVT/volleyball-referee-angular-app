@@ -1,21 +1,3 @@
-.btn-set {
-  background-color: inherit;
-  color: #1f4294;
-  border-color: #1f4294;
-}
-
-.active {
-  background-color: #1f4294;
-  color: white;
-  border-color: #1f4294;
-}
-
-.btn-set:hover {
-  background-color: #1f4294;
-  color: white;
-  border-color: #1f4294;
-}
-
 .wrap-buttons {
   flex-wrap: wrap;
   justify-content: center;

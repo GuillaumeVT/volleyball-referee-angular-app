@@ -80,6 +80,30 @@
   border-color: #1f4294;
 }
 
+.vbr-button-unselected {
+  background-color: inherit;
+  color: #1f1f1f;
+  border-color: #1f1f1f;
+}
+
+.vbr-button-unselected:hover {
+  background-color: #1f4294;
+  color: white;
+  border-color: #1f4294;
+}
+
+.vbr-button-selected {
+  background-color: #cedaf5;
+  color: #1f4294;
+  border-color: #1f4294;
+}
+
+.vbr-button-selected:hover {
+  background-color: #1f4294;
+  color: white;
+  border-color: #1f4294;
+}
+
 .cancel-button {
 	color: white;
 	background-color: #424242;

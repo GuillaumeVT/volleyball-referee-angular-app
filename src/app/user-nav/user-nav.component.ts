@@ -16,9 +16,9 @@ export class UserNavComponent implements OnInit {
 
   getLinkClass(index: number): string {
     if (this.selectedIndex === index) {
-      return 'btn vbr-button';
+      return 'btn vbr-button-selected';
     } else {
-      return 'btn vbr-button-inverted';
+      return 'btn vbr-button-unselected';
     }
   }
 
