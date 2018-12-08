@@ -20,7 +20,8 @@
       <div class="input-group-prepend">
         <button class="btn vbr-button" (click)="onSearchDateClicked()"><i class="fa fa-search"></i></button>
       </div>
-      <input type="date" class="form-control vbr-text-color" min="2018-01-02" max="2038-01-02" [ngModel]="dateModel | date:'yyyy-MM-dd'" (ngModelChange)="dateModel = $event" (keyup.enter)="onSearchDateClicked()"/>
+      <input class="form-control vbr-text-color" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp" [(ngModel)]="dateModel" placeholder="By date" (keydown)="$event.preventDefault()">
+      <owl-date-time [pickerType]="'calendar'" #dtp></owl-date-time>
     </div>
 
     <div class="input-group">

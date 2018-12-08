@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Rules } from '../model/rules';
 import { Team } from '../model/team';
@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './user-game-modal.component.html',
   styleUrls: ['./user-game-modal.component.css']
 })
-export class UserGameModalComponent implements OnInit, AfterViewInit {
+export class UserGameModalComponent implements OnInit {
 
   @Input() game:         GameDescription;
   @Input() crudType:     CrudType;
@@ -31,7 +31,6 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   invalidGTeam:     boolean;
   invalidRules:     boolean;
   invalidResponse:  boolean;
-  gender:           string;
 
   constructor(private activeModal: NgbActiveModal, private userService: UserService, private utils: Utils, private datePipe: DatePipe) {
     this.invalidGender = false;
@@ -40,34 +39,13 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
     this.invalidGTeam = false;
     this.invalidRules = false;
     this.invalidResponse = false;
-    this.gender = 'MIXED';
   }
 
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
-    if (this.game && this.crudType && this.rules && this.teams) {
-      this.initForm();
-    }
-  }
-
   close(): void {
     this.activeModal.close();
-  }
-
-  initForm(): void {
-    (<HTMLInputElement>document.getElementById('schedule')).value =  this.datePipe.transform(this.game.schedule, 'yyyy-MM-ddTHH:mm');
-    (<HTMLInputElement>document.getElementById('public')).checked = (this.game.indexed === true);
-    (<HTMLInputElement>document.getElementById('private')).checked = (this.game.indexed === false);
-    (<HTMLInputElement>document.getElementById('league')).value = this.game.league;
-    (<HTMLInputElement>document.getElementById('division')).value = this.game.division;
-    (<HTMLInputElement>document.getElementById('hTeam')).value = this.game.hName;
-    (<HTMLInputElement>document.getElementById('gTeam')).value = this.game.gName;
-    (<HTMLInputElement>document.getElementById('rules')).value = this.game.rules;
-    (<HTMLInputElement>document.getElementById('referee')).value = this.game.referee;
-
-    setTimeout(() => this.gender = this.game.gender, 0);
   }
 
   onSubmitForm(): void {
@@ -109,9 +87,9 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
       var gTeam: Team;
 
       for (let team of this.teams) {
-        if (team.name === hName && team.gender === this.gender) {
+        if (team.name === hName && team.gender === this.game.gender) {
           hTeam = team;
-        } else if (team.name === gName && team.gender === this.gender) {
+        } else if (team.name === gName && team.gender === this.game.gender) {
           gTeam = team;
         }
       }
@@ -124,16 +102,6 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
     }
 
     if (!this.invalidGender && !this.invalidHTeam && !this.invalidGTeam && !this.invalidRules && !this.invalidTeams) {
-      this.game.schedule = schedule;
-      this.game.indexed = indexed;
-      this.game.league = league;
-      this.game.division = division;
-      this.game.gender = this.gender;
-      this.game.hName = hName;
-      this.game.gName = gName;
-      this.game.rules = rules;
-      this.game.referee = referee;
-
       if (this.crudType === CrudType.Create) {
         this.userService.createGame(this.game).subscribe(game => this.onValidResponse(), error => this.onInvalidResponse(error));
       } else if (this.crudType === CrudType.Update) {
@@ -152,10 +120,14 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
     this.invalidResponse = true;
   }
 
+  isEditingDisabled(): boolean {
+    return this.crudType === 4 ? true : null;
+  }
+
   getGenderIcon(): string {
-    if (this.gender === 'MIXED') {
+    if (this.game.gender === 'MIXED') {
       return 'fa fa-intersex';
-    } else if (this.gender === 'LADIES') {
+    } else if (this.game.gender === 'LADIES') {
       return 'fa fa-venus';
     } else {
       return 'fa fa-mars';
@@ -163,9 +135,9 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   }
 
   getGenderButton(): string {
-    if (this.gender === 'MIXED') {
+    if (this.game.gender === 'MIXED') {
       return 'mixed-button';
-    } else if (this.gender === 'LADIES') {
+    } else if (this.game.gender === 'LADIES') {
       return 'ladies-button';
     } else {
       return 'gents-button';
@@ -173,12 +145,12 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   }
 
   nextGender(): void {
-    if (this.gender === 'MIXED') {
-      this.gender = 'LADIES';
-    } else if (this.gender === 'LADIES') {
-      this.gender = 'GENTS';
+    if (this.game.gender === 'MIXED') {
+      this.game.gender = 'LADIES';
+    } else if (this.game.gender === 'LADIES') {
+      this.game.gender = 'GENTS';
     } else {
-      this.gender = 'MIXED';
+      this.game.gender = 'MIXED';
     }
   }
 

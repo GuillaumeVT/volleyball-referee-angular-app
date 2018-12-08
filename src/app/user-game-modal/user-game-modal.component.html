@@ -11,8 +11,9 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="schedule">Scheduled for</label>
-        <input type="datetime-local" class="form-control vbr-text" name="schedule" id="schedule" required [attr.disabled]="crudType === 4 ? true : null"
-          min="2018-01-02T00:00" max="2038-01-02T00:00" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"/>
+        <input class="form-control vbr-text-color" name="schedule" id="schedule" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp"
+          (keydown)="$event.preventDefault()" required [attr.disabled]="isEditingDisabled()">
+        <owl-date-time #dtp></owl-date-time>
       </div>
     </div>
 
@@ -30,7 +31,7 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="league">Tournament / League</label>
-        <input type="text" class="vbr-text form-control" name="league" id="league" list="leagueList" required [attr.disabled]="crudType === 4 ? true : null"/>
+        <input type="text" class="vbr-text form-control" name="league" id="league" list="leagueList" required [attr.disabled]="isEditingDisabled()"/>
         <datalist id="leagueList">
           <option *ngFor="let league of leagues">
             {{league.name}}
@@ -42,7 +43,7 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="division">Pool / Division</label>
-        <input type="text" class="vbr-text form-control" name="division" id="division" list="divisionList" required [attr.disabled]="crudType === 4 ? true : null"/>
+        <input type="text" class="vbr-text form-control" name="division" id="division" list="divisionList" required [attr.disabled]="isEditingDisabled()"/>
         <datalist id="divisionList">
           <option *ngFor="let division of divisions">
             {{division}}
@@ -70,8 +71,8 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label [ngClass]="invalidHTeam ? 'vbr-error-label' : ''" class="vbr-text" for="hTeam">Home team</label>
-        <select [ngClass]="invalidHTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="hTeam" id="hTeam" [attr.disabled]="crudType === 4 ? true : null">
-          <option *ngFor="let team of teams" [value]="team.name">
+        <select [ngClass]="invalidHTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="hTeam" id="hTeam" [attr.disabled]="isEditingDisabled()">
+          <option *ngFor="let team of teams" [ngValue]="team.name">
             {{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}
           </option>
         </select>
@@ -86,8 +87,8 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label [ngClass]="invalidGTeam ? 'vbr-error-label' : ''" class="vbr-text" for="gTeam">Guest team</label>
-        <select [ngClass]="invalidGTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="gTeam" id="gTeam" [attr.disabled]="crudType === 4 ? true : null">
-          <option *ngFor="let team of teams" [value]="team.name">
+        <select [ngClass]="invalidGTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="gTeam" id="gTeam" [attr.disabled]="isEditingDisabled()">
+          <option *ngFor="let team of teams" [ngValue]="team.name">
             {{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}
           </option>
         </select>
@@ -102,12 +103,12 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label [ngClass]="invalidRules ? 'vbr-error-label' : ''" class="vbr-text" for="rules">Rules</label>
-        <select [ngClass]="invalidRules ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="rules" id="rules" [attr.disabled]="crudType === 4 ? true : null">
+        <select [ngClass]="invalidRules ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="rules" id="rules" [attr.disabled]="isEditingDisabled()">
           <optgroup label="Default Rules">
-            <option *ngFor="let rule of defaultRules" [value]="rule.name">{{rule.name}}</option>
+            <option *ngFor="let rule of defaultRules" [ngValue]="rule.name">{{rule.name}}</option>
           </optgroup>
           <optgroup label="My Rules">
-            <option *ngFor="let rule of rules" [value]="rule.name">{{rule.name}}</option>
+            <option *ngFor="let rule of rules" [ngValue]="rule.name">{{rule.name}}</option>
           </optgroup>
         </select>
       </div>
@@ -121,7 +122,7 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="referee">Referee</label>
-        <input type="text" class="vbr-text form-control" name="referee" id="referee" required [attr.disabled]="crudType === 4 ? true : null"/>
+        <input type="text" class="vbr-text form-control" name="referee" id="referee" required [attr.disabled]="isEditingDisabled()"/>
       </div>
     </div>
 

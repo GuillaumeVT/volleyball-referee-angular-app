@@ -9,7 +9,8 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label [ngClass]="invalidName ? 'vbr-error-label' : ''" class="vbr-text" for="name">League name</label>
-        <input type="text" [ngClass]="invalidName ? 'vbr-error-input' : ''" class="vbr-text form-control" name="name" id="name" placeholder="" required/>
+        <input type="text" [ngClass]="invalidName ? 'vbr-error-input' : ''" class="vbr-text form-control"
+          name="name" id="name" [(ngModel)]="league.name" placeholder="" required/>
         <div class="vbr-error-feedback" *ngIf="invalidName">
           Please enter a name for the league.
         </div>

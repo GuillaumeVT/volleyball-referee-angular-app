@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
@@ -129,6 +129,8 @@ export function getAuthServiceConfigs() {
     NgbModule.forRoot(),
     FormsModule,
     ToastrModule.forRoot(),
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   providers: [
     GameService,
@@ -137,7 +139,8 @@ export function getAuthServiceConfigs() {
     Utils,
     DatePipe,
     { provide: AuthServiceConfig, useFactory: getAuthServiceConfigs },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: OWL_DATE_TIME_LOCALE, useValue: 'en-GB' }
   ],
   entryComponents: [
     UserRulesModalComponent,

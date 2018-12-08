@@ -1,3 +1,5 @@
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
 .vbr-body {
   background-color: #e4e2e4;
   width: 100%;
@@ -320,6 +322,23 @@ html {
   .icon-text {
     display: none;
   }
+}
+
+/* Date picker */
+
+.cdk-overlay-container {
+  z-index: 9999;
+}
+
+.owl-dt-calendar-table .owl-dt-calendar-cell-selected {
+  color: white;
+  background-color: #1f4294;
+}
+
+.owl-dt-container {
+  -webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 /* based on angular-toastr css https://github.com/Foxandxss/angular-toastr/blob/cb508fe6801d6b288d3afc525bb40fee1b101650/dist/angular-toastr.css */

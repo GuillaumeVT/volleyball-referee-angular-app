@@ -29,14 +29,10 @@ export class UserLeaguesModalComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-    const name = (<HTMLInputElement>document.getElementById('name')).value;
-
-    if (name.length === 0) {
+    if (this.league.name.length === 0) {
       this.invalidName = true;
     } else {
       this.invalidName = false;
-
-      this.league.name = (<HTMLInputElement>document.getElementById('name')).value;
       this.userService.createLeague(this.league).subscribe(league => this.onValidResponse(), error => this.onInvalidResponse(error));
     }
   }
