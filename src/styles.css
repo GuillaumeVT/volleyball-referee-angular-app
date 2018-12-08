@@ -341,6 +341,10 @@ html {
   border-radius: 5px;
 }
 
+.owl-dt-control-button {
+  color: #1f4294;
+}
+
 /* based on angular-toastr css https://github.com/Foxandxss/angular-toastr/blob/cb508fe6801d6b288d3afc525bb40fee1b101650/dist/angular-toastr.css */
 
 /* position */

@@ -24,8 +24,7 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
     this.invalidResponse =  false;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngAfterViewInit() {
     if (this.rules && this.crudType) {

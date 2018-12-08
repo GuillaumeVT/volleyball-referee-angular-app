@@ -11,7 +11,7 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="schedule">Scheduled for</label>
-        <input class="form-control vbr-text-color" name="schedule" id="schedule" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp"
+        <input class="form-control vbr-text-color" name="schedule" id="schedule" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp" [(ngModel)]="scheduleDate" [min]="minScheduleDate"
           (keydown)="$event.preventDefault()" required [attr.disabled]="isEditingDisabled()">
         <owl-date-time #dtp></owl-date-time>
       </div>
@@ -19,11 +19,11 @@
 
     <div class="mb-3">
       <div class="custom-control custom-radio custom-control-inline">
-        <input class="custom-control-input" type="radio" name="indexed" id="public">
+        <input class="custom-control-input" type="radio" name="indexed" id="public" [value]="true" [(ngModel)]="game.indexed" [attr.disabled]="isEditingDisabled()">
         <label class="custom-control-label vbr-text" name="public" for="public">Public</label>
       </div>
       <div class="custom-control custom-radio custom-control-inline">
-        <input class="custom-control-input" type="radio" name="indexed" id="private">
+        <input class="custom-control-input" type="radio" name="indexed" id="private" [value]="false" [(ngModel)]="game.indexed" [attr.disabled]="isEditingDisabled()">
         <label class="custom-control-label vbr-text" name="private" for="private">Private</label>
       </div>
     </div>
@@ -31,11 +31,9 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="league">Tournament / League</label>
-        <input type="text" class="vbr-text form-control" name="league" id="league" list="leagueList" required [attr.disabled]="isEditingDisabled()"/>
+        <input type="text" class="vbr-text form-control" name="league" id="league" list="leagueList" [(ngModel)]="game.league" required [attr.disabled]="isEditingDisabled()"/>
         <datalist id="leagueList">
-          <option *ngFor="let league of leagues">
-            {{league.name}}
-          </option>
+          <option *ngFor="let league of leagues" [ngValue]="league.name">{{league.name}}</option>
         </datalist>
       </div>
     </div>
@@ -43,11 +41,9 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="division">Pool / Division</label>
-        <input type="text" class="vbr-text form-control" name="division" id="division" list="divisionList" required [attr.disabled]="isEditingDisabled()"/>
+        <input type="text" class="vbr-text form-control" name="division" id="division" list="divisionList" [(ngModel)]="game.division" required [attr.disabled]="isEditingDisabled()"/>
         <datalist id="divisionList">
-          <option *ngFor="let division of divisions">
-            {{division}}
-          </option>
+          <option *ngFor="let division of divisions" [ngValue]="division">{{division}}</option>
         </datalist>
       </div>
     </div>
@@ -71,10 +67,8 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label [ngClass]="invalidHTeam ? 'vbr-error-label' : ''" class="vbr-text" for="hTeam">Home team</label>
-        <select [ngClass]="invalidHTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="hTeam" id="hTeam" [attr.disabled]="isEditingDisabled()">
-          <option *ngFor="let team of teams" [ngValue]="team.name">
-            {{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}
-          </option>
+        <select [ngClass]="invalidHTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="hTeam" id="hTeam" [(ngModel)]="game.hName" [attr.disabled]="isEditingDisabled()">
+          <option *ngFor="let team of teams" [ngValue]="team.name">{{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}</option>
         </select>
       </div>
       <div class="col-12">
@@ -87,10 +81,8 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label [ngClass]="invalidGTeam ? 'vbr-error-label' : ''" class="vbr-text" for="gTeam">Guest team</label>
-        <select [ngClass]="invalidGTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="gTeam" id="gTeam" [attr.disabled]="isEditingDisabled()">
-          <option *ngFor="let team of teams" [ngValue]="team.name">
-            {{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}
-          </option>
+        <select [ngClass]="invalidGTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="gTeam" id="gTeam" [(ngModel)]="game.gName" [attr.disabled]="isEditingDisabled()">
+          <option *ngFor="let team of teams" [ngValue]="team.name">{{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}</option>
         </select>
       </div>
       <div class="col-12">
@@ -103,7 +95,7 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label [ngClass]="invalidRules ? 'vbr-error-label' : ''" class="vbr-text" for="rules">Rules</label>
-        <select [ngClass]="invalidRules ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="rules" id="rules" [attr.disabled]="isEditingDisabled()">
+        <select [ngClass]="invalidRules ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="rules" id="rules" [(ngModel)]="game.rules" [attr.disabled]="isEditingDisabled()">
           <optgroup label="Default Rules">
             <option *ngFor="let rule of defaultRules" [ngValue]="rule.name">{{rule.name}}</option>
           </optgroup>
@@ -122,7 +114,7 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="referee">Referee</label>
-        <input type="text" class="vbr-text form-control" name="referee" id="referee" required [attr.disabled]="isEditingDisabled()"/>
+        <input type="text" class="vbr-text form-control" name="referee" id="referee" [(ngModel)]="game.referee" required [attr.disabled]="isEditingDisabled()"/>
       </div>
     </div>
 

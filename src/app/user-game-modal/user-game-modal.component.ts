@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Rules } from '../model/rules';
 import { Team } from '../model/team';
@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './user-game-modal.component.html',
   styleUrls: ['./user-game-modal.component.css']
 })
-export class UserGameModalComponent implements OnInit {
+export class UserGameModalComponent implements OnInit, AfterViewInit {
 
   @Input() game:         GameDescription;
   @Input() crudType:     CrudType;
@@ -32,6 +32,9 @@ export class UserGameModalComponent implements OnInit {
   invalidRules:     boolean;
   invalidResponse:  boolean;
 
+  scheduleDate: Date;
+  minScheduleDate: Date;
+
   constructor(private activeModal: NgbActiveModal, private userService: UserService, private utils: Utils, private datePipe: DatePipe) {
     this.invalidGender = false;
     this.invalidTeams = false;
@@ -39,9 +42,16 @@ export class UserGameModalComponent implements OnInit {
     this.invalidGTeam = false;
     this.invalidRules = false;
     this.invalidResponse = false;
+    this.scheduleDate = new Date();
+    this.minScheduleDate = new Date();
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ngAfterViewInit() {
+    if (this.game && this.crudType) {
+      this.scheduleDate = new Date(this.game.schedule);
+    }
   }
 
   close(): void {
@@ -49,34 +59,27 @@ export class UserGameModalComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-    const schedule: number = new Date((<HTMLInputElement>document.getElementById('schedule')).value).getTime();
-    const indexed: boolean = (<HTMLInputElement>document.getElementById('public')).checked;
-    const league: string = (<HTMLInputElement>document.getElementById('league')).value;
-    const division: string = (<HTMLInputElement>document.getElementById('division')).value;
-    const hName: string = (<HTMLInputElement>document.getElementById('hTeam')).value;
-    const gName: string = (<HTMLInputElement>document.getElementById('gTeam')).value;
-    const rules: string = (<HTMLInputElement>document.getElementById('rules')).value;
-    const referee: string = (<HTMLInputElement>document.getElementById('referee')).value;
+    this.game.schedule = this.scheduleDate.getTime();
 
-    if (hName.length === 0) {
+    if (this.game.hName.length === 0) {
       this.invalidHTeam = true;
     } else {
       this.invalidHTeam = false;
     }
 
-    if (gName.length === 0) {
+    if (this.game.gName.length === 0) {
       this.invalidGTeam = true;
     } else {
       this.invalidGTeam = false;
     }
 
-    if (rules.length === 0) {
+    if (this.game.rules.length === 0) {
       this.invalidRules = true;
     } else {
       this.invalidRules = false;
     }
 
-     if (hName === gName) {
+     if (this.game.hName === this.game.gName) {
        this.invalidTeams = true;
      } else {
        this.invalidTeams = false;
@@ -87,9 +90,9 @@ export class UserGameModalComponent implements OnInit {
       var gTeam: Team;
 
       for (let team of this.teams) {
-        if (team.name === hName && team.gender === this.game.gender) {
+        if (team.name === this.game.hName && team.gender === this.game.gender) {
           hTeam = team;
-        } else if (team.name === gName && team.gender === this.game.gender) {
+        } else if (team.name === this.game.gName && team.gender === this.game.gender) {
           gTeam = team;
         }
       }

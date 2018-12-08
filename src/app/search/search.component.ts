@@ -12,12 +12,14 @@ import { DatePipe } from '@angular/common';
 })
 export class SearchComponent implements OnInit {
 
-  dateModel:Date;
+  searchDate:Date;
+  minDate:   Date;
   image:    string;
 
   constructor(private titleService: Title, private router: Router, private authService: AuthService, private datePipe: DatePipe) {
     this.titleService.setTitle('Volleyball Referee - Search');
-    this.dateModel = new Date();
+    this.searchDate = new Date();
+    this.minDate = new Date(2018, 1, 1, 0, 0, 0);
   }
 
   ngOnInit() {
@@ -41,8 +43,8 @@ export class SearchComponent implements OnInit {
   }
 
   onSearchDateClicked(): void {
-    if (this.dateModel) {
-      const dateStr = this.datePipe.transform(this.dateModel, 'dd-MM-yyyy');
+    if (this.searchDate) {
+      const dateStr = this.datePipe.transform(this.searchDate, 'dd-MM-yyyy');
       this.router.navigateByUrl(`search/date/${dateStr}`);
     }
   }
