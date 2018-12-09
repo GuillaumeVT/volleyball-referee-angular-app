@@ -65,13 +65,7 @@ export class UserLeaguesComponent implements OnInit {
   }
 
   createLeague(kind: string): void {
-    const league = new League();
-    league.userId = '';
-    league.kind = kind;
-    league.date = new Date().getTime();
-    league.name = '';
-    league.divisions = [];
-
+    const league = League.createLeague(kind);
     const modalRef = this.modalService.open(UserLeaguesModalComponent, { size: 'lg' });
     modalRef.componentInstance.league = league;
     modalRef.componentInstance.leagueCreated.subscribe(created => this.onLeagueCreated());

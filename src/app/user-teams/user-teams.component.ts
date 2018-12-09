@@ -51,23 +51,7 @@ export class UserTeamsComponent implements OnInit {
   }
 
   createTeam(kind: string): void {
-    const team = new Team();
-    team.userId = '';
-    team.name = '';
-    team.kind = kind;
-    team.date = new Date().getTime();
-    team.gender = 'MIXED';
-    team.color = '#000000';
-    team.liberoColor = '#ff0000';
-    team.players = [];
-    team.liberos = [];
-    team.captain = 1;
-
-    if (team.kind === 'BEACH') {
-      team.players.push(1);
-      team.players.push(2);
-    }
-
+    const team = Team.createTeam(kind);
     const modalRef = this.modalService.open(UserTeamModalComponent, { size: 'lg' });
     modalRef.componentInstance.team = team;
     modalRef.componentInstance.crudType = CrudType.Create;
@@ -81,8 +65,9 @@ export class UserTeamsComponent implements OnInit {
   }
 
   updateTeam(team: Team): void {
+    const copy = Team.copyTeam(team);
     const modalRef = this.modalService.open(UserTeamModalComponent, { size: 'lg' });
-    modalRef.componentInstance.team = team;
+    modalRef.componentInstance.team = copy;
     modalRef.componentInstance.crudType = CrudType.Update;
     modalRef.componentInstance.teamUpdated.subscribe(updated => this.onTeamUpdated());
   }

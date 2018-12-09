@@ -64,6 +64,10 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
     return this.crudType === 4 ? true : null;
   }
 
+  isEditingDisabledKey(): boolean {
+    return (this.crudType === 2 ||this.crudType === 4) ? true : null;
+  }
+
   isTieBreakDisabled(): boolean {
     if (this.crudType === 1 || this.crudType === 2) {
       return this.rules.tieBreakInLastSet ? null : true;

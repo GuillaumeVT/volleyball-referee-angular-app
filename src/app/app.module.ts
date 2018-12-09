@@ -8,6 +8,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { ToastrModule } from 'ngx-toastr';
 
+
+import { AuthService, AuthServiceConfig } from './auth.service';
+import { TokenInterceptor } from './token.interceptor';
+import { GoogleLoginProvider } from './login/providers/google-login-provider';
+import { FacebookLoginProvider } from './login/providers/facebook-login-provider';
+
 import { AppComponent } from './app.component';
 import { GameService } from './game.service';
 import { UserService } from './user.service';
@@ -56,11 +62,7 @@ import { UserLeaguesModalComponent } from './user-leagues-modal/user-leagues-mod
 import { LeagueComponent } from './league/league.component';
 import { PrivatePolicyComponent } from './private-policy/private-policy.component';
 import { RoleSelectorComponent } from './role-selector/role-selector.component';
-
-import { AuthService, AuthServiceConfig } from './auth.service';
-import { TokenInterceptor } from './token.interceptor';
-import { GoogleLoginProvider } from './login/providers/google-login-provider';
-import { FacebookLoginProvider } from './login/providers/facebook-login-provider';
+import { ColorPickerModalComponent } from './color-picker-modal/color-picker-modal.component';
 
 export function configFactory(config: AuthServiceConfig) {
   return config;
@@ -120,6 +122,7 @@ export function getAuthServiceConfigs() {
     LeagueComponent,
     PrivatePolicyComponent,
     RoleSelectorComponent,
+    ColorPickerModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -147,7 +150,8 @@ export function getAuthServiceConfigs() {
     UserTeamModalComponent,
     UserGameModalComponent,
     UserLeaguesModalComponent,
-    OkCancelModalComponent
+    OkCancelModalComponent,
+    ColorPickerModalComponent
   ],
   bootstrap: [AppComponent]
 })

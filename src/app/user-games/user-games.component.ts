@@ -82,28 +82,7 @@ export class UserGamesComponent implements OnInit {
   }
 
   createGame(kind: string): void {
-    const game = new GameDescription();
-    game.userId = '';
-    game.kind = kind;
-    game.date = new Date().getTime();
-    game.schedule = new Date().getTime();
-    game.gender = 'MIXED';
-    game.usage = 'NORMAL';
-    game.status = 'SCHEDULED';
-    game.indexed = true;
-    game.referee = '';
-    if (this.selectedLeague) {
-      game.league = this.selectedLeague;
-    } else {
-      game.league = '';
-    }
-    game.division = '';
-    game.hName = '';
-    game.gName = '';
-    game.hSets = 0;
-    game.gSets = 0;
-    game.rules = '';
-
+    const game = GameDescription.createGame(kind, this.selectedLeague);
     forkJoin(
       this.userService.getTeamsWithKind(game.kind),
       this.userService.getLeaguesWithKind(game.kind),
@@ -153,13 +132,14 @@ export class UserGamesComponent implements OnInit {
   }
 
   updateGame(game: GameDescription): void {
+    const copy = GameDescription.copyGame(game);
     forkJoin(
       this.userService.getTeamsWithKind(game.kind),
       this.userService.getLeaguesWithKind(game.kind),
       this.userService.getDivisionsWithKind(game.kind)
     )
     .subscribe(([teams, leagues, divisions]) => {
-      this.launchUpdateGame(game, leagues, divisions, teams);
+      this.launchUpdateGame(copy, leagues, divisions, teams);
     });
   }
 

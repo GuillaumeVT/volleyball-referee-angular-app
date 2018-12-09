@@ -5,6 +5,8 @@ import { CrudType } from '../model/crudtype';
 import { InputPlayerItem } from '../model/input-player-item';
 import { Utils } from '../utils/utils';
 import { UserService } from '../user.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ColorPickerModalComponent } from '../color-picker-modal/color-picker-modal.component';
 
 @Component({
   selector: 'app-user-team-modal',
@@ -21,19 +23,17 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   invalidResponse:  boolean;
   availablePlayers: number;
   invalidCaptain:   boolean;
-  gender:           string;
   players:          InputPlayerItem[];
   liberos:          InputPlayerItem[];
   moreNumbers:      boolean;
   minPlayers:       number;
 
-  constructor(private activeModal: NgbActiveModal, private userService: UserService, private utils: Utils) {
+  constructor(private activeModal: NgbActiveModal, private userService: UserService, private modalService: NgbModal, private utils: Utils) {
     this.invalidName = false;
     this.invalidResponse =  false;
     this.invalidCaptain = false;
     this.availablePlayers = 6;
 
-    this.gender = 'MIXED';
     this.moreNumbers = false;
     this.players = [];
     this.liberos = [];
@@ -42,8 +42,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngAfterViewInit() {
     if (this.team && this.crudType) {
@@ -68,20 +67,13 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   }
 
   initForm(): void {
-    (<HTMLInputElement>document.getElementById('name')).value = this.team.name;
-    (<HTMLInputElement>document.getElementById('shirt-color')).value = this.team.color;
-    (<HTMLInputElement>document.getElementById('libero-shirt-color')).value = this.team.liberoColor;
-    (<HTMLInputElement>document.getElementById('captain')).value = String(this.team.captain);
-
-    this.onShirtColorChanged();
-    this.onLiberoShirtColorChanged();
+    this.onShirtColorChanged(this.team.color);
+    this.onLiberoShirtColorChanged(this.team.liberoColor);
 
     setTimeout(() => this.initPlayersAndLiberos(), 0);
   }
 
   initPlayersAndLiberos(): void {
-    this.gender = this.team.gender;
-
     for (let player of this.team.players) {
       this.onPlayerSelected(player);
     }
@@ -92,16 +84,13 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   }
 
   onSubmitForm(): void {
-    const name = (<HTMLInputElement>document.getElementById('name')).value;
-
-    if (name.length === 0) {
+    if (this.team.name.length === 0) {
       this.invalidName = true;
     } else {
       this.invalidName = false;
     }
 
-    const captain: number = Number((<HTMLInputElement>document.getElementById('captain')).value);
-    if (this.players[captain-1].selected) {
+    if (this.players[this.team.captain-1].selected) {
       this.invalidCaptain = false;
     } else {
       this.invalidCaptain = true;
@@ -110,12 +99,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     this.availablePlayers = this.numberOfPlayers() - this.numberOfLiberos();
 
     if (!this.invalidName && !this.invalidCaptain && this.availablePlayers >= this.minPlayers) {
-      this.team.name = (<HTMLInputElement>document.getElementById('name')).value;
       this.team.date = new Date().getTime();
-      this.team.gender = this.gender;
-      this.team.color = (<HTMLInputElement>document.getElementById('shirt-color')).value;
-      this.team.liberoColor = (<HTMLInputElement>document.getElementById('libero-shirt-color')).value;
-      this.team.captain = captain;
       this.team.players = [];
       this.team.liberos = [];
 
@@ -149,10 +133,18 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     this.invalidResponse = true;
   }
 
+  isEditingDisabled(): boolean {
+    return this.crudType === 4 ? true : null;
+  }
+
+  isEditingDisabledKey(): boolean {
+    return (this.crudType === 2 ||this.crudType === 4) ? true : null;
+  }
+
   getGenderIcon(): string {
-    if (this.gender === 'MIXED') {
+    if (this.team.gender === 'MIXED') {
       return 'fa fa-intersex';
-    } else if (this.gender === 'LADIES') {
+    } else if (this.team.gender === 'LADIES') {
       return 'fa fa-venus';
     } else {
       return 'fa fa-mars';
@@ -160,9 +152,9 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   }
 
   getGenderButton(): string {
-    if (this.gender === 'MIXED') {
+    if (this.team.gender === 'MIXED') {
       return 'mixed-button';
-    } else if (this.gender === 'LADIES') {
+    } else if (this.team.gender === 'LADIES') {
       return 'ladies-button';
     } else {
       return 'gents-button';
@@ -170,30 +162,42 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   }
 
   nextGender(): void {
-    if (this.gender === 'MIXED') {
-      this.gender = 'LADIES';
-    } else if (this.gender === 'LADIES') {
-      this.gender = 'GENTS';
+    if (this.team.gender === 'MIXED') {
+      this.team.gender = 'LADIES';
+    } else if (this.team.gender === 'LADIES') {
+      this.team.gender = 'GENTS';
     } else {
-      this.gender = 'MIXED';
+      this.team.gender = 'MIXED';
     }
   }
 
-  onShirtColorChanged(): void {
-    const backgroundColor: string = (<HTMLInputElement>document.getElementById('shirt-color')).value;
-    const color: string = this.utils.getTextColor(backgroundColor);
+  changeShirtColor(): void {
+    const modalRef = this.modalService.open(ColorPickerModalComponent, { size: 'lg' });
+    modalRef.componentInstance.selectedColor = this.team.color;
+    modalRef.componentInstance.okClicked.subscribe(color => this.onShirtColorChanged(color));
+  }
+
+  onShirtColorChanged(color: string): void {
+    this.team.color = color;
+    const textColor: string = this.utils.getTextColor(this.team.color);
     for (let playerItem of this.players) {
-      playerItem.backgroundColor = backgroundColor;
-      playerItem.color = color;
+      playerItem.backgroundColor = this.team.color;
+      playerItem.color = textColor;
     }
   }
 
-  onLiberoShirtColorChanged(): void {
-    const backgroundColor: string = (<HTMLInputElement>document.getElementById('libero-shirt-color')).value;
-    const color: string = this.utils.getTextColor(backgroundColor);
+  changeLiberoShirtColor(): void {
+    const modalRef = this.modalService.open(ColorPickerModalComponent, { size: 'lg' });
+    modalRef.componentInstance.selectedColor = this.team.liberoColor;
+    modalRef.componentInstance.okClicked.subscribe(color => this.onLiberoShirtColorChanged(color));
+  }
+
+  onLiberoShirtColorChanged(color: string): void {
+    this.team.liberoColor = color;
+    const textColor: string = this.utils.getTextColor(this.team.liberoColor);
     for (let liberoItem of this.liberos) {
-      liberoItem.backgroundColor = backgroundColor;
-      liberoItem.color = color;
+      liberoItem.backgroundColor = this.team.liberoColor;
+      liberoItem.color = textColor;
     }
   }
 
@@ -202,9 +206,8 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     playerItem.selected = !playerItem.selected;
 
     if (playerItem.selected) {
-      const backgroundColor: string = (<HTMLInputElement>document.getElementById('libero-shirt-color')).value;
-      const color: string = this.utils.getTextColor(backgroundColor);
-      this.liberos.push(new InputPlayerItem(player, color, backgroundColor, playerItem.captain, '#1f1f1f', '#d6d7d7'));
+      const color: string = this.utils.getTextColor(this.team.liberoColor);
+      this.liberos.push(new InputPlayerItem(player, color, this.team.liberoColor, playerItem.captain, '#1f1f1f', '#d6d7d7'));
       this.liberos = this.liberos.sort((l1, l2) => l1.shirtNumber - l2.shirtNumber);
     } else {
       var tmpLiberos = [];
@@ -252,6 +255,10 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
 
   showMoreNumbers(): void {
     this.moreNumbers = true;
+  }
+
+  showLessNumbers(): void {
+    this.moreNumbers = false;
   }
 
 }

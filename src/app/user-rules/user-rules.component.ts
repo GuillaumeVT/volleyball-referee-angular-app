@@ -49,30 +49,7 @@ export class UserRulesComponent implements OnInit {
   }
 
   createRules(): void {
-    const rules = new Rules();
-    rules.userId = '';
-    rules.name = '';
-    rules.date = new Date().getTime();
-    rules.setsPerGame = 5;
-    rules.pointsPerSet = 25;
-    rules.tieBreakInLastSet = true;
-    rules.pointsInTieBreak = 15;
-    rules.twoPointsDifference = true;
-    rules.sanctions = true;
-    rules.teamTimeouts = true;
-    rules.teamTimeoutsPerSet = 2;
-    rules.teamTimeoutDuration = 30;
-    rules.technicalTimeouts = true;
-    rules.technicalTimeoutDuration = 60;
-    rules.gameIntervals = true;
-    rules.gameIntervalDuration = 180;
-    rules.substitutionsLimitation = 1;
-    rules.teamSubstitutionsPerSet = 6;
-    rules.beachCourtSwitches = true;
-    rules.beachCourtSwitchFreq = 7;
-    rules.beachCourtSwitchFreqTieBreak = 5;
-    rules.customConsecutiveServesPerPlayer = 9999;
-
+    const rules = Rules.createRules();
     const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
     modalRef.componentInstance.rules = rules;
     modalRef.componentInstance.crudType = CrudType.Create;
@@ -86,8 +63,9 @@ export class UserRulesComponent implements OnInit {
   }
 
   updateRules(rules: Rules): void {
+    const copy = Rules.copyRules(rules);
     const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
-    modalRef.componentInstance.rules = rules;
+    modalRef.componentInstance.rules = copy;
     modalRef.componentInstance.crudType = CrudType.Update;
     modalRef.componentInstance.rulesUpdated.subscribe(updated => this.onRulesUpdated());
   }

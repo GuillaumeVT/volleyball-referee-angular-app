@@ -11,7 +11,8 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label [ngClass]="invalidName ? 'vbr-error-label' : ''" class="vbr-text" for="name">Team name</label>
-        <input type="text" [ngClass]="invalidName ? 'vbr-error-input' : ''" class="vbr-text form-control" name="name" id="name" placeholder="" required [attr.disabled]="(crudType === 2 || crudType === 4) ? true : null"/>
+        <input type="text" [ngClass]="invalidName ? 'vbr-error-input' : ''" class="vbr-text form-control"
+          name="name" id="name" [(ngModel)]="team.name" placeholder="" required [attr.disabled]="isEditingDisabledKey()"/>
         <div class="vbr-error-feedback" *ngIf="invalidName">
           Please enter a name for the team.
         </div>
@@ -25,7 +26,7 @@
         <label class="vbr-text">Gender</label>
       </div>
       <div class="col-6 col-sm-8">
-        <button type="button" class="btn form-button" [ngClass]="getGenderButton()" id="gender" (click)="nextGender()" [attr.disabled]="(crudType === 2 || crudType === 4) ? true : null">
+        <button type="button" class="btn form-button" [ngClass]="getGenderButton()" id="gender" (click)="nextGender()" [attr.disabled]="isEditingDisabledKey()">
           <i class="p-1" [ngClass]="getGenderIcon()"></i>
         </button>
       </div>
@@ -36,34 +37,29 @@
         <label class="vbr-text" for="shirt-color">Shirt color</label>
       </div>
       <div class="col-6 col-sm-8">
-        <input type="color" class="form-control form-button" name="shirt-color" id="shirt-color" (change)="onShirtColorChanged()" [attr.disabled]="crudType === 4 ? true : null"/>
+        <button type="button" class="btn vbr-button form-button" [style.background-color]="team.color" [style.color]="utils.getTextColor(team.color)" [style.border-color]="team.color"
+          name="shirt-color" id="shirt-color" (click)="changeShirtColor()" [attr.disabled]="isEditingDisabled()">
+          <i class="fa fa-paint-brush"></i>
+        </button>
       </div>
     </div>
 
-    <div class="row align-items-center mb-3" *ngIf="!moreNumbers" [hidden]="team.kind === 'BEACH'">
+    <div class="row align-items-center mb-3" [hidden]="team.kind === 'BEACH'">
       <div class="col-12 col-sm-12">
         <label [ngClass]="(availablePlayers < minPlayers) ? 'vbr-error-label' : ''" class="vbr-text" for="players">Team players (including liberos)</label>
-        <div class="div-players" id="players">
+        <div class="div-players" id="players" *ngIf="!moreNumbers">
           <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:0:25;" (click)="onPlayerSelected(playerItem.shirtNumber)"
-            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [innerHTML]="playerItem.player" [attr.disabled]="crudType === 4 ? true : null"></button>
+            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [innerHTML]="playerItem.player" [attr.disabled]="isEditingDisabled()"></button>
           <button type="button" class="btn vbr-button-inverted m-1" (click)="showMoreNumbers()">More numbers</button>
+        </div>
+        <div class="div-players" id="players" *ngIf="moreNumbers">
+          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players" (click)="onPlayerSelected(playerItem.shirtNumber)"
+            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [innerHTML]="playerItem.player" [attr.disabled]="isEditingDisabled()"></button>
+            <button type="button" class="btn vbr-button-inverted m-1" (click)="showLessNumbers()">Less numbers</button>
         </div>
         <div class="vbr-error-feedback" *ngIf="availablePlayers < minPlayers">
           Please select at least {{minPlayers - availablePlayers}} more players.
         </div>
-      </div>
-    </div>
-
-    <div class="row align-items-center mb-3" *ngIf="moreNumbers" [hidden]="team.kind === 'BEACH'">
-      <div class="col-12 col-sm-12">
-        <label class="vbr-text" for="players">Team players (including liberos)</label>
-        <div class="div-players" id="players">
-          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players" (click)="onPlayerSelected(playerItem.shirtNumber)"
-            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [innerHTML]="playerItem.player" [attr.disabled]="crudType === 4 ? true : null"></button>
-        </div>
-      </div>
-      <div class="vbr-error-feedback" *ngIf="availablePlayers < minPlayers">
-        Please select at least {{minPlayers - availablePlayers}} more players.
       </div>
     </div>
 
@@ -72,8 +68,9 @@
         <label [ngClass]="invalidCaptain ? 'vbr-error-label' : ''" class="vbr-text" for="captain">Team captain</label>
       </div>
       <div class="col-6 col-sm-6">
-        <select [ngClass]="invalidCaptain ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="captain" id="captain" [attr.disabled]="crudType === 4 ? true : null">
-          <option *ngFor="let playerItem of players" [value]="playerItem.shirtNumber">{{playerItem.shirtNumber}}</option>
+        <select [ngClass]="invalidCaptain ? 'vbr-error-input' : ''" class="vbr-text custom-select"
+          name="captain" id="captain" [(ngModel)]="team.captain" [attr.disabled]="isEditingDisabled()">
+          <option *ngFor="let playerItem of players" [ngValue]="playerItem.shirtNumber">{{playerItem.shirtNumber}}</option>
         </select>
       </div>
       <div class="col-12">
@@ -88,7 +85,10 @@
         <label class="vbr-text" for="libero-shirt-color">Libero shirt color</label>
       </div>
       <div class="col-6 col-sm-6">
-        <input type="color" class="form-control form-button" name="libero-shirt-color" id="libero-shirt-color" (change)="onLiberoShirtColorChanged()" [attr.disabled]="crudType === 4 ? true : null"/>
+        <button type="button" class="btn vbr-button form-button" [style.background-color]="team.liberoColor" [style.color]="utils.getTextColor(team.liberoColor)" [style.border-color]="team.liberoColor"
+          name="libero-shirt-color" id="libero-shirt-color" (click)="changeLiberoShirtColor()" [attr.disabled]="isEditingDisabled()">
+          <i class="fa fa-paint-brush"></i>
+        </button>
       </div>
     </div>
 
@@ -97,7 +97,7 @@
         <label class="vbr-text" for="liberos">Team liberos</label>
         <div class="div-players" id="liberos">
           <button type="button" class="btn player-button m-1" *ngFor="let playerItem of liberos" (click)="onLiberoSelected(playerItem.shirtNumber)"
-            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [innerHTML]="playerItem.player" [attr.disabled]="crudType === 4 ? true : null"></button>
+            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [innerHTML]="playerItem.player" [attr.disabled]="isEditingDisabled()"></button>
         </div>
       </div>
     </div>

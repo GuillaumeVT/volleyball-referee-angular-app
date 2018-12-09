@@ -12,7 +12,7 @@
       <div class="col-12 col-sm-10">
         <label [ngClass]="invalidName ? 'vbr-error-label' : ''" class="vbr-text" for="name">Rules name</label>
         <input type="text" [ngClass]="invalidName ? 'vbr-error-input' : ''" class="vbr-text form-control"
-          name="name" id="name" [(ngModel)]="rules.name" placeholder="" required [attr.disabled]="(crudType === 2 || crudType === 4) ? true : null"/>
+          name="name" id="name" [(ngModel)]="rules.name" placeholder="" required [attr.disabled]="isEditingDisabledKey()"/>
         <div class="vbr-error-feedback" *ngIf="invalidName">
           Please enter a name for the rules.
         </div>
