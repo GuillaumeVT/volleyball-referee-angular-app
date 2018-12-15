@@ -1,6 +1,6 @@
-# Volleyball Referee Frontend
+# Volleyball Referee Web App
 
-Volleyball Referee Frontend is a user-friendly Angular application, part of the [Volleyball Referee system][vbr]
+Volleyball Referee Web App is a user-friendly Angular application, part of the [Volleyball Referee system][vbr]
 
 <ul>
   <li>Search volleyball matches by their team / league name</li>
