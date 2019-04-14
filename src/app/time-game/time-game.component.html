@@ -1,4 +1,4 @@
 <div class="div-content">
-  <app-time-game-summary class="time-game-summary card div-card" [date]="date" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (teamsSwapped)="onTeamsSwapped()"></app-time-game-summary>
+  <app-time-game-summary class="time-game-summary card div-card" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (teamsSwapped)="onTeamsSwapped()"></app-time-game-summary>
   <app-ladder class="ladder card div-card" [game]="game" [setIndex]="currentSet" [topTeam]="leftTeam" [bottomTeam]="rightTeam"></app-ladder>
 </div>

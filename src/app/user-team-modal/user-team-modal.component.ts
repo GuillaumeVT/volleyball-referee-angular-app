@@ -1,10 +1,11 @@
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Team } from '../model/team';
+import { Player } from '../model/player';
 import { CrudType } from '../model/crudtype';
 import { InputPlayerItem } from '../model/input-player-item';
 import { Utils } from '../utils/utils';
-import { UserService } from '../user.service';
+import { TeamService } from '../team.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ColorPickerModalComponent } from '../color-picker-modal/color-picker-modal.component';
 
@@ -19,7 +20,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   @Input() crudType: CrudType;
   @Output() teamUpdated = new EventEmitter();
 
-  invalidName:      boolean;
+  undefinedName:    boolean;
   invalidResponse:  boolean;
   availablePlayers: number;
   invalidCaptain:   boolean;
@@ -28,8 +29,8 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   moreNumbers:      boolean;
   minPlayers:       number;
 
-  constructor(private activeModal: NgbActiveModal, private userService: UserService, private modalService: NgbModal, private utils: Utils) {
-    this.invalidName = false;
+  constructor(private activeModal: NgbActiveModal, private teamService: TeamService, private modalService: NgbModal, private utils: Utils) {
+    this.undefinedName = false;
     this.invalidResponse =  false;
     this.invalidCaptain = false;
     this.availablePlayers = 6;
@@ -75,19 +76,19 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
 
   initPlayersAndLiberos(): void {
     for (let player of this.team.players) {
-      this.onPlayerSelected(player);
+      this.onPlayerSelected(player.num);
     }
 
     for (let libero of this.team.liberos) {
-      this.onLiberoSelected(libero);
+      this.onLiberoSelected(libero.num);
     }
   }
 
   onSubmitForm(): void {
     if (this.team.name.length === 0) {
-      this.invalidName = true;
+      this.undefinedName = true;
     } else {
-      this.invalidName = false;
+      this.undefinedName = false;
     }
 
     if (this.players[this.team.captain-1].selected) {
@@ -98,27 +99,29 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
 
     this.availablePlayers = this.numberOfPlayers() - this.numberOfLiberos();
 
-    if (!this.invalidName && !this.invalidCaptain && this.availablePlayers >= this.minPlayers) {
-      this.team.date = new Date().getTime();
+    if (!this.undefinedName && !this.invalidCaptain && this.availablePlayers >= this.minPlayers) {
       this.team.players = [];
       this.team.liberos = [];
 
       for (let playerItem of this.players) {
         if (playerItem.selected) {
-          this.team.players.push(playerItem.shirtNumber);
+          this.team.players.push(new Player(playerItem.shirtNumber, ""));
         }
       }
 
       for (let liberoItem of this.liberos) {
         if (liberoItem.selected) {
-          this.team.liberos.push(liberoItem.shirtNumber);
+          this.team.liberos.push(new Player(liberoItem.shirtNumber, ""));
         }
       }
 
       if (this.crudType === CrudType.Create) {
-        this.userService.createTeam(this.team).subscribe(team => this.onValidResponse(), error => this.onInvalidResponse(error));
+        this.team.createdAt = new Date().getTime();
+        this.team.updatedAt = new Date().getTime();
+        this.teamService.createTeam(this.team).subscribe(team => this.onValidResponse(), error => this.onInvalidResponse(error));
       } else if (this.crudType === CrudType.Update) {
-        this.userService.updateTeam(this.team).subscribe(team => this.onValidResponse(), error => this.onInvalidResponse(error));
+        this.team.updatedAt = new Date().getTime();
+        this.teamService.updateTeam(this.team).subscribe(team => this.onValidResponse(), error => this.onInvalidResponse(error));
       }
     }
   }

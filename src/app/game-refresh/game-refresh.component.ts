@@ -1,5 +1,5 @@
 import { Game } from '../model/game';
-import { GameService } from '../game.service';
+import { PublicService } from '../public.service';
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, timer } from "rxjs";
@@ -15,15 +15,15 @@ import { saveAs }from 'file-saver';
 })
 export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() date: number;
-  @Input() rate: number;
+  @Input() gameId: string;
+  @Input() rate:   number;
   @Output() currentGameUpdated = new EventEmitter();
 
   game:         Game;
   isLive:       boolean;
   subscription: Subscription;
 
-  constructor(private router: Router, private gameService: GameService, private datePipe: DatePipe) {
+  constructor(private router: Router, private publicService: PublicService, private datePipe: DatePipe) {
     this.isLive = true;
   }
 
@@ -31,7 +31,7 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.date && this.rate) {
+    if (this.gameId && this.rate) {
       if (this.subscription) {
         this.subscription.unsubscribe();
       }
@@ -46,7 +46,7 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   updateGame(): void {
-    this.gameService.getGame(this.date).subscribe(game => this.onGameReceived(game), error => this.onGameReceived(null));
+    this.publicService.getGame(this.gameId).subscribe(game => this.onGameReceived(game), error => this.onGameReceived(null));
   }
 
   onGameReceived(game: Game): void {
@@ -60,12 +60,12 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   downloadScoreSheet(): void {
-    this.gameService.getScoreSheet(this.date).subscribe(response => this.onScoreSheetReceived(response), error => this.onScoreSheetReceived(null));
+    this.publicService.getScoreSheet(this.gameId).subscribe(response => this.onScoreSheetReceived(response), error => this.onScoreSheetReceived(null));
   }
 
   onScoreSheetReceived(response: HttpResponse<any>): void {
-    const dateStr = this.datePipe.transform(this.game.schedule, 'dd_MM_yyyy');
-    const filename = this.game.hTeam.name + '_' + this.game.gTeam.name + '_' + dateStr + '.html';
+    const dateStr = this.datePipe.transform(this.game.scheduledAt, 'dd_MM_yyyy');
+    const filename = this.game.homeTeam.name + '_' + this.game.guestTeam.name + '_' + dateStr + '.html';
     const blob = new Blob([response.body], { type: 'html' });
     saveAs(response, filename);
   }

@@ -3,16 +3,16 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-search-result',
-  templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.css']
+  selector: 'app-search-result-token',
+  templateUrl: './search-result-token.component.html',
+  styleUrls: ['./search-result-token.component.css']
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultTokenComponent implements OnInit {
 
   token: string;
 
   constructor(private titleService: Title, private route: ActivatedRoute) {
-    this.titleService.setTitle('Volleyball Referee - Search');
+    this.titleService.setTitle('VBR - Search Results');
   }
 
   ngOnInit() {

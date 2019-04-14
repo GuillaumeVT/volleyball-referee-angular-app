@@ -10,16 +10,15 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChange
 })
 export class TimeGameSummaryComponent implements OnInit, OnChanges {
 
-  @Input() date:      number;
   @Input() game:      Game;
   @Input() leftTeam:  TeamType;
   @Input() rightTeam: TeamType;
 
   @Output() teamsSwapped = new EventEmitter();
 
-  hPoints:   number;
-  gPoints:   number;
-  rTime:     number;
+  homePoints:   number;
+  guestPoints:   number;
+  remainingTime:     number;
 
   constructor(private utils: Utils) { }
 
@@ -28,9 +27,9 @@ export class TimeGameSummaryComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.game && this.game.sets) {
-      this.hPoints = this.game.sets[0].hPoints;
-      this.gPoints = this.game.sets[0].gPoints;
-      this.rTime = this.game.sets[0].rTime;
+      this.homePoints = this.game.sets[0].homePoints;
+      this.guestPoints = this.game.sets[0].guestPoints;
+      this.remainingTime = this.game.sets[0].remainingTime;
     }
   }
 
@@ -38,9 +37,9 @@ export class TimeGameSummaryComponent implements OnInit, OnChanges {
     var name;
 
     if (TeamType.Home === teamType) {
-      name = this.game.hTeam.name;
+      name = this.game.homeTeam.name;
     } else {
-      name = this.game.gTeam.name;
+      name = this.game.guestTeam.name;
     }
 
     return name;
@@ -50,9 +49,9 @@ export class TimeGameSummaryComponent implements OnInit, OnChanges {
     var points;
 
     if (TeamType.Home === teamType) {
-      points = this.hPoints;
+      points = this.homePoints;
     } else {
-      points = this.gPoints;
+      points = this.guestPoints;
     }
 
     return points;

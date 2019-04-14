@@ -1,6 +1,6 @@
 <div class="div-content">
   <div class="div-summary card div-card">
-    <app-game-summary class="game-summary" [date]="date" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (teamsSwapped)="onTeamsSwapped()"></app-game-summary>
+    <app-game-summary class="game-summary" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (teamsSwapped)="onTeamsSwapped()"></app-game-summary>
     <app-set-selector class="set-selector" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-set-selector>
     <app-set-summary class="set-summary" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-set-summary>
   </div>

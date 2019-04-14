@@ -1,12 +1,13 @@
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Rules } from '../model/rules';
-import { Team } from '../model/team';
+import { User, Friend } from '../model/user';
+import { GameDescription } from '../model/game-description';
+import { RulesDescription } from '../model/rules-description';
+import { TeamDescription } from '../model/team-description';
 import { League } from '../model/league';
-import { GameDescription } from '../model/gamedescription';
 import { CrudType } from '../model/crudtype';
 import { Utils } from '../utils/utils';
-import { UserService } from '../user.service';
+import { GameService } from '../game.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -16,31 +17,35 @@ import { DatePipe } from '@angular/common';
 })
 export class UserGameModalComponent implements OnInit, AfterViewInit {
 
-  @Input() game:         GameDescription;
   @Input() crudType:     CrudType;
-  @Input() rules:        Rules[];
-  @Input() defaultRules: Rules[];
-  @Input() teams:        Team[];
+  @Input() game:         GameDescription;
+  @Input() rules:        RulesDescription[];
+  @Input() defaultRules: RulesDescription;
+  @Input() teams:        TeamDescription[];
   @Input() leagues:      League[];
-  @Input() divisions:    string[];
+  @Input() user:         User;
   @Output() gameUpdated = new EventEmitter();
 
-  invalidGender:    boolean;
-  invalidTeams:     boolean;
-  invalidHTeam:     boolean;
-  invalidGTeam:     boolean;
-  invalidRules:     boolean;
-  invalidResponse:  boolean;
+  me: Friend;
 
-  scheduleDate: Date;
-  minScheduleDate: Date;
+  scheduleDate:     Date;
+  minScheduleDate:  Date;
+  selectedHTeam:    TeamDescription;
+  selectedGTeam:    TeamDescription;
+  selectedRules:    RulesDescription;
+  selectedLeague:   League;
+  selectedDivision: string;
+  selectedReferee:  Friend;
 
-  constructor(private activeModal: NgbActiveModal, private userService: UserService, private utils: Utils, private datePipe: DatePipe) {
-    this.invalidGender = false;
-    this.invalidTeams = false;
-    this.invalidHTeam = false;
-    this.invalidGTeam = false;
-    this.invalidRules = false;
+  sameTeams:       boolean;
+  undefinedHTeam:  boolean;
+  undefinedGTeam:  boolean;
+  invalidResponse: boolean;
+
+  constructor(private activeModal: NgbActiveModal, private gameService: GameService, private utils: Utils, private datePipe: DatePipe) {
+    this.sameTeams = false;
+    this.undefinedHTeam = false;
+    this.undefinedGTeam = false;
     this.invalidResponse = false;
     this.scheduleDate = new Date();
     this.minScheduleDate = new Date();
@@ -50,7 +55,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     if (this.game && this.crudType) {
-      this.scheduleDate = new Date(this.game.schedule);
+      setTimeout(() => this.initForm(), 0);
     }
   }
 
@@ -58,57 +63,89 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
     this.activeModal.close();
   }
 
+  initForm(): void {
+    this.scheduleDate = new Date(this.game.scheduledAt);
+    this.me = new Friend(this.user.id, this.user.pseudo);
+    this.selectedReferee = this.me;
+    if (this.game.homeTeamId && this.game.guestTeamId) {
+      for (let team of this.teams) {
+        if (team.id === this.game.homeTeamId) {
+          this.selectedHTeam = team;
+        } else if (team.id === this.game.guestTeamId) {
+          this.selectedGTeam = team;
+        }
+      }
+    }
+    if (this.game.leagueId) {
+      for (let league of this.leagues) {
+        if (league.id === this.game.leagueId) {
+          this.selectedLeague = league;
+        }
+      }
+    }
+    if (this.game.rulesId) {
+      if (this.defaultRules.id === this.game.rulesId) {
+        this.selectedRules = this.defaultRules;
+      } else {
+        for (let aRules of this.rules) {
+          if (aRules.id === this.game.rulesId) {
+            this.selectedRules = aRules;
+          }
+        }
+      }
+    } else {
+      this.selectedRules = this.defaultRules;
+    }
+  }
+
   onSubmitForm(): void {
-    this.game.schedule = this.scheduleDate.getTime();
+    this.game.scheduledAt = this.scheduleDate.getTime();
 
-    if (this.game.hName.length === 0) {
-      this.invalidHTeam = true;
+    if (this.selectedHTeam.id.length === 0) {
+      this.undefinedHTeam = true;
     } else {
-      this.invalidHTeam = false;
+      this.undefinedHTeam = false;
     }
 
-    if (this.game.gName.length === 0) {
-      this.invalidGTeam = true;
+    if (this.selectedGTeam.id.length === 0) {
+      this.undefinedGTeam = true;
     } else {
-      this.invalidGTeam = false;
+      this.undefinedGTeam = false;
     }
 
-    if (this.game.rules.length === 0) {
-      this.invalidRules = true;
-    } else {
-      this.invalidRules = false;
-    }
-
-     if (this.game.hName === this.game.gName) {
-       this.invalidTeams = true;
+     if (this.selectedHTeam.id === this.selectedGTeam.id) {
+       this.sameTeams = true;
      } else {
-       this.invalidTeams = false;
+       this.sameTeams = false;
      }
 
-    if (!this.invalidHTeam && !this.invalidGTeam && !this.invalidTeams) {
-      var hTeam: Team;
-      var gTeam: Team;
+    if (!this.undefinedHTeam && !this.undefinedGTeam && !this.sameTeams) {
+      this.game.gender = this.selectedHTeam.gender === this.selectedGTeam.gender ? this.selectedHTeam.gender : 'MIXED';
+      this.game.homeTeamId = this.selectedHTeam.id;
+      this.game.homeTeamName = this.selectedHTeam.name;
+      this.game.guestTeamId = this.selectedGTeam.id;
+      this.game.guestTeamName = this.selectedGTeam.name;
+      this.game.rulesId = this.selectedRules.id;
+      this.game.rulesName = this.selectedRules.name;
+      this.game.refereedBy = this.selectedReferee.id;
+      this.game.refereeName = this.selectedReferee.pseudo;
 
-      for (let team of this.teams) {
-        if (team.name === this.game.hName && team.gender === this.game.gender) {
-          hTeam = team;
-        } else if (team.name === this.game.gName && team.gender === this.game.gender) {
-          gTeam = team;
+      if (this.selectedLeague) {
+        this.game.leagueId = this.selectedLeague.id;
+        this.game.leagueName = this.selectedLeague.name;
+
+        if (this.selectedDivision) {
+          this.game.divisionName = this.selectedDivision;
         }
       }
 
-      if (hTeam && gTeam) {
-        this.invalidGender = false;
-      } else {
-        this.invalidGender = true;
-      }
-    }
-
-    if (!this.invalidGender && !this.invalidHTeam && !this.invalidGTeam && !this.invalidRules && !this.invalidTeams) {
       if (this.crudType === CrudType.Create) {
-        this.userService.createGame(this.game).subscribe(game => this.onValidResponse(), error => this.onInvalidResponse(error));
+        this.game.createdAt = new Date().getTime();
+        this.game.updatedAt = new Date().getTime();
+        this.gameService.createGame(this.game).subscribe(game => this.onValidResponse(), error => this.onInvalidResponse(error));
       } else if (this.crudType === CrudType.Update) {
-        this.userService.updateGame(this.game).subscribe(game => this.onValidResponse(), error => this.onInvalidResponse(error));
+        this.game.updatedAt = new Date().getTime();
+        this.gameService.updateGame(this.game).subscribe(game => this.onValidResponse(), error => this.onInvalidResponse(error));
       }
     }
   }

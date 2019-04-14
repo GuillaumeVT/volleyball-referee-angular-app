@@ -1,5 +1,4 @@
-import { GameDescription } from '../model/gamedescription';
-import { Utils } from '../utils/utils';
+import { GameDescription } from '../model/game-description';
 
 export class GameFilter {
 
@@ -16,8 +15,6 @@ export class GameFilter {
   games:         GameDescription[];
   filteredGames: GameDescription[];
 
-  utils: Utils;
-
   constructor() {
     this.textFilter = '';
     this.isLiveChecked = true;
@@ -28,11 +25,10 @@ export class GameFilter {
     this.isMixedChecked = true;
     this.isLadiesChecked = true;
     this.isGentsChecked = true;
-    this.utils = new Utils();
   }
 
   updateGames(games: GameDescription[]): void {
-    this.games = this.utils.sortGames(games);
+    this.games = games;
     this.filterGames();
   }
 
@@ -43,10 +39,10 @@ export class GameFilter {
       var mustAdd = true;
 
       if (this.textFilter.trim()) {
-        if ((game.gName.toLowerCase().indexOf(this.textFilter) === -1)
-          && (game.hName.toLowerCase().indexOf(this.textFilter) === -1)
-          && (game.league.toLowerCase().indexOf(this.textFilter) === -1)
-          && (game.division.toLowerCase().indexOf(this.textFilter) === -1)) {
+        if ((game.guestTeamName.toLowerCase().indexOf(this.textFilter) === -1)
+          && (game.homeTeamName.toLowerCase().indexOf(this.textFilter) === -1)
+          && (game.leagueName.toLowerCase().indexOf(this.textFilter) === -1)
+          && (game.divisionName.toLowerCase().indexOf(this.textFilter) === -1)) {
             mustAdd = false;
         }
       }

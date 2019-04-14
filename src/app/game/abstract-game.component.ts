@@ -4,9 +4,9 @@ import { OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
-export class AbstractGameComponent implements OnInit {
+export abstract class AbstractGameComponent implements OnInit {
 
-  @Input() date:       number;
+  @Input() gameId:     string;
   @Input() game:       Game;
   @Input() currentSet: number;
   @Input() leftTeam:   TeamType;

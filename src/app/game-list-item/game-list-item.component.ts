@@ -1,4 +1,4 @@
-import { GameDescription } from '../model/gamedescription';
+import { GameDescription } from '../model/game-description';
 import { Utils } from '../utils/utils';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -18,19 +18,23 @@ export class GameListItemComponent implements OnInit {
   }
 
   getMatchUrl(): string {
-    return `/game/${this.gameDescription.date}`;
+    return `/view/game/${this.gameDescription.id}`;
+  }
+
+  getLeagueUrl(): string {
+    return `/view/league/${this.gameDescription.leagueId}`;
   }
 
   showLeague(): boolean {
-    return !this.inLeague && this.gameDescription.league && this.gameDescription.league.length > 0;
+    return !this.inLeague && this.gameDescription.leagueId && this.gameDescription.leagueId.length > 0;
   }
 
   showDivision(): boolean {
-    return this.gameDescription.division && this.gameDescription.division.length > 0;
+    return this.gameDescription.divisionName && this.gameDescription.divisionName.length > 0;
   }
 
   showReferee(): boolean {
-    return this.gameDescription.referee && this.gameDescription.referee.length > 0;
+    return this.gameDescription.refereeName && this.gameDescription.refereeName.length > 0;
   }
 
 }

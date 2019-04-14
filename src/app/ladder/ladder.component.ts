@@ -1,6 +1,6 @@
 import { Game } from '../model/game';
 import { TeamType } from '../model/teamtype';
-import { LadderItem } from '../model/ladder-item';
+import { LadderItem } from './ladder-item';
 import { Utils } from '../utils/utils';
 import { Substitution } from '../model/substitution';
 import { Timeout } from '../model/timeout';
@@ -29,12 +29,12 @@ export class LadderComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (this.game && this.game.sets) {
       this.updateLadder();
-      this.addSubstitutions(this.game.sets[this.setIndex].hSubstitutions, TeamType.Home);
-      this.addSubstitutions(this.game.sets[this.setIndex].gSubstitutions, TeamType.Guest);
-      this.addTimeouts(this.game.sets[this.setIndex].hCalledTimeouts, TeamType.Home);
-      this.addTimeouts(this.game.sets[this.setIndex].gCalledTimeouts, TeamType.Guest);
-      this.addSanctions(this.game.hCards, TeamType.Home);
-      this.addSanctions(this.game.gCards, TeamType.Guest);
+      this.addSubstitutions(this.game.sets[this.setIndex].homeSubstitutions, TeamType.Home);
+      this.addSubstitutions(this.game.sets[this.setIndex].guestSubstitutions, TeamType.Guest);
+      this.addTimeouts(this.game.sets[this.setIndex].homeCalledTimeouts, TeamType.Home);
+      this.addTimeouts(this.game.sets[this.setIndex].guestCalledTimeouts, TeamType.Guest);
+      this.addSanctions(this.game.homeCards, TeamType.Home);
+      this.addSanctions(this.game.guestCards, TeamType.Guest);
     }
   }
 
@@ -59,8 +59,8 @@ export class LadderComponent implements OnInit, OnChanges {
 
   addSubstitutions(substitutions: Substitution[], teamType: TeamType): void {
     for (let substitution of substitutions) {
-      var homePoints = substitution.hPoints;
-      var guestPoints = substitution.gPoints;
+      var homePoints = substitution.homePoints;
+      var guestPoints = substitution.guestPoints;
 
       for (let item of this.ladder) {
         if  (item.teamType === TeamType.Home) {
@@ -78,8 +78,8 @@ export class LadderComponent implements OnInit, OnChanges {
 
   addTimeouts(timeouts: Timeout[], teamType: TeamType): void {
     for (let timeout of timeouts) {
-      var homePoints = timeout.hPoints;
-      var guestPoints = timeout.gPoints;
+      var homePoints = timeout.homePoints;
+      var guestPoints = timeout.guestPoints;
 
       for (let item of this.ladder) {
         if  (item.teamType === TeamType.Home) {
@@ -98,8 +98,8 @@ export class LadderComponent implements OnInit, OnChanges {
   addSanctions(sanctions: Sanction[], teamType: TeamType): void {
     for (let sanction of sanctions) {
       if (this.setIndex === sanction.set) {
-        var homePoints = sanction.hPoints;
-        var guestPoints = sanction.gPoints;
+        var homePoints = sanction.homePoints;
+        var guestPoints = sanction.guestPoints;
 
         for (let item of this.ladder) {
           if  (item.teamType === TeamType.Home) {

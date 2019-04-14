@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 export class SearchResultLiveComponent implements OnInit {
 
   constructor(private titleService: Title) {
-    this.titleService.setTitle('Volleyball Referee - Search');
+    this.titleService.setTitle('VBR - Search Results');
   }
 
   ngOnInit() {

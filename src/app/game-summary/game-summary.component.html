@@ -1,5 +1,5 @@
 <div class="comp-container p-2 text-center" *ngIf="game">
-  <span class="card-text vbr-text text-center">{{game.date | date : 'mediumDate'}}</span>
+  <span class="card-text vbr-text text-center">{{game.scheduledDate | date : 'mediumDate'}}</span>
   <span class="div-summary my-2" *ngIf="game">
     <span class="card-text vbr-text text-center small-line">{{getTeamName(leftTeam)}}</span>
     <span class="badge text-center set-badge" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)">{{getTeamSets(leftTeam)}}</span>

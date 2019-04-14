@@ -22,24 +22,28 @@ export class UserNavComponent implements OnInit {
     }
   }
 
-  getUserDashboardUrl(): string {
-    return '/user';
+  getHomeUrl(): string {
+    return '/home';
   }
 
   getUserLeaguesUrl(): string {
-    return '/user/leagues';
+    return '/leagues';
   }
 
   getUserRulesUrl(): string {
-    return '/user/rules';
+    return '/rules';
   }
 
   getUserTeamsUrl(): string {
-    return '/user/teams';
+    return '/teams';
   }
 
   getUserGamesUrl(): string {
-    return '/user/games';
+    return '/games';
+  }
+
+  getUserColleaguesUrl(): string {
+    return '/colleagues';
   }
 
 }

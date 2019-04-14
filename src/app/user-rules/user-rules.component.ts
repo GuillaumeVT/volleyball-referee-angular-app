@@ -1,9 +1,11 @@
+import { Component, Injector } from '@angular/core';
+import { AbstractUserDataComponent } from '../user/abstract-user-data.component';
 import { Rules } from '../model/rules';
+import { RulesDescription } from '../model/rules-description';
+import { RulesFilter } from '../utils/rulesfilter';
 import { CrudType } from '../model/crudtype';
-import { UserService } from '../user.service';
-import { AuthService } from '../auth.service';
+import { RulesService } from '../rules.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserRulesModalComponent } from '../user-rules-modal/user-rules-modal.component';
@@ -15,67 +17,61 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './user-rules.component.html',
   styleUrls: ['./user-rules.component.css']
 })
-export class UserRulesComponent implements OnInit {
+export class UserRulesComponent extends AbstractUserDataComponent {
 
-  signedIn:  boolean;
-  rulesList: Rules[];
+  rulesfilter: RulesFilter;
 
-  constructor(private titleService: Title, private router: Router, private authService: AuthService, private userService: UserService, private modalService: NgbModal, private toastr: ToastrService) {
-    this.titleService.setTitle('Volleyball Referee - User');
-    this.signedIn = false;
-    this.rulesList = [];
+  constructor(injector: Injector, private titleService: Title, private rulesService: RulesService, private modalService: NgbModal, private toastr: ToastrService) {
+    super(injector);
+    this.titleService.setTitle('VBR - My Rules');
+    this.rulesfilter = new RulesFilter();
   }
 
-  ngOnInit() {
-    this.authService.authState.subscribe(user => {
-      this.signedIn = (user != null);
-
-      if (this.signedIn) {
-        this.refreshRules();
-      } else {
-        setTimeout(() => this.navigateToUser(), 1000);
-      }
-    });
-  }
-
-  navigateToUser(): void {
-    if (!this.signedIn) {
-      this.router.navigateByUrl('user')
-    }
+  refreshData(): void {
+    this.refreshRules();
   }
 
   refreshRules(): void {
-    this.userService.getRules().subscribe(rules => this.rulesList = rules, error => this.rulesList = []);
+    this.rulesService.listRules().subscribe(rules => this.rulesfilter.updateRules(rules), error => this.rulesfilter.updateRules([]));
   }
 
-  createRules(): void {
-    const rules = Rules.createRules();
+  createRules(kind: string): void {
+    const rules = Rules.createRules(this.user, kind);
     const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
     modalRef.componentInstance.rules = rules;
     modalRef.componentInstance.crudType = CrudType.Create;
     modalRef.componentInstance.rulesUpdated.subscribe(updated => this.onRulesCreated());
   }
 
-  viewRules(rules: Rules): void {
-    const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
-    modalRef.componentInstance.rules = rules;
-    modalRef.componentInstance.crudType = CrudType.View;
+  viewRules(rulesDescription: RulesDescription): void {
+    this.rulesService.getRules(rulesDescription.id).subscribe(
+      rules => {
+        const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
+        modalRef.componentInstance.rules = rules;
+        modalRef.componentInstance.crudType = CrudType.View;
+      },
+      error => this.toastr.error('Rules could not be found.', '', { timeOut: 5000, positionClass: 'toast-top-left' })
+    );
   }
 
-  updateRules(rules: Rules): void {
-    const copy = Rules.copyRules(rules);
-    const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
-    modalRef.componentInstance.rules = copy;
-    modalRef.componentInstance.crudType = CrudType.Update;
-    modalRef.componentInstance.rulesUpdated.subscribe(updated => this.onRulesUpdated());
+  updateRules(rulesDescription: RulesDescription): void {
+    this.rulesService.getRules(rulesDescription.id).subscribe(
+      rules => {
+        const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
+        modalRef.componentInstance.rules = rules;
+        modalRef.componentInstance.crudType = CrudType.Update;
+        modalRef.componentInstance.rulesUpdated.subscribe(updated => this.onRulesUpdated());
+      },
+      error => this.toastr.error('Rules could not be found.', '', { timeOut: 5000, positionClass: 'toast-top-left' })
+    );
   }
 
-  deleteRules(rules: Rules): void {
+  deleteRules(rulesDescription: RulesDescription): void {
     const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
     modalRef.componentInstance.title = 'Delete rules';
-    modalRef.componentInstance.message = `Do you want to delete the rules named ${rules.name}?`;
+    modalRef.componentInstance.message = `Do you want to delete the rules named ${rulesDescription.name}?`;
     modalRef.componentInstance.okClicked.subscribe(ok =>
-      this.userService.deleteRules(rules.name).subscribe(deleted => this.onRulesDeleted(), error => this.onRulesNotDeleted()));
+      this.rulesService.deleteRules(rulesDescription.id).subscribe(deleted => this.onRulesDeleted(), error => this.onRulesDeletionError()));
   }
 
   onRulesCreated(): void {
@@ -93,7 +89,7 @@ export class UserRulesComponent implements OnInit {
     this.toastr.success('Rules were successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
   }
 
-  onRulesNotDeleted(): void {
+  onRulesDeletionError(): void {
     this.toastr.error('Rules could not be deleted. Are they used in a scheduled game?', '', { timeOut: 5000, positionClass: 'toast-top-left' });
   }
 

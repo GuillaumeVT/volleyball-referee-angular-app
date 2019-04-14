@@ -1,85 +1,73 @@
-import { Game } from './model/game';
-import { GameDescription } from './model/gamedescription';
-import { GameStatistics } from './model/gamestatistics';
 import { Injectable } from '@angular/core';
-import { Set } from './model/set';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../environments/environment';
+import { Game } from './model/game';
+import { GameDescription } from './model/game-description';
+import { Count } from './model/count';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class GameService {
 
-  private apiUrl          = environment.api;
-  private viewGameUrl     = this.apiUrl + '/view/game';
-  private searchGameUrl   = this.apiUrl + '/search/game';
-  private searchLeagueUrl = this.searchGameUrl + '/league';
-  private gameStatsUrl    = this.apiUrl + '/stats/game';
+  private gamesUrl = environment.api + '/games';
 
   constructor(private http: HttpClient) { }
 
-  getGame(id: number): Observable<Game> {
-    const url = `${this.viewGameUrl}/${id}`;
+  listGames(): Observable<GameDescription[]> {
+    const url = `${this.gamesUrl}`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  listGamesWithStatus(status: string): Observable<GameDescription[]> {
+    const url = `${this.gamesUrl}/status/${status}`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  listAvailableGames(): Observable<GameDescription[]> {
+    const url = `${this.gamesUrl}/available`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  listGamesInLeague(leagueId: string): Observable<GameDescription[]> {
+    const url = `${this.gamesUrl}/league/${leagueId}`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  listGamesInLeagueCsv(leagueId: string): Observable<any> {
+    const url = `${this.gamesUrl}/league/${leagueId}/csv`;
+    return this.http.get<any>(url, { headers: { 'Content-Type': 'application/json', 'Accept': 'text/csv'}, responseType: 'blob' as 'json' });
+  }
+
+  listGamesInDivisionCsv(leagueId: string, divisionName: string): Observable<any> {
+    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/csv`;
+    return this.http.get<any>(url, { headers: { 'Content-Type': 'application/json', 'Accept': 'text/csv'}, responseType: 'blob' as 'json' });
+  }
+
+  getGame(gameId: string): Observable<Game> {
+    const url = `${this.gamesUrl}/${gameId}`;
     return this.http.get<Game>(url);
   }
 
-  getScoreSheet(id: number): Observable<any> {
-    const url = `${this.viewGameUrl}/score-sheet/${id}`;
-    const options = {headers: { 'Content-Type': 'application/json', 'Accept': 'text/html'}, responseType: 'blob' as 'json'};
-    return this.http.get<any>(url, options);
+  getNumberOfGamesInLeague(leagueId: string): Observable<Count> {
+    const url = `${this.gamesUrl}/league/${leagueId}/count`;
+    return this.http.get<Count>(url);
   }
 
-  searchGames(token: string): Observable<GameDescription[]> {
-    if (token.trim()) {
-      const url = `${this.searchGameUrl}/${token}`;
-      return this.http.get<GameDescription[]>(url);
-    } else {
-      return of([]);
-    }
+  createGame(game: GameDescription): Observable<GameDescription> {
+    const url = `${this.gamesUrl}`;
+    return this.http.post<GameDescription>(url, game);
   }
 
-  searchLiveGames(): Observable<GameDescription[]> {
-    const url = `${this.searchGameUrl}/live`;
-    return this.http.get<GameDescription[]>(url);
+  updateGame(game: GameDescription): Observable<GameDescription> {
+    const url = `${this.gamesUrl}`;
+    return this.http.put<GameDescription>(url, game);
   }
 
-  searchGamesByDate(date: string): Observable<GameDescription[]> {
-    if (date.trim()) {
-      const url = `${this.searchGameUrl}/date/${date}`;
-      return this.http.get<GameDescription[]>(url);
-    } else {
-      return of([]);
-    }
-  }
-
-  searchGamesInLeague(id: number): Observable<GameDescription[]> {
-    const url = `${this.searchLeagueUrl}/${id}`;
-    return this.http.get<GameDescription[]>(url);
-  }
-
-  searchGamesOfTeamInLeague(id: number, team: string, gender: string): Observable<GameDescription[]> {
-    let params = new HttpParams().set('team', team).set('gender', gender);
-    const url = `${this.searchLeagueUrl}/${id}`;
-    return this.http.get<GameDescription[]>(url, { params: params });
-  }
-
-  searchLiveGamesInLeague(id: number): Observable<GameDescription[]> {
-    const url = `${this.searchLeagueUrl}/${id}/live`;
-    return this.http.get<GameDescription[]>(url);
-  }
-
-  searchLast10GamesInLeague(id: number): Observable<GameDescription[]> {
-    const url = `${this.searchLeagueUrl}/${id}/last10`;
-    return this.http.get<GameDescription[]>(url);
-  }
-
-  searchNext10GamesInLeague(id: number): Observable<GameDescription[]> {
-    const url = `${this.searchLeagueUrl}/${id}/next10`;
-    return this.http.get<GameDescription[]>(url);
-  }
-
-  getGameStatistics() : Observable<GameStatistics> {
-    return this.http.get<GameStatistics>(this.gameStatsUrl);
+  deleteGame(gameId: string): Observable<Object> {
+    const url = `${this.gamesUrl}/${gameId}`;
+    return this.http.delete(url);
   }
 
 }

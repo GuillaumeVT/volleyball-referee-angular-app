@@ -1,7 +1,13 @@
+import { User } from './user';
+import { UUID } from 'angular2-uuid';
+
 export class Rules {
-  userId:                           string;
+  id:                               string;
+  createdBy:                        string;
+  createdAt:                        number;
+  updatedAt:                        number;
   name:                             string;
-  date:                             number;
+  kind:                             string;
   setsPerGame:                      number;
   pointsPerSet:                     number;
   tieBreakInLastSet:                boolean;
@@ -22,12 +28,33 @@ export class Rules {
   beachCourtSwitchFreqTieBreak:     number;
   customConsecutiveServesPerPlayer: number;
 
-  public static createRules(): Rules {
+  public static createRules(user: User, kind: string): Rules {
+    var rules: Rules;
+
+    switch (kind) {
+      case "INDOOR":
+      rules = Rules.createIndoorRules(user);
+      break;
+      case "BEACH":
+      rules = Rules.createBeachRules(user);
+      break;
+      case "INDOOR_4X4":
+      rules = Rules.createIndoor4x4Rules(user);
+      break;
+    }
+
+    return rules;
+  }
+
+  public static createIndoorRules(user: User): Rules {
     const rules = new Rules();
 
-    rules.userId = '';
+    rules.id = UUID.UUID();
+    rules.createdBy = user.id;
+    rules.createdAt = new Date().getTime();
+    rules.updatedAt = new Date().getTime();
     rules.name = '';
-    rules.date = new Date().getTime();
+    rules.kind = 'INDOOR';
     rules.setsPerGame = 5;
     rules.pointsPerSet = 25;
     rules.tieBreakInLastSet = true;
@@ -43,6 +70,38 @@ export class Rules {
     rules.gameIntervalDuration = 180;
     rules.substitutionsLimitation = 1;
     rules.teamSubstitutionsPerSet = 6;
+    rules.beachCourtSwitches = false;
+    rules.beachCourtSwitchFreq = 0;
+    rules.beachCourtSwitchFreqTieBreak = 0;
+    rules.customConsecutiveServesPerPlayer = 9999;
+
+    return rules;
+  }
+
+  public static createBeachRules(user: User): Rules {
+    const rules = new Rules();
+
+    rules.id = UUID.UUID();
+    rules.createdBy = user.id;
+    rules.createdAt = new Date().getTime();
+    rules.updatedAt = new Date().getTime();
+    rules.name = '';
+    rules.kind = 'BEACH';
+    rules.setsPerGame = 3;
+    rules.pointsPerSet = 21;
+    rules.tieBreakInLastSet = true;
+    rules.pointsInTieBreak = 15;
+    rules.twoPointsDifference = true;
+    rules.sanctions = true;
+    rules.teamTimeouts = true;
+    rules.teamTimeoutsPerSet = 1;
+    rules.teamTimeoutDuration = 30;
+    rules.technicalTimeouts = true;
+    rules.technicalTimeoutDuration = 30;
+    rules.gameIntervals = true;
+    rules.gameIntervalDuration = 60;
+    rules.substitutionsLimitation = 1;
+    rules.teamSubstitutionsPerSet = 9999;
     rules.beachCourtSwitches = true;
     rules.beachCourtSwitchFreq = 7;
     rules.beachCourtSwitchFreqTieBreak = 5;
@@ -51,32 +110,36 @@ export class Rules {
     return rules;
   }
 
-  public static copyRules(rules: Rules): Rules {
-    const copy = new Rules();
+  public static createIndoor4x4Rules(user: User): Rules {
+    const rules = new Rules();
 
-    copy.userId = rules.userId;
-    copy.name = rules.name;
-    copy.date = rules.date;
-    copy.setsPerGame = rules.setsPerGame;
-    copy.pointsPerSet = rules.pointsPerSet;
-    copy.tieBreakInLastSet = rules.tieBreakInLastSet;
-    copy.pointsInTieBreak = rules.pointsInTieBreak;
-    copy.twoPointsDifference = rules.twoPointsDifference;
-    copy.sanctions = rules.sanctions;
-    copy.teamTimeouts = rules.teamTimeouts;
-    copy.teamTimeoutsPerSet = rules.teamTimeoutsPerSet;
-    copy.teamTimeoutDuration = rules.teamTimeoutDuration;
-    copy.technicalTimeouts = rules.technicalTimeouts;
-    copy.technicalTimeoutDuration = rules.technicalTimeoutDuration;
-    copy.gameIntervals = rules.gameIntervals;
-    copy.gameIntervalDuration = rules.gameIntervalDuration;
-    copy.substitutionsLimitation = rules.substitutionsLimitation;
-    copy.teamSubstitutionsPerSet = rules.teamSubstitutionsPerSet;
-    copy.beachCourtSwitches = rules.beachCourtSwitches;
-    copy.beachCourtSwitchFreq = rules.beachCourtSwitchFreq;
-    copy.beachCourtSwitchFreqTieBreak = rules.beachCourtSwitchFreqTieBreak;
-    copy.customConsecutiveServesPerPlayer = rules.customConsecutiveServesPerPlayer;
+    rules.id = UUID.UUID();
+    rules.createdBy = user.id;
+    rules.createdAt = new Date().getTime();
+    rules.updatedAt = new Date().getTime();
+    rules.name = '';
+    rules.kind = 'INDOOR_4X4';
+    rules.setsPerGame = 5;
+    rules.pointsPerSet = 25;
+    rules.tieBreakInLastSet = true;
+    rules.pointsInTieBreak = 15;
+    rules.twoPointsDifference = true;
+    rules.sanctions = true;
+    rules.teamTimeouts = true;
+    rules.teamTimeoutsPerSet = 2;
+    rules.teamTimeoutDuration = 30;
+    rules.technicalTimeouts = true;
+    rules.technicalTimeoutDuration = 60;
+    rules.gameIntervals = true;
+    rules.gameIntervalDuration = 180;
+    rules.substitutionsLimitation = 1;
+    rules.teamSubstitutionsPerSet = 6;
+    rules.beachCourtSwitches = false;
+    rules.beachCourtSwitchFreq = 0;
+    rules.beachCourtSwitchFreqTieBreak = 0;
+    rules.customConsecutiveServesPerPlayer = 9999;
 
-    return copy;
+    return rules;
   }
+
 }

@@ -1,4 +1,4 @@
 export class Timeout {
-  hPoints: number;
-  gPoints: number;
+  homePoints:  number;
+  guestPoints: number;
 }

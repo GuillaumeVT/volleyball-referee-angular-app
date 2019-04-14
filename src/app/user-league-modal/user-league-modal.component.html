@@ -8,10 +8,10 @@
   <form class="needs-validation" (submit)="onSubmitForm()" novalidate autocomplete="off">
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
-        <label [ngClass]="invalidName ? 'vbr-error-label' : ''" class="vbr-text" for="name">League name</label>
-        <input type="text" [ngClass]="invalidName ? 'vbr-error-input' : ''" class="vbr-text form-control"
+        <label [ngClass]="undefinedName ? 'vbr-error-label' : ''" class="vbr-text" for="name">League name</label>
+        <input type="text" [ngClass]="undefinedName ? 'vbr-error-input' : ''" class="vbr-text form-control"
           name="name" id="name" [(ngModel)]="league.name" placeholder="" required/>
-        <div class="vbr-error-feedback" *ngIf="invalidName">
+        <div class="vbr-error-feedback" *ngIf="undefinedName">
           Please enter a name for the league.
         </div>
       </div>

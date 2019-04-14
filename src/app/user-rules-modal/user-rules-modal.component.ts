@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Rules } from '../model/rules';
 import { CrudType } from '../model/crudtype';
-import { UserService } from '../user.service';
+import { RulesService } from '../rules.service';
 
 @Component({
   selector: 'app-user-rules-modal',
@@ -16,11 +16,11 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
 
   @Output() rulesUpdated = new EventEmitter();
 
-  invalidName:     boolean;
+  undefinedName:   boolean;
   invalidResponse: boolean;
 
-  constructor(private activeModal: NgbActiveModal, private userService: UserService) {
-    this.invalidName = false;
+  constructor(private activeModal: NgbActiveModal, private rulesService: RulesService) {
+    this.undefinedName = false;
     this.invalidResponse =  false;
   }
 
@@ -38,14 +38,17 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
 
   onSubmitForm(): void {
     if (this.rules.name.length === 0) {
-      this.invalidName = true;
+      this.undefinedName = true;
     } else {
-      this.invalidName = false;
+      this.undefinedName = false;
 
       if (this.crudType === CrudType.Create) {
-        this.userService.createRules(this.rules).subscribe(rules => this.onValidResponse(), error => this.onInvalidResponse(error));
+        this.rules.createdAt = new Date().getTime();
+        this.rules.updatedAt = new Date().getTime();
+        this.rulesService.createRules(this.rules).subscribe(rules => this.onValidResponse(), error => this.onInvalidResponse(error));
       } else if (this.crudType === CrudType.Update) {
-        this.userService.updateRules(this.rules).subscribe(rules => this.onValidResponse(), error => this.onInvalidResponse(error));
+        this.rules.updatedAt = new Date().getTime();
+        this.rulesService.updateRules(this.rules).subscribe(rules => this.onValidResponse(), error => this.onInvalidResponse(error));
       }
     }
   }

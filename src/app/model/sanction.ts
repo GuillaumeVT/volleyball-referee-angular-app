@@ -1,7 +1,7 @@
 export class Sanction {
-  card:    string;
-  num:     number;
-  set:     number;
-  hPoints: number;
-  gPoints: number;
+  card:        string;
+  num:         number;
+  set:         number;
+  homePoints:  number;
+  guestPoints: number;
 }

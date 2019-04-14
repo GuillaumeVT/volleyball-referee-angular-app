@@ -4,20 +4,20 @@
     <i class="fa fa-hourglass-2 game-item-icon vbr-time-text mr-2" *ngIf="gameDescription.kind === 'TIME'"></i>
     <i class="fa fa-sun-o game-item-icon vbr-sun-text mr-2" *ngIf="gameDescription.kind === 'BEACH'"></i>
     <span class="game-item-badge badge text-center vbr-indoor-text mr-2" *ngIf="gameDescription.kind === 'INDOOR'">6x6</span>
-    <span class="game-item-badge badge text-center vbr-indoor-text mr-2" *ngIf="gameDescription.kind === 'INDOOR_4X4'">4x4</span>
+    <span class="game-item-badge badge text-center vbr-indoor-4x4-text mr-2" *ngIf="gameDescription.kind === 'INDOOR_4X4'">4x4</span>
     <i class="game-item-icon mr-2" [ngClass]="utils.getGenderIcon(gameDescription.gender)"></i>
-    <span class="game-item-schedule vbr-text text-muted secondary-text">{{gameDescription.schedule | date : 'dd MMM yyyy, HH:mm'}}</span>
+    <span class="game-item-schedule vbr-text text-muted secondary-text">{{gameDescription.scheduledAt | date : 'dd MMM yyyy, HH:mm'}}</span>
   </div>
   <hr/>
   <a [routerLink]="getMatchUrl()" class="game-item-title">
-    <span *ngIf="gameDescription.status !== 'SCHEDULED'">{{gameDescription.hName}} {{gameDescription.hSets}} - {{gameDescription.gSets}} {{gameDescription.gName}}</span>
-    <span *ngIf="gameDescription.status === 'SCHEDULED'">{{gameDescription.hName}} - {{gameDescription.gName}}</span>
+    <span *ngIf="gameDescription.status !== 'SCHEDULED'">{{gameDescription.homeTeamName}} {{gameDescription.homeSets}} - {{gameDescription.guestSets}} {{gameDescription.guestTeamName}}</span>
+    <span *ngIf="gameDescription.status === 'SCHEDULED'">{{gameDescription.homeTeamName}} - {{gameDescription.guestTeamName}}</span>
   </a>
-  <div class="vbr-text secondary-text mt-3" *ngIf="showLeague() || showDivision() || showReferee()">
-    <span *ngIf="showLeague()">{{gameDescription.league}}&nbsp;</span>
-    <span *ngIf="showLeague() && showDivision()">/&nbsp;</span>
-    <span *ngIf="showDivision()">{{gameDescription.division}}</span>
+  <div class="vbr-text mt-3" *ngIf="showLeague() || showDivision() || showReferee()">
+    <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="league-link">{{gameDescription.leagueName}}</a>
+    <span *ngIf="showLeague() && showDivision()" class="mx-1">/</span>
+    <span *ngIf="showDivision()">{{gameDescription.divisionName}}</span>
     <br *ngIf="(showLeague() || showDivision()) && showReferee()" />
-    <span *ngIf="showReferee()"><i class="fa fa-user mr-1"></i>by {{gameDescription.referee}}</span>
+    <span *ngIf="showReferee()"><i class="fa fa-user mr-1"></i>by {{gameDescription.refereeName}}</span>
   </div>
 </div>

@@ -47,7 +47,7 @@
         </optgroup>
       </select>
     </div>
-    <app-game-list class="my-3" *ngIf="league && selectedTeam" [leagueDate]="league.date" [team]="selectedTeam"></app-game-list>
+    <app-game-list class="my-3" *ngIf="league && selectedTeam" [leagueId]="league.id" [teamId]="selectedTeam.id"></app-game-list>
   </div>
 </div>
 <div class="div-footer">

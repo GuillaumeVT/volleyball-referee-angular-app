@@ -31,48 +31,31 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="league">Tournament / League</label>
-        <input type="text" class="vbr-text form-control" name="league" id="league" list="leagueList" [(ngModel)]="game.league" required [attr.disabled]="isEditingDisabled()"/>
-        <datalist id="leagueList">
-          <option *ngFor="let league of leagues" [ngValue]="league.name">{{league.name}}</option>
-        </datalist>
+        <select class="vbr-text custom-select" name="league" id="league" [(ngModel)]="selectedLeague" [attr.disabled]="isEditingDisabled()">
+          <option *ngFor="let league of leagues" [ngValue]="league">{{league.name}}</option>
+        </select>
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3" *ngIf="selectedLeague">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="division">Pool / Division</label>
-        <input type="text" class="vbr-text form-control" name="division" id="division" list="divisionList" [(ngModel)]="game.division" required [attr.disabled]="isEditingDisabled()"/>
+        <input type="text" class="vbr-text form-control" name="division" id="division" list="divisionList" [(ngModel)]="game.divisionName" required [attr.disabled]="isEditingDisabled()"/>
         <datalist id="divisionList">
-          <option *ngFor="let division of divisions" [ngValue]="division">{{division}}</option>
+          <option *ngFor="let division of selectedLeague.divisions" [ngValue]="selectedDivision">{{division}}</option>
         </datalist>
-      </div>
-    </div>
-
-    <div class="row align-items-center mb-3">
-      <div class="col-6 col-sm-4">
-        <label [ngClass]="invalidGender ? 'vbr-error-label' : ''" class="vbr-text">Gender</label>
-      </div>
-      <div class="col-6 col-sm-8">
-        <button type="button" class="btn form-button" [ngClass]="getGenderButton()" id="gender" (click)="nextGender()" [attr.disabled]="(crudType === 2 || crudType === 4) ? true : null">
-          <i class="p-1" [ngClass]="getGenderIcon()"></i>
-        </button>
-      </div>
-      <div class="col-12">
-        <div class="vbr-error-feedback" *ngIf="invalidGender">
-          Teams gender and game gender must be identical.
-        </div>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
-        <label [ngClass]="invalidHTeam ? 'vbr-error-label' : ''" class="vbr-text" for="hTeam">Home team</label>
-        <select [ngClass]="invalidHTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="hTeam" id="hTeam" [(ngModel)]="game.hName" [attr.disabled]="isEditingDisabled()">
-          <option *ngFor="let team of teams" [ngValue]="team.name">{{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}</option>
+        <label [ngClass]="undefinedHTeam ? 'vbr-error-label' : ''" class="vbr-text" for="homeTeam">Home team</label>
+        <select [ngClass]="undefinedHTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="homeTeam" id="homeTeam" [(ngModel)]="selectedHTeam" [attr.disabled]="isEditingDisabled()">
+          <option *ngFor="let team of teams" [ngValue]="team">{{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}</option>
         </select>
       </div>
       <div class="col-12">
-        <div class="vbr-error-feedback" *ngIf="invalidTeams">
+        <div class="vbr-error-feedback" *ngIf="sameTeams">
           Home and guest teams must be different.
         </div>
       </div>
@@ -80,13 +63,13 @@
 
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
-        <label [ngClass]="invalidGTeam ? 'vbr-error-label' : ''" class="vbr-text" for="gTeam">Guest team</label>
-        <select [ngClass]="invalidGTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="gTeam" id="gTeam" [(ngModel)]="game.gName" [attr.disabled]="isEditingDisabled()">
-          <option *ngFor="let team of teams" [ngValue]="team.name">{{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}</option>
+        <label [ngClass]="undefinedGTeam ? 'vbr-error-label' : ''" class="vbr-text" for="guestTeam">Guest team</label>
+        <select [ngClass]="undefinedGTeam ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="guestTeam" id="guestTeam" [(ngModel)]="selectedGTeam" [attr.disabled]="isEditingDisabled()">
+          <option *ngFor="let team of teams" [ngValue]="team">{{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}</option>
         </select>
       </div>
       <div class="col-12">
-        <div class="vbr-error-feedback" *ngIf="invalidTeams">
+        <div class="vbr-error-feedback" *ngIf="sameTeams">
           Home and guest teams must be different.
         </div>
       </div>
@@ -95,26 +78,28 @@
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label [ngClass]="invalidRules ? 'vbr-error-label' : ''" class="vbr-text" for="rules">Rules</label>
-        <select [ngClass]="invalidRules ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="rules" id="rules" [(ngModel)]="game.rules" [attr.disabled]="isEditingDisabled()">
-          <optgroup label="Default Rules">
-            <option *ngFor="let rule of defaultRules" [ngValue]="rule.name">{{rule.name}}</option>
+        <select [ngClass]="invalidRules ? 'vbr-error-input' : ''" class="vbr-text custom-select" name="rules" id="rules" [(ngModel)]="selectedRules" [attr.disabled]="isEditingDisabled()">
+          <optgroup label="Default Rules" *ngIf="defaultRules">
+            <option [ngValue]="defaultRules">{{defaultRules.name}}</option>
           </optgroup>
           <optgroup label="My Rules">
-            <option *ngFor="let rule of rules" [ngValue]="rule.name">{{rule.name}}</option>
+            <option *ngFor="let rule of rules" [ngValue]="rule">{{rule.name}}</option>
           </optgroup>
         </select>
-      </div>
-      <div class="col-12">
-        <div class="vbr-error-feedback" *ngIf="invalidRules">
-          Please select the rules.
-        </div>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="referee">Referee</label>
-        <input type="text" class="vbr-text form-control" name="referee" id="referee" [(ngModel)]="game.referee" required [attr.disabled]="isEditingDisabled()"/>
+        <select class="vbr-text custom-select" name="referee" id="referee" [(ngModel)]="selectedReferee" [attr.disabled]="isEditingDisabled()">
+          <optgroup label="Me" *ngIf="me">
+            <option [ngValue]="me">{{me.pseudo}}</option>
+          </optgroup>
+          <optgroup label="My colleagues">
+            <option *ngFor="let friend of user.friends" [ngValue]="friend">{{friend.pseudo}}</option>
+          </optgroup>
+        </select>
       </div>
     </div>
 

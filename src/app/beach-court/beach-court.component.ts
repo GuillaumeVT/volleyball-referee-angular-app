@@ -1,6 +1,5 @@
-import { GameService } from '../game.service';
 import { Game } from '../model/game';
-import { Player } from '../model/player';
+import { Court } from '../model/court';
 import { TeamType } from '../model/teamtype';
 import { Utils } from '../utils/utils';
 import { Component, OnInit, Input } from '@angular/core';
@@ -26,21 +25,20 @@ export class BeachCourtComponent implements OnInit {
     const set = this.game.sets[this.setIndex];
 
     var servingTeam: TeamType;
-    var players: Player[];
+    var players: Court;
 
     if (set.serving === 'H') {
       servingTeam = TeamType.Home;
-      players = set.hCurrentPlayers;
+      players = set.homeCurrentPlayers;
     } else {
       servingTeam = TeamType.Guest;
-      players = set.gCurrentPlayers;
+      players = set.guestCurrentPlayers;
     }
 
     var visibility;
 
     if (teamType.valueOf() === servingTeam.valueOf()) {
-      const player = players.find(this.isPosition1);
-      if (player.num === playerNumber) {
+      if (players.p1 === playerNumber) {
         visibility = 'visible';
       } else {
           visibility = 'hidden';
@@ -50,10 +48,6 @@ export class BeachCourtComponent implements OnInit {
     }
 
     return visibility;
-  }
-
-  isPosition1(player: Player) {
-    return player.pos === 1;
   }
 
 }

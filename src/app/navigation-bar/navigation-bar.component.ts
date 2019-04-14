@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
 import { SocialUser } from '../login/entities/user';
-import { DatePipe } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SearchModalComponent } from '../search-modal/search-modal.component';
+import { Count } from '../model/count';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -11,54 +14,41 @@ import { DatePipe } from '@angular/common';
 })
 export class NavigationBarComponent implements OnInit {
 
-  searchDate:  Date;
-  minDate:     Date;
-  searchShown: boolean;
-  image:       string;
+  photo: string;
+  numberOfFriendRequests: number;
 
-  constructor(private router: Router, private authService: AuthService, private datePipe: DatePipe) {
-    this.searchShown = false;
-    this.searchDate = new Date();
-    this.minDate = new Date(2018, 1, 1, 0, 0, 0);
+  constructor(private router: Router, private authService: AuthService, private userService: UserService, private modalService: NgbModal) {
+    this.numberOfFriendRequests = 0;
   }
 
   ngOnInit() {
     this.authService.authState.subscribe(user => {
       if (user) {
-        this.image = user.photoUrl;
+        this.photo = user.photoUrl;
+        this.refreshNotifications();
       } else {
-        this.image = null;
+        this.photo = null;
       }
     });
   }
 
-  onShowSearchClicked(): void {
-    this.searchShown = !this.searchShown;
+  refreshNotifications(): void {
+    setTimeout(() => this.userService.getNumberOfFriendRequestsReceivedBy().subscribe(
+      count => this.numberOfFriendRequests = count.count,
+      error => this.numberOfFriendRequests = 0
+    ), 0);
   }
 
-  onSearchTokenClicked(searchedToken: HTMLInputElement): void {
-    if (searchedToken.value.trim() && searchedToken.value.length > 2) {
-      this.router.navigateByUrl(`search/${searchedToken.value}`);
-    }
+  onShowSearchClicked(): void {
+    const modalRef = this.modalService.open(SearchModalComponent, { size: 'lg' });
   }
 
   getHomeUrl(): string {
-    return '/search';
+    return '/home';
   }
 
-  getLiveUrl(): string {
-    return '/search/live';
-  }
-
-  onSearchDateClicked(): void {
-    if (this.searchDate) {
-      const dateStr = this.datePipe.transform(this.searchDate, 'dd-MM-yyyy');
-      this.router.navigateByUrl(`search/date/${dateStr}`);
-    }
-  }
-
-  getUserUrl(): string {
-    return '/user';
+  getUserColleaguesUrl(): string {
+    return '/colleagues';
   }
 
 }

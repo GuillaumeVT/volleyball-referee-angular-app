@@ -2,25 +2,25 @@
   <app-navigation-bar></app-navigation-bar>
 </div>
 <div class="div-refresh">
-  <app-game-refresh [date]="date" [rate]="rate" (currentGameUpdated)="onCurrentGameUpdated($event)"></app-game-refresh>
+  <app-game-refresh [gameId]="gameId" [rate]="rate" (currentGameUpdated)="onCurrentGameUpdated($event)"></app-game-refresh>
 </div>
 <div *ngIf="game && game.status !== 'SCHEDULED'" [ngSwitch]="game.kind">
-  <app-beach-game *ngSwitchCase="'BEACH'" [date]="date" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
+  <app-beach-game *ngSwitchCase="'BEACH'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
     (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-beach-game>
 
-  <app-indoor-game *ngSwitchCase="'INDOOR'" [date]="date" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
+  <app-indoor-game *ngSwitchCase="'INDOOR'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
     (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-indoor-game>
 
-  <app-indoor4x4-game *ngSwitchCase="'INDOOR_4X4'" [date]="date" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
+  <app-indoor4x4-game *ngSwitchCase="'INDOOR_4X4'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
     (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-indoor4x4-game>
 
-  <app-time-game *ngSwitchCase="'TIME'" [date]="date" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
+  <app-time-game *ngSwitchCase="'TIME'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
     (teamsSwapped)="onTeamsSwapped()"></app-time-game>
 </div>
 <div class="div-schedule text-center" *ngIf="game && game.status === 'SCHEDULED'">
   <ngb-alert class="mx-1 px-1" type="info" [dismissible]="false">
-    <h4 class="alert-heading">{{game.hTeam.name}} - {{game.gTeam.name}}</h4>
-    <label>This game is scheduled to start on {{game.schedule | date : 'dd MMM yyyy'}} at {{game.schedule | date : 'HH:mm:ss'}}.</label>
+    <h4 class="alert-heading">{{game.homeTeam.name}} - {{game.guestTeam.name}}</h4>
+    <label>This game is scheduled to start on {{game.scheduledAt | date : 'dd MMM yyyy'}} at {{game.scheduledAt | date : 'HH:mm:ss'}}.</label>
   </ngb-alert>
 </div>
 <div class="div-role" *ngIf="game && game.status === 'LIVE'">

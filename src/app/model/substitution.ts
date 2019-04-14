@@ -1,6 +1,6 @@
 export class Substitution {
-  pIn:     number;
-  pOut:    number;
-  hPoints: number;
-  gPoints: number;
+  playerIn:     number;
+  playerOut:    number;
+  homePoints:   number;
+  guestPoints:  number;
 }

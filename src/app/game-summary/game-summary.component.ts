@@ -14,7 +14,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class GameSummaryComponent implements OnInit {
 
-  @Input() date:      number;
   @Input() game:      Game;
   @Input() leftTeam:  TeamType;
   @Input() rightTeam: TeamType;
@@ -30,9 +29,9 @@ export class GameSummaryComponent implements OnInit {
     var name;
 
     if (TeamType.Home === teamType) {
-      name = this.game.hTeam.name;
+      name = this.game.homeTeam.name;
     } else {
-      name = this.game.gTeam.name;
+      name = this.game.guestTeam.name;
     }
 
     return name;
@@ -42,9 +41,9 @@ export class GameSummaryComponent implements OnInit {
     var sets;
 
     if (TeamType.Home === teamType) {
-      sets = this.game.hSets;
+      sets = this.game.homeSets;
     } else {
-      sets = this.game.gSets;
+      sets = this.game.guestSets;
     }
 
     return sets;

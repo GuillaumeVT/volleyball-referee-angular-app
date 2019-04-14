@@ -23,17 +23,17 @@ export class SetSubstitutionsComponent implements OnInit {
 
   getSubstitutions(teamType: TeamType): Substitution[] {
     if (TeamType.Home === teamType) {
-      return this.game.sets[this.setIndex].hSubstitutions;
+      return this.game.sets[this.setIndex].homeSubstitutions;
     } else {
-      return this.game.sets[this.setIndex].gSubstitutions;
+      return this.game.sets[this.setIndex].guestSubstitutions;
     }
   }
 
   getScore(teamType: TeamType, substitution: Substitution): string {
     if (TeamType.Home === teamType) {
-      return substitution.hPoints + '-' + substitution.gPoints;
+      return substitution.homePoints + '-' + substitution.guestPoints;
     } else {
-      return substitution.gPoints + '-' + substitution.hPoints;
+      return substitution.guestPoints + '-' + substitution.homePoints;
     }
   }
 

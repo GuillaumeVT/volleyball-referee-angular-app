@@ -1,6 +1,7 @@
 import { Game } from '../model/game';
 import { Substitution } from '../model/substitution';
 import { TeamType } from '../model/teamtype';
+import { Player } from '../model/player';
 import { Utils } from '../utils/utils';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -20,19 +21,19 @@ export class GamePlayersComponent implements OnInit {
   ngOnInit() {
   }
 
-  getPlayers(teamType: TeamType): number[] {
+  getPlayers(teamType: TeamType): Player[] {
     if (TeamType.Home === teamType) {
-      return this.game.hTeam.players;
+      return this.game.homeTeam.players;
     } else {
-      return this.game.gTeam.players;
+      return this.game.guestTeam.players;
     }
   }
 
-  getLiberos(teamType: TeamType): number[] {
+  getLiberos(teamType: TeamType): Player[] {
     if (TeamType.Home === teamType) {
-      return this.game.hTeam.liberos;
+      return this.game.homeTeam.liberos;
     } else {
-      return this.game.gTeam.liberos;
+      return this.game.guestTeam.liberos;
     }
   }
 

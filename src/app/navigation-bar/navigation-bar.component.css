@@ -2,27 +2,23 @@
   background-color: #1f4294;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
 
-.search-form {
-  background-color: #f3f3f3;
-}
-
-.brand-img-size {
+.photo {
   width: 40px;
   height: auto;
 }
 
-.user-image {
-  width: 24px;
-  height: auto;
-  vertical-align: middle;
+.notification {
+  font-size: 1em;
+  color: #1f4294;
+  background-color: #f2bb1a;
 }
 
 @media screen and (max-width: 1200px) {
-  .brand-img-size {
+  .photo {
     width: 32px;
   }
 }

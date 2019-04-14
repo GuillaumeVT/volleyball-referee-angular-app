@@ -12,7 +12,7 @@ export class SearchResultDateComponent implements OnInit {
   date: string;
 
   constructor(private titleService: Title, private route: ActivatedRoute) {
-    this.titleService.setTitle('Volleyball Referee - Search');
+    this.titleService.setTitle('VBR - Search Results');
   }
 
   ngOnInit() {

@@ -1,25 +1,25 @@
-import { Player } from './player';
+import { Court } from './court';
 import { Substitution } from './substitution';
 import { Timeout } from './timeout';
 
 export class Set {
-  duration:         number;
-  hPoints:          number;
-  gPoints:          number;
-  hTimeouts:        number;
-  gTimeouts:        number;
-  ladder:           string[];
-  serving:          string;
-  firstServing:     string;
-  hCurrentPlayers:  Player[];
-  gCurrentPlayers:  Player[];
-  hStartingPlayers: Player[];
-  gStartingPlayers: Player[];
-  hSubstitutions:   Substitution[];
-  gSubstitutions:   Substitution[];
-  hCaptain:         number;
-  gCaptain:         number;
-  hCalledTimeouts:  Timeout[];
-  gCalledTimeouts:  Timeout[];
-  rTime:            number;
+  duration:              number;
+  homePoints:            number;
+  guestPoints:           number;
+  homeTimeouts:          number;
+  guestTimeouts:        number;
+  ladder:               string[];
+  serving:              string;
+  firstServing:         string;
+  homeCurrentPlayers:   Court;
+  guestCurrentPlayers:  Court;
+  homeStartingPlayers:  Court;
+  guestStartingPlayers: Court;
+  homeSubstitutions:    Substitution[];
+  guestSubstitutions:   Substitution[];
+  homeCaptain:          number;
+  guestCaptain:         number;
+  homeCalledTimeouts:   Timeout[];
+  guestCalledTimeouts:  Timeout[];
+  remainingTime:        number;
 }

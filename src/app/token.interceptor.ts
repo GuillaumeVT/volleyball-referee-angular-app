@@ -36,7 +36,7 @@ export class TokenInterceptor implements HttpInterceptor {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           this.authService.signOut();
-          setTimeout(() => this.router.navigateByUrl('user'), 1000);
+          setTimeout(() => this.router.navigateByUrl('home'), 1000);
         }
       }
     }));

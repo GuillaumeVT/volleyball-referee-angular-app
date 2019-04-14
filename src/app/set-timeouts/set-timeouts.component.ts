@@ -23,17 +23,17 @@ export class SetTimeoutsComponent implements OnInit {
 
   getTimeouts(teamType: TeamType): Timeout[] {
     if (TeamType.Home === teamType) {
-      return this.game.sets[this.setIndex].hCalledTimeouts;
+      return this.game.sets[this.setIndex].homeCalledTimeouts;
     } else {
-      return this.game.sets[this.setIndex].gCalledTimeouts;
+      return this.game.sets[this.setIndex].guestCalledTimeouts;
     }
   }
 
   getScore(teamType: TeamType, timeout: Timeout): string {
     if (TeamType.Home === teamType) {
-      return timeout.hPoints + '-' + timeout.gPoints;
+      return timeout.homePoints + '-' + timeout.guestPoints;
     } else {
-      return timeout.gPoints + '-' + timeout.hPoints;
+      return timeout.guestPoints + '-' + timeout.homePoints;
     }
   }
 }

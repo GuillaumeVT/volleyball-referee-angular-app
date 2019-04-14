@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GameComponent implements OnInit {
 
-  date:       number;
+  gameId:     string;
   game:       Game;
   currentSet: number;
   leftTeam:   TeamType;
@@ -19,7 +19,7 @@ export class GameComponent implements OnInit {
   rate:       number;
 
   constructor(private titleService: Title, private route: ActivatedRoute) {
-    this.titleService.setTitle('Volleyball Referee - Match');
+    this.titleService.setTitle('VBR - View Match');
     this.currentSet = 0;
     this.leftTeam = TeamType.Home;
     this.rightTeam = TeamType.Guest
@@ -27,8 +27,7 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
-    const idStr = this.route.snapshot.paramMap.get('date');
-    this.date = Number(idStr);
+    this.gameId = this.route.snapshot.paramMap.get('gameId');
   }
 
   onCurrentGameUpdated(game: Game): void {

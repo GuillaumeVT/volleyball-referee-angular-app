@@ -1,23 +1,23 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { League } from '../model/league';
-import { UserService } from '../user.service';
+import { LeagueService } from '../league.service';
 
 @Component({
-  selector: 'app-user-leagues-modal',
-  templateUrl: './user-leagues-modal.component.html',
-  styleUrls: ['./user-leagues-modal.component.css']
+  selector: 'app-user-league-modal',
+  templateUrl: './user-league-modal.component.html',
+  styleUrls: ['./user-league-modal.component.css']
 })
-export class UserLeaguesModalComponent implements OnInit {
+export class UserLeagueModalComponent implements OnInit {
 
   @Input() league: League;
   @Output() leagueCreated = new EventEmitter();
 
-  invalidName:     boolean;
+  undefinedName:   boolean;
   invalidResponse: boolean;
 
-  constructor(private activeModal: NgbActiveModal, private userService: UserService) {
-    this.invalidName = false;
+  constructor(private activeModal: NgbActiveModal, private leagueService: LeagueService) {
+    this.undefinedName = false;
     this.invalidResponse =  false;
   }
 
@@ -30,10 +30,11 @@ export class UserLeaguesModalComponent implements OnInit {
 
   onSubmitForm(): void {
     if (this.league.name.length === 0) {
-      this.invalidName = true;
+      this.undefinedName = true;
     } else {
-      this.invalidName = false;
-      this.userService.createLeague(this.league).subscribe(league => this.onValidResponse(), error => this.onInvalidResponse(error));
+      this.undefinedName = false;
+      this.league.createdAt = new Date().getTime();
+      this.leagueService.createLeague(this.league).subscribe(league => this.onValidResponse(), error => this.onInvalidResponse(error));
     }
   }
 

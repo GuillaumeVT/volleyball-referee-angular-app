@@ -1,6 +1,6 @@
 import { GameService } from '../game.service';
 import { Game } from '../model/game';
-import { Player } from '../model/player';
+import { Court } from '../model/court';
 import { TeamType } from '../model/teamtype';
 import { IndoorPlayerItem } from '../model/indoor-player-item';
 import { Utils } from '../utils/utils';
@@ -60,9 +60,9 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
       const set = this.game.sets[this.setIndex];
 
       if (TeamType.Home === teamType) {
-        actingCaptain = set.hCaptain;
+        actingCaptain = set.homeCaptain;
       } else {
-        actingCaptain = set.gCaptain;
+        actingCaptain = set.guestCaptain;
       }
 
       var playerItem = new IndoorPlayerItem(player, color, backgroundColor, actingCaptain === player);
@@ -100,23 +100,38 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
   getPlayerAt(position: number, teamType: TeamType) {
     const set = this.game.sets[this.setIndex];
 
-    var players: Player[];
+    var players: Court;
 
     switch (teamType) {
       case TeamType.Home:
-        players = set.hCurrentPlayers;
+        players = set.homeCurrentPlayers;
         break;
       case TeamType.Guest:
-        players = set.gCurrentPlayers;
+        players = set.guestCurrentPlayers;
         break;
     }
 
     var playerNumber = 0;
 
-    for (let player of players) {
-      if (player.pos === position) {
-        playerNumber = player.num;
-      }
+    switch (position) {
+      case 1:
+      playerNumber = players.p1;
+      break;
+      case 2:
+      playerNumber = players.p2;
+      break;
+      case 3:
+      playerNumber = players.p3;
+      break;
+      case 4:
+      playerNumber = players.p4;
+      break;
+      case 5:
+      playerNumber = players.p5;
+      break;
+      case 6:
+      playerNumber = players.p6;
+      break;
     }
 
     return playerNumber;

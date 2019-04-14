@@ -1,8 +1,6 @@
 import { Game } from '../model/game';
-import { GameDescription } from '../model/gamedescription';
-import { Team } from '../model/team';
-import { League } from '../model/league';
-import { Rules } from '../model/rules';
+import { GameDescription } from '../model/game-description';
+import { Player } from '../model/player';
 import { TeamType } from '../model/teamtype';
 import { Sanction } from '../model/sanction';
 import { Injectable } from '@angular/core';
@@ -17,13 +15,13 @@ export class Utils {
     var liberos = [];
 
     if (TeamType.Home === teamType) {
-      liberos = game.hTeam.liberos;
+      liberos = game.homeTeam.liberos;
     } else {
-      liberos = game.gTeam.liberos;
+      liberos = game.guestTeam.liberos;
     }
 
     for (let libero of liberos) {
-      if (libero === player) {
+      if (libero.num === player) {
         result = true;
       }
     }
@@ -35,9 +33,9 @@ export class Utils {
     var captain;
 
     if (TeamType.Home === teamType) {
-      captain = game.hTeam.captain;
+      captain = game.homeTeam.captain;
     } else {
-      captain = game.gTeam.captain;
+      captain = game.guestTeam.captain;
     }
 
     var playerStr = String(player);
@@ -54,10 +52,10 @@ export class Utils {
 
     switch (teamType) {
       case TeamType.Home:
-        color = game.hTeam.color;
+        color = game.homeTeam.color;
         break;
       case TeamType.Guest:
-        color = game.gTeam.color;
+        color = game.guestTeam.color;
         break;
     }
 
@@ -69,10 +67,10 @@ export class Utils {
 
     switch (teamType) {
       case TeamType.Home:
-        color = game.hTeam.liberoColor;
+        color = game.homeTeam.liberoColor;
         break;
       case TeamType.Guest:
-        color = game.gTeam.liberoColor;
+        color = game.guestTeam.liberoColor;
         break;
     }
 
@@ -171,22 +169,6 @@ export class Utils {
     } else {
       return '(Gents)';
     }
-  }
-
-  sortGames(games: GameDescription[]): GameDescription[] {
-    return games.sort((g1, g2) => g2.schedule - g1.schedule);
-  }
-
-  sortTeams(teams: Team[]): Team[] {
-    return teams.sort((t1, t2) => (t1.name > t2.name) ? 1 : ((t2.name > t1.name) ? -1 : 0));
-  }
-
-  sortLeagues(leagues: League[]): League[] {
-    return leagues.sort((l1, l2) => (l1.name > l2.name) ? 1 : ((l2.name > l1.name) ? -1 : 0));
-  }
-
-  sortRules(rules: Rules[]): Rules[] {
-    return rules.sort((r1, r2) => (r1.name > r2.name) ? 1 : ((r2.name > r1.name) ? -1 : 0));
   }
 
 }

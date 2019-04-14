@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h5 class="modal-title vbr-text">Search games</h5>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <button class="btn vbr-button" (click)="onSearchTokenClicked()"><i class="fa fa-search"></i></button>
+    </div>
+    <input type="text" class="form-control vbr-text-color" placeholder="By team / league / referee" [(ngModel)]="searchToken"
+    (keyup.enter)="onSearchTokenClicked()"/>
+  </div>
+  <div>
+    <button class="btn vbr-button col-6 col-sm-3 col-md-3 my-2 mr-4" (click)="onSearchLiveClicked()"><i class="fa fa-mixcloud"></i>&nbsp;&nbsp;Live games</button>
+    <input class="btn vbr-button placeholder-color col-6 col-sm-3 col-md-3 my-2" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp" [(ngModel)]="searchDate" (dateTimeChange)="onSearchDateClicked()"
+    [min]="minDate" placeholder="By date" (keydown)="$event.preventDefault()" readonly>
+    <owl-date-time [pickerType]="'calendar'" #dtp></owl-date-time>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn cancel-button" (click)="close()">Close</button>
+</div>

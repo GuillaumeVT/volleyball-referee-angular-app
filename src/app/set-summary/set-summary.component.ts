@@ -15,11 +15,11 @@ export class SetSummaryComponent implements OnInit, OnChanges {
   @Input() leftTeam:  TeamType;
   @Input() rightTeam: TeamType;
 
-  hPoints:   number;
-  gPoints:   number;
+  homePoints:   number;
+  guestPoints:   number;
   duration:  string;
-  hTimeouts: number[];
-  gTimeouts: number[];
+  homeTimeouts: number[];
+  guestTimeouts: number[];
 
   constructor(private utils: Utils) { }
 
@@ -28,18 +28,18 @@ export class SetSummaryComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.game && this.game.sets) {
-      this.hPoints = this.game.sets[this.setIndex].hPoints;
-      this.gPoints = this.game.sets[this.setIndex].gPoints;
+      this.homePoints = this.game.sets[this.setIndex].homePoints;
+      this.guestPoints = this.game.sets[this.setIndex].guestPoints;
       this.duration = ` ${Math.ceil(this.game.sets[this.setIndex].duration / 60000)} min`;
 
-      this.hTimeouts = [];
-      this.gTimeouts = [];
+      this.homeTimeouts = [];
+      this.guestTimeouts = [];
       var index;
-      for (index = 0; index < this.game.sets[this.setIndex].hTimeouts; index++) {
-        this.hTimeouts.push(1);
+      for (index = 0; index < this.game.sets[this.setIndex].homeTimeouts; index++) {
+        this.homeTimeouts.push(1);
       }
-      for (index = 0; index < this.game.sets[this.setIndex].gTimeouts; index++) {
-        this.gTimeouts.push(1);
+      for (index = 0; index < this.game.sets[this.setIndex].guestTimeouts; index++) {
+        this.guestTimeouts.push(1);
       }
     }
   }
@@ -48,9 +48,9 @@ export class SetSummaryComponent implements OnInit, OnChanges {
     var points;
 
     if (TeamType.Home === teamType) {
-      points = this.hPoints;
+      points = this.homePoints;
     } else {
-      points = this.gPoints;
+      points = this.guestPoints;
     }
 
     return points;
@@ -60,9 +60,9 @@ export class SetSummaryComponent implements OnInit, OnChanges {
     var timeouts;
 
     if (TeamType.Home === teamType) {
-      timeouts = this.hTimeouts;
+      timeouts = this.homeTimeouts;
     } else {
-      timeouts = this.gTimeouts;
+      timeouts = this.guestTimeouts;
     }
 
     return timeouts;

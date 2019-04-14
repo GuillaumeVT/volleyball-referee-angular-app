@@ -14,11 +14,11 @@
                   <tbody>
                     <tr *ngFor="let substitution of getSubstitutions(ladderItem, topTeam)">
                       <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, topTeam)" [style.color]="utils.getTeamTextColor(game, topTeam)" [innerHTML]="utils.getPlayer(game, topTeam, substitution.pIn)"></span>
+                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, topTeam)" [style.color]="utils.getTeamTextColor(game, topTeam)" [innerHTML]="utils.getPlayer(game, topTeam, substitution.playerIn)"></span>
                       </td>
                       <td><img class="ladder-icon-item" src="../../assets/ic_sub.png" alt="sub"></td>
                       <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, topTeam)" [style.color]="utils.getTeamTextColor(game, topTeam)" [innerHTML]="utils.getPlayer(game, topTeam, substitution.pOut)"></span>
+                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, topTeam)" [style.color]="utils.getTeamTextColor(game, topTeam)" [innerHTML]="utils.getPlayer(game, topTeam, substitution.playerOut)"></span>
                       </td>
                     </tr>
                   </tbody>
@@ -59,11 +59,11 @@
                   <tbody>
                     <tr *ngFor="let substitution of getSubstitutions(ladderItem, bottomTeam)">
                       <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, bottomTeam)" [style.color]="utils.getTeamTextColor(game, bottomTeam)" [innerHTML]="utils.getPlayer(game, bottomTeam, substitution.pIn)"></span>
+                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, bottomTeam)" [style.color]="utils.getTeamTextColor(game, bottomTeam)" [innerHTML]="utils.getPlayer(game, bottomTeam, substitution.playerIn)"></span>
                       </td>
                       <td><img class="ladder-icon-item" src="../../assets/ic_sub.png" alt="sub"></td>
                       <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, bottomTeam)" [style.color]="utils.getTeamTextColor(game, bottomTeam)" [innerHTML]="utils.getPlayer(game, bottomTeam, substitution.pOut)"></span>
+                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, bottomTeam)" [style.color]="utils.getTeamTextColor(game, bottomTeam)" [innerHTML]="utils.getPlayer(game, bottomTeam, substitution.playerOut)"></span>
                       </td>
                     </tr>
                   </tbody>

@@ -1,22 +1,30 @@
+import { User } from './user';
+import { UUID } from 'angular2-uuid';
+import { Player } from './player';
+
 export class Team {
-  userId:      string;
+  id:          string;
+  createdBy:   string;
+  createdAt:   number;
+  updatedAt:   number;
   name:        string;
   kind:        string;
-  date:        number;
   gender:      string;
   color:       string;
   liberoColor: string;
-  players:     number[];
-  liberos:     number[];
+  players:     Player[];
+  liberos:     Player[];
   captain:     number;
 
-  public static createTeam(kind: string): Team {
+  public static createTeam(user: User, kind: string): Team {
     const team = new Team();
 
-    team.userId = '';
+    team.id = UUID.UUID();
+    team.createdBy = user.id;
+    team.createdAt = new Date().getTime();
+    team.updatedAt = new Date().getTime();
     team.name = '';
     team.kind = kind;
-    team.date = new Date().getTime();
     team.gender = 'MIXED';
     team.color = '#034694';
     team.liberoColor = '#bc0019';
@@ -25,27 +33,11 @@ export class Team {
     team.captain = 1;
 
     if (team.kind === 'BEACH') {
-      team.players.push(1);
-      team.players.push(2);
+      team.players.push(new Player(1, ""));
+      team.players.push(new Player(2, ""));
     }
 
     return team;
   }
 
-  public static copyTeam(team: Team): Team {
-    const copy = new Team();
-
-    copy.userId = team.userId;
-    copy.name = team.name;
-    copy.kind = team.kind;
-    copy.date = team.date;
-    copy.gender = team.gender;
-    copy.color = team.color;
-    copy.liberoColor = team.liberoColor;
-    copy.players = Object.assign([], team.players);
-    copy.liberos = Object.assign([], team.liberos);
-    copy.captain = team.captain;
-
-    return copy;
-  }
 }

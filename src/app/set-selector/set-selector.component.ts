@@ -55,13 +55,13 @@ export class SetSelectorComponent implements OnInit, OnChanges {
   }
 
   getScore(setIndex: number): string {
-    const hPoints = this.game.sets[setIndex].hPoints;
-    const gPoints = this.game.sets[setIndex].gPoints;
+    const homePoints = this.game.sets[setIndex].homePoints;
+    const guestPoints = this.game.sets[setIndex].guestPoints;
 
     if (TeamType.Home === this.leftTeam) {
-      return hPoints + '-' + gPoints;
+      return homePoints + '-' + guestPoints;
     } else {
-      return gPoints + '-' + hPoints;
+      return guestPoints + '-' + homePoints;
     }
   }
 

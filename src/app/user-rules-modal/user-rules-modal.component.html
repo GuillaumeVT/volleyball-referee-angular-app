@@ -10,10 +10,10 @@
   <form class="needs-validation" (submit)="onSubmitForm()" novalidate autocomplete="off">
     <div class="row mb-3">
       <div class="col-12 col-sm-10">
-        <label [ngClass]="invalidName ? 'vbr-error-label' : ''" class="vbr-text" for="name">Rules name</label>
-        <input type="text" [ngClass]="invalidName ? 'vbr-error-input' : ''" class="vbr-text form-control"
+        <label [ngClass]="undefinedName ? 'vbr-error-label' : ''" class="vbr-text" for="name">Rules name</label>
+        <input type="text" [ngClass]="undefinedName ? 'vbr-error-input' : ''" class="vbr-text form-control"
           name="name" id="name" [(ngModel)]="rules.name" placeholder="" required [attr.disabled]="isEditingDisabledKey()"/>
-        <div class="vbr-error-feedback" *ngIf="invalidName">
+        <div class="vbr-error-feedback" *ngIf="undefinedName">
           Please enter a name for the rules.
         </div>
       </div>
@@ -185,11 +185,11 @@
       </div>
     </div>
 
-    <hr class="mb-3"/>
+    <hr class="mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'"/>
 
-    <h5 class="vbr-text">Indoor Volleyball</h5>
+    <h5 class="vbr-text" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">Indoor Volleyball</h5>
 
-    <div class="row mb-3">
+    <div class="row mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="substitutions-limitation">Substitutions limitation</label>
         <select class="custom-select vbr-text"
@@ -221,7 +221,7 @@
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="substitutions-number">Number of team substitutions per set</label>
         <select class="custom-select vbr-text"
@@ -237,7 +237,7 @@
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="consecutive-serves">Limit of consecutive serves per player</label>
         <select class="custom-select vbr-text"
@@ -251,17 +251,17 @@
       </div>
     </div>
 
-    <hr class="mb-3"/>
+    <hr class="mb-3" *ngIf="rules.kind === 'BEACH'"/>
 
-    <h5 class="vbr-text">Beach Volleyball</h5>
+    <h5 class="vbr-text" *ngIf="rules.kind === 'BEACH'">Beach Volleyball</h5>
 
-    <div class="mb-2 custom-control custom-checkbox">
+    <div class="mb-2 custom-control custom-checkbox" *ngIf="rules.kind === 'BEACH'">
       <input type="checkbox" class="custom-control-input"
         name="beach-court-switches" id="beach-court-switches" [(ngModel)]="rules.beachCourtSwitches" [attr.disabled]="isEditingDisabled()"/>
       <label class="custom-control-label vbr-text" for="beach-court-switches">Court switches</label>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3" *ngIf="rules.kind === 'BEACH'">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="beach-switch-court-frequency">Court switch period in normal set</label>
         <select class="custom-select vbr-text"
@@ -276,7 +276,7 @@
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3" *ngIf="rules.kind === 'BEACH'">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="beach-switch-court-frequency-tie-break">Court switch period in tie break</label>
         <select class="custom-select vbr-text"

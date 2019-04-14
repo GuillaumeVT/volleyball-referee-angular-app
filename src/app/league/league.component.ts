@@ -4,10 +4,9 @@ import { Title } from '@angular/platform-browser';
 import { timer } from "rxjs";
 import { takeWhile } from 'rxjs/operators';
 import { League } from '../model/league';
-import { GameDescription } from '../model/gamedescription';
-import { Team } from '../model/team';
-import { GameService } from '../game.service';
-import { UserService } from '../user.service';
+import { GameDescription } from '../model/game-description';
+import { TeamDescription } from '../model/team-description';
+import { PublicService } from '../public.service';
 import { Utils } from '../utils/utils';
 
 @Component({
@@ -17,36 +16,36 @@ import { Utils } from '../utils/utils';
 })
 export class LeagueComponent implements OnInit, OnDestroy {
 
-  date:          number;
+  leagueId:      string;
   league:        League;
   selectedIndex: number;
   liveGames:     GameDescription[];
   next10Games:   GameDescription[];
   last10Games:   GameDescription[];
-  selectedTeam:  Team;
-  allTeams:      Team;
-  teams:         Team[];
+  selectedTeam:  TeamDescription;
+  allTeams:      TeamDescription;
+  teams:         TeamDescription[];
   autoRefresh:   boolean;
 
-  constructor(private titleService: Title, private route: ActivatedRoute, private router: Router, private gameService: GameService, private userService: UserService, private utils: Utils) {
-    this.titleService.setTitle('Volleyball Referee - League');
+  constructor(private titleService: Title, private route: ActivatedRoute, private router: Router, private publicService: PublicService, private utils: Utils) {
+    this.titleService.setTitle('VBR - View League');
     this.selectedIndex = 0;
     this.liveGames = [];
     this.next10Games = [];
     this.last10Games = [];
-    this.allTeams = new Team();
-    this.allTeams.name = 'All teams';
+    this.allTeams = new TeamDescription();
+    this.allTeams.id = 'All teams';
+    this.allTeams.name = this.allTeams.id;
     this.teams = [];
     this.selectedTeam = this.allTeams;
     this.autoRefresh = true;
   }
 
   ngOnInit() {
-    const idStr = this.route.snapshot.paramMap.get('date');
+    this.leagueId = this.route.snapshot.paramMap.get('leagueId');
 
-    if (idStr) {
-      this.date = Number(idStr);
-      this.userService.getLeaguePublic(this.date).subscribe(league => this.onLeagueUpdated(league));
+    if (this.leagueId) {
+      this.publicService.getLeague(this.leagueId).subscribe(league => this.onLeagueUpdated(league));
     }
   }
 
@@ -61,13 +60,13 @@ export class LeagueComponent implements OnInit, OnDestroy {
   }
 
   refreshGames(): void {
-    this.gameService.searchLiveGamesInLeague(this.league.date).subscribe(games => this.liveGames = games, error => this.liveGames = []);
-    this.gameService.searchNext10GamesInLeague(this.league.date).subscribe(games => this.next10Games = games, error => this.next10Games = []);
-    this.gameService.searchLast10GamesInLeague(this.league.date).subscribe(games => this.last10Games = games, error => this.last10Games = []);
+    this.publicService.listLiveGamesInLeague(this.leagueId).subscribe(games => this.liveGames = games, error => this.liveGames = []);
+    this.publicService.listNext10GamesInLeague(this.leagueId).subscribe(games => this.next10Games = games, error => this.next10Games = []);
+    this.publicService.listLast10GamesInLeague(this.leagueId).subscribe(games => this.last10Games = games, error => this.last10Games = []);
   }
 
   refreshTeams(): void {
-    this.userService.getTeamsInLeaguePublic(this.league.date).subscribe(teams => this.teams = this.utils.sortTeams(teams), error => this.teams = []);
+    this.publicService.listTeamsOfLeague(this.leagueId).subscribe(teams => this.teams = teams, error => this.teams = []);
   }
 
   getLinkClass(index: number): string {

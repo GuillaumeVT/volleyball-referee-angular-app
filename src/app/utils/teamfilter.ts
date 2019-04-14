@@ -1,5 +1,4 @@
-import { Team } from '../model/team';
-import { Utils } from '../utils/utils';
+import { TeamDescription } from '../model/team-description';
 
 export class TeamFilter {
 
@@ -11,10 +10,8 @@ export class TeamFilter {
   isLadiesChecked:    boolean;
   isGentsChecked:     boolean;
 
-  teams:         Team[];
-  filteredTeams: Team[];
-
-  utils: Utils;
+  teams:         TeamDescription[];
+  filteredTeams: TeamDescription[];
 
   constructor() {
     this.textFilter = '';
@@ -24,11 +21,10 @@ export class TeamFilter {
     this.isMixedChecked = true;
     this.isLadiesChecked = true;
     this.isGentsChecked = true;
-    this.utils = new Utils();
   }
 
-  updateTeams(teams: Team[]): void {
-    this.teams = this.utils.sortTeams(teams);
+  updateTeams(teams: TeamDescription[]): void {
+    this.teams = teams;
     this.filterTeams();
   }
 

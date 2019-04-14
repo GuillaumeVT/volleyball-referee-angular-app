@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { ToastrModule } from 'ngx-toastr';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { AuthService, AuthServiceConfig } from './auth.service';
 import { TokenInterceptor } from './token.interceptor';
@@ -15,14 +15,11 @@ import { GoogleLoginProvider } from './login/providers/google-login-provider';
 import { FacebookLoginProvider } from './login/providers/facebook-login-provider';
 
 import { AppComponent } from './app.component';
-import { GameService } from './game.service';
-import { UserService } from './user.service';
 import { Utils } from './utils/utils';
-import { SearchResultComponent } from './search-result/search-result.component';
+import { SearchResultTokenComponent } from './search-result-token/search-result-token.component';
 import { SearchResultLiveComponent } from './search-result-live/search-result-live.component';
 import { SearchResultDateComponent } from './search-result-date/search-result-date.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SearchComponent } from './search/search.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { GameListComponent } from './game-list/game-list.component';
@@ -37,7 +34,7 @@ import { IndoorCourtComponent } from './indoor-court/indoor-court.component';
 import { LadderComponent } from './ladder/ladder.component';
 import { GameRefreshComponent } from './game-refresh/game-refresh.component';
 import { LinksBarComponent } from './links-bar/links-bar.component';
-import { GameStatisticsComponent } from './game-statistics/game-statistics.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 import { Indoor4x4GameComponent } from './indoor4x4-game/indoor4x4-game.component';
 import { Indoor4x4CourtComponent } from './indoor4x4-court/indoor4x4-court.component';
 import { SetSubstitutionsComponent } from './set-substitutions/set-substitutions.component';
@@ -47,7 +44,6 @@ import { GameSanctionsComponent } from './game-sanctions/game-sanctions.componen
 import { SetLineupsComponent } from './set-lineups/set-lineups.component';
 import { TimeGameComponent } from './time-game/time-game.component';
 import { TimeGameSummaryComponent } from './time-game-summary/time-game-summary.component';
-import { UserComponent } from './user/user.component';
 import { GameComponent } from './game/game.component';
 import { UserRulesComponent } from './user-rules/user-rules.component';
 import { UserTeamsComponent } from './user-teams/user-teams.component';
@@ -58,11 +54,16 @@ import { UserGamesComponent } from './user-games/user-games.component';
 import { UserGameModalComponent } from './user-game-modal/user-game-modal.component';
 import { UserNavComponent } from './user-nav/user-nav.component';
 import { UserLeaguesComponent } from './user-leagues/user-leagues.component';
-import { UserLeaguesModalComponent } from './user-leagues-modal/user-leagues-modal.component';
+import { UserLeagueModalComponent } from './user-league-modal/user-league-modal.component';
 import { LeagueComponent } from './league/league.component';
 import { PrivatePolicyComponent } from './private-policy/private-policy.component';
 import { RoleSelectorComponent } from './role-selector/role-selector.component';
 import { ColorPickerModalComponent } from './color-picker-modal/color-picker-modal.component';
+import { HomeComponent } from './home/home.component';
+import { SearchModalComponent } from './search-modal/search-modal.component';
+import { UserColleaguesComponent } from './user-colleagues/user-colleagues.component';
+import { UserColleagueModalComponent } from './user-colleague-modal/user-colleague-modal.component';
+import { ColleagueRequestItemComponent } from './colleague-request-item/colleague-request-item.component';
 
 export function configFactory(config: AuthServiceConfig) {
   return config;
@@ -79,10 +80,9 @@ export function getAuthServiceConfigs() {
 @NgModule({
   declarations: [
     AppComponent,
-    SearchResultComponent,
+    SearchResultTokenComponent,
     SearchResultLiveComponent,
     SearchResultDateComponent,
-    SearchComponent,
     PageNotFoundComponent,
     NavigationBarComponent,
     GameListComponent,
@@ -97,7 +97,7 @@ export function getAuthServiceConfigs() {
     LadderComponent,
     GameRefreshComponent,
     LinksBarComponent,
-    GameStatisticsComponent,
+    StatisticsComponent,
     Indoor4x4GameComponent,
     Indoor4x4CourtComponent,
     SetSubstitutionsComponent,
@@ -107,7 +107,6 @@ export function getAuthServiceConfigs() {
     SetLineupsComponent,
     TimeGameComponent,
     TimeGameSummaryComponent,
-    UserComponent,
     GameComponent,
     UserRulesComponent,
     UserTeamsComponent,
@@ -118,11 +117,16 @@ export function getAuthServiceConfigs() {
     UserGameModalComponent,
     UserNavComponent,
     UserLeaguesComponent,
-    UserLeaguesModalComponent,
+    UserLeagueModalComponent,
     LeagueComponent,
     PrivatePolicyComponent,
     RoleSelectorComponent,
     ColorPickerModalComponent,
+    HomeComponent,
+    SearchModalComponent,
+    UserColleaguesComponent,
+    UserColleagueModalComponent,
+    ColleagueRequestItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,11 +137,10 @@ export function getAuthServiceConfigs() {
     FormsModule,
     ToastrModule.forRoot(),
     OwlDateTimeModule,
-    OwlNativeDateTimeModule
+    OwlNativeDateTimeModule,
+    NgxChartsModule
   ],
   providers: [
-    GameService,
-    UserService,
     AuthService,
     Utils,
     DatePipe,
@@ -149,9 +152,11 @@ export function getAuthServiceConfigs() {
     UserRulesModalComponent,
     UserTeamModalComponent,
     UserGameModalComponent,
-    UserLeaguesModalComponent,
+    UserLeagueModalComponent,
     OkCancelModalComponent,
-    ColorPickerModalComponent
+    ColorPickerModalComponent,
+    SearchModalComponent,
+    UserColleagueModalComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 import { Game } from '../model/game';
-import { Player } from '../model/player';
+import { Court } from '../model/court';
 import { TeamType } from '../model/teamtype';
 import { Utils } from '../utils/utils';
 import { Component, OnInit, Input } from '@angular/core';
@@ -24,23 +24,38 @@ export class SetLineupsComponent implements OnInit {
   getPlayerAt(teamType: TeamType, position: number): string {
     const set = this.game.sets[this.setIndex];
 
-    var players: Player[];
+    var players: Court;
     var captain;
 
     if (TeamType.Home === teamType) {
-      players = set.hStartingPlayers;
-      captain = this.game.hTeam.captain;
+      players = set.homeStartingPlayers;
+      captain = this.game.homeTeam.captain;
     } else {
-      players = set.gStartingPlayers;
-      captain = this.game.gTeam.captain;
+      players = set.guestStartingPlayers;
+      captain = this.game.guestTeam.captain;
     }
 
     var playerNumber = 0;
 
-    for (let player of players) {
-      if (player.pos === position) {
-        playerNumber = player.num;
-      }
+    switch (position) {
+      case 1:
+      playerNumber = players.p1;
+      break;
+      case 2:
+      playerNumber = players.p2;
+      break;
+      case 3:
+      playerNumber = players.p3;
+      break;
+      case 4:
+      playerNumber = players.p4;
+      break;
+      case 5:
+      playerNumber = players.p5;
+      break;
+      case 6:
+      playerNumber = players.p6;
+      break;
     }
 
     var playerNumberStr = String(playerNumber);
