@@ -24,7 +24,6 @@
 }
 
 .btn-facebook:hover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	filter: brightness(120%);
 }
 
@@ -35,6 +34,5 @@
 }
 
 .btn-google:hover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	filter: brightness(120%);
 }

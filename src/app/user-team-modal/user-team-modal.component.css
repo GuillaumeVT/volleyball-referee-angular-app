@@ -34,14 +34,6 @@
   border-color: #1f4294;
 }
 
-.color-input {
-  background-color: inherit;
-}
-
-.color-input:hover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-
 .div-players {
   width: 100%;
   display: flex;
@@ -59,7 +51,7 @@
 }
 
 .form-button:hover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  filter: brightness(120%);
 }
 
 .player-button {
@@ -68,6 +60,5 @@
 }
 
 .player-button:hover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   filter: brightness(120%);
 }

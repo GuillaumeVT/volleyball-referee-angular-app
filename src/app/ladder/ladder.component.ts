@@ -128,7 +128,7 @@ export class LadderComponent implements OnInit, OnChanges {
     if (ladderItem.teamType === teamType) {
       return this.utils.getTeamTextColor(this.game, teamType);
     } else {
-      return '#f3f3f3';
+      return '#ffffff';
     }
   }
 
@@ -136,7 +136,7 @@ export class LadderComponent implements OnInit, OnChanges {
     if (ladderItem.teamType === teamType) {
       return this.utils.getTeamBackgroundColor(this.game, teamType);
     } else {
-      return '#f3f3f3';
+      return '#ffffff';
     }
   }
 
