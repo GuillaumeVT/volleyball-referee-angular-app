@@ -1,9 +1,9 @@
 <div *ngIf="friendRequest" class="card div-card my-3 py-2">
   <div class="row align-items-center m-1">
-    <div class="vbr-text col-12 col-sm-8 p-1 text-left">
+    <div class="vbr-text col-12 col-sm-7 p-1 text-left">
       You received a colleague request from {{friendRequest.senderPseudo}}
     </div>
-    <div class="vbr-text col-12 col-sm-4 p-1 text-right">
+    <div class="vbr-text col-12 col-sm-5 p-1 text-right">
       <div class="btn-group">
         <button type="button" class="btn vbr-button-inverted" (click)="acceptColleague(friendRequest)">
           <i class="fa fa-plus"></i><span class="icon-text">&nbsp;&nbsp;Accept</span>

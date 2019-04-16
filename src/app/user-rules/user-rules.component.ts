@@ -1,9 +1,10 @@
-import { Component, Injector } from '@angular/core';
-import { AbstractUserDataComponent } from '../user/abstract-user-data.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Rules } from '../model/rules';
 import { RulesDescription } from '../model/rules-description';
 import { RulesFilter } from '../utils/rulesfilter';
 import { CrudType } from '../model/crudtype';
+import { User } from '../model/user';
+import { UserService } from '../user.service';
 import { RulesService } from '../rules.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -11,24 +12,36 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserRulesModalComponent } from '../user-rules-modal/user-rules-modal.component';
 import { OkCancelModalComponent } from '../ok-cancel-modal/ok-cancel-modal.component';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-rules',
   templateUrl: './user-rules.component.html',
   styleUrls: ['./user-rules.component.css']
 })
-export class UserRulesComponent extends AbstractUserDataComponent {
+export class UserRulesComponent implements OnInit, OnDestroy {
 
+  user:        User;
   rulesfilter: RulesFilter;
 
-  constructor(injector: Injector, private titleService: Title, private rulesService: RulesService, private modalService: NgbModal, private toastr: ToastrService) {
-    super(injector);
+  private subscription : Subscription = new Subscription();
+
+  constructor(private titleService: Title, private userService: UserService, private rulesService: RulesService, private modalService: NgbModal, private toastr: ToastrService) {
     this.titleService.setTitle('VBR - My Rules');
     this.rulesfilter = new RulesFilter();
   }
 
-  refreshData(): void {
-    this.refreshRules();
+  ngOnInit() {
+    this.subscription.add(this.userService.userState.subscribe(user => {
+      this.user = user;
+      if (this.user) {
+        this.refreshRules();
+      }
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   refreshRules(): void {
@@ -91,6 +104,10 @@ export class UserRulesComponent extends AbstractUserDataComponent {
 
   onRulesDeletionError(): void {
     this.toastr.error('Rules could not be deleted. Are they used in a scheduled game?', '', { timeOut: 5000, positionClass: 'toast-top-left' });
+  }
+
+  getPageNumber(): number {
+    return 4;
   }
 
 }

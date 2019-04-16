@@ -1,5 +1,4 @@
-import { Component, Injector } from '@angular/core';
-import { AbstractUserDataComponent } from '../user/abstract-user-data.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GameDescription } from '../model/game-description';
 import { RulesDescription } from '../model/rules-description';
 import { TeamDescription } from '../model/team-description';
@@ -7,6 +6,8 @@ import { League } from '../model/league';
 import { CrudType } from '../model/crudtype';
 import { GameFilter } from '../utils/gamefilter';
 import { Utils } from '../utils/utils';
+import { User } from '../model/user';
+import { UserService } from '../user.service';
 import { GameService } from '../game.service';
 import { RulesService } from '../rules.service';
 import { TeamService } from '../team.service';
@@ -21,30 +22,41 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { saveAs }from 'file-saver';
-import { forkJoin } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-user-games',
   templateUrl: './user-games.component.html',
   styleUrls: ['./user-games.component.css']
 })
-export class UserGamesComponent extends AbstractUserDataComponent {
+export class UserGamesComponent implements OnInit, OnDestroy {
 
+  user:             User;
   gameFilter:       GameFilter;
   selectedLeagueId: string;
   selectedLeague:   League;
 
-  constructor(injector: Injector, private titleService: Title, private route: ActivatedRoute, private datePipe: DatePipe,
+  private subscription : Subscription = new Subscription();
+
+  constructor(private titleService: Title, private route: ActivatedRoute, private datePipe: DatePipe, private userService: UserService,
     private gameService: GameService, private rulesService: RulesService, private teamService: TeamService, private leagueService: LeagueService,
     private publicService: PublicService, private modalService: NgbModal, private utils: Utils, private toastr: ToastrService) {
-    super(injector);
     this.titleService.setTitle('VBR - My Games');
     this.gameFilter = new GameFilter();
   }
 
-  refreshData(): void {
-    this.selectedLeagueId = this.route.snapshot.paramMap.get('leagueId');
-    this.refreshGames();
+  ngOnInit() {
+    this.subscription.add(this.userService.userState.subscribe(user => {
+      this.user = user;
+      if (this.user) {
+        this.selectedLeagueId = this.route.snapshot.paramMap.get('leagueId');
+        this.refreshGames();
+      }
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   refreshGames(): void {
@@ -175,5 +187,9 @@ export class UserGamesComponent extends AbstractUserDataComponent {
     const filename = game.homeTeamName + '_' + game.guestTeamName + '_' + dateStr + '.html';
     const blob = new Blob([response.body], { type: 'html' });
     saveAs(response, filename);
+  }
+
+  getPageNumber(): number {
+    return 2;
   }
 }

@@ -14,10 +14,10 @@
     <span *ngIf="gameDescription.status === 'SCHEDULED'">{{gameDescription.homeTeamName}} - {{gameDescription.guestTeamName}}</span>
   </a>
   <div class="vbr-text mt-3" *ngIf="showLeague() || showDivision() || showReferee()">
-    <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="league-link">{{gameDescription.leagueName}}</a>
+    <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="item-link">{{gameDescription.leagueName}}</a>
     <span *ngIf="showLeague() && showDivision()" class="mx-1">/</span>
     <span *ngIf="showDivision()">{{gameDescription.divisionName}}</span>
     <br *ngIf="(showLeague() || showDivision()) && showReferee()" />
-    <span *ngIf="showReferee()"><i class="fa fa-user mr-1"></i>by {{gameDescription.refereeName}}</span>
+    <a [routerLink]="getTokenUrl()" *ngIf="showReferee()" class="item-link"><i class="fa fa-user mr-1"></i>by {{gameDescription.refereeName}}</a>
   </div>
 </div>

@@ -21,7 +21,6 @@ import { SearchResultLiveComponent } from './search-result-live/search-result-li
 import { SearchResultDateComponent } from './search-result-date/search-result-date.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameListItemComponent } from './game-list-item/game-list-item.component';
 import { BeachGameComponent } from './beach-game/beach-game.component';
@@ -52,7 +51,6 @@ import { OkCancelModalComponent } from './ok-cancel-modal/ok-cancel-modal.compon
 import { UserTeamModalComponent } from './user-team-modal/user-team-modal.component';
 import { UserGamesComponent } from './user-games/user-games.component';
 import { UserGameModalComponent } from './user-game-modal/user-game-modal.component';
-import { UserNavComponent } from './user-nav/user-nav.component';
 import { UserLeaguesComponent } from './user-leagues/user-leagues.component';
 import { UserLeagueModalComponent } from './user-league-modal/user-league-modal.component';
 import { LeagueComponent } from './league/league.component';
@@ -84,7 +82,6 @@ export function getAuthServiceConfigs() {
     SearchResultLiveComponent,
     SearchResultDateComponent,
     PageNotFoundComponent,
-    NavigationBarComponent,
     GameListComponent,
     GameListItemComponent,
     BeachGameComponent,
@@ -115,7 +112,6 @@ export function getAuthServiceConfigs() {
     OkCancelModalComponent,
     UserGamesComponent,
     UserGameModalComponent,
-    UserNavComponent,
     UserLeaguesComponent,
     UserLeagueModalComponent,
     LeagueComponent,

@@ -25,11 +25,11 @@
   text-decoration: underline;
 }
 
-.league-link {
+.item-link {
   font-weight: normal;
   color: #1f1f1f;
 }
 
-.league-link:hover {
+.item-link:hover {
   text-decoration: underline;
 }

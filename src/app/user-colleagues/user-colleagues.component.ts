@@ -1,35 +1,47 @@
-import { Component, Injector } from '@angular/core';
-import { AbstractUserDataComponent } from '../user/abstract-user-data.component';
-import { Friend } from '../model/user';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { User, Friend } from '../model/user';
 import { FriendRequest } from '../model/friend-request';
+import { UserService } from '../user.service';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserColleagueModalComponent } from '../user-colleague-modal/user-colleague-modal.component';
 import { OkCancelModalComponent } from '../ok-cancel-modal/ok-cancel-modal.component';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-colleagues',
   templateUrl: './user-colleagues.component.html',
   styleUrls: ['./user-colleagues.component.css']
 })
-export class UserColleaguesComponent extends AbstractUserDataComponent {
+export class UserColleaguesComponent implements OnInit, OnDestroy {
 
+  user:                     User;
   friendRequestsReceivedBy: FriendRequest[];
 
-  constructor(injector: Injector, private titleService: Title, private modalService: NgbModal, private toastr: ToastrService) {
-    super(injector);
+  private subscription : Subscription = new Subscription();
+
+  constructor(private titleService: Title, private userService: UserService, private modalService: NgbModal, private toastr: ToastrService) {
     this.titleService.setTitle('VBR - My Colleagues');
     this.friendRequestsReceivedBy = [];
   }
 
-  refreshData(): void {
-    this.refreshFriends();
-    this.refreshFriendRequestsReceivedBy();
+  ngOnInit() {
+    this.subscription.add(this.userService.userState.subscribe(user => {
+      this.user = user;
+      if (this.user) {
+        this.refreshUser();
+        this.refreshFriendRequestsReceivedBy();
+      }
+    }));
   }
 
-  refreshFriends(): void {
-    this.userService.getUser().subscribe(user => this.user = user, error => this.user = null);
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  refreshUser(): void {
+    this.userService.refreshUser();
   }
 
   refreshFriendRequestsReceivedBy(): void {
@@ -54,12 +66,16 @@ export class UserColleaguesComponent extends AbstractUserDataComponent {
   }
 
   onColleagueRemoved(pseudo: string): void {
-    this.refreshFriends();
+    this.refreshUser();
     this.toastr.success(`${pseudo} was successfully removed from your colleagues`, '', { timeOut: 2500, positionClass: 'toast-top-left' });
   }
 
   onColleagueRemovalError(pseudo: string): void {
     this.toastr.error(`${pseudo} could not be removed from your colleagues`, '', { timeOut: 5000, positionClass: 'toast-top-left' });
+  }
+
+  getPageNumber(): number {
+    return 5;
   }
 
 }

@@ -1,9 +1,11 @@
-import { Component, Injector } from '@angular/core';
-import { AbstractUserDataComponent } from '../user/abstract-user-data.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { League } from '../model/league';
 import { LeagueFilter } from '../utils/leaguefilter';
+import { User } from '../model/user';
+import { UserService } from '../user.service';
 import { LeagueService } from '../league.service';
 import { GameService } from '../game.service';
+import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserLeagueModalComponent } from '../user-league-modal/user-league-modal.component';
@@ -12,27 +14,39 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { saveAs }from 'file-saver';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-leagues',
   templateUrl: './user-leagues.component.html',
   styleUrls: ['./user-leagues.component.css']
 })
-export class UserLeaguesComponent extends AbstractUserDataComponent {
+export class UserLeaguesComponent implements OnInit, OnDestroy {
 
+  user:         User;
   leagueFilter: LeagueFilter;
   countsMap:    Map<string,number>;
 
-  constructor(injector: Injector, private titleService: Title, private leagueService: LeagueService, private gameService: GameService,
-    private modalService: NgbModal, private toastr: ToastrService, private datePipe: DatePipe) {
-    super(injector);
+  private subscription : Subscription = new Subscription();
+
+  constructor(private titleService: Title, private userService: UserService, private leagueService: LeagueService, private gameService: GameService,
+    private modalService: NgbModal, private toastr: ToastrService, private datePipe: DatePipe, private router: Router) {
     this.titleService.setTitle('VBR - My Leagues');
     this.leagueFilter = new LeagueFilter();
     this.countsMap = new Map();
   }
 
-  refreshData(): void {
-    this.refreshLeagues();
+  ngOnInit() {
+    this.subscription.add(this.userService.userState.subscribe(user => {
+      this.user = user;
+      if (this.user) {
+        this.refreshLeagues();
+      }
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   refreshLeagues(): void {
@@ -100,5 +114,9 @@ export class UserLeaguesComponent extends AbstractUserDataComponent {
     const filename = league.name + '_' + divisionName + '_' + dateStr + '.csv';
     const blob = new Blob([response.body], { type: 'csv' });
     saveAs(response, filename);
+  }
+
+  getPageNumber(): number {
+    return 1;
   }
 }

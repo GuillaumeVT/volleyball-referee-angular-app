@@ -14,11 +14,13 @@
                   <tbody>
                     <tr *ngFor="let substitution of getSubstitutions(ladderItem, topTeam)">
                       <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, topTeam)" [style.color]="utils.getTeamTextColor(game, topTeam)" [innerHTML]="utils.getPlayer(game, topTeam, substitution.playerIn)"></span>
+                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, topTeam)" [style.color]="utils.getTeamTextColor(game, topTeam)"
+                          [style.border-color]="utils.getTeamBorderColor(game, topTeam)" [innerHTML]="utils.getPlayer(game, topTeam, substitution.playerIn)"></span>
                       </td>
                       <td><img class="ladder-icon-item" src="../../assets/ic_sub.png" alt="sub"></td>
                       <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, topTeam)" [style.color]="utils.getTeamTextColor(game, topTeam)" [innerHTML]="utils.getPlayer(game, topTeam, substitution.playerOut)"></span>
+                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, topTeam)" [style.color]="utils.getTeamTextColor(game, topTeam)"
+                          [style.border-color]="utils.getTeamBorderColor(game, topTeam)" [innerHTML]="utils.getPlayer(game, topTeam, substitution.playerOut)"></span>
                       </td>
                     </tr>
                   </tbody>
@@ -28,7 +30,8 @@
                     <tr *ngFor="let sanction of getSanctions(ladderItem, topTeam)">
                       <td><img class="ladder-icon-item mr-1" [src]="utils.getSanctionIcon(sanction)" alt="card"></td>
                       <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getPlayerBackgroundColor(game, topTeam, sanction.num)" [style.color]="utils.getPlayerTextColor(game, topTeam, sanction.num)" [innerHTML]="utils.getPlayerForSanction(game, topTeam, sanction.num)"></span>
+                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getPlayerBackgroundColor(game, topTeam, sanction.num)" [style.color]="utils.getPlayerTextColor(game, topTeam, sanction.num)"
+                          [style.border-color]="utils.getPlayerBorderColor(game, topTeam, sanction.num)" [innerHTML]="utils.getPlayerForSanction(game, topTeam, sanction.num)"></span>
                       </td>
                     </tr>
                   </tbody>
@@ -40,12 +43,14 @@
         </tr>
         <tr>
           <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
-            <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, topTeam)" [style.color]="utils.getTeamTextColor(game, topTeam)" [innerHTML]="getTeamScore(ladderItem, topTeam)"></span>
+            <span class="ladder-item badge point-badge" [style.background-color]="getTeamBackgroundColor(ladderItem, topTeam)" [style.color]="getTeamTextColor(ladderItem, topTeam)"
+              [style.border-color]="getTeamBorderColor(ladderItem, topTeam)" [innerHTML]="getTeamScore(ladderItem, topTeam)"></span>
           </td>
         </tr>
         <tr>
           <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
-            <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, bottomTeam)" [style.color]="utils.getTeamTextColor(game, bottomTeam)" [innerHTML]="getTeamScore(ladderItem, bottomTeam)"></span>
+            <span class="ladder-item badge point-badge" [style.background-color]="getTeamBackgroundColor(ladderItem, bottomTeam)" [style.color]="getTeamTextColor(ladderItem, bottomTeam)"
+              [style.border-color]="getTeamBorderColor(ladderItem, bottomTeam)" [innerHTML]="getTeamScore(ladderItem, bottomTeam)"></span>
           </td>
         </tr>
         <tr>
@@ -59,11 +64,13 @@
                   <tbody>
                     <tr *ngFor="let substitution of getSubstitutions(ladderItem, bottomTeam)">
                       <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, bottomTeam)" [style.color]="utils.getTeamTextColor(game, bottomTeam)" [innerHTML]="utils.getPlayer(game, bottomTeam, substitution.playerIn)"></span>
+                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, bottomTeam)" [style.color]="utils.getTeamTextColor(game, bottomTeam)"
+                          [style.border-color]="utils.getTeamBorderColor(game, bottomTeam)" [innerHTML]="utils.getPlayer(game, bottomTeam, substitution.playerIn)"></span>
                       </td>
                       <td><img class="ladder-icon-item" src="../../assets/ic_sub.png" alt="sub"></td>
                       <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, bottomTeam)" [style.color]="utils.getTeamTextColor(game, bottomTeam)" [innerHTML]="utils.getPlayer(game, bottomTeam, substitution.playerOut)"></span>
+                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getTeamBackgroundColor(game, bottomTeam)" [style.color]="utils.getTeamTextColor(game, bottomTeam)"
+                          [style.border-color]="utils.getTeamBorderColor(game, bottomTeam)" [innerHTML]="utils.getPlayer(game, bottomTeam, substitution.playerOut)"></span>
                       </td>
                     </tr>
                   </tbody>
@@ -73,7 +80,8 @@
                     <tr *ngFor="let sanction of getSanctions(ladderItem, bottomTeam)">
                       <td><img class="ladder-icon-item" [src]="utils.getSanctionIcon(sanction)" alt="card"></td>
                       <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getPlayerBackgroundColor(game, bottomTeam, sanction.num)" [style.color]="utils.getPlayerTextColor(game, bottomTeam, sanction.num)" [innerHTML]="utils.getPlayerForSanction(game, bottomTeam, sanction.num)"></span>
+                        <span class="ladder-item badge point-badge" [style.background-color]="utils.getPlayerBackgroundColor(game, bottomTeam, sanction.num)" [style.color]="utils.getPlayerTextColor(game, bottomTeam, sanction.num)"
+                          [style.border-color]="utils.getPlayerBorderColor(game, rightTeam, sanction.num)" [innerHTML]="utils.getPlayerForSanction(game, bottomTeam, sanction.num)"></span>
                       </td>
                     </tr>
                   </tbody>

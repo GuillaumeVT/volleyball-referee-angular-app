@@ -45,15 +45,17 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
     for (index = 0; index < this.positions; index++) {
       var position = index + 1;
       var player = this.getPlayerAt(position, teamType);
-      var color, backgroundColor;
+      var color, backgroundColor, borderColor;
 
       if (this.utils.isLibero(this.game, teamType, player)) {
         color = this.utils.getLiberoTextColor(this.game, teamType);
         backgroundColor = this.utils.getLiberoBackgroundColor(this.game, teamType);
+        borderColor = this.utils.getBorderColor(backgroundColor);
       }
       else {
         color = this.utils.getTeamTextColor(this.game, teamType);
         backgroundColor = this.utils.getTeamBackgroundColor(this.game, teamType);
+        borderColor = this.utils.getBorderColor(backgroundColor);
       }
 
       var actingCaptain;
@@ -65,10 +67,9 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
         actingCaptain = set.guestCaptain;
       }
 
-      var playerItem = new IndoorPlayerItem(player, color, backgroundColor, actingCaptain === player);
+      var playerItem = new IndoorPlayerItem(player, color, backgroundColor, borderColor, actingCaptain === player);
       playerItems.push(playerItem);
     }
-
     return playerItems;
   }
 
@@ -95,6 +96,10 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
 
   getPlayerBackColor(position: number, teamType: TeamType): string {
     return this.getPlayerItem(position, teamType).backgroundColor;
+  }
+
+  getPlayerBorderColor(position: number, teamType: TeamType): string {
+    return this.getPlayerItem(position, teamType).borderColor;
   }
 
   getPlayerAt(position: number, teamType: TeamType) {

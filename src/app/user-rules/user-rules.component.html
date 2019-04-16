@@ -1,10 +1,4 @@
-<div class="div-header">
-  <app-navigation-bar></app-navigation-bar>
-</div>
-<div *ngIf="signedIn && user">
-  <app-user-nav [selectedIndex]="4"></app-user-nav>
-</div>
-<div class="div-user text-center" *ngIf="signedIn && user">
+<div class="div-user text-center" *ngIf="user">
   <div class="jumbotron div-jumbotron p-4 m-1">
     <p class="lead vbr-text">My rules</p>
     <hr class="mt-2 mb-4"/>

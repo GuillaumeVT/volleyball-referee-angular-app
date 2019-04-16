@@ -82,9 +82,19 @@ export class Utils {
     return this.getTextColor(backgroundColor);
   }
 
+  getTeamBorderColor(game: Game, teamType: TeamType): string {
+    var backgroundColor = this.getTeamBackgroundColor(game, teamType);
+    return this.getBorderColor(backgroundColor);
+  }
+
   getLiberoTextColor(game: Game, teamType: TeamType): string {
     var backgroundColor = this.getLiberoBackgroundColor(game, teamType);
     return this.getTextColor(backgroundColor);
+  }
+
+  getLiberoBorderColor(game: Game, teamType: TeamType): string {
+    var backgroundColor = this.getLiberoBackgroundColor(game, teamType);
+    return this.getBorderColor(backgroundColor);
   }
 
   getPlayerBackgroundColor(game: Game, teamType: TeamType, player: number): string {
@@ -101,6 +111,18 @@ export class Utils {
     } else {
       return this.getTeamTextColor(game, teamType);
     }
+  }
+
+  getPlayerBorderColor(game: Game, teamType: TeamType, player: number): string {
+    if (this.isLibero(game, teamType, player)) {
+      return this.getLiberoBorderColor(game, teamType);
+    } else {
+      return this.getTeamBorderColor(game, teamType);
+    }
+  }
+
+  getBorderColor(backgroundColor: string) {
+    return backgroundColor === '#ffffff' ? '#1f1f1f' : backgroundColor;
   }
 
   getTextColor(backgroundColor: string) {

@@ -140,6 +140,14 @@ export class LadderComponent implements OnInit, OnChanges {
     }
   }
 
+  getTeamBorderColor(ladderItem: LadderItem, teamType: TeamType) {
+    if (ladderItem.teamType === teamType) {
+      return this.utils.getTeamBorderColor(this.game, teamType);
+    } else {
+      return '#ffffff';
+    }
+  }
+
   getIcon(ladderItem: LadderItem, teamType: TeamType) {
     var icon = '';
 

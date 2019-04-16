@@ -2,16 +2,20 @@
   <h6 class="card-title vbr-text-color">Current Line-up</h6>
   <div class="div-court" *ngIf="game">
     <div class="position-1-l">
-      <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)">1</span>
+      <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)"
+        [style.border-color]="utils.getTeamBorderColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)">1</span>
     </div>
     <div class="position-2-l">
-      <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)">2</span>
+      <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)"
+        [style.border-color]="utils.getTeamBorderColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)">2</span>
     </div>
     <div class="position-1-r">
-      <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)">1</span>
+      <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)"
+        [style.border-color]="utils.getTeamBorderColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)">1</span>
     </div>
     <div class="position-2-r">
-      <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)">2</span>
+      <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)"
+        [style.border-color]="utils.getTeamBorderColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)">2</span>
     </div>
     <div class="serve-1-l" [style.visibility]="getServeVisibility(1, leftTeam)">
       <img class="serve" src="../../assets/ic_volley_ball.png" alt="serve">

@@ -3,11 +3,11 @@
   <div class="div-grid-50-50" *ngIf="game">
     <div class="div-timeouts mr-2" *ngIf="game">
       <span class="badge text-center player-badge-font mr-1 mb-1" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)"
-        [innerHTML]="getScore(leftTeam, timeout)" *ngFor="let timeout of getTimeouts(leftTeam)"></span>
+        [style.border-color]="utils.getTeamBorderColor(game, leftTeam)" [innerHTML]="getScore(leftTeam, timeout)" *ngFor="let timeout of getTimeouts(leftTeam)"></span>
     </div>
     <div class="div-timeouts mr-2" *ngIf="game">
       <span class="badge text-center player-badge-font mr-1 mb-1" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)"
-        [innerHTML]="getScore(rightTeam, timeout)" *ngFor="let timeout of getTimeouts(rightTeam)"></span>
+        [style.border-color]="utils.getTeamBorderColor(game, rightTeam)" [innerHTML]="getScore(rightTeam, timeout)" *ngFor="let timeout of getTimeouts(rightTeam)"></span>
     </div>
   </div>
 </div>

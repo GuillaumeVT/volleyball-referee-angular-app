@@ -4,8 +4,10 @@
     <span class="left-timeout">
       <i class="fa fa-circle vbr-timeout-text mr-1" *ngFor="let timeout of getTimeouts(leftTeam)"></i>
     </span>
-    <span class="badge text-center point-badge mx-1" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)" [innerHTML]="getPoints(leftTeam)"></span>
-    <span class="badge text-center point-badge mx-1" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)" [innerHTML]="getPoints(rightTeam)"></span>
+    <span class="badge text-center point-badge mx-1" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)"
+      [style.border-color]="utils.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPoints(leftTeam)"></span>
+    <span class="badge text-center point-badge mx-1" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)"
+      [style.border-color]="utils.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPoints(rightTeam)"></span>
     <span class="right-timeout">
       <i class="fa fa-circle vbr-timeout-text ml-1" *ngFor="let timeout of getTimeouts(rightTeam)"></i>
     </span>

@@ -1,17 +1,21 @@
 import { IndoorPlayerItem } from './indoor-player-item';
 
 export class InputPlayerItem extends IndoorPlayerItem {
+
   shirtNumber:               number;
   selected:                  boolean;
   unselectedColor:           string;
   unselectedBackgroundColor: string;
+  unselectedBorderColor:     string;
 
-  constructor(player: number, color: string, backgroundColor: string, captain: boolean, unselectedColor: string, unselectedBackgroundColor) {
-    super(player, color, backgroundColor, captain);
+  constructor(player: number, color: string, backgroundColor: string, borderColor: string,
+    captain: boolean, unselectedColor: string, unselectedBackgroundColor: string, unselectedBorderColor: string) {
+    super(player, color, backgroundColor, borderColor, captain);
     this.shirtNumber = player;
     this.selected = false;
     this.unselectedColor = unselectedColor;
     this.unselectedBackgroundColor = unselectedBackgroundColor;
+    this.unselectedBorderColor = unselectedBorderColor;
   }
 
   getColor(): string {
@@ -29,6 +33,15 @@ export class InputPlayerItem extends IndoorPlayerItem {
     }
     else {
       return this.unselectedBackgroundColor;
+    }
+  }
+
+  getBorderColor(): string {
+    if (this.selected) {
+      return this.borderColor;
+    }
+    else {
+      return this.unselectedBorderColor;
     }
   }
 }

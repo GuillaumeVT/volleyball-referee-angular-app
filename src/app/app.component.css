@@ -1,0 +1,115 @@
+.div-drawer-side {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+}
+
+.div-drawer-logo {
+  height: 60px;
+  background-color: white;
+}
+
+.div-drawer {
+  width: inherit;
+  background-color: white;
+  height: 100vh;
+}
+
+.div-component-side {
+  margin-left: 300px;
+}
+
+.div-top-bar {
+  background-color: #1f4294;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+}
+
+.photo {
+  width: auto;
+  height: 40px;
+}
+
+.notification {
+  font-size: 1em;
+  color: #1f4294;
+  background-color: #f2bb1a;
+}
+
+.drawer-trigger-button {
+  font-size: 1.5em;
+}
+
+.drawer-close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.5em;
+  color: #1f1f1f;
+}
+
+.drawer-link {
+    text-decoration: none;
+    color: #1f1f1f;
+    display: block;
+}
+
+.drawer-link:hover {
+    color: #1f4294;
+}
+
+.selected-drawer-link {
+  text-decoration: none;
+  color: #1f4294;
+  background-color: #f2bb1a;
+  border-radius: 5px 20px 20px 5px;
+  display: block;
+}
+
+.selected-drawer-link:hover {
+  filter: brightness(120%);
+}
+
+.brand-img-size {
+  width: auto;
+  height: 40px;
+}
+
+.div-component-side-overlay {
+  display: none;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 992px) {
+  .div-drawer-side {
+    display: none;
+    transition: 0.5s;
+    overflow-x: hidden;
+    z-index: 2;
+  }
+
+  .div-component-side {
+    margin-left: 0;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+  .drawer-close-button {
+    display: none;
+  }
+
+  .drawer-trigger-button {
+    display: none;
+  }
+}

@@ -1,1 +1,34 @@
-<router-outlet></router-outlet>
+<div class="div-drawer-side" id="drawer">
+  <div class="div-drawer-logo material-design-shadow p-2">
+    <span class="navbar-brand"><img class="brand-img-size mx-2" src="../favicon.ico" alt="VBR">Volleyball Referee</span>
+    <a href="javascript:void(0)" class="drawer-close-button" (click)="closeDrawer()">&times;</a>
+  </div>
+  <div *ngIf="signedIn" class="div-drawer p-3 mr-5 material-design-shadow">
+    <a class="ml-3 p-2" [ngClass]="currentPage === 0 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getHomeUrl()">Home</a>
+    <hr *ngIf="signedIn && user"/>
+    <div *ngIf="signedIn && user" class="ml-3 p-2 c3ac-text text-muted">My data</div>
+    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 1 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getUserLeaguesUrl()">Tournaments & Leagues</a>
+    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 2 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getUserGamesUrl()">Games</a>
+    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 3 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getUserTeamsUrl()">Teams</a>
+    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 4 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getUserRulesUrl()">Rules</a>
+    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 5 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getUserColleaguesUrl()">Colleagues</a>
+  </div>
+</div>
+<div class="div-component-side-overlay" id="overlay" (click)="closeDrawer()"></div>
+<div class="div-component-side">
+  <div class="div-top-bar material-design-shadow justify-content-between p-2">
+    <div class="row align-items-center ml-1">
+      <button type="button" class="btn vbr-button drawer-trigger-button" (click)="openDrawer()">&#9776;</button>
+      <button class="btn vbr-button" (click)="onShowSearchClicked()"><i class="fa fa-search mr-2"></i>Search games</button>
+    </div>
+    <div class="row align-items-center mr-1">
+      <a *ngIf="numberOfFriendRequests > 0" class="badge notification" [routerLink]="getUserColleaguesUrl()">+{{numberOfFriendRequests}}</a>
+			<a *ngIf="photo" class="navbar-brand" [routerLink]="getHomeUrl()">
+				<img [src]="photo" class="photo" alt="User photo"/>
+			</a>
+    </div>
+  </div>
+  <div class="div-component m-1">
+    <router-outlet (activate)="setCurrentPage($event)"></router-outlet>
+  </div>
+</div>

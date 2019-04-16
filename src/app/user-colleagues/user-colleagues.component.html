@@ -1,10 +1,4 @@
-<div class="div-header">
-  <app-navigation-bar></app-navigation-bar>
-</div>
-<div *ngIf="signedIn && user">
-  <app-user-nav [selectedIndex]="5"></app-user-nav>
-</div>
-<div class="div-user text-center" *ngIf="signedIn && user">
+<div class="div-user text-center" *ngIf="user">
   <div class="jumbotron div-jumbotron p-4 m-1">
     <p class="lead vbr-text">My Colleagues</p>
     <hr class="mt-2 mb-4"/>
@@ -17,7 +11,7 @@
   <div class="row m-1">
     <div class="col-12 col-sm-8 px-1" *ngIf="friendRequestsReceivedBy && friendRequestsReceivedBy.length > 0">
       <app-colleague-request-item *ngFor="let friendRequest of friendRequestsReceivedBy" [friendRequest]="friendRequest"
-        (mustRefreshFriendRequestsReceivedBy)="refreshData()"></app-colleague-request-item>
+        (mustRefreshFriendRequestsReceivedBy)="refreshUser()"></app-colleague-request-item>
     </div>
     <div *ngFor="let friend of user.friends" class="card div-card my-3 py-2 px-0 col-12 col-sm-4">
       <div class="row align-items-center m-1">

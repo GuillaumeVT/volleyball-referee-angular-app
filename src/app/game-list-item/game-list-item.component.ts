@@ -25,6 +25,10 @@ export class GameListItemComponent implements OnInit {
     return `/view/league/${this.gameDescription.leagueId}`;
   }
 
+  getTokenUrl(): string {
+    return `/search/token/${this.gameDescription.refereeName}`;
+  }
+
   showLeague(): boolean {
     return !this.inLeague && this.gameDescription.leagueId && this.gameDescription.leagueId.length > 0;
   }

@@ -1,34 +1,47 @@
-import { Component, Injector } from '@angular/core';
-import { AbstractUserDataComponent } from '../user/abstract-user-data.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Team } from '../model/team';
 import { TeamDescription } from '../model/team-description';
 import { CrudType } from '../model/crudtype';
 import { TeamFilter } from '../utils/teamfilter';
 import { Utils } from '../utils/utils';
+import { User } from '../model/user';
+import { UserService } from '../user.service';
 import { TeamService } from '../team.service';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserTeamModalComponent } from '../user-team-modal/user-team-modal.component';
 import { OkCancelModalComponent } from '../ok-cancel-modal/ok-cancel-modal.component';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-teams',
   templateUrl: './user-teams.component.html',
   styleUrls: ['./user-teams.component.css']
 })
-export class UserTeamsComponent extends AbstractUserDataComponent {
+export class UserTeamsComponent implements OnInit, OnDestroy {
 
+  user:       User;
   teamFilter: TeamFilter;
 
-  constructor(injector: Injector, private titleService: Title, private teamService: TeamService, private modalService: NgbModal, private utils: Utils, private toastr: ToastrService) {
-    super(injector);
+  private subscription : Subscription = new Subscription();
+
+  constructor(private titleService: Title, private userService: UserService, private teamService: TeamService, private modalService: NgbModal, private utils: Utils, private toastr: ToastrService) {
     this.titleService.setTitle('VBR - My Teams');
     this.teamFilter = new TeamFilter();
   }
 
-  refreshData(): void {
-    this.refreshTeams();
+  ngOnInit() {
+    this.subscription.add(this.userService.userState.subscribe(user => {
+      this.user = user;
+      if (this.user) {
+        this.refreshTeams();
+      }
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   refreshTeams(): void {
@@ -91,5 +104,9 @@ export class UserTeamsComponent extends AbstractUserDataComponent {
 
   onTeamDeletionError(): void {
     this.toastr.error('Team could not be deleted. Is it used in a scheduled game?', '', { timeOut: 5000, positionClass: 'toast-top-left' });
+  }
+
+  getPageNumber(): number {
+    return 3;
   }
 }

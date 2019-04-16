@@ -39,7 +39,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     this.players = [];
     this.liberos = [];
     for (var index = 1; index <= 99; index++) {
-      this.players.push(new InputPlayerItem(index, '#ffffff', '#000000', false, '#1f1f1f', '#d6d7d7'));
+      this.players.push(new InputPlayerItem(index, '#ffffff', '#000000', '#000000', false, '#1f1f1f', '#d6d7d7', '#d6d7d7'));
     }
   }
 
@@ -183,9 +183,11 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   onShirtColorChanged(color: string): void {
     this.team.color = color;
     const textColor: string = this.utils.getTextColor(this.team.color);
+    const borderColor: string = this.utils.getBorderColor(this.team.color);
     for (let playerItem of this.players) {
       playerItem.backgroundColor = this.team.color;
       playerItem.color = textColor;
+      playerItem.borderColor = borderColor;
     }
   }
 
@@ -198,9 +200,11 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   onLiberoShirtColorChanged(color: string): void {
     this.team.liberoColor = color;
     const textColor: string = this.utils.getTextColor(this.team.liberoColor);
+    const borderColor: string = this.utils.getBorderColor(this.team.liberoColor);
     for (let liberoItem of this.liberos) {
       liberoItem.backgroundColor = this.team.liberoColor;
       liberoItem.color = textColor;
+      liberoItem.borderColor = borderColor;
     }
   }
 
@@ -210,7 +214,8 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
 
     if (playerItem.selected) {
       const color: string = this.utils.getTextColor(this.team.liberoColor);
-      this.liberos.push(new InputPlayerItem(player, color, this.team.liberoColor, playerItem.captain, '#1f1f1f', '#d6d7d7'));
+      const borderColor: string = this.utils.getBorderColor(this.team.liberoColor);
+      this.liberos.push(new InputPlayerItem(player, color, this.team.liberoColor, borderColor, playerItem.captain, '#1f1f1f', '#d6d7d7', '#d6d7d7'));
       this.liberos = this.liberos.sort((l1, l2) => l1.shirtNumber - l2.shirtNumber);
     } else {
       var tmpLiberos = [];
