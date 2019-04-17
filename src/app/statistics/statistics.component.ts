@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StatisticsService } from '../statistics.service';
-import { PublicService } from '../public.service';
+import { StatisticsService } from '../services/statistics.service';
+import { PublicService } from '../services/public.service';
 import { Statistics, Count } from '../model/statistics';
 
 @Component({

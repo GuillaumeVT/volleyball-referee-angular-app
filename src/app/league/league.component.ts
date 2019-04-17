@@ -6,7 +6,7 @@ import { takeWhile } from 'rxjs/operators';
 import { League } from '../model/league';
 import { GameDescription } from '../model/game-description';
 import { TeamDescription } from '../model/team-description';
-import { PublicService } from '../public.service';
+import { PublicService } from '../services/public.service';
 import { Utils } from '../utils/utils';
 
 @Component({

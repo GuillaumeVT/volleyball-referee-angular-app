@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpErrorResponse, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs';
 import { tap } from "rxjs/operators";
-import { SocialUser } from './login/entities/user';
+import { SocialUser } from './services/login/entities/user';
 import { Router } from '@angular/router';
 
 @Injectable()

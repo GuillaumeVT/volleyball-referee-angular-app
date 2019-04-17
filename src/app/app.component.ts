@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './model/user';
-import { UserService } from './user.service';
+import { UserService } from './services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SearchModalComponent } from './search-modal/search-modal.component';
+import { SearchModalComponent } from './search/search-modal/search-modal.component';
 import { Count } from './model/count';
 
 @Component({
@@ -30,11 +30,12 @@ export class AppComponent implements OnInit {
       if (this.user) {
         this.signedIn = this.userService.isSignedIn();
         this.photo = this.userService.getSocialUser().photoUrl;
+        this.refreshNotifications();
       } else {
         this.signedIn = false;
         this.photo = null;
+        this.numberOfFriendRequests = 0;
       }
-      this.refreshNotifications();
     });
   }
 

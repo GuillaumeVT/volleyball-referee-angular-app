@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { User } from '../model/user';
-import { AuthService } from '../auth.service';
-import { UserService } from '../user.service';
-import { GameService } from '../game.service';
-import { GoogleLoginProvider } from '../login/providers/google-login-provider';
-import { FacebookLoginProvider } from '../login/providers/facebook-login-provider';
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
+import { GameService } from '../services/game.service';
+import { GoogleLoginProvider } from '../services/login/providers/google-login-provider';
+import { FacebookLoginProvider } from '../services/login/providers/facebook-login-provider';
 import { FriendRequest } from '../model/friend-request';
 import { GameDescription } from '../model/game-description';
 import { forkJoin, Subscription } from 'rxjs';

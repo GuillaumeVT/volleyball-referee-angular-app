@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { SocialUser } from '../login/entities/user';
+import { AuthService } from '../services/auth.service';
+import { SocialUser } from '../services/login/entities/user';
 
 @Component({
   selector: 'app-links-bar',
