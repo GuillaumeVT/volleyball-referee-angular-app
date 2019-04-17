@@ -13,6 +13,7 @@ import { LeagueComponent } from './league/league.component';
 import { PrivatePolicyComponent } from './private-policy/private-policy.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserExistsGuard } from './user-exists.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,12 +23,12 @@ const routes: Routes = [
   { path: 'search/date/:date', component: SearchResultDateComponent },
   { path: 'view/game/:gameId', component: GameComponent },
   { path: 'view/league/:leagueId', component: LeagueComponent },
-  { path: 'colleagues', component: UserColleaguesComponent },
-  { path: 'leagues', component: UserLeaguesComponent },
-  { path: 'rules', component: UserRulesComponent },
-  { path: 'teams', component: UserTeamsComponent },
-  { path: 'games', component: UserGamesComponent },
-  { path: 'games/league/:leagueId', component: UserGamesComponent },
+  { path: 'colleagues', component: UserColleaguesComponent, canActivate: [ UserExistsGuard ] },
+  { path: 'leagues', component: UserLeaguesComponent, canActivate: [ UserExistsGuard ] },
+  { path: 'rules', component: UserRulesComponent, canActivate: [ UserExistsGuard ] },
+  { path: 'teams', component: UserTeamsComponent, canActivate: [ UserExistsGuard ] },
+  { path: 'games', component: UserGamesComponent, canActivate: [ UserExistsGuard ] },
+  { path: 'games/league/:leagueId', component: UserGamesComponent, canActivate: [ UserExistsGuard ] },
   { path: 'private-policy', component: PrivatePolicyComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
