@@ -162,13 +162,12 @@ export class Utils {
   }
 
   getPlayerForSanction(game: Game, teamType: TeamType, player: number): string {
-    if (player > 0) {
+    if (player >= 0) {
       return this.getPlayer(game, teamType, player);
-    } else if (player == 0) {
+    } else if (player == 100) {
       // coach
       return 'C.';
     } else {
-      // whole team (beach)
       return 'T.';
     }
   }

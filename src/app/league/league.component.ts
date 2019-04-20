@@ -16,20 +16,24 @@ import { Utils } from '../utils/utils';
 })
 export class LeagueComponent implements OnInit, OnDestroy {
 
-  leagueId:      string;
-  league:        League;
-  selectedIndex: number;
-  liveGames:     GameDescription[];
-  next10Games:   GameDescription[];
-  last10Games:   GameDescription[];
-  selectedTeam:  TeamDescription;
-  allTeams:      TeamDescription;
-  teams:         TeamDescription[];
-  autoRefresh:   boolean;
+  leagueId:         string;
+  league:           League;
+  selectedIndex:    number;
+  selectedDivision: string;
+  allDivisions:     string;
+  liveGames:        GameDescription[];
+  next10Games:      GameDescription[];
+  last10Games:      GameDescription[];
+  selectedTeam:     TeamDescription;
+  allTeams:         TeamDescription;
+  teams:            TeamDescription[];
+  autoRefresh:      boolean;
 
   constructor(private titleService: Title, private route: ActivatedRoute, private router: Router, private publicService: PublicService, private utils: Utils) {
     this.titleService.setTitle('VBR - View League');
     this.selectedIndex = 0;
+    this.allDivisions = "All pools / divisions";
+    this.selectedDivision = this.allDivisions;
     this.liveGames = [];
     this.next10Games = [];
     this.last10Games = [];
@@ -60,13 +64,28 @@ export class LeagueComponent implements OnInit, OnDestroy {
   }
 
   refreshGames(): void {
-    this.publicService.listLiveGamesInLeague(this.leagueId).subscribe(games => this.liveGames = games, error => this.liveGames = []);
-    this.publicService.listNext10GamesInLeague(this.leagueId).subscribe(games => this.next10Games = games, error => this.next10Games = []);
-    this.publicService.listLast10GamesInLeague(this.leagueId).subscribe(games => this.last10Games = games, error => this.last10Games = []);
+    if (this.selectedDivision === this.allDivisions) {
+      this.publicService.listLiveGamesInLeague(this.leagueId).subscribe(games => this.liveGames = games, error => this.liveGames = []);
+      this.publicService.listNext10GamesInLeague(this.leagueId).subscribe(games => this.next10Games = games, error => this.next10Games = []);
+      this.publicService.listLast10GamesInLeague(this.leagueId).subscribe(games => this.last10Games = games, error => this.last10Games = []);
+    } else {
+      this.publicService.listLiveGamesInDivision(this.leagueId, this.selectedDivision).subscribe(games => this.liveGames = games, error => this.liveGames = []);
+      this.publicService.listNext10GamesInDivision(this.leagueId, this.selectedDivision).subscribe(games => this.next10Games = games, error => this.next10Games = []);
+      this.publicService.listLast10GamesInDivision(this.leagueId, this.selectedDivision).subscribe(games => this.last10Games = games, error => this.last10Games = []);
+    }
   }
 
   refreshTeams(): void {
-    this.publicService.listTeamsOfLeague(this.leagueId).subscribe(teams => this.teams = teams, error => this.teams = []);
+    if (this.selectedDivision === this.allDivisions) {
+      this.publicService.listTeamsOfLeague(this.leagueId).subscribe(teams => this.teams = teams, error => this.teams = []);
+    } else {
+      this.publicService.listTeamsOfDivision(this.leagueId, this.selectedDivision).subscribe(teams => this.teams = teams, error => this.teams = []);
+    }
+  }
+
+  onDivisionSelected(): void {
+    this.refreshGames();
+    this.refreshTeams();
   }
 
   getLinkClass(index: number): string {

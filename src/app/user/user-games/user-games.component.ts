@@ -185,7 +185,7 @@ export class UserGamesComponent implements OnInit, OnDestroy {
   onScoreSheetReceived(response: HttpResponse<any>, game: GameDescription): void {
     const dateStr = this.datePipe.transform(game.scheduledAt, 'dd_MM_yyyy');
     const filename = game.homeTeamName + '_' + game.guestTeamName + '_' + dateStr + '.html';
-    const blob = new Blob([response.body], { type: 'html' });
+    const blob = new Blob([response.body], { type: 'text/html' });
     saveAs(response, filename);
   }
 

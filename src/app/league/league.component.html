@@ -2,6 +2,20 @@
   <div class="my-3 text-center" *ngIf="league">
     <span class="h2 vbr-text-color">{{league.name}}</span>
   </div>
+  <div class="div-games">
+    <div class="mx-1 my-3" *ngIf="league">
+      <select class="custom-select vbr-text" [(ngModel)]="selectedDivision" (change)="onDivisionSelected()">
+        <option [ngValue]="allDivisions">
+          {{allDivisions}}
+        </option>
+        <optgroup label="Divisions">
+          <option *ngFor="let division of league.divisions" [ngValue]="division">
+            {{division}}
+          </option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
   <div class="text-center my-3">
     <ul class="list-unstyled list-inline">
       <li class="list-inline-item my-1"><button [ngClass]="getLinkClass(0)" (click)="showDashboard()">Dashboard</button></li>

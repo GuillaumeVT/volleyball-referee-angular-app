@@ -39,11 +39,16 @@
 
     <div class="row mb-3" *ngIf="selectedLeague">
       <div class="col-12 col-sm-10">
-        <label class="vbr-text" for="division">Pool / Division</label>
-        <input type="text" class="vbr-text form-control" name="division" id="division" list="divisionList" [(ngModel)]="game.divisionName" required [attr.disabled]="isEditingDisabled()"/>
+        <label [ngClass]="undefinedDivision ? 'vbr-error-label' : ''" class="vbr-text" for="division">Pool / Division</label>
+        <input type="text" [ngClass]="undefinedDivision ? 'vbr-error-input' : ''" class="vbr-text form-control" name="division" id="division" list="divisionList" [(ngModel)]="game.divisionName" required [attr.disabled]="isEditingDisabled()"/>
         <datalist id="divisionList">
-          <option *ngFor="let division of selectedLeague.divisions" [ngValue]="selectedDivision">{{division}}</option>
+          <option *ngFor="let division of selectedLeague.divisions" [ngValue]="division">{{division}}</option>
         </datalist>
+      </div>
+      <div class="col-12">
+        <div class="vbr-error-feedback" *ngIf="undefinedDivision">
+          A division must be provided.
+        </div>
       </div>
     </div>
 

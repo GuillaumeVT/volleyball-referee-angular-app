@@ -66,7 +66,7 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
   onScoreSheetReceived(response: HttpResponse<any>): void {
     const dateStr = this.datePipe.transform(this.game.scheduledAt, 'dd_MM_yyyy');
     const filename = this.game.homeTeam.name + '_' + this.game.guestTeam.name + '_' + dateStr + '.html';
-    const blob = new Blob([response.body], { type: 'html' });
+    const blob = new Blob([response.body], { type: 'text/html' });
     saveAs(response, filename);
   }
 

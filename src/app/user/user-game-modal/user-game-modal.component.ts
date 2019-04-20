@@ -37,15 +37,17 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   selectedDivision: string;
   selectedReferee:  Friend;
 
-  sameTeams:       boolean;
-  undefinedHTeam:  boolean;
-  undefinedGTeam:  boolean;
-  invalidResponse: boolean;
+  sameTeams:         boolean;
+  undefinedHTeam:    boolean;
+  undefinedGTeam:    boolean;
+  undefinedDivision: boolean;
+  invalidResponse:   boolean;
 
   constructor(private activeModal: NgbActiveModal, private gameService: GameService, private utils: Utils, private datePipe: DatePipe) {
     this.sameTeams = false;
     this.undefinedHTeam = false;
     this.undefinedGTeam = false;
+    this.undefinedDivision = false;
     this.invalidResponse = false;
     this.scheduleDate = new Date();
     this.minScheduleDate = new Date();
@@ -101,25 +103,33 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   onSubmitForm(): void {
     this.game.scheduledAt = this.scheduleDate.getTime();
 
-    if (this.selectedHTeam.id.length === 0) {
+    if (!this.selectedHTeam || this.selectedHTeam.id.length === 0) {
       this.undefinedHTeam = true;
     } else {
       this.undefinedHTeam = false;
     }
 
-    if (this.selectedGTeam.id.length === 0) {
+    if (!this.selectedGTeam || this.selectedGTeam.id.length === 0) {
       this.undefinedGTeam = true;
     } else {
       this.undefinedGTeam = false;
     }
 
-     if (this.selectedHTeam.id === this.selectedGTeam.id) {
-       this.sameTeams = true;
-     } else {
-       this.sameTeams = false;
-     }
+    if (this.selectedHTeam && this.selectedGTeam && this.selectedHTeam.id === this.selectedGTeam.id) {
+      this.sameTeams = true;
+    } else {
+      this.sameTeams = false;
+    }
 
-    if (!this.undefinedHTeam && !this.undefinedGTeam && !this.sameTeams) {
+    if (this.selectedLeague) {
+      if (this.game.divisionName && this.game.divisionName.length > 0) {
+        this.undefinedDivision = false;
+      } else {
+        this.undefinedDivision = true;
+      }
+    }
+
+    if (!this.undefinedHTeam && !this.undefinedGTeam && !this.sameTeams && !this.undefinedDivision) {
       this.game.gender = this.selectedHTeam.gender === this.selectedGTeam.gender ? this.selectedHTeam.gender : 'MIXED';
       this.game.homeTeamId = this.selectedHTeam.id;
       this.game.homeTeamName = this.selectedHTeam.name;
@@ -133,10 +143,6 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
       if (this.selectedLeague) {
         this.game.leagueId = this.selectedLeague.id;
         this.game.leagueName = this.selectedLeague.name;
-
-        if (this.selectedDivision) {
-          this.game.divisionName = this.selectedDivision;
-        }
       }
 
       if (this.crudType === CrudType.Create) {

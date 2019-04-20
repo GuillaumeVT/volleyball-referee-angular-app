@@ -100,19 +100,15 @@ export class UserLeaguesComponent implements OnInit, OnDestroy {
     return `/view/league/${league.id}`;
   }
 
-  downloadCsvLeague(league: League, divisionName: string): void {
-    if (divisionName && divisionName.length > 0) {
-      this.gameService.listGamesInDivisionCsv(league.id, divisionName).subscribe(response => this.onCsvLeagueReceived(response, league, divisionName), error => this.onCsvLeagueReceived(null, league, divisionName));
-    } else {
-      this.gameService.listGamesInLeagueCsv(league.id).subscribe(response => this.onCsvLeagueReceived(response, league, ""), error => this.onCsvLeagueReceived(null, league, ""));
-    }
+  downloadDivisionExcel(league: League, divisionName: string): void {
+    this.gameService.listGamesInDivisionExcel(league.id, divisionName).subscribe(response => this.onDivisionExcelReceived(response, league, divisionName), error => this.onDivisionExcelReceived(null, league, divisionName));
   }
 
-  onCsvLeagueReceived(response: HttpResponse<any>, league: League, divisionName: string): void {
+  onDivisionExcelReceived(response: HttpResponse<any>, league: League, divisionName: string): void {
     const date = new Date();
     const dateStr = this.datePipe.transform(date.getTime(), 'dd_MM_yyyy__HH_mm');
-    const filename = league.name + '_' + divisionName + '_' + dateStr + '.csv';
-    const blob = new Blob([response.body], { type: 'csv' });
+    const filename = league.name + '_' + divisionName + '_' + dateStr + '.xlsx';
+    const blob = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     saveAs(response, filename);
   }
 

@@ -116,7 +116,7 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
         break;
     }
 
-    var playerNumber = 0;
+    var playerNumber = -1;
 
     switch (position) {
       case 1:

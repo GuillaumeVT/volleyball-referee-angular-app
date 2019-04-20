@@ -35,7 +35,7 @@ export class SetLineupsComponent implements OnInit {
       captain = this.game.guestTeam.captain;
     }
 
-    var playerNumber = 0;
+    var playerNumber = -1;
 
     switch (position) {
       case 1:

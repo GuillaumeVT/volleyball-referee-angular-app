@@ -76,8 +76,38 @@ export class PublicService {
     return this.http.get<GameDescription[]>(url);
   }
 
+  listGamesInDivision(leagueId: string, divisionName: string): Observable<GameDescription[]> {
+    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  listLiveGamesInDivision(leagueId: string, divisionName: string): Observable<GameDescription[]> {
+    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/live`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  listNext10GamesInDivision(leagueId: string, divisionName: string): Observable<GameDescription[]> {
+    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/next-10`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  listLast10GamesInDivision(leagueId: string, divisionName: string): Observable<GameDescription[]> {
+    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/last-10`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
+  listGamesOfTeamInDivision(leagueId: string, divisionName: string, teamId: string): Observable<GameDescription[]> {
+    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/team/${teamId}`;
+    return this.http.get<GameDescription[]>(url);
+  }
+
   listTeamsOfLeague(leagueId: string): Observable<TeamDescription[]> {
     const url = `${this.teamsUrl}/league/${leagueId}`;
+    return this.http.get<TeamDescription[]>(url);
+  }
+
+  listTeamsOfDivision(leagueId: string, divisionName: string): Observable<TeamDescription[]> {
+    const url = `${this.teamsUrl}/league/${leagueId}/division/${divisionName}`;
     return this.http.get<TeamDescription[]>(url);
   }
 

@@ -49,11 +49,10 @@
           </button>
           <div class="btn-group" ngbDropdown role="group">
             <button type="button" class="btn vbr-button-inverted" ngbDropdownToggle>
-              <i class="fa fa-download"></i><span class="icon-text">&nbsp;&nbsp;CSV</span>
+              <i class="fa fa-download"></i><span class="icon-text">&nbsp;&nbsp;Excel</span>
             </button>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <button class="dropdown-item" (click)="downloadCsvLeague(league, '')">All</button>
-              <button *ngFor="let divisionName of league.divisions" class="dropdown-item" (click)="downloadCsvLeague(league, divisionName)">{{divisionName}}</button>
+              <button *ngFor="let divisionName of league.divisions" class="dropdown-item" (click)="downloadDivisionExcel(league, divisionName)">{{divisionName}}</button>
             </div>
           </div>
           <button type="button" class="btn vbr-button-inverted" (click)="deleteLeague(league)">

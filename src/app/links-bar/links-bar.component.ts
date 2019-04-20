@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { SocialUser } from '../services/login/entities/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-links-bar',
@@ -14,7 +15,7 @@ export class LinksBarComponent implements OnInit {
   facebookUrl: string;
   playUrl:     string;
 
-  constructor(private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService) {
     this.facebookUrl = 'https://www.facebook.com/VolleyballReferee/';
     this.playUrl = 'https://play.google.com/store/apps/details?id=com.tonkar.volleyballreferee';
     this.authService.authState.subscribe(socialUser => {
@@ -32,6 +33,7 @@ export class LinksBarComponent implements OnInit {
 
   signOut(): void {
     this.authService.signOut();
+    this.router.navigateByUrl('home');
   }
 
 }
