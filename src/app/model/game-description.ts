@@ -26,6 +26,7 @@ export class GameDescription {
   guestSets:     number;
   rulesId:       string;
   rulesName:     string;
+  score:         string;
 
   public static createGame(user: User, kind: string, league: League): GameDescription {
     const game = new GameDescription();
@@ -63,6 +64,7 @@ export class GameDescription {
     game.guestSets = 0;
     game.rulesId = '';
     game.rulesName = '';
+    game.score = '';
 
     return game;
   }
@@ -93,6 +95,7 @@ export class GameDescription {
     copy.guestSets = game.guestSets;
     copy.rulesId = game.rulesId;
     copy.rulesName = game.rulesName;
+    copy.score = game.score;
 
     return copy;
   }

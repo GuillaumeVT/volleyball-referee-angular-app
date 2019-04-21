@@ -13,6 +13,9 @@
     <span *ngIf="gameDescription.status !== 'SCHEDULED'">{{gameDescription.homeTeamName}} {{gameDescription.homeSets}} - {{gameDescription.guestSets}} {{gameDescription.guestTeamName}}</span>
     <span *ngIf="gameDescription.status === 'SCHEDULED'">{{gameDescription.homeTeamName}} - {{gameDescription.guestTeamName}}</span>
   </a>
+  <div class="vbr-text" *ngIf="gameDescription.score && gameDescription.score.length > 0">
+    <span>{{gameDescription.score}}</span>
+  </div>
   <div class="vbr-text mt-3" *ngIf="showLeague() || showDivision() || showReferee()">
     <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="item-link">{{gameDescription.leagueName}}</a>
     <span *ngIf="showLeague() && showDivision()" class="mx-1">/</span>

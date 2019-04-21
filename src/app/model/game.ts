@@ -27,4 +27,5 @@ export class Game {
   homeCards:    Sanction[];
   guestCards:   Sanction[];
   rules:        Rules;
+  score:        string;
 }
