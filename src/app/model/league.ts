@@ -5,6 +5,7 @@ export class League {
   id:        string;
   createdBy: string;
   createdAt: number;
+  updatedAt: number;
   kind:      string;
   name:      string;
   divisions: string[];
@@ -15,6 +16,7 @@ export class League {
     league.id = UUID.UUID();
     league.createdBy = user.id;
     league.createdAt = new Date().getTime();
+    league.updatedAt = new Date().getTime();
     league.kind = kind;
     league.name = '';
     league.divisions = [];

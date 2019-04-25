@@ -34,6 +34,7 @@ export class UserLeagueModalComponent implements OnInit {
     } else {
       this.undefinedName = false;
       this.league.createdAt = new Date().getTime();
+      this.league.updatedAt = new Date().getTime();
       this.leagueService.createLeague(this.league).subscribe(league => this.onValidResponse(), error => this.onInvalidResponse(error));
     }
   }
