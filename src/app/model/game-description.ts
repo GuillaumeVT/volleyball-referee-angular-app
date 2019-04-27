@@ -30,12 +30,13 @@ export class GameDescription {
 
   public static createGame(user: User, kind: string, league: League): GameDescription {
     const game = new GameDescription();
+    const now = new Date();
 
     game.id = UUID.UUID();
     game.createdBy = user.id;
-    game.createdAt = new Date().getTime();
-    game.updatedAt = new Date().getTime();
-    game.scheduledAt = new Date().getTime();
+    game.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    game.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    game.scheduledAt = now.getTime();
     game.refereedBy = user.id;
     game.refereeName = user.id;
     game.kind = kind;

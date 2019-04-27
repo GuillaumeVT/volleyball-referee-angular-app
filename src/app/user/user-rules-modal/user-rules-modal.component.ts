@@ -43,11 +43,8 @@ export class UserRulesModalComponent implements OnInit, AfterViewInit {
       this.undefinedName = false;
 
       if (this.crudType === CrudType.Create) {
-        this.rules.createdAt = new Date().getTime();
-        this.rules.updatedAt = new Date().getTime();
         this.rulesService.createRules(this.rules).subscribe(rules => this.onValidResponse(), error => this.onInvalidResponse(error));
       } else if (this.crudType === CrudType.Update) {
-        this.rules.updatedAt = new Date().getTime();
         this.rulesService.updateRules(this.rules).subscribe(rules => this.onValidResponse(), error => this.onInvalidResponse(error));
       }
     }

@@ -48,11 +48,12 @@ export class Rules {
 
   public static createIndoorRules(user: User): Rules {
     const rules = new Rules();
+    const now = new Date();
 
     rules.id = UUID.UUID();
     rules.createdBy = user.id;
-    rules.createdAt = new Date().getTime();
-    rules.updatedAt = new Date().getTime();
+    rules.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    rules.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
     rules.name = '';
     rules.kind = 'INDOOR';
     rules.setsPerGame = 5;
@@ -80,11 +81,12 @@ export class Rules {
 
   public static createBeachRules(user: User): Rules {
     const rules = new Rules();
+    const now = new Date();
 
     rules.id = UUID.UUID();
     rules.createdBy = user.id;
-    rules.createdAt = new Date().getTime();
-    rules.updatedAt = new Date().getTime();
+    rules.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    rules.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
     rules.name = '';
     rules.kind = 'BEACH';
     rules.setsPerGame = 3;
@@ -112,11 +114,12 @@ export class Rules {
 
   public static createIndoor4x4Rules(user: User): Rules {
     const rules = new Rules();
+    const now = new Date();
 
     rules.id = UUID.UUID();
     rules.createdBy = user.id;
-    rules.createdAt = new Date().getTime();
-    rules.updatedAt = new Date().getTime();
+    rules.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    rules.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
     rules.name = '';
     rules.kind = 'INDOOR_4X4';
     rules.setsPerGame = 5;

@@ -12,11 +12,12 @@ export class League {
 
   public static createLeague(user: User, kind: string): League {
     const league = new League();
+    const now = new Date();
 
     league.id = UUID.UUID();
     league.createdBy = user.id;
-    league.createdAt = new Date().getTime();
-    league.updatedAt = new Date().getTime();
+    league.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    league.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
     league.kind = kind;
     league.name = '';
     league.divisions = [];

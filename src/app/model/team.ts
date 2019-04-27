@@ -18,11 +18,12 @@ export class Team {
 
   public static createTeam(user: User, kind: string): Team {
     const team = new Team();
+    const now = new Date();
 
     team.id = UUID.UUID();
     team.createdBy = user.id;
-    team.createdAt = new Date().getTime();
-    team.updatedAt = new Date().getTime();
+    team.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    team.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
     team.name = '';
     team.kind = kind;
     team.gender = 'MIXED';

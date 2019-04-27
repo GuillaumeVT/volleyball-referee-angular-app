@@ -146,11 +146,8 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
       }
 
       if (this.crudType === CrudType.Create) {
-        this.game.createdAt = new Date().getTime();
-        this.game.updatedAt = new Date().getTime();
         this.gameService.createGame(this.game).subscribe(game => this.onValidResponse(), error => this.onInvalidResponse(error));
       } else if (this.crudType === CrudType.Update) {
-        this.game.updatedAt = new Date().getTime();
         this.gameService.updateGame(this.game).subscribe(game => this.onValidResponse(), error => this.onInvalidResponse(error));
       }
     }

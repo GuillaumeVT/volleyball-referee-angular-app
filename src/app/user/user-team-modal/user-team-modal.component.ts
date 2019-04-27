@@ -116,11 +116,8 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
       }
 
       if (this.crudType === CrudType.Create) {
-        this.team.createdAt = new Date().getTime();
-        this.team.updatedAt = new Date().getTime();
         this.teamService.createTeam(this.team).subscribe(team => this.onValidResponse(), error => this.onInvalidResponse(error));
       } else if (this.crudType === CrudType.Update) {
-        this.team.updatedAt = new Date().getTime();
         this.teamService.updateTeam(this.team).subscribe(team => this.onValidResponse(), error => this.onInvalidResponse(error));
       }
     }
