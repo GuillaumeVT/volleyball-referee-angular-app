@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { League } from '../../model/league';
+import { LeagueDescription } from '../../model/league-description';
 import { LeagueFilter } from '../../utils/leaguefilter';
 import { User } from '../../model/user';
 import { UserService } from '../../services/user.service';
@@ -23,9 +24,10 @@ import { Subscription } from 'rxjs';
 })
 export class UserLeaguesComponent implements OnInit, OnDestroy {
 
-  user:         User;
-  leagueFilter: LeagueFilter;
-  countsMap:    Map<string,number>;
+  user:            User;
+  leagueFilter:    LeagueFilter;
+  countsMap:       Map<string,number>;
+  divisionsMap:    Map<string,string[]>;
 
   private subscription : Subscription = new Subscription();
 
@@ -34,6 +36,7 @@ export class UserLeaguesComponent implements OnInit, OnDestroy {
     this.titleService.setTitle('VBR - My Leagues');
     this.leagueFilter = new LeagueFilter();
     this.countsMap = new Map();
+    this.divisionsMap = new Map();
   }
 
   ngOnInit() {
@@ -53,13 +56,15 @@ export class UserLeaguesComponent implements OnInit, OnDestroy {
     this.leagueService.listLeagues().subscribe(leagues => this.onLeaguesRefreshed(leagues), error => this.onLeaguesRefreshed([]));
   }
 
-  onLeaguesRefreshed(leagues: League[]): void {
+  onLeaguesRefreshed(leagues: LeagueDescription[]): void {
     this.leagueFilter.updateLeagues(leagues);
 
     for (let league of this.leagueFilter.leagues) {
       this.countsMap.set(league.id, 0);
       this.gameService.getNumberOfGamesInLeague(league.id).subscribe(
         count => this.countsMap.set(league.id, count.count), error => this.countsMap.set(league.id, 0));
+      this.leagueService.getLeague(league.id).subscribe(
+        league => this.divisionsMap.set(league.id, league.divisions), error => this.divisionsMap.set(league.id, []));
     }
   }
 
@@ -70,11 +75,11 @@ export class UserLeaguesComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.leagueCreated.subscribe(created => this.onLeagueCreated());
   }
 
-  viewLeague(league: League): void {
+  viewLeague(league: LeagueDescription): void {
     this.router.navigateByUrl(`games/league/${league.id}`);
   }
 
-  deleteLeague(league: League): void {
+  deleteLeague(league: LeagueDescription): void {
     const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
     modalRef.componentInstance.title = 'Delete tournament';
     modalRef.componentInstance.message = `Do you want to delete the tournament named ${league.name}?`;

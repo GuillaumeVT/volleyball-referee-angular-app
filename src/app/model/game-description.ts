@@ -1,5 +1,5 @@
 import { User } from './user';
-import { League } from './league';
+import { LeagueDescription } from './league-description';
 import { UUID } from 'angular2-uuid';
 
 export class GameDescription {
@@ -28,7 +28,7 @@ export class GameDescription {
   rulesName:     string;
   score:         string;
 
-  public static createGame(user: User, kind: string, league: League): GameDescription {
+  public static createGame(user: User, kind: string, league: LeagueDescription): GameDescription {
     const game = new GameDescription();
     const now = new Date();
 
@@ -47,16 +47,11 @@ export class GameDescription {
     if (league) {
       game.leagueId = league.id;
       game.leagueName = league.name;
-      if (league.divisions.length > 0) {
-        game.divisionName = league.divisions[0];
-      } else {
-        game.divisionName = '';
-      }
     } else {
       game.leagueId = '';
       game.leagueName = '';
-      game.divisionName = '';
     }
+    game.divisionName = '';
     game.homeTeamId = '';
     game.homeTeamName = '';
     game.guestTeamId = '';

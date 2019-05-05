@@ -4,10 +4,11 @@ import { User, Friend } from '../../model/user';
 import { GameDescription } from '../../model/game-description';
 import { RulesDescription } from '../../model/rules-description';
 import { TeamDescription } from '../../model/team-description';
-import { League } from '../../model/league';
+import { LeagueDescription } from '../../model/league-description';
 import { CrudType } from '../../model/crudtype';
 import { Utils } from '../../utils/utils';
 import { GameService } from '../../services/game.service';
+import { LeagueService } from '../../services/league.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -22,20 +23,21 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   @Input() rules:        RulesDescription[];
   @Input() defaultRules: RulesDescription;
   @Input() teams:        TeamDescription[];
-  @Input() leagues:      League[];
+  @Input() leagues:      LeagueDescription[];
   @Input() user:         User;
   @Output() gameUpdated = new EventEmitter();
 
   me: Friend;
 
-  scheduleDate:     Date;
-  minScheduleDate:  Date;
-  selectedHTeam:    TeamDescription;
-  selectedGTeam:    TeamDescription;
-  selectedRules:    RulesDescription;
-  selectedLeague:   League;
-  selectedDivision: string;
-  selectedReferee:  Friend;
+  scheduleDate:              Date;
+  minScheduleDate:           Date;
+  selectedHTeam:             TeamDescription;
+  selectedGTeam:             TeamDescription;
+  selectedRules:             RulesDescription;
+  selectedLeague:            LeagueDescription;
+  divisionsOfSelectedLeague: string[];
+  selectedDivision:          string;
+  selectedReferee:           Friend;
 
   sameTeams:         boolean;
   undefinedHTeam:    boolean;
@@ -43,7 +45,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   undefinedDivision: boolean;
   invalidResponse:   boolean;
 
-  constructor(private activeModal: NgbActiveModal, private gameService: GameService, private utils: Utils, private datePipe: DatePipe) {
+  constructor(private activeModal: NgbActiveModal, private gameService: GameService, private leagueService: LeagueService, private utils: Utils, private datePipe: DatePipe) {
     this.sameTeams = false;
     this.undefinedHTeam = false;
     this.undefinedGTeam = false;
@@ -51,6 +53,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
     this.invalidResponse = false;
     this.scheduleDate = new Date();
     this.minScheduleDate = new Date();
+    this.divisionsOfSelectedLeague = [];
   }
 
   ngOnInit() { }
@@ -82,6 +85,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
       for (let league of this.leagues) {
         if (league.id === this.game.leagueId) {
           this.selectedLeague = league;
+          this.refreshDivisionsOfSelectedLeague();
         }
       }
     }
@@ -194,6 +198,16 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
       this.game.gender = 'GENTS';
     } else {
       this.game.gender = 'MIXED';
+    }
+  }
+
+  refreshDivisionsOfSelectedLeague(): void {
+    if (this.selectedLeague) {
+      this.leagueService.getLeague(this.selectedLeague.id).subscribe(
+        league => this.divisionsOfSelectedLeague = league.divisions,
+        error => this.divisionsOfSelectedLeague = []);
+    } else {
+      this.divisionsOfSelectedLeague = [];
     }
   }
 

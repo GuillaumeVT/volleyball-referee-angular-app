@@ -52,7 +52,7 @@
               <i class="fa fa-download"></i><span class="icon-text">&nbsp;&nbsp;Excel</span>
             </button>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <button *ngFor="let divisionName of league.divisions" class="dropdown-item" (click)="downloadDivisionExcel(league, divisionName)">{{divisionName}}</button>
+              <button *ngFor="let divisionName of divisionsMap.get(league.id)" class="dropdown-item" (click)="downloadDivisionExcel(league, divisionName)">{{divisionName}}</button>
             </div>
           </div>
           <button type="button" class="btn vbr-button-inverted" (click)="deleteLeague(league)">

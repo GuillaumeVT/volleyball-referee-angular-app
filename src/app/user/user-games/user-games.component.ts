@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GameDescription } from '../../model/game-description';
 import { RulesDescription } from '../../model/rules-description';
 import { TeamDescription } from '../../model/team-description';
-import { League } from '../../model/league';
+import { LeagueDescription } from '../../model/league-description';
 import { CrudType } from '../../model/crudtype';
 import { GameFilter } from '../../utils/gamefilter';
 import { Utils } from '../../utils/utils';
@@ -34,7 +34,7 @@ export class UserGamesComponent implements OnInit, OnDestroy {
   user:             User;
   gameFilter:       GameFilter;
   selectedLeagueId: string;
-  selectedLeague:   League;
+  selectedLeague:   LeagueDescription;
 
   private subscription : Subscription = new Subscription();
 
@@ -87,7 +87,7 @@ export class UserGamesComponent implements OnInit, OnDestroy {
     });
   }
 
-  launchCreateGame(game: GameDescription, leagues: League[], teams: TeamDescription[], rules: RulesDescription[], defaultRules: RulesDescription): void {
+  launchCreateGame(game: GameDescription, leagues: LeagueDescription[], teams: TeamDescription[], rules: RulesDescription[], defaultRules: RulesDescription): void {
     const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
     modalRef.componentInstance.game = game;
     modalRef.componentInstance.leagues = leagues;
@@ -111,7 +111,7 @@ export class UserGamesComponent implements OnInit, OnDestroy {
     });
   }
 
-  launchViewGame(game: GameDescription, leagues: League[], teams: TeamDescription[], rules: RulesDescription[], defaultRules: RulesDescription): void {
+  launchViewGame(game: GameDescription, leagues: LeagueDescription[], teams: TeamDescription[], rules: RulesDescription[], defaultRules: RulesDescription): void {
     const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
     modalRef.componentInstance.game = game;
     modalRef.componentInstance.leagues = leagues;
@@ -135,7 +135,7 @@ export class UserGamesComponent implements OnInit, OnDestroy {
     });
   }
 
-  launchUpdateGame(game: GameDescription, leagues: League[], teams: TeamDescription[], rules: RulesDescription[], defaultRules: RulesDescription): void {
+  launchUpdateGame(game: GameDescription, leagues: LeagueDescription[], teams: TeamDescription[], rules: RulesDescription[], defaultRules: RulesDescription): void {
     const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
     modalRef.componentInstance.game = game;
     modalRef.componentInstance.leagues = leagues;
