@@ -44,7 +44,7 @@
     </div>
     <div class="px-1 col-12 col-sm-12 col-md-6" *ngIf="availableGames && availableGames.length > 0">
       <div class="jumbotron div-jumbotron p-4 my-1">
-        <p class="lead vbr-text">Upcoming games</p>
+        <p class="lead vbr-text">Upcoming & live games</p>
         <hr class="mt-2 mb-4"/>
         <app-game-list-item *ngFor="let game of availableGames" [gameDescription]="game" [inLeague]="false"></app-game-list-item>
       </div>
