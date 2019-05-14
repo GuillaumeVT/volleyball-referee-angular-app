@@ -5,13 +5,13 @@
       <span class="badge text-center player-badge mr-1 mb-1" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)"
         [style.border-color]="utils.getTeamBorderColor(game, leftTeam)" [innerHTML]="utils.getPlayer(game, leftTeam, player.num)" *ngFor="let player of getPlayers(leftTeam)"></span>
       <span class="badge text-center player-badge mr-1 mb-1" [style.background-color]="utils.getLiberoBackgroundColor(game, leftTeam)" [style.color]="utils.getLiberoTextColor(game, leftTeam)"
-        [style.border-color]="utils.getLiberoBorderColor(game, leftTeam)" [innerHTML]="libero" *ngFor="let libero of getLiberos(leftTeam)"></span>
+        [style.border-color]="utils.getLiberoBorderColor(game, leftTeam)" [innerHTML]="utils.getPlayer(game, leftTeam, libero.num)" *ngFor="let libero of getLiberos(leftTeam)"></span>
     </div>
     <div class="div-players mr-2" *ngIf="game">
       <span class="badge text-center player-badge mr-1 mb-1" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)"
         [style.border-color]="utils.getTeamBorderColor(game, rightTeam)" [innerHTML]="utils.getPlayer(game, rightTeam, player.num)" *ngFor="let player of getPlayers(rightTeam)"></span>
       <span class="badge text-center player-badge mr-1 mb-1" [style.background-color]="utils.getLiberoBackgroundColor(game, rightTeam)" [style.color]="utils.getLiberoTextColor(game, rightTeam)"
-        [style.border-color]="utils.getLiberoBorderColor(game, rightTeam)" [innerHTML]="libero" *ngFor="let libero of getLiberos(rightTeam)"></span>
+        [style.border-color]="utils.getLiberoBorderColor(game, rightTeam)" [innerHTML]="utils.getPlayer(game, rightTeam, libero.num)" *ngFor="let libero of getLiberos(rightTeam)"></span>
     </div>
   </div>
 </div>
