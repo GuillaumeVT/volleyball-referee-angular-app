@@ -2,64 +2,16 @@
   <div class="my-3 text-center" *ngIf="league">
     <span class="h2 vbr-text-color">{{league.name}}</span>
   </div>
-  <div class="div-games">
-    <div class="mx-1 my-3" *ngIf="league">
-      <select class="custom-select vbr-text" [(ngModel)]="selectedDivision" (change)="onDivisionSelected()">
-        <option [ngValue]="allDivisions">
-          {{allDivisions}}
-        </option>
-        <optgroup label="Divisions">
-          <option *ngFor="let division of league.divisions" [ngValue]="division">
-            {{division}}
-          </option>
-        </optgroup>
-      </select>
-    </div>
-  </div>
   <div class="text-center my-3">
     <ul class="list-unstyled list-inline">
       <li class="list-inline-item my-1"><button [ngClass]="getLinkClass(0)" (click)="showDashboard()">Dashboard</button></li>
-      <li class="list-inline-item my-1"><button [ngClass]="getLinkClass(1)" (click)="showGames()">Games</button></li>
+      <li class="list-inline-item my-1"><button [ngClass]="getLinkClass(1)" (click)="showRankings()">Rankings</button></li>
+      <li class="list-inline-item my-1"><button [ngClass]="getLinkClass(2)" (click)="showGames()">Games</button></li>
     </ul>
   </div>
-  <div class="div-dashboard row m-1 text-center" *ngIf="league && selectedIndex === 0">
-    <div class="px-1 col-12 col-sm-4 col-md-4">
-      <div class="jumbotron div-jumbotron p-2">
-        <p class="lead vbr-text">Live Games&nbsp;&nbsp;&nbsp;<span class="badge vbr-button-color">{{liveGames.length}}</span></p>
-        <hr class="mt-2 mb-4"/>
-        <app-game-list-item *ngFor="let game of liveGames" [gameDescription]="game" [inLeague]="true"></app-game-list-item>
-      </div>
-    </div>
-    <div class="px-1 col-12 col-sm-4 col-md-4">
-      <div class="jumbotron div-jumbotron p-2">
-        <p class="lead vbr-text">Next 10 Games&nbsp;&nbsp;&nbsp;<span class="badge vbr-button-color">{{next10Games.length}}</span></p>
-        <hr class="mt-2 mb-4"/>
-        <app-game-list-item *ngFor="let game of next10Games" [gameDescription]="game" [inLeague]="true"></app-game-list-item>
-      </div>
-    </div>
-    <div class="px-1 col-12 col-sm-4 col-md-4">
-      <div class="jumbotron div-jumbotron p-2">
-        <p class="lead vbr-text">Last 10 Games&nbsp;&nbsp;&nbsp;<span class="badge vbr-button-color">{{last10Games.length}}</span></p>
-        <hr class="mt-2 mb-4"/>
-        <app-game-list-item *ngFor="let game of last10Games" [gameDescription]="game" [inLeague]="true"></app-game-list-item>
-      </div>
-    </div>
-  </div>
-  <div class="div-games" *ngIf="league && selectedIndex === 1">
-    <div class="mx-1 my-3" *ngIf="league && teams.length > 0">
-      <select class="custom-select vbr-text" [(ngModel)]="selectedTeam">
-        <option [ngValue]="allTeams">
-          {{allTeams.name}}
-        </option>
-        <optgroup label="Teams">
-          <option *ngFor="let team of teams" [ngValue]="team">
-            {{team.name}}&nbsp;&nbsp;{{utils.getGenderNoIcon(team.gender)}}
-          </option>
-        </optgroup>
-      </select>
-    </div>
-    <app-game-list class="my-3" *ngIf="league && selectedTeam" [leagueId]="league.id" [teamId]="selectedTeam.id"></app-game-list>
-  </div>
+  <app-league-dashboard [league]="league" *ngIf="league && selectedIndex === 0"></app-league-dashboard>
+  <app-division-rankings [league]="league" *ngIf="league && selectedIndex === 1"></app-division-rankings>
+  <app-league-games [league]="league" *ngIf="league && selectedIndex === 2"></app-league-games>
 </div>
 <div class="div-footer">
   <app-links-bar></app-links-bar>

@@ -39,7 +39,7 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

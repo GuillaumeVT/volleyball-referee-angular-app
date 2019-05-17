@@ -62,6 +62,9 @@ import { SearchModalComponent } from './search/search-modal/search-modal.compone
 import { UserColleaguesComponent } from './user/user-colleagues/user-colleagues.component';
 import { UserColleagueModalComponent } from './user/user-colleague-modal/user-colleague-modal.component';
 import { ColleagueRequestItemComponent } from './user/colleague-request-item/colleague-request-item.component';
+import { DivisionRankingsComponent } from './league/division-rankings/division-rankings.component';
+import { LeagueDashboardComponent } from './league/league-dashboard/league-dashboard.component';
+import { LeagueGamesComponent } from './league/league-games/league-games.component';
 
 export function configFactory(config: AuthServiceConfig) {
   return config;
@@ -123,6 +126,9 @@ export function getAuthServiceConfigs() {
     UserColleaguesComponent,
     UserColleagueModalComponent,
     ColleagueRequestItemComponent,
+    DivisionRankingsComponent,
+    LeagueDashboardComponent,
+    LeagueGamesComponent,
   ],
   imports: [
     BrowserModule,

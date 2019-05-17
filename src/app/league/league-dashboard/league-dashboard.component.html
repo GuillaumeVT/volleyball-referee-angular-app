@@ -1,0 +1,37 @@
+<div class="div-divisions" *ngIf="league">
+  <div class="mx-1 my-3">
+    <select class="custom-select vbr-text" [(ngModel)]="selectedDivision" (change)="onDivisionSelected()">
+      <option [ngValue]="allDivisions">
+        {{allDivisions}}
+      </option>
+      <optgroup label="Divisions">
+        <option *ngFor="let division of league.divisions" [ngValue]="division">
+          {{division}}
+        </option>
+      </optgroup>
+    </select>
+  </div>
+</div>
+<div class="row m-1 text-center" *ngIf="league">
+  <div class="px-1 col-12 col-sm-4 col-md-4">
+    <div class="jumbotron div-jumbotron p-2">
+      <p class="lead vbr-text">Live Games&nbsp;&nbsp;&nbsp;<span class="badge vbr-button-color">{{liveGames.length}}</span></p>
+      <hr class="mt-2 mb-4"/>
+      <app-game-list-item *ngFor="let game of liveGames" [gameDescription]="game" [inLeague]="true"></app-game-list-item>
+    </div>
+  </div>
+  <div class="px-1 col-12 col-sm-4 col-md-4">
+    <div class="jumbotron div-jumbotron p-2">
+      <p class="lead vbr-text">Next 10 Games&nbsp;&nbsp;&nbsp;<span class="badge vbr-button-color">{{next10Games.length}}</span></p>
+      <hr class="mt-2 mb-4"/>
+      <app-game-list-item *ngFor="let game of next10Games" [gameDescription]="game" [inLeague]="true"></app-game-list-item>
+    </div>
+  </div>
+  <div class="px-1 col-12 col-sm-4 col-md-4">
+    <div class="jumbotron div-jumbotron p-2">
+      <p class="lead vbr-text">Last 10 Games&nbsp;&nbsp;&nbsp;<span class="badge vbr-button-color">{{last10Games.length}}</span></p>
+      <hr class="mt-2 mb-4"/>
+      <app-game-list-item *ngFor="let game of last10Games" [gameDescription]="game" [inLeague]="true"></app-game-list-item>
+    </div>
+  </div>
+</div>

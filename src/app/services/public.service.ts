@@ -7,6 +7,7 @@ import { Game } from '../model/game';
 import { League } from '../model/league';
 import { GameDescription } from '../model/game-description';
 import { TeamDescription } from '../model/team-description';
+import { Ranking } from '../model/ranking';
 
 @Injectable({
   providedIn: 'root'
@@ -99,6 +100,11 @@ export class PublicService {
   listGamesOfTeamInDivision(leagueId: string, divisionName: string, teamId: string): Observable<GameDescription[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/team/${teamId}`;
     return this.http.get<GameDescription[]>(url);
+  }
+
+  listRankingsInDivision(leagueId: string, divisionName: string): Observable<Ranking[]> {
+    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/rankings`;
+    return this.http.get<Ranking[]>(url);
   }
 
   listTeamsOfLeague(leagueId: string): Observable<TeamDescription[]> {
