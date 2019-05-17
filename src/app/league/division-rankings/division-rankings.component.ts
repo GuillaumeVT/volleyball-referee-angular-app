@@ -5,6 +5,9 @@ import { League } from '../../model/league';
 import { Ranking } from '../../model/ranking';
 import { PublicService } from '../../services/public.service';
 import { Utils } from '../../utils/utils';
+import { HttpResponse } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { saveAs }from 'file-saver';
 
 @Component({
   selector: 'app-division-rankings',
@@ -21,7 +24,7 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() league: League;
 
-  constructor(private publicService: PublicService, private utils: Utils) {
+  constructor(private publicService: PublicService, private datePipe: DatePipe, private utils: Utils) {
     this.rankings = [];
   }
 
@@ -64,6 +67,18 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
 
   getLineColor(index: number): string {
     return (index % 2) === 0 ? '#fff': '#e0e0e0';
+  }
+
+  downloadDivisionExcel(): void {
+    this.publicService.listGamesInDivisionExcel(this.league.id, this.selectedDivision).subscribe(response => this.onDivisionExcelReceived(response), error => this.onDivisionExcelReceived(null));
+  }
+
+  onDivisionExcelReceived(response: HttpResponse<any>): void {
+    const date = new Date();
+    const dateStr = this.datePipe.transform(date.getTime(), 'dd_MM_yyyy__HH_mm');
+    const filename = this.league.name + '_' + this.selectedDivision + '_' + dateStr + '.xlsx';
+    const blob = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    saveAs(response, filename);
   }
 
 }

@@ -6,6 +6,7 @@ import { User } from '../../model/user';
 import { UserService } from '../../services/user.service';
 import { LeagueService } from '../../services/league.service';
 import { GameService } from '../../services/game.service';
+import { PublicService } from '../../services/public.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -31,7 +32,7 @@ export class UserLeaguesComponent implements OnInit, OnDestroy {
 
   private subscription : Subscription = new Subscription();
 
-  constructor(private titleService: Title, private userService: UserService, private leagueService: LeagueService, private gameService: GameService,
+  constructor(private titleService: Title, private userService: UserService, private leagueService: LeagueService, private gameService: GameService, private publicService: PublicService,
     private modalService: NgbModal, private toastr: ToastrService, private datePipe: DatePipe, private router: Router) {
     this.titleService.setTitle('VBR - My Leagues');
     this.leagueFilter = new LeagueFilter();
@@ -106,7 +107,7 @@ export class UserLeaguesComponent implements OnInit, OnDestroy {
   }
 
   downloadDivisionExcel(league: League, divisionName: string): void {
-    this.gameService.listGamesInDivisionExcel(league.id, divisionName).subscribe(response => this.onDivisionExcelReceived(response, league, divisionName), error => this.onDivisionExcelReceived(null, league, divisionName));
+    this.publicService.listGamesInDivisionExcel(league.id, divisionName).subscribe(response => this.onDivisionExcelReceived(response, league, divisionName), error => this.onDivisionExcelReceived(null, league, divisionName));
   }
 
   onDivisionExcelReceived(response: HttpResponse<any>, league: League, divisionName: string): void {

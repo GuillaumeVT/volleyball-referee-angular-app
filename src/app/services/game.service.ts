@@ -35,11 +35,6 @@ export class GameService {
     return this.http.get<GameDescription[]>(url);
   }
 
-  listGamesInDivisionExcel(leagueId: string, divisionName: string): Observable<any> {
-    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/excel`;
-    return this.http.get<any>(url, { headers: { 'Content-Type': 'application/json', 'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}, responseType: 'blob' as 'json' });
-  }
-
   getGame(gameId: string): Observable<Game> {
     const url = `${this.gamesUrl}/${gameId}`;
     return this.http.get<Game>(url);

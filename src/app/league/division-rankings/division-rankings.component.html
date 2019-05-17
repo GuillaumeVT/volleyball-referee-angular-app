@@ -1,11 +1,14 @@
 <div class="div-divisions" *ngIf="league">
-  <div class="mx-1 my-3" *ngIf="league">
+  <div class="mx-1 my-3">
     <select class="custom-select vbr-text" [(ngModel)]="selectedDivision" (change)="onDivisionSelected()">
       <option *ngFor="let division of league.divisions" [ngValue]="division">
         {{division}}
       </option>
     </select>
   </div>
+  <button type="button" class="btn vbr-button-inverted mx-1" (click)="downloadDivisionExcel()">
+    <i class="fa fa-download mr-2"></i>Excel version
+  </button>
 </div>
 <div class="div-rankings my-3" *ngIf="league">
   <div class="card div-card container expanded-rankings">
@@ -53,8 +56,8 @@
     </div>
     <div class="row align-items-center p-1">
       <div class="vbr-text col-6 text-left p-0 m-0 title"></div>
-      <div class="vbr-text col-1 text-right p-0 m-0 title">P</div>
-      <div class="vbr-text col-1 text-right p-0 m-0 title">W</div>
+      <div class="vbr-text col-1 text-right p-0 m-0 title">P.</div>
+      <div class="vbr-text col-1 text-right p-0 m-0 title">W.</div>
       <div class="vbr-text col-2 text-right p-0 m-0 title">Diff</div>
       <div class="vbr-text col-2 text-right p-0 m-0 title">Diff</div>
     </div>

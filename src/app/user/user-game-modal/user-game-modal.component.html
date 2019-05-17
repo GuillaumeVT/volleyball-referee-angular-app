@@ -18,14 +18,13 @@
     </div>
 
     <div class="mb-3">
-      <div class="custom-control custom-radio custom-control-inline">
-        <input class="custom-control-input" type="radio" name="indexed" id="public" [value]="true" [(ngModel)]="game.indexed" [attr.disabled]="isEditingDisabled()">
-        <label class="custom-control-label vbr-text" name="public" for="public">Public</label>
-      </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input class="custom-control-input" type="radio" name="indexed" id="private" [value]="false" [(ngModel)]="game.indexed" [attr.disabled]="isEditingDisabled()">
-        <label class="custom-control-label vbr-text" name="private" for="private">Private</label>
-      </div>
+      <label class="vbr-switch">
+        <input type="checkbox" name="indexed" id="indexed" [(ngModel)]="game.indexed" [attr.disabled]="isEditingDisabled()">
+        <span class="slider round"></span>
+      </label>
+      <span *ngIf="game.indexed" class="ml-3 vbr-text">Public</span>
+      <span *ngIf="!game.indexed" class="ml-3 vbr-text">Private</span>
+
     </div>
 
     <div class="row mb-3">
