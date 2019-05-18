@@ -10,6 +10,11 @@
   margin-right: auto;
 }
 
+.div-download {
+  z-index: 3;
+  position: fixed;
+}
+
 @media screen and (min-width: 800px) {
   .collapsed-rankings {
     display: none;
