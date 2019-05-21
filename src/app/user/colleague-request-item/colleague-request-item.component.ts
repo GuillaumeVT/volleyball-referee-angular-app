@@ -23,7 +23,7 @@ export class ColleagueRequestItemComponent implements OnInit {
   acceptColleague(friendRequest: FriendRequest): void {
     const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
     modalRef.componentInstance.title = 'Accept colleague';
-    modalRef.componentInstance.message = `Do you want to accept ${friendRequest.senderPseudo}'s colleague request?`;
+    modalRef.componentInstance.message = `Do you want to add ${friendRequest.senderPseudo} as colleague?`;
     modalRef.componentInstance.okClicked.subscribe(ok =>
       this.userService.acceptFriendRequest(friendRequest.id).subscribe(
         success => this.onColleagueAccepted(friendRequest.senderPseudo),
@@ -35,7 +35,7 @@ export class ColleagueRequestItemComponent implements OnInit {
   rejectColleague(friendRequest: FriendRequest): void {
     const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
     modalRef.componentInstance.title = 'Reject colleague';
-    modalRef.componentInstance.message = `Do you want to reject ${friendRequest.senderPseudo}'s colleague request?`;
+    modalRef.componentInstance.message = `Do you want to reject ${friendRequest.senderPseudo}'s request?`;
     modalRef.componentInstance.okClicked.subscribe(ok =>
       this.userService.rejectFriendRequest(friendRequest.id).subscribe(
         success => this.onColleagueRejected(friendRequest.senderPseudo),
@@ -55,7 +55,7 @@ export class ColleagueRequestItemComponent implements OnInit {
 
   onColleagueRejected(pseudo: string): void {
     this.mustRefreshFriendRequestsReceivedBy.emit(true);
-    this.toastr.success(`${pseudo}'s colleague request was rejected`, '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.toastr.success(`${pseudo}'s request was rejected`, '', { timeOut: 2500, positionClass: 'toast-top-left' });
   }
 
   onColleagueRejectionError(pseudo: string): void {

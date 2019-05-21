@@ -62,7 +62,7 @@ export class UserColleaguesComponent implements OnInit, OnDestroy {
   }
 
   onAddColleagueRequested(receiverPseudo: string): void {
-    this.toastr.success(`A colleague request was successfully sent to ${receiverPseudo}`, '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.toastr.success(`A request was successfully sent to ${receiverPseudo}`, '', { timeOut: 2500, positionClass: 'toast-top-left' });
   }
 
   onColleagueRemoved(pseudo: string): void {

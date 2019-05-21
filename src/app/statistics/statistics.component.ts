@@ -46,8 +46,7 @@ export class StatisticsComponent implements OnInit {
       this.teamStatisticsData = [
         { "name": "Indoor 6x6", "value": this.findCount("INDOOR", this.statistics.teamStatistics) },
         { "name": "Beach", "value": this.findCount("BEACH", this.statistics.teamStatistics) },
-        { "name": "Indoor 4x4", "value": this.findCount("INDOOR_4X4", this.statistics.teamStatistics) },
-        { "name": "Time", "value": this.findCount("TIME", this.statistics.teamStatistics) }
+        { "name": "Indoor 4x4", "value": this.findCount("INDOOR_4X4", this.statistics.teamStatistics) }
       ];
     }
   }
