@@ -38,7 +38,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     this.moreNumbers = false;
     this.players = [];
     this.liberos = [];
-    for (var index = 1; index <= 99; index++) {
+    for (var index = 0; index <= 99; index++) {
       this.players.push(new InputPlayerItem(index, '#ffffff', '#000000', '#000000', false, '#1f1f1f', '#d6d7d7', '#d6d7d7'));
     }
   }
@@ -91,7 +91,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
       this.undefinedName = false;
     }
 
-    if (this.players[this.team.captain-1].selected) {
+    if (this.players[this.team.captain].selected) {
       this.invalidCaptain = false;
     } else {
       this.invalidCaptain = true;
@@ -206,7 +206,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   }
 
   onPlayerSelected(player: number) {
-    const playerItem = this.players[player-1];
+    const playerItem = this.players[player];
     playerItem.selected = !playerItem.selected;
 
     if (playerItem.selected) {
@@ -228,11 +228,13 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   }
 
   onLiberoSelected(player: number) {
-    const numberOfLiberos = this.numberOfLiberos();
-    for (let liberoItem of this.liberos) {
-      if (liberoItem.shirtNumber === player) {
-        if (liberoItem.selected || (numberOfLiberos < 2)) {
-          liberoItem.selected = !liberoItem.selected;
+    if (this.numberOfPlayers() > this.minPlayers) {
+      const numberOfLiberos = this.numberOfLiberos();
+      for (let liberoItem of this.liberos) {
+        if (liberoItem.shirtNumber === player) {
+          if (liberoItem.selected || (numberOfLiberos < 2)) {
+            liberoItem.selected = !liberoItem.selected;
+          }
         }
       }
     }

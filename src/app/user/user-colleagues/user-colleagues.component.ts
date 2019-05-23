@@ -30,7 +30,6 @@ export class UserColleaguesComponent implements OnInit, OnDestroy {
     this.subscription.add(this.userService.userState.subscribe(user => {
       this.user = user;
       if (this.user) {
-        this.refreshUser();
         this.refreshFriendRequestsReceivedBy();
       }
     }));

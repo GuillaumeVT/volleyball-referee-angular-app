@@ -64,6 +64,10 @@ export class SetLineupsComponent implements OnInit {
       playerNumberStr = '<u>' + playerNumberStr + '</u>';
     }
 
+    if (playerNumber === -1) {
+      playerNumberStr = '_';
+    }
+
     return playerNumberStr;
   }
 

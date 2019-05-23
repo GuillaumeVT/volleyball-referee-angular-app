@@ -67,7 +67,7 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
         actingCaptain = set.guestCaptain;
       }
 
-      var playerItem = new IndoorPlayerItem(player, color, backgroundColor, borderColor, actingCaptain === player);
+      var playerItem = new IndoorPlayerItem(player, color, backgroundColor, borderColor, (actingCaptain >= 0 && actingCaptain === player));
       playerItems.push(playerItem);
     }
     return playerItems;
@@ -87,7 +87,13 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
   }
 
   getPlayerText(position: number, teamType: TeamType): string {
-    return this.getPlayerItem(position, teamType).player;
+    var player: string = this.getPlayerItem(position, teamType).player;
+
+    if (player === '-1') {
+      player = '_';
+    }
+
+    return player;
   }
 
   getPlayerFrontColor(position: number, teamType: TeamType): string {
