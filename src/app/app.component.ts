@@ -45,8 +45,10 @@ export class AppComponent implements OnInit {
   }
 
   closeDrawer(): void {
-    document.getElementById("drawer").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
+    if (document.getElementById("overlay").style.display === "block") {
+      document.getElementById("drawer").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
   }
 
   setCurrentPage(event): void {

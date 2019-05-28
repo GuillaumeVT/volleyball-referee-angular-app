@@ -35,6 +35,12 @@ export class SearchModalComponent implements OnInit {
     this.close();
   }
 
+  onSearchTodayClicked(): void {
+    const dateStr = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.router.navigateByUrl(`search/date/${dateStr}`);
+    this.close();
+  }
+
   onSearchDateClicked(): void {
     if (this.searchDate) {
       const dateStr = this.datePipe.transform(this.searchDate, 'yyyy-MM-dd');

@@ -362,6 +362,10 @@ input:checked + .slider:before {
   background-color: #1f4294;
 }
 
+.badge {
+  border: 1px solid #1f1f1f;
+}
+
 html {
   font-family: 'Roboto', sans-serif;
   font-size: 1em;

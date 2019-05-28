@@ -72,7 +72,7 @@
       <div class="col-6 col-sm-6">
         <select [ngClass]="invalidCaptain ? 'vbr-error-input' : ''" class="vbr-text custom-select"
           name="captain" id="captain" [(ngModel)]="team.captain" [attr.disabled]="isEditingDisabled()">
-          <option *ngFor="let playerItem of players" [ngValue]="playerItem.shirtNumber">{{playerItem.shirtNumber}}</option>
+          <option *ngFor="let playerNumber of selectedPlayers" [ngValue]="playerNumber">{{playerNumber}}</option>
         </select>
       </div>
       <div class="col-12">

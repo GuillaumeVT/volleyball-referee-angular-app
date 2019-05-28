@@ -17,7 +17,7 @@
 <div class="div-schedule text-center" *ngIf="game && game.status === 'SCHEDULED'">
   <ngb-alert class="mx-1 px-1" type="info" [dismissible]="false">
     <h4 class="alert-heading">{{game.homeTeam.name}} - {{game.guestTeam.name}}</h4>
-    <label>This game is scheduled to start on {{game.scheduledAt | date : 'dd MMM yyyy'}} at {{game.scheduledAt | date : 'HH:mm:ss'}}.</label>
+    <label>This game is scheduled to start on {{game.scheduledAt | date : 'dd MMM yyyy'}} at {{game.scheduledAt | date : 'HH:mm'}}.</label>
   </ngb-alert>
 </div>
 <div class="div-role" *ngIf="game && game.status === 'LIVE'">

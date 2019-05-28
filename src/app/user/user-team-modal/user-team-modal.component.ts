@@ -28,6 +28,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   liberos:          InputPlayerItem[];
   moreNumbers:      boolean;
   minPlayers:       number;
+  selectedPlayers:    number[];
 
   constructor(private activeModal: NgbActiveModal, private teamService: TeamService, private modalService: NgbModal, private utils: Utils) {
     this.undefinedName = false;
@@ -41,6 +42,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     for (var index = 0; index <= 99; index++) {
       this.players.push(new InputPlayerItem(index, '#ffffff', '#000000', '#000000', false, '#1f1f1f', '#d6d7d7', '#d6d7d7'));
     }
+    this.selectedPlayers = [];
   }
 
   ngOnInit() { }
@@ -214,6 +216,8 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
       const borderColor: string = this.utils.getBorderColor(this.team.liberoColor);
       this.liberos.push(new InputPlayerItem(player, color, this.team.liberoColor, borderColor, playerItem.captain, '#1f1f1f', '#d6d7d7', '#d6d7d7'));
       this.liberos = this.liberos.sort((l1, l2) => l1.shirtNumber - l2.shirtNumber);
+      this.selectedPlayers.push(player);
+      this.selectedPlayers = this.selectedPlayers.sort((a, b) => a - b);
     } else {
       var tmpLiberos = [];
 
@@ -224,6 +228,12 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
       }
 
       this.liberos = tmpLiberos.sort((l1, l2) => l1.shirtNumber - l2.shirtNumber);
+
+      for (var index = 0; index < this.selectedPlayers.length; index++) {
+        if (this.selectedPlayers[index] === player) {
+          this.selectedPlayers.splice(index, 1);
+        }
+      }
     }
   }
 

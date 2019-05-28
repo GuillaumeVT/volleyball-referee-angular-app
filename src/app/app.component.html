@@ -4,14 +4,14 @@
     <a href="javascript:void(0)" class="drawer-close-button" (click)="closeDrawer()">&times;</a>
   </div>
   <div *ngIf="signedIn" class="div-drawer p-3 mr-5 material-design-shadow">
-    <a class="ml-3 p-2" [ngClass]="currentPage === 0 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getHomeUrl()">Home</a>
+    <a class="ml-3 p-2" [ngClass]="currentPage === 0 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getHomeUrl()">Home</a>
     <hr *ngIf="signedIn && user"/>
     <div *ngIf="signedIn && user" class="ml-3 p-2 c3ac-text text-muted">My data</div>
-    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 1 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getUserLeaguesUrl()">Tournaments & Leagues</a>
-    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 2 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getUserGamesUrl()">Games</a>
-    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 3 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getUserTeamsUrl()">Teams</a>
-    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 4 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getUserRulesUrl()">Rules</a>
-    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 5 ? 'selected-drawer-link' : 'drawer-link'" [routerLink]="getUserColleaguesUrl()">Colleagues</a>
+    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 1 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserLeaguesUrl()">Tournaments & Leagues</a>
+    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 2 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserGamesUrl()">Games</a>
+    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 3 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserTeamsUrl()">Teams</a>
+    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 4 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserRulesUrl()">Rules</a>
+    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 5 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserColleaguesUrl()">Colleagues</a>
   </div>
 </div>
 <div class="div-component-side-overlay" id="overlay" (click)="closeDrawer()"></div>
