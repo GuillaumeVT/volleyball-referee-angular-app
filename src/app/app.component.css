@@ -92,10 +92,18 @@
 
 @media screen and (max-width: 992px) {
   .div-drawer-side {
-    display: none;
+    width: 0px;
     transition: 0.5s;
-    overflow-x: hidden;
+    overflow: hidden;
     z-index: 2;
+  }
+
+  .div-drawer-side span {
+    transition: 0.5s;
+  }
+
+  .div-drawer-side a {
+    transition: 0.5s;
   }
 
   .div-component-side {

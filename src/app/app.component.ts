@@ -40,13 +40,13 @@ export class AppComponent implements OnInit {
   }
 
   openDrawer(): void {
-    document.getElementById("drawer").style.display = "block";
+    document.getElementById("drawer").style.width = "300px";
     document.getElementById("overlay").style.display = "block";
   }
 
   closeDrawer(): void {
     if (document.getElementById("overlay").style.display === "block") {
-      document.getElementById("drawer").style.display = "none";
+      document.getElementById("drawer").style.width = "0px";
       document.getElementById("overlay").style.display = "none";
     }
   }
