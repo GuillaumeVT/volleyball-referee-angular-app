@@ -65,6 +65,7 @@ import { ColleagueRequestItemComponent } from './user/colleague-request-item/col
 import { DivisionRankingsComponent } from './league/division-rankings/division-rankings.component';
 import { LeagueDashboardComponent } from './league/league-dashboard/league-dashboard.component';
 import { LeagueGamesComponent } from './league/league-games/league-games.component';
+import { GameRefereeModalComponent } from './user/game-referee-modal/game-referee-modal.component';
 
 export function configFactory(config: AuthServiceConfig) {
   return config;
@@ -129,6 +130,7 @@ export function getAuthServiceConfigs() {
     DivisionRankingsComponent,
     LeagueDashboardComponent,
     LeagueGamesComponent,
+    GameRefereeModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -158,7 +160,8 @@ export function getAuthServiceConfigs() {
     OkCancelModalComponent,
     ColorPickerModalComponent,
     SearchModalComponent,
-    UserColleagueModalComponent
+    UserColleagueModalComponent,
+    GameRefereeModalComponent
   ],
   bootstrap: [AppComponent]
 })

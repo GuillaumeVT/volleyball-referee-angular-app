@@ -55,6 +55,11 @@ export class GameService {
     return this.http.put<GameDescription>(url, game);
   }
 
+  updateReferee(gameId: string, refereeUserId: string): Observable<Object> {
+    const url = `${this.gamesUrl}/${gameId}/referee/${refereeUserId}`;
+    return this.http.patch<Object>(url, {});
+  }
+
   deleteGame(gameId: string): Observable<Object> {
     const url = `${this.gamesUrl}/${gameId}`;
     return this.http.delete(url);

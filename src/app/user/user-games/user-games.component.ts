@@ -18,6 +18,7 @@ import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserGameModalComponent } from '../user-game-modal/user-game-modal.component';
 import { OkCancelModalComponent } from '../../ok-cancel-modal/ok-cancel-modal.component';
+import { GameRefereeModalComponent } from '../game-referee-modal/game-referee-modal.component';
 import { ToastrService } from 'ngx-toastr';
 import { HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
@@ -147,6 +148,13 @@ export class UserGamesComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.gameUpdated.subscribe(updated => this.onGameUpdated());
   }
 
+  updateReferee(game: GameDescription): void {
+    const modalRef = this.modalService.open(GameRefereeModalComponent, { size: 'lg' });
+    modalRef.componentInstance.game = game;
+    modalRef.componentInstance.user = this.user;
+    modalRef.componentInstance.refereeUpdated.subscribe(updated => this.onRefereeUpdated());
+  }
+
   deleteGame(game: GameDescription): void {
     const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
     modalRef.componentInstance.title = 'Delete game';
@@ -163,6 +171,11 @@ export class UserGamesComponent implements OnInit, OnDestroy {
   onGameUpdated(): void {
     this.refreshGames();
     this.toastr.success('Game was successfully updated', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+  }
+
+  onRefereeUpdated(): void {
+    this.refreshGames();
+    this.toastr.success('Referee was successfully updated', '', { timeOut: 2500, positionClass: 'toast-top-left' });
   }
 
   onGameDeleted(): void {

@@ -71,7 +71,17 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   initForm(): void {
     this.scheduleDate = new Date(this.game.scheduledAt);
     this.me = new Friend(this.user.id, this.user.pseudo);
-    this.selectedReferee = this.me;
+
+    if (this.game.refereedBy === this.me.id) {
+      this.selectedReferee = this.me;
+    } else {
+      for (let friend of this.user.friends) {
+        if (this.game.refereedBy === friend.id) {
+          this.selectedReferee = friend;
+        }
+      }
+    }
+
     if (this.game.homeTeamId && this.game.guestTeamId) {
       for (let team of this.teams) {
         if (team.id === this.game.homeTeamId) {
