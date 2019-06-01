@@ -22,13 +22,13 @@
 
 .vbr-indoor-text {
   background-color: #1f4294;
-  border-color: #1f4294;
+  border-color: #1f4294 !important;
   color: white;
 }
 
 .vbr-indoor-4x4-text {
   background-color: #2980b9;
-  border-color: #2980b9;
+  border-color: #2980b9 !important;
   color: white;
 }
 
