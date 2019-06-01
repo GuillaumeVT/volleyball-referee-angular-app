@@ -54,7 +54,7 @@ import { UserGameModalComponent } from './user/user-game-modal/user-game-modal.c
 import { UserLeaguesComponent } from './user/user-leagues/user-leagues.component';
 import { UserLeagueModalComponent } from './user/user-league-modal/user-league-modal.component';
 import { LeagueComponent } from './league/league.component';
-import { PrivatePolicyComponent } from './private-policy/private-policy.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { RoleSelectorComponent } from './game/role-selector/role-selector.component';
 import { ColorPickerModalComponent } from './user/color-picker-modal/color-picker-modal.component';
 import { HomeComponent } from './home/home.component';
@@ -119,7 +119,7 @@ export function getAuthServiceConfigs() {
     UserLeaguesComponent,
     UserLeagueModalComponent,
     LeagueComponent,
-    PrivatePolicyComponent,
+    PrivacyPolicyComponent,
     RoleSelectorComponent,
     ColorPickerModalComponent,
     HomeComponent,

@@ -10,7 +10,7 @@ import { UserGamesComponent } from './user/user-games/user-games.component';
 import { UserLeaguesComponent } from './user/user-leagues/user-leagues.component';
 import { UserColleaguesComponent } from './user/user-colleagues/user-colleagues.component';
 import { LeagueComponent } from './league/league.component';
-import { PrivatePolicyComponent } from './private-policy/private-policy.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserExistsGuard } from './user-exists.guard';
@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'teams', component: UserTeamsComponent, canActivate: [ UserExistsGuard ] },
   { path: 'games', component: UserGamesComponent, canActivate: [ UserExistsGuard ] },
   { path: 'games/league/:leagueId', component: UserGamesComponent, canActivate: [ UserExistsGuard ] },
-  { path: 'private-policy', component: PrivatePolicyComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

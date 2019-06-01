@@ -27,8 +27,8 @@ export class LinksBarComponent implements OnInit {
   ngOnInit() {
   }
 
-  getPrivatePolicyUrl(): string {
-    return '/private-policy';
+  getPrivacyPolicyUrl(): string {
+    return '/privacy-policy';
   }
 
   signOut(): void {
