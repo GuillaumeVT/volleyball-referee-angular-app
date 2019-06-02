@@ -74,7 +74,7 @@
 
 .vbr-button-color {
 	background-color: #1f4294;
-  border-color: #1f4294;
+  border-color: #1f4294 !important;
   color: white;
 }
 
