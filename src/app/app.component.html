@@ -22,6 +22,7 @@
       <button class="btn vbr-button" (click)="onShowSearchClicked()"><i class="fa fa-search mr-2"></i>Search games</button>
     </div>
     <div class="row align-items-center mr-1">
+      <span *ngIf="user" class="mr-3 user-pseudo">{{user.pseudo}}</span>
       <a *ngIf="numberOfFriendRequests > 0" class="badge notification" [routerLink]="getUserColleaguesUrl()">+{{numberOfFriendRequests}}</a>
 			<a *ngIf="photo" class="navbar-brand" [routerLink]="getHomeUrl()">
 				<img [src]="photo" class="photo" alt="User photo"/>

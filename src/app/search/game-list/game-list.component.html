@@ -1,8 +1,8 @@
 <div *ngIf="gameFilter.games">
-  <div class="mx-1">
-    <span class="vbr-text-color game-number-text" *ngIf="gameFilter.games">Found {{gameFilter.games.length}} game(s)</span>
+  <div class="mx-1 mt-3">
+    <span class="vbr-text-color game-number-text">Found {{gameFilter.games.length}} game(s)</span>
   </div>
-  <div class="my-3 mx-1 text-left" *ngIf="gameFilter.games && gameFilter.games.length > 0">
+  <div class="my-3 mx-1 text-left" *ngIf="gameFilter.games.length > 0">
     <input type="text" class="form-control vbr-text-color mb-2" placeholder="Filter" #textFilter (input)="gameFilter.filterFromText(textFilter)"/>
     <div class="text-left">
       <ul class="list-unstyled list-inline">

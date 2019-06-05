@@ -38,6 +38,7 @@
   font-size: 1em;
   color: #1f4294;
   background-color: #f2bb1a;
+  border-color: #f2bb1a;
 }
 
 .drawer-trigger-button {
@@ -90,6 +91,10 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
+.user-pseudo {
+  color: white;
+}
+
 @media screen and (max-width: 992px) {
   .div-drawer-side {
     width: 0px;
@@ -110,6 +115,9 @@
     margin-left: 0;
   }
 
+  .user-pseudo {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 992px) {
