@@ -19,7 +19,24 @@
   <div class="div-top-bar material-design-shadow justify-content-between p-2">
     <div class="row align-items-center ml-1">
       <button type="button" class="btn vbr-button drawer-trigger-button" (click)="openDrawer()">&#9776;</button>
-      <button class="btn vbr-button" (click)="onShowSearchClicked()"><i class="fa fa-search mr-2"></i>Search games</button>
+      <button type="button" class="btn vbr-button modal-search" (click)="onShowSearchClicked()"><i class="fa fa-search mr-2"></i>Search games</button>
+      <button type="button" class="btn vbr-button bar-search" (click)="onToggleSearchClicked()"><i class="fa fa-search mr-2"></i>Search games</button>
+      <div *ngIf="showSearch" class="form-inline bar-search mx-1">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button type="button" class="btn selected-drawer-link" (click)="onSearchTokenClicked()"><i class="fa fa-search"></i></button>
+          </div>
+          <input type="text" class="form-control vbr-text-color" placeholder="By team / league / referee" [(ngModel)]="searchToken"
+          (keyup.enter)="onSearchTokenClicked()"/>
+        </div>
+      </div>
+      <button type="button" *ngIf="showSearch" class="btn vbr-button bar-search mx-1" (click)="onSearchLiveClicked()"><i class="fa fa-mixcloud mr-2"></i>Live games</button>
+      <button type="button" *ngIf="showSearch" class="btn vbr-button bar-search mx-1" (click)="onSearchTodayClicked()">Today's games</button>
+      <div *ngIf="showSearch" class="form-inline bar-search mx-1">
+        <input style="text-align: left" class="btn vbr-button placeholder-color" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp" [(ngModel)]="searchDate" (dateTimeChange)="onSearchDateClicked()"
+          [min]="minDate" placeholder="Games by date" (keydown)="$event.preventDefault()" readonly>
+        <owl-date-time [pickerType]="'calendar'" #dtp></owl-date-time>
+      </div>
     </div>
     <div class="row align-items-center mr-1">
       <a *ngIf="numberOfFriendRequests > 0" class="badge notification" [routerLink]="getUserColleaguesUrl()"><i class="fa fa-user mr-1"></i>{{numberOfFriendRequests}}</a>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from './model/user';
 import { UserService } from './services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { SearchModalComponent } from './search/search-modal/search-modal.component';
 import { Count } from './model/count';
 
@@ -18,10 +20,20 @@ export class AppComponent implements OnInit {
   numberOfFriendRequests: number;
   currentPage:            number;
 
-  constructor(private userService: UserService, private modalService: NgbModal) {
+  showSearch:  boolean;
+  searchToken: string;
+  searchDate:  Date;
+  minDate:     Date;
+
+  constructor(private userService: UserService, private modalService: NgbModal, private router: Router, private datePipe: DatePipe) {
     this.signedIn = false;
     this.numberOfFriendRequests = 0;
     this.currentPage = -1;
+
+    this.showSearch = false;
+    this.searchToken = '';
+    this.searchDate;
+    this.minDate = new Date(2019, 1, 1, 0, 0, 0);
   }
 
   ngOnInit() {
@@ -68,6 +80,32 @@ export class AppComponent implements OnInit {
 
   onShowSearchClicked(): void {
     const modalRef = this.modalService.open(SearchModalComponent, { size: 'lg' });
+  }
+
+  onToggleSearchClicked(): void {
+    this.showSearch = !this.showSearch;
+  }
+
+  onSearchTokenClicked(): void {
+    if (this.searchToken && this.searchToken.length > 2) {
+      this.router.navigateByUrl(`search/token/${this.searchToken}`);
+    }
+  }
+
+  onSearchLiveClicked(): void {
+    this.router.navigateByUrl('search/live');
+  }
+
+  onSearchTodayClicked(): void {
+    const dateStr = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.router.navigateByUrl(`search/date/${dateStr}`);
+  }
+
+  onSearchDateClicked(): void {
+    if (this.searchDate) {
+      const dateStr = this.datePipe.transform(this.searchDate, 'yyyy-MM-dd');
+      this.router.navigateByUrl(`search/date/${dateStr}`);
+    }
   }
 
   getHomeUrl(): string {

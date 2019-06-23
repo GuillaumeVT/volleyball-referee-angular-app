@@ -1,7 +1,6 @@
 <div class="card div-card text-left mx-1 my-3 p-3" *ngIf="gameDescription">
   <div class="game-item-header">
     <i class="fa fa-mixcloud game-item-icon vbr-live-text mr-2" *ngIf="gameDescription.status === 'LIVE'"></i>
-    <i class="fa fa-hourglass-2 game-item-icon vbr-time-text mr-2" *ngIf="gameDescription.kind === 'TIME'"></i>
     <i class="fa fa-sun-o game-item-icon vbr-sun-text mr-2" *ngIf="gameDescription.kind === 'BEACH'"></i>
     <span class="game-item-badge badge text-center vbr-indoor-text mr-2" *ngIf="gameDescription.kind === 'INDOOR'">6x6</span>
     <span class="game-item-badge badge text-center vbr-indoor-4x4-text mr-2" *ngIf="gameDescription.kind === 'INDOOR_4X4'">4x4</span>

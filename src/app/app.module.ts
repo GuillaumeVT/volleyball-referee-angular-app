@@ -41,8 +41,6 @@ import { SetTimeoutsComponent } from './set/set-timeouts/set-timeouts.component'
 import { GamePlayersComponent } from './game/game-players/game-players.component';
 import { GameSanctionsComponent } from './game/game-sanctions/game-sanctions.component';
 import { SetLineupsComponent } from './set/set-lineups/set-lineups.component';
-import { TimeGameComponent } from './game/time-game/time-game.component';
-import { TimeGameSummaryComponent } from './game/time-game-summary/time-game-summary.component';
 import { GameComponent } from './game/game.component';
 import { UserRulesComponent } from './user/user-rules/user-rules.component';
 import { UserTeamsComponent } from './user/user-teams/user-teams.component';
@@ -106,8 +104,6 @@ export function getAuthServiceConfigs() {
     GamePlayersComponent,
     GameSanctionsComponent,
     SetLineupsComponent,
-    TimeGameComponent,
-    TimeGameSummaryComponent,
     GameComponent,
     UserRulesComponent,
     UserTeamsComponent,

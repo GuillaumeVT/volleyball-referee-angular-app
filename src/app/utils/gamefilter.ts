@@ -57,8 +57,6 @@ export class GameFilter {
         mustAdd = false;
       } else if ((game.kind === 'INDOOR_4X4') && !this.isIndoor4x4Checked) {
         mustAdd = false;
-      } else if ((game.kind === 'TIME') && !this.isTimeChecked) {
-        mustAdd = false;
       }
 
       if ((game.gender === 'MIXED') && !this.isMixedChecked) {
@@ -103,12 +101,6 @@ export class GameFilter {
   toggleIndoor4x4(): void {
     this.isIndoor4x4Checked = !this.isIndoor4x4Checked;
     this.changeToggleButtonState('indoor-4x4-button', this.isIndoor4x4Checked);
-    this.filterGames();
-  }
-
-  toggleTime(): void {
-    this.isTimeChecked = !this.isTimeChecked;
-    this.changeToggleButtonState('time-button', this.isTimeChecked);
     this.filterGames();
   }
 
