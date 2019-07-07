@@ -1,8 +1,7 @@
-import { Game } from '../model/game';
-import { GameDescription } from '../model/game-description';
-import { Player } from '../model/player';
+import { Game, Sanction } from '../model/game';
+import { GameSummary } from '../model/game';
+import { Player } from '../model/team';
 import { TeamType } from '../model/teamtype';
-import { Sanction } from '../model/sanction';
 import { Injectable } from '@angular/core';
 
 @Injectable()

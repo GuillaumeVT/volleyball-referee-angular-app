@@ -10,7 +10,7 @@
 }
 
 .not-found-text {
-  color: white;
+  color: var(--vbr-inverted-text-color);
   position: absolute;
   top: 10%;
   left: 50%;

@@ -1,6 +1,5 @@
-import { User } from './user';
+import { UserSummary } from './user';
 import { UUID } from 'angular2-uuid';
-import { Player } from './player';
 
 export class Team {
   id:          string;
@@ -16,7 +15,7 @@ export class Team {
   liberos:     Player[];
   captain:     number;
 
-  public static createTeam(user: User, kind: string): Team {
+  public static createTeam(user: UserSummary, kind: string): Team {
     const team = new Team();
     const now = new Date();
 
@@ -41,4 +40,24 @@ export class Team {
     return team;
   }
 
+}
+
+export class TeamSummary {
+  id:           string;
+  createdBy:    string;
+  createdAt:    number;
+  updatedAt:    number;
+  name:         string;
+  kind:         string;
+  gender:       string;
+}
+
+export class Player {
+  num:  number;
+  name: string;
+
+  constructor(num: number, name: string) {
+    this.num = num;
+    this.name = name;
+  }
 }

@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Rules } from '../model/rules';
-import { RulesDescription } from '../model/rules-description';
+import { Rules, RulesSummary } from '../model/rules';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +13,14 @@ export class RulesService {
 
   constructor(private http: HttpClient) { }
 
-  listRules(): Observable<RulesDescription[]> {
+  listRules(): Observable<RulesSummary[]> {
     const url = `${this.rulesUrl}`;
-    return this.http.get<RulesDescription[]>(url);
+    return this.http.get<RulesSummary[]>(url);
   }
 
-  listRulesOfKind(kind: string): Observable<RulesDescription[]> {
+  listRulesOfKind(kind: string): Observable<RulesSummary[]> {
     const url = `${this.rulesUrl}/kind/${kind}`;
-    return this.http.get<RulesDescription[]>(url);
+    return this.http.get<RulesSummary[]>(url);
   }
 
   getRules(rulesId: string): Observable<Rules> {
@@ -29,9 +28,9 @@ export class RulesService {
     return this.http.get<Rules>(url);
   }
 
-  getDefaultRules(kind: string): Observable<RulesDescription> {
+  getDefaultRules(kind: string): Observable<RulesSummary> {
     const url = `${this.rulesUrl}/default/kind/${kind}`;
-    return this.http.get<RulesDescription>(url);
+    return this.http.get<RulesSummary>(url);
   }
 
   createRules(rules: Rules): Observable<Rules> {

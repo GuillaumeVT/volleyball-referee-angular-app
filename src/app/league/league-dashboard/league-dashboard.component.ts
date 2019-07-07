@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges, Input } from '@
 import { Subscription, timer } from "rxjs";
 import { takeWhile } from 'rxjs/operators';
 import { League } from '../../model/league';
-import { GameDescription } from '../../model/game-description';
+import { GameSummary } from '../../model/game';
 import { PublicService } from '../../services/public.service';
 
 @Component({
@@ -14,9 +14,9 @@ export class LeagueDashboardComponent implements OnInit, OnDestroy, OnChanges {
 
   selectedDivision: string;
   allDivisions:     string;
-  liveGames:        GameDescription[];
-  next10Games:      GameDescription[];
-  last10Games:      GameDescription[];
+  liveGames:        GameSummary[];
+  next10Games:      GameSummary[];
+  last10Games:      GameSummary[];
   subscription:     Subscription;
   autoRefresh:      boolean;
 

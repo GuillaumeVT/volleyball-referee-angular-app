@@ -3,6 +3,7 @@ import { TeamType } from '../model/teamtype';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-game',
@@ -18,7 +19,7 @@ export class GameComponent implements OnInit {
   rightTeam:  TeamType;
   rate:       number;
 
-  constructor(private titleService: Title, private route: ActivatedRoute) {
+  constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService) {
     this.titleService.setTitle('VBR - View Match');
     this.currentSet = 0;
     this.leftTeam = TeamType.Home;
@@ -28,6 +29,13 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this.gameId = this.route.snapshot.paramMap.get('gameId');
+    this.userService.authState.subscribe(userToken => {
+      if (userToken) {
+        this.rate = 10000;
+      } else {
+        this.rate = 60000;
+      }
+    });
   }
 
   onCurrentGameUpdated(game: Game): void {
@@ -48,7 +56,4 @@ export class GameComponent implements OnInit {
     }
   }
 
-  onCurrentRateUpdated(rate: number): void {
-    this.rate = rate;
-  }
 }

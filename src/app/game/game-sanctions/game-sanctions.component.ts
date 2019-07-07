@@ -1,5 +1,4 @@
-import { Game } from '../../model/game';
-import { Sanction } from '../../model/sanction';
+import { Game, Sanction } from '../../model/game';
 import { TeamType } from '../../model/teamtype';
 import { Utils } from '../../utils/utils';
 import { Component, OnInit, Input } from '@angular/core';

@@ -1,0 +1,28 @@
+.div-players {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  width: inherit;
+  align-items: center;
+  justify-items: start;
+  align-content: center;
+  justify-content: start;
+}
+
+.form-button {
+  width: 60px;
+  height: 45px;
+}
+
+.form-button:hover {
+  filter: var(--vbr-hover-brighter);
+}
+
+.player-button {
+  width: 50px;
+  height: 45px;
+}
+
+.player-button:hover {
+  filter: var(--vbr-hover-brighter);
+}

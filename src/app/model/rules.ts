@@ -1,4 +1,4 @@
-import { User } from './user';
+import { UserSummary } from './user';
 import { UUID } from 'angular2-uuid';
 
 export class Rules {
@@ -28,7 +28,7 @@ export class Rules {
   beachCourtSwitchFreqTieBreak:     number;
   customConsecutiveServesPerPlayer: number;
 
-  public static createRules(user: User, kind: string): Rules {
+  public static createRules(user: UserSummary, kind: string): Rules {
     var rules: Rules;
 
     switch (kind) {
@@ -46,7 +46,7 @@ export class Rules {
     return rules;
   }
 
-  public static createIndoorRules(user: User): Rules {
+  public static createIndoorRules(user: UserSummary): Rules {
     const rules = new Rules();
     const now = new Date();
 
@@ -79,7 +79,7 @@ export class Rules {
     return rules;
   }
 
-  public static createBeachRules(user: User): Rules {
+  public static createBeachRules(user: UserSummary): Rules {
     const rules = new Rules();
     const now = new Date();
 
@@ -112,7 +112,7 @@ export class Rules {
     return rules;
   }
 
-  public static createIndoor4x4Rules(user: User): Rules {
+  public static createIndoor4x4Rules(user: UserSummary): Rules {
     const rules = new Rules();
     const now = new Date();
 
@@ -145,4 +145,13 @@ export class Rules {
     return rules;
   }
 
+}
+
+export class RulesSummary {
+  id:           string;
+  createdBy:    string;
+  createdAt:    number;
+  updatedAt:    number;
+  name:         string;
+  kind:         string;
 }

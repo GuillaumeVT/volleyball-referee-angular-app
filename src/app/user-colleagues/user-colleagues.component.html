@@ -1,0 +1,32 @@
+<div class="div-user text-center">
+  <ul class="my-3 list-unstyled list-inline">
+    <li class="list-inline-item my-1">
+      <button class="btn vbr-button" (click)="addColleague()">
+        <i class="fa fa-plus mr-1"></i>Add colleague
+      </button>
+    </li>
+  </ul>
+  <div class="row m-1" *ngIf="friendsAndRequests">
+    <div class="col-12 col-sm-8 px-1" *ngIf="friendsAndRequests.receivedFriendRequests && friendsAndRequests.receivedFriendRequests.length > 0">
+      <app-colleague-request-item *ngFor="let friendRequest of friendsAndRequests.receivedFriendRequests" [friendRequest]="friendRequest"
+        (mustRefreshFriendRequestsReceivedBy)="refreshFriendsAndRequests()"></app-colleague-request-item>
+    </div>
+    <div *ngFor="let friend of friendsAndRequests.friends" class="card div-card my-3 py-2 px-0 col-12 col-sm-4">
+      <div class="row align-items-center m-1">
+        <div class="vbr-text col-8 col-sm-6 p-1 text-left">
+          {{friend.pseudo}}
+        </div>
+        <div class="vbr-text col-4 col-sm-6 p-1 text-right">
+          <div class="btn-group">
+            <button type="button" class="btn vbr-button-inverted" (click)="removeColleague(friend)">
+              <i class="fa fa-trash"></i><span class="icon-text">&nbsp;&nbsp;Remove</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="div-footer">
+  <app-links-bar></app-links-bar>
+</div>

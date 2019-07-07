@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Team } from '../model/team';
-import { TeamDescription } from '../model/team-description';
+import { Team, TeamSummary } from '../model/team';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +13,14 @@ export class TeamService {
 
   constructor(private http: HttpClient) { }
 
-  listTeams(): Observable<TeamDescription[]> {
+  listTeams(): Observable<TeamSummary[]> {
     const url = `${this.teamsUrl}`;
-    return this.http.get<TeamDescription[]>(url);
+    return this.http.get<TeamSummary[]>(url);
   }
 
-  listTeamsOfKind(kind: string): Observable<TeamDescription[]> {
+  listTeamsOfKind(kind: string): Observable<TeamSummary[]> {
     const url = `${this.teamsUrl}/kind/${kind}`;
-    return this.http.get<TeamDescription[]>(url);
+    return this.http.get<TeamSummary[]>(url);
   }
 
   getTeam(teamId: string): Observable<Team> {

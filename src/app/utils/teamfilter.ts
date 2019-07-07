@@ -1,4 +1,4 @@
-import { TeamDescription } from '../model/team-description';
+import { TeamSummary } from '../model/team';
 
 export class TeamFilter {
 
@@ -10,8 +10,8 @@ export class TeamFilter {
   isLadiesChecked:    boolean;
   isGentsChecked:     boolean;
 
-  teams:         TeamDescription[];
-  filteredTeams: TeamDescription[];
+  teams:         TeamSummary[];
+  filteredTeams: TeamSummary[];
 
   constructor() {
     this.textFilter = '';
@@ -23,7 +23,7 @@ export class TeamFilter {
     this.isGentsChecked = true;
   }
 
-  updateTeams(teams: TeamDescription[]): void {
+  updateTeams(teams: TeamSummary[]): void {
     this.teams = teams;
     this.filterTeams();
   }

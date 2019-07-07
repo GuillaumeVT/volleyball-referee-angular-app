@@ -1,6 +1,6 @@
 import { GameService } from '../../services/game.service';
 import { Game } from '../../model/game';
-import { Court } from '../../model/court';
+import { Court } from '../../model/set';
 import { TeamType } from '../../model/teamtype';
 import { IndoorPlayerItem } from '../../model/indoor-player-item';
 import { Utils } from '../../utils/utils';

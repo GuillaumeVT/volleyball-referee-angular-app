@@ -1,6 +1,4 @@
-<div class="div-refresh">
-  <app-game-refresh [gameId]="gameId" [rate]="rate" (currentGameUpdated)="onCurrentGameUpdated($event)"></app-game-refresh>
-</div>
+<app-game-refresh [gameId]="gameId" [rate]="rate" (currentGameUpdated)="onCurrentGameUpdated($event)"></app-game-refresh>
 <div *ngIf="game && game.status !== 'SCHEDULED'" [ngSwitch]="game.kind">
   <app-beach-game *ngSwitchCase="'BEACH'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
     (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-beach-game>
@@ -16,9 +14,6 @@
     <h4 class="alert-heading">{{game.homeTeam.name}} - {{game.guestTeam.name}}</h4>
     <label>This game is scheduled to start on {{game.scheduledAt | date : 'dd MMM yyyy'}} at {{game.scheduledAt | date : 'HH:mm'}}.</label>
   </ngb-alert>
-</div>
-<div class="div-role" *ngIf="game && game.status === 'LIVE'">
-  <app-role-selector (currentRateUpdated)="onCurrentRateUpdated($event)"></app-role-selector>
 </div>
 <div class="div-footer">
   <app-links-bar></app-links-bar>

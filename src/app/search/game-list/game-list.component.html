@@ -1,9 +1,9 @@
 <div *ngIf="gameFilter.games">
   <div class="mx-1 mt-3">
-    <span class="vbr-text-color game-number-text">Found {{gameFilter.games.length}} game(s)</span>
+    <span class="vbr-text game-number-text">Found {{gameFilter.games.length}} game(s)</span>
   </div>
   <div class="my-3 mx-1 text-left" *ngIf="gameFilter.games.length > 0">
-    <input type="text" class="form-control vbr-text-color mb-2" placeholder="Filter" #textFilter (input)="gameFilter.filterFromText(textFilter)"/>
+    <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="gameFilter.filterFromText(textFilter)"/>
     <div class="text-left">
       <ul class="list-unstyled list-inline">
         <button id="live-button" class="btn vbr-live-button list-inline-item my-1" (click)="gameFilter.toggleLive()"><i class="fa fa-mixcloud"></i>&nbsp;&nbsp;Live</button>
@@ -17,6 +17,6 @@
     </div>
   </div>
   <div>
-    <app-game-list-item *ngFor="let gameDescription of gameFilter.filteredGames" [gameDescription]="gameDescription" [inLeague]="leagueId"></app-game-list-item>
+    <app-game-list-item *ngFor="let gameSummary of gameFilter.filteredGames" [gameSummary]="gameSummary" [inLeague]="leagueId"></app-game-list-item>
   </div>
 </div>

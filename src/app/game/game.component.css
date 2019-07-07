@@ -1,15 +1,3 @@
-@media screen and (max-width: 800px) {
-  .div-refresh {
-    padding-left: 2%;
-  }
-}
-
-@media screen and (min-width: 800px) {
-  .div-refresh {
-    padding-left: 10%;
-  }
-}
-
 .div-schedule {
   width: 100%;
   max-width: 1200px;

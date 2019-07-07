@@ -14,24 +14,24 @@
 </div>
 <div class="row m-1 text-center" *ngIf="league">
   <div class="px-1 col-12 col-sm-4 col-md-4">
-    <div class="jumbotron div-jumbotron p-2">
+    <div class="card div-card p-2">
       <p class="lead vbr-text">Live Games&nbsp;&nbsp;&nbsp;<span class="badge vbr-button-color">{{liveGames.length}}</span></p>
       <hr class="mt-2 mb-4"/>
-      <app-game-list-item *ngFor="let game of liveGames" [gameDescription]="game" [inLeague]="true"></app-game-list-item>
+      <app-game-list-item *ngFor="let game of liveGames" [gameSummary]="game" [inLeague]="true"></app-game-list-item>
     </div>
   </div>
   <div class="px-1 col-12 col-sm-4 col-md-4">
-    <div class="jumbotron div-jumbotron p-2">
+    <div class="card div-card p-2">
       <p class="lead vbr-text">Next 10 Games&nbsp;&nbsp;&nbsp;<span class="badge vbr-button-color">{{next10Games.length}}</span></p>
       <hr class="mt-2 mb-4"/>
-      <app-game-list-item *ngFor="let game of next10Games" [gameDescription]="game" [inLeague]="true"></app-game-list-item>
+      <app-game-list-item *ngFor="let game of next10Games" [gameSummary]="game" [inLeague]="true"></app-game-list-item>
     </div>
   </div>
   <div class="px-1 col-12 col-sm-4 col-md-4">
-    <div class="jumbotron div-jumbotron p-2">
+    <div class="card div-card p-2">
       <p class="lead vbr-text">Last 10 Games&nbsp;&nbsp;&nbsp;<span class="badge vbr-button-color">{{last10Games.length}}</span></p>
       <hr class="mt-2 mb-4"/>
-      <app-game-list-item *ngFor="let game of last10Games" [gameDescription]="game" [inLeague]="true"></app-game-list-item>
+      <app-game-list-item *ngFor="let game of last10Games" [gameSummary]="game" [inLeague]="true"></app-game-list-item>
     </div>
   </div>
 </div>

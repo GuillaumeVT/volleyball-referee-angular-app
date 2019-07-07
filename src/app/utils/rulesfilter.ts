@@ -1,4 +1,4 @@
-import { RulesDescription } from '../model/rules-description';
+import { RulesSummary } from '../model/rules';
 
 export class RulesFilter {
 
@@ -7,8 +7,8 @@ export class RulesFilter {
   isIndoorChecked:    boolean;
   isIndoor4x4Checked: boolean;
 
-  rules:         RulesDescription[];
-  filteredRules: RulesDescription[];
+  rules:         RulesSummary[];
+  filteredRules: RulesSummary[];
 
   constructor() {
     this.textFilter = '';
@@ -17,7 +17,7 @@ export class RulesFilter {
     this.isIndoor4x4Checked = true;
   }
 
-  updateRules(rules: RulesDescription[]): void {
+  updateRules(rules: RulesSummary[]): void {
     this.rules = rules;
     this.filterRules();
   }

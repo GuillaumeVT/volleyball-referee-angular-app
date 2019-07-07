@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { SocialUser } from '../services/login/entities/user';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,18 +9,14 @@ import { Router } from '@angular/router';
 })
 export class LinksBarComponent implements OnInit {
 
-  socialUser:  SocialUser;
   signedIn:    boolean;
   facebookUrl: string;
   playUrl:     string;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private userService: UserService) {
     this.facebookUrl = 'https://www.facebook.com/VolleyballReferee/';
     this.playUrl = 'https://play.google.com/store/apps/details?id=com.tonkar.volleyballreferee';
-    this.authService.authState.subscribe(socialUser => {
-      this.socialUser = socialUser;
-      this.signedIn = (socialUser != null);
-    });
+    this.userService.authState.subscribe(userToken => this.signedIn = (userToken != null));
   }
 
   ngOnInit() {
@@ -32,7 +27,7 @@ export class LinksBarComponent implements OnInit {
   }
 
   signOut(): void {
-    this.authService.signOut();
+    this.userService.signOut();
     this.router.navigateByUrl('home');
   }
 

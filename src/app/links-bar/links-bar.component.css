@@ -1,31 +1,31 @@
 .btn-android {
-	color: white;
-	background-color: #6ab344;
-	border-color: #6ab344;
+	color: var(--vbr-inverted-text-color);
+	background-color: var(--android-color);
+	border-color: var(--android-color);
 }
 
 .btn-android:hover {
-	filter: brightness(120%);
+	filter: var(--vbr-hover-brighter);
 }
 
 .btn-facebook {
-	color: white;
-	background-color: #4267a8;
-	border-color: #4267a8;
+	color: var(--vbr-inverted-text-color);
+	background-color: var(--facebook-color);
+	border-color: var(--facebook-color);
 }
 
 .btn-facebook:hover {
-	filter: brightness(120%);
+	filter: var(--vbr-hover-brighter);
 }
 
 .btn-sign-out {
-	color: #424242;
+	color: var(--vbr-cancel-color);
 	background-color: inherit;
-	border-color: #424242;
+	border-color: var(--vbr-cancel-color);
 }
 
 .btn-sign-out:hover {
-	color: white;
-	background-color: #424242;
-	border-color: #424242;
+	color: var(--vbr-inverted-text-color);
+	background-color: var(--vbr-cancel-color);
+	border-color: var(--vbr-cancel-color);
 }

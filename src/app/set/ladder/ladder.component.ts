@@ -1,10 +1,8 @@
-import { Game } from '../../model/game';
+import { Game, Sanction } from '../../model/game';
 import { TeamType } from '../../model/teamtype';
 import { LadderItem } from './ladder-item';
 import { Utils } from '../../utils/utils';
-import { Substitution } from '../../model/substitution';
-import { Timeout } from '../../model/timeout';
-import { Sanction } from '../../model/sanction';
+import { Substitution, Timeout } from '../../model/set';
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({

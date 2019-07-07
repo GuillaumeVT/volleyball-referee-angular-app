@@ -4,7 +4,7 @@ import { Rules } from '../../model/rules';
 import { CrudType } from '../../model/crudtype';
 import { Utils } from '../../utils/utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserRulesModalComponent } from '../../user/user-rules-modal/user-rules-modal.component';
+import { UserRulesModalComponent } from '../../user-rules/user-rules-modal/user-rules-modal.component';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({

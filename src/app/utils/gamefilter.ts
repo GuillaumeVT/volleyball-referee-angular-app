@@ -1,4 +1,4 @@
-import { GameDescription } from '../model/game-description';
+import { GameSummary } from '../model/game';
 
 export class GameFilter {
 
@@ -12,8 +12,8 @@ export class GameFilter {
   isLadiesChecked:    boolean;
   isGentsChecked:     boolean;
 
-  games:         GameDescription[];
-  filteredGames: GameDescription[];
+  games:         GameSummary[];
+  filteredGames: GameSummary[];
 
   constructor() {
     this.textFilter = '';
@@ -27,7 +27,7 @@ export class GameFilter {
     this.isGentsChecked = true;
   }
 
-  updateGames(games: GameDescription[]): void {
+  updateGames(games: GameSummary[]): void {
     this.games = games;
     this.filterGames();
   }

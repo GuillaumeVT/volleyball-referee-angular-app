@@ -18,7 +18,7 @@
 
 .game-item-title {
   font-size: 1.1em;
-  color: #1f4294;
+  color: var(--vbr-primary-color);
 }
 
 .game-item-title:hover {
@@ -27,7 +27,7 @@
 
 .item-link {
   font-weight: normal;
-  color: #1f1f1f;
+  color: var(--vbr-text-color);
 }
 
 .item-link:hover {

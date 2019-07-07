@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { User } from '../model/user';
-import { SocialUser } from '../services/login/entities/user';
-import { FriendRequest } from '../model/friend-request';
+import { UserSummary, FriendRequest, FriendsAndRequests, EmailCredentials, UserToken, UserPasswordUpdate } from '../model/user';
 import { Count } from '../model/count';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,46 +13,55 @@ import { AuthService } from './auth.service';
 export class UserService {
 
   private usersUrl = environment.api + '/users';
+  private publicUsersUrl = environment.api + '/public/users';
 
-  private signedIn: boolean;
-  private socialUser: SocialUser;
+  private _authState: BehaviorSubject<UserToken>;
+  private userToken:  UserToken;
 
-  private _userState: BehaviorSubject<User> = new BehaviorSubject(null);
-
-  constructor(private http: HttpClient, private authService: AuthService) {
-    this.signedIn = false;
-
-    this.authService.authState.subscribe(socialUser => {
-      this.socialUser = socialUser;
-      this.signedIn = (this.socialUser != null);
-
-      if (this.signedIn) {
-        setTimeout(() => this.refreshUser(), 0);
-      } else {
-        this._userState.next(null);
-      }
-    });
+  constructor(private http: HttpClient, private router: Router) {
+    this.userToken = JSON.parse(localStorage.getItem('vbrAuth'));
+    this._authState = new BehaviorSubject<UserToken>(this.userToken);
   }
 
-  get userState(): Observable<User> {
-    return this._userState.asObservable();
+  public get authState(): Observable<UserToken> {
+    return this._authState.asObservable();
   }
 
-  isSignedIn(): boolean {
-    return this.signedIn;
+  interceptUserToken(userToken: UserToken) {
+    if (userToken && userToken.token && userToken.user) {
+      this.userToken = userToken;
+      localStorage.setItem('vbrAuth', JSON.stringify(this.userToken));
+      this._authState.next(this.userToken);
+      this.router.navigateByUrl('/home');
+    }
+    return userToken;
   }
 
-  getSocialUser(): SocialUser {
-    return this.socialUser;
+  signIn(emailCredentials: EmailCredentials): Observable<UserToken> {
+    const url = `${this.publicUsersUrl}/token`;
+    return this.http.post<UserToken>(url, emailCredentials).pipe(map(userToken => this.interceptUserToken(userToken)));
   }
 
-  getUser(): Observable<User> {
-    const url = `${this.usersUrl}`;
-    return this.http.get<User>(url);
+  signOut() {
+    localStorage.removeItem('vbrAuth');
+    this.userToken = null;
+    this._authState.next(null);
+    setTimeout(() => this.router.navigateByUrl('/sign-in'));
   }
 
-  refreshUser(): void {
-    this.getUser().subscribe(user => this._userState.next(user), error => this._userState.next(null));
+  initiatePasswordReset(userEmail: string): Observable<Object> {
+    const url = `${this.publicUsersUrl}/password/recover/${userEmail}`;
+    return this.http.post<Object>(url, userEmail);
+  }
+
+  resetPassword(passwordResetId: string, userPassword: string): Observable<UserToken> {
+    const url = `${this.publicUsersUrl}/password/reset/${passwordResetId}`;
+    return this.http.post<UserToken>(url, { userPassword: userPassword }).pipe(map(userToken => this.interceptUserToken(userToken)));
+  }
+
+  updateUserPassword(userPasswordUpdate: UserPasswordUpdate): Observable<UserToken> {
+    const url = `${this.usersUrl}/password`;
+    return this.http.post<UserToken>(url, userPasswordUpdate).pipe(map(userToken => this.interceptUserToken(userToken)));
   }
 
   listFriendRequestsSentBy(): Observable<FriendRequest[]> {
@@ -64,6 +72,11 @@ export class UserService {
   listFriendRequestsReceivedBy(): Observable<FriendRequest[]> {
     const url = `${this.usersUrl}/friends/received`;
     return this.http.get<FriendRequest[]>(url);
+  }
+
+  listFriendsAndRequests(): Observable<FriendsAndRequests> {
+    const url = `${this.usersUrl}/friends`;
+    return this.http.get<FriendsAndRequests>(url);
   }
 
   getNumberOfFriendRequestsReceivedBy(): Observable<Count> {

@@ -1,7 +1,7 @@
 import { Game } from '../../model/game';
-import { Substitution } from '../../model/substitution';
+import { Substitution } from '../../model/set';
 import { TeamType } from '../../model/teamtype';
-import { Player } from '../../model/player';
+import { Player } from '../../model/team';
 import { Utils } from '../../utils/utils';
 import { Component, OnInit, Input } from '@angular/core';
 

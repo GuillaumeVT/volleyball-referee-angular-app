@@ -1,4 +1,4 @@
-import { User } from './user';
+import { UserSummary } from './user';
 import { UUID } from 'angular2-uuid';
 
 export class League {
@@ -10,7 +10,7 @@ export class League {
   name:      string;
   divisions: string[];
 
-  public static createLeague(user: User, kind: string): League {
+  public static createLeague(user: UserSummary, kind: string): League {
     const league = new League();
     const now = new Date();
 
@@ -24,4 +24,23 @@ export class League {
 
     return league;
   }
+}
+
+export class LeagueSummary {
+  id:           string;
+  createdBy:    string;
+  createdAt:    number;
+  updatedAt:    number;
+  name:         string;
+  kind:         string;
+}
+
+export class SelectedLeague {
+  id:           string;
+  createdBy:    string;
+  createdAt:    number;
+  updatedAt:    number;
+  name:         string;
+  kind:         string;
+  division:     string;
 }

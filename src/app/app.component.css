@@ -7,13 +7,16 @@
 
 .div-drawer-logo {
   height: 60px;
-  background-color: white;
+  background-color: var(--vbr-background-color);
+  border-right: 1px solid var(--vbr-card-border-color);
 }
 
 .div-drawer {
   width: inherit;
-  background-color: white;
+  background-color: var(--vbr-background-color);
   height: 100vh;
+  border-right: 1px solid var(--vbr-card-border-color);
+  border-top: 1px solid var(--vbr-card-border-color);
 }
 
 .div-component-side {
@@ -21,24 +24,19 @@
 }
 
 .div-top-bar {
-  background-color: #1f4294;
+  background-color: var(--vbr-primary-color);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  min-height: 60px;
-}
-
-.photo {
-  width: auto;
-  height: 40px;
+  height: 60px;
 }
 
 .notification {
   font-size: 1em;
-  color: #1f4294;
-  background-color: #f2bb1a;
-  border-color: #f2bb1a;
+  color: var(--vbr-primary-color);
+  background-color: var(--vbr-secondary-color);
+  border-color: var(--vbr-secondary-color);
 }
 
 .drawer-trigger-button {
@@ -50,29 +48,29 @@
   top: 15px;
   right: 15px;
   font-size: 1.5em;
-  color: #1f1f1f;
+  color: var(--vbr-text-color);
 }
 
 .drawer-link {
-    text-decoration: none;
-    color: #1f1f1f;
-    display: block;
+  text-decoration: none;
+  color: var(--vbr-text-color);
+  display: block;
 }
 
 .drawer-link:hover {
-    color: #1f4294;
+  color: var(--vbr-primary-color);
 }
 
 .selected-drawer-link {
   text-decoration: none;
-  color: #1f4294;
-  background-color: #f2bb1a;
+  color: var(--vbr-primary-color);
+  background-color: var(--vbr-secondary-color);
   border-radius: 5px 20px 20px 5px;
   display: block;
 }
 
 .selected-drawer-link:hover {
-  filter: brightness(120%);
+  filter: var(--vbr-hover-brighter);
 }
 
 .brand-img-size {
@@ -92,28 +90,31 @@
 }
 
 .user-pseudo {
-  color: white;
+  color: var(--vbr-inverted-text-color);
 }
 
 .placeholder-color::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: white;
+  color: var(--vbr-inverted-text-color);
   opacity: 1; /* Firefox */
 }
 
 @media screen and (max-width: 992px) {
   .div-drawer-side {
     width: 0px;
-    transition: 0.4s;
+    transition: var(--vbr-transition-duration);
+    -webkit-transition: var(--vbr-transition-duration);
     overflow: hidden;
     z-index: 2;
   }
 
   .div-drawer-side span {
-    transition: 0.4s;
+    transition: var(--vbr-transition-duration);
+    -webkit-transition: var(--vbr-transition-duration);
   }
 
   .div-drawer-side a {
-    transition: 0.4s;
+    transition: var(--vbr-transition-duration);
+    -webkit-transition: var(--vbr-transition-duration);
   }
 
   .div-component-side {

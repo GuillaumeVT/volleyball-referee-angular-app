@@ -1,0 +1,62 @@
+<div class="div-user text-center" *ngIf="user">
+  <ul class="my-3 list-unstyled list-inline">
+    <li class="list-inline-item my-1">
+      <button class="btn vbr-indoor-button" (click)="createTeam('INDOOR')">
+        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="icon-text">Create</span>&nbsp;6x6
+      </button>
+    </li>
+    <li class="list-inline-item my-1">
+      <button class="btn vbr-beach-button" (click)="createTeam('BEACH')">
+        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="icon-text">Create</span>&nbsp;Beach
+      </button>
+    </li>
+    <li class="list-inline-item my-1">
+      <button class="btn vbr-indoor-4x4-button" (click)="createTeam('INDOOR_4X4')">
+        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="icon-text">Create</span>&nbsp;4x4
+      </button>
+    </li>
+  </ul>
+  <div class="my-3 mx-1 text-left" *ngIf="teamFilter.teams && teamFilter.teams.length > 0">
+    <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="teamFilter.filterFromText(textFilter)"/>
+    <div class="text-left">
+      <ul class="list-unstyled list-inline">
+        <button id="beach-button" class="btn vbr-beach-button list-inline-item my-1" (click)="teamFilter.toggleBeach()"><i class="fa fa-sun-o"></i>&nbsp;&nbsp;Beach</button>
+        <button id="indoor-button" class="btn vbr-indoor-button list-inline-item my-1" (click)="teamFilter.toggleIndoor()">6x6</button>
+        <button id="indoor-4x4-button" class="btn vbr-indoor-4x4-button list-inline-item my-1" (click)="teamFilter.toggleIndoor4x4()">4x4</button>
+        <button id="mixed-button" class="btn vbr-mixed-button list-inline-item my-1" (click)="teamFilter.toggleMixed()"><i class="fa fa-intersex"></i></button>
+        <button id="ladies-button" class="btn vbr-ladies-button list-inline-item my-1" (click)="teamFilter.toggleLadies()"><i class="fa fa-venus"></i></button>
+        <button id="gents-button" class="btn vbr-gents-button list-inline-item my-1" (click)="teamFilter.toggleGents()"><i class="fa fa-mars"></i></button>
+      </ul>
+    </div>
+  </div>
+  <div *ngFor="let team of teamFilter.filteredTeams" class="card div-card my-3 mx-1 py-2">
+    <div class="row align-items-center m-1">
+      <div class="vbr-text col-9 col-sm-4 p-1 text-left">{{team.name}}</div>
+      <div class="vbr-text col-3 col-sm-1 p-1 text-left list-unstyled list-inline">
+        <i class="fa fa-sun-o vbr-beach-text list-inline-item" *ngIf="team.kind === 'BEACH'"></i>
+        <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="team.kind === 'INDOOR'">6x6</span>
+        <span class="badge text-center vbr-indoor-4x4-text list-inline-item" *ngIf="team.kind === 'INDOOR_4X4'">4x4</span>
+        <i class="list-inline-item" [ngClass]="utils.getGenderIcon(team.gender)"></i>
+      </div>
+      <div class="vbr-text col-7 col-sm-4 p-1 text-left">
+        <span class="icon-text">Last updated on&nbsp;</span>{{team.updatedAt | date : 'dd MMM yyyy, HH:mm:ss'}}
+      </div>
+      <div class="vbr-text col-5 col-sm-3 p-1 text-right">
+        <div class="btn-group">
+          <button type="button" class="btn vbr-button-inverted" (click)="viewTeam(team)">
+            <i class="fa fa-eye"></i><span class="icon-text">&nbsp;&nbsp;View</span>
+          </button>
+          <button type="button" class="btn vbr-button-inverted" (click)="updateTeam(team)">
+            <i class="fa fa-pencil"></i><span class="icon-text">&nbsp;&nbsp;Edit</span>
+          </button>
+          <button type="button" class="btn vbr-button-inverted" (click)="deleteTeam(team)">
+            <i class="fa fa-trash"></i><span class="icon-text">&nbsp;&nbsp;Delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="div-footer">
+  <app-links-bar></app-links-bar>
+</div>

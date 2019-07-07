@@ -1,5 +1,5 @@
 <div class="comp-container p-2" *ngIf="game && (game.usage === 'NORMAL')">
-  <h6 class="card-title vbr-text-color">Current Line-up</h6>
+  <h6 class="card-title vbr-text">Current Line-up</h6>
   <div class="div-court"*ngIf="game && (game.usage === 'NORMAL')">
     <div class="position-1-l">
       <span class="badge player-badge" [style.background-color]="getPlayerBackColor(1, leftTeam)" [style.color]="getPlayerFrontColor(1, leftTeam)" [style.border-color]="getPlayerBorderColor(1, leftTeam)" [innerHTML]="getPlayerText(1, leftTeam)"></span>

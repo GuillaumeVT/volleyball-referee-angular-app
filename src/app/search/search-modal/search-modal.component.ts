@@ -16,7 +16,7 @@ export class SearchModalComponent implements OnInit {
 
   constructor(private activeModal: NgbActiveModal, private router: Router, private datePipe: DatePipe) {
     this.searchToken = '';
-    this.searchDate;
+    this.searchDate = new Date();
     this.minDate = new Date(2019, 1, 1, 0, 0, 0);
   }
 

@@ -1,0 +1,312 @@
+<div class="modal-header">
+  <h5 class="modal-title vbr-text" *ngIf="rules && crudType && (crudType === 1)">Create rules</h5>
+  <h5 class="modal-title vbr-text" *ngIf="rules && crudType && (crudType === 2)">Update rules {{rules.name}}</h5>
+  <h5 class="modal-title vbr-text" *ngIf="rules && crudType && (crudType === 4)">View rules {{rules.name}}</h5>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="rules && crudType">
+  <form class="needs-validation" (submit)="onSubmitForm()" novalidate autocomplete="off">
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label [ngClass]="undefinedName ? 'vbr-error-text' : ''" class="vbr-text" for="name">Rules name</label>
+        <input type="text" [ngClass]="undefinedName ? 'vbr-error-input' : ''" class="vbr-text form-control"
+          name="name" id="name" [(ngModel)]="rules.name" placeholder="" required [attr.disabled]="isEditingDisabledKey()"/>
+        <div class="vbr-error-feedback" *ngIf="undefinedName">
+          Please enter a name for the rules.
+        </div>
+      </div>
+    </div>
+
+    <hr class="mb-3"/>
+
+    <h5 class="vbr-text">General</h5>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="sets-per-game">Number of sets per game</label>
+        <select class="custom-select vbr-text"
+          name="sets-per-game" id="sets-per-game" [(ngModel)]="rules.setsPerGame" [attr.disabled]="isEditingDisabled()">
+          <option [ngValue]="5">Game of 5 sets</option>
+          <option [ngValue]="3">Game of 3 sets</option>
+          <option [ngValue]="1">Game of 1 set</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="points-per-set">Number of points per set</label>
+        <select class="custom-select vbr-text"
+          name="points-per-set" id="points-per-set" [(ngModel)]="rules.pointsPerSet" [attr.disabled]="isEditingDisabled()">
+          <option [ngValue]="30">Set of 30 points</option>
+          <option [ngValue]="29">Set of 29 points</option>
+          <option [ngValue]="28">Set of 28 points</option>
+          <option [ngValue]="27">Set of 27 points</option>
+          <option [ngValue]="26">Set of 26 points</option>
+          <option [ngValue]="25">Set of 25 points</option>
+          <option [ngValue]="24">Set of 24 points</option>
+          <option [ngValue]="23">Set of 23 points</option>
+          <option [ngValue]="22">Set of 22 points</option>
+          <option [ngValue]="21">Set of 21 points</option>
+          <option [ngValue]="20">Set of 20 points</option>
+          <option [ngValue]="19">Set of 19 points</option>
+          <option [ngValue]="18">Set of 18 points</option>
+          <option [ngValue]="17">Set of 17 points</option>
+          <option [ngValue]="16">Set of 16 points</option>
+          <option [ngValue]="15">Set of 15 points</option>
+          <option [ngValue]="14">Set of 14 points</option>
+          <option [ngValue]="13">Set of 13 points</option>
+          <option [ngValue]="12">Set of 12 points</option>
+          <option [ngValue]="11">Set of 11 points</option>
+          <option [ngValue]="10">Set of 10 points</option>
+          <option [ngValue]="9">Set of 9 points</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input"
+        name="tie-break" id="tie-break" [(ngModel)]="rules.tieBreakInLastSet" [attr.disabled]="isEditingDisabled()"/>
+      <label class="custom-control-label vbr-text" for="tie-break">Tie break in last set</label>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="points-per-set">Number of points in tie break</label>
+        <select class="custom-select vbr-text"
+          name="points-in-tie-break" id="points-in-tie-break" [(ngModel)]="rules.pointsInTieBreak" [attr.disabled]="isTieBreakDisabled()">
+          <option [ngValue]="30">Tie break of 30 points</option>
+          <option [ngValue]="29">Tie break of 29 points</option>
+          <option [ngValue]="28">Tie break of 28 points</option>
+          <option [ngValue]="27">Tie break of 27 points</option>
+          <option [ngValue]="26">Tie break of 26 points</option>
+          <option [ngValue]="25">Tie break of 25 points</option>
+          <option [ngValue]="24">Tie break of 24 points</option>
+          <option [ngValue]="23">Tie break of 23 points</option>
+          <option [ngValue]="22">Tie break of 22 points</option>
+          <option [ngValue]="21">Tie break of 21 points</option>
+          <option [ngValue]="20">Tie break of 20 points</option>
+          <option [ngValue]="19">Tie break of 19 points</option>
+          <option [ngValue]="18">Tie break of 18 points</option>
+          <option [ngValue]="17">Tie break of 17 points</option>
+          <option [ngValue]="16">Tie break of 16 points</option>
+          <option [ngValue]="15">Tie break of 15 points</option>
+          <option [ngValue]="14">Tie break of 14 points</option>
+          <option [ngValue]="13">Tie break of 13 points</option>
+          <option [ngValue]="12">Tie break of 12 points</option>
+          <option [ngValue]="11">Tie break of 11 points</option>
+          <option [ngValue]="10">Tie break of 10 points</option>
+          <option [ngValue]="9">Tie break of 9 points</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input"
+        name="two-points" id="two-points" [(ngModel)]="rules.twoPointsDifference" [attr.disabled]="isEditingDisabled()"/>
+      <label class="custom-control-label vbr-text" for="two-points">Two points difference to win set</label>
+    </div>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input"
+        name="sanctions" id="sanctions" [(ngModel)]="rules.sanctions" [attr.disabled]="isEditingDisabled()"/>
+      <label class="custom-control-label vbr-text" for="sanctions">Sanctions</label>
+    </div>
+
+    <hr class="mb-3"/>
+
+    <h5 class="vbr-text">Timeout</h5>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input"
+        name="team-timeouts" id="team-timeouts" [(ngModel)]="rules.teamTimeouts" [attr.disabled]="isEditingDisabled()"/>
+      <label class="custom-control-label vbr-text" for="team-timeouts">Team timeouts</label>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="team-timeouts-number">Number of team timeouts per set</label>
+        <select class="custom-select vbr-text"
+          name="team-timeouts-number" id="team-timeouts-number" [(ngModel)]="rules.teamTimeoutsPerSet" [attr.disabled]="isTeamTimeoutsDisabled()">
+          <option [ngValue]="2">2 team timeouts per set</option>
+          <option [ngValue]="1">1 team timeout per set</option>
+          <option [ngValue]="0">No team timeout per set</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="team-timeouts-duration">Duration of a team timeout</label>
+        <select class="custom-select vbr-text"
+          name="team-timeouts-duration" id="team-timeouts-duration" [(ngModel)]="rules.teamTimeoutDuration" [attr.disabled]="isTeamTimeoutsDisabled()">
+          <option [ngValue]="60">60 seconds</option>
+          <option [ngValue]="45">45 seconds</option>
+          <option [ngValue]="30">30 seconds</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input"
+        name="technical-timeouts" id="technical-timeouts" [(ngModel)]="rules.technicalTimeouts" [attr.disabled]="isEditingDisabled()"/>
+      <label class="custom-control-label vbr-text" for="technical-timeouts">Technical timeouts</label>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="technical-timeouts-duration">Duration of a technical timeout</label>
+        <select class="custom-select vbr-text"
+          name="technical-timeouts-duration" id="technical-timeouts-duration" [(ngModel)]="rules.technicalTimeoutDuration" [attr.disabled]="isTechnicalTimeoutsDisabled()">
+          <option [ngValue]="60">60 seconds</option>
+          <option [ngValue]="45">45 seconds</option>
+          <option [ngValue]="30">30 seconds</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-2 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input"
+        name="game-intervals" id="game-intervals" [(ngModel)]="rules.gameIntervals" [attr.disabled]="isEditingDisabled()"/>
+      <label class="custom-control-label vbr-text" for="game-intervals">Game intervals</label>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="game-intervals-duration">Duration of a game interval</label>
+        <select class="custom-select vbr-text"
+          name="game-intervals-duration" id="game-intervals-duration" [(ngModel)]="rules.gameIntervalDuration" [attr.disabled]="isGameIntervalsDisabled()">
+          <option [ngValue]="180">3 minutes</option>
+          <option [ngValue]="120">2 minutes</option>
+          <option [ngValue]="60">1 minute</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'"/>
+
+    <h5 class="vbr-text" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">Indoor Volleyball</h5>
+
+    <div class="row mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="substitutions-limitation">Substitutions limitation</label>
+        <select class="custom-select vbr-text"
+          name="substitutions-limitation" id="substitutions-limitation" [(ngModel)]="rules.substitutionsLimitation" [attr.disabled]="isEditingDisabled()" (change)="checkSubstitutions()">
+          <option [ngValue]="1">FIVB limitation</option>
+          <option [ngValue]="2">Alternative limitation 1</option>
+          <option [ngValue]="3">Alternative limitation 2</option>
+          <option [ngValue]="4">No limitation</option>
+        </select>
+        <div class="div-info-icon mt-2">
+          <i class="mx-3 fa fa-info-circle"></i>
+          <div class="vbr-text rule-description" *ngIf="rules.substitutionsLimitation === 1">
+            <div class="mb-2">A player of the starting line-up may leave the game, but only once in a set, and re-enter, but only once in a set, and only to his/her previous position in the line-up.</div>
+            <div>A substitute player may enter the game in place of a player of the starting line-up, but only once per set, and he/she can only be substituted by the same starting player.</div>
+          </div>
+          <div class="vbr-text rule-description" *ngIf="rules.substitutionsLimitation === 2">
+            <div class="mb-2">A player of the starting line-up may leave the game, several times in a set, and re-enter, an unlimited amount of times per set within the number of allowed team substitutions, and only to his/her previous position in the line-up.</div>
+            <div>A substitute player may enter the game in place of a player of the starting line-up, an unlimited amount of times per set within the number of allowed team substitutions, and he/she can only be substituted by the same starting player.</div>
+          </div>
+          <div class="vbr-text rule-description" *ngIf="rules.substitutionsLimitation === 3">
+            <div class="mb-2">A player of the starting line-up may leave the game, several times in a set, and re-enter, an unlimited amount of times per set within the number of allowed team substitutions, and only to his/her previous position in the line-up.</div>
+            <div class="mb-2">A substitute player may enter the game in place of a player of the starting line-up, an unlimited amount of times per set within the number of allowed team substitutions.</div>
+            <div>More than one substitute may enter the set in each position.</div>
+          </div>
+          <div class="vbr-text rule-description" *ngIf="rules.substitutionsLimitation === 4">
+            <div>Players can leave and re-enter the game on any position, an unlimited amount of times per set within the number of allowed team substitutions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="substitutions-number">Number of team substitutions per set</label>
+        <select class="custom-select vbr-text"
+          name="substitutions-number" id="substitutions-number" [(ngModel)]="rules.teamSubstitutionsPerSet" [attr.disabled]="isEditingDisabled()" (change)="checkSubstitutions()">
+          <option [ngValue]="18">18 substitutions per set (according to substitutions limitation)</option>
+          <option [ngValue]="15">15 substitutions per set (according to substitutions limitation)</option>
+          <option [ngValue]="12">12 substitutions per set</option>
+          <option [ngValue]="6">6 substitutions per set</option>
+          <option [ngValue]="5">5 substitutions per set</option>
+          <option [ngValue]="4">4 substitutions per set</option>
+          <option [ngValue]="3">3 substitutions per set</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="consecutive-serves">Limit of consecutive serves per player</label>
+        <select class="custom-select vbr-text"
+          name="consecutive-serves" id="consecutive-serves" [(ngModel)]="rules.customConsecutiveServesPerPlayer" [attr.disabled]="isEditingDisabled()">
+          <option [ngValue]="9999">Unlimited</option>
+          <option [ngValue]="5">5 serves</option>
+          <option [ngValue]="4">4 serves</option>
+          <option [ngValue]="3">3 serves</option>
+          <option [ngValue]="2">2 serves</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="mb-3" *ngIf="rules.kind === 'BEACH'"/>
+
+    <h5 class="vbr-text" *ngIf="rules.kind === 'BEACH'">Beach Volleyball</h5>
+
+    <div class="mb-2 custom-control custom-checkbox" *ngIf="rules.kind === 'BEACH'">
+      <input type="checkbox" class="custom-control-input"
+        name="beach-court-switches" id="beach-court-switches" [(ngModel)]="rules.beachCourtSwitches" [attr.disabled]="isEditingDisabled()"/>
+      <label class="custom-control-label vbr-text" for="beach-court-switches">Court switches</label>
+    </div>
+
+    <div class="row mb-3" *ngIf="rules.kind === 'BEACH'">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="beach-switch-court-frequency">Court switch period in normal set</label>
+        <select class="custom-select vbr-text"
+          name="beach-switch-court-frequency" id="beach-switch-court-frequency" [(ngModel)]="rules.beachCourtSwitchFreq" [attr.disabled]="isBeachCourtSwitchesDisabled()">
+          <option [ngValue]="10">Switch every 10 points</option>
+          <option [ngValue]="9">Switch every 9 points</option>
+          <option [ngValue]="8">Switch every 8 points</option>
+          <option [ngValue]="7">Switch every 7 points</option>
+          <option [ngValue]="6">Switch every 6 points</option>
+          <option [ngValue]="5">Switch every 5 points</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="rules.kind === 'BEACH'">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="beach-switch-court-frequency-tie-break">Court switch period in tie break</label>
+        <select class="custom-select vbr-text"
+          name="beach-switch-court-frequency-tie-break" id="beach-switch-court-frequency-tie-break" [(ngModel)]="rules.beachCourtSwitchFreqTieBreak" [attr.disabled]="isBeachCourtSwitchesDisabled()">
+          <option [ngValue]="10">Switch every 10 points</option>
+          <option [ngValue]="9">Switch every 9 points</option>
+          <option [ngValue]="8">Switch every 8 points</option>
+          <option [ngValue]="7">Switch every 7 points</option>
+          <option [ngValue]="6">Switch every 6 points</option>
+          <option [ngValue]="5">Switch every 5 points</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="invalidResponse">
+      <div class="col-12 col-sm-10">
+        <p class="alert alert-danger" *ngIf="crudType === 1">
+          The rules could not be created. Is the name already taken?
+        </p>
+        <p class="alert alert-danger" *ngIf="crudType === 2">
+          The rules could not be updated. Do they still exist?
+        </p>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn cancel-button" *ngIf="crudType === 4" (click)="close()">Close</button>
+      <button type="button" class="btn cancel-button" *ngIf="crudType !== 4" (click)="close()">Cancel</button>
+      <button type="submit" class="btn vbr-button" *ngIf="crudType === 1">Create</button>
+      <button type="submit" class="btn vbr-button" *ngIf="crudType === 2">Update</button>
+    </div>
+  </form>
+</div>

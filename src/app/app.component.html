@@ -1,52 +1,57 @@
 <div class="div-drawer-side" id="drawer">
-  <div class="div-drawer-logo material-design-shadow p-2">
-    <span class="navbar-brand"><img class="brand-img-size mx-2" src="../favicon.ico" alt="VBR">Volleyball Referee</span>
+  <div class="div-drawer-logo p-2">
+    <span class="navbar-brand interactive" [routerLink]="getHomeUrl()"><img class="brand-img-size mx-2" src="../favicon.ico" alt="VBR">Volleyball Referee</span>
     <a href="javascript:void(0)" class="drawer-close-button" (click)="closeDrawer()">&times;</a>
   </div>
-  <div *ngIf="signedIn" class="div-drawer p-3 mr-5 material-design-shadow">
+  <div *ngIf="user" class="div-drawer p-3 mr-5">
     <a class="ml-3 p-2" [ngClass]="currentPage === 0 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getHomeUrl()">Home</a>
-    <hr *ngIf="signedIn && user"/>
-    <div *ngIf="signedIn && user" class="ml-3 p-2 c3ac-text text-muted">My data</div>
-    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 1 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserLeaguesUrl()">Tournaments & Leagues</a>
-    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 2 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserGamesUrl()">Games</a>
-    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 3 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserTeamsUrl()">Teams</a>
-    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 4 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserRulesUrl()">Rules</a>
-    <a *ngIf="signedIn && user" class="ml-5 p-2" [ngClass]="currentPage === 5 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserColleaguesUrl()">Colleagues</a>
+    <hr/>
+    <div class="ml-3 p-2 c3ac-text text-muted">My data</div>
+    <a class="ml-5 p-2" [ngClass]="currentPage === 1 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserLeaguesUrl()">Tournaments & Leagues</a>
+    <a class="ml-5 p-2" [ngClass]="currentPage === 2 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserGamesUrl()">Games</a>
+    <a class="ml-5 p-2" [ngClass]="currentPage === 3 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserTeamsUrl()">Teams</a>
+    <a class="ml-5 p-2" [ngClass]="currentPage === 4 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserRulesUrl()">Rules</a>
+    <a class="ml-5 p-2" [ngClass]="currentPage === 5 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserColleaguesUrl()">Colleagues</a>
   </div>
 </div>
 <div class="div-component-side-overlay" id="overlay" (click)="closeDrawer()"></div>
 <div class="div-component-side">
-  <div class="div-top-bar material-design-shadow justify-content-between p-2">
+  <div class="div-top-bar justify-content-between p-2">
     <div class="row align-items-center ml-1">
       <button type="button" class="btn vbr-button drawer-trigger-button" (click)="openDrawer()">&#9776;</button>
       <button type="button" class="btn vbr-button modal-search" (click)="onShowSearchClicked()"><i class="fa fa-search mr-2"></i>Search games</button>
-      <button type="button" class="btn vbr-button bar-search" (click)="onToggleSearchClicked()"><i class="fa fa-search mr-2"></i>Search games</button>
+      <button *ngIf="!showSearch" type="button" class="btn vbr-button bar-search" (click)="onToggleSearchClicked()"><i class="fa fa-search mr-2"></i>Search games</button>
+      <button *ngIf="showSearch" type="button" class="btn vbr-button bar-search" (click)="onToggleSearchClicked()"><i class="fa fa-close"></i></button>
       <div *ngIf="showSearch" class="form-inline bar-search mx-1">
         <div class="input-group">
           <div class="input-group-prepend">
             <button type="button" class="btn selected-drawer-link" (click)="onSearchTokenClicked()"><i class="fa fa-search"></i></button>
           </div>
-          <input type="text" class="form-control vbr-text-color" placeholder="By team / league / referee" [(ngModel)]="searchToken"
-          (keyup.enter)="onSearchTokenClicked()"/>
+          <input type="text" class="form-control vbr-text" placeholder="By team / league / referee" [(ngModel)]="searchToken" (keyup.enter)="onSearchTokenClicked()"/>
         </div>
       </div>
       <button type="button" *ngIf="showSearch" class="btn vbr-button bar-search mx-1" (click)="onSearchLiveClicked()"><i class="fa fa-mixcloud mr-2"></i>Live games</button>
-      <button type="button" *ngIf="showSearch" class="btn vbr-button bar-search mx-1" (click)="onSearchTodayClicked()">Today's games</button>
+      <button type="button" *ngIf="showSearch" class="btn vbr-button bar-search mx-1" (click)="onSearchTodayClicked()"><i class="fa fa-calendar-check-o mr-2"></i>Today's games</button>
       <div *ngIf="showSearch" class="form-inline bar-search mx-1">
-        <input style="text-align: left" class="btn vbr-button placeholder-color" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp" [(ngModel)]="searchDate" (dateTimeChange)="onSearchDateClicked()"
-          [min]="minDate" placeholder="Games by date" (keydown)="$event.preventDefault()" readonly>
-        <owl-date-time [pickerType]="'calendar'" #dtp></owl-date-time>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button type="button" class="btn selected-drawer-link" (click)="onSearchDateClicked()"><i class="fa fa-calendar-o"></i></button>
+          </div>
+          <input type="text" class="form-control vbr-text" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp" [(ngModel)]="searchDate" (dateTimeChange)="onSearchDateClicked()"
+            [min]="minDate" placeholder="Games by date" (keydown)="$event.preventDefault()" readonly>
+          <owl-date-time [pickerType]="'calendar'" #dtp></owl-date-time>
+        </div>
       </div>
     </div>
     <div class="row align-items-center mr-1">
       <a *ngIf="numberOfFriendRequests > 0" class="badge notification" [routerLink]="getUserColleaguesUrl()"><i class="fa fa-user mr-1"></i>{{numberOfFriendRequests}}</a>
       <span *ngIf="user" class="mx-3 user-pseudo">{{user.pseudo}}</span>
-			<a *ngIf="photo" class="navbar-brand" [routerLink]="getHomeUrl()">
-				<img [src]="photo" class="photo" alt="User photo"/>
-			</a>
     </div>
   </div>
   <div class="div-component m-1">
+    <div *ngIf="showScrollToTop" class="scroll-to-top">
+      <button type="button" class="btn vbr-button rounded-circle" (click)="scrollToTop()"><i class='fa fa-arrow-up'></i></button>
+    </div>
     <router-outlet (activate)="setCurrentPage($event)"></router-outlet>
   </div>
 </div>

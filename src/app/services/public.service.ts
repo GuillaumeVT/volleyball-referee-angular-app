@@ -3,10 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Statistics } from '../model/statistics';
-import { Game } from '../model/game';
+import { Game, GameSummary } from '../model/game';
 import { League } from '../model/league';
-import { GameDescription } from '../model/game-description';
-import { TeamDescription } from '../model/team-description';
+import { TeamSummary } from '../model/team';
 import { Ranking } from '../model/ranking';
 
 @Injectable({
@@ -37,69 +36,69 @@ export class PublicService {
     return this.http.get<any>(url, options);
   }
 
-  listLiveGames(): Observable<GameDescription[]> {
+  listLiveGames(): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/live`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listGamesMatchingToken(token: string): Observable<GameDescription[]> {
+  listGamesMatchingToken(token: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/token/${token}`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listGamesWithScheduleDate(date: string): Observable<GameDescription[]> {
+  listGamesWithScheduleDate(date: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/date/${date}`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listGamesInLeague(leagueId: string): Observable<GameDescription[]> {
+  listGamesInLeague(leagueId: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listLiveGamesInLeague(leagueId: string): Observable<GameDescription[]> {
+  listLiveGamesInLeague(leagueId: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/live`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listNext10GamesInLeague(leagueId: string): Observable<GameDescription[]> {
+  listNext10GamesInLeague(leagueId: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/next-10`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listLast10GamesInLeague(leagueId: string): Observable<GameDescription[]> {
+  listLast10GamesInLeague(leagueId: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/last-10`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listGamesOfTeamInLeague(leagueId: string, teamId: string): Observable<GameDescription[]> {
+  listGamesOfTeamInLeague(leagueId: string, teamId: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/team/${teamId}`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listGamesInDivision(leagueId: string, divisionName: string): Observable<GameDescription[]> {
+  listGamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listLiveGamesInDivision(leagueId: string, divisionName: string): Observable<GameDescription[]> {
+  listLiveGamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/live`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listNext10GamesInDivision(leagueId: string, divisionName: string): Observable<GameDescription[]> {
+  listNext10GamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/next-10`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listLast10GamesInDivision(leagueId: string, divisionName: string): Observable<GameDescription[]> {
+  listLast10GamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/last-10`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
-  listGamesOfTeamInDivision(leagueId: string, divisionName: string, teamId: string): Observable<GameDescription[]> {
+  listGamesOfTeamInDivision(leagueId: string, divisionName: string, teamId: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/team/${teamId}`;
-    return this.http.get<GameDescription[]>(url);
+    return this.http.get<GameSummary[]>(url);
   }
 
   listGamesInDivisionExcel(leagueId: string, divisionName: string): Observable<any> {
@@ -112,14 +111,14 @@ export class PublicService {
     return this.http.get<Ranking[]>(url);
   }
 
-  listTeamsOfLeague(leagueId: string): Observable<TeamDescription[]> {
+  listTeamsOfLeague(leagueId: string): Observable<TeamSummary[]> {
     const url = `${this.teamsUrl}/league/${leagueId}`;
-    return this.http.get<TeamDescription[]>(url);
+    return this.http.get<TeamSummary[]>(url);
   }
 
-  listTeamsOfDivision(leagueId: string, divisionName: string): Observable<TeamDescription[]> {
+  listTeamsOfDivision(leagueId: string, divisionName: string): Observable<TeamSummary[]> {
     const url = `${this.teamsUrl}/league/${leagueId}/division/${divisionName}`;
-    return this.http.get<TeamDescription[]>(url);
+    return this.http.get<TeamSummary[]>(url);
   }
 
   getLeague(leagueId: string): Observable<League> {

@@ -1,7 +1,6 @@
 import { TeamType } from '../../model/teamtype';
-import { Substitution } from '../../model/substitution';
-import { Timeout } from '../../model/timeout';
-import { Sanction } from '../../model/sanction';
+import { Substitution, Timeout } from '../../model/set';
+import { Sanction } from '../../model/game';
 
 export class LadderItem {
   teamType:        TeamType;

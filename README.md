@@ -1,20 +1,28 @@
 # Volleyball Referee Web App
 
-Volleyball Referee Web App is a user-friendly Angular application, part of the [Volleyball Referee system][vbr]
+Volleyball Referee Web App is an Angular application, part of the [Volleyball Referee system][vbr]
 
-<ul>
-  <li>Search volleyball matches by their team / league name</li>
-  <li>Search volleyball matches by their date</li>
-  <li>Search live volleyball matches</li>
-  <li>View indoor volleyball matches' data</li>
-  <li>View beach volleyball matches' data</li>
-  <li>Follow the live volleyball matches in real time</li>
-  <li>Download the volleyball matches' scoresheets in PDF format</li>
-</ul>
+#### Manage your data
+- For 6x6, 4x4 and beach volleyball
+- Leagues
+- Matches (scheduled, live and completed)
+- Teams
+- Rules
+- Account and friends
 
-## Languages
+#### Search matches
+- By date
+- By team, league or referee name
+- Being refereed in real-time by another user
 
-At the moment, no translation is planned for the website.
+#### View matches
+- Being refereed in real-time by another user
+- Download score sheets
+- Download league rankings
+
+#### Languages
+
+No translation is currently planned.
 
 | Languages        | Status                          |
 |------------------|---------------------------------|

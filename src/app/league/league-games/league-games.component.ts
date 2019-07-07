@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges, Input } from '@
 import { Subscription, timer } from "rxjs";
 import { takeWhile } from 'rxjs/operators';
 import { League } from '../../model/league';
-import { TeamDescription } from '../../model/team-description';
+import { TeamSummary } from '../../model/team';
 import { PublicService } from '../../services/public.service';
 import { Utils } from '../../utils/utils';
 
@@ -15,9 +15,9 @@ export class LeagueGamesComponent implements OnInit, OnDestroy, OnChanges {
 
   selectedDivision: string;
   allDivisions:     string;
-  selectedTeam:     TeamDescription;
-  allTeams:         TeamDescription;
-  teams:            TeamDescription[];
+  selectedTeam:     TeamSummary;
+  allTeams:         TeamSummary;
+  teams:            TeamSummary[];
 
   subscription:     Subscription;
   autoRefresh:      boolean;
@@ -27,7 +27,7 @@ export class LeagueGamesComponent implements OnInit, OnDestroy, OnChanges {
   constructor(private publicService: PublicService, private utils: Utils) {
     this.allDivisions = "All pools / divisions";
     this.selectedDivision = this.allDivisions;
-    this.allTeams = new TeamDescription();
+    this.allTeams = new TeamSummary();
     this.allTeams.id = 'All teams';
     this.allTeams.name = this.allTeams.id;
     this.teams = [];

@@ -1,7 +1,3 @@
-import { Court } from './court';
-import { Substitution } from './substitution';
-import { Timeout } from './timeout';
-
 export class Set {
   duration:              number;
   homePoints:            number;
@@ -22,4 +18,25 @@ export class Set {
   homeCalledTimeouts:   Timeout[];
   guestCalledTimeouts:  Timeout[];
   remainingTime:        number;
+}
+
+export class Court {
+  p1: number;
+  p2: number;
+  p3: number;
+  p4: number;
+  p5: number;
+  p6: number;
+}
+
+export class Substitution {
+  playerIn:     number;
+  playerOut:    number;
+  homePoints:   number;
+  guestPoints:  number;
+}
+
+export class Timeout {
+  homePoints:  number;
+  guestPoints: number;
 }

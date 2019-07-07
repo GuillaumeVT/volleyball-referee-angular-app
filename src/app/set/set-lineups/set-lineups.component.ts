@@ -1,5 +1,5 @@
 import { Game } from '../../model/game';
-import { Court } from '../../model/court';
+import { Court } from '../../model/set';
 import { TeamType } from '../../model/teamtype';
 import { Utils } from '../../utils/utils';
 import { Component, OnInit, Input } from '@angular/core';

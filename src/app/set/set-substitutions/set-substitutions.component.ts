@@ -1,5 +1,5 @@
 import { Game } from '../../model/game';
-import { Substitution } from '../../model/substitution';
+import { Substitution } from '../../model/set';
 import { TeamType } from '../../model/teamtype';
 import { Utils } from '../../utils/utils';
 import { Component, OnInit, Input } from '@angular/core';

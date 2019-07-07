@@ -1,4 +1,4 @@
-import { LeagueDescription } from '../model/league-description';
+import { LeagueSummary } from '../model/league';
 
 export class LeagueFilter {
 
@@ -7,8 +7,8 @@ export class LeagueFilter {
   isIndoorChecked:    boolean;
   isIndoor4x4Checked: boolean;
 
-  leagues:         LeagueDescription[];
-  filteredLeagues: LeagueDescription[];
+  leagues:         LeagueSummary[];
+  filteredLeagues: LeagueSummary[];
 
   constructor() {
     this.textFilter = '';
@@ -17,7 +17,7 @@ export class LeagueFilter {
     this.isIndoor4x4Checked = true;
   }
 
-  updateLeagues(leagues: LeagueDescription[]): void {
+  updateLeagues(leagues: LeagueSummary[]): void {
     this.leagues =  leagues;
     this.filterLeagues();
   }

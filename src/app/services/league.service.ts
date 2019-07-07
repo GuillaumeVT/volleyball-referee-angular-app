@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { League } from '../model/league';
-import { LeagueDescription } from '../model/league-description';
+import { League, LeagueSummary } from '../model/league';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +13,14 @@ export class LeagueService {
 
   constructor(private http: HttpClient) { }
 
-  listLeagues(): Observable<LeagueDescription[]> {
+  listLeagues(): Observable<LeagueSummary[]> {
     const url = `${this.leaguesUrl}`;
-    return this.http.get<LeagueDescription[]>(url);
+    return this.http.get<LeagueSummary[]>(url);
   }
 
-  listLeaguesOfKind(kind: string): Observable<LeagueDescription[]> {
+  listLeaguesOfKind(kind: string): Observable<LeagueSummary[]> {
     const url = `${this.leaguesUrl}/kind/${kind}`;
-    return this.http.get<LeagueDescription[]>(url);
+    return this.http.get<LeagueSummary[]>(url);
   }
 
   getLeague(leagueId: string): Observable<League> {
