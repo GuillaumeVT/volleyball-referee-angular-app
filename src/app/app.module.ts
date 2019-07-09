@@ -124,7 +124,7 @@ import { SettingsComponent } from './user/settings/settings.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     FormsModule,
     ToastrModule.forRoot(),
     OwlDateTimeModule,

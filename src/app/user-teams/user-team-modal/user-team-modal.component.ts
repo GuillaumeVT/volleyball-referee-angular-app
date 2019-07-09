@@ -1,11 +1,10 @@
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Team, Player } from '../../model/team';
 import { CrudType } from '../../model/crudtype';
 import { InputPlayerItem } from '../../model/input-player-item';
 import { Utils } from '../../utils/utils';
 import { TeamService } from '../../services/team.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ColorPickerModalComponent } from '../color-picker-modal/color-picker-modal.component';
 
 @Component({

@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
         this.user = userToken.user;
         this.refreshNotifications();
       } else {
+        this.user = null;
         this.numberOfFriendRequests = 0;
       }
     });

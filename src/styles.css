@@ -165,7 +165,7 @@
 }
 
 .vbr-live-button:hover {
-  filter: var(--vbr-hover-brighter);
+  filter: brightness(90%);
 }
 
 .vbr-beach-button {
