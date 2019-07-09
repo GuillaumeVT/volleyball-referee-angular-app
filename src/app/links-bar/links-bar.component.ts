@@ -26,6 +26,10 @@ export class LinksBarComponent implements OnInit {
     return '/privacy-policy';
   }
 
+  getHomeUrl(): string {
+    return '/home';
+  }
+
   signOut(): void {
     this.userService.signOut();
     this.router.navigateByUrl('home');

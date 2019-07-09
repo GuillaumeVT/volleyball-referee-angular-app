@@ -421,8 +421,9 @@ input:checked + .slider:before {
   border-bottom-left-radius: 25px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  height: 50px;
   line-height: 35px;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
   box-shadow: var(--material-shadow-big);
 }
 

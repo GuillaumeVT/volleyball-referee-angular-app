@@ -127,6 +127,10 @@ export class AppComponent implements OnInit {
     return '/colleagues';
   }
 
+  getUserSettingsUrl(): string {
+    return '/settings';
+  }
+
   @HostListener('window:scroll')
   computeScrollToTop() {
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
