@@ -11,6 +11,16 @@
   border-right: 1px solid var(--vbr-card-border-color);
 }
 
+.logo-link {
+  color: var(--vbr-text-color);
+  text-decoration: none;
+}
+
+.logo-link:hover {
+  background-color: var(--vbr-light-unselected-color);
+  border-radius: 10px;
+}
+
 .div-drawer {
   width: inherit;
   background-color: var(--vbr-background-color);
@@ -64,13 +74,9 @@
 .selected-drawer-link {
   text-decoration: none;
   color: var(--vbr-primary-color);
-  background-color: var(--vbr-secondary-color);
+  background-color: var(--vbr-light-primary-color);
   border-radius: 5px 20px 20px 5px;
   display: block;
-}
-
-.selected-drawer-link:hover {
-  filter: var(--vbr-hover-brighter);
 }
 
 .brand-img-size {
@@ -87,10 +93,6 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-}
-
-.user-pseudo {
-  color: var(--vbr-inverted-text-color);
 }
 
 .placeholder-color::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -119,10 +121,6 @@
 
   .div-component-side {
     margin-left: 0;
-  }
-
-  .user-pseudo {
-    display: none;
   }
 
   .bar-search {

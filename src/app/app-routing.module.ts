@@ -14,7 +14,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { PasswordResetComponent } from './user/password-reset/password-reset.component';
 import { PasswordLostComponent } from './user/password-lost/password-lost.component';
-import { SettingsComponent } from './user/settings/settings.component';
+import { AccountComponent } from './user/account/account.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PublicGuard } from './guards/public.guard';
@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'password-lost', component: PasswordLostComponent, canActivate: [ PublicGuard ] },
   { path: 'password-reset', component: PasswordResetComponent, canActivate: [ PublicGuard ] },
   { path: 'home', component: HomeComponent, canActivate: [ LoginGuard ] },
-  { path: 'settings', component: SettingsComponent, canActivate: [ LoginGuard ] },
+  { path: 'account', component: AccountComponent, canActivate: [ LoginGuard ] },
   { path: 'search/live', component: SearchResultLiveComponent },
   { path: 'search/token/:token', component: SearchResultTokenComponent },
   { path: 'search/date/:date', component: SearchResultDateComponent },

@@ -128,8 +128,8 @@ export class AppComponent implements OnInit {
     return '/colleagues';
   }
 
-  getUserSettingsUrl(): string {
-    return '/settings';
+  getUserAccountUrl(): string {
+    return '/account';
   }
 
   @HostListener('window:scroll')

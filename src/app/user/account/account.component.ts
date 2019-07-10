@@ -4,11 +4,11 @@ import { UserSummary, UserPasswordUpdate } from '../../model/user';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  selector: 'app-account',
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.css']
 })
-export class SettingsComponent implements OnInit {
+export class AccountComponent implements OnInit {
 
   user: UserSummary;
 

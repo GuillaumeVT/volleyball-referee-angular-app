@@ -1,7 +1,7 @@
 <div class="div-drawer-side" id="drawer">
-  <div class="div-drawer-logo p-2">
-    <span class="navbar-brand interactive" [routerLink]="getHomeUrl()"><img class="brand-img-size mx-2" src="../favicon.ico" alt="VBR">Volleyball Referee</span>
-    <a href="javascript:void(0)" class="drawer-close-button" (click)="closeDrawer()">&times;</a>
+  <div class="div-drawer-logo">
+    <a class="navbar-brand logo-link m-1 p-2" [routerLink]="getHomeUrl()"><img class="brand-img-size mr-2" src="../favicon.ico" alt="VBR">Volleyball Referee</a>
+    <a href="javascript:void(0)" class="drawer-close-button logo-link" (click)="closeDrawer()">&times;</a>
   </div>
   <div *ngIf="user" class="div-drawer p-3 mr-5">
     <a class="ml-3 p-2" [ngClass]="currentPage === 0 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getHomeUrl()">Home</a>
@@ -25,7 +25,7 @@
       <div *ngIf="showSearch" class="form-inline bar-search mx-1">
         <div class="input-group">
           <div class="input-group-prepend">
-            <button type="button" class="btn selected-drawer-link" (click)="onSearchTokenClicked()"><i class="fa fa-search"></i></button>
+            <button type="button" class="btn vbr-button-selected" (click)="onSearchTokenClicked()"><i class="fa fa-search"></i></button>
           </div>
           <input type="text" class="form-control vbr-text" placeholder="By team / league / referee" [(ngModel)]="searchToken" (keyup.enter)="onSearchTokenClicked()"/>
         </div>
@@ -35,7 +35,7 @@
       <div *ngIf="showSearch" class="form-inline bar-search mx-1">
         <div class="input-group">
           <div class="input-group-prepend">
-            <button type="button" class="btn selected-drawer-link" (click)="onSearchDateClicked()"><i class="fa fa-calendar-o"></i></button>
+            <button type="button" class="btn vbr-button-selected" (click)="onSearchDateClicked()"><i class="fa fa-calendar-o"></i></button>
           </div>
           <input type="text" class="form-control vbr-text" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp" [(ngModel)]="searchDate" (dateTimeChange)="onSearchDateClicked()"
             [min]="minDate" placeholder="Games by date" (keydown)="$event.preventDefault()" readonly>
@@ -44,9 +44,8 @@
       </div>
     </div>
     <div class="row align-items-center mr-1">
-      <a *ngIf="numberOfFriendRequests > 0" class="badge notification" [routerLink]="getUserColleaguesUrl()"><i class="fa fa-user mr-1"></i>{{numberOfFriendRequests}}</a>
-      <button *ngIf="user" class="ml-3 btn vbr-button" [routerLink]="getUserSettingsUrl()"><i class="fa fa-gear"></i><span class="ml-1 icon-text">Settings</span></button>
-      <span *ngIf="user" class="mx-3 user-pseudo">{{user.pseudo}}</span>
+      <a *ngIf="numberOfFriendRequests > 0" class="badge notification" [routerLink]="getUserColleaguesUrl()"><i class="fa fa-user-plus mr-1"></i>{{numberOfFriendRequests}}</a>
+      <button *ngIf="user" class="mx-3 btn vbr-button" [routerLink]="getUserAccountUrl()"><i class="fa fa-user"></i><span class="ml-2 icon-text">{{user.pseudo}}</span></button>
     </div>
   </div>
   <div class="div-component m-1">

@@ -5,7 +5,7 @@
 }
 
 .btn-android:hover {
-	filter: var(--vbr-hover-brighter);
+	filter: var(--vbr-hover-darker);
 }
 
 .btn-facebook {
@@ -15,7 +15,7 @@
 }
 
 .btn-facebook:hover {
-	filter: var(--vbr-hover-brighter);
+	filter: var(--vbr-hover-darker);
 }
 
 .btn-sign-out {
@@ -25,7 +25,7 @@
 }
 
 .btn-sign-out:hover {
-	color: var(--vbr-inverted-text-color);
-	background-color: var(--vbr-cancel-color);
+	color: var(--vbr-cancel-color);
+	background-color: var(--vbr-light-unselected-color);
 	border-color: var(--vbr-cancel-color);
 }

@@ -63,7 +63,7 @@ import { GameRefereeModalComponent } from './user-games/game-referee-modal/game-
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { PasswordResetComponent } from './user/password-reset/password-reset.component';
 import { PasswordLostComponent } from './user/password-lost/password-lost.component';
-import { SettingsComponent } from './user/settings/settings.component';
+import { AccountComponent } from './user/account/account.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +117,7 @@ import { SettingsComponent } from './user/settings/settings.component';
     SignInComponent,
     PasswordResetComponent,
     PasswordLostComponent,
-    SettingsComponent
+    AccountComponent
   ],
   imports: [
     BrowserModule,
