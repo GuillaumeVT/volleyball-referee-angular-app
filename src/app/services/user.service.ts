@@ -61,7 +61,7 @@ export class UserService {
 
   updateUserPassword(userPasswordUpdate: UserPasswordUpdate): Observable<UserToken> {
     const url = `${this.usersUrl}/password`;
-    return this.http.post<UserToken>(url, userPasswordUpdate).pipe(map(userToken => this.interceptUserToken(userToken)));
+    return this.http.patch<UserToken>(url, userPasswordUpdate).pipe(map(userToken => this.interceptUserToken(userToken)));
   }
 
   listFriendRequestsSentBy(): Observable<FriendRequest[]> {
