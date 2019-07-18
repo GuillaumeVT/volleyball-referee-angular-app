@@ -1,5 +1,5 @@
 {
-  "name": "volleyball-referee-web-app",
+  "name": "volleyball-referee-angular-app",
   "version": "3.1.0",
   "scripts": {
     "ng": "ng",

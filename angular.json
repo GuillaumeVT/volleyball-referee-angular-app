@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "volleyball-referee-web-app": {
+    "volleyball-referee-angular-app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/volleyball-referee-web-app",
+            "outputPath": "dist/volleyball-referee-angular-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "volleyball-referee-web-app:build"
+            "browserTarget": "volleyball-referee-angular-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "volleyball-referee-web-app:build:production"
+              "browserTarget": "volleyball-referee-angular-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "volleyball-referee-web-app:build"
+            "browserTarget": "volleyball-referee-angular-app:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "volleyball-referee-web-app-e2e": {
+    "volleyball-referee-angular-app-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -118,5 +118,5 @@
       }
     }
   },
-  "defaultProject": "volleyball-referee-web-app"
+  "defaultProject": "volleyball-referee-angular-app"
 }
