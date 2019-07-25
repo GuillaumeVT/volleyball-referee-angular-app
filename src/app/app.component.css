@@ -103,20 +103,8 @@
 @media screen and (max-width: 992px) {
   .div-drawer-side {
     width: 0px;
-    transition: var(--vbr-transition-duration);
-    -webkit-transition: var(--vbr-transition-duration);
     overflow: hidden;
     z-index: 2;
-  }
-
-  .div-drawer-side span {
-    transition: var(--vbr-transition-duration);
-    -webkit-transition: var(--vbr-transition-duration);
-  }
-
-  .div-drawer-side a {
-    transition: var(--vbr-transition-duration);
-    -webkit-transition: var(--vbr-transition-duration);
   }
 
   .div-component-side {

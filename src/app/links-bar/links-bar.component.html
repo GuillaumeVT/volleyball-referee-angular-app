@@ -1,9 +1,9 @@
 <div class="text-center">
   <ul class="list-unstyled list-inline">
-    <li class="list-inline-item my-1"><a class="btn btn-sm btn-android" href="{{playUrl}}" target="_blank"><i class="fa fa-android mr-1"></i>Download our Android app</a></li>
-    <li class="list-inline-item my-1"><a class="btn btn-sm btn-facebook" href="{{facebookUrl}}" target="_blank"><i class="fa fa-facebook mr-1"></i>Join us on Facebook</a></li>
-    <li class="list-inline-item my-1"><a class="btn btn-sm vbr-button-inverted" [routerLink]="getPrivacyPolicyUrl()" role="button">Privacy Policy</a></li>
-    <li class="list-inline-item my-1" *ngIf="signedIn"><a class="btn btn-sm vbr-button-inverted" [routerLink]="getHomeUrl()" role="button"><i class="fa fa-home mr-1"></i>Home</a></li>
-    <li class="list-inline-item my-1" *ngIf="signedIn"><button class="btn btn-sm btn-sign-out" (click)="signOut()"><i class="fa fa-sign-out mr-1"></i>Sign out</button></li>
+    <li class="list-inline-item my-1"><a class="btn btn-android" href="{{playUrl}}" target="_blank"><i class="fa fa-android mr-1"></i>Download our Android app</a></li>
+    <li class="list-inline-item my-1"><a class="btn btn-facebook" href="{{facebookUrl}}" target="_blank"><i class="fa fa-facebook mr-1"></i>Join us on Facebook</a></li>
+    <li class="list-inline-item my-1"><a class="btn vbr-button-inverted" [routerLink]="getPrivacyPolicyUrl()" role="button">Privacy Policy</a></li>
+    <li class="list-inline-item my-1" *ngIf="signedIn"><a class="btn vbr-button-inverted" [routerLink]="getHomeUrl()" role="button"><i class="fa fa-home mr-1"></i>Home</a></li>
+    <li class="list-inline-item my-1" *ngIf="signedIn"><button class="btn btn-sign-out" (click)="signOut()"><i class="fa fa-sign-out mr-1"></i>Sign out</button></li>
   </ul>
 </div>

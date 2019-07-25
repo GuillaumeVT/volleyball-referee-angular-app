@@ -18,27 +18,27 @@
   </ul>
   <div class="my-3 mx-1 text-left" *ngIf="teamFilter.teams && teamFilter.teams.length > 0">
     <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="teamFilter.filterFromText(textFilter)"/>
-    <div class="text-left">
-      <ul class="list-unstyled list-inline">
-        <button id="beach-button" class="btn vbr-beach-button list-inline-item my-1" (click)="teamFilter.toggleBeach()"><i class="fa fa-sun-o"></i>&nbsp;&nbsp;Beach</button>
-        <button id="indoor-button" class="btn vbr-indoor-button list-inline-item my-1" (click)="teamFilter.toggleIndoor()">6x6</button>
-        <button id="indoor-4x4-button" class="btn vbr-indoor-4x4-button list-inline-item my-1" (click)="teamFilter.toggleIndoor4x4()">4x4</button>
-        <button id="mixed-button" class="btn vbr-mixed-button list-inline-item my-1" (click)="teamFilter.toggleMixed()"><i class="fa fa-intersex"></i></button>
-        <button id="ladies-button" class="btn vbr-ladies-button list-inline-item my-1" (click)="teamFilter.toggleLadies()"><i class="fa fa-venus"></i></button>
-        <button id="gents-button" class="btn vbr-gents-button list-inline-item my-1" (click)="teamFilter.toggleGents()"><i class="fa fa-mars"></i></button>
-      </ul>
+    <div class="text-left list-unstyled list-inline">
+      <button class="btn chip vbr-beach-chip list-inline-item my-1" #beachButton (click)="teamFilter.toggleBeach(beachButton)"><i class="fa fa-sun-o"></i>&nbsp;&nbsp;Beach</button>
+      <button class="btn chip vbr-indoor-chip list-inline-item my-1" #indoorButton (click)="teamFilter.toggleIndoor(indoorButton)">6x6</button>
+      <button class="btn chip vbr-indoor-4x4-chip list-inline-item my-1" #indoor4x4Button (click)="teamFilter.toggleIndoor4x4(indoor4x4Button)">4x4</button>
+      <button class="btn chip vbr-mixed-chip list-inline-item my-1" #mixedButton (click)="teamFilter.toggleMixed(mixedButton)"><i class="fa fa-intersex"></i>&nbsp;&nbsp;Mixed</button>
+      <button class="btn chip vbr-ladies-chip list-inline-item my-1" #ladiesButton (click)="teamFilter.toggleLadies(ladiesButton)"><i class="fa fa-venus"></i>&nbsp;&nbsp;Ladies</button>
+      <button class="btn chip vbr-gents-chip list-inline-item my-1" #gentsButton (click)="teamFilter.toggleGents(gentsButton)"><i class="fa fa-mars"></i>&nbsp;&nbsp;Gents</button>
     </div>
   </div>
   <div *ngFor="let team of teamFilter.filteredTeams" class="card div-card my-3 mx-1 py-2">
     <div class="row align-items-center m-1">
-      <div class="vbr-text col-9 col-sm-4 p-1 text-left">{{team.name}}</div>
-      <div class="vbr-text col-3 col-sm-1 p-1 text-left list-unstyled list-inline">
-        <i class="fa fa-sun-o vbr-beach-text list-inline-item" *ngIf="team.kind === 'BEACH'"></i>
-        <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="team.kind === 'INDOOR'">6x6</span>
-        <span class="badge text-center vbr-indoor-4x4-text list-inline-item" *ngIf="team.kind === 'INDOOR_4X4'">4x4</span>
-        <i class="list-inline-item" [ngClass]="utils.getGenderIcon(team.gender)"></i>
+      <div class="vbr-text col-8 col-sm-4 p-1 text-left">{{team.name}}</div>
+      <div class="vbr-text col-4 col-sm-2 p-1 text-center list-unstyled list-inline">
+        <span class="chip vbr-beach-chip list-inline-item" *ngIf="team.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
+        <span class="chip vbr-indoor-chip list-inline-item" *ngIf="team.kind === 'INDOOR'">6x6</span>
+        <span class="chip vbr-indoor-4x4-chip list-inline-item" *ngIf="team.kind === 'INDOOR_4X4'">4x4</span>
+        <span class="chip vbr-mixed-chip list-inline-item" *ngIf="team.gender === 'MIXED'"><i class="fa fa-intersex"></i></span>
+        <span class="chip vbr-ladies-chip list-inline-item" *ngIf="team.gender === 'LADIES'"><i class="fa fa-venus"></i></span>
+        <span class="chip vbr-gents-chip list-inline-item" *ngIf="team.gender === 'GENTS'"><i class="fa fa-mars"></i></span>
       </div>
-      <div class="vbr-text col-7 col-sm-4 p-1 text-left">
+      <div class="vbr-text col-7 col-sm-3 p-1 text-left">
         <span class="icon-text">Last updated on&nbsp;</span>{{team.updatedAt | date : 'dd MMM yyyy, HH:mm:ss'}}
       </div>
       <div class="vbr-text col-5 col-sm-3 p-1 text-right">

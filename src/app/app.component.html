@@ -4,14 +4,14 @@
     <a href="javascript:void(0)" class="drawer-close-button logo-link" (click)="closeDrawer()">&times;</a>
   </div>
   <div *ngIf="user" class="div-drawer p-3 mr-5">
-    <a class="ml-3 p-2" [ngClass]="currentPage === 0 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getHomeUrl()">Home</a>
+    <a class="p-2" [ngClass]="currentPage === 0 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getHomeUrl()">Home</a>
     <hr/>
-    <div class="ml-3 p-2 c3ac-text text-muted">My data</div>
-    <a class="ml-5 p-2" [ngClass]="currentPage === 1 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserLeaguesUrl()">Tournaments & Leagues</a>
-    <a class="ml-5 p-2" [ngClass]="currentPage === 2 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserGamesUrl()">Games</a>
-    <a class="ml-5 p-2" [ngClass]="currentPage === 3 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserTeamsUrl()">Teams</a>
-    <a class="ml-5 p-2" [ngClass]="currentPage === 4 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserRulesUrl()">Rules</a>
-    <a class="ml-5 p-2" [ngClass]="currentPage === 5 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserColleaguesUrl()">Colleagues</a>
+    <div class="p-2 c3ac-text text-muted">My data</div>
+    <a class="p-2 ml-2" [ngClass]="currentPage === 1 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserLeaguesUrl()">Tournaments & Leagues</a>
+    <a class="p-2 ml-2" [ngClass]="currentPage === 2 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserGamesUrl()">Games</a>
+    <a class="p-2 ml-2" [ngClass]="currentPage === 3 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserTeamsUrl()">Teams</a>
+    <a class="p-2 ml-2" [ngClass]="currentPage === 4 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserRulesUrl()">Rules</a>
+    <a class="p-2 ml-2" [ngClass]="currentPage === 5 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserColleaguesUrl()">Colleagues</a>
   </div>
 </div>
 <div class="div-component-side-overlay" id="overlay" (click)="closeDrawer()"></div>

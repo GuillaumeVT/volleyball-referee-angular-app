@@ -4,20 +4,12 @@
   align-items: center;
 }
 
-.game-item-icon {
-  font-size: 1.4em;
-}
-
-.game-item-badge {
-  font-size: 1em;
-}
-
 .game-item-schedule {
   margin-left: auto;
 }
 
 .game-item-title {
-  font-size: 1.1em;
+  font-size: 1.1rem;
   color: var(--vbr-primary-color);
 }
 

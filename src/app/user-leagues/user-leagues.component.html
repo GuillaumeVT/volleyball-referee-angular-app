@@ -18,12 +18,10 @@
   </ul>
   <div class="my-3 mx-1 text-left" *ngIf="leagueFilter.leagues && leagueFilter.leagues.length > 0">
     <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="leagueFilter.filterFromText(textFilter)"/>
-    <div class="text-left">
-      <ul class="list-unstyled list-inline">
-        <button id="beach-button" class="btn vbr-beach-button list-inline-item my-1" (click)="leagueFilter.toggleBeach()"><i class="fa fa-sun-o"></i>&nbsp;&nbsp;Beach</button>
-        <button id="indoor-button" class="btn vbr-indoor-button list-inline-item my-1" (click)="leagueFilter.toggleIndoor()">6x6</button>
-        <button id="indoor-4x4-button" class="btn vbr-indoor-4x4-button list-inline-item my-1" (click)="leagueFilter.toggleIndoor4x4()">4x4</button>
-      </ul>
+    <div class="text-left list-unstyled list-inline">
+      <button class="btn chip vbr-beach-chip list-inline-item my-1" #beachButton (click)="leagueFilter.toggleBeach(beachButton)"><i class="fa fa-sun-o"></i>&nbsp;&nbsp;Beach</button>
+      <button class="btn chip vbr-indoor-chip list-inline-item my-1" #indoorButton (click)="leagueFilter.toggleIndoor(indoorButton)">6x6</button>
+      <button class="btn chip vbr-indoor-4x4-chip list-inline-item my-1" #indoor4x4Button (click)="leagueFilter.toggleIndoor4x4(indoor4x4Button)">4x4</button>
     </div>
   </div>
   <div *ngFor="let league of leagueFilter.filteredLeagues" class="card div-card my-3 mx-1 py-2">
@@ -31,15 +29,15 @@
       <div class="vbr-text col-12 col-sm-3 p-1 text-left">
         {{league.name}}
       </div>
-      <div class="vbr-text col-10 col-sm-2 p-1 text-left">
+      <div class="vbr-text col-6 col-sm-2 p-1 text-left">
         <a class="btn vbr-button-inverted" [routerLink]="getLeaguePublicUrl(league)" placement="top" ngbTooltip="Navigate to the public section of the tournament. Share this URL with everyone.">
           Public Page »
         </a>
       </div>
-      <div class="vbr-text col-2 col-sm-1 p-1 text-left">
-        <i class="fa fa-sun-o vbr-beach-text ml-1" *ngIf="league.kind === 'BEACH'"></i>
-        <span class="badge text-center vbr-indoor-text ml-1" *ngIf="league.kind === 'INDOOR'">6x6</span>
-        <span class="badge text-center vbr-indoor-4x4-text ml-1" *ngIf="league.kind === 'INDOOR_4X4'">4x4</span>
+      <div class="vbr-text col-6 col-sm-1 p-1 text-center list-unstyled list-inline">
+        <span class="chip vbr-beach-chip list-inline-item" *ngIf="league.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
+        <span class="chip vbr-indoor-chip list-inline-item" *ngIf="league.kind === 'INDOOR'">6x6</span>
+        <span class="chip vbr-indoor-4x4-chip list-inline-item" *ngIf="league.kind === 'INDOOR_4X4'">4x4</span>
       </div>
       <div class="vbr-text col-6 col-sm-2 p-1 text-left">
         <span class="icon-text">Created on&nbsp;</span>{{league.createdAt | date : 'dd MMM yyyy, HH:mm'}}

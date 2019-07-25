@@ -21,16 +21,14 @@
   </div>
   <div class="my-3 mx-1 text-left" *ngIf="gameFilter.games && gameFilter.games.length > 0">
     <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="gameFilter.filterFromText(textFilter)"/>
-    <div class="text-left">
-      <ul class="list-unstyled list-inline">
-        <button id="live-button" class="btn vbr-live-button list-inline-item my-1" (click)="gameFilter.toggleLive()"><i class="fa fa-mixcloud"></i>&nbsp;&nbsp;Live</button>
-        <button id="beach-button" class="btn vbr-beach-button list-inline-item my-1" (click)="gameFilter.toggleBeach()" *ngIf="!selectedLeagueId"><i class="fa fa-sun-o"></i>&nbsp;&nbsp;Beach</button>
-        <button id="indoor-button" class="btn vbr-indoor-button list-inline-item my-1" (click)="gameFilter.toggleIndoor()" *ngIf="!selectedLeagueId">6x6</button>
-        <button id="indoor-4x4-button" class="btn vbr-indoor-4x4-button list-inline-item my-1" (click)="gameFilter.toggleIndoor4x4()" *ngIf="!selectedLeagueId">4x4</button>
-        <button id="mixed-button" class="btn vbr-mixed-button list-inline-item my-1" (click)="gameFilter.toggleMixed()"><i class="fa fa-intersex"></i></button>
-        <button id="ladies-button" class="btn vbr-ladies-button list-inline-item my-1" (click)="gameFilter.toggleLadies()"><i class="fa fa-venus"></i></button>
-        <button id="gents-button" class="btn vbr-gents-button list-inline-item my-1" (click)="gameFilter.toggleGents()"><i class="fa fa-mars"></i></button>
-      </ul>
+    <div class="text-left list-unstyled list-inline">
+      <button class="btn chip vbr-live-chip list-inline-item my-1" #liveButton (click)="gameFilter.toggleLive(liveButton)"><i class="fa fa-mixcloud"></i>&nbsp;&nbsp;Live</button>
+      <button class="btn chip vbr-beach-chip list-inline-item my-1" #beachButton (click)="gameFilter.toggleBeach(beachButton)" *ngIf="!selectedLeagueId"><i class="fa fa-sun-o"></i>&nbsp;&nbsp;Beach</button>
+      <button class="btn chip vbr-indoor-chip list-inline-item my-1" #indoorButton (click)="gameFilter.toggleIndoor(indoorButton)" *ngIf="!selectedLeagueId">6x6</button>
+      <button class="btn chip vbr-indoor-4x4-chip list-inline-item my-1" #indoor4x4Button (click)="gameFilter.toggleIndoor4x4(indoor4x4Button)" *ngIf="!selectedLeagueId">4x4</button>
+      <button class="btn chip vbr-mixed-chip list-inline-item my-1" #mixedButton (click)="gameFilter.toggleMixed(mixedButton)"><i class="fa fa-intersex"></i>&nbsp;&nbsp;Mixed</button>
+      <button class="btn chip vbr-ladies-chip list-inline-item my-1" #ladiesButton (click)="gameFilter.toggleLadies(ladiesButton)"><i class="fa fa-venus"></i>&nbsp;&nbsp;Ladies</button>
+      <button class="btn chip vbr-gents-chip list-inline-item my-1" #gentsButton (click)="gameFilter.toggleGents(gentsButton)"><i class="fa fa-mars"></i>&nbsp;&nbsp;Gents</button>
     </div>
   </div>
   <div *ngFor="let game of gameFilter.filteredGames" class="card div-card my-3 mx-1 py-2">
@@ -43,17 +41,19 @@
         </span>
         <span *ngIf="game.refereeName && game.refereeName.length" class="text-muted"> <br/><i class="fa fa-user mr-1"></i>by {{game.refereeName}}</span>
       </div>
-      <div class="vbr-text col-10 col-sm-2 p-1 text-left list-unstyled list-inline">
+      <div class="vbr-text col-6 col-sm-1 p-1 text-left list-unstyled list-inline">
         <a class="btn vbr-button-inverted list-inline-item my-1" [routerLink]="getGamePublicUrl(game)" placement="top" ngbTooltip="Navigate to the public page for this game. Share this URL with everyone.">
           Game page »
         </a>
       </div>
-      <div class="vbr-text col-2 col-sm-1 p-1 text-left list-unstyled list-inline">
-        <i class="fa fa-mixcloud vbr-live-text list-inline-item" *ngIf="game.status === 'LIVE'"></i>
-        <i class="fa fa-sun-o vbr-beach-text list-inline-item" *ngIf="game.kind === 'BEACH'"></i>
-        <span class="badge text-center vbr-indoor-text list-inline-item" *ngIf="game.kind === 'INDOOR'">6x6</span>
-        <span class="badge text-center vbr-indoor-4x4-text list-inline-item" *ngIf="game.kind === 'INDOOR_4X4'">4x4</span>
-        <i class="list-inline-item" [ngClass]="utils.getGenderIcon(game.gender)"></i>
+      <div class="vbr-text col-6 col-sm-2 p-1 text-center list-unstyled list-inline">
+        <span class="chip vbr-live-chip list-inline-item" *ngIf="game.status === 'LIVE'"><i class="fa fa-mixcloud"></i></span>
+        <span class="chip vbr-beach-chip list-inline-item" *ngIf="game.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
+        <span class="chip vbr-indoor-chip list-inline-item" *ngIf="game.kind === 'INDOOR'">6x6</span>
+        <span class="chip vbr-indoor-4x4-chip list-inline-item" *ngIf="game.kind === 'INDOOR_4X4'">4x4</span>
+        <span class="chip vbr-mixed-chip list-inline-item" *ngIf="game.gender === 'MIXED'"><i class="fa fa-intersex"></i></span>
+        <span class="chip vbr-ladies-chip list-inline-item" *ngIf="game.gender === 'LADIES'"><i class="fa fa-venus"></i></span>
+        <span class="chip vbr-gents-chip list-inline-item" *ngIf="game.gender === 'GENTS'"><i class="fa fa-mars"></i></span>
       </div>
       <div class="vbr-text col-7 col-sm-2 p-1 text-left">
         <span class="icon-text">Scheduled for&nbsp;</span>{{game.scheduledAt | date : 'dd MMM yyyy, HH:mm'}}

@@ -55,31 +55,27 @@ export class RulesFilter {
     this.filterRules();
   }
 
-  toggleBeach(): void {
+  toggleBeach(button: HTMLElement): void {
     this.isBeachChecked = !this.isBeachChecked;
-    this.changeToggleButtonState('beach-button', this.isBeachChecked);
-    this.filterRules();
+    this.toggleButton(button, this.isBeachChecked, 'vbr-beach-chip');
   }
 
-  toggleIndoor(): void {
+  toggleIndoor(button: HTMLElement): void {
     this.isIndoorChecked = !this.isIndoorChecked;
-    this.changeToggleButtonState('indoor-button', this.isIndoorChecked);
-    this.filterRules();
+    this.toggleButton(button, this.isIndoorChecked, 'vbr-indoor-chip');
   }
 
-  toggleIndoor4x4(): void {
+  toggleIndoor4x4(button: HTMLElement): void {
     this.isIndoor4x4Checked = !this.isIndoor4x4Checked;
-    this.changeToggleButtonState('indoor-4x4-button', this.isIndoor4x4Checked);
-    this.filterRules();
+    this.toggleButton(button, this.isIndoor4x4Checked, 'vbr-indoor-4x4-chip');
   }
 
-  changeToggleButtonState(id: string, toggled: boolean): void {
-    var button = document.getElementById(id);
-    var buttonClasses = button.classList;
-    if (toggled) {
-      buttonClasses.remove('vbr-button-unchecked');
+  toggleButton(button: HTMLElement, selected: boolean, clazz: string): void {
+    if (selected) {
+      button.classList.add(clazz);
     } else {
-      buttonClasses.add('vbr-button-unchecked');
+      button.classList.remove(clazz);
     }
+    this.filterRules();
   }
 }

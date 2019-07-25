@@ -171,16 +171,6 @@ export class Utils {
     }
   }
 
-  getGenderIcon(gender: string): string {
-    if (gender === 'MIXED') {
-      return 'fa fa-intersex vbr-mixed-text';
-    } else if (gender === 'LADIES') {
-      return 'fa fa-venus vbr-ladies-text';
-    } else {
-      return 'fa fa-mars vbr-gents-text';
-    }
-  }
-
   getGenderNoIcon(gender: string): string {
     if (gender === 'MIXED') {
       return '(Mixed)';

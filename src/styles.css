@@ -11,12 +11,19 @@
   --vbr-text-color: #1f1f1f;
   --vbr-inverted-text-color: white;
   --vbr-indoor-color: #1f4294;
+  --vbr-indoor-light-color: #cedaf5;
   --vbr-indoor-4x4-color: #2980b9;
+  --vbr-indoor-4x4-light-color: #e7f2fa;
   --vbr-beach-color: #f2bb1a;
+  --vbr-beach-light-color: #f8dc8a;
   --vbr-live-color: red;
+  --vbr-live-light-color: #faa;
   --vbr-ladies-color: #c2185b;
+  --vbr-ladies-light-color: #f7c0d6;
   --vbr-gents-color: #1f4294;
+  --vbr-gents-light-color: #cedaf5;
   --vbr-mixed-color: #006232;
+  --vbr-mixed-light-color: #c8ffe4;
   --vbr-error-color: #dc3545;
   --vbr-cancel-color: #424242;
   --vbr-unselected-color: #1f1f1f;
@@ -29,6 +36,7 @@
   --material-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
   --material-shadow-big: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
   --vbr-transition-duration: 0.4s;
+  --chip-padding: 1rem;
 }
 
 .vbr-body {
@@ -41,27 +49,6 @@
 .vbr-text {
   font-weight: normal;
   color: var(--vbr-text-color);
-}
-
-.vbr-live-text {
-  font-weight: normal;
-  color: var(--vbr-live-color);
-}
-
-.vbr-indoor-text {
-  background-color: var(--vbr-indoor-color);
-  border-color: var(--vbr-indoor-color) !important;
-  color: var(--vbr-inverted-text-color);
-}
-
-.vbr-indoor-4x4-text {
-  background-color: var(--vbr-indoor-4x4-color);
-  border-color: var(--vbr-indoor-4x4-color) !important;
-  color: var(--vbr-inverted-text-color);
-}
-
-.vbr-beach-text {
-  color: var(--vbr-beach-color);
 }
 
 .vbr-error-text {
@@ -103,8 +90,8 @@
 }
 
 .vbr-button-inverted:hover {
-  background-color: var(--vbr-light-primary-color);
-  color: var(--vbr-primary-color);
+  background-color: var(--vbr-primary-color);
+  color: var(--vbr-inverted-text-color);
   border-color: var(--vbr-primary-color);
 }
 
@@ -133,13 +120,15 @@
 }
 
 .cancel-button {
-	color: var(--vbr-inverted-text-color);
-	background-color: var(--vbr-cancel-color);
+	color: var(--vbr-cancel-color);
+	background-color: inherit;
 	border-color: var(--vbr-cancel-color);
 }
 
 .cancel-button:hover {
-  filter: var(--vbr-hover-brighter);
+	color: var(--vbr-inverted-text-color);
+	background-color: var(--vbr-cancel-color);
+	border-color: var(--vbr-cancel-color);
 }
 
 .vbr-live-button {
@@ -212,24 +201,6 @@
   filter: var(--vbr-hover-darker);
 }
 
-.vbr-button-unchecked {
-  background-color: var(--vbr-light-unselected-color);
-  color:  var(--vbr-unselected-color);
-  border-color: var(--vbr-unselected-color);
-}
-
-.vbr-mixed-text {
-  color: var(--vbr-mixed-color);
-}
-
-.vbr-ladies-text {
-  color: var(--vbr-ladies-color);
-}
-
-.vbr-gents-text {
-  color: var(--vbr-gents-color);
-}
-
 /* Switch */
 
 .vbr-switch {
@@ -287,6 +258,54 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+/* Chip */
+
+.chip {
+   display: inline-block;
+   color: var(--vbr-text-color);
+   padding: 0 var(--chip-padding);
+   height: calc(var(--chip-padding) * 2);
+   line-height: calc(var(--chip-padding) * 2);
+   border-radius: var(--chip-padding);
+   border-color: var(--vbr-light-unselected-color);
+   background-color: var(--vbr-light-unselected-color);
+ }
+
+ .vbr-live-chip {
+   border-color: var(--vbr-live-light-color) !important;
+   background-color: var(--vbr-live-light-color) !important;
+ }
+
+ .vbr-indoor-chip {
+   border-color: var(--vbr-indoor-light-color) !important;
+   background-color: var(--vbr-indoor-light-color) !important;
+ }
+
+ .vbr-indoor-4x4-chip {
+   border-color: var(--vbr-indoor-4x4-light-color) !important;
+   background-color: var(--vbr-indoor-4x4-light-color) !important;
+ }
+
+ .vbr-beach-chip {
+   border-color: var(--vbr-beach-light-color) !important;
+   background-color: var(--vbr-beach-light-color) !important;
+ }
+
+ .vbr-mixed-chip {
+   border-color: var(--vbr-mixed-light-color) !important;
+   background-color: var(--vbr-mixed-light-color) !important;
+ }
+
+ .vbr-ladies-chip {
+   border-color: var(--vbr-ladies-light-color) !important;
+   background-color: var(--vbr-ladies-light-color) !important;
+ }
+
+ .vbr-gents-chip {
+   border-color: var(--vbr-gents-light-color) !important;
+   background-color: var(--vbr-gents-light-color) !important;
+ }
+
 .div-card-title {
   display: flex;
   flex-flow: row wrap;
@@ -341,13 +360,13 @@ input:checked + .slider:before {
 
 .player-badge {
   font-weight: normal;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   width: 50px;
 }
 
 .player-badge-font {
   font-weight: normal;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .form-control:focus {
@@ -448,12 +467,12 @@ input:checked + .slider:before {
 
 html {
   font-family: 'Roboto', sans-serif;
-  font-size: 1em;
+  font-size: 0.875rem;
 }
 
 @media screen and (max-width: 1200px) {
   html {
-    font-size: 1em;
+    font-size: 1rem;
   }
 
   .player-badge {

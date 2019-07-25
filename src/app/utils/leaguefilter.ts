@@ -55,31 +55,28 @@ export class LeagueFilter {
     this.filterLeagues();
   }
 
-  toggleBeach(): void {
+  toggleBeach(button: HTMLElement): void {
     this.isBeachChecked = !this.isBeachChecked;
-    this.changeToggleButtonState('beach-button', this.isBeachChecked);
-    this.filterLeagues();
+    this.toggleButton(button, this.isBeachChecked, 'vbr-beach-chip');
   }
 
-  toggleIndoor(): void {
+  toggleIndoor(button: HTMLElement): void {
     this.isIndoorChecked = !this.isIndoorChecked;
-    this.changeToggleButtonState('indoor-button', this.isIndoorChecked);
-    this.filterLeagues();
+    this.toggleButton(button, this.isIndoorChecked, 'vbr-indoor-chip');
   }
 
-  toggleIndoor4x4(): void {
+  toggleIndoor4x4(button: HTMLElement): void {
     this.isIndoor4x4Checked = !this.isIndoor4x4Checked;
-    this.changeToggleButtonState('indoor-4x4-button', this.isIndoor4x4Checked);
+    this.toggleButton(button, this.isIndoor4x4Checked, 'vbr-indoor-4x4-chip');
+  }
+
+  toggleButton(button: HTMLElement, selected: boolean, clazz: string): void {
+    if (selected) {
+      button.classList.add(clazz);
+    } else {
+      button.classList.remove(clazz);
+    }
     this.filterLeagues();
   }
 
-  changeToggleButtonState(id: string, toggled: boolean): void {
-    var button = document.getElementById(id);
-    var buttonClasses = button.classList;
-    if (toggled) {
-      buttonClasses.remove('vbr-button-unchecked');
-    } else {
-      buttonClasses.add('vbr-button-unchecked');
-    }
-  }
 }

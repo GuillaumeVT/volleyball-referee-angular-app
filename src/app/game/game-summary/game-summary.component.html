@@ -9,7 +9,9 @@
       [style.border-color]="utils.getTeamBorderColor(game, rightTeam)">{{getTeamSets(rightTeam)}}</span>
     <span class="card-text vbr-text text-center small-line">{{getTeamName(rightTeam)}}</span>
   </span>
-  <span><i class="mr-3" [ngClass]="utils.getGenderIcon(game.gender)"></i></span>
+  <span class="chip vbr-mixed-chip mr-3" *ngIf="game.gender === 'MIXED'"><i class="fa fa-intersex"></i></span>
+  <span class="chip vbr-ladies-chip mr-3" *ngIf="game.gender === 'LADIES'"><i class="fa fa-venus"></i></span>
+  <span class="chip vbr-gents-chip mr-3" *ngIf="game.gender === 'GENTS'"><i class="fa fa-mars"></i></span>
   <span class="card-text vbr-text text-center" *ngIf="game.league && game.league.length">
     {{game.league}}
     <span *ngIf="game.division && game.division.length">&nbsp;/&nbsp;{{game.division}}</span>
