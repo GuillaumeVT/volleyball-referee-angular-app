@@ -2,11 +2,11 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 300px;
+  width: var(--drawer-width);
 }
 
 .div-drawer-logo {
-  height: 60px;
+  height: var(--toolbar-height);
   background-color: var(--vbr-background-color);
   border-right: 1px solid var(--vbr-card-border-color);
 }
@@ -30,34 +30,38 @@
 }
 
 .div-component-side {
-  margin-left: 300px;
+  margin-left: var(--drawer-width);
 }
 
 .div-top-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 3;
   background-color: var(--vbr-primary-color);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: 60px;
+  height: var(--toolbar-height);
 }
 
 .notification {
-  font-size: 1em;
+  font-size: 1rem;
   color: var(--vbr-primary-color);
   background-color: var(--vbr-secondary-color);
   border-color: var(--vbr-secondary-color);
 }
 
 .drawer-trigger-button {
-  font-size: 1.5em;
+  font-size: 1.3rem;
 }
 
 .drawer-close-button {
   position: absolute;
-  top: 15px;
+  top: 10px;
   right: 15px;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   color: var(--vbr-text-color);
 }
 
@@ -81,12 +85,12 @@
 
 .brand-img-size {
   width: auto;
-  height: 40px;
+  height: 30px;
 }
 
 .div-component-side-overlay {
   display: none;
-  z-index: 1;
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 0;
@@ -104,7 +108,7 @@
   .div-drawer-side {
     width: 0px;
     overflow: hidden;
-    z-index: 2;
+    z-index: 15;
   }
 
   .div-component-side {

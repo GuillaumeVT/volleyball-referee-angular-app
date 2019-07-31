@@ -15,10 +15,11 @@
   top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-size: 3.5rem;
 }
 
 @media screen and (max-width: 1200px) {
   .not-found-text {
-    font-size: 1.2em;
+    font-size: 1.5rem;
   }
 }

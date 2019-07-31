@@ -1,6 +1,6 @@
 .set-badge {
   font-weight: normal;
-  font-size: 1.6em;
+  font-size: 1.6rem;
 }
 
 .div-summary {
@@ -14,11 +14,11 @@
 }
 
 .small-line {
-  line-height: 1em;
+  line-height: 1;
 }
 
 @media screen and (max-width: 1200px) {
   .set-badge {
-    font-size: 1.2em;
+    font-size: 1.2rem;
   }
 }

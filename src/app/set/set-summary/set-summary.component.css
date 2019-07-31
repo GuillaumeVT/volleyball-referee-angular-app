@@ -4,7 +4,7 @@
 
 .point-badge {
   font-weight: normal;
-  font-size: 2em;
+  font-size: 2.5rem;
 }
 
 .points-line {
@@ -26,7 +26,7 @@
 
 @media screen and (max-width: 1200px) {
   .point-badge {
-    font-size: 1.4em;
+    font-size: 2rem;
   }
 
   .points-line {

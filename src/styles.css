@@ -37,6 +37,9 @@
   --material-shadow-big: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
   --vbr-transition-duration: 0.4s;
   --chip-padding: 1rem;
+  --drawer-width: 300px;
+  --toolbar-height: 50px;
+  --fab-padding: 1.6rem;
 }
 
 .vbr-body {
@@ -57,7 +60,7 @@
 }
 
 .vbr-error-feedback {
-  font-size: 0.85em;
+  font-size: 0.75rem;
   font-weight: normal;
   color: var(--vbr-error-color);
 }
@@ -360,13 +363,13 @@ input:checked + .slider:before {
 
 .player-badge {
   font-weight: normal;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   width: 50px;
 }
 
 .player-badge-font {
   font-weight: normal;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 .form-control:focus {
@@ -398,8 +401,8 @@ input:checked + .slider:before {
 
 .scroll-to-top {
   position: fixed;
-  top: 25px;
-  right: 25px;
+  top: calc(1.1 * var(--toolbar-height));
+  right: calc(0.5 * var(--toolbar-height));
   z-index: 5;
 }
 
@@ -409,17 +412,14 @@ input:checked + .slider:before {
 
 .fab-refresh {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
+  bottom: calc(0.5 * var(--toolbar-height));
+  right: calc(0.5 * var(--toolbar-height));
   z-index: 5;
 }
 
 .fab-refresh button {
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-  line-height: 35px;
+  border-radius: var(--fab-padding);
+  line-height: calc(1.6 * var(--fab-padding));
   padding-top: 0 !important;
   padding-bottom: 0 !important;
   box-shadow: var(--material-shadow-big);
@@ -476,12 +476,12 @@ html {
   }
 
   .player-badge {
-    font-size: 1em;
+    font-size: 1rem;
     width: 30px;
   }
 
   .player-badge-font {
-    font-size: 1em;
+    font-size: 1rem;
   }
 }
 
