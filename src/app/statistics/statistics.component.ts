@@ -18,7 +18,7 @@ export class StatisticsComponent implements OnInit {
   colorScheme;
 
   constructor(private statisticsService: StatisticsService, private publicService: PublicService) {
-    this.colorScheme = { domain: ["#1f4294", "#f2bb1a", "#2980b9"] };
+    this.colorScheme = { domain: ["#1f4294", "#f2bb1a", "#781fc9"] };
   }
 
   ngOnInit() {

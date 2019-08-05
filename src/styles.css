@@ -12,10 +12,12 @@
   --vbr-inverted-text-color: white;
   --vbr-indoor-color: #1f4294;
   --vbr-indoor-light-color: #cedaf5;
-  --vbr-indoor-4x4-color: #2980b9;
-  --vbr-indoor-4x4-light-color: #e7f2fa;
+  --vbr-indoor-4x4-color: #781fc9;
+  --vbr-indoor-4x4-light-color: #dbc0f5;
   --vbr-beach-color: #f2bb1a;
   --vbr-beach-light-color: #f8dc8a;
+  --vbr-snow-color: #2980b9;
+  --vbr-snow-light-color: #e7f2fa;
   --vbr-live-color: red;
   --vbr-live-light-color: #faa;
   --vbr-ladies-color: #c2185b;
