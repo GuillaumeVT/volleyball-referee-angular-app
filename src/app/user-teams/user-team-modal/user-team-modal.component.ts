@@ -5,6 +5,7 @@ import { CrudType } from '../../model/crudtype';
 import { InputPlayerItem } from '../../model/input-player-item';
 import { Utils } from '../../utils/utils';
 import { TeamService } from '../../services/team.service';
+import { PlayerNamesModalComponent } from '../player-names-modal/player-names-modal.component';
 import { ColorPickerModalComponent } from '../color-picker-modal/color-picker-modal.component';
 
 @Component({
@@ -26,7 +27,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
   liberos:          InputPlayerItem[];
   moreNumbers:      boolean;
   minPlayers:       number;
-  selectedPlayers:    number[];
+  selectedPlayers:  number[];
 
   constructor(private activeModal: NgbActiveModal, private teamService: TeamService, private modalService: NgbModal, private utils: Utils) {
     this.undefinedName = false;
@@ -76,11 +77,11 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
 
   initPlayersAndLiberos(): void {
     for (let player of this.team.players) {
-      this.onPlayerSelected(player.num);
+      this.onPlayerSelected(player.num, false);
     }
 
     for (let libero of this.team.liberos) {
-      this.onLiberoSelected(libero.num);
+      this.onLiberoSelected(libero.num, false);
     }
   }
 
@@ -100,20 +101,8 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     this.availablePlayers = this.numberOfPlayers() - this.numberOfLiberos();
 
     if (!this.undefinedName && !this.invalidCaptain && this.availablePlayers >= this.minPlayers) {
-      this.team.players = [];
-      this.team.liberos = [];
-
-      for (let playerItem of this.players) {
-        if (playerItem.selected) {
-          this.team.players.push(new Player(playerItem.shirtNumber, ""));
-        }
-      }
-
-      for (let liberoItem of this.liberos) {
-        if (liberoItem.selected) {
-          this.team.liberos.push(new Player(liberoItem.shirtNumber, ""));
-        }
-      }
+      this.team.players = this.team.players.sort((p1, p2) => p1.num - p2.num);
+      this.team.liberos = this.team.liberos.sort((l1, l2) => l1.num - l2.num);
 
       if (this.crudType === CrudType.Create) {
         this.teamService.createTeam(this.team).subscribe(team => this.onValidResponse(), error => this.onInvalidResponse(error));
@@ -137,8 +126,8 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     return this.crudType === 4 ? true : null;
   }
 
-  isEditingDisabledKey(): boolean {
-    return (this.crudType === 2 ||this.crudType === 4) ? true : null;
+  isEditingDisabledPrimaryKey(): boolean {
+    return (this.crudType === 2 || this.crudType === 4) ? true : null;
   }
 
   getGenderIcon(): string {
@@ -205,7 +194,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onPlayerSelected(player: number) {
+  onPlayerSelected(player: number, andUpdateModel : boolean) {
     const playerItem = this.players[player];
     playerItem.selected = !playerItem.selected;
 
@@ -216,6 +205,9 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
       this.liberos = this.liberos.sort((l1, l2) => l1.shirtNumber - l2.shirtNumber);
       this.selectedPlayers.push(player);
       this.selectedPlayers = this.selectedPlayers.sort((a, b) => a - b);
+      if (andUpdateModel) {
+        this.addPlayer(player);
+      }
     } else {
       var tmpLiberos = [];
 
@@ -232,16 +224,27 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
           this.selectedPlayers.splice(index, 1);
         }
       }
+
+      if (andUpdateModel) {
+        this.removePlayer(player);
+      }
     }
   }
 
-  onLiberoSelected(player: number) {
+  onLiberoSelected(player: number, andUpdateModel : boolean) {
     if (this.numberOfPlayers() > this.minPlayers) {
       const numberOfLiberos = this.numberOfLiberos();
       for (let liberoItem of this.liberos) {
         if (liberoItem.shirtNumber === player) {
           if (liberoItem.selected || (numberOfLiberos < 2)) {
             liberoItem.selected = !liberoItem.selected;
+          }
+          if (andUpdateModel) {
+            if (liberoItem.selected) {
+              this.addLibero(player);
+            } else {
+              this.removeLibero(player);
+            }
           }
         }
       }
@@ -268,6 +271,35 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     return count;
   }
 
+  addPlayer(player: number): void {
+    this.team.players.push(new Player(player, ""));
+  }
+
+  removePlayer(player: number): void {
+    for (var index = 0; index < this.team.players.length; index++) {
+      if (this.team.players[index].num === player) {
+        this.team.players.splice(index, 1);
+      }
+    }
+    this.removeLibero(player);
+  }
+
+  addLibero(libero: number): void {
+    for (let player of this.team.players) {
+      if (player.num == libero) {
+        this.team.liberos.push(player);
+      }
+    }
+  }
+
+  removeLibero(libero: number): void {
+    for (var index = 0; index < this.team.liberos.length; index++) {
+      if (this.team.liberos[index].num === libero) {
+        this.team.liberos.splice(index, 1);
+      }
+    }
+  }
+
   showMoreNumbers(): void {
     this.moreNumbers = true;
   }
@@ -276,4 +308,9 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     this.moreNumbers = false;
   }
 
+  showPlayerNamesInputModal(): void {
+    this.team.players = this.team.players.sort((p1, p2) => p1.num - p2.num);
+    const modalRef = this.modalService.open(PlayerNamesModalComponent, { size: 'lg' });
+    modalRef.componentInstance.team = this.team;
+  }
 }

@@ -10,11 +10,19 @@
   width: 100%;
 }
 
-.beach-court {
+.indoor-court {
   width: 100%;
 }
 
 .timeouts {
+  width: 100%;
+}
+
+.substitutions {
+  width: 100%;
+}
+
+.players {
   width: 100%;
 }
 
@@ -81,12 +89,19 @@
   }
 
   .sanctions {
-    grid-column: 1;
+    grid-column: 2;
     grid-row: 3;
   }
 
   .ladder {
     grid-column: auto / span 2;
     grid-row: 2;
+  }
+
+  .div-tertiary {
+    display: flex;
+    flex-flow: column;
+    grid-column: 1;
+    grid-row: 3;
   }
 }

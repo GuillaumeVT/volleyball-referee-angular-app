@@ -12,7 +12,7 @@
       <div class="col-12 col-sm-10">
         <label [ngClass]="undefinedName ? 'vbr-error-text' : ''" class="vbr-text" for="name">Team name</label>
         <input type="text" [ngClass]="undefinedName ? 'vbr-error-input' : ''" class="vbr-text form-control"
-          name="name" id="name" [(ngModel)]="team.name" placeholder="" required [attr.disabled]="isEditingDisabledKey()"/>
+          name="name" id="name" [(ngModel)]="team.name" placeholder="" required [attr.disabled]="isEditingDisabledPrimaryKey()"/>
         <div class="vbr-error-feedback" *ngIf="undefinedName">
           Please enter a name for the team.
         </div>
@@ -26,7 +26,7 @@
         <label class="vbr-text">Gender</label>
       </div>
       <div class="col-6 col-sm-8">
-        <button type="button" class="btn form-button" [ngClass]="getGenderButton()" id="gender" (click)="nextGender()" [attr.disabled]="isEditingDisabledKey()">
+        <button type="button" class="btn form-button" [ngClass]="getGenderButton()" id="gender" (click)="nextGender()" [attr.disabled]="isEditingDisabledPrimaryKey()">
           <i class="p-1" [ngClass]="getGenderIcon()"></i>
         </button>
       </div>
@@ -48,13 +48,13 @@
       <div class="col-12 col-sm-12">
         <label [ngClass]="(availablePlayers < minPlayers) ? 'vbr-error-text' : ''" class="vbr-text" for="players">Team players (including liberos)</label>
         <div class="div-players" id="players" *ngIf="!moreNumbers">
-          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:0:25;" (click)="onPlayerSelected(playerItem.shirtNumber)"
+          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:0:25;" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
             [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
             [innerHTML]="playerItem.player" [attr.disabled]="isEditingDisabled()"></button>
           <button type="button" class="btn vbr-button-inverted m-1" (click)="showMoreNumbers()">More numbers</button>
         </div>
         <div class="div-players" id="players" *ngIf="moreNumbers">
-          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players" (click)="onPlayerSelected(playerItem.shirtNumber)"
+          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
             [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
             [innerHTML]="playerItem.player" [attr.disabled]="isEditingDisabled()"></button>
             <button type="button" class="btn vbr-button-inverted m-1" (click)="showLessNumbers()">Less numbers</button>
@@ -87,7 +87,7 @@
         <label class="vbr-text" for="libero-shirt-color">Libero shirt color</label>
       </div>
       <div class="col-6 col-sm-6">
-        <button type="button" class="btn vbr-button form-button" [style.background-color]="team.liberoColor" [style.color]="utils.getTextColor(team.liberoColor)" [style.border-color]="team.liberoColor"
+        <button type="button" class="btn vbr-button form-button" [style.background-color]="team.liberoColor" [style.color]="utils.getTextColor(team.liberoColor)"
           [style.border-color]="utils.getBorderColor(team.liberoColor)" name="libero-shirt-color" id="libero-shirt-color" (click)="changeLiberoShirtColor()" [attr.disabled]="isEditingDisabled()">
           <i class="fa fa-paint-brush"></i>
         </button>
@@ -98,10 +98,22 @@
       <div class="col-12 col-sm-12">
         <label class="vbr-text" for="liberos">Team liberos</label>
         <div class="div-players" id="liberos">
-          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of liberos" (click)="onLiberoSelected(playerItem.shirtNumber)"
+          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of liberos" (click)="onLiberoSelected(playerItem.shirtNumber, true)"
             [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
             [innerHTML]="playerItem.player" [attr.disabled]="isEditingDisabled()"></button>
         </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-3">
+      <div class="col-6 col-sm-4">
+        <label class="vbr-text" for="player-names">Player names</label>
+      </div>
+      <div class="col-6 col-sm-6">
+        <button type="button" class="btn vbr-button form-button" [style.background-color]="team.color" [style.color]="utils.getTextColor(team.color)"
+          [style.border-color]="utils.getBorderColor(team.color)" name="player-names" id="player-names" (click)="showPlayerNamesInputModal()" [attr.disabled]="isEditingDisabled()">
+          <i class="fa fa-id-card-o"></i>
+        </button>
       </div>
     </div>
 

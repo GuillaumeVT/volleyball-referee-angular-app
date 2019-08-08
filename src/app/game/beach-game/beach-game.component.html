@@ -9,5 +9,8 @@
     <app-set-timeouts class="timeouts" *ngIf="game" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-set-timeouts>
   </div>
   <app-ladder class="ladder card div-card" [game]="game" [setIndex]="currentSet" [topTeam]="leftTeam" [bottomTeam]="rightTeam"></app-ladder>
+  <div class="div-tertiary card div-card">
+    <app-game-players class="players" *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-game-players>
+  </div>
   <app-game-sanctions class="sanctions card div-card" *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-game-sanctions>
 </div>

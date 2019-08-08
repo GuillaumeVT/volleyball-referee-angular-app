@@ -1,10 +1,9 @@
-.div-players {
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  width: inherit;
+.div-grid-team {
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+  grid-auto-rows: 1fr;
   align-items: center;
-  justify-items: start;
-  align-content: center;
+  align-content: start;
   justify-content: start;
+  justify-items: start;
 }

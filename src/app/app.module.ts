@@ -44,6 +44,7 @@ import { UserTeamsComponent } from './user-teams/user-teams.component';
 import { UserRulesModalComponent } from './user-rules/user-rules-modal/user-rules-modal.component';
 import { OkCancelModalComponent } from './ok-cancel-modal/ok-cancel-modal.component';
 import { UserTeamModalComponent } from './user-teams/user-team-modal/user-team-modal.component';
+import { PlayerNamesModalComponent } from './user-teams/player-names-modal/player-names-modal.component';
 import { ColorPickerModalComponent } from './user-teams/color-picker-modal/color-picker-modal.component';
 import { UserGamesComponent } from './user-games/user-games.component';
 import { UserGameModalComponent } from './user-games/user-game-modal/user-game-modal.component';
@@ -97,6 +98,7 @@ import { AccountComponent } from './user/account/account.component';
     UserTeamsComponent,
     UserRulesModalComponent,
     UserTeamModalComponent,
+    PlayerNamesModalComponent,
     OkCancelModalComponent,
     UserGamesComponent,
     UserGameModalComponent,
@@ -140,6 +142,7 @@ import { AccountComponent } from './user/account/account.component';
   entryComponents: [
     UserRulesModalComponent,
     UserTeamModalComponent,
+    PlayerNamesModalComponent,
     UserGameModalComponent,
     UserLeagueModalComponent,
     OkCancelModalComponent,

@@ -4,9 +4,9 @@
   flex-flow: row wrap;
   width: inherit;
   align-items: center;
-  justify-items: start;
+  justify-items: flex-start;
   align-content: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .form-button {
