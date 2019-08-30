@@ -40,13 +40,9 @@ export class EmailCredentials {
 }
 
 export class UserToken {
-  user:  UserSummary;
-  token: string;
-
-  constructor(user: UserSummary, token: string) {
-    this.user = user;
-    this.token = token;
-  }
+  user:        UserSummary;
+  token:       string;
+  tokenExpiry: number;
 }
 
 export class UserPasswordUpdate {

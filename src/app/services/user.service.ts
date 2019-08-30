@@ -19,7 +19,16 @@ export class UserService {
   private userToken:  UserToken;
 
   constructor(private http: HttpClient, private router: Router) {
-    this.userToken = JSON.parse(localStorage.getItem('vbrAuth'));
+    this.userToken = JSON.parse(localStorage.getItem('vbrUserToken'));
+    if (this.userToken) {
+      // Check that the token is not expired
+      const now = new Date();
+      const nowMillis = now.getTime() + (now.getTimezoneOffset() * 60000);
+      if (nowMillis > this.userToken.tokenExpiry) {
+        localStorage.removeItem('vbrUserToken');
+        this.userToken = null;
+      }
+    }
     this._authState = new BehaviorSubject<UserToken>(this.userToken);
   }
 
@@ -30,7 +39,7 @@ export class UserService {
   interceptUserToken(userToken: UserToken) {
     if (userToken && userToken.token && userToken.user) {
       this.userToken = userToken;
-      localStorage.setItem('vbrAuth', JSON.stringify(this.userToken));
+      localStorage.setItem('vbrUserToken', JSON.stringify(this.userToken));
       this._authState.next(this.userToken);
       this.router.navigateByUrl('/home');
     }
@@ -43,7 +52,7 @@ export class UserService {
   }
 
   signOut() {
-    localStorage.removeItem('vbrAuth');
+    localStorage.removeItem('vbrUserToken');
     this.userToken = null;
     this._authState.next(null);
     setTimeout(() => this.router.navigateByUrl('/sign-in'));
