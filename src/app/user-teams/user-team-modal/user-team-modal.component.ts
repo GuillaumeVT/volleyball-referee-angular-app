@@ -126,10 +126,6 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     return this.crudType === 4 ? true : null;
   }
 
-  isEditingDisabledPrimaryKey(): boolean {
-    return (this.crudType === 2 || this.crudType === 4) ? true : null;
-  }
-
   getGenderIcon(): string {
     if (this.team.gender === 'MIXED') {
       return 'fa fa-intersex';

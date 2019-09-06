@@ -12,7 +12,7 @@
       <div class="col-12 col-sm-10">
         <label [ngClass]="undefinedName ? 'vbr-error-text' : ''" class="vbr-text" for="name">Team name</label>
         <input type="text" [ngClass]="undefinedName ? 'vbr-error-input' : ''" class="vbr-text form-control"
-          name="name" id="name" [(ngModel)]="team.name" placeholder="" required [attr.disabled]="isEditingDisabledPrimaryKey()"/>
+          name="name" id="name" [(ngModel)]="team.name" placeholder="" required [attr.disabled]="isEditingDisabled()"/>
         <div class="vbr-error-feedback" *ngIf="undefinedName">
           Please enter a name for the team.
         </div>
@@ -26,7 +26,7 @@
         <label class="vbr-text">Gender</label>
       </div>
       <div class="col-6 col-sm-8">
-        <button type="button" class="btn form-button" [ngClass]="getGenderButton()" id="gender" (click)="nextGender()" [attr.disabled]="isEditingDisabledPrimaryKey()">
+        <button type="button" class="btn form-button" [ngClass]="getGenderButton()" id="gender" (click)="nextGender()" [attr.disabled]="isEditingDisabled()">
           <i class="p-1" [ngClass]="getGenderIcon()"></i>
         </button>
       </div>

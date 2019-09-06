@@ -12,7 +12,7 @@
       <div class="col-12 col-sm-10">
         <label [ngClass]="undefinedName ? 'vbr-error-text' : ''" class="vbr-text" for="name">Rules name</label>
         <input type="text" [ngClass]="undefinedName ? 'vbr-error-input' : ''" class="vbr-text form-control"
-          name="name" id="name" [(ngModel)]="rules.name" placeholder="" required [attr.disabled]="isEditingDisabledKey()"/>
+          name="name" id="name" [(ngModel)]="rules.name" placeholder="" required [attr.disabled]="isEditingDisabled()"/>
         <div class="vbr-error-feedback" *ngIf="undefinedName">
           Please enter a name for the rules.
         </div>
