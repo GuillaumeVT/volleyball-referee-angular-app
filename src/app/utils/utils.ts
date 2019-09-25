@@ -161,13 +161,15 @@ export class Utils {
   }
 
   getPlayerForSanction(game: Game, teamType: TeamType, player: number): string {
-    if (player >= 0) {
-      return this.getPlayer(game, teamType, player);
-    } else if (player == 100) {
-      // coach
-      return 'C.';
-    } else {
-      return 'T.';
+    switch (player) {
+      case 100:
+        // coach
+        return 'C.';
+      case 200:
+        // team
+        return 'T.';
+      default:
+        return this.getPlayer(game, teamType, player);
     }
   }
 
