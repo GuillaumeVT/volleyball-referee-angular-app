@@ -14,6 +14,7 @@ export class Rules {
   pointsInTieBreak:                 number;
   twoPointsDifference:              boolean;
   sanctions:                        boolean;
+  matchTermination:                 number;
   teamTimeouts:                     boolean;
   teamTimeoutsPerSet:               number;
   teamTimeoutDuration:              number;
@@ -62,6 +63,7 @@ export class Rules {
     rules.pointsInTieBreak = 15;
     rules.twoPointsDifference = true;
     rules.sanctions = true;
+    rules.matchTermination = 1;
     rules.teamTimeouts = true;
     rules.teamTimeoutsPerSet = 2;
     rules.teamTimeoutDuration = 30;
@@ -95,6 +97,7 @@ export class Rules {
     rules.pointsInTieBreak = 15;
     rules.twoPointsDifference = true;
     rules.sanctions = true;
+    rules.matchTermination = 1;
     rules.teamTimeouts = true;
     rules.teamTimeoutsPerSet = 1;
     rules.teamTimeoutDuration = 30;
@@ -128,6 +131,7 @@ export class Rules {
     rules.pointsInTieBreak = 15;
     rules.twoPointsDifference = true;
     rules.sanctions = true;
+    rules.matchTermination = 1;
     rules.teamTimeouts = true;
     rules.teamTimeoutsPerSet = 2;
     rules.teamTimeoutDuration = 30;

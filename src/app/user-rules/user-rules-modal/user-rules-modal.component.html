@@ -87,6 +87,16 @@
         <label class="vbr-text" for="points-per-set">Number of points in tie break</label>
         <select class="custom-select vbr-text"
           name="points-in-tie-break" id="points-in-tie-break" [(ngModel)]="rules.pointsInTieBreak" [attr.disabled]="isTieBreakDisabled()">
+          <option [ngValue]="40">Tie break of 40 points</option>
+          <option [ngValue]="39">Tie break of 39 points</option>
+          <option [ngValue]="38">Tie break of 38 points</option>
+          <option [ngValue]="37">Tie break of 37 points</option>
+          <option [ngValue]="36">Tie break of 36 points</option>
+          <option [ngValue]="35">Tie break of 35 points</option>
+          <option [ngValue]="34">Tie break of 34 points</option>
+          <option [ngValue]="33">Tie break of 33 points</option>
+          <option [ngValue]="32">Tie break of 32 points</option>
+          <option [ngValue]="31">Tie break of 31 points</option>
           <option [ngValue]="30">Tie break of 30 points</option>
           <option [ngValue]="29">Tie break of 29 points</option>
           <option [ngValue]="28">Tie break of 28 points</option>
@@ -123,6 +133,17 @@
       <input type="checkbox" class="custom-control-input"
         name="sanctions" id="sanctions" [(ngModel)]="rules.sanctions" [attr.disabled]="isEditingDisabled()"/>
       <label class="custom-control-label vbr-text" for="sanctions">Sanctions</label>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="match-termination">Termination of match</label>
+        <select class="custom-select vbr-text"
+          name="match-termination" id="match-termination" [(ngModel)]="rules.matchTermination" [attr.disabled]="isEditingDisabled()">
+          <option [ngValue]="1">Finish the match when a team wins</option>
+          <option [ngValue]="2">Finish the match when all the sets have been played</option>
+        </select>
+      </div>
     </div>
 
     <hr class="mb-3"/>
