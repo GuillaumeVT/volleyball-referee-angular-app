@@ -1,20 +1,36 @@
 import { GameSummary } from '../../model/game';
 import { Utils } from '../../utils/utils';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-game-list-item',
   templateUrl: './game-list-item.component.html',
   styleUrls: ['./game-list-item.component.css']
 })
-export class GameListItemComponent implements OnInit {
+export class GameListItemComponent implements OnInit, OnChanges {
 
   @Input() gameSummary: GameSummary;
   @Input() inLeague:        boolean;
 
+  homeScores: number[];
+  guestScores: number[];
+
   constructor(private utils: Utils) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.homeScores = [];
+    this.guestScores = [];
+
+    if (this.gameSummary && this.gameSummary.status !== 'SCHEDULED') {
+      const sets: string[] = this.gameSummary.score.split("\t\t");
+      for (let set of sets) {
+        const score: string[] = set.split('-');
+        this.homeScores.push(Number(score[0]));
+        this.guestScores.push(Number(score[1]));
+      }
+    }
   }
 
   getMatchUrl(): string {

@@ -17,6 +17,15 @@
   text-decoration: underline;
 }
 
+.game-item-sets {
+  font-size: 1.5rem;
+  color: var(--vbr-primary-color);
+}
+
+.game-item-sets:hover {
+  text-decoration: underline;
+}
+
 .item-link {
   font-weight: normal;
   color: var(--vbr-text-color);

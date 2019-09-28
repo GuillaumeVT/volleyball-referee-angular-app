@@ -1,7 +1,7 @@
 <div class="div-user text-center">
   <div class="row m-1">
     <div class="px-1 col-12 col-sm-12 col-md-6" *ngIf="friendRequestsReceivedBy && friendRequestsReceivedBy.length > 0">
-      <div class="card div-card p-4 my-1">
+      <div class="card div-card p-2 my-1">
         <p class="lead vbr-text">New colleagues</p>
         <hr class="mt-2 mb-4"/>
         <app-colleague-request-item *ngFor="let friendRequest of friendRequestsReceivedBy" [friendRequest]="friendRequest"
@@ -9,14 +9,14 @@
       </div>
     </div>
     <div class="px-1 col-12 col-sm-12 col-md-6" *ngIf="availableGames && availableGames.length > 0">
-      <div class="card div-card p-4 my-1">
+      <div class="card div-card p-2 my-1">
         <p class="lead vbr-text">Upcoming & live games</p>
         <hr class="mt-2 mb-4"/>
         <app-game-list-item *ngFor="let game of availableGames" [gameSummary]="game" [inLeague]="false"></app-game-list-item>
       </div>
     </div>
     <div class="px-1 col-12 col-sm-12 col-md-6">
-      <div class="card div-card p-4 my-1">
+      <div class="card div-card p-2 my-1">
         <app-statistics [showUserStatistics]="true"></app-statistics>
       </div>
     </div>
