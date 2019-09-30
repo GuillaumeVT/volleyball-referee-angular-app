@@ -46,10 +46,10 @@
     </div>
   </div>
   <div class="vbr-text mt-3" *ngIf="showLeague() || showDivision() || showReferee()">
-    <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="item-link interactive">{{gameSummary.leagueName}}</a>
+    <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="item-link">{{gameSummary.leagueName}}</a>
     <span *ngIf="showLeague() && showDivision()" class="mx-1">/</span>
     <span *ngIf="showDivision()">{{gameSummary.divisionName}}</span>
     <br *ngIf="(showLeague() || showDivision()) && showReferee()" />
-    <a [routerLink]="getTokenUrl()" *ngIf="showReferee()" class="item-link interactive"><i class="fa fa-user mr-1"></i>by {{gameSummary.refereeName}}</a>
+    <a [routerLink]="getTokenUrl()" *ngIf="showReferee()" class="item-link"><i class="fa fa-user mr-1"></i>by {{gameSummary.refereeName}}</a>
   </div>
 </div>
