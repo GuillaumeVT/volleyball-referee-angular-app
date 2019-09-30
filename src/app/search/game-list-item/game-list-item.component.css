@@ -13,17 +13,15 @@
   color: var(--vbr-primary-color);
 }
 
-.game-item-title:hover {
-  text-decoration: underline;
-}
-
 .game-item-sets {
   font-size: 1.5rem;
   color: var(--vbr-primary-color);
+  min-width: 24px;
 }
 
-.game-item-sets:hover {
-  text-decoration: underline;
+.game-item-set {
+  color: var(--vbr-text-color);
+  min-width: 16px;
 }
 
 .item-link {
@@ -31,6 +29,9 @@
   color: var(--vbr-text-color);
 }
 
-.item-link:hover {
+.interactive:hover {
+  background-color: var(--vbr-light-primary-color) !important;
+  cursor: pointer;
+  border-radius: 5px;
   text-decoration: underline;
 }
