@@ -20,8 +20,9 @@
 }
 
 .game-item-set {
+  display: inline-block;
   color: var(--vbr-text-color);
-  min-width: 16px;
+  width: 16px;
 }
 
 .item-link {
