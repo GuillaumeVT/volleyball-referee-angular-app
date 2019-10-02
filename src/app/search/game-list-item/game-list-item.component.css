@@ -22,7 +22,7 @@
 .game-item-set {
   display: inline-block;
   color: var(--vbr-text-color);
-  width: 16px;
+  width: 20px;
 }
 
 .item-link {
