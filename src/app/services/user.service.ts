@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { UserSummary, FriendRequest, FriendsAndRequests, EmailCredentials, UserToken, UserPasswordUpdate } from '../model/user';
+import { FriendRequest, FriendsAndRequests, EmailCredentials, UserToken, UserPasswordUpdate } from '../model/user';
 import { Count } from '../model/count';
 
 @Injectable({
@@ -17,6 +17,7 @@ export class UserService {
 
   private _authState: BehaviorSubject<UserToken>;
   private userToken:  UserToken;
+  private redirectUrlAfterLogin: string;
 
   constructor(private http: HttpClient, private router: Router) {
     this.userToken = JSON.parse(localStorage.getItem('vbrUserToken'));
@@ -41,7 +42,12 @@ export class UserService {
       this.userToken = userToken;
       localStorage.setItem('vbrUserToken', JSON.stringify(this.userToken));
       this._authState.next(this.userToken);
-      this.router.navigateByUrl('/home');
+      if (this.redirectUrlAfterLogin) {
+        this.router.navigateByUrl(this.redirectUrlAfterLogin);
+        this.redirectUrlAfterLogin = null;
+      } else {
+        this.router.navigateByUrl('/home');
+      }
     }
     return userToken;
   }
@@ -111,6 +117,10 @@ export class UserService {
   removeFriend(friendId: string): Observable<Object> {
     const url = `${this.usersUrl}/friends/remove/${friendId}`;
     return this.http.delete(url);
+  }
+
+  setRedirectUrlAfterLogin(url: string): void {
+    this.redirectUrlAfterLogin = url;
   }
 
 }

@@ -37,7 +37,6 @@ import { SetSubstitutionsComponent } from './set/set-substitutions/set-substitut
 import { SetTimeoutsComponent } from './set/set-timeouts/set-timeouts.component';
 import { GamePlayersComponent } from './game/game-players/game-players.component';
 import { GameSanctionsComponent } from './game/game-sanctions/game-sanctions.component';
-import { SetLineupsComponent } from './set/set-lineups/set-lineups.component';
 import { GameComponent } from './game/game.component';
 import { UserRulesComponent } from './user-rules/user-rules.component';
 import { UserTeamsComponent } from './user-teams/user-teams.component';
@@ -65,6 +64,11 @@ import { SignInComponent } from './user/sign-in/sign-in.component';
 import { PasswordResetComponent } from './user/password-reset/password-reset.component';
 import { PasswordLostComponent } from './user/password-lost/password-lost.component';
 import { AccountComponent } from './user/account/account.component';
+import { SnowGameComponent } from './game/snow-game/snow-game.component';
+import { SnowCourtComponent } from './court/snow-court/snow-court.component';
+import { IndoorSetLineupsComponent } from './set/indoor-set-lineups/indoor-set-lineups.component';
+import { Indoor4x4SetLineupsComponent } from './set/indoor4x4-set-lineups/indoor4x4-set-lineups.component';
+import { SnowSetLineupsComponent } from './set/snow-set-lineups/snow-set-lineups.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +96,6 @@ import { AccountComponent } from './user/account/account.component';
     SetTimeoutsComponent,
     GamePlayersComponent,
     GameSanctionsComponent,
-    SetLineupsComponent,
     GameComponent,
     UserRulesComponent,
     UserTeamsComponent,
@@ -119,7 +122,12 @@ import { AccountComponent } from './user/account/account.component';
     SignInComponent,
     PasswordResetComponent,
     PasswordLostComponent,
-    AccountComponent
+    AccountComponent,
+    SnowGameComponent,
+    SnowCourtComponent,
+    IndoorSetLineupsComponent,
+    Indoor4x4SetLineupsComponent,
+    SnowSetLineupsComponent
   ],
   imports: [
     BrowserModule,

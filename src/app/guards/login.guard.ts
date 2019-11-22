@@ -23,6 +23,7 @@ export class LoginGuard implements CanActivate {
       if (this.isSignedIn) {
         return true;
       } else {
+        this.userService.setRedirectUrlAfterLogin(state.url);
         this.router.navigateByUrl('/sign-in');
         return false;
       }

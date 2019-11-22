@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'https://www.volleyball-referee.com/api/v3.1'
+  api: 'https://www.volleyball-referee.com/api/v3.2'
 };

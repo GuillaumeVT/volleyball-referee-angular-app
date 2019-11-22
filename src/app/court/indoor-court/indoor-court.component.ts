@@ -1,10 +1,9 @@
-import { GameService } from '../../services/game.service';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Game } from '../../model/game';
 import { Court } from '../../model/set';
 import { TeamType } from '../../model/teamtype';
 import { IndoorPlayerItem } from '../../model/indoor-player-item';
 import { Utils } from '../../utils/utils';
-import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-indoor-court',
@@ -40,12 +39,11 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
 
   computePlayerItems(teamType: TeamType): IndoorPlayerItem[] {
     var playerItems = [];
-    var index;
 
-    for (index = 0; index < this.positions; index++) {
+    for (let index = 0; index < this.positions; index++) {
       var position = index + 1;
       var player = this.getPlayerAt(position, teamType);
-      var color, backgroundColor, borderColor;
+      var color : string, backgroundColor : string, borderColor : string;
 
       if (this.utils.isLibero(this.game, teamType, player)) {
         color = this.utils.getLiberoTextColor(this.game, teamType);
@@ -58,7 +56,7 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
         borderColor = this.utils.getBorderColor(backgroundColor);
       }
 
-      var actingCaptain;
+      var actingCaptain: number;
       const set = this.game.sets[this.setIndex];
 
       if (TeamType.Home === teamType) {
@@ -75,7 +73,7 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
 
   getPlayerItem(position: number, teamType: TeamType): IndoorPlayerItem {
     var index = position - 1;
-    var playerItem;
+    var playerItem: IndoorPlayerItem;
 
     if (TeamType.Home === teamType) {
       playerItem = this.hPlayerItems[index];
@@ -159,7 +157,7 @@ export class IndoorCourtComponent implements OnInit, OnChanges {
       servingTeam = TeamType.Guest;
     }
 
-    var visibility;
+    var visibility: string;
 
     if (teamType.valueOf() === servingTeam.valueOf()) {
       visibility = 'visible';

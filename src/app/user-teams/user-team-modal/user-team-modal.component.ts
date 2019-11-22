@@ -58,6 +58,9 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
         case 'INDOOR_4X4':
           this.minPlayers = 4;
           break;
+          case 'SNOW':
+            this.minPlayers = 3;
+            break;
       }
 
       this.initForm();

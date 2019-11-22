@@ -1,15 +1,10 @@
-import { Game } from '../../model/game';
-import { Court } from '../../model/set';
-import { TeamType } from '../../model/teamtype';
-import { Utils } from '../../utils/utils';
-import { Component, OnInit, Input } from '@angular/core';
+import { Game } from '../model/game';
+import { Court } from '../model/set';
+import { TeamType } from '../model/teamtype';
+import { Utils } from '../utils/utils';
+import { OnInit, Input } from '@angular/core';
 
-@Component({
-  selector: 'app-set-lineups',
-  templateUrl: './set-lineups.component.html',
-  styleUrls: ['./set-lineups.component.css']
-})
-export class SetLineupsComponent implements OnInit {
+export abstract class AbstractSetLineupsComponent implements OnInit {
 
   @Input() game:      Game;
   @Input() setIndex:  number;
@@ -25,7 +20,7 @@ export class SetLineupsComponent implements OnInit {
     const set = this.game.sets[this.setIndex];
 
     var players: Court;
-    var captain;
+    var captain: number;
 
     if (TeamType.Home === teamType) {
       players = set.homeStartingPlayers;

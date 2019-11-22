@@ -42,6 +42,9 @@ export class Rules {
       case "INDOOR_4X4":
       rules = Rules.createIndoor4x4Rules(user);
       break;
+      case "SNOW":
+      rules = Rules.createSnowRules(user);
+      break;
     }
 
     return rules;
@@ -144,6 +147,40 @@ export class Rules {
     rules.beachCourtSwitches = false;
     rules.beachCourtSwitchFreq = 0;
     rules.beachCourtSwitchFreqTieBreak = 0;
+    rules.customConsecutiveServesPerPlayer = 9999;
+
+    return rules;
+  }
+
+  public static createSnowRules(user: UserSummary): Rules {
+    const rules = new Rules();
+    const now = new Date();
+
+    rules.id = UUID.UUID();
+    rules.createdBy = user.id;
+    rules.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    rules.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    rules.name = '';
+    rules.kind = 'SNOW';
+    rules.setsPerGame = 3;
+    rules.pointsPerSet = 15;
+    rules.tieBreakInLastSet = false;
+    rules.pointsInTieBreak = 15;
+    rules.twoPointsDifference = true;
+    rules.sanctions = true;
+    rules.matchTermination = 1;
+    rules.teamTimeouts = true;
+    rules.teamTimeoutsPerSet = 1;
+    rules.teamTimeoutDuration = 30;
+    rules.technicalTimeouts = false;
+    rules.technicalTimeoutDuration = 0;
+    rules.gameIntervals = true;
+    rules.gameIntervalDuration = 60;
+    rules.substitutionsLimitation = 4;
+    rules.teamSubstitutionsPerSet = 9999;
+    rules.beachCourtSwitches = true;
+    rules.beachCourtSwitchFreq = 5;
+    rules.beachCourtSwitchFreqTieBreak = 5;
     rules.customConsecutiveServesPerPlayer = 9999;
 
     return rules;

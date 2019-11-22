@@ -1,8 +1,8 @@
+import { Component, OnInit, Input } from '@angular/core';
 import { Game } from '../../model/game';
 import { Court } from '../../model/set';
 import { TeamType } from '../../model/teamtype';
 import { Utils } from '../../utils/utils';
-import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-beach-court',
@@ -35,7 +35,7 @@ export class BeachCourtComponent implements OnInit {
       players = set.guestCurrentPlayers;
     }
 
-    var visibility;
+    var visibility: string;
 
     if (teamType.valueOf() === servingTeam.valueOf()) {
       if (players.p1 === playerNumber) {

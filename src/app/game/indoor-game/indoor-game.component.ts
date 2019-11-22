@@ -1,5 +1,5 @@
-import { AbstractGameComponent } from '../abstract-game.component';
 import { Component } from '@angular/core';
+import { AbstractGameComponent } from '../abstract-game.component';
 
 @Component({
   selector: 'app-indoor-game',

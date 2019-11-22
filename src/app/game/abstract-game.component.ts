@@ -1,8 +1,6 @@
 import { Game } from '../model/game';
 import { TeamType } from '../model/teamtype';
 import { OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
 
 export abstract class AbstractGameComponent implements OnInit {
 

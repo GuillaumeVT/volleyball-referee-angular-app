@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Team, TeamSummary } from '../model/team';
+import { Page } from '../model/page';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,16 @@ export class TeamService {
 
   constructor(private http: HttpClient) { }
 
-  listTeams(): Observable<TeamSummary[]> {
+  listTeams(kinds: string[], genders: string[], page: number, size: number): Observable<Page<TeamSummary>> {
     const url = `${this.teamsUrl}`;
-    return this.http.get<TeamSummary[]>(url);
-  }
-
-  listTeamsOfKind(kind: string): Observable<TeamSummary[]> {
-    const url = `${this.teamsUrl}/kind/${kind}`;
-    return this.http.get<TeamSummary[]>(url);
+    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    for (let kind of kinds) {
+      params = params.append("kind", kind);
+    }
+    for (let gender of genders) {
+      params = params.append("gender", gender);
+    }
+    return this.http.get<Page<TeamSummary>>(url, { params: params });
   }
 
   getTeam(teamId: string): Observable<Team> {
@@ -40,6 +43,11 @@ export class TeamService {
 
   deleteTeam(teamId: string): Observable<Object> {
     const url = `${this.teamsUrl}/${teamId}`;
+    return this.http.delete(url);
+  }
+
+  deleteAllTeams(): Observable<Object> {
+    const url = `${this.teamsUrl}`;
     return this.http.delete(url);
   }
 }

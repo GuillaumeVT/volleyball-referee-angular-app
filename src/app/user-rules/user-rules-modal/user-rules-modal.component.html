@@ -148,7 +148,7 @@
 
     <hr class="mb-3"/>
 
-    <h5 class="vbr-text">Timeout</h5>
+    <h5 class="vbr-text">Timeouts</h5>
 
     <div class="mb-2 custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input"
@@ -180,13 +180,13 @@
       </div>
     </div>
 
-    <div class="mb-2 custom-control custom-checkbox">
+    <div class="mb-2 custom-control custom-checkbox" *ngIf="rules.kind !== 'SNOW'">
       <input type="checkbox" class="custom-control-input"
         name="technical-timeouts" id="technical-timeouts" [(ngModel)]="rules.technicalTimeouts" [attr.disabled]="isEditingDisabled()"/>
       <label class="custom-control-label vbr-text" for="technical-timeouts">Technical timeouts</label>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3" *ngIf="rules.kind !== 'SNOW'">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="technical-timeouts-duration">Duration of a technical timeout</label>
         <select class="custom-select vbr-text"
@@ -216,11 +216,51 @@
       </div>
     </div>
 
-    <hr class="mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'"/>
+    <hr class="mb-3" *ngIf="rules.kind === 'BEACH' || rules.kind === 'SNOW'"/>
 
-    <h5 class="vbr-text" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">Indoor Volleyball</h5>
+    <h5 class="vbr-text" *ngIf="rules.kind === 'BEACH' || rules.kind === 'SNOW'">Court switches</h5>
 
-    <div class="row mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">
+    <div class="mb-2 custom-control custom-checkbox" *ngIf="rules.kind === 'BEACH' || rules.kind === 'SNOW'">
+      <input type="checkbox" class="custom-control-input"
+        name="beach-court-switches" id="beach-court-switches" [(ngModel)]="rules.beachCourtSwitches" [attr.disabled]="isEditingDisabled()"/>
+      <label class="custom-control-label vbr-text" for="beach-court-switches">Court switches</label>
+    </div>
+
+    <div class="row mb-3" *ngIf="rules.kind === 'BEACH' || rules.kind === 'SNOW'">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="beach-switch-court-frequency">Court switch period in normal set</label>
+        <select class="custom-select vbr-text"
+          name="beach-switch-court-frequency" id="beach-switch-court-frequency" [(ngModel)]="rules.beachCourtSwitchFreq" [attr.disabled]="isBeachCourtSwitchesDisabled()">
+          <option [ngValue]="10">Switch every 10 points</option>
+          <option [ngValue]="9">Switch every 9 points</option>
+          <option [ngValue]="8">Switch every 8 points</option>
+          <option [ngValue]="7">Switch every 7 points</option>
+          <option [ngValue]="6">Switch every 6 points</option>
+          <option [ngValue]="5">Switch every 5 points</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="rules.kind === 'BEACH' || rules.kind === 'SNOW'">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="beach-switch-court-frequency-tie-break">Court switch period in tie break</label>
+        <select class="custom-select vbr-text"
+          name="beach-switch-court-frequency-tie-break" id="beach-switch-court-frequency-tie-break" [(ngModel)]="rules.beachCourtSwitchFreqTieBreak" [attr.disabled]="isBeachCourtSwitchesDisabled()">
+          <option [ngValue]="10">Switch every 10 points</option>
+          <option [ngValue]="9">Switch every 9 points</option>
+          <option [ngValue]="8">Switch every 8 points</option>
+          <option [ngValue]="7">Switch every 7 points</option>
+          <option [ngValue]="6">Switch every 6 points</option>
+          <option [ngValue]="5">Switch every 5 points</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4' || rules.kind === 'SNOW'"/>
+
+    <h5 class="vbr-text" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4' || rules.kind === 'SNOW'">Substitutions</h5>
+
+    <div class="row mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4' || rules.kind === 'SNOW'">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="substitutions-limitation">Substitutions limitation</label>
         <select class="custom-select vbr-text"
@@ -252,7 +292,7 @@
       </div>
     </div>
 
-    <div class="row mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4'">
+    <div class="row mb-3" *ngIf="rules.kind === 'INDOOR' || rules.kind === 'INDOOR_4X4' || rules.kind === 'SNOW'">
       <div class="col-12 col-sm-10">
         <label class="vbr-text" for="substitutions-number">Number of team substitutions per set</label>
         <select class="custom-select vbr-text"
@@ -264,6 +304,7 @@
           <option [ngValue]="5">5 substitutions per set</option>
           <option [ngValue]="4">4 substitutions per set</option>
           <option [ngValue]="3">3 substitutions per set</option>
+          <option [ngValue]="2">2 substitutions per set</option>
         </select>
       </div>
     </div>
@@ -278,46 +319,6 @@
           <option [ngValue]="4">4 serves</option>
           <option [ngValue]="3">3 serves</option>
           <option [ngValue]="2">2 serves</option>
-        </select>
-      </div>
-    </div>
-
-    <hr class="mb-3" *ngIf="rules.kind === 'BEACH'"/>
-
-    <h5 class="vbr-text" *ngIf="rules.kind === 'BEACH'">Beach Volleyball</h5>
-
-    <div class="mb-2 custom-control custom-checkbox" *ngIf="rules.kind === 'BEACH'">
-      <input type="checkbox" class="custom-control-input"
-        name="beach-court-switches" id="beach-court-switches" [(ngModel)]="rules.beachCourtSwitches" [attr.disabled]="isEditingDisabled()"/>
-      <label class="custom-control-label vbr-text" for="beach-court-switches">Court switches</label>
-    </div>
-
-    <div class="row mb-3" *ngIf="rules.kind === 'BEACH'">
-      <div class="col-12 col-sm-10">
-        <label class="vbr-text" for="beach-switch-court-frequency">Court switch period in normal set</label>
-        <select class="custom-select vbr-text"
-          name="beach-switch-court-frequency" id="beach-switch-court-frequency" [(ngModel)]="rules.beachCourtSwitchFreq" [attr.disabled]="isBeachCourtSwitchesDisabled()">
-          <option [ngValue]="10">Switch every 10 points</option>
-          <option [ngValue]="9">Switch every 9 points</option>
-          <option [ngValue]="8">Switch every 8 points</option>
-          <option [ngValue]="7">Switch every 7 points</option>
-          <option [ngValue]="6">Switch every 6 points</option>
-          <option [ngValue]="5">Switch every 5 points</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row mb-3" *ngIf="rules.kind === 'BEACH'">
-      <div class="col-12 col-sm-10">
-        <label class="vbr-text" for="beach-switch-court-frequency-tie-break">Court switch period in tie break</label>
-        <select class="custom-select vbr-text"
-          name="beach-switch-court-frequency-tie-break" id="beach-switch-court-frequency-tie-break" [(ngModel)]="rules.beachCourtSwitchFreqTieBreak" [attr.disabled]="isBeachCourtSwitchesDisabled()">
-          <option [ngValue]="10">Switch every 10 points</option>
-          <option [ngValue]="9">Switch every 9 points</option>
-          <option [ngValue]="8">Switch every 8 points</option>
-          <option [ngValue]="7">Switch every 7 points</option>
-          <option [ngValue]="6">Switch every 6 points</option>
-          <option [ngValue]="5">Switch every 5 points</option>
         </select>
       </div>
     </div>

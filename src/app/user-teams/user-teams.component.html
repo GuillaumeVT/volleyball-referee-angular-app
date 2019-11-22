@@ -2,38 +2,50 @@
   <ul class="my-3 list-unstyled list-inline">
     <li class="list-inline-item my-1">
       <button class="btn vbr-indoor-button" (click)="createTeam('INDOOR')">
-        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="icon-text">Create</span>&nbsp;6x6
+        <i class="fa fa-plus"></i><span class="icon-text mx-2">Create</span>6x6
       </button>
     </li>
     <li class="list-inline-item my-1">
       <button class="btn vbr-beach-button" (click)="createTeam('BEACH')">
-        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="icon-text">Create</span>&nbsp;Beach
+        <i class="fa fa-plus"></i><span class="icon-text mx-2">Create</span>Beach
       </button>
     </li>
     <li class="list-inline-item my-1">
       <button class="btn vbr-indoor-4x4-button" (click)="createTeam('INDOOR_4X4')">
-        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="icon-text">Create</span>&nbsp;4x4
+        <i class="fa fa-plus"></i><span class="icon-text mx-2">Create</span>4x4
+      </button>
+    </li>
+    <li class="list-inline-item my-1">
+      <button class="btn vbr-snow-button" (click)="createTeam('SNOW')">
+        <i class="fa fa-plus"></i><span class="icon-text mx-2">Create</span>Snow
+      </button>
+    </li>
+    <li class="list-inline-item my-1">
+      <button class="btn cancel-button" (click)="deleteAllTeams()">
+        <i class="fa fa-trash"></i><span class="icon-text ml-2">Delete All</span>
       </button>
     </li>
   </ul>
-  <div class="my-3 mx-1 text-left" *ngIf="teamFilter.teams && teamFilter.teams.length > 0">
-    <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="teamFilter.filterFromText(textFilter)"/>
+  <div class="my-3 mx-1 text-left" *ngIf="teams && teams.length > 0">
+    <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="filterFromText(textFilter)"/>
     <div class="text-left list-unstyled list-inline">
-      <button class="btn chip vbr-beach-chip list-inline-item my-1" #beachButton (click)="teamFilter.toggleBeach(beachButton)"><i class="fa fa-sun-o"></i>&nbsp;&nbsp;Beach</button>
-      <button class="btn chip vbr-indoor-chip list-inline-item my-1" #indoorButton (click)="teamFilter.toggleIndoor(indoorButton)">6x6</button>
-      <button class="btn chip vbr-indoor-4x4-chip list-inline-item my-1" #indoor4x4Button (click)="teamFilter.toggleIndoor4x4(indoor4x4Button)">4x4</button>
-      <button class="btn chip vbr-mixed-chip list-inline-item my-1" #mixedButton (click)="teamFilter.toggleMixed(mixedButton)"><i class="fa fa-intersex"></i>&nbsp;&nbsp;Mixed</button>
-      <button class="btn chip vbr-ladies-chip list-inline-item my-1" #ladiesButton (click)="teamFilter.toggleLadies(ladiesButton)"><i class="fa fa-venus"></i>&nbsp;&nbsp;Ladies</button>
-      <button class="btn chip vbr-gents-chip list-inline-item my-1" #gentsButton (click)="teamFilter.toggleGents(gentsButton)"><i class="fa fa-mars"></i>&nbsp;&nbsp;Gents</button>
+      <button class="btn chip vbr-beach-chip list-inline-item my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>Beach</button>
+      <button class="btn chip vbr-indoor-chip list-inline-item my-1" #indoorButton (click)="toggleIndoor(indoorButton)">6x6</button>
+      <button class="btn chip vbr-indoor-4x4-chip list-inline-item my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">4x4</button>
+      <button class="btn chip vbr-snow-chip list-inline-item my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>Snow</button>
+      <button class="btn chip vbr-mixed-chip list-inline-item my-1" #mixedButton (click)="toggleMixed(mixedButton)"><i class="fa fa-intersex mr-2"></i>Mixed</button>
+      <button class="btn chip vbr-ladies-chip list-inline-item my-1" #ladiesButton (click)="toggleLadies(ladiesButton)"><i class="fa fa-venus mr-2"></i>Ladies</button>
+      <button class="btn chip vbr-gents-chip list-inline-item my-1" #gentsButton (click)="toggleGents(gentsButton)"><i class="fa fa-mars mr-2"></i>Gents</button>
     </div>
   </div>
-  <div *ngFor="let team of teamFilter.filteredTeams" class="card div-card my-3 mx-1 py-2">
+  <div *ngFor="let team of filteredTeams" class="card div-card my-3 mx-1 py-2">
     <div class="row align-items-center m-1">
       <div class="vbr-text col-8 col-sm-4 p-1 text-left">{{team.name}}</div>
       <div class="vbr-text col-4 col-sm-2 p-1 text-center list-unstyled list-inline">
         <span class="chip vbr-beach-chip list-inline-item" *ngIf="team.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
         <span class="chip vbr-indoor-chip list-inline-item" *ngIf="team.kind === 'INDOOR'">6x6</span>
         <span class="chip vbr-indoor-4x4-chip list-inline-item" *ngIf="team.kind === 'INDOOR_4X4'">4x4</span>
+        <span class="chip vbr-snow-chip list-inline-item" *ngIf="team.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
         <span class="chip vbr-mixed-chip list-inline-item" *ngIf="team.gender === 'MIXED'"><i class="fa fa-intersex"></i></span>
         <span class="chip vbr-ladies-chip list-inline-item" *ngIf="team.gender === 'LADIES'"><i class="fa fa-venus"></i></span>
         <span class="chip vbr-gents-chip list-inline-item" *ngIf="team.gender === 'GENTS'"><i class="fa fa-mars"></i></span>
@@ -44,17 +56,20 @@
       <div class="vbr-text col-5 col-sm-3 p-1 text-right">
         <div class="btn-group">
           <button type="button" class="btn vbr-button-inverted" (click)="viewTeam(team)">
-            <i class="fa fa-eye"></i><span class="icon-text">&nbsp;&nbsp;View</span>
+            <i class="fa fa-eye"></i><span class="icon-text ml-2">View</span>
           </button>
           <button type="button" class="btn vbr-button-inverted" (click)="updateTeam(team)">
-            <i class="fa fa-pencil"></i><span class="icon-text">&nbsp;&nbsp;Edit</span>
+            <i class="fa fa-pencil"></i><span class="icon-text ml-2">Edit</span>
           </button>
           <button type="button" class="btn vbr-button-inverted" (click)="deleteTeam(team)">
-            <i class="fa fa-trash"></i><span class="icon-text">&nbsp;&nbsp;Delete</span>
+            <i class="fa fa-trash"></i><span class="icon-text ml-2">Delete</span>
           </button>
         </div>
       </div>
     </div>
+  </div>
+  <div class="div-user text-center my-3" *ngIf="!last">
+    <button type="button" class="btn vbr-button-inverted" (click)="refreshTeams(true)">Load more teams</button>
   </div>
 </div>
 <div class="div-footer">

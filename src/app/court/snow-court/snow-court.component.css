@@ -2,7 +2,7 @@
   align-self: center;
   justify-self: start;
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 1;
   text-align: center;
 }
 
@@ -10,7 +10,15 @@
   align-self: center;
   justify-self: start;
   grid-column: 2;
-  grid-row: 1;
+  grid-row: 2;
+  text-align: center;
+}
+
+.position-3-l {
+  align-self: center;
+  justify-self: start;
+  grid-column: 2;
+  grid-row: 3;
   text-align: center;
 }
 
@@ -30,15 +38,15 @@
   text-align: center;
 }
 
-.serve-1-l {
+.position-3-r {
   align-self: center;
-  justify-self: center;
-  grid-column: 1;
-  grid-row: 2;
+  justify-self: end;
+  grid-column: 3;
+  grid-row: 3;
   text-align: center;
 }
 
-.serve-2-l {
+.serve-1-l {
   align-self: center;
   justify-self: center;
   grid-column: 1;
@@ -54,14 +62,6 @@
   text-align: center;
 }
 
-.serve-2-r {
-  align-self: center;
-  justify-self: center;
-  grid-column: 4;
-  grid-row: 2;
-  text-align: center;
-}
-
 .div-court {
   display: grid;
   grid-template-columns: 22fr 28fr 28fr 22fr;
@@ -69,7 +69,7 @@
   max-width: 400px;
   height: 200px;
   background-size: 100% 100%;
-  background-image: url(../../../assets/beach_court.jpg);
+  background-image: url(../../../assets/snow_court.jpg);
   background-repeat: no-repeat;
   margin-left: auto;
   margin-right: auto;

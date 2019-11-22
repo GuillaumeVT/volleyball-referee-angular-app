@@ -1,4 +1,4 @@
-<div class="comp-container p-2" *ngIf="game">
+<div class="comp-container p-2" *ngIf="game && game.kind === 'INDOOR'">
   <h6 class="card-title vbr-text">Starting Line-up</h6>
   <div class="div-grid-50-50" *ngIf="game">
     <table *ngIf="game">
@@ -22,17 +22,12 @@
               [style.border-color]="utils.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPlayerAt(leftTeam, 2)"></span>
           </td>
         </tr>
-        <tr *ngIf="game.kind === 'INDOOR'">
+        <tr>
           <td class="mx-1 text-center"><span class="player-badge vbr-text">V</span></td>
           <td class="mx-1 text-center"><span class="player-badge vbr-text">VI</span></td>
           <td class="mx-1 text-center"><span class="player-badge vbr-text">I</span></td>
         </tr>
-        <tr *ngIf="game.kind === 'INDOOR_4X4'">
-          <td class="mx-1 text-center"></td>
-          <td class="mx-1 text-center"><span class="player-badge vbr-text">I</span></td>
-          <td class="mx-1 text-center"></td>
-        </tr>
-        <tr *ngIf="game.kind === 'INDOOR'">
+        <tr>
           <td class="mx-1 text-center">
             <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)"
               [style.border-color]="utils.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPlayerAt(leftTeam, 5)"></span>
@@ -45,14 +40,6 @@
             <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)"
               [style.border-color]="utils.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPlayerAt(leftTeam, 1)"></span>
           </td>
-        </tr>
-        <tr *ngIf="game.kind === 'INDOOR_4X4'">
-          <td class="mx-1 text-center"></td>
-          <td class="mx-1 text-center">
-            <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, leftTeam)" [style.color]="utils.getTeamTextColor(game, leftTeam)"
-              [style.border-color]="utils.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPlayerAt(leftTeam, 1)"></span>
-          </td>
-          <td class="mx-1 text-center"></td>
         </tr>
       </tbody>
     </table>
@@ -77,17 +64,12 @@
               [style.border-color]="utils.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPlayerAt(rightTeam, 2)"></span>
           </td>
         </tr>
-        <tr *ngIf="game.kind === 'INDOOR'">
+        <tr>
           <td class="mx-1 text-center"><span class="player-badge vbr-text">V</span></td>
           <td class="mx-1 text-center"><span class="player-badge vbr-text">VI</span></td>
           <td class="mx-1 text-center"><span class="player-badge vbr-text">I</span></td>
         </tr>
-        <tr *ngIf="game.kind === 'INDOOR_4X4'">
-          <td class="mx-1 text-center"></td>
-          <td class="mx-1 text-center"><span class="player-badge vbr-text">I</span></td>
-          <td class="mx-1 text-center"></td>
-        </tr>
-        <tr *ngIf="game.kind === 'INDOOR'">
+        <tr>
           <td class="mx-1 text-center">
             <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)"
               [style.border-color]="utils.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPlayerAt(rightTeam, 5)"></span>
@@ -100,14 +82,6 @@
             <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)"
               [style.border-color]="utils.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPlayerAt(rightTeam, 1)"></span>
           </td>
-        </tr>
-        <tr *ngIf="game.kind === 'INDOOR_4X4'">
-          <td class="mx-1 text-center"></td>
-          <td class="mx-1 text-center">
-            <span class="badge player-badge" [style.background-color]="utils.getTeamBackgroundColor(game, rightTeam)" [style.color]="utils.getTeamTextColor(game, rightTeam)"
-              [style.border-color]="utils.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPlayerAt(rightTeam, 1)"></span>
-          </td>
-          <td class="mx-1 text-center"></td>
         </tr>
       </tbody>
     </table>

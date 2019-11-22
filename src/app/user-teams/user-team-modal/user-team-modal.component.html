@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class="row align-items-center mb-3" [hidden]="team.kind === 'BEACH'">
+    <div class="row align-items-center mb-3" *ngIf="team.kind === 'INDOOR' || team.kind === 'INDOOR_4X4'">
       <div class="col-12 col-sm-12">
         <label [ngClass]="(availablePlayers < minPlayers) ? 'vbr-error-text' : ''" class="vbr-text" for="players">Team players (including liberos)</label>
         <div class="div-players" id="players" *ngIf="!moreNumbers">
@@ -61,6 +61,17 @@
         </div>
         <div class="vbr-error-feedback" *ngIf="availablePlayers < minPlayers">
           Please select at least {{minPlayers - availablePlayers}} more players.
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-3" *ngIf="team.kind === 'SNOW'">
+      <div class="col-12 col-sm-12">
+        <label [ngClass]="(availablePlayers < minPlayers) ? 'vbr-error-text' : ''" class="vbr-text" for="players">Team players</label>
+        <div class="div-players" id="players">
+          <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:1:5;" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
+            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
+            [innerHTML]="playerItem.player" [attr.disabled]="isEditingDisabled()"></button>
         </div>
       </div>
     </div>
@@ -82,7 +93,7 @@
       </div>
     </div>
 
-    <div class="row align-items-center mb-3" [hidden]="team.kind === 'BEACH' || team.kind === 'INDOOR_4X4'">
+    <div class="row align-items-center mb-3" *ngIf="team.kind === 'INDOOR'">
       <div class="col-6 col-sm-4">
         <label class="vbr-text" for="libero-shirt-color">Libero shirt color</label>
       </div>
@@ -94,7 +105,7 @@
       </div>
     </div>
 
-    <div class="row align-items-center mb-3" [hidden]="team.kind === 'BEACH' || team.kind === 'INDOOR_4X4'">
+    <div class="row align-items-center mb-3" *ngIf="team.kind === 'INDOOR'">
       <div class="col-12 col-sm-12">
         <label class="vbr-text" for="liberos">Team liberos</label>
         <div class="div-players" id="liberos">

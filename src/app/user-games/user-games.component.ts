@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GameSummary, GameIngredients } from '../model/game';
 import { CrudType } from '../model/crudtype';
-import { GameFilter } from '../utils/gamefilter';
-import { Utils } from '../utils/utils';
+import { AbstractGameFilter } from '../utils/abstract-game-filter';
 import { UserSummary } from '../model/user';
 import { LeagueSummary } from '../model/league';
 import { UserService } from '../services/user.service';
@@ -26,10 +25,9 @@ import { Subscription, forkJoin } from 'rxjs';
   templateUrl: './user-games.component.html',
   styleUrls: ['./user-games.component.css']
 })
-export class UserGamesComponent implements OnInit, OnDestroy {
+export class UserGamesComponent extends AbstractGameFilter implements OnInit, OnDestroy {
 
   user:             UserSummary;
-  gameFilter:       GameFilter;
   selectedLeagueId: string;
   selectedLeague:   LeagueSummary;
 
@@ -37,9 +35,9 @@ export class UserGamesComponent implements OnInit, OnDestroy {
 
   constructor(private titleService: Title, private route: ActivatedRoute, private datePipe: DatePipe, private userService: UserService,
     private gameService: GameService, private leagueService: LeagueService, private publicService: PublicService,
-    private modalService: NgbModal, private utils: Utils, private toastr: ToastrService) {
+    private modalService: NgbModal, private toastr: ToastrService) {
+    super(50);
     this.titleService.setTitle('VBR - My Games');
-    this.gameFilter = new GameFilter();
   }
 
   ngOnInit() {
@@ -47,7 +45,7 @@ export class UserGamesComponent implements OnInit, OnDestroy {
       this.user = userToken.user;
       if (this.user) {
         this.selectedLeagueId = this.route.snapshot.paramMap.get('leagueId');
-        this.refreshGames();
+        this.refreshGames(false);
       }
     }));
   }
@@ -56,18 +54,20 @@ export class UserGamesComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  refreshGames(): void {
+  refreshGames(append: boolean): void {
     if (this.selectedLeagueId) {
       forkJoin(
         this.leagueService.getLeague(this.selectedLeagueId),
-        this.gameService.listGamesInLeague(this.selectedLeagueId)
+        this.gameService.listGamesInLeague(this.selectedLeagueId, this.getKinds(), this.getGenders(), (append ? this.page : 0), this.size)
       )
-      .subscribe(([league, games]) => {
+      .subscribe(([league, page]) => {
         this.selectedLeague = league;
-        this.gameFilter.updateGames(games);
+        this.onGamesReceived(page);
       });
     } else {
-      this.gameService.listGames().subscribe(games => this.gameFilter.updateGames(games), error => this.gameFilter.updateGames([]));
+      this.gameService.listGames(this.getStatuses(), this.getKinds(), this.getGenders(), (append ? this.page : 0), this.size).subscribe(
+        page => this.onGamesReceived(page),
+        _error => this.onGamesReceived(null));
     }
   }
 
@@ -82,7 +82,7 @@ export class UserGamesComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.gameIngredients = gameIngredients;
     modalRef.componentInstance.user = this.user;
     modalRef.componentInstance.crudType = CrudType.Create;
-    modalRef.componentInstance.gameUpdated.subscribe(updated => this.onGameCreated());
+    modalRef.componentInstance.gameUpdated.subscribe(_updated => this.onGameCreated());
   }
 
   viewGame(game: GameSummary): void {
@@ -108,42 +108,63 @@ export class UserGamesComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.gameIngredients = gameIngredients;
     modalRef.componentInstance.user = this.user;
     modalRef.componentInstance.crudType = CrudType.Update;
-    modalRef.componentInstance.gameUpdated.subscribe(updated => this.onGameUpdated());
+    modalRef.componentInstance.gameUpdated.subscribe(_updated => this.onGameUpdated());
   }
 
   updateReferee(game: GameSummary): void {
     const modalRef = this.modalService.open(GameRefereeModalComponent, { size: 'lg' });
     modalRef.componentInstance.game = game;
     modalRef.componentInstance.user = this.user;
-    modalRef.componentInstance.refereeUpdated.subscribe(updated => this.onRefereeUpdated());
+    modalRef.componentInstance.refereeUpdated.subscribe(_updated => this.onRefereeUpdated());
   }
 
   deleteGame(game: GameSummary): void {
     const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
     modalRef.componentInstance.title = 'Delete game';
     modalRef.componentInstance.message = `Do you want to delete the game ${game.homeTeamName} - ${game.guestTeamName}?`;
-    modalRef.componentInstance.okClicked.subscribe(ok =>
-      this.gameService.deleteGame(game.id).subscribe(deleted => this.onGameDeleted(), error => this.onGameDeletionError()));
+    modalRef.componentInstance.okClicked.subscribe(_ok =>
+      this.gameService.deleteGame(game.id).subscribe(_deleted => this.onGameDeleted(), _error => this.onGameDeletionError()));
+  }
+
+  deleteAllTeams(): void {
+    const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
+
+    if (this.selectedLeagueId) {
+      modalRef.componentInstance.title = `Delete ALL games in ${this.selectedLeague.name}`;
+      modalRef.componentInstance.message = `Do you want to delete ALL the games in ${this.selectedLeague.name}?`;
+      modalRef.componentInstance.okClicked.subscribe(_ok =>
+        this.gameService.deleteAllGamesInLeague(this.selectedLeagueId).subscribe(_deleted => this.onAllGamesDeleted()));
+    } else {
+      modalRef.componentInstance.title = 'Delete ALL games';
+      modalRef.componentInstance.message = 'Do you want to delete ALL the games?';
+      modalRef.componentInstance.okClicked.subscribe(_ok =>
+        this.gameService.deleteAllGames().subscribe(_deleted => this.onAllGamesDeleted()));
+    }
   }
 
   onGameCreated(): void {
-    this.refreshGames();
+    this.refreshGames(false);
     this.toastr.success('Game was successfully created', '', { timeOut: 2500, positionClass: 'toast-top-left' });
   }
 
   onGameUpdated(): void {
-    this.refreshGames();
+    this.refreshGames(false);
     this.toastr.success('Game was successfully updated', '', { timeOut: 2500, positionClass: 'toast-top-left' });
   }
 
   onRefereeUpdated(): void {
-    this.refreshGames();
+    this.refreshGames(false);
     this.toastr.success('Referee was successfully updated', '', { timeOut: 2500, positionClass: 'toast-top-left' });
   }
 
   onGameDeleted(): void {
-    this.refreshGames();
+    this.refreshGames(false);
     this.toastr.success('Game was successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+  }
+
+  onAllGamesDeleted(): void {
+    this.refreshGames(false);
+    this.toastr.success('All games was successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
   }
 
   onGameDeletionError(): void {

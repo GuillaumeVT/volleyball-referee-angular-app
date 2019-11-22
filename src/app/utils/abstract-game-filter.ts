@@ -1,70 +1,118 @@
 import { GameSummary } from '../model/game';
+import { Page } from '../model/page';
 
-export class GameFilter {
+export abstract class AbstractGameFilter {
 
   textFilter:         string;
   isLiveChecked:      boolean;
   isBeachChecked:     boolean;
   isIndoorChecked:    boolean;
   isIndoor4x4Checked: boolean;
-  isTimeChecked:      boolean;
+  isSnowChecked:      boolean;
   isMixedChecked:     boolean;
   isLadiesChecked:    boolean;
   isGentsChecked:     boolean;
 
+  page:  number;
+  size:  number;
+  total: number;
+  last:  boolean;
+
   games:         GameSummary[];
   filteredGames: GameSummary[];
 
-  constructor() {
+  constructor(size: number) {
     this.textFilter = '';
     this.isLiveChecked = true;
     this.isBeachChecked = true;
     this.isIndoorChecked = true;
     this.isIndoor4x4Checked = true;
-    this.isTimeChecked = true;
+    this.isSnowChecked = true;
     this.isMixedChecked = true;
     this.isLadiesChecked = true;
     this.isGentsChecked = true;
+    this.page = 0;
+    this.size = size;
+    this.total = 0;
+    this.last = true;
   }
 
-  updateGames(games: GameSummary[]): void {
-    this.games = games;
-    this.filterGames();
+  abstract refreshGames(append: boolean): void;
+
+  getStatuses(): string[] {
+    const statuses: string[] = [];
+    statuses.push('COMPLETED');
+    statuses.push('SCHEDULED');
+    if (this.isLiveChecked) {
+      statuses.push('LIVE');
+    }
+    return statuses;
+  }
+
+  getKinds(): string[] {
+    const kinds: string[] = [];
+    if (this.isBeachChecked) {
+      kinds.push('BEACH');
+    }
+    if (this.isIndoorChecked) {
+      kinds.push('INDOOR');
+    }
+    if (this.isIndoor4x4Checked) {
+      kinds.push('INDOOR_4X4');
+    }
+    if (this.isSnowChecked) {
+      kinds.push('SNOW');
+    }
+    return kinds;
+  }
+
+  getGenders(): string[] {
+    const genders: string[] = [];
+    if (this.isMixedChecked) {
+      genders.push('MIXED');
+    }
+    if (this.isLadiesChecked) {
+      genders.push('LADIES');
+    }
+    if (this.isGentsChecked) {
+      genders.push('GENTS');
+    }
+    return genders;
+  }
+
+  onGamesReceived(page: Page<GameSummary>): void {
+    if (page === null) {
+      this.games = [];
+    } else {
+      if (page.first) {
+        this.games = page.content;
+      } else {
+        this.games = this.games.concat(page.content);
+      }
+
+      this.page = this.page + 1;
+      this.total = page.totalElements;
+      this.last = page.last;
+
+      this.filterGames();
+    }
   }
 
   filterGames(): void {
     var tempList = [];
 
     for (let game of this.games) {
-      var mustAdd = true;
+      var mustAdd = false;
 
       if (this.textFilter.trim()) {
-        if ((game.guestTeamName.toLowerCase().indexOf(this.textFilter) === -1)
-          && (game.homeTeamName.toLowerCase().indexOf(this.textFilter) === -1)
-          && (game.leagueName.toLowerCase().indexOf(this.textFilter) === -1)
-          && (game.divisionName.toLowerCase().indexOf(this.textFilter) === -1)) {
-            mustAdd = false;
+        if ((game.guestTeamName.toLowerCase().indexOf(this.textFilter) >= 0)
+          || (game.homeTeamName.toLowerCase().indexOf(this.textFilter) >= 0)
+          || (game.leagueName && game.leagueName.toLowerCase().indexOf(this.textFilter) >= 0)
+          || (game.divisionName && game.divisionName.toLowerCase().indexOf(this.textFilter) >= 0)) {
+            mustAdd = true;
         }
-      }
-
-      if (game.status === 'LIVE' && !this.isLiveChecked) {
-        mustAdd = false;
-      }
-
-      if ((game.kind === 'BEACH') && !this.isBeachChecked) {
-        mustAdd = false;
-      } else if ((game.kind === 'INDOOR') && !this.isIndoorChecked) {
-        mustAdd = false;
-      } else if ((game.kind === 'INDOOR_4X4') && !this.isIndoor4x4Checked) {
-        mustAdd = false;
-      }
-
-      if ((game.gender === 'MIXED') && !this.isMixedChecked) {
-        mustAdd = false;
-      } else if ((game.gender === 'LADIES') && !this.isLadiesChecked) {
-        mustAdd = false;
-      } else if ((game.gender === 'GENTS') && !this.isGentsChecked) {
-        mustAdd = false;
+      } else {
+        mustAdd = true;
       }
 
       if (mustAdd) {
@@ -100,6 +148,11 @@ export class GameFilter {
     this.toggleButton(button, this.isIndoor4x4Checked, 'vbr-indoor-4x4-chip');
   }
 
+  toggleSnow(button: HTMLElement): void {
+    this.isSnowChecked = !this.isSnowChecked;
+    this.toggleButton(button, this.isSnowChecked, 'vbr-snow-chip');
+  }
+
   toggleMixed(button: HTMLElement): void {
     this.isMixedChecked = !this.isMixedChecked;
     this.toggleButton(button, this.isMixedChecked, 'vbr-mixed-chip');
@@ -121,6 +174,6 @@ export class GameFilter {
     } else {
       button.classList.remove(clazz);
     }
-    this.filterGames();
+    this.refreshGames(false);
   }
 }

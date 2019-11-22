@@ -8,6 +8,9 @@
 
   <app-indoor4x4-game *ngSwitchCase="'INDOOR_4X4'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
     (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-indoor4x4-game>
+
+    <app-snow-game *ngSwitchCase="'SNOW'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
+      (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-snow-game>
 </div>
 <div class="div-schedule text-center" *ngIf="game && game.status === 'SCHEDULED'">
   <ngb-alert class="mx-1 px-1" type="info" [dismissible]="false">

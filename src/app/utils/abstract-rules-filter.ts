@@ -1,11 +1,12 @@
 import { RulesSummary } from '../model/rules';
 
-export class RulesFilter {
+export abstract class AbstractRulesFilter {
 
   textFilter:         string;
   isBeachChecked:     boolean;
   isIndoorChecked:    boolean;
   isIndoor4x4Checked: boolean;
+  isSnowChecked:      boolean;
 
   rules:         RulesSummary[];
   filteredRules: RulesSummary[];
@@ -15,9 +16,29 @@ export class RulesFilter {
     this.isBeachChecked = true;
     this.isIndoorChecked = true;
     this.isIndoor4x4Checked = true;
+    this.isSnowChecked = true;
   }
 
-  updateRules(rules: RulesSummary[]): void {
+  abstract refreshRules(): void;
+
+  getKinds(): string[] {
+    const kinds: string[] = [];
+    if (this.isBeachChecked) {
+      kinds.push('BEACH');
+    }
+    if (this.isIndoorChecked) {
+      kinds.push('INDOOR');
+    }
+    if (this.isIndoor4x4Checked) {
+      kinds.push('INDOOR_4X4');
+    }
+    if (this.isSnowChecked) {
+      kinds.push('SNOW');
+    }
+    return kinds;
+  }
+
+  onRulesReceived(rules: RulesSummary[]): void {
     this.rules = rules;
     this.filterRules();
   }
@@ -32,14 +53,6 @@ export class RulesFilter {
         if (rules.name.toLowerCase().indexOf(this.textFilter) === -1) {
             mustAdd = false;
         }
-      }
-
-      if ((rules.kind === 'BEACH') && !this.isBeachChecked) {
-        mustAdd = false;
-      } else if ((rules.kind === 'INDOOR') && !this.isIndoorChecked) {
-        mustAdd = false;
-      } else if ((rules.kind === 'INDOOR_4X4') && !this.isIndoor4x4Checked) {
-        mustAdd = false;
       }
 
       if (mustAdd) {
@@ -70,12 +83,17 @@ export class RulesFilter {
     this.toggleButton(button, this.isIndoor4x4Checked, 'vbr-indoor-4x4-chip');
   }
 
+  toggleSnow(button: HTMLElement): void {
+    this.isSnowChecked = !this.isSnowChecked;
+    this.toggleButton(button, this.isSnowChecked, 'vbr-snow-chip');
+  }
+
   toggleButton(button: HTMLElement, selected: boolean, clazz: string): void {
     if (selected) {
       button.classList.add(clazz);
     } else {
       button.classList.remove(clazz);
     }
-    this.filterRules();
+    this.refreshRules();
   }
 }

@@ -1,11 +1,12 @@
 import { LeagueSummary } from '../model/league';
 
-export class LeagueFilter {
+export abstract class AbstractLeagueFilter {
 
   textFilter:         string;
   isBeachChecked:     boolean;
   isIndoorChecked:    boolean;
   isIndoor4x4Checked: boolean;
+  isSnowChecked:      boolean;
 
   leagues:         LeagueSummary[];
   filteredLeagues: LeagueSummary[];
@@ -15,9 +16,29 @@ export class LeagueFilter {
     this.isBeachChecked = true;
     this.isIndoorChecked = true;
     this.isIndoor4x4Checked = true;
+    this.isSnowChecked = true;
   }
 
-  updateLeagues(leagues: LeagueSummary[]): void {
+  abstract refreshLeagues(): void;
+
+  getKinds(): string[] {
+    const kinds: string[] = [];
+    if (this.isBeachChecked) {
+      kinds.push('BEACH');
+    }
+    if (this.isIndoorChecked) {
+      kinds.push('INDOOR');
+    }
+    if (this.isIndoor4x4Checked) {
+      kinds.push('INDOOR_4X4');
+    }
+    if (this.isSnowChecked) {
+      kinds.push('SNOW');
+    }
+    return kinds;
+  }
+
+  onLeaguesReceived(leagues: LeagueSummary[]): void {
     this.leagues =  leagues;
     this.filterLeagues();
   }
@@ -32,14 +53,6 @@ export class LeagueFilter {
         if (league.name.toLowerCase().indexOf(this.textFilter) === -1) {
             mustAdd = false;
         }
-      }
-
-      if ((league.kind === 'BEACH') && !this.isBeachChecked) {
-        mustAdd = false;
-      } else if ((league.kind === 'INDOOR') && !this.isIndoorChecked) {
-        mustAdd = false;
-      } else if ((league.kind === 'INDOOR_4X4') && !this.isIndoor4x4Checked) {
-        mustAdd = false;
       }
 
       if (mustAdd) {
@@ -70,13 +83,18 @@ export class LeagueFilter {
     this.toggleButton(button, this.isIndoor4x4Checked, 'vbr-indoor-4x4-chip');
   }
 
+  toggleSnow(button: HTMLElement): void {
+    this.isSnowChecked = !this.isSnowChecked;
+    this.toggleButton(button, this.isSnowChecked, 'vbr-snow-chip');
+  }
+
   toggleButton(button: HTMLElement, selected: boolean, clazz: string): void {
     if (selected) {
       button.classList.add(clazz);
     } else {
       button.classList.remove(clazz);
     }
-    this.filterLeagues();
+    this.refreshLeagues();
   }
 
 }

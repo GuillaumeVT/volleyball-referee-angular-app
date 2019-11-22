@@ -176,6 +176,16 @@
   filter: var(--vbr-hover-darker);
 }
 
+.vbr-snow-button {
+	background-color: var(--vbr-snow-color);
+  border-color: var(--vbr-snow-color);
+  color: var(--vbr-inverted-text-color);
+}
+
+.vbr-snow-button:hover {
+  filter: var(--vbr-hover-darker);
+}
+
 .vbr-mixed-button {
 	background-color: var(--vbr-mixed-color);
   border-color: var(--vbr-mixed-color);
@@ -294,6 +304,11 @@ input:checked + .slider:before {
  .vbr-beach-chip {
    border-color: var(--vbr-beach-light-color) !important;
    background-color: var(--vbr-beach-light-color) !important;
+ }
+
+ .vbr-snow-chip {
+   border-color: var(--vbr-snow-light-color) !important;
+   background-color: var(--vbr-snow-light-color) !important;
  }
 
  .vbr-mixed-chip {

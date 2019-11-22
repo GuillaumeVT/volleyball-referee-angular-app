@@ -37,6 +37,12 @@ export class Team {
       team.players.push(new Player(2, ""));
     }
 
+    if (team.kind === 'SNOW') {
+      team.players.push(new Player(1, ""));
+      team.players.push(new Player(2, ""));
+      team.players.push(new Player(3, ""));
+    }
+
     return team;
   }
 
