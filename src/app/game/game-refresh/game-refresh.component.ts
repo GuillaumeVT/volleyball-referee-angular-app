@@ -46,7 +46,7 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   updateGame(): void {
-    this.publicService.getGame(this.gameId).subscribe(game => this.onGameReceived(game), error => this.onGameReceived(null));
+    this.publicService.getGame(this.gameId).subscribe(game => this.onGameReceived(game), _error => this.onGameReceived(null));
   }
 
   onGameReceived(game: Game): void {
@@ -55,12 +55,15 @@ export class GameRefreshComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       this.game = game;
       this.isLive = (game.status === 'LIVE');
+      if (this.game.homeTeam.color === this.game.guestTeam.color) {
+        this.game.guestTeam.color = "#d6d7d7";
+      }
       this.currentGameUpdated.emit(game);
     }
   }
 
   downloadScoreSheet(): void {
-    this.publicService.getScoreSheet(this.gameId).subscribe(response => this.onScoreSheetReceived(response), error => this.onScoreSheetReceived(null));
+    this.publicService.getScoreSheet(this.gameId).subscribe(response => this.onScoreSheetReceived(response), _error => this.onScoreSheetReceived(null));
   }
 
   onScoreSheetReceived(response: HttpResponse<any>): void {

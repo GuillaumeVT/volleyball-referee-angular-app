@@ -19,7 +19,7 @@ export class GameListItemComponent implements OnInit, OnChanges {
 
   ngOnInit() { }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(_changes: SimpleChanges) {
     this.homeScores = [];
     this.guestScores = [];
 

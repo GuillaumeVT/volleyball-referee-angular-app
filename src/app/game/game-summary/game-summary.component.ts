@@ -26,7 +26,7 @@ export class GameSummaryComponent implements OnInit {
   }
 
   getTeamName(teamType: TeamType): string {
-    var name;
+    var name: string;
 
     if (TeamType.Home === teamType) {
       name = this.game.homeTeam.name;
@@ -37,8 +37,8 @@ export class GameSummaryComponent implements OnInit {
     return name;
   }
 
-  getTeamSets(teamType: TeamType): string {
-    var sets;
+  getTeamSets(teamType: TeamType): number {
+    var sets: number;
 
     if (TeamType.Home === teamType) {
       sets = this.game.homeSets;

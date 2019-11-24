@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { League } from '../model/league';
 import { PublicService } from '../services/public.service';
@@ -15,7 +15,7 @@ export class LeagueComponent implements OnInit {
   league:           League;
   selectedIndex:    number;
 
-  constructor(private titleService: Title, private route: ActivatedRoute, private router: Router, private publicService: PublicService) {
+  constructor(private titleService: Title, private route: ActivatedRoute, private publicService: PublicService) {
     this.titleService.setTitle('VBR - View League');
     this.selectedIndex = 0;
   }

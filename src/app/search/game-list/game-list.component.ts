@@ -21,7 +21,7 @@ export class GameListComponent extends AbstractGameFilter implements OnInit, OnC
 
   ngOnInit() { }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(_changes: SimpleChanges) {
     this.refreshGames(false);
   }
 

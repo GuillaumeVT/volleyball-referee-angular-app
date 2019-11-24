@@ -32,7 +32,7 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
     this.autoRefresh = true;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(_changes: SimpleChanges) {
     if (this.league) {
       if (!this.selectedDivision) {
         this.selectedDivision = this.league.divisions[0];
@@ -53,7 +53,7 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
 
   refreshRankings(): void {
     if (this.selectedDivision) {
-      this.publicService.listRankingsInDivision(this.league.id, this.selectedDivision).subscribe(ranking => this.rankings = ranking, error => this.rankings = []);
+      this.publicService.listRankingsInDivision(this.league.id, this.selectedDivision).subscribe(ranking => this.rankings = ranking, _error => this.rankings = []);
     }
   }
 
@@ -70,7 +70,9 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   downloadDivisionExcel(): void {
-    this.publicService.listGamesInDivisionExcel(this.league.id, this.selectedDivision).subscribe(response => this.onDivisionExcelReceived(response), error => this.onDivisionExcelReceived(null));
+    this.publicService.listGamesInDivisionExcel(this.league.id, this.selectedDivision).subscribe(
+      response => this.onDivisionExcelReceived(response),
+      _error => this.onDivisionExcelReceived(null));
   }
 
   onDivisionExcelReceived(response: HttpResponse<any>): void {

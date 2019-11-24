@@ -37,7 +37,7 @@ export class LeagueGamesComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit() {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(_changes: SimpleChanges) {
     if (this.league) {
       if (this.subscription) {
         this.subscription.unsubscribe();
@@ -55,9 +55,9 @@ export class LeagueGamesComponent implements OnInit, OnDestroy, OnChanges {
 
   refreshTeams(): void {
     if (this.selectedDivision === this.allDivisions) {
-      this.publicService.listTeamsOfLeague(this.league.id).subscribe(teams => this.teams = teams, error => this.teams = []);
+      this.publicService.listTeamsOfLeague(this.league.id).subscribe(teams => this.teams = teams, _error => this.teams = []);
     } else {
-      this.publicService.listTeamsOfDivision(this.league.id, this.selectedDivision).subscribe(teams => this.teams = teams, error => this.teams = []);
+      this.publicService.listTeamsOfDivision(this.league.id, this.selectedDivision).subscribe(teams => this.teams = teams, _error => this.teams = []);
     }
   }
 
