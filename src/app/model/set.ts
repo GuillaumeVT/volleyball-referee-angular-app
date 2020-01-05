@@ -1,8 +1,10 @@
 export class Set {
-  duration:              number;
-  homePoints:            number;
-  guestPoints:           number;
-  homeTimeouts:          number;
+  duration:             number;
+  startTime:            number;
+  endTime:              number;
+  homePoints:           number;
+  guestPoints:          number;
+  homeTimeouts:         number;
   guestTimeouts:        number;
   ladder:               string[];
   serving:              string;

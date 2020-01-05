@@ -28,6 +28,8 @@ export class Game {
   guestCards:  Sanction[];
   rules:       Rules;
   score:       string;
+  startTime:   number;
+  endTime:     number;
 }
 
 export class GameSummary {
