@@ -3,7 +3,7 @@
 Volleyball Referee Web App is an Angular application, part of the [Volleyball Referee system][vbr]
 
 #### Manage your data
-- For 6x6, 4x4 and beach volleyball
+- For 6x6, 4x4, beach and snow volleyball
 - Leagues
 - Matches (scheduled, live and completed)
 - Teams
@@ -22,7 +22,7 @@ Volleyball Referee Web App is an Angular application, part of the [Volleyball Re
 
 #### Languages
 
-No translation is currently planned.
+No internationalization is currently planned.
 
 | Languages        | Status                          |
 |------------------|---------------------------------|
