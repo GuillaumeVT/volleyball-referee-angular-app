@@ -14,6 +14,7 @@ export class Team {
   players:     Player[];
   liberos:     Player[];
   captain:     number;
+  coach:       string;
 
   public static createTeam(user: UserSummary, kind: string): Team {
     const team = new Team();
@@ -31,6 +32,7 @@ export class Team {
     team.players = [];
     team.liberos = [];
     team.captain = 1;
+    team.coach = '';
 
     if (team.kind === 'BEACH') {
       team.players.push(new Player(1, ""));

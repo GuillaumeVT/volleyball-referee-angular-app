@@ -128,6 +128,16 @@
       </div>
     </div>
 
+    <hr class="mb-3" *ngIf="team.kind === 'INDOOR' || team.kind === 'INDOOR_4X4'"/>
+
+    <div class="row mb-3" *ngIf="team.kind === 'INDOOR' || team.kind === 'INDOOR_4X4'">
+      <div class="col-12 col-sm-10">
+        <label class="vbr-text" for="coach-name">Coach name</label>
+        <input type="text" class="vbr-text form-control"
+          name="coach-name" id="coach-name" [(ngModel)]="team.coach" placeholder="" required [attr.disabled]="isEditingDisabled()"/>
+      </div>
+    </div>
+
     <div class="row mb-3" *ngIf="invalidResponse">
       <div class="col-12 col-sm-10">
         <p class="alert alert-danger" *ngIf="crudType === 1">

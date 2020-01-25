@@ -30,6 +30,9 @@ export class Game {
   score:       string;
   startTime:   number;
   endTime:     number;
+  referee1:    string;
+  referee2:    string;
+  scorer:      string;
 }
 
 export class GameSummary {
@@ -57,6 +60,9 @@ export class GameSummary {
   rulesId:       string;
   rulesName:     string;
   score:         string;
+  referee1Name:  string;
+  referee2Name:  string;
+  scorerName:    string;
 
   public static createGame(user: UserSummary, kind: string, league: LeagueSummary): GameSummary {
     const game = new GameSummary();
@@ -91,6 +97,9 @@ export class GameSummary {
     game.rulesId = '';
     game.rulesName = '';
     game.score = '';
+    game.referee1Name = '';
+    game.referee2Name = '';
+    game.scorerName = '';
 
     return game;
   }
@@ -122,6 +131,9 @@ export class GameSummary {
     copy.rulesId = game.rulesId;
     copy.rulesName = game.rulesName;
     copy.score = game.score;
+    copy.referee1Name = game.referee1Name;
+    copy.referee2Name = game.referee2Name;
+    copy.scorerName = game.scorerName;
 
     return copy;
   }
