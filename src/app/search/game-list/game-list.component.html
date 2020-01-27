@@ -1,8 +1,8 @@
-<div *ngIf="games">
+<div>
   <div class="mx-1 mt-3">
     <span class="vbr-text game-number-text">Found {{total}} game(s)</span>
   </div>
-  <div class="my-3 mx-1 text-left" *ngIf="games.length > 0">
+  <div class="my-3 mx-1 text-left">
     <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="filterFromText(textFilter)"/>
     <div class="text-left list-unstyled list-inline">
       <button class="btn chip vbr-live-chip list-inline-item my-1" #liveButton (click)="toggleLive(liveButton)"><i class="fa fa-mixcloud mr-2"></i>Live</button>

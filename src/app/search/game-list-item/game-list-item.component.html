@@ -42,7 +42,7 @@
         {{gameSummary.guestTeamName}}
       </span>
     </a>
-    <div class="vbr-text" *ngIf="gameSummary.score && gameSummary.score.length > 0">
+    <div class="vbr-text" *ngIf="gameSummary.score?.length > 0">
       <span>{{gameSummary.score}}</span>
     </div>
   </div>

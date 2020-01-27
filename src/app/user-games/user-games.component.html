@@ -29,7 +29,7 @@
       </li>
     </ul>
   </div>
-  <div class="my-3 mx-1 text-left" *ngIf="games && games.length > 0">
+  <div class="my-3 mx-1 text-left" *ngIf="games">
     <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="gameFilter.filterFromText(textFilter)"/>
     <div class="text-left list-unstyled list-inline">
       <button class="btn chip vbr-live-chip list-inline-item my-1" #liveButton (click)="toggleLive(liveButton)"><i class="fa fa-mixcloud mr-2"></i>Live</button>
@@ -46,11 +46,11 @@
     <div class="row align-items-center m-1">
       <div class="vbr-text col-12 col-sm-4 p-1 text-left">
         {{game.homeTeamName}} - {{game.guestTeamName}}
-        <span *ngIf="game.leagueName && game.leagueName.length" class="text-muted">
+        <span *ngIf="game.leagueName?.length" class="text-muted">
           <br/>{{game.leagueName}}
-          <span *ngIf="game.divisionName && game.divisionName.length">&nbsp;/&nbsp;{{game.divisionName}}</span>
+          <span *ngIf="game.divisionName?.length">&nbsp;/&nbsp;{{game.divisionName}}</span>
         </span>
-        <span *ngIf="game.refereeName && game.refereeName.length" class="text-muted"> <br/><i class="fa fa-user mr-1"></i>by {{game.refereeName}}</span>
+        <span *ngIf="game.refereeName?.length" class="text-muted"> <br/><i class="fa fa-user mr-1"></i>by {{game.refereeName}}</span>
       </div>
       <div class="vbr-text col-6 col-sm-1 p-1 text-left list-unstyled list-inline">
         <a class="btn vbr-button-inverted list-inline-item my-1" [routerLink]="getGamePublicUrl(game)" placement="top" ngbTooltip="Navigate to the public page for this game. Share this URL with everyone.">

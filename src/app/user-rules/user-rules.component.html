@@ -26,7 +26,7 @@
       </button>
     </li>
   </ul>
-  <div class="my-3 mx-1 text-left" *ngIf="rules && rules.length > 0">
+  <div class="my-3 mx-1 text-left" *ngIf="rules">
     <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="filterFromText(textFilter)"/>
     <div class="text-left list-unstyled list-inline">
       <button class="btn chip vbr-beach-chip list-inline-item my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>Beach</button>

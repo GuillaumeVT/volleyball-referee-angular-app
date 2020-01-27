@@ -7,7 +7,7 @@
     </li>
   </ul>
   <div class="row m-1" *ngIf="friendsAndRequests">
-    <div class="col-12 col-sm-8 px-1" *ngIf="friendsAndRequests.receivedFriendRequests && friendsAndRequests.receivedFriendRequests.length > 0">
+    <div class="col-12 col-sm-8 px-1" *ngIf="friendsAndRequests.receivedFriendRequests?.length > 0">
       <app-colleague-request-item *ngFor="let friendRequest of friendsAndRequests.receivedFriendRequests" [friendRequest]="friendRequest"
         (mustRefreshFriendRequestsReceivedBy)="refreshFriendsAndRequests()"></app-colleague-request-item>
     </div>

@@ -108,9 +108,9 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
       this.team.liberos = this.team.liberos.sort((l1, l2) => l1.num - l2.num);
 
       if (this.crudType === CrudType.Create) {
-        this.teamService.createTeam(this.team).subscribe(team => this.onValidResponse(), error => this.onInvalidResponse(error));
+        this.teamService.createTeam(this.team).subscribe(_team => this.onValidResponse(), _error => this.onInvalidResponse());
       } else if (this.crudType === CrudType.Update) {
-        this.teamService.updateTeam(this.team).subscribe(team => this.onValidResponse(), error => this.onInvalidResponse(error));
+        this.teamService.updateTeam(this.team).subscribe(_team => this.onValidResponse(), _error => this.onInvalidResponse());
       }
     }
   }
@@ -121,7 +121,7 @@ export class UserTeamModalComponent implements OnInit, AfterViewInit {
     this.close();
   }
 
-  onInvalidResponse(error): void {
+  onInvalidResponse(): void {
     this.invalidResponse = true;
   }
 

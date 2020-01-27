@@ -1,6 +1,6 @@
 <div class="div-user text-center">
   <div class="row m-1">
-    <div class="px-1 col-12 col-sm-12 col-md-6" *ngIf="friendRequestsReceivedBy && friendRequestsReceivedBy.length > 0">
+    <div class="px-1 col-12 col-sm-12 col-md-6" *ngIf="friendRequestsReceivedBy?.length > 0">
       <div class="card div-card p-2 my-1">
         <p class="lead vbr-text">New colleagues</p>
         <hr class="mt-2 mb-4"/>
@@ -8,7 +8,7 @@
           (mustRefreshFriendRequestsReceivedBy)="refreshFriendRequestsReceivedBy()"></app-colleague-request-item>
       </div>
     </div>
-    <div class="px-1 col-12 col-sm-12 col-md-6" *ngIf="availableGames && availableGames.length > 0">
+    <div class="px-1 col-12 col-sm-12 col-md-6" *ngIf="availableGames?.length > 0">
       <div class="card div-card p-2 my-1">
         <p class="lead vbr-text">Upcoming & live games</p>
         <hr class="mt-2 mb-4"/>

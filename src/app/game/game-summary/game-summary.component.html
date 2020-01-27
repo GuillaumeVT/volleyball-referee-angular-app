@@ -10,11 +10,11 @@
     <span class="card-text vbr-text text-center small-line">{{getTeamName(rightTeam)}}</span>
   </div>
   <div>
-    <span class="card-text vbr-text text-center ml-2" *ngIf="game.league && game.league.name && game.league.name.length">
+    <span class="card-text vbr-text text-center ml-2" *ngIf="game.league?.name?.length">
       {{game.league.name}}
-      <span *ngIf="game.league.division && game.league.division.length">&nbsp;/&nbsp;{{game.league.division}}</span>
+      <span *ngIf="game.league?.division?.length">&nbsp;/&nbsp;{{game.league.division}}</span>
     </span>
-    <span class="card-text vbr-text text-center ml-2" *ngIf="game.refereeName && game.refereeName.length"><i class="fa fa-user mx-1"></i>by {{game.refereeName}}</span>
+    <span class="card-text vbr-text text-center ml-2" *ngIf="game.refereeName?.length"><i class="fa fa-user mx-1"></i>by {{game.refereeName}}</span>
   </div>
   <div>
     <span class="chip vbr-mixed-chip" *ngIf="game.gender === 'MIXED'"><i class="fa fa-intersex"></i></span>

@@ -42,7 +42,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
   undefinedDivision: boolean;
   invalidResponse:   boolean;
 
-  constructor(private activeModal: NgbActiveModal, private gameService: GameService, private leagueService: LeagueService, private utils: Utils, private datePipe: DatePipe) {
+  constructor(private activeModal: NgbActiveModal, private gameService: GameService, private leagueService: LeagueService, public utils: Utils, public datePipe: DatePipe) {
     this.sameTeams = false;
     this.undefinedHTeam = false;
     this.undefinedGTeam = false;
@@ -157,9 +157,9 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
       }
 
       if (this.crudType === CrudType.Create) {
-        this.gameService.createGame(this.game).subscribe(game => this.onValidResponse(), error => this.onInvalidResponse(error));
+        this.gameService.createGame(this.game).subscribe(_game => this.onValidResponse(), _error => this.onInvalidResponse());
       } else if (this.crudType === CrudType.Update) {
-        this.gameService.updateGame(this.game).subscribe(game => this.onValidResponse(), error => this.onInvalidResponse(error));
+        this.gameService.updateGame(this.game).subscribe(_game => this.onValidResponse(), _error => this.onInvalidResponse());
       }
     }
   }
@@ -170,7 +170,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
     this.close();
   }
 
-  onInvalidResponse(error): void {
+  onInvalidResponse(): void {
     this.invalidResponse = true;
   }
 
@@ -182,7 +182,7 @@ export class UserGameModalComponent implements OnInit, AfterViewInit {
     if (this.selectedLeague) {
       this.leagueService.getLeague(this.selectedLeague.id).subscribe(
         league => this.divisionsOfSelectedLeague = league.divisions,
-        error => this.divisionsOfSelectedLeague = []);
+        _error => this.divisionsOfSelectedLeague = []);
     } else {
       this.divisionsOfSelectedLeague = [];
     }
