@@ -8,6 +8,12 @@
   margin-left: auto;
 }
 
+.game-item-line:hover {
+  background-color: var(--vbr-light-primary-color);
+  color: var(--vbr-primary-color);
+  border-color: var(--vbr-light-primary-color);
+}
+
 .game-item-title {
   font-size: 1.2rem;
   color: var(--vbr-primary-color);

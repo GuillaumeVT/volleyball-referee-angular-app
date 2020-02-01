@@ -13,7 +13,7 @@
     <span class="game-item-schedule vbr-text text-muted secondary-text">{{gameSummary.scheduledAt | date : 'dd MMM yyyy, HH:mm'}}</span>
   </div>
   <hr/>
-  <div *ngIf="gameSummary.status !== 'SCHEDULED'" class="desktop btn vbr-button-inverted text-left" [routerLink]="getMatchUrl()">
+  <div *ngIf="gameSummary.status !== 'SCHEDULED'" class="desktop game-item-line p-2" [routerLink]="getMatchUrl()">
     <div class="row align-items-center">
       <a class="col-6 col-sm-6 text-left game-item-title" [routerLink]="getMatchUrl()">{{gameSummary.homeTeamName}}</a>
       <div class="col-6 col-sm-6 text-left">
@@ -29,10 +29,10 @@
       </div>
     </div>
   </div>
-  <div *ngIf="gameSummary.status === 'SCHEDULED'" class="desktop btn vbr-button-inverted text-left">
+  <div *ngIf="gameSummary.status === 'SCHEDULED'" class="desktop game-item-line p-2">
     <a [routerLink]="getMatchUrl()" class="game-item-title">{{gameSummary.homeTeamName}} - {{gameSummary.guestTeamName}}</a>
   </div>
-  <div class="mobile btn vbr-button-inverted text-left">
+  <div class="mobile game-item-line p-2">
     <a [routerLink]="getMatchUrl()" class="game-item-title">
       <span>
         {{gameSummary.homeTeamName}}
@@ -46,7 +46,7 @@
       <span>{{gameSummary.score}}</span>
     </div>
   </div>
-  <div class="vbr-text mt-3 pl-3" *ngIf="showLeague() || showDivision() || showReferee()">
+  <div class="vbr-text mt-3 pl-2" *ngIf="showLeague() || showDivision() || showReferee()">
     <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="item-link">{{gameSummary.leagueName}}</a>
     <span *ngIf="showLeague() && showDivision()" class="mx-1">/</span>
     <span *ngIf="showDivision()">{{gameSummary.divisionName}}</span>
