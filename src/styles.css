@@ -91,13 +91,12 @@
 .vbr-button-inverted {
   background-color: inherit;
   color: var(--vbr-primary-color);
-  border-color: var(--vbr-primary-color);
 }
 
 .vbr-button-inverted:hover {
-  background-color: var(--vbr-primary-color);
-  color: var(--vbr-inverted-text-color);
-  border-color: var(--vbr-primary-color);
+  background-color: var(--vbr-light-primary-color);
+  color: var(--vbr-primary-color);
+  border-color: var(--vbr-light-primary-color);
 }
 
 .vbr-button-unselected {
@@ -127,7 +126,6 @@
 .cancel-button {
 	color: var(--vbr-cancel-color);
 	background-color: inherit;
-	border-color: var(--vbr-cancel-color);
 }
 
 .cancel-button:hover {

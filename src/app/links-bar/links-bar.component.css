@@ -25,7 +25,6 @@
 .btn-sign-out {
 	color: var(--vbr-cancel-color);
 	background-color: inherit;
-	border-color: var(--vbr-cancel-color);
 }
 
 .btn-sign-out:hover {

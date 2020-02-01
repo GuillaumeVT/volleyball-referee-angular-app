@@ -33,10 +33,3 @@
 .item-link:hover {
   text-decoration: underline;
 }
-
-.interactive:hover {
-  background-color: var(--vbr-light-primary-color) !important;
-  cursor: pointer;
-  border-radius: 5px;
-  text-decoration: underline;
-}
