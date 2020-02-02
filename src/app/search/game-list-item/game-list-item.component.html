@@ -13,27 +13,27 @@
     <span class="game-item-schedule vbr-text text-muted secondary-text">{{gameSummary.scheduledAt | date : 'dd MMM yyyy, HH:mm'}}</span>
   </div>
   <hr/>
-  <div *ngIf="gameSummary.status !== 'SCHEDULED'" class="desktop game-item-line p-2" [routerLink]="getMatchUrl()">
+  <a *ngIf="gameSummary.status !== 'SCHEDULED'" class="desktop game-item-line p-2" [routerLink]="getMatchUrl()">
     <div class="row align-items-center">
-      <a class="col-6 col-sm-6 text-left game-item-title" [routerLink]="getMatchUrl()">{{gameSummary.homeTeamName}}</a>
+      <span class="col-6 col-sm-6 text-left game-item-title">{{gameSummary.homeTeamName}}</span>
       <div class="col-6 col-sm-6 text-left">
-        <a class="game-item-sets mx-2" [routerLink]="getMatchUrl()">{{gameSummary.homeSets}}</a>
+        <span class="game-item-sets mx-2">{{gameSummary.homeSets}}</span>
         <span *ngFor="let homeScore of homeScores" class="ml-2 game-item-set">{{homeScore}}</span>
       </div>
     </div>
     <div class="row align-items-center">
-      <a class="col-6 col-sm-6 text-left game-item-title" [routerLink]="getMatchUrl()">{{gameSummary.guestTeamName}}</a>
+      <span class="col-6 col-sm-6 text-left game-item-title">{{gameSummary.guestTeamName}}</span>
       <div class="col-6 col-sm-6 text-left">
-        <a class="game-item-sets mx-2" [routerLink]="getMatchUrl()">{{gameSummary.guestSets}}</a>
+        <span class="game-item-sets mx-2">{{gameSummary.guestSets}}</span>
         <span *ngFor="let guestScore of guestScores" class="ml-2 game-item-set">{{guestScore}}</span>
       </div>
     </div>
-  </div>
-  <div *ngIf="gameSummary.status === 'SCHEDULED'" class="desktop game-item-line p-2">
-    <a [routerLink]="getMatchUrl()" class="game-item-title">{{gameSummary.homeTeamName}} - {{gameSummary.guestTeamName}}</a>
-  </div>
-  <div class="mobile game-item-line p-2">
-    <a [routerLink]="getMatchUrl()" class="game-item-title">
+  </a>
+  <a *ngIf="gameSummary.status === 'SCHEDULED'" class="desktop game-item-line p-2" [routerLink]="getMatchUrl()">
+    <span class="game-item-title">{{gameSummary.homeTeamName}} - {{gameSummary.guestTeamName}}</span>
+  </a>
+  <a class="mobile game-item-line p-2" [routerLink]="getMatchUrl()">
+    <div class="game-item-title">
       <span>
         {{gameSummary.homeTeamName}}
         <span *ngIf="gameSummary.status !== 'SCHEDULED'" class="game-item-sets">{{gameSummary.homeSets}}</span>
@@ -41,11 +41,11 @@
         <span *ngIf="gameSummary.status !== 'SCHEDULED'" class="game-item-sets">{{gameSummary.guestSets}}</span>
         {{gameSummary.guestTeamName}}
       </span>
-    </a>
+    </div>
     <div class="vbr-text" *ngIf="gameSummary.score?.length > 0">
       <span>{{gameSummary.score}}</span>
     </div>
-  </div>
+  </a>
   <div class="vbr-text mt-3 pl-2" *ngIf="showLeague() || showDivision() || showReferee()">
     <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="item-link">{{gameSummary.leagueName}}</a>
     <span *ngIf="showLeague() && showDivision()" class="mx-1">/</span>
