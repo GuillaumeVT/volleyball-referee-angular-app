@@ -1,6 +1,4 @@
 import { Game, Sanction } from '../model/game';
-import { GameSummary } from '../model/game';
-import { Player } from '../model/team';
 import { TeamType } from '../model/teamtype';
 import { Injectable } from '@angular/core';
 
@@ -29,7 +27,7 @@ export class Utils {
   }
 
   getPlayer(game: Game, teamType: TeamType, player: number): string {
-    var captain;
+    var captain: number;
 
     if (TeamType.Home === teamType) {
       captain = game.homeTeam.captain;
@@ -46,8 +44,8 @@ export class Utils {
     return playerStr;
   }
 
-  getTeamBackgroundColor(game: Game, teamType: TeamType) {
-    var color;
+  getTeamBackgroundColor(game: Game, teamType: TeamType): string {
+    var color: string;
 
     switch (teamType) {
       case TeamType.Home:
@@ -61,8 +59,8 @@ export class Utils {
     return color;
   }
 
-  getLiberoBackgroundColor(game: Game, teamType: TeamType) {
-    var color;
+  getLiberoBackgroundColor(game: Game, teamType: TeamType): string {
+    var color: string;
 
     switch (teamType) {
       case TeamType.Home:
@@ -132,7 +130,7 @@ export class Utils {
 
     const a = 1 - ( 0.299 * red + 0.587 * green + 0.114 * blue) / 255;
 
-    var color;
+    var color: string;
 
     if (a < 0.5) {
       color = '#1f1f1f';

@@ -21,4 +21,8 @@ export class SearchResultTokenComponent implements OnInit {
        this.token = params['token'];
     });
   }
+
+  getPageNumber(): number {
+    return 6;
+  }
 }

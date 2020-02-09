@@ -12,7 +12,10 @@ export class SearchResultLiveComponent implements OnInit {
     this.titleService.setTitle('VBR - Search Results');
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  getPageNumber(): number {
+    return 6;
   }
 
 }

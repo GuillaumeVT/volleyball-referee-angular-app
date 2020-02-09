@@ -22,4 +22,8 @@ export class SearchResultDateComponent implements OnInit {
      })
   }
 
+  getPageNumber(): number {
+    return 6;
+  }
+
 }

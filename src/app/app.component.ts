@@ -1,11 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { UserSummary } from './model/user';
 import { UserService } from './services/user.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
-import { SearchModalComponent } from './search/search-modal/search-modal.component';
-import { Count } from './model/count';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +19,7 @@ export class AppComponent implements OnInit {
   searchDate:  Date;
   minDate:     Date;
 
-  constructor(private userService: UserService, private modalService: NgbModal, private router: Router, private datePipe: DatePipe) {
+  constructor(private userService: UserService) {
     this.numberOfFriendRequests = 0;
     this.currentPage = -1;
     this.showScrollToTop = false;
@@ -70,42 +65,16 @@ export class AppComponent implements OnInit {
   refreshNotifications(): void {
     setTimeout(() => this.userService.getNumberOfFriendRequestsReceivedBy().subscribe(
       count => this.numberOfFriendRequests = count.count,
-      error => this.numberOfFriendRequests = 0
+      _error => this.numberOfFriendRequests = 0
     ), 0);
-  }
-
-  onShowSearchClicked(): void {
-    const modalRef = this.modalService.open(SearchModalComponent, { size: 'lg' });
-  }
-
-  onToggleSearchClicked(): void {
-    this.showSearch = !this.showSearch;
-  }
-
-  onSearchTokenClicked(): void {
-    if (this.searchToken && this.searchToken.length > 2) {
-      this.router.navigateByUrl(`search/token/${this.searchToken}`);
-    }
-  }
-
-  onSearchLiveClicked(): void {
-    this.router.navigateByUrl('search/live');
-  }
-
-  onSearchTodayClicked(): void {
-    const dateStr = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    this.router.navigateByUrl(`search/date/${dateStr}`);
-  }
-
-  onSearchDateClicked(): void {
-    if (this.searchDate) {
-      const dateStr = this.datePipe.transform(this.searchDate, 'yyyy-MM-dd');
-      this.router.navigateByUrl(`search/date/${dateStr}`);
-    }
   }
 
   getHomeUrl(): string {
     return '/home';
+  }
+
+  getSearchUrl(): string {
+    return '/search';
   }
 
   getUserLeaguesUrl(): string {

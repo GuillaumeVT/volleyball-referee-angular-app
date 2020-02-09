@@ -13,6 +13,7 @@ import { TokenInterceptor } from './token.interceptor';
 
 import { AppComponent } from './app.component';
 import { Utils } from './utils/utils';
+import { SearchComponent } from './search/search.component';
 import { SearchResultTokenComponent } from './search/search-result-token/search-result-token.component';
 import { SearchResultLiveComponent } from './search/search-result-live/search-result-live.component';
 import { SearchResultDateComponent } from './search/search-result-date/search-result-date.component';
@@ -52,7 +53,6 @@ import { UserLeagueModalComponent } from './user-leagues/user-league-modal/user-
 import { LeagueComponent } from './league/league.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { HomeComponent } from './user/home/home.component';
-import { SearchModalComponent } from './search/search-modal/search-modal.component';
 import { UserColleaguesComponent } from './user-colleagues/user-colleagues.component';
 import { UserColleagueModalComponent } from './user-colleagues/user-colleague-modal/user-colleague-modal.component';
 import { ColleagueRequestItemComponent } from './user-colleagues/colleague-request-item/colleague-request-item.component';
@@ -111,7 +111,6 @@ import { SnowSetLineupsComponent } from './set/snow-set-lineups/snow-set-lineups
     PrivacyPolicyComponent,
     ColorPickerModalComponent,
     HomeComponent,
-    SearchModalComponent,
     UserColleaguesComponent,
     UserColleagueModalComponent,
     ColleagueRequestItemComponent,
@@ -127,7 +126,8 @@ import { SnowSetLineupsComponent } from './set/snow-set-lineups/snow-set-lineups
     SnowCourtComponent,
     IndoorSetLineupsComponent,
     Indoor4x4SetLineupsComponent,
-    SnowSetLineupsComponent
+    SnowSetLineupsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -155,7 +155,6 @@ import { SnowSetLineupsComponent } from './set/snow-set-lineups/snow-set-lineups
     UserLeagueModalComponent,
     OkCancelModalComponent,
     ColorPickerModalComponent,
-    SearchModalComponent,
     UserColleagueModalComponent,
     GameRefereeModalComponent
   ],

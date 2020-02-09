@@ -15,8 +15,11 @@ export class GameListComponent extends AbstractGameFilter implements OnInit, OnC
   @Input() teamId:   string;
   @Input() live:     boolean;
 
+  searchCriterion: string;
+
   constructor(private publicService: PublicService) {
     super(20);
+    this.searchCriterion = '';
   }
 
   ngOnInit() { }
@@ -29,14 +32,17 @@ export class GameListComponent extends AbstractGameFilter implements OnInit, OnC
     const pageToGet: number = append ? this.page : 0;
 
     if (this.token && this.token.length) {
+      this.searchCriterion = ` with '${this.token}'`;
       this.publicService.listGamesMatchingToken(this.token, this.getStatuses(), this.getKinds(), this.getGenders(), pageToGet, this.size).subscribe(
         page => this.onGamesReceived(page),
         _error => this.onGamesReceived(null));
     } else if (this.date && this.date.length) {
+      this.searchCriterion = ` on ${this.date}`;
       this.publicService.listGamesWithScheduleDate(this.date, this.getStatuses(), this.getKinds(), this.getGenders(), pageToGet, this.size).subscribe(
         page => this.onGamesReceived(page),
         _error => this.onGamesReceived(null));
     } else if (this.leagueId && this.teamId) {
+      this.searchCriterion = '';
       if (this.teamId === "All teams") {
         this.publicService.listGamesInLeague(this.leagueId, this.getStatuses(), this.getGenders(), pageToGet, this.size).subscribe(
           page => this.onGamesReceived(page),
@@ -47,6 +53,7 @@ export class GameListComponent extends AbstractGameFilter implements OnInit, OnC
           _error => this.onGamesReceived(null));
       }
     } else if (this.live) {
+      this.searchCriterion = ` live`;
       this.publicService.listLiveGames(this.getKinds(), this.getGenders(), pageToGet, this.size).subscribe(
         page => this.onGamesReceived(page),
         _error => this.onGamesReceived(null));

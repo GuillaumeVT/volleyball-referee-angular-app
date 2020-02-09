@@ -1,6 +1,7 @@
 import { HomeComponent } from './user/home/home.component';
 import { GameComponent } from './game/game.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SearchComponent } from './search/search.component';
 import { SearchResultTokenComponent } from './search/search-result-token/search-result-token.component';
 import { SearchResultLiveComponent } from './search/search-result-live/search-result-live.component';
 import { SearchResultDateComponent } from './search/search-result-date/search-result-date.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'password-reset', component: PasswordResetComponent, canActivate: [ PublicGuard ] },
   { path: 'home', component: HomeComponent, canActivate: [ LoginGuard ] },
   { path: 'account', component: AccountComponent, canActivate: [ LoginGuard ] },
+  { path: 'search', component: SearchComponent },
   { path: 'search/live', component: SearchResultLiveComponent },
   { path: 'search/token/:token', component: SearchResultTokenComponent },
   { path: 'search/date/:date', component: SearchResultDateComponent },
