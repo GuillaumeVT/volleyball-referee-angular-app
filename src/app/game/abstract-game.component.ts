@@ -1,7 +1,8 @@
 import { Game } from '../model/game';
 import { TeamType } from '../model/teamtype';
-import { OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { OnInit, Input, Output, EventEmitter, Directive } from '@angular/core';
 
+@Directive()
 export abstract class AbstractGameComponent implements OnInit {
 
   @Input() gameId:     string;

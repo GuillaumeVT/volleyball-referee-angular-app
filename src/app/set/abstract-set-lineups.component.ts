@@ -2,8 +2,9 @@ import { Game } from '../model/game';
 import { Court } from '../model/set';
 import { TeamType } from '../model/teamtype';
 import { Utils } from '../utils/utils';
-import { OnInit, Input } from '@angular/core';
+import { OnInit, Input, Directive } from '@angular/core';
 
+@Directive()
 export abstract class AbstractSetLineupsComponent implements OnInit {
 
   @Input() game:      Game;
