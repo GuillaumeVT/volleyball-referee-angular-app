@@ -1,18 +1,20 @@
 <div class="div-content">
-  <div class="card div-card div-search p-3 my-1">
+  <div class="card div-card div-search p-2 my-1">
     <p class="lead vbr-text text-center">Search games</p>
     <hr class="mt-2 mb-4"/>
     <div>
-      <div class="input-group my-2">
+      <div class="input-group my-3">
         <div class="input-group-prepend">
           <button type="button" class="btn vbr-button" (click)="onSearchTokenClicked()"><i class="fa fa-search"></i></button>
         </div>
         <input type="text" class="form-control vbr-text" placeholder="By team / league / referee" [(ngModel)]="searchToken"
           (keyup.enter)="onSearchTokenClicked()"/>
       </div>
-      <button type="button" class="btn vbr-button my-2 mr-4" (click)="onSearchLiveClicked()"><i class="fa fa-mixcloud mr-2"></i>Live games</button>
-      <button type="button" class="btn vbr-button my-2" (click)="onSearchTodayClicked()"><i class="fa fa-calendar-check-o mr-2"></i>Today's games</button>
-      <div class="input-group my-2">
+      <div class="div-grid-50-50 my-3">
+        <button type="button" class="btn vbr-button mr-1 fill-grid-cell" (click)="onSearchLiveClicked()"><i class="fa fa-mixcloud mr-2"></i>Live games</button>
+        <button type="button" class="btn vbr-button ml-1 fill-grid-cell" (click)="onSearchTodayClicked()"><i class="fa fa-calendar-check-o mr-2"></i>Today's games</button>
+      </div>
+      <div class="input-group my-3">
         <div class="input-group-prepend">
           <button type="button" class="btn vbr-button" (click)="onSearchDateClicked()"><i class="fa fa-calendar-o"></i></button>
         </div>

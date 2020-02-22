@@ -86,6 +86,7 @@
 
 .vbr-button:hover {
   filter: var(--vbr-hover-brighter);
+  color: var(--vbr-inverted-text-color);
 }
 
 .vbr-button-inverted {
@@ -142,6 +143,7 @@
 
 .vbr-live-button:hover {
   filter: var(--vbr-hover-darker);
+  color: var(--vbr-inverted-text-color);
 }
 
 .vbr-beach-button {
@@ -152,6 +154,7 @@
 
 .vbr-beach-button:hover {
   filter: var(--vbr-hover-brighter);
+  color: var(--vbr-text-color);
 }
 
 .vbr-indoor-button {
@@ -162,6 +165,7 @@
 
 .vbr-indoor-button:hover {
   filter: var(--vbr-hover-darker);
+  color: var(--vbr-inverted-text-color);
 }
 
 .vbr-indoor-4x4-button {
@@ -172,6 +176,7 @@
 
 .vbr-indoor-4x4-button:hover {
   filter: var(--vbr-hover-darker);
+  color: var(--vbr-inverted-text-color);
 }
 
 .vbr-snow-button {
@@ -182,6 +187,7 @@
 
 .vbr-snow-button:hover {
   filter: var(--vbr-hover-darker);
+  color: var(--vbr-inverted-text-color);
 }
 
 .vbr-mixed-button {
@@ -192,6 +198,7 @@
 
 .vbr-mixed-button:hover {
   filter: var(--vbr-hover-darker);
+  color: var(--vbr-inverted-text-color);
 }
 
 .vbr-ladies-button {
@@ -202,6 +209,7 @@
 
 .vbr-ladies-button:hover {
   filter: var(--vbr-hover-darker);
+  color: var(--vbr-inverted-text-color);
 }
 
 .vbr-gents-button {
@@ -212,6 +220,7 @@
 
 .vbr-gents-button:hover {
   filter: var(--vbr-hover-darker);
+  color: var(--vbr-inverted-text-color);
 }
 
 /* Switch */
@@ -360,6 +369,10 @@ input:checked + .slider:before {
   justify-content: start;
 }
 
+.fill-grid-cell {
+  justify-self: stretch;
+}
+
 .div-header {
   width: 100%;
   max-width: 1500px;
@@ -500,7 +513,7 @@ html {
 
   .player-badge {
     font-size: 1rem;
-    width: 30px;
+    width: 40px;
   }
 
   .player-badge-font {

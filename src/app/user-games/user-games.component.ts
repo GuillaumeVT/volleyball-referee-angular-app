@@ -126,7 +126,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
       this.gameService.deleteGame(game.id).subscribe(_deleted => this.onGameDeleted(), _error => this.onGameDeletionError()));
   }
 
-  deleteAllTeams(): void {
+  deleteAllGames(): void {
     const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
 
     if (this.selectedLeagueId) {
