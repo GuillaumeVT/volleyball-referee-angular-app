@@ -18,7 +18,7 @@ export class StatisticsComponent implements OnInit {
   colorScheme;
 
   constructor(private statisticsService: StatisticsService, private publicService: PublicService) {
-    this.colorScheme = { domain: ["#1f4294", "#f2bb1a", "#781fc9"] };
+    this.colorScheme = { domain: ["#1f4294", "#f2bb1a", "#781fc9", "#2980b9"] };
   }
 
   ngOnInit() {
@@ -39,13 +39,15 @@ export class StatisticsComponent implements OnInit {
       this.gameStatisticsData = [
         { "name": "Indoor 6x6", "value": this.findCount("INDOOR", this.statistics.gameStatistics) },
         { "name": "Beach", "value": this.findCount("BEACH", this.statistics.gameStatistics) },
-        { "name": "Indoor 4x4", "value": this.findCount("INDOOR_4X4", this.statistics.gameStatistics) }
+        { "name": "Indoor 4x4", "value": this.findCount("INDOOR_4X4", this.statistics.gameStatistics) },
+        { "name": "Snow", "value": this.findCount("SNOW", this.statistics.gameStatistics) }
       ];
 
       this.teamStatisticsData = [
         { "name": "Indoor 6x6", "value": this.findCount("INDOOR", this.statistics.teamStatistics) },
         { "name": "Beach", "value": this.findCount("BEACH", this.statistics.teamStatistics) },
-        { "name": "Indoor 4x4", "value": this.findCount("INDOOR_4X4", this.statistics.teamStatistics) }
+        { "name": "Indoor 4x4", "value": this.findCount("INDOOR_4X4", this.statistics.teamStatistics) },
+        { "name": "Snow", "value": this.findCount("SNOW", this.statistics.teamStatistics) }
       ];
     }
   }
