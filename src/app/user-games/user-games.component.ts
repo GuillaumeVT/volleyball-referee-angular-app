@@ -56,7 +56,6 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   refreshGames(append: boolean): void {
     if (this.selectedLeagueId) {
-      console.log(this.getKinds());
       forkJoin(
         this.leagueService.getLeague(this.selectedLeagueId),
         this.gameService.listGamesInLeague(this.selectedLeagueId, this.getStatuses(), this.getGenders(), (append ? this.page : 0), this.size)
