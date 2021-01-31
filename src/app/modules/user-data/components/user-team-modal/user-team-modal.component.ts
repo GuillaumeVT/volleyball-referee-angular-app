@@ -1,7 +1,7 @@
-import { ColorPickerModalComponent } from 'src/app/modules/user-data/components/user-teams/color-picker-modal/color-picker-modal.component';
-import { PlayerNamesModalComponent } from 'src/app/modules/user-data/components/user-teams/player-names-modal/player-names-modal.component';
-import { InputPlayerItem } from 'src/app/modules/user-data/components/user-teams/user-team-modal/input-player-item.model';
+import { ColorPickerModalComponent } from 'src/app/modules/user-data/components/color-picker-modal/color-picker-modal.component';
+import { PlayerNamesModalComponent } from 'src/app/modules/user-data/components/player-names-modal/player-names-modal.component';
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
+import { InputPlayerItem } from 'src/app/modules/user-data/models/input-player-item.model';
 import { TeamService } from 'src/app/modules/user-data/services/team.service';
 import { Player, Team } from 'src/app/shared/models/team.model';
 import { PlayerStyleService } from 'src/app/shared/services/player-style.service';

@@ -1,4 +1,4 @@
-import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules/user-rules-modal/user-rules-modal.component';
+import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules-modal/user-rules-modal.component';
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { Game } from 'src/app/shared/models/game.model';
 import { TeamType } from 'src/app/shared/models/team-type.model';

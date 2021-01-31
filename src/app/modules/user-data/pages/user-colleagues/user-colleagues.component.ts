@@ -1,7 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
 import { Friend, FriendsAndRequests } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { UserColleagueModalComponent } from 'src/app/modules/user-data/components/user-colleagues/user-colleague-modal/user-colleague-modal.component';
+import { UserColleagueModalComponent } from 'src/app/modules/user-data/components/user-colleague-modal/user-colleague-modal.component';
 import { OkCancelModalComponent } from 'src/app/shared/components/ok-cancel-modal/ok-cancel-modal.component';
 
 import { Component, OnInit } from '@angular/core';

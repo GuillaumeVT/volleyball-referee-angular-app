@@ -7,7 +7,6 @@ import { GamePlayersComponent } from 'src/app/modules/game/components/game-playe
 import { GameRefreshComponent } from 'src/app/modules/game/components/game-refresh/game-refresh.component';
 import { GameSanctionsComponent } from 'src/app/modules/game/components/game-sanctions/game-sanctions.component';
 import { GameSummaryComponent } from 'src/app/modules/game/components/game-summary/game-summary.component';
-import { GameComponent } from 'src/app/modules/game/components/game/game.component';
 import { IndoorGameComponent } from 'src/app/modules/game/components/indoor-game/indoor-game.component';
 import { Indoor4x4GameComponent } from 'src/app/modules/game/components/indoor4x4-game/indoor4x4-game.component';
 import { IndoorSetLineupsComponent } from 'src/app/modules/game/components/set/indoor-set-lineups/indoor-set-lineups.component';
@@ -19,6 +18,7 @@ import { SetSummaryComponent } from 'src/app/modules/game/components/set/set-sum
 import { SetTimeoutsComponent } from 'src/app/modules/game/components/set/set-timeouts/set-timeouts.component';
 import { SnowSetLineupsComponent } from 'src/app/modules/game/components/set/snow-set-lineups/snow-set-lineups.component';
 import { SnowGameComponent } from 'src/app/modules/game/components/snow-game/snow-game.component';
+import { GameComponent } from 'src/app/modules/game/pages/game/game.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { CommonModule } from '@angular/common';

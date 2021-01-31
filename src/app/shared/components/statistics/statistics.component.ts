@@ -1,6 +1,6 @@
-import { StatisticsService } from 'src/app/modules/user-management/services/statistics.service';
 import { Count, Statistics } from 'src/app/shared/models/statistics.model';
 import { PublicService } from 'src/app/shared/services/public.service';
+import { StatisticsService } from 'src/app/shared/services/statistics.service';
 
 import { Component, Input, OnInit } from '@angular/core';
 

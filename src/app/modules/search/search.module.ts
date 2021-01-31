@@ -1,7 +1,7 @@
-import { SearchResultDateComponent } from 'src/app/modules/search/components/search-result-date/search-result-date.component';
-import { SearchResultLiveComponent } from 'src/app/modules/search/components/search-result-live/search-result-live.component';
-import { SearchResultTokenComponent } from 'src/app/modules/search/components/search-result-token/search-result-token.component';
-import { SearchComponent } from 'src/app/modules/search/components/search/search.component';
+import { SearchResultDateComponent } from 'src/app/modules/search/pages/search-result-date/search-result-date.component';
+import { SearchResultLiveComponent } from 'src/app/modules/search/pages/search-result-live/search-result-live.component';
+import { SearchResultTokenComponent } from 'src/app/modules/search/pages/search-result-token/search-result-token.component';
+import { SearchComponent } from 'src/app/modules/search/pages/search/search.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { CommonModule } from '@angular/common';

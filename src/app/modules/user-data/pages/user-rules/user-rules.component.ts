@@ -2,7 +2,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules/user-rules-modal/user-rules-modal.component';
+import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules-modal/user-rules-modal.component';
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { RulesService } from 'src/app/modules/user-data/services/rules.service';
 import { OkCancelModalComponent } from 'src/app/shared/components/ok-cancel-modal/ok-cancel-modal.component';

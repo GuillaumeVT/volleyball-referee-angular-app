@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { UserLeagueModalComponent } from 'src/app/modules/user-data/components/user-leagues/user-league-modal/user-league-modal.component';
+import { UserLeagueModalComponent } from 'src/app/modules/user-data/components/user-league-modal/user-league-modal.component';
 import { GameService } from 'src/app/modules/user-data/services/game.service';
 import { LeagueService } from 'src/app/modules/user-data/services/league.service';
 import { OkCancelModalComponent } from 'src/app/shared/components/ok-cancel-modal/ok-cancel-modal.component';

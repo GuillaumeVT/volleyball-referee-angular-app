@@ -5,8 +5,9 @@ import { GameListItemComponent } from 'src/app/shared/components/game-list-item/
 import { GameListComponent } from 'src/app/shared/components/game-list/game-list.component';
 import { LinksBarComponent } from 'src/app/shared/components/links-bar/links-bar.component';
 import { OkCancelModalComponent } from 'src/app/shared/components/ok-cancel-modal/ok-cancel-modal.component';
-import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
-import { PrivacyPolicyComponent } from 'src/app/shared/components/privacy-policy/privacy-policy.component';
+import { StatisticsComponent } from 'src/app/shared/components/statistics/statistics.component';
+import { PageNotFoundComponent } from 'src/app/shared/pages/page-not-found/page-not-found.component';
+import { PrivacyPolicyComponent } from 'src/app/shared/pages/privacy-policy/privacy-policy.component';
 import { GenderPipe } from 'src/app/shared/pipes/gender.pipe';
 
 import { CommonModule, DatePipe } from '@angular/common';
@@ -16,12 +17,14 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
     LinksBarComponent,
     PrivacyPolicyComponent,
     PageNotFoundComponent,
+    StatisticsComponent,
     GameListComponent,
     GameListItemComponent,
     GenderPipe,
@@ -33,6 +36,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule,
     ToastrModule.forRoot(),
     NgbModule,
+    NgxChartsModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     FileSaverModule
@@ -43,6 +47,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     { provide: OWL_DATE_TIME_LOCALE, useValue: 'en-GB' }
   ],
   exports: [
+    CommonModule,
     FormsModule,
     RouterModule,
     ToastrModule,
@@ -54,6 +59,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LinksBarComponent,
     PrivacyPolicyComponent,
     PageNotFoundComponent,
+    StatisticsComponent,
     GameListComponent,
     GameListItemComponent,
     OkCancelModalComponent
