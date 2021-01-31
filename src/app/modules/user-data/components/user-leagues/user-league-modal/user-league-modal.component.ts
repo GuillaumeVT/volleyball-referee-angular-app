@@ -1,0 +1,51 @@
+import { LeagueService } from 'src/app/modules/user-data/services/league.service';
+import { League } from 'src/app/shared/models/league.model';
+
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-user-league-modal',
+  templateUrl: './user-league-modal.component.html',
+  styleUrls: ['./user-league-modal.component.css']
+})
+export class UserLeagueModalComponent implements OnInit {
+
+  @Input() league: League;
+  @Output() leagueCreated = new EventEmitter();
+
+  undefinedName:   boolean;
+  invalidResponse: boolean;
+
+  constructor(private activeModal: NgbActiveModal, private leagueService: LeagueService) {
+    this.undefinedName = false;
+    this.invalidResponse =  false;
+  }
+
+  ngOnInit() {
+  }
+
+  close(): void {
+    this.activeModal.close();
+  }
+
+  onSubmitForm(): void {
+    if (this.league.name.length === 0) {
+      this.undefinedName = true;
+    } else {
+      this.undefinedName = false;
+      this.leagueService.createLeague(this.league).subscribe(league => this.onValidResponse(), error => this.onInvalidResponse(error));
+    }
+  }
+
+  onValidResponse(): void {
+    this.invalidResponse = false;
+    this.leagueCreated.emit(true);
+    this.close();
+  }
+
+  onInvalidResponse(_error: any): void {
+    this.invalidResponse = true;
+  }
+
+}

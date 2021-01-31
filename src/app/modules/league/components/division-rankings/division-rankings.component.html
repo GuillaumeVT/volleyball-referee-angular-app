@@ -1,0 +1,78 @@
+<div class="div-divisions" *ngIf="league">
+  <div class="mx-1 my-3">
+    <select class="custom-select vbr-text" [(ngModel)]="selectedDivision" (change)="onDivisionSelected()">
+      <option *ngFor="let division of league.divisions" [ngValue]="division">
+        {{division}}
+      </option>
+    </select>
+  </div>
+</div>
+<div class="div-rankings my-3" *ngIf="league">
+  <div class="card div-card container expanded-rankings">
+    <div class="div-download">
+      <button type="button" class="btn vbr-button-inverted" (click)="downloadDivisionExcel()"><i class="fa fa-download"></i></button>
+    </div>
+    <div class="row align-items-center p-1">
+      <div class="vbr-text col-sm-3 text-center p-0 m-0 title">Teams</div>
+      <div class="vbr-text col-sm-3 text-center p-0 m-0 title">Matches</div>
+      <div class="vbr-text col-sm-3 text-center p-0 m-0 title">Sets</div>
+      <div class="vbr-text col-sm-3 text-center p-0 m-0 title">Points</div>
+    </div>
+    <div class="row align-items-center p-1">
+      <div class="vbr-text col-sm-3 text-center p-0 m-0 title"></div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0 title">Played</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0 title">Won</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0 title">Lost</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0 title">Won</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0 title">Lost</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0 title">Diff</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0 title">Won</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0 title">Lost</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0 title">Diff</div>
+    </div>
+    <div class="row align-items-center p-1" *ngFor="let ranking of rankings; let index=index" [style.background-color]="getLineColor(index)">
+      <div class="vbr-text col-sm-3 text-left p-0 m-0">
+        <span class="badge text-center player-badge-font" [style.background-color]="ranking.teamColor" [style.color]="playerStyleService.getTextColor(ranking.teamColor)"
+          [style.border-color]="playerStyleService.getBorderColor(ranking.teamColor)" [innerHTML]="ranking.teamName"></span>
+      </div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0">{{ranking.matchesFor + ranking.matchesAgainst}}</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0">{{ranking.matchesFor}}</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0">{{ranking.matchesAgainst}}</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0">{{ranking.setsFor}}</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0">{{ranking.setsAgainst}}</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0">{{getDiff(ranking.setsDiff)}}</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0">{{ranking.pointsFor}}</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0">{{ranking.pointsAgainst}}</div>
+      <div class="vbr-text col-sm-1 text-right p-0 m-0">{{getDiff(ranking.pointsDiff)}}</div>
+    </div>
+  </div>
+
+  <div class="card div-card container collapsed-rankings">
+    <div class="div-download">
+      <button type="button" class="btn btn-sm vbr-button-inverted" (click)="downloadDivisionExcel()"><i class="fa fa-download"></i></button>
+    </div>
+    <div class="row align-items-center p-1">
+      <div class="vbr-text col-6 text-center p-0 m-0 title">Teams</div>
+      <div class="vbr-text col-2 text-right p-0 m-0 title">Matches</div>
+      <div class="vbr-text col-2 text-right p-0 m-0 title">Sets</div>
+      <div class="vbr-text col-2 text-right p-0 m-0 title">Points</div>
+    </div>
+    <div class="row align-items-center p-1">
+      <div class="vbr-text col-6 text-center p-0 m-0 title"></div>
+      <div class="vbr-text col-1 text-right p-0 m-0 title">P.</div>
+      <div class="vbr-text col-1 text-right p-0 m-0 title">W.</div>
+      <div class="vbr-text col-2 text-right p-0 m-0 title">Diff</div>
+      <div class="vbr-text col-2 text-right p-0 m-0 title">Diff</div>
+    </div>
+    <div class="row align-items-center p-1" *ngFor="let ranking of rankings; let index=index" [style.background-color]="getLineColor(index)">
+      <div class="vbr-text col-6 text-left p-0 m-0">
+        <span class="badge text-center player-badge-font" [style.background-color]="ranking.teamColor" [style.color]="playerStyleService.getTextColor(ranking.teamColor)"
+          [style.border-color]="playerStyleService.getBorderColor(ranking.teamColor)" [innerHTML]="ranking.teamName"></span>
+      </div>
+      <div class="vbr-text col-1 text-right p-0 m-0">{{ranking.matchesFor + ranking.matchesAgainst}}</div>
+      <div class="vbr-text col-1 text-right p-0 m-0">{{ranking.matchesFor}}</div>
+      <div class="vbr-text col-2 text-right p-0 m-0">{{getDiff(ranking.setsDiff)}}</div>
+      <div class="vbr-text col-2 text-right p-0 m-0">{{getDiff(ranking.pointsDiff)}}</div>
+    </div>
+  </div>
+</div>

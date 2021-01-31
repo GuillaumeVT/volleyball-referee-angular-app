@@ -1,0 +1,29 @@
+<div class="div-games" *ngIf="league">
+  <div class="mx-1 my-3">
+    <select class="custom-select vbr-text" [(ngModel)]="selectedDivision" (change)="onDivisionSelected()">
+      <option [ngValue]="allDivisions">
+        {{allDivisions}}
+      </option>
+      <optgroup label="Divisions">
+        <option *ngFor="let division of league.divisions" [ngValue]="division">
+          {{division}}
+        </option>
+      </optgroup>
+    </select>
+  </div>
+</div>
+<div class="div-games" *ngIf="league">
+  <div class="mx-1 my-3" *ngIf="teams.length > 0">
+    <select class="custom-select vbr-text" [(ngModel)]="selectedTeam">
+      <option [ngValue]="allTeams">
+        {{allTeams.name}}
+      </option>
+      <optgroup label="Teams">
+        <option *ngFor="let team of teams" [ngValue]="team">
+          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender }}
+        </option>
+      </optgroup>
+    </select>
+  </div>
+  <app-game-list class="my-3" *ngIf="league && selectedTeam" [leagueId]="league.id" [teamId]="selectedTeam.id"></app-game-list>
+</div>

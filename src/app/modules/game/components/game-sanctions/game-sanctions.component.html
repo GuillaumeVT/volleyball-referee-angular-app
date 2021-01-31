@@ -1,0 +1,37 @@
+<div class="comp-container p-2" *ngIf="game">
+  <h6 class="card-title vbr-text">Sanctions</h6>
+  <div class="div-grid-50-50" *ngIf="game">
+    <table *ngIf="game">
+      <tbody>
+        <tr *ngFor="let sanction of getSanctions(leftTeam)">
+          <td class="mx-1 text-center">
+            <img class="sanction-icon mr-1" [src]="sanctionService.getSanctionIcon(sanction)" alt="card">
+          </td>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getPlayerBackgroundColor(game, leftTeam, sanction.num)" [style.color]="playerStyleService.getPlayerTextColor(game, leftTeam, sanction.num)"
+              [style.border-color]="playerStyleService.getPlayerBorderColor(game, leftTeam, sanction.num)" [innerHTML]="sanctionService.getPlayerForSanction(game, leftTeam, sanction.num)"></span>
+          </td>
+          <td class="mx-1 text-center">
+            <span class="vbr-text player-badge-font ml-2" [innerHTML]="getScore(leftTeam, sanction)"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table *ngIf="game">
+      <tbody>
+        <tr *ngFor="let sanction of getSanctions(rightTeam)">
+          <td class="mx-1 text-center">
+            <img class="sanction-icon mr-1" [src]="sanctionService.getSanctionIcon(sanction)" alt="card">
+          </td>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getPlayerBackgroundColor(game, rightTeam, sanction.num)" [style.color]="playerStyleService.getPlayerTextColor(game, rightTeam, sanction.num)"
+              [style.border-color]="playerStyleService.getPlayerBorderColor(game, rightTeam, sanction.num)" [innerHTML]="sanctionService.getPlayerForSanction(game, rightTeam, sanction.num)"></span>
+          </td>
+          <td class="mx-1 text-center">
+            <span class="vbr-text player-badge-font ml-2" [innerHTML]="getScore(rightTeam, sanction)"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

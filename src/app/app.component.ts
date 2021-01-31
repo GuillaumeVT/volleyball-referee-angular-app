@@ -1,6 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { UserSummary } from './model/user';
-import { UserService } from './services/user.service';
+import { UserSummary } from 'src/app/core/models/user.model';
+import { UserService } from 'src/app/core/services/user.service';
+import { Count } from 'src/app/shared/models/count.model';
+
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -54,7 +56,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  setCurrentPage(event): void {
+  setCurrentPage(event: any): void {
     if (event && event.getPageNumber) {
       this.currentPage = event.getPageNumber();
     } else {
@@ -64,7 +66,7 @@ export class AppComponent implements OnInit {
 
   refreshNotifications(): void {
     setTimeout(() => this.userService.getNumberOfFriendRequestsReceivedBy().subscribe(
-      count => this.numberOfFriendRequests = count.count,
+      (count: Count) => this.numberOfFriendRequests = count.count,
       _error => this.numberOfFriendRequests = 0
     ), 0);
   }

@@ -1,0 +1,89 @@
+<div class="comp-container p-2" *ngIf="game && game.kind === 'INDOOR'">
+  <h6 class="card-title vbr-text">Starting Line-up</h6>
+  <div class="div-grid-50-50" *ngIf="game">
+    <table *ngIf="game">
+      <tbody>
+        <tr>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">IV</span></td>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">III</span></td>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">II</span></td>
+        </tr>
+        <tr>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPlayerAt(leftTeam, 4)"></span>
+          </td>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPlayerAt(leftTeam, 3)"></span>
+          </td>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPlayerAt(leftTeam, 2)"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">V</span></td>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">VI</span></td>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">I</span></td>
+        </tr>
+        <tr>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPlayerAt(leftTeam, 5)"></span>
+          </td>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPlayerAt(leftTeam, 6)"></span>
+          </td>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="getPlayerAt(leftTeam, 1)"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table *ngIf="game">
+      <tbody>
+        <tr>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">IV</span></td>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">III</span></td>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">II</span></td>
+        </tr>
+        <tr>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPlayerAt(rightTeam, 4)"></span>
+          </td>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPlayerAt(rightTeam, 3)"></span>
+          </td>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPlayerAt(rightTeam, 2)"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">V</span></td>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">VI</span></td>
+          <td class="mx-1 text-center"><span class="player-badge vbr-text">I</span></td>
+        </tr>
+        <tr>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPlayerAt(rightTeam, 5)"></span>
+          </td>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPlayerAt(rightTeam, 6)"></span>
+          </td>
+          <td class="mx-1 text-center">
+            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="getPlayerAt(rightTeam, 1)"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

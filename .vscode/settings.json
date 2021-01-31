@@ -1,0 +1,6 @@
+{
+  "editor.tabSize": 2,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "maxLineLength",
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 1000
+}
