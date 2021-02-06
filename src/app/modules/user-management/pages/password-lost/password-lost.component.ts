@@ -1,49 +1,37 @@
 import { UserService } from 'src/app/core/services/user.service';
 
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-password-lost',
   templateUrl: './password-lost.component.html',
   styleUrls: ['./password-lost.component.css']
 })
-export class PasswordLostComponent implements AfterViewInit {
+export class PasswordLostComponent {
 
-  userEmail:       string;
-  emptyEmail:      boolean;
-  invalidResponse: boolean;
-  resetInitiated:  boolean;
+  passwordLostForm: FormGroup;
 
-  constructor(private userService: UserService) {
-    this.userEmail = "";
-    this.emptyEmail = false;
-    this.invalidResponse = false;
-    this.resetInitiated = false;
+  constructor(private userService: UserService, private snackBar: MatSnackBar) {
+    this.passwordLostForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email])
+    });
   }
 
-  ngAfterViewInit() {
-    const emailInput = document.getElementById('email');
-    if (emailInput) {
-      emailInput.focus();
-    }
-  }
+  get formEmail() { return this.passwordLostForm.get('email'); }
 
   initiatePasswordReset(): void {
-    this.invalidResponse = false;
-    this.emptyEmail = (this.userEmail.length === 0);
-
-    if (!this.emptyEmail) {
-      this.userService.initiatePasswordReset(this.userEmail).subscribe(success => this.onValidResponse(), error => this.onInvalidResponse(error));
-    }
+    const emailAddress = this.formEmail.value;
+    this.userService.initiatePasswordReset(emailAddress).subscribe(success => this.onValidResponse(emailAddress), _error => this.onInvalidResponse(emailAddress));
   }
 
-  onValidResponse(): void {
-    this.invalidResponse = false;
-    this.resetInitiated = true;
+  private onValidResponse(emailAddress: string): void {
+    this.snackBar.open(`A recovery link was sent to ${emailAddress}`, 'Dismiss', { duration: 2500, horizontalPosition: 'center', verticalPosition: 'bottom' });
   }
 
-  onInvalidResponse(_error: any): void {
-    this.invalidResponse = true;
+  private onInvalidResponse(emailAddress: string): void {
+    this.snackBar.open(`${emailAddress} could not be found.`, 'Dismiss', { duration: 2500, horizontalPosition: 'center', verticalPosition: 'bottom' });
   }
 
 }

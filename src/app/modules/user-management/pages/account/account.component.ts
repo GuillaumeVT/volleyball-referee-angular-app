@@ -1,8 +1,9 @@
-import { ToastrService } from 'ngx-toastr';
 import { UserPasswordUpdate, UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
 
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-account',
@@ -13,59 +14,59 @@ export class AccountComponent implements OnInit {
 
   user: UserSummary;
 
-  userPasswordUpdate: UserPasswordUpdate;
-  confirmedPassword:  string;
+  passwordUpdateForm: FormGroup;
+  hidePassword:       boolean;
+  passwordVisibility: string;
 
-  emptyCurrentPassword: boolean;
-  emptyNewPassword:     boolean;
-  emptyNewPassword2:    boolean;
-  differentPasswords:   boolean;
-  invalidPassword:      boolean;
-  invalidResponse:      boolean;
+  constructor(private userService: UserService, private snackBar: MatSnackBar) {
+    this.hidePassword = false;
+    this.togglePasswordVisibility();
 
-  constructor(private userService: UserService, private toastr: ToastrService) {
-    this.userPasswordUpdate = new UserPasswordUpdate("", "");
-    this.confirmedPassword = "";
-
-    this.emptyCurrentPassword = false;
-    this.emptyNewPassword = false;
-    this.emptyNewPassword2 = false;
-    this.differentPasswords = false;
-    this.invalidPassword = false;
-    this.invalidResponse = false;
+    this.passwordUpdateForm = new FormGroup({
+      currentPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      confirmedPassword: new FormControl('', [Validators.required, Validators.minLength(8)])
+    }, this.passwordsMustMatchValidator);
   }
 
   ngOnInit() {
     this.userService.authState.subscribe(auth => this.user = auth ? auth.user : null);
   }
 
-  updateUserPassword(): void {
-    this.emptyCurrentPassword = (this.userPasswordUpdate.currentPassword.length === 0);
-    this.emptyNewPassword = (this.userPasswordUpdate.newPassword.length === 0);
-    this.emptyNewPassword2 = (this.confirmedPassword.length === 0);
-    this.differentPasswords = (this.userPasswordUpdate.newPassword  !== this.confirmedPassword);
+  get formCurrentPassword() { return this.passwordUpdateForm.get('currentPassword'); }
 
-    const invalidForm : boolean = this.emptyCurrentPassword || this.emptyNewPassword || this.emptyNewPassword2 || this.differentPasswords;
+  get formNewPassword() { return this.passwordUpdateForm.get('newPassword'); }
 
-    if (!invalidForm) {
-      this.userService.updateUserPassword(this.userPasswordUpdate).subscribe(tokenRequestResult => this.onValidResponse(), error => this.onInvalidResponse(error));
+  get formConfirmedPassword() { return this.passwordUpdateForm.get('confirmedPassword'); }
+
+  private passwordsMustMatchValidator(abstractControl: AbstractControl): { mismatch: boolean } {
+    if ((abstractControl.get('newPassword').value && abstractControl.get('confirmedPassword').value)
+      && (abstractControl.get('newPassword').value !== abstractControl.get('confirmedPassword').value)) {
+      return { mismatch: true };  
+    } else {
+      return null;
     }
   }
 
-  onValidResponse(): void {
-    this.invalidResponse = false;
-    this.invalidPassword = false;
-    this.toastr.success('Your password was successfully updated', '', { timeOut: 2500, positionClass: 'toast-top-left' })
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
+    this.passwordVisibility = this.hidePassword ? 'visibility_off' : 'visibility';
   }
 
-  onInvalidResponse(error: any): void {
-    this.invalidResponse = false;
-    this.invalidPassword = false;
+  updateUserPassword(): void {
+    const userPasswordUpdate = new UserPasswordUpdate(this.formCurrentPassword.value, this.formNewPassword.value);
+    this.userService.updateUserPassword(userPasswordUpdate).subscribe(tokenRequestResult => this.onValidResponse(), error => this.onInvalidResponse(error));
+  }
 
+  private onValidResponse(): void {
+    this.snackBar.open('Your password was successfully updated.', 'Dismiss', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'bottom' });
+  }
+
+  private onInvalidResponse(error: any): void {
     if (error.status === 400) {
-      this.invalidPassword = true;
+      this.snackBar.open('Password does not satisfy the aforementioned criteria.', 'Dismiss', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'bottom' });
     } else {
-      this.invalidResponse = true;
+      this.snackBar.open('An error occurred on the server.', 'Dismiss', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'bottom' });
     }
   }
 

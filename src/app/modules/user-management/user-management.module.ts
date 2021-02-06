@@ -1,3 +1,4 @@
+import { MaterialModule } from 'src/app/material/material.module';
 import { UserDataModule } from 'src/app/modules/user-data/user-data.module';
 import { AccountComponent } from 'src/app/modules/user-management/pages/account/account.component';
 import { HomeComponent } from 'src/app/modules/user-management/pages/home/home.component';
@@ -17,6 +18,7 @@ import { NgModule } from '@angular/core';
     SignInComponent
   ],
   imports: [
+    MaterialModule,
     SharedModule,
     UserDataModule
   ],

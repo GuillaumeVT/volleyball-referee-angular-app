@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MaterialModule } from 'src/app/material/material.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CommonModule,
     FormsModule,
     RouterModule,
+    MaterialModule,
     ToastrModule.forRoot(),
     NgbModule,
     NgxChartsModule,
@@ -50,6 +52,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CommonModule,
     FormsModule,
     RouterModule,
+    MaterialModule,
     ToastrModule,
     NgbModule,
     OwlDateTimeModule,

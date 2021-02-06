@@ -1,9 +1,19 @@
-<div class="text-center div-links">
-  <ul class="list-unstyled list-inline">
-    <li class="list-inline-item my-1"><a class="btn btn-android" href="{{playUrl}}" target="_blank"><i class="fa fa-android mr-1"></i>Download our Android app</a></li>
-    <li class="list-inline-item my-1"><a class="btn btn-facebook" href="{{facebookUrl}}" target="_blank"><i class="fa fa-facebook mr-1"></i>Join us on Facebook</a></li>
-    <li class="list-inline-item my-1"><a class="btn vbr-button-inverted" [routerLink]="getPrivacyPolicyUrl()" role="button">Privacy Policy</a></li>
-    <li class="list-inline-item my-1" *ngIf="signedIn"><a class="btn vbr-button-inverted" [routerLink]="getHomeUrl()" role="button"><i class="fa fa-home mr-1"></i>Home</a></li>
-    <li class="list-inline-item my-1" *ngIf="signedIn"><button class="btn btn-sign-out" (click)="signOut()"><i class="fa fa-sign-out mr-1"></i>Sign out</button></li>
-  </ul>
+<div class="text-center">
+  <div class="div-links">
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+      <a fxFlex href="{{playUrl}}" target="_blank" class="m-1">
+        <button class="btn-android" mat-raised-button type="button"><i class="fa fa-android mr-2"></i>Download our Android app</button>
+      </a>
+      <a fxFlex href="{{facebookUrl}}" target="_blank" class="m-1">
+        <button class="btn-facebook" mat-raised-button type="button"><i class="fa fa-facebook mr-2"></i>Join us on Facebook</button>
+      </a>
+      <a fxFlex [routerLink]="getPrivacyPolicyUrl()" target="_blank" class="m-1">
+        <button mat-button color="primary" type="button">Privacy Policy</button>
+      </a>
+      <a fxFlex *ngIf="signedIn" [routerLink]="getHomeUrl()" target="_blank" class="m-1">
+        <button mat-button color="primary" type="button"><i class="fa fa-home mr-2"></i>Home</button>
+      </a>
+      <button fxFlex *ngIf="signedIn" mat-button class="btn-sign-out" type="button" (click)="signOut()" class="m-1"><i class="fa fa-sign-out mr-2"></i>Sign out</button>
+    </div>
+  </div>
 </div>

@@ -347,10 +347,15 @@ input:checked + .slider:before {
 }
 
 .div-small-form {
-  max-width: 600px;
+  max-width: 700px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.mat-form-field {
+  min-width: 300px;
+  width: 100%;
 }
 
 .comp-container {
@@ -381,7 +386,7 @@ input:checked + .slider:before {
 }
 
 .div-footer {
-  margin-top: 2%;
+  margin-top: 150px;
   bottom: 0;
 }
 
@@ -394,6 +399,10 @@ input:checked + .slider:before {
 .player-badge-font {
   font-weight: normal;
   font-size: 1.3rem;
+}
+
+.mat-form-field {
+  min-width: 300px;
 }
 
 .form-control:focus {
@@ -545,3 +554,6 @@ html {
 .owl-dt-control-button {
   color: var(--vbr-primary-color);
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

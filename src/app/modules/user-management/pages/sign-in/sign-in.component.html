@@ -1,35 +1,47 @@
-<div class="div-sign-in m-1">
-  <div class="div-small-form div-card mt-4 p-4">
-    <form novalidate autocomplete="off">
-      <div class="div-card-title mb-3">
-        <h5 class="vbr-text">Sign in to Volleyball Referee</h5>
-        <img class="text-right vbr-logo" src="favicon.ico"/>
-      </div>
-      <hr/>
-      <p class="text">If you purchased the web services package, please create your account in the app to be able to sign in here.</p>
-      <div class="form-group mb-3">
-        <label [ngClass]="emptyEmail ? 'vbr-error-text' : ''" class="vbr-text" for="email">Email</label>
-        <input type="email" [ngClass]="emptyEmail ? 'vbr-error-input' : ''" class="vbr-text form-control" name="email" id="email" [(ngModel)]="emailCredentials.userEmail" required />
-        <div class="vbr-error-feedback" *ngIf="emptyEmail">Please input an email.</div>
-      </div>
-      <div class="form-group mb-3">
-        <label [ngClass]="emptyPassword ? 'vbr-error-text' : ''" class="vbr-text" for="password">Password</label>
-        <input type="password" [ngClass]="emptyPassword ? 'vbr-error-input' : ''" class="vbr-text form-control" name="password" id="password" [(ngModel)]="emailCredentials.userPassword" required />
-        <div class="vbr-error-feedback" *ngIf="emptyPassword">Please input a password.</div>
-      </div>
-      <div class="mb-3 vbr-error-text text-right" *ngIf="invalidResponse">Email and password do not match.</div>
-      <div class="mb-3 text-right">
-        <button type="submit" class="btn vbr-button" (click)="signIn()">Sign in</button>
-      </div>
-      <hr/>
-      <div class="text-right">
-        <a class="btn vbr-button-inverted" [routerLink]="getPasswordLostUrl()">Lost my password</a>
-      </div>
-    </form>
-  </div>
-  <div class="div-small-form div-card mt-4 p-4">
-    <app-statistics [showUserStatistics]="false"></app-statistics>
-  </div>
+<div fxLayout="row wrap" fxLayoutAlign="center top">
+  <form class="div-small-form mt-4" fxFlex [formGroup]="signInForm" autocomplete="off" novalidate (ngSubmit)="signIn()">
+    <mat-card>
+      <mat-card-header>
+        <img mat-card-avatar src="favicon.ico"/>
+        <mat-card-title>Sign in</mat-card-title>
+        <mat-card-subtitle>Volleyball Referee</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="mb-3">
+          If you purchased the web services package, please create your account in the app to be able to sign in here.
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="center center">
+          <div fxFlex class="m-1">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="email" cdkFocusInitial required>
+              <mat-error *ngIf="formEmail.errors?.required">Email address is required</mat-error>
+              <mat-error *ngIf="formEmail.errors?.email">Email address is not valid</mat-error>
+            </mat-form-field>
+          </div>
+          <div fxFlex class="m-1">
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+              <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+                <mat-icon>{{passwordVisibility}}</mat-icon>
+              </button>
+              <mat-error *ngIf="formPassword.errors?.required">Password is required</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <a [routerLink]="getPasswordLostUrl()"><button mat-button color="primary" type="button">Lost my password</button></a>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!signInForm.valid">Sign in</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  <mat-card fxFlex class="div-small-form mt-4">
+    <mat-card-content>
+      <app-statistics [showUserStatistics]="false"></app-statistics>
+    </mat-card-content>
+  </mat-card>
 </div>
 <div class="div-footer">
   <app-links-bar></app-links-bar>

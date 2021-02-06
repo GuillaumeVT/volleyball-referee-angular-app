@@ -1,5 +1,5 @@
 .div-links {
-	margin-top: 150px;
+	display: inline-block;
 }
 
 .btn-android {
@@ -24,11 +24,4 @@
 
 .btn-sign-out {
 	color: var(--vbr-cancel-color);
-	background-color: inherit;
-}
-
-.btn-sign-out:hover {
-	color: var(--vbr-inverted-text-color);
-	background-color: var(--vbr-cancel-color);
-	border-color: var(--vbr-cancel-color);
 }

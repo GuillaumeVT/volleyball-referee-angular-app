@@ -1,58 +1,52 @@
-<div class="div-small-form div-card p-4 mt-4" *ngIf="user">
-  <div class="div-card-title mb-3">
-    <h5 class="vbr-text">About me</h5>
-    <img class="text-right vbr-logo" src="favicon.ico"/>
-  </div>
-  <hr/>
-  <div class="row align-items-center">
-    <div class="col-3 col-sm-3 my-1">
-      <span class="vbr-text">Email</span>
-    </div>
-    <div class="col-9 col-sm-9 my-1">
-      <span>{{user.email}}</span>
-    </div>
-    <div class="col-3 col-sm-3 my-1">
-      <span class="vbr-text">Pseudo</span>
-    </div>
-    <div class="col-9 col-sm-9 my-1">
-      <span>{{user.pseudo}}</span>
-    </div>
-  </div>
-</div>
-<div class="div-small-form div-card p-4 mt-4" *ngIf="user">
-  <div class="div-card-title mb-3">
-    <h5 class="vbr-text">Update my password</h5>
-    <img class="text-right vbr-logo" src="favicon.ico"/>
-  </div>
-  <hr/>
-  <form novalidate autocomplete="off">
-    <div class="form-group mb-3">
-      <label [ngClass]="emptyCurrentPassword ? 'vbr-error-text' : ''" class="vbr-text" for="current-password">Current password</label>
-      <input type="password" [ngClass]="emptyCurrentPassword ? 'vbr-error-input' : ''" class="vbr-text form-control"
-        name="current-password" id="current-password" [(ngModel)]="userPasswordUpdate.currentPassword" required />
-      <div class="vbr-error-feedback" *ngIf="emptyCurrentPassword">Please input a password.</div>
-    </div>
-    <div class="mb-3 vbr-text">The password must contain at least 8 characters, including 1 uppercase character, 1 digit, and 1 special character.</div>
-    <div class="form-group mb-3">
-      <label [ngClass]="emptyNewPassword || differentPasswords || invalidPassword ? 'vbr-error-text' : ''" class="vbr-text" for="new-password">New password</label>
-      <input type="password" [ngClass]="emptyNewPassword || differentPasswords || invalidPassword ? 'vbr-error-input' : ''" class="vbr-text form-control"
-        name="new-password" id="new-password" [(ngModel)]="userPasswordUpdate.newPassword" required />
-      <div class="vbr-error-feedback" *ngIf="emptyNewPassword">Please input a password.</div>
-    </div>
-    <div class="form-group mb-3">
-      <label [ngClass]="emptyNewPassword2 || differentPasswords || invalidPassword ? 'vbr-error-text' : ''" class="vbr-text" for="new-password2">Confirm new password</label>
-      <input type="password" [ngClass]="emptyNewPassword2 || differentPasswords || invalidPassword ? 'vbr-error-input' : ''" class="vbr-text form-control"
-        name="new-password2" id="new-password2" [(ngModel)]="confirmedPassword" required />
-      <div class="vbr-error-feedback" *ngIf="emptyNewPassword2">Please input a password.</div>
-    </div>
-    <div class="mb-3 vbr-error-text text-right" *ngIf="differentPasswords">Passwords do not match.</div>
-    <div class="mb-3 alert alert-danger text-right" *ngIf="invalidPassword">Password does not satisfy the aforementioned criteria.</div>
-    <div class="mb-3 alert alert-danger text-right" *ngIf="invalidResponse">An error occurred on the server.</div>
-    <div class="text-right">
-      <button type="submit" class="btn vbr-button" (click)="updateUserPassword()">Update password</button>
-    </div>
-  </form>
-</div>
+<form [formGroup]="passwordUpdateForm" autocomplete="off" novalidate (ngSubmit)="updateUserPassword()" *ngIf="user" class="mt-4">
+  <mat-card class="div-small-form">
+    <mat-card-header>
+      <img mat-card-avatar src="favicon.ico"/>
+      <mat-card-title>{{user.pseudo}}</mat-card-title>
+      <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h3 class="mat-h3">Update my password</h3>
+      <mat-form-field class="m-1" appearance="outline">
+        <mat-label>Current password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="currentPassword" required>
+        <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+          <mat-icon>{{passwordVisibility}}</mat-icon>
+        </button>
+        <mat-error *ngIf="formCurrentPassword.errors?.required">Current password is required</mat-error>
+        <mat-error *ngIf="formCurrentPassword.errors?.minlength">Password must contain at least 8 characters</mat-error>
+      </mat-form-field>
+      <p class="mx-1">
+        The password must contain at least 8 characters, including 1 uppercase character, 1 digit, and 1 special character.
+      </p>
+      <mat-form-field class="m-1" appearance="outline">
+        <mat-label>New password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="newPassword" required>
+        <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+          <mat-icon>{{passwordVisibility}}</mat-icon>
+        </button>
+        <mat-error *ngIf="formNewPassword.errors?.required">New password is required</mat-error>
+        <mat-error *ngIf="formNewPassword.errors?.minlength">Password must contain at least 8 characters</mat-error>
+      </mat-form-field>
+      <mat-form-field class="m-1" appearance="outline">
+        <mat-label>Confirm new password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="confirmedPassword" required>
+        <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+          <mat-icon>{{passwordVisibility}}</mat-icon>
+        </button>
+        <mat-error *ngIf="formConfirmedPassword.errors?.required">New password confirmation is required</mat-error>
+        <mat-error *ngIf="formConfirmedPassword.errors?.minlength">Password must contain at least 8 characters</mat-error>
+      </mat-form-field>
+      <p class="mx-1" *ngIf="passwordUpdateForm.errors?.mismatch">
+        <mat-error>Passwords do not match.</mat-error>
+      </p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!passwordUpdateForm.valid">Update password</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
 <div class="div-footer">
   <app-links-bar></app-links-bar>
 </div>

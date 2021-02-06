@@ -1,6 +1,7 @@
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { MaterialModule } from 'src/app/material/material.module';
 import { GameModule } from 'src/app/modules/game/game.module';
 import { LeagueModule } from 'src/app/modules/league/league.module';
 import { SearchModule } from 'src/app/modules/search/search.module';
@@ -17,12 +18,13 @@ import { NgModule } from '@angular/core';
   imports: [
     AppRoutingModule,
     CoreModule,
+    MaterialModule,
     SharedModule,
     SearchModule,
     GameModule,
     LeagueModule,
     UserDataModule,
-    UserManagementModule
+    UserManagementModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

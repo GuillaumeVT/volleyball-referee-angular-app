@@ -1,6 +1,8 @@
 import { UserService } from 'src/app/core/services/user.service';
 
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,66 +10,59 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './password-reset.component.html',
   styleUrls: ['./password-reset.component.css']
 })
-export class PasswordResetComponent implements OnInit, AfterViewInit {
+export class PasswordResetComponent implements OnInit {
 
   passwordResetId: string;
-  password:        string;
-  password2:       string;
+  
+  passwordResetForm:  FormGroup;
+  hidePassword:       boolean;
+  passwordVisibility: string;
 
-  emptyPassword:      boolean;
-  emptyPassword2:     boolean;
-  differentPasswords: boolean;
-  invalidPassword :   boolean;
-  invalidResponse :   boolean;
+  constructor(private route: ActivatedRoute, private userService: UserService, private snackBar: MatSnackBar) {
+    this.hidePassword = false;
+    this.togglePasswordVisibility();
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {
-    this.password = "";
-    this.password2 = "";
-    this.emptyPassword = false;
-    this.emptyPassword2 = false;
-    this.differentPasswords = false;
-    this.invalidPassword = false;
-    this.invalidResponse = false;
+    this.passwordResetForm = new FormGroup({
+      newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      confirmedPassword: new FormControl('', [Validators.required, Validators.minLength(8)])
+    }, this.passwordsMustMatchValidator);
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => this.passwordResetId = params['passwordResetId']);
   }
 
-  ngAfterViewInit() {
-    const firstNameInput = document.getElementById('password');
-    if (firstNameInput) {
-      firstNameInput.focus();
+  get formNewPassword() { return this.passwordResetForm.get('newPassword'); }
+
+  get formConfirmedPassword() { return this.passwordResetForm.get('confirmedPassword'); }
+
+  private passwordsMustMatchValidator(abstractControl: AbstractControl): { mismatch: boolean } {
+    if ((abstractControl.get('newPassword').value && abstractControl.get('confirmedPassword').value)
+      && (abstractControl.get('newPassword').value !== abstractControl.get('confirmedPassword').value)) {
+      return { mismatch: true };  
+    } else {
+      return null;
     }
+  }
+
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
+    this.passwordVisibility = this.hidePassword ? 'visibility_off' : 'visibility';
   }
 
   resetPassword(): void {
-    this.invalidResponse = false;
-    this.invalidPassword = false;
-    this.emptyPassword = (this.password.length === 0);
-    this.emptyPassword2 = (this.password2.length === 0);
-    this.differentPasswords = (this.password  !== this.password2);
-
-    const invalidForm : boolean = this.emptyPassword || this.emptyPassword2 || this.differentPasswords;
-
-    if (!invalidForm) {
-      this.userService.resetPassword(this.passwordResetId, this.password).subscribe(tokenRequestResult => this.onValidResponse(), error => this.onInvalidResponse(error));
-    }
+    this.userService.resetPassword(this.passwordResetId, this.formNewPassword.value).subscribe(tokenRequestResult => this.onValidResponse(), error => this.onInvalidResponse(error));
   }
 
-  onValidResponse(): void {
-    this.invalidResponse = false;
-    this.invalidPassword = false;
+  private onValidResponse(): void {
+    this.snackBar.open('Your password was successfully reset.', 'Dismiss', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'bottom' });
   }
 
-  onInvalidResponse(error: any): void {
-    this.invalidResponse = false;
-    this.invalidPassword = false;
-
+  private onInvalidResponse(error: any): void {
     if (error.status === 400) {
-      this.invalidPassword = true;
+      this.snackBar.open('Password does not satisfy the aforementioned criteria.', 'Dismiss', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'bottom' });
     } else {
-      this.invalidResponse = true;
+      this.snackBar.open('An error occurred on the server.', 'Dismiss', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'bottom' });
     }
   }
 
