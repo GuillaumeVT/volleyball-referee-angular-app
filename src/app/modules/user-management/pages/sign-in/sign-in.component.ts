@@ -1,9 +1,9 @@
 import { EmailCredentials } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +16,7 @@ export class SignInComponent {
   hidePassword:       boolean;
   passwordVisibility: string;
 
-  constructor(private userService: UserService, private snackBar: MatSnackBar) {
+  constructor(private userService: UserService, private snackBarService: SnackBarService) {
     this.hidePassword = false;
     this.togglePasswordVisibility();
     this.passwordVisibility = 'visibility_off';
@@ -44,7 +44,7 @@ export class SignInComponent {
   private onValidResponse(): void {}
 
   private onInvalidResponse(_error: any): void {
-    this.snackBar.open('Email and password do not match.', 'Dismiss', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'bottom' });
+    this.snackBarService.showError('Email and password do not match.', 5000);
   }
 
   getPasswordLostUrl(): string {

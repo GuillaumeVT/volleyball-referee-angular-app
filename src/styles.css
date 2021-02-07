@@ -26,7 +26,8 @@
   --vbr-gents-light-color: #cedaf5;
   --vbr-mixed-color: #006232;
   --vbr-mixed-light-color: #c8ffe4;
-  --vbr-error-color: #dc3545;
+  --vbr-error-color: #bc0019;
+  --vbr-error-light-color: #ffbcc5;
   --vbr-cancel-color: #424242;
   --vbr-unselected-color: #1f1f1f;
   --vbr-light-unselected-color: #e4e2e4;
@@ -496,6 +497,24 @@ input:checked + .slider:before {
   transform: scale(0, 0);
   opacity: .3;
   transition: 0s;
+}
+
+.info-snackbar {
+  color: var(--vbr-primary-color);
+  background-color: var(--vbr-light-primary-color);
+}
+
+.info-snackbar .mat-simple-snackbar {
+  justify-content: center;
+}
+
+.error-snackbar {
+  color: var(--vbr-error-color);
+  background-color: var(--vbr-error-light-color);
+}
+
+.error-snackbar .mat-simple-snackbar {
+  justify-content: center;
 }
 
 @media screen and (min-width: 800px) {

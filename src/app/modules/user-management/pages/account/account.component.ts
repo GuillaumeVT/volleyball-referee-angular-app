@@ -1,9 +1,9 @@
 import { UserPasswordUpdate, UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-account',
@@ -18,7 +18,7 @@ export class AccountComponent implements OnInit {
   hidePassword:       boolean;
   passwordVisibility: string;
 
-  constructor(private userService: UserService, private snackBar: MatSnackBar) {
+  constructor(private userService: UserService, private snackBarService: SnackBarService) {
     this.hidePassword = false;
     this.togglePasswordVisibility();
 
@@ -59,14 +59,14 @@ export class AccountComponent implements OnInit {
   }
 
   private onValidResponse(): void {
-    this.snackBar.open('Your password was successfully updated.', 'Dismiss', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'bottom' });
+    this.snackBarService.showInfo('Your password was successfully updated.', 5000);
   }
 
   private onInvalidResponse(error: any): void {
     if (error.status === 400) {
-      this.snackBar.open('Password does not satisfy the aforementioned criteria.', 'Dismiss', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'bottom' });
+      this.snackBarService.showError('Password does not satisfy the aforementioned criteria.', 5000);
     } else {
-      this.snackBar.open('An error occurred on the server.', 'Dismiss', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'bottom' });
+      this.snackBarService.showError('An error occurred on the server.', 5000);
     }
   }
 

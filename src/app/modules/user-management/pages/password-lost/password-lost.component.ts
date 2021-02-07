@@ -1,8 +1,8 @@
 import { UserService } from 'src/app/core/services/user.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-password-lost',
@@ -13,7 +13,7 @@ export class PasswordLostComponent {
 
   passwordLostForm: FormGroup;
 
-  constructor(private userService: UserService, private snackBar: MatSnackBar) {
+  constructor(private userService: UserService, private snackBarService: SnackBarService) {
     this.passwordLostForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email])
     });
@@ -27,11 +27,11 @@ export class PasswordLostComponent {
   }
 
   private onValidResponse(emailAddress: string): void {
-    this.snackBar.open(`A recovery link was sent to ${emailAddress}`, 'Dismiss', { duration: 2500, horizontalPosition: 'center', verticalPosition: 'bottom' });
+    this.snackBarService.showInfo(`A recovery link was sent to ${emailAddress}.`, 5000);
   }
 
   private onInvalidResponse(emailAddress: string): void {
-    this.snackBar.open(`${emailAddress} could not be found.`, 'Dismiss', { duration: 2500, horizontalPosition: 'center', verticalPosition: 'bottom' });
+    this.snackBarService.showError(`${emailAddress} could not be found.`, 5000);
   }
 
 }
