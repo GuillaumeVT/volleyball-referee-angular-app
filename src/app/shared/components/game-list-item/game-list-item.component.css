@@ -1,13 +1,3 @@
-.game-item-header {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-}
-
-.game-item-schedule {
-  margin-left: auto;
-}
-
 .game-item-line:hover {
   background-color: var(--vbr-light-primary-color);
   color: var(--vbr-primary-color);

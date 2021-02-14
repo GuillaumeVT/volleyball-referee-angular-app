@@ -3,7 +3,10 @@
     <span class="vbr-text game-number-text">Found {{total}} game(s){{searchCriterion}}</span>
   </div>
   <div class="my-3 mx-1 text-left">
-    <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="filterFromText(textFilter)"/>
+    <mat-form-field class="mb-2">
+      <mat-label>Filter</mat-label>
+      <input matInput type="text" #textFilter (input)="filterFromText(textFilter)"/>
+    </mat-form-field>
     <div class="text-left list-unstyled list-inline">
       <button class="btn chip vbr-live-chip list-inline-item my-1" #liveButton (click)="toggleLive(liveButton)"><i class="fa fa-mixcloud mr-2"></i>Live</button>
       <button class="btn chip vbr-beach-chip list-inline-item my-1" #beachButton (click)="toggleBeach(beachButton)" *ngIf="!leagueId"><i class="fa fa-sun-o mr-2"></i>Beach</button>
@@ -15,9 +18,11 @@
       <button class="btn chip vbr-gents-chip list-inline-item my-1" #gentsButton (click)="toggleGents(gentsButton)"><i class="fa fa-mars mr-2"></i>Gents</button>
     </div>
   </div>
-  <div>
-    <app-game-list-item *ngFor="let gameSummary of filteredGames" [gameSummary]="gameSummary" [inLeague]="inLeague"></app-game-list-item>
+ 
+  <div *ngFor="let gameSummary of filteredGames" class="my-3">
+    <app-game-list-item [gameSummary]="gameSummary" [inLeague]="inLeague"></app-game-list-item>
   </div>
+
   <div class="div-user text-center my-3" *ngIf="!last">
     <button type="button" class="btn vbr-button-inverted" (click)="refreshGames(true)">Load more games</button>
   </div>

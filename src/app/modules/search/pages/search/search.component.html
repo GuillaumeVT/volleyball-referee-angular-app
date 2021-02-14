@@ -1,36 +1,45 @@
-<div class="div-content">
-  <div class="card div-card div-search p-2 my-1">
-    <p class="lead vbr-text text-center">Search games</p>
-    <hr class="mt-2 mb-4"/>
-    <div>
-      <div class="input-group my-3">
-        <div class="input-group-prepend">
-          <button type="button" class="btn vbr-button" (click)="onSearchTokenClicked()"><i class="fa fa-search"></i></button>
-        </div>
-        <input type="text" class="form-control vbr-text" placeholder="By team / league / referee" [(ngModel)]="searchToken"
-          (keyup.enter)="onSearchTokenClicked()"/>
-      </div>
-      <div class="div-grid-50-50 my-3">
-        <button type="button" class="btn vbr-button mr-1 fill-grid-cell" (click)="onSearchLiveClicked()"><i class="fa fa-mixcloud mr-2"></i>Live games</button>
-        <button type="button" class="btn vbr-button ml-1 fill-grid-cell" (click)="onSearchTodayClicked()"><i class="fa fa-calendar-check-o mr-2"></i>Today's games</button>
-      </div>
-      <div class="input-group my-3">
-        <div class="input-group-prepend">
-          <button type="button" class="btn vbr-button" (click)="onSearchDateClicked()"><i class="fa fa-calendar-o"></i></button>
-        </div>
-        <input class="form-control vbr-text" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp" [(ngModel)]="searchDate" (dateTimeChange)="onSearchDateClicked()"
-          [min]="minDate" placeholder="By date" (keydown)="$event.preventDefault()" readonly>
-        <owl-date-time [pickerType]="'calendar'" #dtp></owl-date-time>
-      </div>
-    </div>
-  </div>
-  <div>
-  <ng-container [ngSwitch]="searchType">
+<div class="div-content mt-4">
+  <form autocomplete="off" novalidate (ngSubmit)="search()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Search games</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <mat-select class="mt-3" [(value)]="searchType" (selectionChange)=onSelectionChanged()>
+          <mat-option *ngFor="let searchCriterion of searchCriteria" [value]="searchCriterion.type">
+            {{searchCriterion.display}}
+          </mat-option>
+        </mat-select>
+
+        <mat-form-field *ngIf="searchType === searchTypeEnum.Token" appearance="outline" class="mt-3">
+          <input matInput type="search" [formControl]="searchTokenControl">
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-error *ngIf="searchTokenControl.errors?.required">Criterion must contain at least 3 characters</mat-error>
+          <mat-error *ngIf="searchTokenControl.errors?.minlength">Criterion must contain at least 3 characters</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field *ngIf="searchType === searchTypeEnum.Date" appearance="outline" class="mt-3">
+          <input matInput type="search" name="searchDate" [(ngModel)]="searchDate" [matDatepicker]="picker" (click)="picker.open()" readonly>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!canSearch()">Search</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+
+  <ng-container *ngIf="loadSearchResults" [ngSwitch]="searchType">
     <app-game-list *ngSwitchCase="searchTypeEnum.Token" [token]="searchToken"></app-game-list>
     <app-game-list *ngSwitchCase="searchTypeEnum.Live" [live]="true"></app-game-list>
     <app-game-list *ngSwitchCase="searchTypeEnum.Date" [date]="searchDateStr"></app-game-list>
+    <app-game-list *ngSwitchCase="searchTypeEnum.Today" [date]="searchDateStr"></app-game-list>
   </ng-container>
 </div>
+
 <div class="div-footer">
   <app-links-bar></app-links-bar>
 </div>

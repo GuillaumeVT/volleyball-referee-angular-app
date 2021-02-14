@@ -1,56 +1,78 @@
-<div class="card div-card text-left mx-1 my-3 p-3" *ngIf="gameSummary">
-  <div class="game-item-header">
-    <div class="text-left list-unstyled list-inline">
-      <span class="chip vbr-live-chip list-inline-item" *ngIf="gameSummary.status === 'LIVE'"><i class="fa fa-mixcloud"></i></span>
-      <span class="chip vbr-beach-chip list-inline-item" *ngIf="gameSummary.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
-      <span class="chip vbr-indoor-chip list-inline-item" *ngIf="gameSummary.kind === 'INDOOR'">6x6</span>
-      <span class="chip vbr-indoor-4x4-chip list-inline-item" *ngIf="gameSummary.kind === 'INDOOR_4X4'">4x4</span>
-      <span class="chip vbr-snow-chip list-inline-item" *ngIf="gameSummary.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
-      <span class="chip vbr-mixed-chip list-inline-item" *ngIf="gameSummary.gender === 'MIXED'"><i class="fa fa-intersex"></i></span>
-      <span class="chip vbr-ladies-chip list-inline-item" *ngIf="gameSummary.gender === 'LADIES'"><i class="fa fa-venus"></i></span>
-      <span class="chip vbr-gents-chip list-inline-item" *ngIf="gameSummary.gender === 'GENTS'"><i class="fa fa-mars"></i></span>
+<mat-card *ngIf="gameSummary">
+  <mat-card-content>
+
+    <div fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="8px">
+      <div fxFlex class="chip vbr-live-chip" *ngIf="gameSummary.status === 'LIVE'"><i class="fa fa-mixcloud"></i></div>
+      <div fxFlex class="chip vbr-beach-chip" *ngIf="gameSummary.kind === 'BEACH'"><i class="fa fa-sun-o"></i></div>
+      <div fxFlex class="chip vbr-indoor-chip" *ngIf="gameSummary.kind === 'INDOOR'">6x6</div>
+      <div fxFlex class="chip vbr-indoor-4x4-chip" *ngIf="gameSummary.kind === 'INDOOR_4X4'">4x4</div>
+      <div fxFlex class="chip vbr-snow-chip" *ngIf="gameSummary.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></div>
+      <div fxFlex class="chip vbr-mixed-chip" *ngIf="gameSummary.gender === 'MIXED'"><i class="fa fa-intersex"></i></div>
+      <div fxFlex class="chip vbr-ladies-chip" *ngIf="gameSummary.gender === 'LADIES'"><i class="fa fa-venus"></i></div>
+      <div fxFlex class="chip vbr-gents-chip" *ngIf="gameSummary.gender === 'GENTS'"><i class="fa fa-mars"></i></div>
+      <div fxFlex="100" class="text-right vbr-text text-muted secondary-text">{{gameSummary.scheduledAt | date : 'dd MMM yyyy, HH:mm'}}</div>
     </div>
-    <span class="game-item-schedule vbr-text text-muted secondary-text">{{gameSummary.scheduledAt | date : 'dd MMM yyyy, HH:mm'}}</span>
-  </div>
-  <hr/>
-  <a *ngIf="gameSummary.status !== 'SCHEDULED'" class="desktop game-item-line p-2" [routerLink]="getMatchUrl()">
-    <div class="row align-items-center">
-      <span class="col-6 col-sm-6 text-left game-item-title">{{gameSummary.homeTeamName}}</span>
-      <div class="col-6 col-sm-6 text-left">
-        <span class="game-item-sets mx-2">{{gameSummary.homeSets}}</span>
-        <span *ngFor="let homeScore of homeScores" class="ml-2 game-item-set">{{homeScore}}</span>
+
+    <hr/>
+
+    <div class="game-item-line py-1">
+      <a [routerLink]="getMatchUrl()">
+
+        <div *ngIf="gameSummary.status !== 'SCHEDULED'" class="desktop">
+
+          <div fxLayout="row" fxLayoutAlign="flex-start center">
+            <div fxFlex="50" class="game-item-title">{{gameSummary.homeTeamName}}</div>
+            <div fxFlex="50">
+              <span class="game-item-sets mx-2">{{gameSummary.homeSets}}</span>
+              <span *ngFor="let homeScore of homeScores" class="ml-2 game-item-set">{{homeScore}}</span>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="flex-start center">
+            <div fxFlex="50" class="game-item-title">{{gameSummary.guestTeamName}}</div>
+            <div fxFlex="50">
+              <span class="game-item-sets mx-2">{{gameSummary.guestSets}}</span>
+              <span *ngFor="let guestScore of guestScores" class="ml-2 game-item-set">{{guestScore}}</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div *ngIf="gameSummary.status === 'SCHEDULED'" class="desktop">
+          <span class="game-item-title">{{gameSummary.homeTeamName}} - {{gameSummary.guestTeamName}}</span>
+        </div>
+
+        <div class="mobile">
+          <div>
+            <span class="game-item-title">{{gameSummary.homeTeamName}}</span>
+            <span class="game-item-title mx-2">-</span>
+            <span class="game-item-title">{{gameSummary.guestTeamName}}</span>
+          </div>
+
+          <div *ngIf="gameSummary.status !== 'SCHEDULED'" class="my-1">
+            <div>
+              <span class="game-item-sets mr-2">{{gameSummary.homeSets}}</span>
+              <span *ngFor="let homeScore of homeScores" class="ml-2 game-item-set">{{homeScore}}</span>
+            </div>
+            <div>
+              <span class="game-item-sets mr-2">{{gameSummary.guestSets}}</span>
+              <span *ngFor="let guestScore of guestScores" class="ml-2 game-item-set">{{guestScore}}</span>
+            </div>
+          </div>
+
+        </div>
+
+      </a>
+    </div>
+
+    <div class="vbr-text mt-3" *ngIf="showLeague() || showDivision() || showReferee()">
+      <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="item-link">{{gameSummary.leagueName}}</a>
+      <span *ngIf="showLeague() && showDivision()" class="mx-1">/</span>
+      <span *ngIf="showDivision()">{{gameSummary.divisionName}}</span>
+      <div *ngIf="showReferee()">
+        <a [routerLink]="getTokenUrl()" class="item-link"><i class="fa fa-user mr-1"></i>by {{gameSummary.refereeName}}</a>
       </div>
     </div>
-    <div class="row align-items-center">
-      <span class="col-6 col-sm-6 text-left game-item-title">{{gameSummary.guestTeamName}}</span>
-      <div class="col-6 col-sm-6 text-left">
-        <span class="game-item-sets mx-2">{{gameSummary.guestSets}}</span>
-        <span *ngFor="let guestScore of guestScores" class="ml-2 game-item-set">{{guestScore}}</span>
-      </div>
-    </div>
-  </a>
-  <a *ngIf="gameSummary.status === 'SCHEDULED'" class="desktop game-item-line p-2" [routerLink]="getMatchUrl()">
-    <span class="game-item-title">{{gameSummary.homeTeamName}} - {{gameSummary.guestTeamName}}</span>
-  </a>
-  <a class="mobile game-item-line p-2" [routerLink]="getMatchUrl()">
-    <div class="game-item-title">
-      <span>
-        {{gameSummary.homeTeamName}}
-        <span *ngIf="gameSummary.status !== 'SCHEDULED'" class="game-item-sets">{{gameSummary.homeSets}}</span>
-        -
-        <span *ngIf="gameSummary.status !== 'SCHEDULED'" class="game-item-sets">{{gameSummary.guestSets}}</span>
-        {{gameSummary.guestTeamName}}
-      </span>
-    </div>
-    <div class="vbr-text" *ngIf="gameSummary.score?.length > 0">
-      <span>{{gameSummary.score}}</span>
-    </div>
-  </a>
-  <div class="vbr-text mt-3 pl-2" *ngIf="showLeague() || showDivision() || showReferee()">
-    <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="item-link">{{gameSummary.leagueName}}</a>
-    <span *ngIf="showLeague() && showDivision()" class="mx-1">/</span>
-    <span *ngIf="showDivision()">{{gameSummary.divisionName}}</span>
-    <br *ngIf="(showLeague() || showDivision()) && showReferee()" />
-    <a [routerLink]="getTokenUrl()" *ngIf="showReferee()" class="item-link"><i class="fa fa-user mr-1"></i>by {{gameSummary.refereeName}}</a>
-  </div>
-</div>
+  
+  </mat-card-content>
+</mat-card>

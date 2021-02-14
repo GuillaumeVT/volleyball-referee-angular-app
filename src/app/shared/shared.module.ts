@@ -1,6 +1,7 @@
 import { FileSaverModule } from 'ngx-filesaver';
 import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from 'src/app/core/interceptors/token.interceptor';
+import { MaterialModule } from 'src/app/material/material.module';
 import { GameListItemComponent } from 'src/app/shared/components/game-list-item/game-list-item.component';
 import { GameListComponent } from 'src/app/shared/components/game-list/game-list.component';
 import { LinksBarComponent } from 'src/app/shared/components/links-bar/links-bar.component';
@@ -18,7 +19,6 @@ import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { MaterialModule } from 'src/app/material/material.module';
 
 @NgModule({
   declarations: [

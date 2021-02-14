@@ -13,7 +13,9 @@
       <mat-card-title>My upcoming & live games</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <app-game-list-item *ngFor="let game of availableGames" [gameSummary]="game" [inLeague]="false"></app-game-list-item>
+      <div *ngFor="let game of availableGames" class="my-3">
+        <app-game-list-item [gameSummary]="game" [inLeague]="false"></app-game-list-item>
+      </div>
     </mat-card-content>
   </mat-card>
   <mat-card fxFlex class="div-small-form mt-4">
