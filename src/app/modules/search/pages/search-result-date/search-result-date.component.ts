@@ -21,9 +21,4 @@ export class SearchResultDateComponent implements OnInit {
        this.date = params['date'];
      })
   }
-
-  getPageNumber(): number {
-    return 6;
-  }
-
 }

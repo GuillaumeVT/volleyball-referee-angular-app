@@ -11,9 +11,4 @@ export class SearchResultLiveComponent {
   constructor(private titleService: Title) {
     this.titleService.setTitle('VBR - Search Results');
   }
-
-  getPageNumber(): number {
-    return 6;
-  }
-
 }

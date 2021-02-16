@@ -1,36 +1,25 @@
-<div class="div-drawer-side" id="drawer">
-  <div class="div-drawer-logo">
-    <a class="navbar-brand logo-link m-1 p-2" [routerLink]="getHomeUrl()"><img class="brand-img-size mr-3" src="favicon.ico" alt="VBR">Volleyball Referee</a>
-    <a href="javascript:void(0)" class="drawer-close-button logo-link" (click)="closeDrawer()">&times;</a>
-  </div>
-  <div *ngIf="user" class="div-drawer p-3 mr-5">
-    <a class="p-2" [ngClass]="currentPage === 0 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getHomeUrl()">Home</a>
-    <a class="p-2" [ngClass]="currentPage === 6 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getSearchUrl()">Search games</a>
-    <hr/>
-    <div class="p-2 c3ac-text text-muted">My data</div>
-    <a class="p-2 ml-2" [ngClass]="currentPage === 1 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserLeaguesUrl()">Tournaments & Leagues</a>
-    <a class="p-2 ml-2" [ngClass]="currentPage === 2 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserGamesUrl()">Games</a>
-    <a class="p-2 ml-2" [ngClass]="currentPage === 3 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserTeamsUrl()">Teams</a>
-    <a class="p-2 ml-2" [ngClass]="currentPage === 4 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserRulesUrl()">Rules</a>
-    <a class="p-2 ml-2" [ngClass]="currentPage === 5 ? 'selected-drawer-link' : 'drawer-link'" (click)="closeDrawer()" [routerLink]="getUserColleaguesUrl()">Colleagues</a>
-  </div>
-</div>
-<div class="div-component-side-overlay" id="overlay" (click)="closeDrawer()"></div>
-<div class="div-component-side">
-  <div class="div-top-bar justify-content-between p-2">
-    <div class="row align-items-center ml-1">
-      <button type="button" class="btn vbr-button when-drawer-trigger" (click)="openDrawer()">&#9776;</button>
-      <button type="button" class="btn vbr-button when-drawer-trigger" [routerLink]="getSearchUrl()"><i class="fa fa-search mr-2"></i>Search games</button>
+
+
+<mat-sidenav-container [hasBackdrop]="!desktopNav" fullscreen>
+  <mat-sidenav #sideNav [mode]="desktopNav ? 'side' : 'over'" [opened]="desktopNav" class="drawer-container">
+
+    <mat-nav-list class="px-3">
+      <a *ngFor="let commonNavItem of commonNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="commonNavItem.url">{{commonNavItem.label}}</a>
+      <mat-divider *ngIf="dataNavItems.length > 0" class="my-2"></mat-divider>
+      <div *ngIf="dataNavItems.length > 0" mat-subheader>My data</div>
+      <a *ngFor="let dataNavItem of dataNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="dataNavItem.url">{{dataNavItem.label}}</a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <div fxLayout="column" fxFlexFill>
+      <app-toolbar [user]="user" [sideNav]="sideNav"></app-toolbar>
+      <div fxFlex>
+        <router-outlet></router-outlet>
+      </div>
+      <app-links-bar></app-links-bar>
     </div>
-    <div class="row align-items-center mr-1">
-      <a *ngIf="numberOfFriendRequests > 0" class="badge notification" [routerLink]="getUserColleaguesUrl()"><i class="fa fa-user-plus mr-1"></i>{{numberOfFriendRequests}}</a>
-      <button *ngIf="user" class="mx-3 btn vbr-button" [routerLink]="getUserAccountUrl()"><i class="fa fa-user"></i><span class="ml-2 icon-text">{{user.pseudo}}</span></button>
-    </div>
-  </div>
-  <div class="div-component m-1">
-    <div *ngIf="showScrollToTop" class="scroll-to-top">
-      <button type="button" class="btn vbr-button rounded-circle" (click)="scrollToTop()"><i class='fa fa-arrow-up'></i></button>
-    </div>
-    <router-outlet (activate)="setCurrentPage($event)"></router-outlet>
-  </div>
-</div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

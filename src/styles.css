@@ -1,5 +1,4 @@
 @import "~@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
-@import '~ngx-toastr/toastr';
 
 :root {
   --vbr-body-color: #f1f1f1;
@@ -377,18 +376,6 @@ input:checked + .slider:before {
 
 .fill-grid-cell {
   justify-self: stretch;
-}
-
-.div-header {
-  width: 100%;
-  max-width: 1500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.div-footer {
-  margin-top: 150px;
-  bottom: 0;
 }
 
 .player-badge {

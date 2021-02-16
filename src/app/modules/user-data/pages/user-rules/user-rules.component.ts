@@ -1,4 +1,3 @@
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
@@ -12,6 +11,7 @@ import { Rules, RulesSummary } from 'src/app/shared/models/rules.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-user-rules',
@@ -24,7 +24,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
 
   private subscription : Subscription = new Subscription();
 
-  constructor(private titleService: Title, private userService: UserService, private rulesService: RulesService, private modalService: NgbModal, private toastr: ToastrService) {
+  constructor(private titleService: Title, private userService: UserService, private rulesService: RulesService, private modalService: NgbModal, private snackBarService: SnackBarService) {
     super();
     this.titleService.setTitle('VBR - My Rules');
   }
@@ -61,7 +61,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
         modalRef.componentInstance.rules = rules;
         modalRef.componentInstance.crudType = CrudType.View;
       },
-      _error => this.toastr.error('Rules could not be found.', '', { timeOut: 5000, positionClass: 'toast-top-left' })
+      _error => this.snackBarService.showError('Rules could not be found.', 5000)
     );
   }
 
@@ -73,7 +73,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
         modalRef.componentInstance.crudType = CrudType.Update;
         modalRef.componentInstance.rulesUpdated.subscribe((_updated: any) => this.onRulesUpdated());
       },
-      _error => this.toastr.error('Rules could not be found.', '', { timeOut: 5000, positionClass: 'toast-top-left' })
+      _error => this.snackBarService.showError('Rules could not be found.', 5000)
     );
   }
 
@@ -95,30 +95,25 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
 
   onRulesCreated(): void {
     this.refreshRules();
-    this.toastr.success('Rules were successfully created', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Rules were successfully created.', 5000);
   }
 
   onRulesUpdated(): void {
     this.refreshRules();
-    this.toastr.success('Rules were successfully updated', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Rules were successfully updated.', 5000);
   }
 
   onRulesDeleted(): void {
     this.refreshRules();
-    this.toastr.success('Rules were successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Rules were successfully deleted.', 5000);
   }
 
   onRulesDeletionError(): void {
-    this.toastr.error('Rules could not be deleted. Are they used in a scheduled game?', '', { timeOut: 5000, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Rules could not be deleted. Are they used in a scheduled game?.', 5000);
   }
 
   onAllRulesDeleted(): void {
     this.refreshRules();
-    this.toastr.success('All rules were successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('All rules were successfully deleted.', 5000);
   }
-
-  getPageNumber(): number {
-    return 4;
-  }
-
 }

@@ -1,5 +1,7 @@
 import { LoginGuard } from 'src/app/core/guards/login.guard';
 import { PublicGuard } from 'src/app/core/guards/public.guard';
+import { PageNotFoundComponent } from 'src/app/core/pages/page-not-found/page-not-found.component';
+import { PrivacyPolicyComponent } from 'src/app/core/pages/privacy-policy/privacy-policy.component';
 import { GameComponent } from 'src/app/modules/game/pages/game/game.component';
 import { LeagueComponent } from 'src/app/modules/league/pages/league/league.component';
 import { SearchResultDateComponent } from 'src/app/modules/search/pages/search-result-date/search-result-date.component';
@@ -16,8 +18,6 @@ import { HomeComponent } from 'src/app/modules/user-management/pages/home/home.c
 import { PasswordLostComponent } from 'src/app/modules/user-management/pages/password-lost/password-lost.component';
 import { PasswordResetComponent } from 'src/app/modules/user-management/pages/password-reset/password-reset.component';
 import { SignInComponent } from 'src/app/modules/user-management/pages/sign-in/sign-in.component';
-import { PageNotFoundComponent } from 'src/app/shared/pages/page-not-found/page-not-found.component';
-import { PrivacyPolicyComponent } from 'src/app/shared/pages/privacy-policy/privacy-policy.component';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';

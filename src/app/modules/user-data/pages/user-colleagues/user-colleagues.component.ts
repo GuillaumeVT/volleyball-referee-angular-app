@@ -1,4 +1,3 @@
-import { ToastrService } from 'ngx-toastr';
 import { Friend, FriendsAndRequests } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
 import { UserColleagueModalComponent } from 'src/app/modules/user-data/components/user-colleague-modal/user-colleague-modal.component';
@@ -7,6 +6,7 @@ import { OkCancelModalComponent } from 'src/app/shared/components/ok-cancel-moda
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-user-colleagues',
@@ -17,7 +17,7 @@ export class UserColleaguesComponent implements OnInit {
 
   friendsAndRequests: FriendsAndRequests;
 
-  constructor(private titleService: Title, private userService: UserService, private modalService: NgbModal, private toastr: ToastrService) {
+  constructor(private titleService: Title, private userService: UserService, private modalService: NgbModal, private snackBarService: SnackBarService) {
     this.titleService.setTitle('VBR - My Colleagues');
   }
 
@@ -26,7 +26,7 @@ export class UserColleaguesComponent implements OnInit {
   }
 
   refreshFriendsAndRequests(): void {
-    this.userService.listFriendsAndRequests().subscribe(friendsAndRequests => this.friendsAndRequests = friendsAndRequests, error => this.friendsAndRequests = null);
+    this.userService.listFriendsAndRequests().subscribe(friendsAndRequests => this.friendsAndRequests = friendsAndRequests, _error => this.friendsAndRequests = null);
   }
 
   addColleague(): void {
@@ -39,24 +39,19 @@ export class UserColleaguesComponent implements OnInit {
     modalRef.componentInstance.title = 'Remove colleague';
     modalRef.componentInstance.message = `Do you want to remove ${friend.pseudo}?`;
     modalRef.componentInstance.okClicked.subscribe((_ok: any) =>
-      this.userService.removeFriend(friend.id).subscribe(deleted => this.onColleagueRemoved(friend.pseudo), error => this.onColleagueRemovalError(friend.pseudo)));
+      this.userService.removeFriend(friend.id).subscribe(_deleted => this.onColleagueRemoved(friend.pseudo), _error => this.onColleagueRemovalError(friend.pseudo)));
   }
 
   onAddColleagueRequested(receiverPseudo: string): void {
-    this.toastr.success(`A request was successfully sent to ${receiverPseudo}`, '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo(`A request was successfully sent to ${receiverPseudo}.`, 5000);
   }
 
   onColleagueRemoved(pseudo: string): void {
     this.refreshFriendsAndRequests();
-    this.toastr.success(`${pseudo} was successfully removed from your colleagues`, '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo(`${pseudo} was successfully removed from your colleagues.`, 5000);
   }
 
   onColleagueRemovalError(pseudo: string): void {
-    this.toastr.error(`${pseudo} could not be removed from your colleagues`, '', { timeOut: 5000, positionClass: 'toast-top-left' });
+    this.snackBarService.showError(`${pseudo} could not be removed from your colleagues.`, 5000);
   }
-
-  getPageNumber(): number {
-    return 5;
-  }
-
 }

@@ -1,4 +1,3 @@
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
@@ -12,6 +11,7 @@ import { Team, TeamSummary } from 'src/app/shared/models/team.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-user-teams',
@@ -24,7 +24,7 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
 
   private subscription : Subscription = new Subscription();
 
-  constructor(private titleService: Title, private userService: UserService, private teamService: TeamService, private modalService: NgbModal, private toastr: ToastrService) {
+  constructor(private titleService: Title, private userService: UserService, private teamService: TeamService, private modalService: NgbModal, private snackBarService: SnackBarService) {
     super(50);
     this.titleService.setTitle('VBR - My Teams');
   }
@@ -63,7 +63,7 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
         modalRef.componentInstance.team = team;
         modalRef.componentInstance.crudType = CrudType.View;
       },
-      _error => this.toastr.error('Team could not be found.', '', { timeOut: 5000, positionClass: 'toast-top-left' })
+      _error => this.snackBarService.showError('Team could not be found.', 5000)
     );
   }
 
@@ -75,7 +75,7 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
         modalRef.componentInstance.crudType = CrudType.Update;
         modalRef.componentInstance.teamUpdated.subscribe((_updated: any) => this.onTeamUpdated());
       },
-      _error => this.toastr.error('Team could not be found.', '', { timeOut: 5000, positionClass: 'toast-top-left' })
+      _error => this.snackBarService.showError('Team could not be found.', 5000)
     );
   }
 
@@ -97,29 +97,25 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
 
   onTeamCreated(): void {
     this.refreshTeams(false);
-    this.toastr.success('Team was successfully created', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Team was successfully created.', 5000);
   }
 
   onTeamUpdated(): void {
     this.refreshTeams(false);
-    this.toastr.success('Team was successfully updated', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Team was successfully updated.', 5000);
   }
 
   onTeamDeleted(): void {
     this.refreshTeams(false);
-    this.toastr.success('Team was successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Team was successfully deleted.', 5000);
   }
 
   onAllTeamsDeleted(): void {
     this.refreshTeams(false);
-    this.toastr.success('All teams were successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('All teams were successfully deleted.', 5000);
   }
 
   onTeamDeletionError(): void {
-    this.toastr.error('Team could not be deleted. Is it used in a scheduled game?', '', { timeOut: 5000, positionClass: 'toast-top-left' });
-  }
-
-  getPageNumber(): number {
-    return 3;
+    this.snackBarService.showError('Team could not be deleted. Is it used in a scheduled game?', 5000);
   }
 }

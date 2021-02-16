@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sideNav.toggle()">menu</mat-icon>
+    </button>
+    <img class="toolbar-logo mx-2" src="favicon.ico" alt="VBR">
+    <span>Volleyball Referee</span>
+    <span *ngIf="user" class="toolbar-spacer"></span>
+    <button *ngIf="user" mat-button [matMenuTriggerFor]="auth">
+      <mat-icon matBadge="{{numberOfFriendRequests}}" matBadgeColor="accent" [matBadgeHidden]="numberOfFriendRequests === 0">person</mat-icon>
+      <span class="ml-2 icon-text">{{user.pseudo}}</span>
+    </button>
+    <mat-menu #auth="matMenu">
+      <button mat-menu-item [routerLink]="getUserAccountUrl()">
+        <mat-icon>contact_mail</mat-icon>
+        <span>My account</span>
+      </button>
+      <button *ngIf="numberOfFriendRequests > 0" mat-menu-item [routerLink]="getUserColleaguesUrl()">
+        <mat-icon>person_add</mat-icon>
+        <span>{{numberOfFriendRequests}} requests received</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="signOut()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sign out</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

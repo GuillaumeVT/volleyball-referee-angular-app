@@ -30,16 +30,12 @@ export class SearchComponent {
     this.searchDate = new Date();
     this.searchDateStr = this.datePipe.transform(this.searchDate, 'yyyy-MM-dd');
     this.searchCriteria = [
-      { type: SearchType.Live, display: 'Live games' },
-      { type: SearchType.Today, display: 'Today\'s games' },
       { type: SearchType.Date, display: 'By date' },
-      { type: SearchType.Token, display: 'By team, league or referee' }
+      { type: SearchType.Token, display: 'By team, league or referee' },
+      { type: SearchType.Live, display: 'Live games' },
+      { type: SearchType.Today, display: 'Today\'s games' }
     ];
-    this.searchType = SearchType.Live;
-  }
-
-  getPageNumber(): number {
-    return 6;
+    this.searchType = SearchType.Date;
   }
 
   canSearch(): boolean {

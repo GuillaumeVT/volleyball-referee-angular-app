@@ -1,5 +1,4 @@
 import { FileSaverService } from 'ngx-filesaver';
-import { ToastrService } from 'ngx-toastr';
 import { forkJoin, Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
@@ -15,11 +14,11 @@ import { LeagueSummary } from 'src/app/shared/models/league.model';
 import { PublicService } from 'src/app/shared/services/public.service';
 
 import { DatePipe } from '@angular/common';
-import { HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-user-games',
@@ -36,7 +35,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   constructor(private titleService: Title, private route: ActivatedRoute, private datePipe: DatePipe, private userService: UserService,
     private gameService: GameService, private leagueService: LeagueService, private publicService: PublicService,
-    private modalService: NgbModal, private toastr: ToastrService, private fileSaverService: FileSaverService) {
+    private modalService: NgbModal, private snackBarService: SnackBarService, private fileSaverService: FileSaverService) {
     super(50);
     this.titleService.setTitle('VBR - My Games');
   }
@@ -145,31 +144,31 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   onGameCreated(): void {
     this.refreshGames(false);
-    this.toastr.success('Game was successfully created', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Game was successfully created.', 5000);
   }
 
   onGameUpdated(): void {
     this.refreshGames(false);
-    this.toastr.success('Game was successfully updated', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Game was successfully updated.', 5000);
   }
 
   onRefereeUpdated(): void {
     this.refreshGames(false);
-    this.toastr.success('Referee was successfully updated', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Referee was successfully updated.', 5000);
   }
 
   onGameDeleted(): void {
     this.refreshGames(false);
-    this.toastr.success('Game was successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('Game was successfully deleted.', 5000);
   }
 
   onAllGamesDeleted(): void {
     this.refreshGames(false);
-    this.toastr.success('All games was successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('All games was successfully deleted.', 5000);
   }
 
   onGameDeletionError(): void {
-    this.toastr.error('Game could not be deleted', '', { timeOut: 5000, positionClass: 'toast-top-left' });
+    this.snackBarService.showError('Game could not be deleted.', 5000);
   }
 
   getGamePublicUrl(game: GameSummary): string {
@@ -184,9 +183,5 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
     const dateStr = this.datePipe.transform(game.scheduledAt, 'dd_MM_yyyy');
     const filename = game.homeTeamName + '_' + game.guestTeamName + '_' + dateStr + '.html';
     this.fileSaverService.save(blob, filename);
-  }
-
-  getPageNumber(): number {
-    return 2;
   }
 }

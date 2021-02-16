@@ -1,131 +1,21 @@
-.div-drawer-side {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: var(--drawer-width);
-  }
-  
-  .div-drawer-logo {
-    height: var(--toolbar-height);
-    background-color: var(--vbr-background-color);
-    border-right: 1px solid var(--vbr-card-border-color);
-  }
-  
-  .logo-link {
-    color: var(--vbr-text-color);
-    text-decoration: none;
-  }
-  
-  .logo-link:hover {
-    background-color: var(--vbr-light-unselected-color);
-    border-radius: 10px;
-  }
-  
-  .div-drawer {
-    width: inherit;
-    background-color: var(--vbr-background-color);
-    height: 100vh;
-    border-right: 1px solid var(--vbr-card-border-color);
-    border-top: 1px solid var(--vbr-card-border-color);
-  }
-  
-  .div-component-side {
-    margin-left: var(--drawer-width);
-  }
-  
-  .div-top-bar {
-    position: sticky;
-    top: 0;
-    z-index: 3;
-    background-color: var(--vbr-primary-color);
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    height: var(--toolbar-height);
-  }
-  
-  .notification {
-    font-size: 1rem;
-    color: var(--vbr-primary-color);
-    background-color: var(--vbr-secondary-color);
-    border-color: var(--vbr-secondary-color);
-  }
-  
-  .drawer-trigger-button {
-    font-size: 1.3rem;
-  }
-  
-  .drawer-close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.5rem;
-    color: var(--vbr-text-color);
-  }
-  
-  .drawer-link {
-    text-decoration: none;
-    color: var(--vbr-text-color);
-    display: block;
-  }
-  
-  .drawer-link:hover {
-    color: var(--vbr-primary-color);
-  }
-  
-  .selected-drawer-link {
-    text-decoration: none;
-    color: var(--vbr-primary-color);
-    background-color: var(--vbr-light-primary-color);
-    border-radius: 5px 20px 20px 5px;
-    display: block;
-  }
-  
-  .brand-img-size {
-    width: auto;
-    height: 30px;
-  }
-  
-  .div-component-side-overlay {
-    display: none;
-    z-index: 10;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-  }
-  
-  .placeholder-color::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: var(--vbr-inverted-text-color);
-    opacity: 1; /* Firefox */
-  }
-  
-  @media screen and (max-width: 992px) {
-    .div-drawer-side {
-      width: 0px;
-      overflow: hidden;
-      z-index: 15;
-    }
-  
-    .div-component-side {
-      margin-left: 0;
-    }
-  
-    .bar-search {
-      display: none;
-    }
-  }
-  
-  @media screen and (min-width: 992px) {
-    .drawer-close-button {
-      display: none;
-    }
-  
-    .when-drawer-trigger {
-      display: none;
-    }
-  }
-  
+.drawer-container {
+  min-width: 300px;
+}
+
+.drawer-link {
+  text-decoration: none;
+  color: var(--vbr-text-color);
+  display: block;
+}
+
+.drawer-link:hover {
+  color: var(--vbr-primary-color);
+}
+
+.selected-drawer-link {
+  text-decoration: none;
+  color: var(--vbr-primary-color);
+  background-color: var(--vbr-light-primary-color);
+  border-radius: 5px 20px 20px 5px;
+  display: block;
+}

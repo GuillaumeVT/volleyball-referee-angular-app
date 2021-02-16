@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutAlign="center start">
-  <form class="div-small-form mt-4" fxFlex [formGroup]="signInForm" autocomplete="off" novalidate (ngSubmit)="signIn()">
+  <form class="div-small-form mt-4" [formGroup]="signInForm" autocomplete="off" novalidate (ngSubmit)="signIn()">
     <mat-card>
       <mat-card-header>
         <img mat-card-avatar src="favicon.ico"/>
@@ -42,8 +42,4 @@
       <app-statistics [showUserStatistics]="false"></app-statistics>
     </mat-card-content>
   </mat-card>
-</div>
-
-<div class="div-footer">
-  <app-links-bar></app-links-bar>
 </div>

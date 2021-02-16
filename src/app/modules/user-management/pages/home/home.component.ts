@@ -1,5 +1,4 @@
-import { forkJoin, Subscription } from 'rxjs';
-import { FriendRequest } from 'src/app/core/models/user.model';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
 import { GameService } from 'src/app/modules/user-data/services/game.service';
 import { GameSummary } from 'src/app/shared/models/game.model';
@@ -14,41 +13,24 @@ import { Title } from '@angular/platform-browser';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  friendRequestsReceivedBy: FriendRequest[];
-  availableGames:           GameSummary[];
+  availableGames: GameSummary[];
 
   private subscription : Subscription = new Subscription();
 
   constructor(private titleService: Title, private userService: UserService, private gameService: GameService) {
     this.titleService.setTitle('Volleyball Referee');
-    this.friendRequestsReceivedBy = [];
     this.availableGames = [];
   }
 
   ngOnInit() {
     this.subscription.add(this.userService.authState.subscribe(userToken => {
       if (userToken) {
-        forkJoin([
-          this.userService.listFriendRequestsReceivedBy(),
-          this.gameService.listAvailableGames()
-        ])
-        .subscribe(([friendRequests, games]) => {
-          this.friendRequestsReceivedBy = friendRequests;
-          this.availableGames = games;
-        });
+        this.gameService.listAvailableGames().subscribe(games => this.availableGames = games, _error => this.availableGames = []);
       }
     }));
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
-
-  refreshFriendRequestsReceivedBy(): void {
-    this.userService.listFriendRequestsReceivedBy().subscribe(friendRequests => this.friendRequestsReceivedBy = friendRequests, error => this.friendRequestsReceivedBy = []);
-  }
-
-  getPageNumber(): number {
-    return 0;
   }
 }

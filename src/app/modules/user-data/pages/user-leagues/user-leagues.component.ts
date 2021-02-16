@@ -1,5 +1,4 @@
 import { FileSaverService } from 'ngx-filesaver';
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
@@ -12,11 +11,11 @@ import { League, LeagueSummary } from 'src/app/shared/models/league.model';
 import { PublicService } from 'src/app/shared/services/public.service';
 
 import { DatePipe } from '@angular/common';
-import { HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-user-leagues',
@@ -32,7 +31,7 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   private subscription : Subscription = new Subscription();
 
   constructor(private titleService: Title, private userService: UserService, private leagueService: LeagueService, private gameService: GameService, private publicService: PublicService,
-    private modalService: NgbModal, private toastr: ToastrService, private datePipe: DatePipe, private router: Router, private fileSaverService: FileSaverService) {
+    private modalService: NgbModal, private snackBarService: SnackBarService, private datePipe: DatePipe, private router: Router, private fileSaverService: FileSaverService) {
     super();
     this.titleService.setTitle('VBR - My Leagues');
     this.countsMap = new Map();
@@ -97,21 +96,21 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
 
   onLeagueCreated(): void {
     this.refreshLeagues();
-    this.toastr.success('League was successfully created', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('League was successfully created.', 5000);
   }
 
   onLeagueDeleted(): void {
     this.refreshLeagues();
-    this.toastr.success('League was successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('League was successfully deleted.', 5000);
   }
 
   onAllLeaguesDeleted(): void {
     this.refreshLeagues();
-    this.toastr.success('All leagues were successfully deleted', '', { timeOut: 2500, positionClass: 'toast-top-left' });
+    this.snackBarService.showInfo('All leagues were successfully deleted.', 5000);
   }
 
   onLeagueDeletionError(): void {
-    this.toastr.error('League could not be deleted', '', { timeOut: 5000, positionClass: 'toast-top-left' });
+    this.snackBarService.showError('League could not be deleted.', 5000);
   }
 
   getLeaguePublicUrl(league: LeagueSummary): string {
@@ -126,9 +125,5 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
     const dateStr = this.datePipe.transform(new Date().getTime(), 'dd_MM_yyyy__HH_mm');
     const filename = league.name + '_' + divisionName + '_' + dateStr + '.xlsx';
     this.fileSaverService.save(blob, filename);
-  }
-
-  getPageNumber(): number {
-    return 1;
   }
 }

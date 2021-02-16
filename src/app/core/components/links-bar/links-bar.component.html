@@ -1,0 +1,11 @@
+<div class="my-3" fxLayout="row wrap" fxLayoutAlign="center center">
+  <a href="{{playUrl}}" target="_blank" class="text-center m-1">
+    <button class="btn-android" mat-raised-button type="button"><mat-icon class="mr-1">android</mat-icon><span>Download our Android app</span></button>
+  </a>
+  <a href="{{facebookUrl}}" target="_blank" class="text-center m-1">
+    <button class="btn-facebook" mat-raised-button type="button"><mat-icon class="mr-1">facebook</mat-icon><span>Join us on Facebook</span></button>
+  </a>
+  <a [routerLink]="getPrivacyPolicyUrl()" target="_blank" class="text-center m-1">
+    <button mat-button color="primary" type="button">Privacy Policy</button>
+  </a>
+</div>
