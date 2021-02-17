@@ -1,6 +1,7 @@
 
 
 <mat-sidenav-container [hasBackdrop]="!desktopNav" fullscreen>
+
   <mat-sidenav #sideNav [mode]="desktopNav ? 'side' : 'over'" [opened]="desktopNav" class="drawer-container">
 
     <mat-nav-list class="px-3">
@@ -11,7 +12,8 @@
     </mat-nav-list>
 
   </mat-sidenav>
-  <mat-sidenav-content>
+
+  <mat-sidenav-content #sideNavContent>
 
     <div fxLayout="column" fxFlexFill>
       <app-toolbar [user]="user" [sideNav]="sideNav"></app-toolbar>
@@ -21,5 +23,8 @@
       <app-links-bar></app-links-bar>
     </div>
 
+    <button #scrollToTopButton class="scroll-to-top" mat-mini-fab type="button" color="accent" aria-label="Scroll to top" (click)="scrollToTop()"><mat-icon>arrow_upward</mat-icon></button>
+
   </mat-sidenav-content>
+
 </mat-sidenav-container>

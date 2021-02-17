@@ -1,18 +1,26 @@
+import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
 
 import { MediaMatcher } from '@angular/cdk/layout';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatSidenavContent } from '@angular/material/sidenav';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  user:                   UserSummary;
-  showScrollToTop:        boolean;
+  user: UserSummary;
+  
+  @ViewChild('sideNavContent') sideNavContent: MatSidenavContent;
+  scrollSubscription: Subscription;  
+  showScrollToTop: boolean;
+
+  @ViewChild('scrollToTopButton') scrollToTopButton: MatButton;
 
   desktopNav: boolean;
 
@@ -27,8 +35,8 @@ export class AppComponent implements OnInit {
       { label: 'Search games', url: '/search' }
     ];
   }
-
-  ngOnInit() {
+ 
+  ngOnInit(): void {
     this.userService.authState.subscribe(userToken => {
       if (userToken) {
         this.user = userToken.user;
@@ -46,16 +54,28 @@ export class AppComponent implements OnInit {
     });
   }
 
-  @HostListener('window:scroll')
+  ngAfterViewInit(): void {
+    this.computeScrollToTop();
+    
+    if (this.scrollSubscription) {
+      this.scrollSubscription.unsubscribe();
+    }
+    this.scrollSubscription = this.sideNavContent.elementScrolled().subscribe(event => this.computeScrollToTop());
+  }
+
+  ngOnDestroy(): void {
+    if (this.scrollSubscription) {
+      this.scrollSubscription.unsubscribe();
+    }
+  }
+
   computeScrollToTop() {
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    this.showScrollToTop = scrollPosition >= 50;
+    this.scrollToTopButton._elementRef.nativeElement.style.visibility = (this.sideNavContent.measureScrollOffset('top') > 100) ? 'visible' : 'hidden';
   }
 
   scrollToTop(): void {
-    window.scroll({ top: 0, left: 0 });
+    this.sideNavContent.scrollTo({ top: 0 });
   }
-
 }
 
 interface NavItem {

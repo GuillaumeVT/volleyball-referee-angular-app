@@ -420,17 +420,6 @@ input:checked + .slider:before {
   width: auto;
 }
 
-.scroll-to-top {
-  position: fixed;
-  top: calc(1.1 * var(--toolbar-height));
-  right: calc(0.5 * var(--toolbar-height));
-  z-index: 5;
-}
-
-.scroll-to-top button {
-  box-shadow: var(--material-shadow-big);
-}
-
 .fab-refresh {
   position: fixed;
   bottom: calc(0.5 * var(--toolbar-height));
