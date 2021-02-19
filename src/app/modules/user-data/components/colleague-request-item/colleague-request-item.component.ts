@@ -1,10 +1,10 @@
 import { FriendRequest } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { OkCancelModalComponent } from 'src/app/shared/components/ok-cancel-modal/ok-cancel-modal.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-colleague-request-item',
@@ -16,48 +16,54 @@ export class ColleagueRequestItemComponent {
   @Input() friendRequest: FriendRequest;
   @Output() mustRefreshFriendRequestsReceivedBy = new EventEmitter();
 
-  constructor(private userService: UserService, private modalService: NgbModal, private snackBarService: SnackBarService) { }
+  constructor(private userService: UserService, private dialog: MatDialog, private snackBarService: SnackBarService) { }
 
   acceptColleague(friendRequest: FriendRequest): void {
-    const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
-    modalRef.componentInstance.title = 'Accept colleague';
-    modalRef.componentInstance.message = `Do you want to add ${friendRequest.senderPseudo} as colleague?`;
-    modalRef.componentInstance.okClicked.subscribe((_ok: any) =>
-      this.userService.acceptFriendRequest(friendRequest.id).subscribe(
-        _success => this.onColleagueAccepted(friendRequest.senderPseudo),
-        _error => this.onColleagueAcceptanceError(friendRequest.senderPseudo)
-      )
-    );
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "500px",
+      data: { title: 'Accept colleague', message: `Do you want to add ${friendRequest.senderPseudo} as colleague?` }
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.userService.acceptFriendRequest(friendRequest.id).subscribe(
+          _success => this.onColleagueAccepted(friendRequest.senderPseudo),
+          _error => this.onColleagueAcceptanceError(friendRequest.senderPseudo)
+        );
+      }
+    });
   }
 
   rejectColleague(friendRequest: FriendRequest): void {
-    const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
-    modalRef.componentInstance.title = 'Reject colleague';
-    modalRef.componentInstance.message = `Do you want to reject ${friendRequest.senderPseudo}'s request?`;
-    modalRef.componentInstance.okClicked.subscribe((_ok: any) =>
-      this.userService.rejectFriendRequest(friendRequest.id).subscribe(
-        _success => this.onColleagueRejected(friendRequest.senderPseudo),
-        _error => this.onColleagueRejectionError(friendRequest.senderPseudo)
-      )
-    );
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "500px",
+      data: { title: 'Reject colleague', message: `Do you want to reject ${friendRequest.senderPseudo}'s request?` }
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.userService.rejectFriendRequest(friendRequest.id).subscribe(
+          _success => this.onColleagueRejected(friendRequest.senderPseudo),
+          _error => this.onColleagueRejectionError(friendRequest.senderPseudo)
+        );
+      }
+    });
   }
 
   onColleagueAccepted(pseudo: string): void {
     this.mustRefreshFriendRequestsReceivedBy.emit(true);
-    this.snackBarService.showInfo(`${pseudo} was successfully added to your colleagues.`, 5000);
+    this.snackBarService.showInfo(`${pseudo} was successfully added to your colleagues.`);
   }
 
   onColleagueAcceptanceError(pseudo: string): void {
-    this.snackBarService.showError(`${pseudo} could not be added to your colleagues.`, 5000);
+    this.snackBarService.showError(`${pseudo} could not be added to your colleagues.`);
   }
 
   onColleagueRejected(pseudo: string): void {
     this.mustRefreshFriendRequestsReceivedBy.emit(true);
-    this.snackBarService.showInfo(`${pseudo}'s request was rejected.`, 5000);
+    this.snackBarService.showInfo(`${pseudo}'s request was rejected.`);
   }
 
   onColleagueRejectionError(pseudo: string): void {
-    this.snackBarService.showError(`${pseudo}'s colleague could not be rejected.`, 5000);
+    this.snackBarService.showError(`${pseudo}'s colleague could not be rejected.`);
   }
 
 }

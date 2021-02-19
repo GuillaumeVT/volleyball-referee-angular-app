@@ -5,17 +5,18 @@ import { UserService } from 'src/app/core/services/user.service';
 import { UserLeagueModalComponent } from 'src/app/modules/user-data/components/user-league-modal/user-league-modal.component';
 import { GameService } from 'src/app/modules/user-data/services/game.service';
 import { LeagueService } from 'src/app/modules/user-data/services/league.service';
-import { OkCancelModalComponent } from 'src/app/shared/components/ok-cancel-modal/ok-cancel-modal.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { AbstractLeagueFilter } from 'src/app/shared/models/abstract-league-filter.model';
 import { League, LeagueSummary } from 'src/app/shared/models/league.model';
 import { PublicService } from 'src/app/shared/services/public.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-user-leagues',
@@ -31,7 +32,7 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   private subscription : Subscription = new Subscription();
 
   constructor(private titleService: Title, private userService: UserService, private leagueService: LeagueService, private gameService: GameService, private publicService: PublicService,
-    private modalService: NgbModal, private snackBarService: SnackBarService, private datePipe: DatePipe, private router: Router, private fileSaverService: FileSaverService) {
+    private dialog: MatDialog, private modalService: NgbModal, private snackBarService: SnackBarService, private datePipe: DatePipe, private router: Router, private fileSaverService: FileSaverService) {
     super();
     this.titleService.setTitle('VBR - My Leagues');
     this.countsMap = new Map();
@@ -79,38 +80,46 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   deleteLeague(league: LeagueSummary): void {
-    const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
-    modalRef.componentInstance.title = 'Delete tournament';
-    modalRef.componentInstance.message = `Do you want to delete the tournament named ${league.name}?`;
-    modalRef.componentInstance.okClicked.subscribe((_ok: any) =>
-      this.leagueService.deleteLeague(league.id).subscribe(_deleted => this.onLeagueDeleted(), _error => this.onLeagueDeletionError()));
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "500px",
+      data: { title: 'Delete league', message: `Do you want to delete the league named ${league.name}?` }
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.leagueService.deleteLeague(league.id).subscribe(_deleted => this.onLeagueDeleted(), _error => this.onLeagueDeletionError());
+      }
+    });
   }
 
   deleteAllLeagues(): void {
-    const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
-    modalRef.componentInstance.title = 'Delete ALL tournaments';
-    modalRef.componentInstance.message = `Do you want to delete ALL the tournaments?`;
-    modalRef.componentInstance.okClicked.subscribe((_ok: any) =>
-      this.leagueService.deleteAllLeagues().subscribe(_deleted => this.onAllLeaguesDeleted()));
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "500px",
+      data: { title: 'Delete ALL leagues', message: 'Do you want to delete ALL the leagues?' }
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.leagueService.deleteAllLeagues().subscribe(_deleted => this.onAllLeaguesDeleted());
+      }
+    });
   }
 
   onLeagueCreated(): void {
     this.refreshLeagues();
-    this.snackBarService.showInfo('League was successfully created.', 5000);
+    this.snackBarService.showInfo('League was successfully created.');
   }
 
   onLeagueDeleted(): void {
     this.refreshLeagues();
-    this.snackBarService.showInfo('League was successfully deleted.', 5000);
+    this.snackBarService.showInfo('League was successfully deleted.');
   }
 
   onAllLeaguesDeleted(): void {
     this.refreshLeagues();
-    this.snackBarService.showInfo('All leagues were successfully deleted.', 5000);
+    this.snackBarService.showInfo('All leagues were successfully deleted.');
   }
 
   onLeagueDeletionError(): void {
-    this.snackBarService.showError('League could not be deleted.', 5000);
+    this.snackBarService.showError('League could not be deleted.');
   }
 
   getLeaguePublicUrl(league: LeagueSummary): string {

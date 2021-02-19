@@ -59,14 +59,14 @@ export class AccountComponent implements OnInit {
   }
 
   private onValidResponse(): void {
-    this.snackBarService.showInfo('Your password was successfully updated.', 5000);
+    this.snackBarService.showInfo('Your password was successfully updated.');
   }
 
   private onInvalidResponse(error: any): void {
     if (error.status === 400) {
-      this.snackBarService.showError('Password does not satisfy the aforementioned criteria.', 5000);
+      this.snackBarService.showError('Password does not satisfy the aforementioned criteria.');
     } else {
-      this.snackBarService.showError('An error occurred on the server.', 5000);
+      this.snackBarService.showError('An error occurred on the server.');
     }
   }
 

@@ -4,14 +4,15 @@ import { UserService } from 'src/app/core/services/user.service';
 import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules-modal/user-rules-modal.component';
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { RulesService } from 'src/app/modules/user-data/services/rules.service';
-import { OkCancelModalComponent } from 'src/app/shared/components/ok-cancel-modal/ok-cancel-modal.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { AbstractRulesFilter } from 'src/app/shared/models/abstract-rules-filter.model';
 import { Rules, RulesSummary } from 'src/app/shared/models/rules.model';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-user-rules',
@@ -24,7 +25,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
 
   private subscription : Subscription = new Subscription();
 
-  constructor(private titleService: Title, private userService: UserService, private rulesService: RulesService, private modalService: NgbModal, private snackBarService: SnackBarService) {
+  constructor(private titleService: Title, private userService: UserService, private rulesService: RulesService, private dialog: MatDialog, private modalService: NgbModal, private snackBarService: SnackBarService) {
     super();
     this.titleService.setTitle('VBR - My Rules');
   }
@@ -61,7 +62,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
         modalRef.componentInstance.rules = rules;
         modalRef.componentInstance.crudType = CrudType.View;
       },
-      _error => this.snackBarService.showError('Rules could not be found.', 5000)
+      _error => this.snackBarService.showError('Rules could not be found.')
     );
   }
 
@@ -73,47 +74,55 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
         modalRef.componentInstance.crudType = CrudType.Update;
         modalRef.componentInstance.rulesUpdated.subscribe((_updated: any) => this.onRulesUpdated());
       },
-      _error => this.snackBarService.showError('Rules could not be found.', 5000)
+      _error => this.snackBarService.showError('Rules could not be found.')
     );
   }
 
   deleteRules(rulesSummary: RulesSummary): void {
-    const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
-    modalRef.componentInstance.title = 'Delete rules';
-    modalRef.componentInstance.message = `Do you want to delete the rules named ${rulesSummary.name}?`;
-    modalRef.componentInstance.okClicked.subscribe((_ok: any) =>
-      this.rulesService.deleteRules(rulesSummary.id).subscribe(_deleted => this.onRulesDeleted(), _error => this.onRulesDeletionError()));
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "500px",
+      data: { title: 'Delete rules', message: `Do you want to delete the rules named ${rulesSummary.name}?` }
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.rulesService.deleteRules(rulesSummary.id).subscribe(_deleted => this.onRulesDeleted(), _error => this.onRulesDeletionError());
+      }
+    });
   }
 
   deleteAllRules(): void {
-    const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
-    modalRef.componentInstance.title = 'Delete ALL rules';
-    modalRef.componentInstance.message = `Do you want to delete ALL the rules?`;
-    modalRef.componentInstance.okClicked.subscribe((_ok: any) =>
-      this.rulesService.deleteAllRules().subscribe(_deleted => this.onAllRulesDeleted()));
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "500px",
+      data: { title: 'Delete ALL rules', message: 'Do you want to delete ALL the rules?' }
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.rulesService.deleteAllRules().subscribe(_deleted => this.onAllRulesDeleted());
+      }
+    });
   }
 
   onRulesCreated(): void {
     this.refreshRules();
-    this.snackBarService.showInfo('Rules were successfully created.', 5000);
+    this.snackBarService.showInfo('Rules were successfully created.');
   }
 
   onRulesUpdated(): void {
     this.refreshRules();
-    this.snackBarService.showInfo('Rules were successfully updated.', 5000);
+    this.snackBarService.showInfo('Rules were successfully updated.');
   }
 
   onRulesDeleted(): void {
     this.refreshRules();
-    this.snackBarService.showInfo('Rules were successfully deleted.', 5000);
+    this.snackBarService.showInfo('Rules were successfully deleted.');
   }
 
   onRulesDeletionError(): void {
-    this.snackBarService.showInfo('Rules could not be deleted. Are they used in a scheduled game?.', 5000);
+    this.snackBarService.showInfo('Rules could not be deleted. Are they used in a scheduled game?.');
   }
 
   onAllRulesDeleted(): void {
     this.refreshRules();
-    this.snackBarService.showInfo('All rules were successfully deleted.', 5000);
+    this.snackBarService.showInfo('All rules were successfully deleted.');
   }
 }

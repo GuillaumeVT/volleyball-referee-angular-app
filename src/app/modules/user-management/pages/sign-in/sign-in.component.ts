@@ -44,7 +44,7 @@ export class SignInComponent {
   private onValidResponse(): void {}
 
   private onInvalidResponse(_error: any): void {
-    this.snackBarService.showError('Email and password do not match.', 5000);
+    this.snackBarService.showError('Email and password do not match.');
   }
 
   getPasswordLostUrl(): string {

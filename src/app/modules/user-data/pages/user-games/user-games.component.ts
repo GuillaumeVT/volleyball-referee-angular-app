@@ -7,18 +7,19 @@ import { UserGameModalComponent } from 'src/app/modules/user-data/components/use
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { GameService } from 'src/app/modules/user-data/services/game.service';
 import { LeagueService } from 'src/app/modules/user-data/services/league.service';
-import { OkCancelModalComponent } from 'src/app/shared/components/ok-cancel-modal/ok-cancel-modal.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { AbstractGameFilter } from 'src/app/shared/models/abstract-game-filter.model';
 import { GameIngredients, GameSummary } from 'src/app/shared/models/game.model';
 import { LeagueSummary } from 'src/app/shared/models/league.model';
 import { PublicService } from 'src/app/shared/services/public.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-user-games',
@@ -34,7 +35,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   private subscription : Subscription = new Subscription();
 
   constructor(private titleService: Title, private route: ActivatedRoute, private datePipe: DatePipe, private userService: UserService,
-    private gameService: GameService, private leagueService: LeagueService, private publicService: PublicService,
+    private gameService: GameService, private leagueService: LeagueService, private publicService: PublicService, private dialog: MatDialog,
     private modalService: NgbModal, private snackBarService: SnackBarService, private fileSaverService: FileSaverService) {
     super(50);
     this.titleService.setTitle('VBR - My Games');
@@ -119,56 +120,65 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   }
 
   deleteGame(game: GameSummary): void {
-    const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
-    modalRef.componentInstance.title = 'Delete game';
-    modalRef.componentInstance.message = `Do you want to delete the game ${game.homeTeamName} - ${game.guestTeamName}?`;
-    modalRef.componentInstance.okClicked.subscribe((_ok: any) =>
-      this.gameService.deleteGame(game.id).subscribe(_deleted => this.onGameDeleted(), _error => this.onGameDeletionError()));
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "500px",
+      data: { title: 'Delete game', message: `Do you want to delete the game ${game.homeTeamName} - ${game.guestTeamName}?` }
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.gameService.deleteGame(game.id).subscribe(_deleted => this.onGameDeleted(), _error => this.onGameDeletionError());
+      }
+    });
   }
 
   deleteAllGames(): void {
-    const modalRef = this.modalService.open(OkCancelModalComponent, { size: 'lg' });
+    let data;
 
     if (this.selectedLeagueId) {
-      modalRef.componentInstance.title = `Delete ALL games in ${this.selectedLeague.name}`;
-      modalRef.componentInstance.message = `Do you want to delete ALL the games in ${this.selectedLeague.name}?`;
-      modalRef.componentInstance.okClicked.subscribe((_ok: any) =>
-        this.gameService.deleteAllGamesInLeague(this.selectedLeagueId).subscribe(_deleted => this.onAllGamesDeleted()));
+      data = { title: `Delete ALL games in ${this.selectedLeague.name}`, message: `Do you want to delete ALL the games in ${this.selectedLeague.name}?` };
     } else {
-      modalRef.componentInstance.title = 'Delete ALL games';
-      modalRef.componentInstance.message = 'Do you want to delete ALL the games?';
-      modalRef.componentInstance.okClicked.subscribe((_ok: any) =>
-        this.gameService.deleteAllGames().subscribe(_deleted => this.onAllGamesDeleted()));
+      data = { title: 'Delete ALL games', message: 'Do you want to delete ALL the games?' };
     }
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, { width: "500px", data: data });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        if (this.selectedLeagueId) {
+          this.gameService.deleteAllGamesInLeague(this.selectedLeagueId).subscribe(_deleted => this.onAllGamesDeleted());
+        } else {
+          this.gameService.deleteAllGames().subscribe(_deleted => this.onAllGamesDeleted());
+        }
+      }
+    });
   }
 
   onGameCreated(): void {
     this.refreshGames(false);
-    this.snackBarService.showInfo('Game was successfully created.', 5000);
+    this.snackBarService.showInfo('Game was successfully created.');
   }
 
   onGameUpdated(): void {
     this.refreshGames(false);
-    this.snackBarService.showInfo('Game was successfully updated.', 5000);
+    this.snackBarService.showInfo('Game was successfully updated.');
   }
 
   onRefereeUpdated(): void {
     this.refreshGames(false);
-    this.snackBarService.showInfo('Referee was successfully updated.', 5000);
+    this.snackBarService.showInfo('Referee was successfully updated.');
   }
 
   onGameDeleted(): void {
     this.refreshGames(false);
-    this.snackBarService.showInfo('Game was successfully deleted.', 5000);
+    this.snackBarService.showInfo('Game was successfully deleted.');
   }
 
   onAllGamesDeleted(): void {
     this.refreshGames(false);
-    this.snackBarService.showInfo('All games was successfully deleted.', 5000);
+    this.snackBarService.showInfo('All games was successfully deleted.');
   }
 
   onGameDeletionError(): void {
-    this.snackBarService.showError('Game could not be deleted.', 5000);
+    this.snackBarService.showError('Game could not be deleted.');
   }
 
   getGamePublicUrl(game: GameSummary): string {

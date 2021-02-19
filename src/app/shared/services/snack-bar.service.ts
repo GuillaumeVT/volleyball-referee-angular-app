@@ -8,11 +8,11 @@ export class SnackBarService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  showInfo(message: string, duration: number): void {
-    this.snackBar.open(message, '', { panelClass: ['info-snackbar'], duration: duration, horizontalPosition: 'center', verticalPosition: 'bottom' });
+  showInfo(message: string): void {
+    this.snackBar.open(message, '', { panelClass: ['info-snackbar'], duration: 2500, horizontalPosition: 'center', verticalPosition: 'top' });
   }
 
-  showError(message: string, duration: number): void {
-    this.snackBar.open(message, '', { panelClass: ['error-snackbar'], duration: duration, horizontalPosition: 'center', verticalPosition: 'bottom' });
+  showError(message: string): void {
+    this.snackBar.open(message, '', { panelClass: ['error-snackbar'], duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
   }  
 }

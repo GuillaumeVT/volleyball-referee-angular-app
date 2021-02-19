@@ -27,11 +27,11 @@ export class PasswordLostComponent {
   }
 
   private onValidResponse(emailAddress: string): void {
-    this.snackBarService.showInfo(`A recovery link was sent to ${emailAddress}.`, 5000);
+    this.snackBarService.showInfo(`A recovery link was sent to ${emailAddress}.`);
   }
 
   private onInvalidResponse(emailAddress: string): void {
-    this.snackBarService.showError(`${emailAddress} could not be found.`, 5000);
+    this.snackBarService.showError(`${emailAddress} could not be found.`);
   }
 
 }

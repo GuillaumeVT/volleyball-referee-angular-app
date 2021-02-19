@@ -475,6 +475,10 @@ input:checked + .slider:before {
   transition: 0s;
 }
 
+.mat-snack-bar-container {
+  margin-top: 300px !important;
+ }
+
 .info-snackbar {
   color: var(--vbr-primary-color);
   background-color: var(--vbr-light-primary-color);
