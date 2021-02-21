@@ -1,4 +1,4 @@
-.comp-container {
+.ladder {
   width: 100%;
 }
 
@@ -6,24 +6,24 @@
   overflow-x: auto;
 }
 
-.comp-container > ::-webkit-scrollbar {
+::-webkit-scrollbar {
   height: 10px;
 }
 
 /* Track */
-.comp-container > ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: var(--vbr-light-unselected-color);
   border-radius: 4px;
 }
 
 /* Handle */
-.comp-container > ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: var(--vbr-light-primary-color);
   border-radius: 4px;
 }
 
 /* Handle on hover */
-.comp-container > ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: var(--vbr-primary-color);
   border-radius: 4px;
 }

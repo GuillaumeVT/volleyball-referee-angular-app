@@ -1,45 +1,57 @@
-<div class="comp-container p-2" *ngIf="game">
-  <h6 class="card-title vbr-text">Substitutions</h6>
-  <div class="div-grid-50-50" *ngIf="game">
-    <table>
-      <tbody>
-        <tr *ngFor="let substitution of getSubstitutions(leftTeam)">
-          <td class="mx-1 text-center">
-            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
-              [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, substitution.playerIn)"></span>
-          </td>
-          <td>
-            <img class="substitution-icon" src="assets/ic_sub.png" alt="sub">
-          </td>
-          <td class="mx-1 text-center">
-            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
-              [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, substitution.playerOut)"></span>
-          </td>
-          <td class="mx-1 text-center">
-            <span class="ml-2 vbr-text player-badge-font" [innerHTML]="getScore(leftTeam, substitution)"></span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table>
-      <tbody>
-        <tr *ngFor="let substitution of getSubstitutions(rightTeam)">
-          <td class="mx-1 text-center">
-            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
-              [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="playerStyleService.getPlayer(game, rightTeam, substitution.playerIn)"></span>
-          </td>
-          <td>
-            <img class="substitution-icon" src="assets/ic_sub.png" alt="sub">
-          </td>
-          <td class="mx-1 text-center">
-            <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
-              [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="playerStyleService.getPlayer(game, rightTeam, substitution.playerOut)"></span>
-          </td>
-          <td class="mx-1 text-center">
-            <span class="ml-2 vbr-text player-badge-font" [innerHTML]="getScore(rightTeam, substitution)"></span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<mat-card *ngIf="game">
+  <mat-card-content>
+    <div>
+      <h3 fxFlex class="mat-h3">Substitutions</h3>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center start">
+      
+      <div fxFlex="50">
+        <table>
+          <tbody>
+            <tr *ngFor="let substitution of getSubstitutions(leftTeam)">
+              <td class="mx-1 text-center">
+                <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+                  [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, substitution.playerIn)"></span>
+              </td>
+              <td>
+                <img class="substitution-icon" src="assets/ic_sub.png" alt="sub">
+              </td>
+              <td class="mx-1 text-center">
+                <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+                  [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, substitution.playerOut)"></span>
+              </td>
+              <td class="mx-1 text-center">
+                <span class="ml-2 vbr-text player-badge-font" [innerHTML]="getScore(leftTeam, substitution)"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div fxFlex="50">
+        <table>
+          <tbody>
+            <tr *ngFor="let substitution of getSubstitutions(rightTeam)">
+              <td class="mx-1 text-center">
+                <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+                  [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="playerStyleService.getPlayer(game, rightTeam, substitution.playerIn)"></span>
+              </td>
+              <td>
+                <img class="substitution-icon" src="assets/ic_sub.png" alt="sub">
+              </td>
+              <td class="mx-1 text-center">
+                <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+                  [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="playerStyleService.getPlayer(game, rightTeam, substitution.playerOut)"></span>
+              </td>
+              <td class="mx-1 text-center">
+                <span class="ml-2 vbr-text player-badge-font" [innerHTML]="getScore(rightTeam, substitution)"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>

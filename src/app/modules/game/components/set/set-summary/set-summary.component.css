@@ -24,6 +24,10 @@
   justify-self: start;
 }
 
+::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+  min-width: 100px !important;
+}
+
 @media screen and (max-width: 1200px) {
   .point-badge {
     font-size: 2rem;
@@ -32,4 +36,10 @@
   .points-line {
     grid-template-columns: 30fr 20fr 20fr 30fr;
   }
+
+  ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+    min-width: 0px !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }  
 }

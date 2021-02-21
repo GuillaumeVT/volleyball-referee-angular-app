@@ -2,7 +2,7 @@ import { FileSaverService } from 'ngx-filesaver';
 import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { UserLeagueModalComponent } from 'src/app/modules/user-data/components/user-league-modal/user-league-modal.component';
+import { UserLeagueDialogComponent } from 'src/app/modules/user-data/components/user-league-dialog/user-league-dialog.component';
 import { GameService } from 'src/app/modules/user-data/services/game.service';
 import { LeagueService } from 'src/app/modules/user-data/services/league.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
@@ -16,7 +16,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-leagues',
@@ -32,7 +31,7 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   private subscription : Subscription = new Subscription();
 
   constructor(private titleService: Title, private userService: UserService, private leagueService: LeagueService, private gameService: GameService, private publicService: PublicService,
-    private dialog: MatDialog, private modalService: NgbModal, private snackBarService: SnackBarService, private datePipe: DatePipe, private router: Router, private fileSaverService: FileSaverService) {
+    private dialog: MatDialog, private snackBarService: SnackBarService, private datePipe: DatePipe, private router: Router, private fileSaverService: FileSaverService) {
     super();
     this.titleService.setTitle('VBR - My Leagues');
     this.countsMap = new Map();
@@ -70,9 +69,12 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
 
   createLeague(kind: string): void {
     const league = League.createLeague(this.user, kind);
-    const modalRef = this.modalService.open(UserLeagueModalComponent, { size: 'lg' });
-    modalRef.componentInstance.league = league;
-    modalRef.componentInstance.leagueCreated.subscribe((_created: any) => this.onLeagueCreated());
+    const dialogRef = this.dialog.open(UserLeagueDialogComponent, { width: "500px", data: league });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.onLeagueCreated();
+      }
+    });
   }
 
   viewLeague(league: LeagueSummary): void {

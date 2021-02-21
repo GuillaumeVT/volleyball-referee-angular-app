@@ -1,18 +1,13 @@
-<div class="div-content">
-  <div class="div-summary card div-card">
-    <app-game-summary class="game-summary" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (teamsSwapped)="onTeamsSwapped()"></app-game-summary>
-    <app-set-selector class="set-selector" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-set-selector>
-    <app-set-summary class="set-summary" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-set-summary>
+<div fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="8px grid" class="mt-3">
+  <app-game-summary fxFlex="45" fxFlex.xs="100" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (teamsSwapped)="onTeamsSwapped()"></app-game-summary>
+  <app-set-summary fxFlex="45" fxFlex.xs="100" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-set-summary>
+  <app-indoor-court fxFlex="30" fxFlex.xs="100" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam" [positions]="6"></app-indoor-court>
+  <div fxFlex="30" fxFlex.xs="100" fxLayout="column" fxLayoutGap="8px">
+    <app-set-timeouts *ngIf="game" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-set-timeouts>
+    <app-indoor-set-lineups *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-indoor-set-lineups>
   </div>
-  <div class="div-secondary card div-card">
-    <app-indoor-court class="indoor-court" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam" [positions]="6"></app-indoor-court>
-    <app-set-timeouts class="timeouts" *ngIf="game" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-set-timeouts>
-    <app-set-substitutions class="substitutions" *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-set-substitutions>
-  </div>
-  <app-ladder class="ladder card div-card" [game]="game" [setIndex]="currentSet" [topTeam]="leftTeam" [bottomTeam]="rightTeam"></app-ladder>
-  <div class="div-tertiary card div-card">
-    <app-indoor-set-lineups class="lineup" *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-indoor-set-lineups>
-    <app-game-players class="players" *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-game-players>
-  </div>
-  <app-game-sanctions class="sanctions card div-card" *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-game-sanctions>
+  <app-set-substitutions fxFlex="30" fxFlex.xs="100" *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [setIndex]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-set-substitutions>
+  <app-ladder fxFlex="90" fxFlex.xs="100" [game]="game" [setIndex]="currentSet" [topTeam]="leftTeam" [bottomTeam]="rightTeam"></app-ladder>
+  <app-game-sanctions fxFlex="30" fxFlex.xs="100" *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-game-sanctions>
+  <app-game-players fxFlex="30" fxFlex.xs="100" *ngIf="game && (game.usage === 'NORMAL')" [game]="game" [leftTeam]="leftTeam" [rightTeam]="rightTeam"></app-game-players>
 </div>

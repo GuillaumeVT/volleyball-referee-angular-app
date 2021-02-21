@@ -1,97 +1,107 @@
-<div class="comp-container p-2" *ngIf="game">
-  <h6 class="card-title vbr-text">Timeline</h6>
-  <div class="h-scroll" *ngIf="game">
-    <table>
-      <tbody>
-        <tr>
-          <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
-            <img class="ladder-icon-item" [src]="getIcon(ladderItem, topTeam)" alt="event" placement="top" [ngbPopover]='popContent' *ngIf="ladderItem.hasEvent(topTeam)">
+<mat-card class="ladder" *ngIf="game">
+  <mat-card-content>
+    <div>
+      <h3 fxFlex class="mat-h3">Timeline</h3>
+    </div>
 
-            <ng-template #popContent>
-              <div class="text-center">
-                <img class="ladder-icon-item" *ngFor="let timeout of getTimeouts(ladderItem, topTeam)" src="assets/ic_timer.png" alt="timeout">
-                <table *ngIf="getSubstitutions(ladderItem, topTeam).length">
-                  <tbody>
-                    <tr *ngFor="let substitution of getSubstitutions(ladderItem, topTeam)">
-                      <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, topTeam)" [style.color]="playerStyleService.getTeamTextColor(game, topTeam)"
-                          [style.border-color]="playerStyleService.getTeamBorderColor(game, topTeam)" [innerHTML]="playerStyleService.getPlayer(game, topTeam, substitution.playerIn)"></span>
-                      </td>
-                      <td><img class="ladder-icon-item" src="assets/ic_sub.png" alt="sub"></td>
-                      <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, topTeam)" [style.color]="playerStyleService.getTeamTextColor(game, topTeam)"
-                          [style.border-color]="playerStyleService.getTeamBorderColor(game, topTeam)" [innerHTML]="playerStyleService.getPlayer(game, topTeam, substitution.playerOut)"></span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <table *ngIf="getSanctions(ladderItem, topTeam).length">
-                  <tbody>
-                    <tr *ngFor="let sanction of getSanctions(ladderItem, topTeam)">
-                      <td><img class="ladder-icon-item mr-1" [src]="sanctionService.getSanctionIcon(sanction)" alt="card"></td>
-                      <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getPlayerBackgroundColor(game, topTeam, sanction.num)" [style.color]="playerStyleService.getPlayerTextColor(game, topTeam, sanction.num)"
-                          [style.border-color]="playerStyleService.getPlayerBorderColor(game, topTeam, sanction.num)" [innerHTML]="sanctionService.getPlayerForSanction(game, topTeam, sanction.num)"></span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </ng-template>
-
-          </td>
-        </tr>
-        <tr>
-          <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
-            <span class="ladder-item badge point-badge" [style.background-color]="getTeamBackgroundColor(ladderItem, topTeam)" [style.color]="getTeamTextColor(ladderItem, topTeam)"
-              [style.border-color]="getTeamBorderColor(ladderItem, topTeam)" [innerHTML]="getTeamScore(ladderItem, topTeam)"></span>
-          </td>
-        </tr>
-        <tr>
-          <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
-            <span class="ladder-item badge point-badge" [style.background-color]="getTeamBackgroundColor(ladderItem, bottomTeam)" [style.color]="getTeamTextColor(ladderItem, bottomTeam)"
-              [style.border-color]="getTeamBorderColor(ladderItem, bottomTeam)" [innerHTML]="getTeamScore(ladderItem, bottomTeam)"></span>
-          </td>
-        </tr>
-        <tr>
-          <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
-            <img class="ladder-icon-item" [src]="getIcon(ladderItem, bottomTeam)" alt="event" placement="bottom" [ngbPopover]='popContent' *ngIf="ladderItem.hasEvent(bottomTeam)">
-
-            <ng-template #popContent>
-              <div class="text-center">
-                <img class="ladder-icon-item" *ngFor="let timeout of getTimeouts(ladderItem, bottomTeam)" src="assets/ic_timer.png" alt="timeout">
-                <table *ngIf="getSubstitutions(ladderItem, bottomTeam).length">
-                  <tbody>
-                    <tr *ngFor="let substitution of getSubstitutions(ladderItem, bottomTeam)">
-                      <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, bottomTeam)" [style.color]="playerStyleService.getTeamTextColor(game, bottomTeam)"
-                          [style.border-color]="playerStyleService.getTeamBorderColor(game, bottomTeam)" [innerHTML]="playerStyleService.getPlayer(game, bottomTeam, substitution.playerIn)"></span>
-                      </td>
-                      <td><img class="ladder-icon-item" src="assets/ic_sub.png" alt="sub"></td>
-                      <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, bottomTeam)" [style.color]="playerStyleService.getTeamTextColor(game, bottomTeam)"
-                          [style.border-color]="playerStyleService.getTeamBorderColor(game, bottomTeam)" [innerHTML]="playerStyleService.getPlayer(game, bottomTeam, substitution.playerOut)"></span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <table *ngIf="getSanctions(ladderItem, bottomTeam).length">
-                  <tbody>
-                    <tr *ngFor="let sanction of getSanctions(ladderItem, bottomTeam)">
-                      <td><img class="ladder-icon-item" [src]="sanctionService.getSanctionIcon(sanction)" alt="card"></td>
-                      <td class="mx-1 text-center">
-                        <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getPlayerBackgroundColor(game, bottomTeam, sanction.num)" [style.color]="playerStyleService.getPlayerTextColor(game, bottomTeam, sanction.num)"
-                          [style.border-color]="playerStyleService.getPlayerBorderColor(game, bottomTeam, sanction.num)" [innerHTML]="sanctionService.getPlayerForSanction(game, bottomTeam, sanction.num)"></span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </ng-template>
-
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+    <div class="h-scroll">
+      <table>
+        <tbody>
+  
+          <tr>
+            <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
+              <img class="ladder-icon-item" [src]="getIcon(ladderItem, topTeam)" alt="event" placement="top" [ngbPopover]='popContent' *ngIf="ladderItem.hasEvent(topTeam)">
+  
+              <ng-template #popContent>
+                <div class="text-center">
+                  <img class="ladder-icon-item" *ngFor="let timeout of getTimeouts(ladderItem, topTeam)" src="assets/ic_timer.png" alt="timeout">
+                  <table *ngIf="getSubstitutions(ladderItem, topTeam).length">
+                    <tbody>
+                      <tr *ngFor="let substitution of getSubstitutions(ladderItem, topTeam)">
+                        <td class="mx-1 text-center">
+                          <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, topTeam)" [style.color]="playerStyleService.getTeamTextColor(game, topTeam)"
+                            [style.border-color]="playerStyleService.getTeamBorderColor(game, topTeam)" [innerHTML]="playerStyleService.getPlayer(game, topTeam, substitution.playerIn)"></span>
+                        </td>
+                        <td><img class="ladder-icon-item" src="assets/ic_sub.png" alt="sub"></td>
+                        <td class="mx-1 text-center">
+                          <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, topTeam)" [style.color]="playerStyleService.getTeamTextColor(game, topTeam)"
+                            [style.border-color]="playerStyleService.getTeamBorderColor(game, topTeam)" [innerHTML]="playerStyleService.getPlayer(game, topTeam, substitution.playerOut)"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table *ngIf="getSanctions(ladderItem, topTeam).length">
+                    <tbody>
+                      <tr *ngFor="let sanction of getSanctions(ladderItem, topTeam)">
+                        <td><img class="ladder-icon-item mr-1" [src]="sanctionService.getSanctionIcon(sanction)" alt="card"></td>
+                        <td class="mx-1 text-center">
+                          <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getPlayerBackgroundColor(game, topTeam, sanction.num)" [style.color]="playerStyleService.getPlayerTextColor(game, topTeam, sanction.num)"
+                            [style.border-color]="playerStyleService.getPlayerBorderColor(game, topTeam, sanction.num)" [innerHTML]="sanctionService.getPlayerForSanction(game, topTeam, sanction.num)"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </ng-template>
+  
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
+              <span class="ladder-item badge point-badge" [style.background-color]="getTeamBackgroundColor(ladderItem, topTeam)" [style.color]="getTeamTextColor(ladderItem, topTeam)"
+                [style.border-color]="getTeamBorderColor(ladderItem, topTeam)" [innerHTML]="getTeamScore(ladderItem, topTeam)"></span>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
+              <span class="ladder-item badge point-badge" [style.background-color]="getTeamBackgroundColor(ladderItem, bottomTeam)" [style.color]="getTeamTextColor(ladderItem, bottomTeam)"
+                [style.border-color]="getTeamBorderColor(ladderItem, bottomTeam)" [innerHTML]="getTeamScore(ladderItem, bottomTeam)"></span>
+            </td>
+          </tr>
+  
+          <tr>
+            <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
+              <img class="ladder-icon-item" [src]="getIcon(ladderItem, bottomTeam)" alt="event" placement="bottom" [ngbPopover]='popContent' *ngIf="ladderItem.hasEvent(bottomTeam)">
+  
+              <ng-template #popContent>
+                <div class="text-center">
+                  <img class="ladder-icon-item" *ngFor="let timeout of getTimeouts(ladderItem, bottomTeam)" src="assets/ic_timer.png" alt="timeout">
+                  <table *ngIf="getSubstitutions(ladderItem, bottomTeam).length">
+                    <tbody>
+                      <tr *ngFor="let substitution of getSubstitutions(ladderItem, bottomTeam)">
+                        <td class="mx-1 text-center">
+                          <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, bottomTeam)" [style.color]="playerStyleService.getTeamTextColor(game, bottomTeam)"
+                            [style.border-color]="playerStyleService.getTeamBorderColor(game, bottomTeam)" [innerHTML]="playerStyleService.getPlayer(game, bottomTeam, substitution.playerIn)"></span>
+                        </td>
+                        <td><img class="ladder-icon-item" src="assets/ic_sub.png" alt="sub"></td>
+                        <td class="mx-1 text-center">
+                          <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, bottomTeam)" [style.color]="playerStyleService.getTeamTextColor(game, bottomTeam)"
+                            [style.border-color]="playerStyleService.getTeamBorderColor(game, bottomTeam)" [innerHTML]="playerStyleService.getPlayer(game, bottomTeam, substitution.playerOut)"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table *ngIf="getSanctions(ladderItem, bottomTeam).length">
+                    <tbody>
+                      <tr *ngFor="let sanction of getSanctions(ladderItem, bottomTeam)">
+                        <td><img class="ladder-icon-item" [src]="sanctionService.getSanctionIcon(sanction)" alt="card"></td>
+                        <td class="mx-1 text-center">
+                          <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getPlayerBackgroundColor(game, bottomTeam, sanction.num)" [style.color]="playerStyleService.getPlayerTextColor(game, bottomTeam, sanction.num)"
+                            [style.border-color]="playerStyleService.getPlayerBorderColor(game, bottomTeam, sanction.num)" [innerHTML]="sanctionService.getPlayerForSanction(game, bottomTeam, sanction.num)"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </ng-template>
+  
+            </td>
+          </tr>
+  
+        </tbody>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -420,21 +420,6 @@ input:checked + .slider:before {
   width: auto;
 }
 
-.fab-refresh {
-  position: fixed;
-  bottom: calc(0.5 * var(--toolbar-height));
-  right: calc(0.5 * var(--toolbar-height));
-  z-index: 5;
-}
-
-.fab-refresh button {
-  border-radius: var(--fab-padding);
-  line-height: calc(1.6 * var(--fab-padding));
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  box-shadow: var(--material-shadow-big);
-}
-
 .btn:focus, .btn:active {
   outline: none !important;
   box-shadow: none !important;

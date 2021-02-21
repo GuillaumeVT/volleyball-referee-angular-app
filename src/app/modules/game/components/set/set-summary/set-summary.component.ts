@@ -2,7 +2,8 @@ import { Game } from 'src/app/shared/models/game.model';
 import { TeamType } from 'src/app/shared/models/team-type.model';
 import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
 
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-set-summary',
@@ -12,34 +13,54 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 export class SetSummaryComponent implements OnChanges {
 
   @Input() game:      Game;
-  @Input() setIndex:  number;
   @Input() leftTeam:  TeamType;
   @Input() rightTeam: TeamType;
+  
+  @Output() currentSetUpdated = new EventEmitter(true);
 
-  homePoints:   number;
+  currentSet: FormControl;
+
+  homePoints:    number;
   guestPoints:   number;
-  duration:  string;
-  homeTimeouts: number[];
+  duration:      string;
+  homeTimeouts:  number[];
   guestTimeouts: number[];
 
-  constructor(public playerStyleService: PlayerStyleService) { }
+  constructor(public playerStyleService: PlayerStyleService) {
+    this.currentSet = new FormControl(-1);
+  }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.init();
+  }
+
+  private init(): void {
     if (this.game && this.game.sets) {
-      this.homePoints = this.game.sets[this.setIndex].homePoints;
-      this.guestPoints = this.game.sets[this.setIndex].guestPoints;
-      this.duration = ` ${Math.ceil(this.game.sets[this.setIndex].duration / 60000)} min`;
+      if (this.currentSet.value < 0) {
+        this.selectSet(this.game.sets.length -1);
+      }
+
+      const setIndex = this.currentSet.value;
+      this.homePoints = this.game.sets[setIndex].homePoints;
+      this.guestPoints = this.game.sets[setIndex].guestPoints;
+      this.duration = ` ${Math.ceil(this.game.sets[setIndex].duration / 60000)} min`;
 
       this.homeTimeouts = [];
       this.guestTimeouts = [];
       var index;
-      for (index = 0; index < this.game.sets[this.setIndex].homeTimeouts; index++) {
+      for (index = 0; index < this.game.sets[setIndex].homeTimeouts; index++) {
         this.homeTimeouts.push(1);
       }
-      for (index = 0; index < this.game.sets[this.setIndex].guestTimeouts; index++) {
+      for (index = 0; index < this.game.sets[setIndex].guestTimeouts; index++) {
         this.guestTimeouts.push(1);
       }
     }
+  }
+
+  selectSet(setIndex: number): void {
+    this.currentSet.setValue(setIndex);
+    this.currentSetUpdated.emit(this.currentSet.value);
+    this.init();
   }
 
   getPoints(teamType: TeamType): number {

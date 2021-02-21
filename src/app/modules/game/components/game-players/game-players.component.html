@@ -1,38 +1,39 @@
-<div class="comp-container p-2" *ngIf="game">
-  <h6 class="card-title vbr-text">Players</h6>
-  <div class="div-grid-50-50" *ngIf="game">
-
-    <div class="div-grid-team mr-2">
-
-      <ng-container *ngFor="let player of getPlayers(leftTeam)">
-        <span class="badge text-center player-badge mr-1 mb-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
-          [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, player.num)"></span>
-        <span class="vbr-text ml-2">{{player.name}}</span>
-      </ng-container>
-
-      <ng-container *ngFor="let libero of getLiberos(leftTeam)">
-        <span class="badge text-center player-badge mr-1 mb-1" [style.background-color]="playerStyleService.getLiberoBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getLiberoTextColor(game, leftTeam)"
-          [style.border-color]="playerStyleService.getLiberoBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, libero.num)"></span>
-        <span class="vbr-text ml-2">{{libero.name}}</span>
-      </ng-container>
-
+<mat-card *ngIf="game">
+  <mat-card-content>
+    <div>
+      <h3 fxFlex class="mat-h3">Players</h3>
     </div>
 
-    <div class="div-grid-team mr-2">
+    <div fxLayout="row" fxLayoutAlign="center start">
+      
+      <div fxFlex="50">
+        <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let player of getPlayers(leftTeam)">
+          <span fxFlew="15" class="badge text-center player-badge mr-1 mb-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+            [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, player.num)"></span>
+          <span fxFlew="85" class="vbr-text ml-2">{{player.name}}</span>
+        </div>
 
-      <ng-container *ngFor="let player of getPlayers(rightTeam)">
-        <span class="badge text-center player-badge mr-1 mb-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+        <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let libero of getLiberos(leftTeam)">
+          <span fxFlew="15" class="badge text-center player-badge mr-1 mb-1" [style.background-color]="playerStyleService.getLiberoBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getLiberoTextColor(game, leftTeam)"
+            [style.border-color]="playerStyleService.getLiberoBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, libero.num)"></span>
+          <span fxFlew="85" class="vbr-text ml-2">{{libero.name}}</span>
+        </div>
+      </div>
+
+      <div fxFlex="50">
+        <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let player of getPlayers(rightTeam)">
+          <span fxFlew="15" class="badge text-center player-badge mr-1 mb-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
           [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="playerStyleService.getPlayer(game, rightTeam, player.num)"></span>
-        <span class="vbr-text ml-2">{{player.name}}</span>
-      </ng-container>
-
-      <ng-container *ngFor="let libero of getLiberos(rightTeam)">
-        <span class="badge text-center player-badge mr-1 mb-1" [style.background-color]="playerStyleService.getLiberoBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getLiberoTextColor(game, rightTeam)"
+          <span fxFlew="85" class="vbr-text ml-2">{{player.name}}</span>
+        </div>
+  
+        <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let libero of getLiberos(rightTeam)">
+          <span fxFlew="15" class="badge text-center player-badge mr-1 mb-1" [style.background-color]="playerStyleService.getLiberoBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getLiberoTextColor(game, rightTeam)"
           [style.border-color]="playerStyleService.getLiberoBorderColor(game, rightTeam)" [innerHTML]="playerStyleService.getPlayer(game, rightTeam, libero.num)"></span>
-        <span class="vbr-text ml-2">{{libero.name}}</span>
-      </ng-container>
+          <span fxFlew="85" class="vbr-text ml-2">{{libero.name}}</span>
+        </div>
+      </div>
 
     </div>
-
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>

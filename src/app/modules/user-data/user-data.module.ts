@@ -4,7 +4,7 @@ import { GameRefereeModalComponent } from 'src/app/modules/user-data/components/
 import { PlayerNamesModalComponent } from 'src/app/modules/user-data/components/player-names-modal/player-names-modal.component';
 import { UserColleagueModalComponent } from 'src/app/modules/user-data/components/user-colleague-modal/user-colleague-modal.component';
 import { UserGameModalComponent } from 'src/app/modules/user-data/components/user-game-modal/user-game-modal.component';
-import { UserLeagueModalComponent } from 'src/app/modules/user-data/components/user-league-modal/user-league-modal.component';
+import { UserLeagueDialogComponent } from 'src/app/modules/user-data/components/user-league-dialog/user-league-dialog.component';
 import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules-modal/user-rules-modal.component';
 import { UserTeamModalComponent } from 'src/app/modules/user-data/components/user-team-modal/user-team-modal.component';
 import { UserColleaguesComponent } from 'src/app/modules/user-data/pages/user-colleagues/user-colleagues.component';
@@ -23,7 +23,7 @@ import { NgModule } from '@angular/core';
     UserColleagueModalComponent,
     ColleagueRequestItemComponent,
     UserLeaguesComponent,
-    UserLeagueModalComponent,
+    UserLeagueDialogComponent,
     UserRulesComponent,
     UserRulesModalComponent,
     UserTeamsComponent,

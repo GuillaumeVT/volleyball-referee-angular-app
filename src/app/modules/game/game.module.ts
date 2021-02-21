@@ -12,7 +12,6 @@ import { Indoor4x4GameComponent } from 'src/app/modules/game/components/indoor4x
 import { IndoorSetLineupsComponent } from 'src/app/modules/game/components/set/indoor-set-lineups/indoor-set-lineups.component';
 import { Indoor4x4SetLineupsComponent } from 'src/app/modules/game/components/set/indoor4x4-set-lineups/indoor4x4-set-lineups.component';
 import { LadderComponent } from 'src/app/modules/game/components/set/ladder/ladder.component';
-import { SetSelectorComponent } from 'src/app/modules/game/components/set/set-selector/set-selector.component';
 import { SetSubstitutionsComponent } from 'src/app/modules/game/components/set/set-substitutions/set-substitutions.component';
 import { SetSummaryComponent } from 'src/app/modules/game/components/set/set-summary/set-summary.component';
 import { SetTimeoutsComponent } from 'src/app/modules/game/components/set/set-timeouts/set-timeouts.component';
@@ -43,7 +42,6 @@ import { NgModule } from '@angular/core';
     GameSanctionsComponent,
     GameSummaryComponent,
     LadderComponent,
-    SetSelectorComponent,
     SetSubstitutionsComponent,
     SetSummaryComponent,
     SetTimeoutsComponent

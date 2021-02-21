@@ -1,4 +1,2 @@
-<div class="fab-refresh">
-  <button class="btn vbr-button" (click)="updateGame()" *ngIf="game && game.status === 'LIVE'"><i class="fa fa-refresh mr-2"></i>Refresh</button>
-  <button class="btn vbr-button" (click)="downloadScoreSheet()" *ngIf="game && game.status === 'COMPLETED'"><i class="fa fa-download mr-2"></i>Score sheet</button>
-</div>
+<button *ngIf="game && game.status === 'LIVE'" class="refresh" mat-mini-fab type="button" color="accent" aria-label="Refresh" (click)="updateGame()"><mat-icon>refresh</mat-icon></button>
+<button *ngIf="game && game.status === 'COMPLETED'" class="refresh" mat-mini-fab type="button" color="accent" aria-label="Score sheet" (click)="downloadScoreSheet()"><mat-icon>cloud_download</mat-icon></button>

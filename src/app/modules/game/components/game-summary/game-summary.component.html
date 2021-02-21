@@ -1,25 +1,41 @@
-<div class="comp-container p-2 text-center" *ngIf="game">
-  <div class="card-text vbr-text text-center">{{game.scheduledAt | date : 'mediumDate'}}</div>
-  <div class="div-summary my-2" *ngIf="game">
-    <span class="card-text vbr-text text-center small-line">{{getTeamName(leftTeam)}}</span>
-    <span class="badge text-center set-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
-      [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)">{{getTeamSets(leftTeam)}}</span>
-    <button class="btn btn-sm vbr-button-inverted rounded-circle" (click)="swapTeams()"><i class="fa fa-exchange"></i></button>
-    <span class="badge text-center set-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
-      [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)">{{getTeamSets(rightTeam)}}</span>
-    <span class="card-text vbr-text text-center small-line">{{getTeamName(rightTeam)}}</span>
-  </div>
-  <div>
-    <span class="card-text vbr-text text-center ml-2" *ngIf="game.league?.name?.length">
-      {{game.league.name}}
-      <span *ngIf="game.league?.division?.length">&nbsp;/&nbsp;{{game.league.division}}</span>
-    </span>
-    <span class="card-text vbr-text text-center ml-2" *ngIf="game.refereeName?.length"><i class="fa fa-user mx-1"></i>by {{game.refereeName}}</span>
-  </div>
-  <div>
-    <span class="chip vbr-mixed-chip" *ngIf="game.gender === 'MIXED'"><i class="fa fa-intersex"></i></span>
-    <span class="chip vbr-ladies-chip" *ngIf="game.gender === 'LADIES'"><i class="fa fa-venus"></i></span>
-    <span class="chip vbr-gents-chip" *ngIf="game.gender === 'GENTS'"><i class="fa fa-mars"></i></span>
-    <button type="button" class="btn btn-sm vbr-button-inverted rounded-circle ml-2" (click)="viewRules()"><i class="fa fa-book"></i></button>
-  </div>
-</div>
+<mat-card *ngIf="game">
+  <mat-card-content>
+    <div class="text-center">
+      <div class="vbr-text">
+        {{game.scheduledAt | date : 'mediumDate'}}
+
+        <div>
+          <span *ngIf="game.league?.name?.length">
+            {{game.league.name}}
+            <span *ngIf="game.league?.division?.length">&nbsp;/&nbsp;{{game.league.division}}</span>
+          </span>
+          <span class="ml-1" *ngIf="game.refereeName?.length"><mat-icon inline=true style="vertical-align: middle;"><span class="material-icons">person</span></mat-icon> by {{game.refereeName}}</span>
+        </div>
+      </div>
+
+      <div class="div-summary my-3">
+        <span class="vbr-text text-center team-name">
+          {{leftTeamName}}
+        </span>
+
+        <span class="badge text-center set-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)" [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)">
+          {{leftTeamSets}}
+        </span>
+
+        <button mat-mini-fab type="button" color="primary" aria-label="Swap" (click)="swapTeams()"><mat-icon>swap_horiz</mat-icon></button>
+
+        <span class="badge text-center set-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)" [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)">
+          {{rightTeamSets}}
+        </span>
+
+        <span class="vbr-text text-center team-name">
+          {{rightTeamName}}
+        </span>
+      </div>
+
+      <div class="vbr-text" [innerHtml]="fullScore"></div>
+
+    </div>
+
+  </mat-card-content>
+</mat-card>

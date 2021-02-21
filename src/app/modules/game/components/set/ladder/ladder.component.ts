@@ -1,7 +1,7 @@
 import { LadderItem } from 'src/app/modules/game/components/set/ladder/ladder-item.model';
 import { SanctionService } from 'src/app/modules/game/services/sanction.service';
 import { Game, Sanction } from 'src/app/shared/models/game.model';
-import { Set, Substitution, Timeout } from 'src/app/shared/models/set.model';
+import { Substitution, Timeout } from 'src/app/shared/models/set.model';
 import { TeamType } from 'src/app/shared/models/team-type.model';
 import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
 

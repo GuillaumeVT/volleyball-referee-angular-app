@@ -1,9 +1,0 @@
-.div-grid-team {
-  display: grid;
-  grid-template-columns: 1fr 8fr;
-  grid-auto-rows: 1fr;
-  align-items: center;
-  align-content: start;
-  justify-content: start;
-  justify-items: start;
-}
