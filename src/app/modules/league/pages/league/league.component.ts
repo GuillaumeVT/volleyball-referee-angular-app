@@ -12,13 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LeagueComponent implements OnInit {
 
-  leagueId:         string;
-  league:           League;
-  selectedIndex:    number;
+  leagueId: string;
+  league:   League;
 
   constructor(private titleService: Title, private route: ActivatedRoute, private publicService: PublicService) {
     this.titleService.setTitle('VBR - View League');
-    this.selectedIndex = 0;
   }
 
   ngOnInit() {
@@ -32,25 +30,4 @@ export class LeagueComponent implements OnInit {
   onLeagueUpdated(league: League): void  {
     this.league = league;
   }
-
-  getLinkClass(index: number): string {
-    if (this.selectedIndex === index) {
-      return 'btn vbr-button-selected';
-    } else {
-      return 'btn vbr-button-unselected';
-    }
-  }
-
-  showDashboard(): void  {
-    this.selectedIndex = 0;
-  }
-
-  showRankings(): void  {
-    this.selectedIndex = 1;
-  }
-
-  showGames(): void  {
-    this.selectedIndex = 2;
-  }
-
 }

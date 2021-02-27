@@ -1,17 +1,14 @@
-<div class="div-divisions" *ngIf="league">
-  <div class="mx-1 my-3">
-    <select class="custom-select vbr-text" [(ngModel)]="selectedDivision" (change)="onDivisionSelected()">
-      <option *ngFor="let division of league.divisions" [ngValue]="division">
+<div class="div-select" *ngIf="league">
+  <mat-form-field class="mx-1 mt-3" appearance="outline">
+    <mat-select [(ngModel)]="selectedDivision" (change)="onDivisionSelected()">
+      <mat-option *ngFor="let division of league.divisions" [value]="division">
         {{division}}
-      </option>
-    </select>
-  </div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
-<div class="div-rankings my-3" *ngIf="league">
-  <div class="card div-card container expanded-rankings">
-    <div class="div-download">
-      <button type="button" class="btn vbr-button-inverted" (click)="downloadDivisionExcel()"><i class="fa fa-download"></i></button>
-    </div>
+<div class="div-rankings" *ngIf="league">
+  <mat-card class="expanded-rankings">
     <div class="row align-items-center p-1">
       <div class="vbr-text col-sm-3 text-center p-0 m-0 title">Teams</div>
       <div class="vbr-text col-sm-3 text-center p-0 m-0 title">Matches</div>
@@ -45,12 +42,9 @@
       <div class="vbr-text col-sm-1 text-right p-0 m-0">{{ranking.pointsAgainst}}</div>
       <div class="vbr-text col-sm-1 text-right p-0 m-0">{{getDiff(ranking.pointsDiff)}}</div>
     </div>
-  </div>
+  </mat-card>
 
-  <div class="card div-card container collapsed-rankings">
-    <div class="div-download">
-      <button type="button" class="btn btn-sm vbr-button-inverted" (click)="downloadDivisionExcel()"><i class="fa fa-download"></i></button>
-    </div>
+  <mat-card class="collapsed-rankings">
     <div class="row align-items-center p-1">
       <div class="vbr-text col-6 text-center p-0 m-0 title">Teams</div>
       <div class="vbr-text col-2 text-right p-0 m-0 title">Matches</div>
@@ -74,5 +68,7 @@
       <div class="vbr-text col-2 text-right p-0 m-0">{{getDiff(ranking.setsDiff)}}</div>
       <div class="vbr-text col-2 text-right p-0 m-0">{{getDiff(ranking.pointsDiff)}}</div>
     </div>
-  </div>
+  </mat-card>
 </div>
+
+<button *ngIf="league" type="button" class="bottom-right-fab" mat-fab type="button" color="accent" aria-label="Rankings" (click)="downloadDivisionExcel()"><mat-icon>cloud_download</mat-icon></button>

@@ -1,15 +1,19 @@
-<div class="div-content">
-  <div class="my-3 text-center" *ngIf="league">
-    <span class="h2 vbr-text">{{league.name}}</span>
-  </div>
-  <div class="text-center my-3">
-    <ul class="list-unstyled list-inline">
-      <li class="list-inline-item my-1"><button [ngClass]="getLinkClass(0)" (click)="showDashboard()">Dashboard</button></li>
-      <li class="list-inline-item my-1"><button [ngClass]="getLinkClass(1)" (click)="showRankings()">Rankings</button></li>
-      <li class="list-inline-item my-1"><button [ngClass]="getLinkClass(2)" (click)="showGames()">Games</button></li>
-    </ul>
-  </div>
-  <app-league-dashboard [league]="league" *ngIf="league && selectedIndex === 0"></app-league-dashboard>
-  <app-division-rankings [league]="league" *ngIf="league && selectedIndex === 1"></app-division-rankings>
-  <app-league-games [league]="league" *ngIf="league && selectedIndex === 2"></app-league-games>
+<div class="my-3 text-center" *ngIf="league">
+  <span class="h2 vbr-text">{{league.name}}</span>
 </div>
+
+<mat-tab-group animationDuration="0ms" *ngIf="league" mat-align-tabs="center">
+
+  <mat-tab label="Dashboard">
+    <app-league-dashboard [league]="league"></app-league-dashboard>
+  </mat-tab>
+  
+  <mat-tab label="Rankings">
+    <app-division-rankings [league]="league"></app-division-rankings>
+  </mat-tab>
+
+  <mat-tab label="Games">
+    <app-league-games [league]="league"></app-league-games>
+  </mat-tab>
+
+</mat-tab-group>

@@ -12,14 +12,12 @@
     <app-snow-game *ngSwitchCase="'SNOW'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
       (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-snow-game>
 </div>
-<div class="div-schedule text-center" *ngIf="game && game.status === 'SCHEDULED'">
-  <ngb-alert class="mx-1 px-1" type="info" [dismissible]="false">
-    <h4 class="alert-heading">{{game.homeTeam.name}} - {{game.guestTeam.name}}</h4>
-    <div class="mb-1" *ngIf="game.league">{{game.league.name}} / {{game.league.division}}</div>
-    <div>
-      This game is scheduled to start on {{game.scheduledAt | date : 'dd MMM yyyy'}} at {{game.scheduledAt | date : 'HH:mm'}}
-      <span *ngIf="game.refereeName"> and refereed by {{game.refereeName}}</span>
-      .
-    </div>
-  </ngb-alert>
+<div class="div-schedule text-center mt-3" *ngIf="game && game.status === 'SCHEDULED'">
+  <div class="mx-1 px-1">
+    <h2 class="mat-h2">{{game.homeTeam.name}} - {{game.guestTeam.name}}</h2>
+    <p class="mb-1" *ngIf="game.league">{{game.league.name}} / {{game.league.division}}</p>
+    <p>This game is scheduled to start on <b>{{game.scheduledAt | date : 'dd MMM yyyy'}} at {{game.scheduledAt | date : 'HH:mm'}}</b>
+      <span *ngIf="game.refereeName"> and will be refereed by {{game.refereeName}}</span>.
+    </p>
+  </div>
 </div>

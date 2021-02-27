@@ -1,5 +1,5 @@
-.div-divisions {
-  max-width: 750px;
+.div-select {
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -10,9 +10,11 @@
   margin-right: auto;
 }
 
-.div-download {
-  z-index: 3;
+.bottom-right-fab {
   position: fixed;
+  bottom: calc(1.1 * var(--toolbar-height));
+  right: calc(0.5 * var(--toolbar-height));
+  z-index: 5;
 }
 
 @media screen and (min-width: 800px) {

@@ -13,6 +13,8 @@ import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/
 })
 export class LeagueDashboardComponent implements OnDestroy, OnChanges {
 
+  @Input() league: League;
+
   selectedDivision: string;
   allDivisions:     string;
   liveGames:        GameSummary[];
@@ -20,8 +22,6 @@ export class LeagueDashboardComponent implements OnDestroy, OnChanges {
   last10Games:      GameSummary[];
   subscription:     Subscription;
   autoRefresh:      boolean;
-
-  @Input() league: League;
 
   constructor(private publicService: PublicService) {
     this.allDivisions = "All pools / divisions";

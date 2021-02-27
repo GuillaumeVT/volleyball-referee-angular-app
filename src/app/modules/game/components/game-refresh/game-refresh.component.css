@@ -1,4 +1,4 @@
-.refresh {
+.bottom-right-fab {
   position: fixed;
   bottom: calc(1.1 * var(--toolbar-height));
   right: calc(0.5 * var(--toolbar-height));
