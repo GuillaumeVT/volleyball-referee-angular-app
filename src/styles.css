@@ -470,22 +470,27 @@ input:checked + .slider:before {
   margin-top: 300px !important;
  }
 
-.info-snackbar {
+.vbr-info-snackbar {
   color: var(--vbr-primary-color);
   background-color: var(--vbr-light-primary-color);
 }
 
-.info-snackbar .mat-simple-snackbar {
+.vbr-info-snackbar .mat-simple-snackbar {
   justify-content: center;
 }
 
-.error-snackbar {
+.vbr-error-snackbar {
   color: var(--vbr-error-color);
   background-color: var(--vbr-error-light-color);
 }
 
-.error-snackbar .mat-simple-snackbar {
+.vbr-error-snackbar .mat-simple-snackbar {
   justify-content: center;
+}
+
+.vbr-tooltip {
+  color: var(--vbr-primary-color) !important;
+  background-color: var(--vbr-light-primary-color) !important;
 }
 
 @media screen and (min-width: 800px) {

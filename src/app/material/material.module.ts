@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatMenuModule,
     MatBadgeModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTooltipModule
   ],
   exports: [
     FlexLayoutModule,
@@ -62,7 +64,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatMenuModule,
     MatBadgeModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTooltipModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
