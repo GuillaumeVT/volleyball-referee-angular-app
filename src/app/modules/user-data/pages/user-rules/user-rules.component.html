@@ -1,65 +1,67 @@
 <div class="div-user text-center" *ngIf="user">
-  <ul class="my-3 list-unstyled list-inline">
-    <li class="list-inline-item my-1">
-      <button class="btn vbr-indoor-button" (click)="createRules('INDOOR')">
-        <i class="fa fa-plus"></i><span class="icon-text mx-2">Create</span>6x6
-      </button>
-    </li>
-    <li class="list-inline-item my-1">
-      <button class="btn vbr-beach-button" (click)="createRules('BEACH')">
-        <i class="fa fa-plus"></i><span class="icon-text mx-2">Create</span>Beach
-      </button>
-    </li>
-    <li class="list-inline-item my-1">
-      <button class="btn vbr-indoor-4x4-button" (click)="createRules('INDOOR_4X4')">
-        <i class="fa fa-plus"></i><span class="icon-text mx-2">Create</span>4x4
-      </button>
-    </li>
-    <li class="list-inline-item my-1">
-      <button class="btn vbr-snow-button" (click)="createRules('SNOW')">
-        <i class="fa fa-plus"></i><span class="icon-text mx-2">Create</span>Snow
-      </button>
-    </li>
-    <li class="list-inline-item my-1">
-      <button class="btn cancel-button" (click)="deleteAllRules()">
-        <i class="fa fa-trash"></i><span class="icon-text ml-2">Delete All</span>
-      </button>
-    </li>
-  </ul>
-  <div class="my-3 mx-1 text-left" *ngIf="rules">
-    <input type="text" class="form-control vbr-text mb-2" placeholder="Filter" #textFilter (input)="filterFromText(textFilter)"/>
-    <div class="text-left list-unstyled list-inline">
-      <button class="btn chip vbr-beach-chip list-inline-item my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>Beach</button>
-      <button class="btn chip vbr-indoor-chip list-inline-item my-1" #indoorButton (click)="toggleIndoor(indoorButton)">6x6</button>
-      <button class="btn chip vbr-indoor-4x4-chip list-inline-item my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">4x4</button>
-      <button class="btn chip vbr-snow-chip list-inline-item my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>Snow</button>
-    </div>
+
+  <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="center center" fxLayoutGap="8px">
+    <button class="vbr-indoor-button my-1" mat-raised-button (click)="createRules('INDOOR')">
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>6x6</span>
+    </button>
+    <button class="vbr-beach-button my-1" mat-raised-button (click)="createRules('BEACH')">
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>Beach</span>
+    </button>
+    <button class="vbr-indoor-4x4-button my-1" mat-raised-button (click)="createRules('INDOOR_4X4')">
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>4x4</span>
+    </button>
+    <button class="vbr-snow-button my-1" mat-raised-button (click)="createRules('SNOW')">
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>Snow</span>
+    </button>
+    <button class="cancel-button my-1" mat-button (click)="deleteAllRules()">
+      <mat-icon>delete</mat-icon><span class="ml-1">Delete All</span>
+    </button>
   </div>
-  <div *ngFor="let rules of filteredRules" class="card div-card my-3 mx-1 py-2">
-    <div class="row align-items-center m-1">
-      <div class="vbr-text col-8 col-sm-4 p-1 text-left">{{rules.name}}</div>
-      <div class="vbr-text col-4 col-sm-2 p-1 text-center list-unstyled list-inline">
-        <span class="chip vbr-beach-chip list-inline-item" *ngIf="rules.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
-        <span class="chip vbr-indoor-chip list-inline-item" *ngIf="rules.kind === 'INDOOR'">6x6</span>
-        <span class="chip vbr-indoor-4x4-chip list-inline-item" *ngIf="rules.kind === 'INDOOR_4X4'">4x4</span>
-        <span class="chip vbr-snow-chip list-inline-item" *ngIf="rules.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
-      </div>
-      <div class="vbr-text col-7 col-sm-3 p-1 text-left">
-        <span class="icon-text">Last updated on&nbsp;</span>{{rules.updatedAt | date : 'dd MMM yyyy, HH:mm:ss'}}
-      </div>
-      <div class="vbr-text col-5 col-sm-3 p-1 text-right">
-        <div class="btn-group">
-          <button type="button" class="btn vbr-button-inverted" (click)="viewRules(rules)">
-            <i class="fa fa-eye"></i><span class="icon-text ml-2">View</span>
+
+  <div class="my-3 mx-1 text-left" *ngIf="rules">
+    
+    <mat-form-field class="mb-2">
+      <mat-label>Filter</mat-label>
+      <input matInput type="text" #textFilter autocomplete="off" (input)="filterFromText(textFilter)"/>
+    </mat-form-field>
+    
+    <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px">
+      <button class="btn chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>Beach</button>
+      <button class="btn chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">6x6</button>
+      <button class="btn chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">4x4</button>
+      <button class="btn chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>Snow</button>
+    </div>
+  
+  </div>
+
+  <mat-card *ngFor="let rules of filteredRules" class="my-3">
+    <mat-card-content>
+      <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px grid">
+        <div class="vbr-text text-left" fxFlex="25" fxFlex.xs="65">
+          {{rules.name}}
+        </div>
+        <div fxFlex="15" fxFlex.xs>
+          <span class="chip vbr-beach-chip" *ngIf="rules.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
+          <span class="chip vbr-indoor-chip" *ngIf="rules.kind === 'INDOOR'">6x6</span>
+          <span class="chip vbr-indoor-4x4-chip" *ngIf="rules.kind === 'INDOOR_4X4'">4x4</span>
+          <span class="chip vbr-snow-chip" *ngIf="rules.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
+        </div>
+        <div class="text-left" fxFlex="20" fxFlex.xs="40">
+          <span class="icon-text">Last updated on&nbsp;</span>{{rules.updatedAt | date : 'dd MMM yyyy, HH:mm:ss'}}
+        </div>
+        <div class="text-right" fxFlex fxFlex.xs>
+          <button mat-button color="primary" type="button" (click)="viewRules(rules)">
+            <mat-icon>visibility</mat-icon><span class="icon-text ml-1">View</span>
           </button>
-          <button type="button" class="btn vbr-button-inverted" (click)="updateRules(rules)">
-            <i class="fa fa-pencil"></i><span class="icon-text ml-2">Edit</span>
+          <button mat-button color="primary" type="button" (click)="updateRules(rules)">
+            <mat-icon>edit</mat-icon><span class="icon-text ml-1">Edit</span>
           </button>
-          <button type="button" class="btn vbr-button-inverted" (click)="deleteRules(rules)">
-            <i class="fa fa-trash"></i><span class="icon-text ml-2">Delete</span>
+          <button mat-button color="primary" type="button" (click)="deleteRules(rules)">
+            <mat-icon>delete</mat-icon><span class="icon-text ml-1">Delete</span>
           </button>
         </div>
       </div>
-    </div>
-  </div>
+    </mat-card-content>
+  </mat-card>
+
 </div>

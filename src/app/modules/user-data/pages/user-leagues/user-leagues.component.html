@@ -1,19 +1,19 @@
 <div class="div-user text-center" *ngIf="user">
   
   <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="center center" fxLayoutGap="8px">
-    <button class="btn vbr-indoor-button my-1" mat-raised-button (click)="createLeague('INDOOR')">
+    <button class="vbr-indoor-button my-1" mat-raised-button (click)="createLeague('INDOOR')">
       <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>6x6</span>
     </button>
-    <button class="btn vbr-beach-button my-1" mat-raised-button (click)="createLeague('BEACH')">
+    <button class="vbr-beach-button my-1" mat-raised-button (click)="createLeague('BEACH')">
       <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>Beach</span>
     </button>
-    <button class="btn vbr-indoor-4x4-button my-1" mat-raised-button (click)="createLeague('INDOOR_4X4')">
+    <button class="vbr-indoor-4x4-button my-1" mat-raised-button (click)="createLeague('INDOOR_4X4')">
       <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>4x4</span>
     </button>
-    <button class="btn vbr-snow-button my-1" mat-raised-button (click)="createLeague('SNOW')">
+    <button class="vbr-snow-button my-1" mat-raised-button (click)="createLeague('SNOW')">
       <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>Snow</span>
     </button>
-    <button class="btn cancel-button my-1" mat-button (click)="deleteAllLeagues()">
+    <button class="cancel-button my-1" mat-button (click)="deleteAllLeagues()">
       <mat-icon>delete</mat-icon><span class="ml-1">Delete All</span>
     </button>
   </div>
@@ -37,12 +37,12 @@
   <mat-card *ngFor="let league of filteredLeagues" class="my-3">
     <mat-card-content>
       <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px grid">
-        <div class="vbr-text text-left" fxFlex="25" fxFlex.xs="100">
+        <div class="vbr-text text-left" fxFlex="25" fxFlex.xs="75">
           {{league.name}}
         </div>
         <div class="text-left" fxFlex="15" fxFlex.xs="75">
           <a [routerLink]="getLeaguePublicUrl(league)" target="_blank">
-            <button mat-raised-button color="primary" type="button" matTooltip="Navigate to the public section of the tournament. Share this URL with everyone." matTooltipClass="vbr-tooltip">Public Page »</button>
+            <button mat-stroked-button color="primary" type="button" matTooltip="Navigate to the public section of the tournament. Share this URL with everyone." matTooltipClass="vbr-tooltip">Public Page »</button>
           </a>
         </div>
         <div fxFlex="10" fxFlex.xs>
@@ -71,3 +71,5 @@
       </div>
     </mat-card-content>
   </mat-card>
+
+</div>

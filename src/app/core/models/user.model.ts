@@ -25,7 +25,7 @@ export class FriendRequest {
 export class FriendsAndRequests {
   friends:                Friend[];
   receivedFriendRequests: FriendRequest[];
-  sentFriendRequest:      FriendRequest[];
+  sentFriendRequests:     FriendRequest[];
 }
 
 
