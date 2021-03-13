@@ -19,7 +19,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-games',
@@ -36,7 +35,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   constructor(private titleService: Title, private route: ActivatedRoute, private datePipe: DatePipe, private userService: UserService,
     private gameService: GameService, private leagueService: LeagueService, private publicService: PublicService, private dialog: MatDialog,
-    private modalService: NgbModal, private snackBarService: SnackBarService, private fileSaverService: FileSaverService) {
+    private snackBarService: SnackBarService, private fileSaverService: FileSaverService) {
     super(50);
     this.titleService.setTitle('VBR - My Games');
   }

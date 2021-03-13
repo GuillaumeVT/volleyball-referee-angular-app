@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Select shirt color</h2>
+<mat-dialog-content>
+
+  <div fxLayout="row wrap" fxFill fxAlign="center center" class="my-4">
+
+    <button *ngFor="let color of colors" mat-mini-fab type="button" (click)="onSelectColor(color)" class="m-2 scaling-fab" [style.background-color]="color" [style.color]="playerStyleService.getTextColor(color)">
+      <mat-icon *ngIf="color === selectedColor">check</mat-icon>
+    </button>
+
+  </div>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onApplyColor()">OK</button>
+</mat-dialog-actions>

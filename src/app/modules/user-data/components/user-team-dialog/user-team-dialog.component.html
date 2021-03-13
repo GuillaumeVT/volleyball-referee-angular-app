@@ -1,0 +1,128 @@
+<h2 mat-dialog-title *ngIf="data.crudType === 1">Create team</h2>
+<h2 mat-dialog-title *ngIf="data.crudType === 2">Update team {{data.team.name}}</h2>
+<h2 mat-dialog-title *ngIf="data.crudType === 4">View team {{data.team.name}}</h2>
+<mat-dialog-content>
+  <form [formGroup]="teamFormGroup" autocomplete="off" novalidate (ngSubmit)="onSubmitForm()">
+
+    <mat-form-field class="my-2" appearance="outline">
+      <mat-label>Team name</mat-label>
+      <input matInput type="text" formControlName="name">
+      <mat-error *ngIf="nameFormControl.errors?.required">Team name is required</mat-error>
+    </mat-form-field>
+
+    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center">
+      <span fxFlex="40" class="vbr-text">Gender</span>
+
+      <div fxFlex>
+        <button mat-fab type="button" [ngClass]="getGenderButton()" (click)="onNextGender()" [disabled]="editingDisabled ? true : null">
+          <i class="p-1" [ngClass]="getGenderIcon()"></i>
+        </button>
+      </div>
+     
+    </div>
+
+    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.crudType !== 4">
+      <span fxFlex="40" class="vbr-text">Shirt color</span>
+
+      <div fxFlex>
+        <button mat-fab type="button" [style.background-color]="colorFormControl.value" [style.color]="playerStyleService.getTextColor(colorFormControl.value)" (click)="onChangeShirtColor()" [disabled]="editingDisabled ? true : null">
+          <mat-icon>brush</mat-icon>
+        </button>
+      </div>
+     
+    </div>
+
+    <div class="my-2" *ngIf="data.team.kind === 'INDOOR' || data.team.kind === 'INDOOR_4X4'">
+      <div class="vbr-text mb-3">
+        Team players (including liberos)
+        <mat-error *ngIf="numberOfPlayersFormControl.errors?.min">{{minPlayers}} players are required</mat-error>
+      </div>
+
+      <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" *ngIf="!moreNumbers">
+        <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:0:25;" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
+          [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
+          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === 4 && !playerItem.selected"></button>
+        
+          <button type="button" mat-button color="primary" (click)="showMoreNumbers()" [hidden]="data.crudType === 4">More numbers</button>
+      </div>
+      
+      <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" *ngIf="moreNumbers">
+        <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
+          [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
+          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === 4 && !playerItem.selected"></button>
+        
+        <button type="button" mat-button color="primary" (click)="showLessNumbers()" [hidden]="data.crudType === 4">Less numbers</button>
+      </div>
+      
+    </div>
+
+    <div class="my-2" *ngIf="data.team.kind === 'SNOW'">
+      <div class="vbr-text mb-3">
+        Team players
+        <mat-error *ngIf="numberOfPlayersFormControl.errors?.min">{{minPlayers}} players are required</mat-error>
+      </div>
+
+      <div fxLayout="row wrap" fxFill fxLayoutAlign="start center">
+        <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:1:5;" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
+          [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
+          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === 4 && !playerItem.selected"></button>
+      </div>
+    </div>
+
+    <mat-form-field class="mt-2" appearance="outline">
+      <mat-label>Captain</mat-label>
+      <mat-select autoActiveFirstOption [formControl]="captain">
+        <mat-option *ngFor="let playerNumber of selectedPlayers" [value]="playerNumber">
+          {{playerNumber}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="captainFormControl.errors?.required || captainFormControl.errors?.min">Captain is required</mat-error>
+    </mat-form-field>
+
+    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.crudType !== 4">
+      <span fxFlex="40" class="vbr-text">Player names</span>
+
+      <div fxFlex>
+        <button mat-fab type="button" [style.background-color]="colorFormControl.value" [style.color]="playerStyleService.getTextColor(colorFormControl.value)" (click)="onEditPlayerNames()" [disabled]="editingDisabled ? true : null">
+          <mat-icon>badge</mat-icon>
+        </button>
+      </div>
+     
+    </div>
+
+    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.team.kind === 'INDOOR' && data.crudType !== 4">
+      <span fxFlex="40" class="vbr-text">Libero shirt color</span>
+
+      <div fxFlex>
+        <button mat-fab type="button" [style.background-color]="liberoColorFormControl.value" [style.color]="playerStyleService.getTextColor(liberoColorFormControl.value)" (click)="onChangeLiberoShirtColor()" [disabled]="editingDisabled ? true : null">
+          <mat-icon>brush</mat-icon>
+        </button>
+      </div>
+     
+    </div>
+
+    <div class="my-2" *ngIf="data.team.kind === 'INDOOR' && selectedPlayers.length > 6">
+      <div class="vbr-text mb-3">Team liberos</div>
+
+      <div fxLayout="row wrap" fxFill fxLayoutAlign="start center">
+        <button type="button" class="btn player-button m-1" *ngFor="let playerItem of liberos" (click)="onLiberoSelected(playerItem.shirtNumber, true)"
+            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
+            [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === 4 && !playerItem.selected"></button>
+      </div>
+      
+    </div>
+
+    <mat-form-field class="my-2" appearance="outline">
+      <mat-label>Coach name</mat-label>
+      <input matInput type="text" formControlName="coachName">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()" *ngIf="data.crudType === 4">Close</button>
+  <button mat-button (click)="close()" *ngIf="data.crudType !== 4">Cancel</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!teamFormGroup.valid" *ngIf="data.crudType === 1">Create</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!teamFormGroup.valid" *ngIf="data.crudType === 2">Update</button>
+  <button mat-raised-button type="button" color="primary" (click)="onEdit()" *ngIf="data.crudType === 4">Edit</button>
+</mat-dialog-actions>

@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { UserTeamModalComponent } from 'src/app/modules/user-data/components/user-team-modal/user-team-modal.component';
+import { UserTeamDialogComponent, UserTeamDialogData } from 'src/app/modules/user-data/components/user-team-dialog/user-team-dialog.component';
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { TeamService } from 'src/app/modules/user-data/services/team.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
@@ -12,7 +12,6 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-teams',
@@ -25,7 +24,7 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
 
   private subscription : Subscription = new Subscription();
 
-  constructor(private titleService: Title, private userService: UserService, private teamService: TeamService, private dialog: MatDialog, private modalService: NgbModal, private snackBarService: SnackBarService) {
+  constructor(private titleService: Title, private userService: UserService, private teamService: TeamService, private dialog: MatDialog, private snackBarService: SnackBarService) {
     super(50);
     this.titleService.setTitle('VBR - My Teams');
   }
@@ -51,18 +50,29 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
 
   createTeam(kind: string): void {
     const team = Team.createTeam(this.user, kind);
-    const modalRef = this.modalService.open(UserTeamModalComponent, { size: 'lg' });
-    modalRef.componentInstance.team = team;
-    modalRef.componentInstance.crudType = CrudType.Create;
-    modalRef.componentInstance.teamUpdated.subscribe((_updated: any) => this.onTeamCreated());
+
+    const data: UserTeamDialogData = {
+      crudType: CrudType.Create,
+      team: team
+    }
+
+    const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: "800px", data: data });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.onTeamCreated();
+      }
+    });
   }
 
   viewTeam(teamSummary: TeamSummary): void {
     this.teamService.getTeam(teamSummary.id).subscribe(
       team => {
-        const modalRef = this.modalService.open(UserTeamModalComponent, { size: 'lg' });
-        modalRef.componentInstance.team = team;
-        modalRef.componentInstance.crudType = CrudType.View;
+        const data: UserTeamDialogData = {
+          crudType: CrudType.View,
+          team: team
+        }
+    
+        const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: "800px", data: data });
       },
       _error => this.snackBarService.showError('Team could not be found.')
     );
@@ -71,10 +81,17 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   updateTeam(teamSummary: TeamSummary): void {
     this.teamService.getTeam(teamSummary.id).subscribe(
       team => {
-        const modalRef = this.modalService.open(UserTeamModalComponent, { size: 'lg' });
-        modalRef.componentInstance.team = team;
-        modalRef.componentInstance.crudType = CrudType.Update;
-        modalRef.componentInstance.teamUpdated.subscribe((_updated: any) => this.onTeamUpdated());
+        const data: UserTeamDialogData = {
+          crudType: CrudType.Update,
+          team: team
+        }
+    
+        const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: "800px", data: data });
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if (dialogResult) {
+            this.onTeamUpdated();
+          }
+        });
       },
       _error => this.snackBarService.showError('Team could not be found.')
     );

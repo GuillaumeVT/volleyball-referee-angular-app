@@ -2,7 +2,7 @@ import { Friend, UserSummary } from 'src/app/core/models/user.model';
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { GameService } from 'src/app/modules/user-data/services/game.service';
 import { LeagueService } from 'src/app/modules/user-data/services/league.service';
-import { Game, GameIngredients, GameSummary } from 'src/app/shared/models/game.model';
+import { GameIngredients, GameSummary } from 'src/app/shared/models/game.model';
 import { League } from 'src/app/shared/models/league.model';
 import { Rules } from 'src/app/shared/models/rules.model';
 import { Team } from 'src/app/shared/models/team.model';
@@ -34,7 +34,7 @@ export class UserGameDialogComponent {
     private gameService: GameService, private leagueService: LeagueService, private snackBarService: SnackBarService,
     public datePipe: DatePipe) {        
     this.genderPipe = new GenderPipe();
-    const editingDisabled = this.isEditingDisabled();
+    const editingDisabled = this.data.crudType === 4 ? true : false;
     this.scheduleDate = new Date(this.data.game.scheduledAt);
     this.minScheduleDate = new Date();
     this.divisionsOfSelectedLeague = [];
@@ -211,14 +211,6 @@ export class UserGameDialogComponent {
     return rules ? rules.name : null;
   }
 
-  close(): void {
-    this.dialogRef.close(false);
-  }
-
-  isEditingDisabled(): boolean {
-    return this.data.crudType === 4 ? true : null;
-  }
-
   refreshDivisionsOfSelectedLeague(): void {
     if (this.leagueFormControl.value) {
       this.leagueService.getLeague(this.leagueFormControl.value.id).subscribe(
@@ -273,6 +265,10 @@ export class UserGameDialogComponent {
     } else if (this.data.crudType === CrudType.Update) {
       this.snackBarService.showError('The game could not be updated. Is it live or completed?');
     }
+  }
+
+  close(): void {
+    this.dialogRef.close(false);
   }
 }
 

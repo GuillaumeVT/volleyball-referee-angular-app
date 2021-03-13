@@ -1,0 +1,9 @@
+.scaling-fab {
+  width: 45px;
+  height: 45px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.scaling-fab:hover {
+  transform: scale(1.5);
+}

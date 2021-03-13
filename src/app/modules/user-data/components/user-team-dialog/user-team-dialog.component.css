@@ -1,0 +1,32 @@
+.mixed-gender {
+	background-color: var(--vbr-mixed-color);
+  color: var(--vbr-inverted-text-color);
+}
+
+.ladies-gender {
+	background-color: var(--vbr-ladies-color);
+  color: var(--vbr-inverted-text-color);
+}
+
+.gents-gender {
+	background-color: var(--vbr-gents-color);
+  color: var(--vbr-inverted-text-color);
+}
+
+.form-button {
+  width: 60px;
+  height: 45px;
+}
+
+.form-button:hover {
+  filter: var(--vbr-hover-brighter);
+}
+
+.player-button {
+  width: 50px;
+  height: 45px;
+}
+
+.player-button:hover {
+  filter: var(--vbr-hover-brighter);
+}

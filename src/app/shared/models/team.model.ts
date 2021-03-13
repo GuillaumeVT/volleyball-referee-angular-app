@@ -31,7 +31,7 @@ export class Team {
     team.liberoColor = '#bc0019';
     team.players = [];
     team.liberos = [];
-    team.captain = 1;
+    team.captain = -1;
     team.coach = '';
 
     if (team.kind === 'BEACH') {

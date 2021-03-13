@@ -32,9 +32,9 @@ export class UserColleaguesComponent implements OnInit {
 
   addColleague(): void {
     const dialogRef = this.dialog.open(UserColleagueDialogComponent, { width: "500px" });
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.onAddColleagueRequested(dialogResult);
+    dialogRef.afterClosed().subscribe(pseudo => {
+      if (pseudo) {
+        this.onAddColleagueRequested(pseudo);
       }
     });
   }

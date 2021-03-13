@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Player names</h2>
+<mat-dialog-content>
+
+  <div fxLayout="column" fxFill>
+    <mat-form-field *ngFor="let player of data.players" class="m-1" appearance="outline">
+      <mat-label>Player #{{player.num}}</mat-label>
+      <input matInput type="text" [(ngModel)]="player.name">
+    </mat-form-field>
+  </div>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button type="submit" color="primary" (click)="close()">OK</button>
+</mat-dialog-actions>
