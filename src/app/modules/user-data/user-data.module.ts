@@ -1,9 +1,8 @@
 import { ColorPickerModalComponent } from 'src/app/modules/user-data/components/color-picker-modal/color-picker-modal.component';
-import { GameRefereeModalComponent } from 'src/app/modules/user-data/components/game-referee-modal/game-referee-modal.component';
+import { GameRefereeDialogComponent } from 'src/app/modules/user-data/components/game-referee-dialog/game-referee-dialog.component';
 import { PlayerNamesModalComponent } from 'src/app/modules/user-data/components/player-names-modal/player-names-modal.component';
-import { UserColleagueModalComponent } from 'src/app/modules/user-data/components/user-colleague-modal/user-colleague-modal.component';
+import { UserColleagueDialogComponent } from 'src/app/modules/user-data/components/user-colleague-dialog/user-colleague-dialog.component';
 import { UserGameDialogComponent } from 'src/app/modules/user-data/components/user-game-dialog/user-game-dialog.component';
-import { UserGameModalComponent } from 'src/app/modules/user-data/components/user-game-modal/user-game-modal.component';
 import { UserLeagueDialogComponent } from 'src/app/modules/user-data/components/user-league-dialog/user-league-dialog.component';
 import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules-modal/user-rules-modal.component';
 import { UserTeamModalComponent } from 'src/app/modules/user-data/components/user-team-modal/user-team-modal.component';
@@ -20,7 +19,6 @@ import { NgModule } from '@angular/core';
 @NgModule({
   declarations: [
     UserColleaguesComponent,
-    UserColleagueModalComponent,
     UserLeaguesComponent,
     UserLeagueDialogComponent,
     UserRulesComponent,
@@ -31,8 +29,8 @@ import { NgModule } from '@angular/core';
     PlayerNamesModalComponent,
     UserGamesComponent,
     UserGameDialogComponent,
-    UserGameModalComponent,
-    GameRefereeModalComponent
+    GameRefereeDialogComponent,
+    UserColleagueDialogComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutAlign="center start">
-  <form class="div-small-form mt-4" [formGroup]="signInForm" autocomplete="off" novalidate (ngSubmit)="signIn()">
+  <form class="div-small-form mt-4" [formGroup]="signInFormGroup" autocomplete="off" novalidate (ngSubmit)="signIn()">
     <mat-card>
       <mat-card-header>
         <img mat-card-avatar src="favicon.ico"/>
@@ -15,8 +15,8 @@
             <mat-form-field appearance="outline">
               <mat-label>Email</mat-label>
               <input matInput type="email" formControlName="email" cdkFocusInitial required>
-              <mat-error *ngIf="formEmail.errors?.required">Email address is required</mat-error>
-              <mat-error *ngIf="formEmail.errors?.email">Email address is not valid</mat-error>
+              <mat-error *ngIf="emailFormControl.errors?.required">Email address is required</mat-error>
+              <mat-error *ngIf="emailFormControl.errors?.email">Email address is not valid</mat-error>
             </mat-form-field>
           </div>
           <div fxFlex class="m-1">
@@ -26,14 +26,14 @@
               <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
                 <mat-icon>{{passwordVisibility}}</mat-icon>
               </button>
-              <mat-error *ngIf="formPassword.errors?.required">Password is required</mat-error>
+              <mat-error *ngIf="passwordFormControl.errors?.required">Password is required</mat-error>
             </mat-form-field>
           </div>
         </div>
       </mat-card-content>
       <mat-card-actions align="end">
         <a [routerLink]="getPasswordLostUrl()"><button mat-button color="primary" type="button">Lost my password</button></a>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!signInForm.valid">Sign in</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!signInFormGroup.valid">Sign in</button>
       </mat-card-actions>
     </mat-card>
   </form>

@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Add colleague</h2>
+<mat-dialog-content>
+  <form [formGroup]="colleagueFormGroup" autocomplete="off" novalidate (ngSubmit)="addColleague()">
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Pseudo</mat-label>
+      <input matInput type="text" formControlName="pseudo" cdkFocusInitial required>
+      <mat-error *ngIf="pseudoFormControl.errors?.required">Pseudo is required</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-raised-button type="button" color="primary" (click)="addColleague()" [disabled]="!colleagueFormGroup.valid">Send</button>
+</mat-dialog-actions>

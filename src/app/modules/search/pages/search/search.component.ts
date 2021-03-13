@@ -87,7 +87,7 @@ export enum SearchType {
     Today = 4
 }
 
-interface SearchCriterion {
+export interface SearchCriterion {
   type: SearchType;
   display: string;
 }

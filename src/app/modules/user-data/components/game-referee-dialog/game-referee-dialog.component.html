@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Update referee</h2>
+<mat-dialog-content>
+  <form [formGroup]="refereeFormGroup" autocomplete="off" novalidate (ngSubmit)="updateReferee()">
+   
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Referee</mat-label>
+      <mat-select autoActiveFirstOption [formControl]="referee">
+        <mat-optgroup label="Me" *ngIf="me">
+          <mat-option [value]="me">
+            {{me.pseudo}}
+          </mat-option>
+        </mat-optgroup>
+        <mat-optgroup label="My colleagues">
+          <mat-option *ngFor="let friend of friends" [value]="friend">
+            {{friend.pseudo}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+      <mat-error *ngIf="refereeFormControl.errors?.required">Referee is required</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-raised-button type="button" color="primary" (click)="updateReferee()" [disabled]="!refereeFormGroup.valid">Update</button>
+</mat-dialog-actions>

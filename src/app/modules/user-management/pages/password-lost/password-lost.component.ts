@@ -11,18 +11,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class PasswordLostComponent {
 
-  passwordLostForm: FormGroup;
+  passwordLostFormGroup: FormGroup;
 
   constructor(private userService: UserService, private snackBarService: SnackBarService) {
-    this.passwordLostForm = new FormGroup({
+    this.passwordLostFormGroup = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email])
     });
   }
 
-  get formEmail() { return this.passwordLostForm.get('email'); }
+  get emailFormControl() { return this.passwordLostFormGroup.get('email'); }
 
   initiatePasswordReset(): void {
-    const emailAddress = this.formEmail.value;
+    const emailAddress = this.emailFormControl.value;
     this.userService.initiatePasswordReset(emailAddress).subscribe(success => this.onValidResponse(emailAddress), _error => this.onInvalidResponse(emailAddress));
   }
 

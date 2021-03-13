@@ -13,22 +13,22 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class UserLeagueDialogComponent {
 
-  leagueForm: FormGroup;
+  leagueFormGroup: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<UserLeagueDialogComponent>, @Inject(MAT_DIALOG_DATA) public league: League, private leagueService: LeagueService, private snackBarService: SnackBarService) {
-    this.leagueForm = new FormGroup({
+    this.leagueFormGroup = new FormGroup({
       leagueName: new FormControl('', [Validators.required])
     });
   }
 
-  get formLeagueName() { return this.leagueForm.get('leagueName'); }
+  get leagueNameFormControl() { return this.leagueFormGroup.get('leagueName'); }
 
   close(): void {
     this.dialogRef.close(false);
   }
 
   createLeague(): void {
-    this.league.name = this.formLeagueName.value;
+    this.league.name = this.leagueNameFormControl.value;
     this.leagueService.createLeague(this.league).subscribe(_league => this.onValidResponse(), error => this.onInvalidResponse(error));
   }
 

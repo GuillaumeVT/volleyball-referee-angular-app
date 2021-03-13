@@ -36,6 +36,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
   ],
   providers: [
     DatePipe,
+    GenderPipe,
     { provide: OWL_DATE_TIME_LOCALE, useValue: 'en-GB' }
   ],
   exports: [

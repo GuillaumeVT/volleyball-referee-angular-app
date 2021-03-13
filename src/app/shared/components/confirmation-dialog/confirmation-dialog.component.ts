@@ -20,7 +20,7 @@ export class ConfirmationDialogComponent {
   }
 }
 
-interface ConfirmationDialogData {
+export interface ConfirmationDialogData {
   title: string;
   message: string;
 }

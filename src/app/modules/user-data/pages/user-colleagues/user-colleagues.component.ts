@@ -1,6 +1,6 @@
 import { Friend, FriendRequest, FriendsAndRequests } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { UserColleagueModalComponent } from 'src/app/modules/user-data/components/user-colleague-modal/user-colleague-modal.component';
+import { UserColleagueDialogComponent } from 'src/app/modules/user-data/components/user-colleague-dialog/user-colleague-dialog.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
@@ -31,8 +31,12 @@ export class UserColleaguesComponent implements OnInit {
   }
 
   addColleague(): void {
-    const modalRef = this.modalService.open(UserColleagueModalComponent, { size: 'lg' });
-    modalRef.componentInstance.addColleagueRequested.subscribe((receiverPseudo: string) => this.onAddColleagueRequested(receiverPseudo));
+    const dialogRef = this.dialog.open(UserColleagueDialogComponent, { width: "500px" });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.onAddColleagueRequested(dialogResult);
+      }
+    });
   }
 
   removeColleague(friend: Friend): void {

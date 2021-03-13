@@ -14,7 +14,7 @@ export class PasswordResetComponent implements OnInit {
 
   passwordResetId: string;
   
-  passwordResetForm:  FormGroup;
+  passwordResetFormGroup:  FormGroup;
   hidePassword:       boolean;
   passwordVisibility: string;
 
@@ -22,7 +22,7 @@ export class PasswordResetComponent implements OnInit {
     this.hidePassword = false;
     this.togglePasswordVisibility();
 
-    this.passwordResetForm = new FormGroup({
+    this.passwordResetFormGroup = new FormGroup({
       newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
       confirmedPassword: new FormControl('', [Validators.required, Validators.minLength(8)])
     }, this.passwordsMustMatchValidator);
@@ -32,9 +32,9 @@ export class PasswordResetComponent implements OnInit {
     this.route.queryParams.subscribe(params => this.passwordResetId = params['passwordResetId']);
   }
 
-  get formNewPassword() { return this.passwordResetForm.get('newPassword'); }
+  get newPasswordFormControl() { return this.passwordResetFormGroup.get('newPassword'); }
 
-  get formConfirmedPassword() { return this.passwordResetForm.get('confirmedPassword'); }
+  get confirmedPasswordFormControl() { return this.passwordResetFormGroup.get('confirmedPassword'); }
 
   private passwordsMustMatchValidator(abstractControl: AbstractControl): { mismatch: boolean } {
     if ((abstractControl.get('newPassword').value && abstractControl.get('confirmedPassword').value)
@@ -51,7 +51,7 @@ export class PasswordResetComponent implements OnInit {
   }
 
   resetPassword(): void {
-    this.userService.resetPassword(this.passwordResetId, this.formNewPassword.value).subscribe(tokenRequestResult => this.onValidResponse(), error => this.onInvalidResponse(error));
+    this.userService.resetPassword(this.passwordResetId, this.newPasswordFormControl.value).subscribe(tokenRequestResult => this.onValidResponse(), error => this.onInvalidResponse(error));
   }
 
   private onValidResponse(): void {

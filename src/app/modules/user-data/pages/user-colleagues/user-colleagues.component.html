@@ -2,7 +2,7 @@
 
   <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="center center" fxLayoutGap="8px">
     <button class="my-1" mat-raised-button color="primary" (click)="addColleague()">
-      <mat-icon>person</mat-icon><span class="ml-1">Add colleague</span>
+      <mat-icon>add</mat-icon><span class="ml-1">Add colleague</span>
     </button>
   </div>
 
@@ -16,10 +16,10 @@
           </div>
           <div class="text-right" fxFlex fxFlex.xs fxLayoutGap="8px">
             <button mat-raised-button color="primary" type="button" (click)="acceptColleague(friendRequest)">
-              <mat-icon>add</mat-icon><span class="ml-1">Accept</span>
+              <mat-icon>check</mat-icon><span class="ml-1">Accept</span>
             </button>
             <button mat-raised-button color="warn" type="button" (click)="rejectColleague(friendRequest)">
-              <mat-icon>delete</mat-icon><span class="ml-1">Reject</span>
+              <mat-icon>close</mat-icon><span class="ml-1">Decline</span>
             </button>
           </div>
         </div>

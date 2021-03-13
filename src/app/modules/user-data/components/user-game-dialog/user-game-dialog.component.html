@@ -1,1 +1,166 @@
-<p>user-game-dialog works!</p>
+<h2 mat-dialog-title *ngIf="data.game && data.crudType && (data.crudType === 1)">Create game</h2>
+<h2 mat-dialog-title *ngIf="data.game && data.crudType && (data.crudType === 2)">Update game</h2>
+<h2 mat-dialog-title *ngIf="data.game && data.crudType && (data.crudType === 4)">View game</h2>
+<mat-dialog-content>
+  <form [formGroup]="gameFormGroup" autocomplete="off" novalidate (ngSubmit)="onSubmitForm()">
+
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Scheduled for</mat-label>
+      <input matInput type="text" formControlName="scheduledAt" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp" [min]="minScheduleDate" (keydown)="$event.preventDefault()" readonly required>
+      <button mat-button matSuffix mat-icon-button [owlDateTimeTrigger]="dtp" (click)="$event.preventDefault()">
+        <mat-icon>today</mat-icon>
+      </button>
+      <owl-date-time #dtp></owl-date-time>
+      <mat-error *ngIf="scheduledAtFormControl.errors?.required">Schedule date is required</mat-error>
+      <mat-error *ngIf="scheduledAtFormControl.errors?.owlDateTimeMin">Game must have a future schedule date</mat-error>
+    </mat-form-field>
+
+    <mat-radio-group formControlName="indexed" color="primary" fxLayout="column" matTooltip="Public games will show for everyone during queries. Private games will not." matTooltipClass="vbr-tooltip">
+      <mat-radio-button [value]="true">Game is public</mat-radio-button>
+      <mat-radio-button [value]="false">Game is private</mat-radio-button>
+    </mat-radio-group>
+
+    <h3 class="mat-h3 mt-3">Tournament / League / Division</h3>
+
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Tournament / League</mat-label>
+      <input matInput type="text" formControlName="league" [matAutocomplete]="leagueAuto">
+      <button mat-button *ngIf="leagueFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="leagueFormControl.setValue(null)">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete #leagueAuto="matAutocomplete" [displayWith]="displayLeague">
+        <mat-option *ngFor="let league of data.gameIngredients?.leagues" [value]="league">
+          {{league.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <p class="mx-1" *ngIf="gameFormGroup.errors?.undefinedLeague">
+      <mat-error>League does not exist.</mat-error>
+    </p>
+
+    <mat-form-field class="m-1" appearance="outline" *ngIf="leagueFormControl.value && !gameFormGroup.errors?.undefinedLeague">
+      <mat-label>Pool / Division</mat-label>
+      <input matInput type="text" formControlName="division" [matAutocomplete]="divisionAuto">
+      <button mat-button *ngIf="divisionFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="divisionFormControl.setValue(null)">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete #divisionAuto="matAutocomplete">
+        <mat-option *ngFor="let division of divisionsOfSelectedLeague" [value]="division">
+          {{division}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="divisionFormControl.errors?.required">Division is required</mat-error>
+    </mat-form-field>
+
+    <h3 class="mat-h3">Teams</h3>
+
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Home team</mat-label>
+      <input matInput type="text" formControlName="homeTeam" [matAutocomplete]="homeTeamAuto" required>
+      <button mat-button *ngIf="homeTeamFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="homeTeamFormControl.setValue(null)">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete #homeTeamAuto="matAutocomplete" [displayWith]="displayTeam">
+        <mat-option *ngFor="let team of data.gameIngredients?.teams" [value]="team">
+          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="homeTeamFormControl.errors?.required">Home team is required</mat-error>
+    </mat-form-field>
+
+    <p class="mx-1" *ngIf="gameFormGroup.errors?.undefinedHomeTeam">
+      <mat-error>Home team does not exist.</mat-error>
+    </p>
+
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Guest team</mat-label>
+      <input matInput type="text" formControlName="guestTeam" [matAutocomplete]="guestTeamAuto" required>
+      <button mat-button *ngIf="guestTeamFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="guestTeamFormControl.setValue(null)">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete #guestTeamAuto="matAutocomplete" [displayWith]="displayTeam">
+        <mat-option *ngFor="let team of data.gameIngredients?.teams" [value]="team">
+          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="guestTeamFormControl.errors?.required">Guest team is required</mat-error>
+    </mat-form-field>
+
+    <p class="mx-1" *ngIf="gameFormGroup.errors?.undefinedGuestTeam">
+      <mat-error>Guest team does not exist.</mat-error>
+    </p>
+
+    <p class="mx-1" *ngIf="gameFormGroup.errors?.sameTeams">
+      <mat-error>Home and guest teams must be different.</mat-error>
+    </p>
+
+    <h3 class="mat-h3">Rules</h3>
+
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Rules</mat-label>
+      <input matInput type="text" formControlName="rules" [matAutocomplete]="rulesAuto" required>
+      <button mat-button *ngIf="rulesFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="rulesFormControl.setValue(null)">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete #rulesAuto="matAutocomplete" [displayWith]="displayRules">
+        <mat-optgroup label="Default Rules">
+          <mat-option [value]="data.gameIngredients.defaultRules">
+            {{data.gameIngredients.defaultRules.name}}
+          </mat-option>
+        </mat-optgroup>
+        <mat-optgroup label="My Rules">
+          <mat-option *ngFor="let rules of data.gameIngredients?.rules" [value]="rules">
+            {{rules.name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+      <mat-error *ngIf="rulesFormControl.errors?.required">Rules are required</mat-error>
+    </mat-form-field>
+
+    <p class="mx-1" *ngIf="gameFormGroup.errors?.undefinedRules">
+      <mat-error>Rules do not exist.</mat-error>
+    </p>
+    
+    <h3 class="mat-h3">Referee</h3>
+
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Referee</mat-label>
+      <mat-select autoActiveFirstOption [formControl]="referee">
+        <mat-optgroup label="Me" *ngIf="me">
+          <mat-option [value]="me">
+            {{me.pseudo}}
+          </mat-option>
+        </mat-optgroup>
+        <mat-optgroup label="My colleagues">
+          <mat-option *ngFor="let friend of data.gameIngredients?.friends" [value]="friend">
+            {{friend.pseudo}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+      <mat-error *ngIf="refereeFormControl.errors?.required">Referee is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Referee 1 name</mat-label>
+      <input matInput type="text" formControlName="referee1Name">
+    </mat-form-field>
+
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Referee 2 name</mat-label>
+      <input matInput type="text" formControlName="referee2Name">
+    </mat-form-field>
+
+    <mat-form-field class="m-1" appearance="outline">
+      <mat-label>Scorer name</mat-label>
+      <input matInput type="text" formControlName="scorerName">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()" *ngIf="data.crudType === 4">Close</button>
+  <button mat-button (click)="close()" *ngIf="data.crudType !== 4">Cancel</button>
+  <button mat-raised-button type="button" color="primary" (click)="onSubmitForm()" [disabled]="!gameFormGroup.valid" *ngIf="data.crudType === 1">Create</button>
+  <button mat-raised-button type="button" color="primary" (click)="onSubmitForm()" [disabled]="!gameFormGroup.valid" *ngIf="data.crudType === 2">Update</button>
+</mat-dialog-actions>

@@ -2,8 +2,8 @@ import { FileSaverService } from 'ngx-filesaver';
 import { forkJoin, Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { GameRefereeModalComponent } from 'src/app/modules/user-data/components/game-referee-modal/game-referee-modal.component';
-import { UserGameModalComponent } from 'src/app/modules/user-data/components/user-game-modal/user-game-modal.component';
+import { GameRefereeDialogComponent, UserGameRefereeDialogData } from 'src/app/modules/user-data/components/game-referee-dialog/game-referee-dialog.component';
+import { UserGameDialogComponent, UserGameDialogData } from 'src/app/modules/user-data/components/user-game-dialog/user-game-dialog.component';
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { GameService } from 'src/app/modules/user-data/services/game.service';
 import { LeagueService } from 'src/app/modules/user-data/services/league.service';
@@ -57,10 +57,10 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   refreshGames(append: boolean): void {
     if (this.selectedLeagueId) {
-      forkJoin(
+      forkJoin([
         this.leagueService.getLeague(this.selectedLeagueId),
         this.gameService.listGamesInLeague(this.selectedLeagueId, this.getStatuses(), this.getGenders(), (append ? this.page : 0), this.size)
-      )
+      ])
       .subscribe(([league, page]) => {
         this.selectedLeague = league;
         this.onGamesReceived(page);
@@ -78,12 +78,19 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   }
 
   launchCreateGame(game: GameSummary, gameIngredients: GameIngredients): void {
-    const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
-    modalRef.componentInstance.game = game;
-    modalRef.componentInstance.gameIngredients = gameIngredients;
-    modalRef.componentInstance.user = this.user;
-    modalRef.componentInstance.crudType = CrudType.Create;
-    modalRef.componentInstance.gameUpdated.subscribe((_updated: any) => this.onGameCreated());
+    const data: UserGameDialogData = {
+      crudType: CrudType.Create,
+      game: game,
+      gameIngredients: gameIngredients,
+      user: this.user
+    }
+
+    const dialogRef = this.dialog.open(UserGameDialogComponent, { width: "800px", data: data });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.onGameCreated();
+      }
+    });
   }
 
   viewGame(game: GameSummary): void {
@@ -91,11 +98,14 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   }
 
   launchViewGame(game: GameSummary, gameIngredients: GameIngredients): void {
-    const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
-    modalRef.componentInstance.game = game;
-    modalRef.componentInstance.gameIngredients = gameIngredients;
-    modalRef.componentInstance.user = this.user;
-    modalRef.componentInstance.crudType = CrudType.View;
+    const data: UserGameDialogData = {
+      crudType: CrudType.View,
+      game: game,
+      gameIngredients: gameIngredients,
+      user: this.user
+    }
+
+    const dialogRef = this.dialog.open(UserGameDialogComponent, { width: "800px", data: data });
   }
 
   updateGame(game: GameSummary): void {
@@ -104,19 +114,33 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   }
 
   launchUpdateGame(game: GameSummary, gameIngredients: GameIngredients): void {
-    const modalRef = this.modalService.open(UserGameModalComponent, { size: 'lg' });
-    modalRef.componentInstance.game = game;
-    modalRef.componentInstance.gameIngredients = gameIngredients;
-    modalRef.componentInstance.user = this.user;
-    modalRef.componentInstance.crudType = CrudType.Update;
-    modalRef.componentInstance.gameUpdated.subscribe((_updated: any) => this.onGameUpdated());
+    const data: UserGameDialogData = {
+      crudType: CrudType.Update,
+      game: game,
+      gameIngredients: gameIngredients,
+      user: this.user
+    }
+
+    const dialogRef = this.dialog.open(UserGameDialogComponent, { width: "800px", data: data });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.onGameUpdated();
+      }
+    });
   }
 
   updateReferee(game: GameSummary): void {
-    const modalRef = this.modalService.open(GameRefereeModalComponent, { size: 'lg' });
-    modalRef.componentInstance.game = game;
-    modalRef.componentInstance.user = this.user;
-    modalRef.componentInstance.refereeUpdated.subscribe((_updated: any) => this.onRefereeUpdated());
+    const data: UserGameRefereeDialogData = {
+      game: game,
+      user: this.user
+    }
+
+    const dialogRef = this.dialog.open(GameRefereeDialogComponent, { width: "800px", data: data });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.onRefereeUpdated();
+      }
+    });
   }
 
   deleteGame(game: GameSummary): void {

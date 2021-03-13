@@ -12,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class SignInComponent {
 
-  signInForm:         FormGroup;
+  signInFormGroup:         FormGroup;
   hidePassword:       boolean;
   passwordVisibility: string;
 
@@ -21,15 +21,15 @@ export class SignInComponent {
     this.togglePasswordVisibility();
     this.passwordVisibility = 'visibility_off';
 
-    this.signInForm = new FormGroup({
+    this.signInFormGroup = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
     });
   }
 
-  get formEmail() { return this.signInForm.get('email'); }
+  get emailFormControl() { return this.signInFormGroup.get('email'); }
 
-  get formPassword() { return this.signInForm.get('password'); }
+  get passwordFormControl() { return this.signInFormGroup.get('password'); }
 
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
@@ -37,7 +37,7 @@ export class SignInComponent {
   }
 
   signIn(): void {
-    const emailCredentials = new EmailCredentials(this.formEmail.value, this.formPassword.value);
+    const emailCredentials = new EmailCredentials(this.emailFormControl.value, this.passwordFormControl.value);
     this.userService.signIn(emailCredentials).subscribe(userToken => this.onValidResponse(), error => this.onInvalidResponse(error));
   }
 

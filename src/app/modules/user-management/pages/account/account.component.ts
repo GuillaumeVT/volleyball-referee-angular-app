@@ -14,7 +14,7 @@ export class AccountComponent implements OnInit {
 
   user: UserSummary;
 
-  passwordUpdateForm: FormGroup;
+  passwordUpdateFormGroup: FormGroup;
   hidePassword:       boolean;
   passwordVisibility: string;
 
@@ -22,7 +22,7 @@ export class AccountComponent implements OnInit {
     this.hidePassword = false;
     this.togglePasswordVisibility();
 
-    this.passwordUpdateForm = new FormGroup({
+    this.passwordUpdateFormGroup = new FormGroup({
       currentPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
       newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
       confirmedPassword: new FormControl('', [Validators.required, Validators.minLength(8)])
@@ -33,11 +33,11 @@ export class AccountComponent implements OnInit {
     this.userService.authState.subscribe(auth => this.user = auth ? auth.user : null);
   }
 
-  get formCurrentPassword() { return this.passwordUpdateForm.get('currentPassword'); }
+  get currentPasswordFormControl() { return this.passwordUpdateFormGroup.get('currentPassword'); }
 
-  get formNewPassword() { return this.passwordUpdateForm.get('newPassword'); }
+  get newPasswordFormControl() { return this.passwordUpdateFormGroup.get('newPassword'); }
 
-  get formConfirmedPassword() { return this.passwordUpdateForm.get('confirmedPassword'); }
+  get confirmedPasswordFormControl() { return this.passwordUpdateFormGroup.get('confirmedPassword'); }
 
   private passwordsMustMatchValidator(abstractControl: AbstractControl): { mismatch: boolean } {
     if ((abstractControl.get('newPassword').value && abstractControl.get('confirmedPassword').value)
@@ -54,7 +54,7 @@ export class AccountComponent implements OnInit {
   }
 
   updateUserPassword(): void {
-    const userPasswordUpdate = new UserPasswordUpdate(this.formCurrentPassword.value, this.formNewPassword.value);
+    const userPasswordUpdate = new UserPasswordUpdate(this.currentPasswordFormControl.value, this.newPasswordFormControl.value);
     this.userService.updateUserPassword(userPasswordUpdate).subscribe(tokenRequestResult => this.onValidResponse(), error => this.onInvalidResponse(error));
   }
 

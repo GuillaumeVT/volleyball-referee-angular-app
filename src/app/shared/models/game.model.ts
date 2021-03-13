@@ -74,7 +74,7 @@ export class GameSummary {
     game.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
     game.scheduledAt = now.getTime();
     game.refereedBy = user.id;
-    game.refereeName = user.id;
+    game.refereeName = user.pseudo;
     game.kind = kind;
     game.gender = 'MIXED';
     game.usage = 'NORMAL';
