@@ -53,7 +53,7 @@ export class AccountComponent implements OnInit {
     this.passwordVisibility = this.hidePassword ? 'visibility_off' : 'visibility';
   }
 
-  updateUserPassword(): void {
+  onUpdateUserPassword(): void {
     const userPasswordUpdate = new UserPasswordUpdate(this.currentPasswordFormControl.value, this.newPasswordFormControl.value);
     this.userService.updateUserPassword(userPasswordUpdate).subscribe(tokenRequestResult => this.onValidResponse(), error => this.onInvalidResponse(error));
   }

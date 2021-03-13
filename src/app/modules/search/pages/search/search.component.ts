@@ -51,7 +51,7 @@ export class SearchComponent {
     }
   }
 
-  search(): void {
+  onSearch(): void {
     switch (this.searchType) {
       case SearchType.Token:
         this.searchToken = this.searchTokenControl.value;

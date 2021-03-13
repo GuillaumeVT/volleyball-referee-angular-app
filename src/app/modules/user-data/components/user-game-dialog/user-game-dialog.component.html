@@ -161,6 +161,6 @@
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()" *ngIf="data.crudType === 4">Close</button>
   <button mat-button (click)="close()" *ngIf="data.crudType !== 4">Cancel</button>
-  <button mat-raised-button type="button" color="primary" (click)="onSubmitForm()" [disabled]="!gameFormGroup.valid" *ngIf="data.crudType === 1">Create</button>
-  <button mat-raised-button type="button" color="primary" (click)="onSubmitForm()" [disabled]="!gameFormGroup.valid" *ngIf="data.crudType === 2">Update</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!gameFormGroup.valid" *ngIf="data.crudType === 1">Create</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!gameFormGroup.valid" *ngIf="data.crudType === 2">Update</button>
 </mat-dialog-actions>

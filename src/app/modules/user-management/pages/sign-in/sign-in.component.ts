@@ -36,7 +36,7 @@ export class SignInComponent {
     this.passwordVisibility = this.hidePassword ? 'visibility_off' : 'visibility';
   }
 
-  signIn(): void {
+  onSignIn(): void {
     const emailCredentials = new EmailCredentials(this.emailFormControl.value, this.passwordFormControl.value);
     this.userService.signIn(emailCredentials).subscribe(userToken => this.onValidResponse(), error => this.onInvalidResponse(error));
   }

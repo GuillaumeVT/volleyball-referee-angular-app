@@ -50,7 +50,7 @@ export class PasswordResetComponent implements OnInit {
     this.passwordVisibility = this.hidePassword ? 'visibility_off' : 'visibility';
   }
 
-  resetPassword(): void {
+  onResetPassword(): void {
     this.userService.resetPassword(this.passwordResetId, this.newPasswordFormControl.value).subscribe(tokenRequestResult => this.onValidResponse(), error => this.onInvalidResponse(error));
   }
 

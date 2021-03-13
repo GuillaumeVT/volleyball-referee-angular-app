@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Update referee</h2>
 <mat-dialog-content>
-  <form [formGroup]="refereeFormGroup" autocomplete="off" novalidate (ngSubmit)="updateReferee()">
+  <form [formGroup]="refereeFormGroup" autocomplete="off" novalidate (ngSubmit)="onUpdateReferee()">
    
     <mat-form-field class="m-1" appearance="outline">
       <mat-label>Referee</mat-label>
@@ -23,5 +23,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()">Cancel</button>
-  <button mat-raised-button type="button" color="primary" (click)="updateReferee()" [disabled]="!refereeFormGroup.valid">Update</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onUpdateReferee()" [disabled]="!refereeFormGroup.valid">Update</button>
 </mat-dialog-actions>

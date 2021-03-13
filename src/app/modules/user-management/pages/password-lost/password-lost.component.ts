@@ -21,7 +21,7 @@ export class PasswordLostComponent {
 
   get emailFormControl() { return this.passwordLostFormGroup.get('email'); }
 
-  initiatePasswordReset(): void {
+  onInitiatePasswordReset(): void {
     const emailAddress = this.emailFormControl.value;
     this.userService.initiatePasswordReset(emailAddress).subscribe(success => this.onValidResponse(emailAddress), _error => this.onInvalidResponse(emailAddress));
   }

@@ -26,7 +26,7 @@ export class UserColleagueDialogComponent {
     this.dialogRef.close(null);
   }
 
-  addColleague(): void {
+  onAddColleague(): void {
     const pseudo = this.pseudoFormControl.value;
     this.userService.sendFriendRequest(pseudo).subscribe(success => this.onValidResponse(pseudo), error => this.onInvalidResponse());
   }

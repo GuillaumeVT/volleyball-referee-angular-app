@@ -51,7 +51,7 @@ export class GameRefereeDialogComponent {
 
   get refereeFormControl() { return this.refereeFormGroup.get('referee'); }
 
-  updateReferee(): void {
+  onUpdateReferee(): void {
     this.gameService.updateReferee(this.data.game.id, this.refereeFormControl.value.id).subscribe(success => this.onValidResponse(), error => this.onInvalidResponse());
   }
 

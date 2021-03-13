@@ -27,7 +27,7 @@ export class UserLeagueDialogComponent {
     this.dialogRef.close(false);
   }
 
-  createLeague(): void {
+  onCreateLeague(): void {
     this.league.name = this.leagueNameFormControl.value;
     this.leagueService.createLeague(this.league).subscribe(_league => this.onValidResponse(), error => this.onInvalidResponse(error));
   }
