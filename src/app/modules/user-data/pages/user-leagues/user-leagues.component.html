@@ -13,7 +13,7 @@
     <button class="vbr-snow-button my-1" mat-raised-button (click)="createLeague('SNOW')">
       <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>Snow</span>
     </button>
-    <button class="cancel-button my-1" mat-button (click)="deleteAllLeagues()">
+    <button class="vbr-cancel-button my-1" mat-button (click)="deleteAllLeagues()">
       <mat-icon>delete</mat-icon><span class="ml-1">Delete All</span>
     </button>
   </div>
@@ -26,10 +26,10 @@
     </mat-form-field>
     
     <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px">
-      <button class="btn chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>Beach</button>
-      <button class="btn chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">6x6</button>
-      <button class="btn chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">4x4</button>
-      <button class="btn chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>Snow</button>
+      <button class="btn vbr-chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>Beach</button>
+      <button class="btn vbr-chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">6x6</button>
+      <button class="btn vbr-chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">4x4</button>
+      <button class="btn vbr-chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>Snow</button>
     </div>
   
   </div>
@@ -46,10 +46,10 @@
           </a>
         </div>
         <div fxFlex="10" fxFlex.xs>
-          <span class="chip vbr-beach-chip" *ngIf="league.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
-          <span class="chip vbr-indoor-chip" *ngIf="league.kind === 'INDOOR'">6x6</span>
-          <span class="chip vbr-indoor-4x4-chip" *ngIf="league.kind === 'INDOOR_4X4'">4x4</span>
-          <span class="chip vbr-snow-chip" *ngIf="league.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
+          <span class="vbr-chip vbr-beach-chip" *ngIf="league.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
+          <span class="vbr-chip vbr-indoor-chip" *ngIf="league.kind === 'INDOOR'">6x6</span>
+          <span class="vbr-chip vbr-indoor-4x4-chip" *ngIf="league.kind === 'INDOOR_4X4'">4x4</span>
+          <span class="vbr-chip vbr-snow-chip" *ngIf="league.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
         </div>
         <div class="text-left" fxFlex="20" fxFlex.xs="40">
           <span class="icon-text">Created on&nbsp;</span>{{league.createdAt | date : 'dd MMM yyyy, HH:mm'}}

@@ -13,7 +13,7 @@
     <button class="vbr-snow-button my-1" mat-raised-button (click)="createTeam('SNOW')">
       <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>Snow</span>
     </button>
-    <button class="cancel-button my-1" mat-button (click)="deleteAllTeams()">
+    <button class="vbr-cancel-button my-1" mat-button (click)="deleteAllTeams()">
       <mat-icon>delete</mat-icon><span class="ml-1">Delete All</span>
     </button>
   </div>
@@ -26,13 +26,13 @@
     </mat-form-field>
     
     <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px">
-      <button class="btn chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>Beach</button>
-      <button class="btn chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">6x6</button>
-      <button class="btn chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">4x4</button>
-      <button class="btn chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>Snow</button>
-      <button class="btn chip vbr-mixed-chip my-1" #mixedButton (click)="toggleMixed(mixedButton)"><i class="fa fa-intersex mr-2"></i>Mixed</button>
-      <button class="btn chip vbr-ladies-chip my-1" #ladiesButton (click)="toggleLadies(ladiesButton)"><i class="fa fa-venus mr-2"></i>Ladies</button>
-      <button class="btn chip vbr-gents-chip my-1" #gentsButton (click)="toggleGents(gentsButton)"><i class="fa fa-mars mr-2"></i>Gents</button>
+      <button class="btn vbr-chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>Beach</button>
+      <button class="btn vbr-chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">6x6</button>
+      <button class="btn vbr-chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">4x4</button>
+      <button class="btn vbr-chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>Snow</button>
+      <button class="btn vbr-chip vbr-mixed-chip my-1" #mixedButton (click)="toggleMixed(mixedButton)"><i class="fa fa-intersex mr-2"></i>Mixed</button>
+      <button class="btn vbr-chip vbr-ladies-chip my-1" #ladiesButton (click)="toggleLadies(ladiesButton)"><i class="fa fa-venus mr-2"></i>Ladies</button>
+      <button class="btn vbr-chip vbr-gents-chip my-1" #gentsButton (click)="toggleGents(gentsButton)"><i class="fa fa-mars mr-2"></i>Gents</button>
     </div>
   
   </div>
@@ -44,13 +44,13 @@
           {{team.name}}
         </div>
         <div fxFlex="15" fxFlex.xs>
-          <span class="chip vbr-beach-chip" *ngIf="team.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
-          <span class="chip vbr-indoor-chip" *ngIf="team.kind === 'INDOOR'">6x6</span>
-          <span class="chip vbr-indoor-4x4-chip" *ngIf="team.kind === 'INDOOR_4X4'">4x4</span>
-          <span class="chip vbr-snow-chip" *ngIf="team.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
-          <span class="chip vbr-mixed-chip" *ngIf="team.gender === 'MIXED'"><i class="fa fa-intersex"></i></span>
-          <span class="chip vbr-ladies-chip" *ngIf="team.gender === 'LADIES'"><i class="fa fa-venus"></i></span>
-          <span class="chip vbr-gents-chip" *ngIf="team.gender === 'GENTS'"><i class="fa fa-mars"></i></span>
+          <span class="vbr-chip vbr-beach-chip" *ngIf="team.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
+          <span class="vbr-chip vbr-indoor-chip" *ngIf="team.kind === 'INDOOR'">6x6</span>
+          <span class="vbr-chip vbr-indoor-4x4-chip" *ngIf="team.kind === 'INDOOR_4X4'">4x4</span>
+          <span class="vbr-chip vbr-snow-chip" *ngIf="team.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
+          <span class="vbr-chip vbr-mixed-chip" *ngIf="team.gender === 'MIXED'"><i class="fa fa-intersex"></i></span>
+          <span class="vbr-chip vbr-ladies-chip" *ngIf="team.gender === 'LADIES'"><i class="fa fa-venus"></i></span>
+          <span class="vbr-chip vbr-gents-chip" *ngIf="team.gender === 'GENTS'"><i class="fa fa-mars"></i></span>
         </div>
         <div class="text-left" fxFlex="20" fxFlex.xs="40">
           <span class="icon-text">Last updated on&nbsp;</span>{{team.updatedAt | date : 'dd MMM yyyy, HH:mm:ss'}}
@@ -71,7 +71,7 @@
   </mat-card>
 
   <div class="div-user text-center my-3" *ngIf="!last">
-    <button type="button" class="vbr-button-inverted" (click)="refreshTeams(true)">Load more teams</button>
+    <button type="button" mat-stroked-button color="primary" (click)="refreshTeams(true)">Load more teams</button>
   </div>
 
 </div>
