@@ -1,6 +1,3 @@
-import { SearchResultDateComponent } from 'src/app/modules/search/pages/search-result-date/search-result-date.component';
-import { SearchResultLiveComponent } from 'src/app/modules/search/pages/search-result-live/search-result-live.component';
-import { SearchResultTokenComponent } from 'src/app/modules/search/pages/search-result-token/search-result-token.component';
 import { SearchComponent } from 'src/app/modules/search/pages/search/search.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -10,10 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
-    SearchComponent,
-    SearchResultLiveComponent,
-    SearchResultTokenComponent,
-    SearchResultDateComponent
+    SearchComponent
   ],
   imports: [
     CommonModule,
@@ -21,10 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
     SharedModule
   ],
   exports: [
-    SearchComponent,
-    SearchResultLiveComponent,
-    SearchResultTokenComponent,
-    SearchResultDateComponent
+    SearchComponent
   ]
 })
 export class SearchModule { }

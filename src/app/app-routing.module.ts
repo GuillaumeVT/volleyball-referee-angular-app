@@ -4,9 +4,6 @@ import { PageNotFoundComponent } from 'src/app/core/pages/page-not-found/page-no
 import { PrivacyPolicyComponent } from 'src/app/core/pages/privacy-policy/privacy-policy.component';
 import { GameComponent } from 'src/app/modules/game/pages/game/game.component';
 import { LeagueComponent } from 'src/app/modules/league/pages/league/league.component';
-import { SearchResultDateComponent } from 'src/app/modules/search/pages/search-result-date/search-result-date.component';
-import { SearchResultLiveComponent } from 'src/app/modules/search/pages/search-result-live/search-result-live.component';
-import { SearchResultTokenComponent } from 'src/app/modules/search/pages/search-result-token/search-result-token.component';
 import { SearchComponent } from 'src/app/modules/search/pages/search/search.component';
 import { UserColleaguesComponent } from 'src/app/modules/user-data/pages/user-colleagues/user-colleagues.component';
 import { UserGamesComponent } from 'src/app/modules/user-data/pages/user-games/user-games.component';
@@ -31,9 +28,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [ LoginGuard ] },
   { path: 'account', component: AccountComponent, canActivate: [ LoginGuard ] },
   { path: 'search', component: SearchComponent },
-  { path: 'search/live', component: SearchResultLiveComponent },
-  { path: 'search/token/:token', component: SearchResultTokenComponent },
-  { path: 'search/date/:date', component: SearchResultDateComponent },
   { path: 'view/game/:gameId', component: GameComponent },
   { path: 'view/league/:leagueId', component: LeagueComponent },
   { path: 'colleagues', component: UserColleaguesComponent, canActivate: [ LoginGuard ] },

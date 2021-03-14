@@ -22,7 +22,7 @@
         </mat-form-field>
   
         <mat-form-field *ngIf="searchType === searchTypeEnum.Date" appearance="outline" class="mt-3">
-          <input matInput type="search" name="searchDate" [(ngModel)]="searchDate" [matDatepicker]="picker" (click)="picker.open()" readonly>
+          <input matInput type="search" name="searchDate" [(ngModel)]="dateSearchCriterion.value" [matDatepicker]="picker" (click)="picker.open()" readonly>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -35,9 +35,9 @@
   </form>
 
   <ng-container *ngIf="loadSearchResults" [ngSwitch]="searchType">
-    <app-game-list *ngSwitchCase="searchTypeEnum.Token" [token]="searchToken"></app-game-list>
+    <app-game-list *ngSwitchCase="searchTypeEnum.Token" [token]="tokenSearchCriterion.value"></app-game-list>
     <app-game-list *ngSwitchCase="searchTypeEnum.Live" [live]="true"></app-game-list>
-    <app-game-list *ngSwitchCase="searchTypeEnum.Date" [date]="searchDateStr"></app-game-list>
-    <app-game-list *ngSwitchCase="searchTypeEnum.Today" [date]="searchDateStr"></app-game-list>
+    <app-game-list *ngSwitchCase="searchTypeEnum.Date" [date]="dateSearchCriterion.value | date: 'yyyy-MM-dd'"></app-game-list>
+    <app-game-list *ngSwitchCase="searchTypeEnum.Today" [date]="todaySearchCriterion.value | date: 'yyyy-MM-dd'"></app-game-list>
   </ng-container>
 </div>
