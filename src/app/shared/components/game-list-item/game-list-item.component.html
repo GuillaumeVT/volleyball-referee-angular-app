@@ -70,7 +70,7 @@
       <span *ngIf="showLeague() && showDivision()" class="mx-1">/</span>
       <span *ngIf="showDivision()">{{gameSummary.divisionName}}</span>
       <div *ngIf="showReferee()">
-        <a [routerLink]="getTokenUrl()" class="item-link">
+        <a [routerLink]="getSearchUrl()" [queryParams]="getSearchParams()" class="item-link">
           <mat-icon inline=true style="vertical-align: middle;"><span class="material-icons">person</span></mat-icon> by {{gameSummary.refereeName}}
         </a>
       </div>
