@@ -10,7 +10,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
@@ -28,7 +27,6 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     FormsModule,
     RouterModule,
     MaterialModule,
-    NgbModule,
     NgxChartsModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
@@ -44,7 +42,6 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     FormsModule,
     RouterModule,
     MaterialModule,
-    NgbModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     FileSaverModule,

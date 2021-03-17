@@ -6,6 +6,8 @@ import { TeamType } from 'src/app/shared/models/team-type.model';
 import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
 
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { LadderEventDialogComponent, LadderEventDialogData } from 'src/app/modules/game/components/set/ladder-event-dialog/ladder-event-dialog.component';
 
 @Component({
   selector: 'app-ladder',
@@ -21,7 +23,7 @@ export class LadderComponent implements OnChanges {
 
   ladder: LadderItem[];
 
-  constructor(public playerStyleService: PlayerStyleService, public sanctionService: SanctionService) { }
+  constructor(public playerStyleService: PlayerStyleService, private dialog: MatDialog) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.game && this.game.sets) {
@@ -145,7 +147,7 @@ export class LadderComponent implements OnChanges {
     }
   }
 
-  getIcon(ladderItem: LadderItem, teamType: TeamType) {
+  getIcon(ladderItem: LadderItem, teamType: TeamType): string {
     var icon = '';
 
     if (ladderItem.hasSeveralEvents(teamType)) {
@@ -160,29 +162,14 @@ export class LadderComponent implements OnChanges {
 
     return icon;
   }
-
-  getSubstitutions(ladderItem: LadderItem, teamType: TeamType): Substitution[] {
-    if (ladderItem.teamType === teamType) {
-      return ladderItem.substitutions;
-    } else {
-      return ladderItem.oSubstitutions;
+  
+  showEvents(ladderItem: LadderItem, teamType: TeamType): void {
+    const data: LadderEventDialogData = {
+      game: this.game,
+      ladderItem: ladderItem,
+      teamType: teamType
     }
-  }
 
-  getTimeouts(ladderItem: LadderItem, teamType: TeamType): Timeout[] {
-    if (ladderItem.teamType === teamType) {
-      return ladderItem.timeouts;
-    } else {
-      return ladderItem.oTimeouts;
-    }
+    const dialogRef = this.dialog.open(LadderEventDialogComponent, { data: data });
   }
-
-  getSanctions(ladderItem: LadderItem, teamType: TeamType): Sanction[] {
-    if (ladderItem.teamType === teamType) {
-      return ladderItem.sanctions;
-    } else {
-      return ladderItem.oSanctions;
-    }
-  }
-
 }

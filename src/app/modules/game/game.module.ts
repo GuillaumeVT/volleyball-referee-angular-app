@@ -11,6 +11,7 @@ import { IndoorGameComponent } from 'src/app/modules/game/components/indoor-game
 import { Indoor4x4GameComponent } from 'src/app/modules/game/components/indoor4x4-game/indoor4x4-game.component';
 import { IndoorSetLineupsComponent } from 'src/app/modules/game/components/set/indoor-set-lineups/indoor-set-lineups.component';
 import { Indoor4x4SetLineupsComponent } from 'src/app/modules/game/components/set/indoor4x4-set-lineups/indoor4x4-set-lineups.component';
+import { LadderEventDialogComponent } from 'src/app/modules/game/components/set/ladder-event-dialog/ladder-event-dialog.component';
 import { LadderComponent } from 'src/app/modules/game/components/set/ladder/ladder.component';
 import { SetSubstitutionsComponent } from 'src/app/modules/game/components/set/set-substitutions/set-substitutions.component';
 import { SetSummaryComponent } from 'src/app/modules/game/components/set/set-summary/set-summary.component';
@@ -44,7 +45,8 @@ import { NgModule } from '@angular/core';
     LadderComponent,
     SetSubstitutionsComponent,
     SetSummaryComponent,
-    SetTimeoutsComponent
+    SetTimeoutsComponent,
+    LadderEventDialogComponent
   ],
   imports: [
     CommonModule,

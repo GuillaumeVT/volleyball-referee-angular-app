@@ -5,7 +5,6 @@ import { UserColleagueDialogComponent } from 'src/app/modules/user-data/componen
 import { UserGameDialogComponent } from 'src/app/modules/user-data/components/user-game-dialog/user-game-dialog.component';
 import { UserLeagueDialogComponent } from 'src/app/modules/user-data/components/user-league-dialog/user-league-dialog.component';
 import { UserRulesDialogComponent } from 'src/app/modules/user-data/components/user-rules-dialog/user-rules-dialog.component';
-import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules-modal/user-rules-modal.component';
 import { UserTeamDialogComponent } from 'src/app/modules/user-data/components/user-team-dialog/user-team-dialog.component';
 import { UserColleaguesComponent } from 'src/app/modules/user-data/pages/user-colleagues/user-colleagues.component';
 import { UserGamesComponent } from 'src/app/modules/user-data/pages/user-games/user-games.component';
@@ -23,7 +22,6 @@ import { NgModule } from '@angular/core';
     UserLeaguesComponent,
     UserLeagueDialogComponent,
     UserRulesComponent,
-    UserRulesModalComponent,
     UserTeamsComponent,
     UserGamesComponent,
     UserGameDialogComponent,
@@ -42,7 +40,6 @@ import { NgModule } from '@angular/core';
     UserColleaguesComponent,
     UserLeaguesComponent,
     UserRulesComponent,
-    UserRulesModalComponent,
     UserTeamsComponent,
     UserGamesComponent
   ]
