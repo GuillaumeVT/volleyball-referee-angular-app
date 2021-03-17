@@ -4,6 +4,7 @@ import { PlayerNamesDialogComponent } from 'src/app/modules/user-data/components
 import { UserColleagueDialogComponent } from 'src/app/modules/user-data/components/user-colleague-dialog/user-colleague-dialog.component';
 import { UserGameDialogComponent } from 'src/app/modules/user-data/components/user-game-dialog/user-game-dialog.component';
 import { UserLeagueDialogComponent } from 'src/app/modules/user-data/components/user-league-dialog/user-league-dialog.component';
+import { UserRulesDialogComponent } from 'src/app/modules/user-data/components/user-rules-dialog/user-rules-dialog.component';
 import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules-modal/user-rules-modal.component';
 import { UserTeamDialogComponent } from 'src/app/modules/user-data/components/user-team-dialog/user-team-dialog.component';
 import { UserColleaguesComponent } from 'src/app/modules/user-data/pages/user-colleagues/user-colleagues.component';
@@ -30,7 +31,8 @@ import { NgModule } from '@angular/core';
     UserColleagueDialogComponent,
     ColorPickerDialogComponent,
     PlayerNamesDialogComponent,
-    UserTeamDialogComponent
+    UserTeamDialogComponent,
+    UserRulesDialogComponent
   ],
   imports: [
     CommonModule,

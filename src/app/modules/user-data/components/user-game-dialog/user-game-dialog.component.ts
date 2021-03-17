@@ -21,6 +21,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class UserGameDialogComponent {
 
+  crudTypeEnum: typeof CrudType = CrudType;
+
   gameFormGroup: FormGroup;
   referee: FormControl;
   genderPipe: GenderPipe;
@@ -34,7 +36,7 @@ export class UserGameDialogComponent {
     private gameService: GameService, private leagueService: LeagueService, private snackBarService: SnackBarService,
     public datePipe: DatePipe) {        
     this.genderPipe = new GenderPipe();
-    const editingDisabled = this.data.crudType === 4 ? true : false;
+    const editingDisabled = this.data.crudType === CrudType.View ? true : false;
     this.scheduleDate = new Date(this.data.game.scheduledAt);
     this.minScheduleDate = new Date();
     this.divisionsOfSelectedLeague = [];
@@ -113,25 +115,15 @@ export class UserGameDialogComponent {
   }
 
   get scheduledAtFormControl() { return this.gameFormGroup.get('scheduledAt'); }
-  
   get indexedFormControl() { return this.gameFormGroup.get('indexed'); }
-
   get leagueFormControl() { return this.gameFormGroup.get('league'); }
-  
   get divisionFormControl() { return this.gameFormGroup.get('division'); }
-
   get homeTeamFormControl() { return this.gameFormGroup.get('homeTeam'); }
-  
   get guestTeamFormControl() { return this.gameFormGroup.get('guestTeam'); }
-  
   get rulesFormControl() { return this.gameFormGroup.get('rules'); }
-  
   get refereeFormControl() { return this.gameFormGroup.get('referee'); }
-
   get referee1NameFormControl() { return this.gameFormGroup.get('referee1Name'); }
-  
   get referee2NameFormControl() { return this.gameFormGroup.get('referee2Name'); }
-  
   get scorerNameFormControl() { return this.gameFormGroup.get('scorerName'); }
 
   private leagueMustExistValidator(abstractControl: AbstractControl): { undefinedLeague: boolean } {

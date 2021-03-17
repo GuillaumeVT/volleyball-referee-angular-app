@@ -18,6 +18,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 })
 export class UserTeamDialogComponent {
 
+  crudTypeEnum: typeof CrudType = CrudType;
+
   teamFormGroup: FormGroup;
   captain: FormControl;
 
@@ -30,7 +32,7 @@ export class UserTeamDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<UserTeamDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: UserTeamDialogData, private teamService: TeamService,
   public playerStyleService: PlayerStyleService, private dialog: MatDialog, private snackBarService: SnackBarService) {
-    this.editingDisabled = this.data.crudType === 4 ? true : false;
+    this.editingDisabled = this.data.crudType === CrudType.View ? true : false;
     this.moreNumbers = false;
     this.players = [];
     this.liberos = [];
@@ -74,17 +76,11 @@ export class UserTeamDialogComponent {
   }
 
   get nameFormControl() { return this.teamFormGroup.get('name'); }
-
   get genderFormControl() { return this.teamFormGroup.get('gender'); }
-
   get colorFormControl() { return this.teamFormGroup.get('color'); }
-  
   get liberoColorFormControl() { return this.teamFormGroup.get('liberoColor'); }
-  
   get captainFormControl() { return this.teamFormGroup.get('captain'); }
-  
   get numberOfPlayersFormControl() { return this.teamFormGroup.get('numberOfPlayers'); }
-  
   get coachNameFormControl() { return this.teamFormGroup.get('coachName'); }
 
   getGenderIcon(): string {

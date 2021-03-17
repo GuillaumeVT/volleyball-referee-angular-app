@@ -1,6 +1,6 @@
-<h2 mat-dialog-title *ngIf="data.crudType === 1">Create team</h2>
-<h2 mat-dialog-title *ngIf="data.crudType === 2">Update team {{data.team.name}}</h2>
-<h2 mat-dialog-title *ngIf="data.crudType === 4">View team {{data.team.name}}</h2>
+<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.Create">Create team</h2>
+<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.Update">Update team {{data.team.name}}</h2>
+<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.View">View team {{data.team.name}}</h2>
 <mat-dialog-content>
   <form [formGroup]="teamFormGroup" autocomplete="off" novalidate (ngSubmit)="onSubmitForm()">
 
@@ -21,7 +21,7 @@
      
     </div>
 
-    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.crudType !== 4">
+    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.crudType !== crudTypeEnum.View">
       <span fxFlex="40" class="vbr-text">Shirt color</span>
 
       <div fxFlex>
@@ -41,17 +41,17 @@
       <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" *ngIf="!moreNumbers">
         <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:0:25;" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
           [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
-          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === 4 && !playerItem.selected"></button>
+          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"></button>
         
-          <button type="button" mat-button color="primary" (click)="showMoreNumbers()" [hidden]="data.crudType === 4">More numbers</button>
+          <button type="button" mat-button color="primary" (click)="showMoreNumbers()" [hidden]="data.crudType === crudTypeEnum.View">More numbers</button>
       </div>
       
       <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" *ngIf="moreNumbers">
         <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
           [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
-          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === 4 && !playerItem.selected"></button>
+          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"></button>
         
-        <button type="button" mat-button color="primary" (click)="showLessNumbers()" [hidden]="data.crudType === 4">Less numbers</button>
+        <button type="button" mat-button color="primary" (click)="showLessNumbers()" [hidden]="data.crudType === crudTypeEnum.View">Less numbers</button>
       </div>
       
     </div>
@@ -65,7 +65,7 @@
       <div fxLayout="row wrap" fxFill fxLayoutAlign="start center">
         <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:1:5;" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
           [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
-          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === 4 && !playerItem.selected"></button>
+          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"></button>
       </div>
     </div>
 
@@ -79,7 +79,7 @@
       <mat-error *ngIf="captainFormControl.errors?.required || captainFormControl.errors?.min">Captain is required</mat-error>
     </mat-form-field>
 
-    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.crudType !== 4">
+    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.crudType !== crudTypeEnum.View">
       <span fxFlex="40" class="vbr-text">Player names</span>
 
       <div fxFlex>
@@ -90,7 +90,7 @@
      
     </div>
 
-    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.team.kind === 'INDOOR' && data.crudType !== 4">
+    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.team.kind === 'INDOOR' && data.crudType !== crudTypeEnum.View">
       <span fxFlex="40" class="vbr-text">Libero shirt color</span>
 
       <div fxFlex>
@@ -107,7 +107,7 @@
       <div fxLayout="row wrap" fxFill fxLayoutAlign="start center">
         <button type="button" class="btn player-button m-1" *ngFor="let playerItem of liberos" (click)="onLiberoSelected(playerItem.shirtNumber, true)"
             [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
-            [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === 4 && !playerItem.selected"></button>
+            [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"></button>
       </div>
       
     </div>
@@ -120,9 +120,9 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button (click)="close()" *ngIf="data.crudType === 4">Close</button>
-  <button mat-button (click)="close()" *ngIf="data.crudType !== 4">Cancel</button>
-  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!teamFormGroup.valid" *ngIf="data.crudType === 1">Create</button>
-  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!teamFormGroup.valid" *ngIf="data.crudType === 2">Update</button>
-  <button mat-raised-button type="button" color="primary" (click)="onEdit()" *ngIf="data.crudType === 4">Edit</button>
+  <button mat-button (click)="close()" *ngIf="data.crudType === crudTypeEnum.View">Close</button>
+  <button mat-button (click)="close()" *ngIf="data.crudType !== crudTypeEnum.View">Cancel</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!teamFormGroup.valid" *ngIf="data.crudType === crudTypeEnum.Create">Create</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!teamFormGroup.valid" *ngIf="data.crudType === crudTypeEnum.Update">Update</button>
+  <button mat-raised-button type="button" color="primary" (click)="onEdit()" *ngIf="data.crudType === crudTypeEnum.View">Edit</button>
 </mat-dialog-actions>

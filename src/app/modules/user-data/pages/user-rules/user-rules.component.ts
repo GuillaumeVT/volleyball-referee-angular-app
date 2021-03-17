@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules-modal/user-rules-modal.component';
+import { UserRulesDialogComponent, UserRulesDialogData } from 'src/app/modules/user-data/components/user-rules-dialog/user-rules-dialog.component';
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { RulesService } from 'src/app/modules/user-data/services/rules.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
@@ -12,7 +12,6 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-rules',
@@ -25,7 +24,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
 
   private subscription : Subscription = new Subscription();
 
-  constructor(private titleService: Title, private userService: UserService, private rulesService: RulesService, private dialog: MatDialog, private modalService: NgbModal, private snackBarService: SnackBarService) {
+  constructor(private titleService: Title, private userService: UserService, private rulesService: RulesService, private dialog: MatDialog, private snackBarService: SnackBarService) {
     super();
     this.titleService.setTitle('VBR - My Rules');
   }
@@ -49,18 +48,29 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
 
   createRules(kind: string): void {
     const rules = Rules.createRules(this.user, kind);
-    const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
-    modalRef.componentInstance.rules = rules;
-    modalRef.componentInstance.crudType = CrudType.Create;
-    modalRef.componentInstance.rulesUpdated.subscribe((_updated: any) => this.onRulesCreated());
+
+    const data: UserRulesDialogData = {
+      crudType: CrudType.Create,
+      rules: rules
+    }
+
+    const dialogRef = this.dialog.open(UserRulesDialogComponent, { width: "800px", data: data });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.onRulesCreated();
+      }
+    });
   }
 
   viewRules(rulesSummary: RulesSummary): void {
     this.rulesService.getRules(rulesSummary.id).subscribe(
       rules => {
-        const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
-        modalRef.componentInstance.rules = rules;
-        modalRef.componentInstance.crudType = CrudType.View;
+        const data: UserRulesDialogData = {
+          crudType: CrudType.View,
+          rules: rules
+        }
+    
+        const dialogRef = this.dialog.open(UserRulesDialogComponent, { width: "800px", data: data });
       },
       _error => this.snackBarService.showError('Rules could not be found.')
     );
@@ -69,10 +79,17 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
   updateRules(rulesSummary: RulesSummary): void {
     this.rulesService.getRules(rulesSummary.id).subscribe(
       rules => {
-        const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
-        modalRef.componentInstance.rules = rules;
-        modalRef.componentInstance.crudType = CrudType.Update;
-        modalRef.componentInstance.rulesUpdated.subscribe((_updated: any) => this.onRulesUpdated());
+        const data: UserRulesDialogData = {
+          crudType: CrudType.Update,
+          rules: rules
+        }
+    
+        const dialogRef = this.dialog.open(UserRulesDialogComponent, { width: "800px", data: data });
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if (dialogResult) {
+            this.onRulesUpdated();
+          }
+        });
       },
       _error => this.snackBarService.showError('Rules could not be found.')
     );

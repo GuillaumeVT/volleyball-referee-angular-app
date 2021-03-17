@@ -1,12 +1,9 @@
-import { UserRulesModalComponent } from 'src/app/modules/user-data/components/user-rules-modal/user-rules-modal.component';
-import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { Game } from 'src/app/shared/models/game.model';
 import { Set } from 'src/app/shared/models/set.model';
 import { TeamType } from 'src/app/shared/models/team-type.model';
 import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
 
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-game-summary',
@@ -27,7 +24,7 @@ export class GameSummaryComponent implements OnChanges {
   rightTeamSets: number;
   fullScore: string;
 
-  constructor(public playerStyleService: PlayerStyleService, private modalService: NgbModal) {
+  constructor(public playerStyleService: PlayerStyleService) {
     this.leftTeamName = '';
     this.rightTeamName = '';
     this.leftTeamSets = 0;
@@ -89,11 +86,4 @@ export class GameSummaryComponent implements OnChanges {
   swapTeams(): void {
     this.teamsSwapped.emit();
   }
-
-  viewRules(): void {
-    const modalRef = this.modalService.open(UserRulesModalComponent, { size: 'lg' });
-    modalRef.componentInstance.rules = this.game.rules;
-    modalRef.componentInstance.crudType = CrudType.View;
-  }
-
 }

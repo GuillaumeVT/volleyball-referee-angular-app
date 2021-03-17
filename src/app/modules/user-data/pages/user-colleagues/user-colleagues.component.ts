@@ -7,7 +7,6 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-colleagues',
@@ -18,7 +17,7 @@ export class UserColleaguesComponent implements OnInit {
 
   friendsAndRequests: FriendsAndRequests;
 
-  constructor(private titleService: Title, private userService: UserService, private dialog: MatDialog, private modalService: NgbModal, private snackBarService: SnackBarService) {
+  constructor(private titleService: Title, private userService: UserService, private dialog: MatDialog, private snackBarService: SnackBarService) {
     this.titleService.setTitle('VBR - My Colleagues');
   }
 
