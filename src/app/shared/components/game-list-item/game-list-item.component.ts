@@ -40,7 +40,7 @@ export class GameListItemComponent implements OnChanges {
   }
 
   getTokenUrl(): string {
-    return `/search/token/${this.gameSummary.refereeName}`;
+    return `/search?type=token&value=${this.gameSummary.refereeName}`;
   }
 
   showLeague(): boolean {
