@@ -14,23 +14,23 @@
       </div>
 
       <div class="div-summary my-3">
-        <span class="vbr-text text-center team-name">
+        <div class="vbr-text text-center team-name">
           {{leftTeamName}}
-        </span>
+        </div>
 
-        <span class="badge text-center set-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)" [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)">
+        <span class="badge text-center set-badge mx-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)" [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)">
           {{leftTeamSets}}
         </span>
 
         <button mat-mini-fab type="button" color="primary" aria-label="Swap" (click)="swapTeams()"><mat-icon>swap_horiz</mat-icon></button>
 
-        <span class="badge text-center set-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)" [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)">
+        <span class="badge text-center set-badge mx-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)" [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)">
           {{rightTeamSets}}
         </span>
 
-        <span class="vbr-text text-center team-name">
+        <div class="vbr-text text-center team-name">
           {{rightTeamName}}
-        </span>
+        </div>
       </div>
 
       <div class="vbr-text" [innerHtml]="fullScore"></div>
