@@ -272,8 +272,16 @@
     display: none;
   }
 
+  .icon-text {
+    display: none;
+  }
+
   .cdk-overlay-pane {
     max-width: 100vw !important;
+  }
+
+  .mobile-screen-border-spacing {
+    padding: 0 8px;
   }
 }
 
@@ -294,12 +302,6 @@ html {
 
   .player-badge-font {
     font-size: 1rem;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .icon-text {
-    display: none;
   }
 }
 
