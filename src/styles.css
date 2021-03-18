@@ -261,6 +261,21 @@
   background-color: var(--vbr-light-primary-color) !important;
 }
 
+/* Charts */
+
+.advanced-pie-legend .total-value {
+  line-height: 40px;
+}
+
+.advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {
+  margin-top: 0 !important;
+  line-height: 30px;
+}
+
+.advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {
+  line-height: 30px;
+}
+
 @media screen and (min-width: 800px) {
   .mobile {
     display: none;
