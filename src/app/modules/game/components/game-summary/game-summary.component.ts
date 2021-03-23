@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 @Component({
   selector: 'app-game-summary',
   templateUrl: './game-summary.component.html',
-  styleUrls: ['./game-summary.component.css']
+  styleUrls: ['./game-summary.component.scss']
 })
 export class GameSummaryComponent implements OnChanges {
 

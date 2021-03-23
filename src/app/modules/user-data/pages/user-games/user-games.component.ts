@@ -23,7 +23,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-user-games',
   templateUrl: './user-games.component.html',
-  styleUrls: ['./user-games.component.css']
+  styleUrls: ['./user-games.component.scss']
 })
 export class UserGamesComponent extends AbstractGameFilter implements OnInit, OnDestroy {
 

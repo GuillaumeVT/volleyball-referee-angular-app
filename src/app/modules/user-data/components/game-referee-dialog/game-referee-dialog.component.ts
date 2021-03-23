@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-game-referee-dialog',
   templateUrl: './game-referee-dialog.component.html',
-  styleUrls: ['./game-referee-dialog.component.css']
+  styleUrls: ['./game-referee-dialog.component.scss']
 })
 export class GameRefereeDialogComponent {
 

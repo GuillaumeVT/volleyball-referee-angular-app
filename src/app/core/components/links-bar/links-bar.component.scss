@@ -1,0 +1,19 @@
+.btn-android {
+	color: var(--vbr-inverted-text-color);
+	background-color: var(--android-color);
+	border-color: var(--android-color);
+
+	&:hover {
+		filter: var(--vbr-hover-darker);
+	}
+}
+
+.btn-facebook {
+	color: var(--vbr-inverted-text-color);
+	background-color: var(--facebook-color);
+	border-color: var(--facebook-color);
+
+	&:hover {
+		filter: var(--vbr-hover-darker);
+	}
+}

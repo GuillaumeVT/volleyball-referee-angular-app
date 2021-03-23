@@ -11,7 +11,7 @@
     </mat-form-field>
 
     <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center">
-      <span fxFlex="40" class="vbr-text">Gender</span>
+      <span fxFlex="40">Gender</span>
 
       <div fxFlex>
         <button mat-fab type="button" [ngClass]="getGenderButton()" (click)="onNextGender()" [disabled]="editingDisabled ? true : null">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.crudType !== crudTypeEnum.View">
-      <span fxFlex="40" class="vbr-text">Shirt color</span>
+      <span fxFlex="40">Shirt color</span>
 
       <div fxFlex>
         <button mat-fab type="button" [style.background-color]="colorFormControl.value" [style.color]="playerStyleService.getTextColor(colorFormControl.value)" (click)="onChangeShirtColor()" [disabled]="editingDisabled ? true : null">
@@ -33,7 +33,7 @@
     </div>
 
     <div class="my-2" *ngIf="data.team.kind === 'INDOOR' || data.team.kind === 'INDOOR_4X4'">
-      <div class="vbr-text mb-3">
+      <div class="mb-3">
         Team players (including liberos)
         <mat-error *ngIf="numberOfPlayersFormControl.errors?.min">{{minPlayers}} players are required</mat-error>
       </div>
@@ -57,7 +57,7 @@
     </div>
 
     <div class="my-2" *ngIf="data.team.kind === 'SNOW'">
-      <div class="vbr-text mb-3">
+      <div class="mb-3">
         Team players
         <mat-error *ngIf="numberOfPlayersFormControl.errors?.min">{{minPlayers}} players are required</mat-error>
       </div>
@@ -80,7 +80,7 @@
     </mat-form-field>
 
     <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.crudType !== crudTypeEnum.View">
-      <span fxFlex="40" class="vbr-text">Player names</span>
+      <span fxFlex="40">Player names</span>
 
       <div fxFlex>
         <button mat-fab type="button" [style.background-color]="colorFormControl.value" [style.color]="playerStyleService.getTextColor(colorFormControl.value)" (click)="onEditPlayerNames()" [disabled]="editingDisabled ? true : null">
@@ -91,7 +91,7 @@
     </div>
 
     <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.team.kind === 'INDOOR' && data.crudType !== crudTypeEnum.View">
-      <span fxFlex="40" class="vbr-text">Libero shirt color</span>
+      <span fxFlex="40">Libero shirt color</span>
 
       <div fxFlex>
         <button mat-fab type="button" [style.background-color]="liberoColorFormControl.value" [style.color]="playerStyleService.getTextColor(liberoColorFormControl.value)" (click)="onChangeLiberoShirtColor()" [disabled]="editingDisabled ? true : null">
@@ -102,7 +102,7 @@
     </div>
 
     <div class="my-2" *ngIf="data.team.kind === 'INDOOR' && selectedPlayers.length > 6">
-      <div class="vbr-text mb-3">Team liberos</div>
+      <div class="mb-3">Team liberos</div>
 
       <div fxLayout="row wrap" fxFill fxLayoutAlign="start center">
         <button type="button" class="btn player-button m-1" *ngFor="let playerItem of liberos" (click)="onLiberoSelected(playerItem.shirtNumber, true)"

@@ -9,7 +9,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 @Component({
   selector: 'app-indoor-court',
   templateUrl: './indoor-court.component.html',
-  styleUrls: ['./indoor-court.component.css']
+  styleUrls: ['./indoor-court.component.scss']
 })
 export class IndoorCourtComponent implements OnChanges {
 

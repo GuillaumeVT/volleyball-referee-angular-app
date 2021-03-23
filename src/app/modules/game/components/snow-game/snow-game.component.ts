@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-snow-game',
   templateUrl: './snow-game.component.html',
-  styleUrls: ['./snow-game.component.css']
+  styleUrls: ['./snow-game.component.scss']
 })
 export class SnowGameComponent extends AbstractGameComponent { }

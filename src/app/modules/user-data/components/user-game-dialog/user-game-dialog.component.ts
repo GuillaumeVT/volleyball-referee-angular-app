@@ -17,7 +17,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-user-game-dialog',
   templateUrl: './user-game-dialog.component.html',
-  styleUrls: ['./user-game-dialog.component.css']
+  styleUrls: ['./user-game-dialog.component.scss']
 })
 export class UserGameDialogComponent {
 

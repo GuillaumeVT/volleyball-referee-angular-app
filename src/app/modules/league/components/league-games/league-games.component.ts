@@ -9,7 +9,7 @@ import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/
 @Component({
   selector: 'app-league-games',
   templateUrl: './league-games.component.html',
-  styleUrls: ['./league-games.component.css']
+  styleUrls: ['./league-games.component.scss']
 })
 export class LeagueGamesComponent implements OnDestroy, OnChanges {
 

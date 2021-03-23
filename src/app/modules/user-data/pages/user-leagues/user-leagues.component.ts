@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-leagues',
   templateUrl: './user-leagues.component.html',
-  styleUrls: ['./user-leagues.component.css']
+  styleUrls: ['./user-leagues.component.scss']
 })
 export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit, OnDestroy {
 

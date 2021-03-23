@@ -8,7 +8,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+  styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
 

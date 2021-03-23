@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-game-refresh',
   templateUrl: './game-refresh.component.html',
-  styleUrls: ['./game-refresh.component.css']
+  styleUrls: ['./game-refresh.component.scss']
 })
 export class GameRefreshComponent implements OnChanges, OnDestroy {
 

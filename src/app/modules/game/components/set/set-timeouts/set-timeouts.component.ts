@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-set-timeouts',
   templateUrl: './set-timeouts.component.html',
-  styleUrls: ['./set-timeouts.component.css']
+  styleUrls: ['./set-timeouts.component.scss']
 })
 export class SetTimeoutsComponent {
 

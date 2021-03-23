@@ -14,7 +14,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 @Component({
   selector: 'app-user-team-dialog',
   templateUrl: './user-team-dialog.component.html',
-  styleUrls: ['./user-team-dialog.component.css']
+  styleUrls: ['./user-team-dialog.component.scss']
 })
 export class UserTeamDialogComponent {
 

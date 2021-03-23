@@ -11,7 +11,7 @@
     <mat-card class="m-1" *ngFor="let friendRequest of friendsAndRequests?.receivedFriendRequests">
       <mat-card-content>
         <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px grid">
-          <div class="vbr-text text-left" fxFlex="50" fxFlex.xs="100">
+          <div class="text-left" fxFlex="50" fxFlex.xs="100">
             You received a request from {{friendRequest.senderPseudo}}
           </div>
           <div class="text-right" fxFlex fxFlex.xs fxLayoutGap="8px">
@@ -29,7 +29,7 @@
     <mat-card class="m-1 friend-card" *ngFor="let friend of friendsAndRequests?.friends">
       <mat-card-content>
         <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px grid">
-          <div class="vbr-text text-left" fxFlex="50" fxFlex.xs="50">
+          <div class="text-left" fxFlex="50" fxFlex.xs="50">
             {{friend.pseudo}}
           </div>
           <div class="text-right" fxFlex fxFlex.xs fxLayoutGap="8px">

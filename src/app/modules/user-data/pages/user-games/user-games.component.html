@@ -42,7 +42,7 @@
   <mat-card *ngFor="let game of filteredGames" class="my-3">
     <mat-card-content>
       <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px grid">
-        <div class="vbr-text text-left" fxFlex="25" fxFlex.xs="100">
+        <div class="text-left" fxFlex="25" fxFlex.xs="100">
           {{game.homeTeamName}} - {{game.guestTeamName}}
           <div class="mat-small" *ngIf="game.leagueName?.length">
             {{game.leagueName}}

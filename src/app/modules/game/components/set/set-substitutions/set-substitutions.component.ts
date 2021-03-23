@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-set-substitutions',
   templateUrl: './set-substitutions.component.html',
-  styleUrls: ['./set-substitutions.component.css']
+  styleUrls: ['./set-substitutions.component.scss']
 })
 export class SetSubstitutionsComponent {
 

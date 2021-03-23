@@ -16,7 +16,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-user-teams',
   templateUrl: './user-teams.component.html',
-  styleUrls: ['./user-teams.component.css']
+  styleUrls: ['./user-teams.component.scss']
 })
 export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, OnDestroy {
 

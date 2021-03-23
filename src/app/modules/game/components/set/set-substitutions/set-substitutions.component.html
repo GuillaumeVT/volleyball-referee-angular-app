@@ -22,7 +22,7 @@
                   [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, substitution.playerOut)"></span>
               </td>
               <td class="mx-1 text-center">
-                <span class="ml-2 vbr-text player-badge-font" [innerHTML]="getScore(leftTeam, substitution)"></span>
+                <span class="ml-2 player-badge-font" [innerHTML]="getScore(leftTeam, substitution)"></span>
               </td>
             </tr>
           </tbody>
@@ -45,7 +45,7 @@
                   [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="playerStyleService.getPlayer(game, rightTeam, substitution.playerOut)"></span>
               </td>
               <td class="mx-1 text-center">
-                <span class="ml-2 vbr-text player-badge-font" [innerHTML]="getScore(rightTeam, substitution)"></span>
+                <span class="ml-2 player-badge-font" [innerHTML]="getScore(rightTeam, substitution)"></span>
               </td>
             </tr>
           </tbody>

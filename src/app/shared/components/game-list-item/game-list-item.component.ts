@@ -5,7 +5,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 @Component({
   selector: 'app-game-list-item',
   templateUrl: './game-list-item.component.html',
-  styleUrls: ['./game-list-item.component.css']
+  styleUrls: ['./game-list-item.component.scss']
 })
 export class GameListItemComponent implements OnChanges {
 

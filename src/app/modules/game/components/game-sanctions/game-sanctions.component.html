@@ -18,7 +18,7 @@
                   [style.border-color]="playerStyleService.getPlayerBorderColor(game, leftTeam, sanction.num)" [innerHTML]="sanctionService.getPlayerForSanction(game, leftTeam, sanction.num)"></span>
               </td>
               <td class="mx-1 text-center">
-                <span class="vbr-text player-badge-font ml-2" [innerHTML]="getScore(leftTeam, sanction)"></span>
+                <span class="player-badge-font ml-2" [innerHTML]="getScore(leftTeam, sanction)"></span>
               </td>
             </tr>
           </tbody>
@@ -37,7 +37,7 @@
                   [style.border-color]="playerStyleService.getPlayerBorderColor(game, rightTeam, sanction.num)" [innerHTML]="sanctionService.getPlayerForSanction(game, rightTeam, sanction.num)"></span>
               </td>
               <td class="mx-1 text-center">
-                <span class="vbr-text player-badge-font ml-2" [innerHTML]="getScore(rightTeam, sanction)"></span>
+                <span class="player-badge-font ml-2" [innerHTML]="getScore(rightTeam, sanction)"></span>
               </td>
             </tr>
           </tbody>

@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-set-summary',
   templateUrl: './set-summary.component.html',
-  styleUrls: ['./set-summary.component.css']
+  styleUrls: ['./set-summary.component.scss']
 })
 export class SetSummaryComponent implements OnChanges {
 

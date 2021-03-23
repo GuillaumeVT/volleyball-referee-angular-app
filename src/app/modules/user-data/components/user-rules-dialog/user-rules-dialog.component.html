@@ -125,20 +125,20 @@
 
     <div class="mb-4" fxLayout="row" fxLayoutAlign="start center" *ngIf="data.rules.kind === 'INDOOR' || data.rules.kind === 'INDOOR_4X4'">
       <mat-icon class="mx-2">info</mat-icon>
-      <div class="vbr-text" *ngIf="substitutionsLimitation.value === 1">
+      <div *ngIf="substitutionsLimitation.value === 1">
         <div class="mb-2">A player of the starting line-up may leave the game, but only once in a set, and re-enter, but only once in a set, and only to his/her previous position in the line-up.</div>
         <div>A substitute player may enter the game in place of a player of the starting line-up, but only once per set, and he/she can only be substituted by the same starting player.</div>
       </div>
-      <div class="vbr-text" *ngIf="substitutionsLimitation.value === 2">
+      <div *ngIf="substitutionsLimitation.value === 2">
         <div class="mb-2">A player of the starting line-up may leave the game, several times in a set, and re-enter, an unlimited amount of times per set within the number of allowed team substitutions, and only to his/her previous position in the line-up.</div>
         <div>A substitute player may enter the game in place of a player of the starting line-up, an unlimited amount of times per set within the number of allowed team substitutions, and he/she can only be substituted by the same starting player.</div>
       </div>
-      <div class="vbr-text" *ngIf="substitutionsLimitation.value === 3">
+      <div *ngIf="substitutionsLimitation.value === 3">
         <div class="mb-2">A player of the starting line-up may leave the game, several times in a set, and re-enter, an unlimited amount of times per set within the number of allowed team substitutions, and only to his/her previous position in the line-up.</div>
         <div class="mb-2">A substitute player may enter the game in place of a player of the starting line-up, an unlimited amount of times per set within the number of allowed team substitutions.</div>
         <div>More than one substitute may enter the set in each position.</div>
       </div>
-      <div class="vbr-text" *ngIf="substitutionsLimitation.value === 4">
+      <div *ngIf="substitutionsLimitation.value === 4">
         <div>Players can leave and re-enter the game on any position, an unlimited amount of times per set within the number of allowed team substitutions.</div>
       </div>
     </div>

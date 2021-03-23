@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-user-colleagues',
   templateUrl: './user-colleagues.component.html',
-  styleUrls: ['./user-colleagues.component.css']
+  styleUrls: ['./user-colleagues.component.scss']
 })
 export class UserColleaguesComponent implements OnInit {
 

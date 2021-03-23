@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-snow-court',
   templateUrl: './snow-court.component.html',
-  styleUrls: ['./snow-court.component.css']
+  styleUrls: ['./snow-court.component.scss']
 })
 export class SnowCourtComponent extends IndoorCourtComponent {}

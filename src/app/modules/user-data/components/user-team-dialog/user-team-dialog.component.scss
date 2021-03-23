@@ -1,0 +1,23 @@
+.mixed-gender {
+	background-color: var(--vbr-mixed-color);
+  color: var(--vbr-inverted-text-color);
+}
+
+.ladies-gender {
+	background-color: var(--vbr-ladies-color);
+  color: var(--vbr-inverted-text-color);
+}
+
+.gents-gender {
+	background-color: var(--vbr-gents-color);
+  color: var(--vbr-inverted-text-color);
+}
+
+.player-button {
+  width: 50px;
+  height: 45px;
+
+  &:hover {
+    filter: var(--vbr-hover-brighter);
+  }
+}

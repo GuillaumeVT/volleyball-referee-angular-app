@@ -10,13 +10,13 @@
         <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let player of getPlayers(leftTeam)">
           <span fxFlew="15" class="badge text-center player-badge mb-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
             [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, player.num)"></span>
-          <span fxFlew="85" class="vbr-text ml-2">{{player.name}}</span>
+          <span fxFlew="85" class="ml-2">{{player.name}}</span>
         </div>
 
         <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let libero of getLiberos(leftTeam)">
           <span fxFlew="15" class="badge text-center player-badge mb-1" [style.background-color]="playerStyleService.getLiberoBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getLiberoTextColor(game, leftTeam)"
             [style.border-color]="playerStyleService.getLiberoBorderColor(game, leftTeam)" [innerHTML]="playerStyleService.getPlayer(game, leftTeam, libero.num)"></span>
-          <span fxFlew="85" class="vbr-text ml-2">{{libero.name}}</span>
+          <span fxFlew="85" class="ml-2">{{libero.name}}</span>
         </div>
       </div>
 
@@ -24,13 +24,13 @@
         <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let player of getPlayers(rightTeam)">
           <span fxFlew="15" class="badge text-center player-badge mb-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
           [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="playerStyleService.getPlayer(game, rightTeam, player.num)"></span>
-          <span fxFlew="85" class="vbr-text ml-2">{{player.name}}</span>
+          <span fxFlew="85" class="ml-2">{{player.name}}</span>
         </div>
   
         <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let libero of getLiberos(rightTeam)">
           <span fxFlew="15" class="badge text-center player-badge mb-1" [style.background-color]="playerStyleService.getLiberoBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getLiberoTextColor(game, rightTeam)"
           [style.border-color]="playerStyleService.getLiberoBorderColor(game, rightTeam)" [innerHTML]="playerStyleService.getPlayer(game, rightTeam, libero.num)"></span>
-          <span fxFlew="85" class="vbr-text ml-2">{{libero.name}}</span>
+          <span fxFlew="85" class="ml-2">{{libero.name}}</span>
         </div>
       </div>
 

@@ -8,7 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-user-colleague-dialog',
   templateUrl: './user-colleague-dialog.component.html',
-  styleUrls: ['./user-colleague-dialog.component.css']
+  styleUrls: ['./user-colleague-dialog.component.scss']
 })
 export class UserColleagueDialogComponent {
 

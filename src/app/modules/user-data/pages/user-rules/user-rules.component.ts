@@ -16,7 +16,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-user-rules',
   templateUrl: './user-rules.component.html',
-  styleUrls: ['./user-rules.component.css']
+  styleUrls: ['./user-rules.component.scss']
 })
 export class UserRulesComponent extends AbstractRulesFilter implements OnInit, OnDestroy {
 

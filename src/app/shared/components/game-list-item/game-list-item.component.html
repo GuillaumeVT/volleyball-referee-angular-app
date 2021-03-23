@@ -10,13 +10,13 @@
       <div class="vbr-chip vbr-mixed-chip" *ngIf="gameSummary.gender === 'MIXED'"><i class="fa fa-intersex"></i></div>
       <div class="vbr-chip vbr-ladies-chip" *ngIf="gameSummary.gender === 'LADIES'"><i class="fa fa-venus"></i></div>
       <div class="vbr-chip vbr-gents-chip" *ngIf="gameSummary.gender === 'GENTS'"><i class="fa fa-mars"></i></div>
-      <div fxFlex="100" class="text-right vbr-text text-muted secondary-text">{{gameSummary.scheduledAt | date : 'dd MMM yyyy, HH:mm'}}</div>
+      <div fxFlex="100" class="text-right">{{gameSummary.scheduledAt | date : 'dd MMM yyyy, HH:mm'}}</div>
     </div>
 
     <hr/>
 
     <div class="game-item-line py-1">
-      <a [routerLink]="getMatchUrl()">
+      <a class="game-item-line-link" [routerLink]="getMatchUrl()">
 
         <div *ngIf="gameSummary.status !== 'SCHEDULED'" class="desktop">
 
@@ -65,7 +65,7 @@
       </a>
     </div>
 
-    <div class="vbr-text mt-3" *ngIf="showLeague() || showDivision() || showReferee()">
+    <div class="mt-3" *ngIf="showLeague() || showDivision() || showReferee()">
       <a [routerLink]="getLeagueUrl()" *ngIf="showLeague()" class="item-link">{{gameSummary.leagueName}}</a>
       <span *ngIf="showLeague() && showDivision()" class="mx-1">/</span>
       <span *ngIf="showDivision()">{{gameSummary.divisionName}}</span>

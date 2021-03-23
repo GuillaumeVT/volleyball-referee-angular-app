@@ -13,7 +13,7 @@ import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@
 @Component({
   selector: 'app-division-rankings',
   templateUrl: './division-rankings.component.html',
-  styleUrls: ['./division-rankings.component.css']
+  styleUrls: ['./division-rankings.component.scss']
 })
 export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
 
@@ -66,8 +66,8 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
     return diff > 0 ? `+${diff}` : `${diff}`;
   }
 
-  getLineColor(index: number): string {
-    return (index % 2) === 0 ? '#fff': '#e0e0e0';
+  getLineClass(index: number): string {
+    return (index % 2) === 0 ? 'league-ranking-even': 'league-ranking-odd';
   }
 
   downloadDivisionExcel(): void {

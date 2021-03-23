@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-user-league-dialog',
   templateUrl: './user-league-dialog.component.html',
-  styleUrls: ['./user-league-dialog.component.css']
+  styleUrls: ['./user-league-dialog.component.scss']
 })
 export class UserLeagueDialogComponent {
 

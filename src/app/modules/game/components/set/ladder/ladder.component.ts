@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-ladder',
   templateUrl: './ladder.component.html',
-  styleUrls: ['./ladder.component.css']
+  styleUrls: ['./ladder.component.scss']
 })
 export class LadderComponent implements OnChanges {
 

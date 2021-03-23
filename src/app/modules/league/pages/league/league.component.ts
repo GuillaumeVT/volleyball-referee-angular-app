@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-league',
   templateUrl: './league.component.html',
-  styleUrls: ['./league.component.css']
+  styleUrls: ['./league.component.scss']
 })
 export class LeagueComponent implements OnInit {
 

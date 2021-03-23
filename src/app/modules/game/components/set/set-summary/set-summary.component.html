@@ -4,7 +4,7 @@
       <mat-tab *ngFor="let set of game.sets; let setIndex = index" label="Set {{setIndex + 1}}">
 
         <div class="text-center mt-3">
-          <span class="vbr-text text-center"><mat-icon inline=true style="vertical-align: middle;"><span class="material-icons">schedule</span></mat-icon>{{duration}}</span>
+          <span class="text-center"><mat-icon inline=true style="vertical-align: middle;"><span class="material-icons">schedule</span></mat-icon>{{duration}}</span>
           <div class="text-center my-2 points-line">
             <span class="left-timeout">
               <i class="fa fa-circle vbr-timeout-text mr-1" *ngFor="let timeout of getTimeouts(leftTeam)"></i>

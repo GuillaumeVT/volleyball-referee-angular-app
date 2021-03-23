@@ -1,0 +1,502 @@
+/**
+* Generated theme by Material Theme Generator
+* https://materialtheme.arcsine.dev
+*/
+
+@import '~@angular/material/theming';
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined&display=block');
+
+$fontConfig: (
+  display-4: mat-typography-level(112px, 112px, 300, 'Roboto', -0.0134em),
+  display-3: mat-typography-level(56px, 56px, 400, 'Roboto', -0.0089em),
+  display-2: mat-typography-level(45px, 48px, 400, 'Roboto', 0.0000em),
+  display-1: mat-typography-level(34px, 40px, 400, 'Roboto', 0.0074em),
+  headline: mat-typography-level(24px, 32px, 400, 'Roboto', 0.0000em),
+  title: mat-typography-level(20px, 32px, 500, 'Roboto', 0.0075em),
+  subheading-2: mat-typography-level(16px, 28px, 400, 'Roboto', 0.0094em),
+  subheading-1: mat-typography-level(15px, 24px, 500, 'Roboto', 0.0067em),
+  body-2: mat-typography-level(14px, 24px, 500, 'Roboto', 0.0179em),
+  body-1: mat-typography-level(14px, 20px, 400, 'Roboto', 0.0179em),
+  button: mat-typography-level(14px, 14px, 500, 'Roboto', 0.0893em),
+  caption: mat-typography-level(12px, 20px, 400, 'Roboto', 0.0333em),
+  input: mat-typography-level(inherit, 1.125, 400, 'Roboto', 1.5px)
+);
+
+// Foreground Elements
+
+// Light Theme Text
+$dark-text: #1f1f1f;
+$dark-primary-text: rgba($dark-text, 0.87);
+$dark-accent-text: rgba($dark-primary-text, 0.54);
+$dark-disabled-text: rgba($dark-primary-text, 0.38);
+$dark-dividers: rgba($dark-primary-text, 0.12);
+$dark-focused: rgba($dark-primary-text, 0.12);
+
+$mat-light-theme-foreground: (
+  base:              black,
+  divider:           $dark-dividers,
+  dividers:          $dark-dividers,
+  disabled:          $dark-disabled-text,
+  disabled-button:   rgba($dark-text, 0.26),
+  disabled-text:     $dark-disabled-text,
+  elevation:         black,
+  secondary-text:    $dark-accent-text,
+  hint-text:         $dark-disabled-text,
+  accent-text:       $dark-accent-text,
+  icon:              $dark-accent-text,
+  icons:             $dark-accent-text,
+  text:              $dark-primary-text,
+  slider-min:        $dark-primary-text,
+  slider-off:        rgba($dark-text, 0.26),
+  slider-off-active: $dark-disabled-text,
+);
+
+// Dark Theme text
+$light-text: #ffffff;
+$light-primary-text: $light-text;
+$light-accent-text: rgba($light-primary-text, 0.7);
+$light-disabled-text: rgba($light-primary-text, 0.5);
+$light-dividers: rgba($light-primary-text, 0.12);
+$light-focused: rgba($light-primary-text, 0.12);
+
+$mat-dark-theme-foreground: (
+  base:              $light-text,
+  divider:           $light-dividers,
+  dividers:          $light-dividers,
+  disabled:          $light-disabled-text,
+  disabled-button:   rgba($light-text, 0.3),
+  disabled-text:     $light-disabled-text,
+  elevation:         black,
+  hint-text:         $light-disabled-text,
+  secondary-text:    $light-accent-text,
+  accent-text:       $light-accent-text,
+  icon:              $light-text,
+  icons:             $light-text,
+  text:              $light-text,
+  slider-min:        $light-text,
+  slider-off:        rgba($light-text, 0.3),
+  slider-off-active: rgba($light-text, 0.3),
+);
+
+// Background config
+// Light bg
+$light-background:    #f3f3f3;
+$light-bg-darker-5:   darken($light-background, 5%);
+$light-bg-darker-10:  darken($light-background, 10%);
+$light-bg-darker-20:  darken($light-background, 20%);
+$light-bg-darker-30:  darken($light-background, 30%);
+$light-bg-lighter-5:  lighten($light-background, 5%);
+$dark-bg-tooltip:     lighten(#060606, 20%);
+$dark-bg-alpha-4:     rgba(#060606, 0.04);
+$dark-bg-alpha-12:    rgba(#060606, 0.12);
+
+$mat-light-theme-background: (
+  background:               $light-background,
+  status-bar:               $light-bg-darker-20,
+  app-bar:                  $light-bg-darker-5,
+  hover:                    $dark-bg-alpha-4,
+  card:                     $light-bg-lighter-5,
+  dialog:                   $light-bg-lighter-5,
+  tooltip:                  $dark-bg-tooltip,
+  disabled-button:          $dark-bg-alpha-12,
+  raised-button:            $light-bg-lighter-5,
+  focused-button:           $dark-focused,
+  selected-button:          $light-bg-darker-20,
+  selected-disabled-button: $light-bg-darker-30,
+  disabled-button-toggle:   $light-bg-darker-10,
+  unselected-chip:          $light-bg-darker-10,
+  disabled-list-option:     $light-bg-darker-10,
+);
+
+// Dark bg
+$dark-background:     #060606;
+$dark-bg-lighter-5:   lighten($dark-background, 5%);
+$dark-bg-lighter-10:  lighten($dark-background, 10%);
+$dark-bg-lighter-20:  lighten($dark-background, 20%);
+$dark-bg-lighter-30:  lighten($dark-background, 30%);
+$light-bg-alpha-4:    rgba(#f3f3f3, 0.04);
+$light-bg-alpha-12:   rgba(#f3f3f3, 0.12);
+
+// Background palette for dark themes.
+$mat-dark-theme-background: (
+  background:               $dark-background,
+  status-bar:               $dark-bg-lighter-20,
+  app-bar:                  $dark-bg-lighter-5,
+  hover:                    $light-bg-alpha-4,
+  card:                     $dark-bg-lighter-5,
+  dialog:                   $dark-bg-lighter-5,
+  tooltip:                  $dark-bg-lighter-20,
+  disabled-button:          $light-bg-alpha-12,
+  raised-button:            $dark-bg-lighter-5,
+  focused-button:           $light-focused,
+  selected-button:          $dark-bg-lighter-20,
+  selected-disabled-button: $dark-bg-lighter-30,
+  disabled-button-toggle:   $dark-bg-lighter-10,
+  unselected-chip:          $dark-bg-lighter-20,
+  disabled-list-option:     $dark-bg-lighter-10,
+);
+
+// Compute font config
+@include mat-core($fontConfig);
+
+// Theme Config
+
+body {
+  --primary-color: #1f4294;
+  --primary-lighter-color: #cedaf5;
+  --primary-darker-color: #1f4294;
+  --text-primary-color: #{$light-primary-text};
+  --text-primary-lighter-color: #{$dark-primary-text};
+  --text-primary-darker-color: #{$light-primary-text};
+}
+
+$mat-primary: (
+  main: #1f4294,
+  lighter: #cedaf5,
+  darker: #1f4294,
+  200: #1f4294, // For slide toggle,
+  contrast : (
+    main: $light-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$theme-primary: mat-palette($mat-primary, main, lighter, darker);
+
+body {
+  --accent-color: #fac511;
+  --accent-lighter-color: #3f3e38;
+  --accent-darker-color: #fac511;
+  --text-accent-color: #{$dark-primary-text};
+  --text-accent-lighter-color: #{$light-primary-text};
+  --text-accent-darker-color: #{$dark-primary-text};
+}
+
+$mat-accent: (
+  main: #fac511,
+  lighter: #3f3e38,
+  darker: #fac511,
+  200: #fac511, // For slide toggle,
+  contrast : (
+    main: $dark-primary-text,
+    lighter: $light-primary-text,
+    darker: $dark-primary-text,
+  )
+);
+$theme-accent: mat-palette($mat-accent, main, lighter, darker);
+
+body {
+  --warn-color: #ff0000;
+  --warn-lighter-color: #ffb3b3;
+  --warn-darker-color: #ff0000;
+  --text-warn-color: #{$light-primary-text};
+  --text-warn-lighter-color: #{$dark-primary-text};
+  --text-warn-darker-color: #{$light-primary-text};
+}
+
+$mat-warn: (
+  main: #ff0000,
+  lighter: #ffb3b3,
+  darker: #ff0000,
+  200: #ff0000, // For slide toggle,
+  contrast : (
+    main: $light-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$theme-warn: mat-palette($mat-warn, main, lighter, darker);;
+
+$lightTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
+$darkTheme: mat-dark-theme($theme-accent, $theme-primary, $theme-warn);
+
+// Theme Init
+@include angular-material-theme($lightTheme);
+
+// Specific component overrides, pieces that are not in line with the general theming
+
+// Handle buttons appropriately, with respect to line-height
+.mat-raised-button, .mat-stroked-button, .mat-flat-button {
+  padding: 0 1.15em;
+  margin: 0 .65em;
+  min-width: 3em;
+  line-height: 36.4px
+}
+
+.mat-standard-chip {
+  padding: .5em .85em;
+  min-height: 2.5em;
+}
+
+.material-icons {
+  font-size: 24px;
+  font-family: 'Material Icons Outlined', 'Material Icons';
+  .mat-badge-content {
+    font-family: 'Roboto';
+  }
+}
+
+.mat-form-field {
+  min-width: 300px;
+  width: 100%;
+}
+
+.mat-snack-bar-container {
+  margin-top: 300px !important;
+}
+
+// Game items
+
+.game-item-line {
+  &:hover {
+    background-color: var(--primary-lighter-color);
+    color: var(--primary-color);
+    border-color: var(--primary-lighter-color);
+    border-radius: 5px;
+  }
+
+  .game-item-line-link {
+    text-decoration: none;
+  }
+
+  .game-item-title {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+  }
+
+  .game-item-sets {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    min-width: 24px;
+  }
+
+  .game-item-set {
+    display: inline-block;
+    color: $dark-text;
+    width: 20px;
+  }
+}
+
+.item-link {
+  text-decoration: none;
+  font-weight: normal;
+  color: $dark-text;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--primary-color);
+    text-decoration-color: var(--primary-color);
+  }
+}
+
+// Navigation drawer
+
+.drawer-link {
+  text-decoration: none;
+  color: $dark-text;
+  display: block;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+.selected-drawer-link {
+  text-decoration: none;
+  color: var(--primary-color) !important;
+  background-color: var(--primary-lighter-color);
+  border-radius: 5px 20px 20px 5px;
+  display: block;
+}
+
+// Sackbar
+
+.vbr-info-snackbar {
+  color: var(--primary-color);
+  background-color: var(--primary-lighter-color);
+}
+
+.vbr-info-snackbar .mat-simple-snackbar {
+  justify-content: center;
+}
+
+.vbr-error-snackbar {
+  color: var(--vbr-error-color);
+  background-color: var(--vbr-error-light-color);
+}
+
+.vbr-error-snackbar .mat-simple-snackbar {
+  justify-content: center;
+}
+
+// Tooltip
+
+.vbr-tooltip {
+  color: var(--primary-color) !important;
+  background-color: var(--primary-lighter-color) !important;
+}
+
+// Buttons
+
+.vbr-cancel-button {
+	color: var(--vbr-cancel-color) !important;
+	background-color: inherit !important;
+
+  &:hover {
+    color: $light-text !important;
+    background-color: var(--vbr-cancel-color) !important;
+    border-color: var(--vbr-cancel-color) !important;
+  }
+}
+
+.vbr-beach-button {
+	background-color: var(--vbr-beach-color) !important;
+  border-color: var(--vbr-beach-color) !important;
+  color: var(--vbr-text-color) !important;
+
+  &:hover {
+    filter: var(--vbr-hover-brighter) !important;
+    color: var(--vbr-text-color) !important;
+  }
+}
+
+.vbr-indoor-button {
+	background-color: var(--vbr-indoor-color) !important;
+  border-color: var(--vbr-indoor-color) !important;
+  color: var(--vbr-inverted-text-color) !important;
+
+  &:hover {
+    filter: var(--vbr-hover-darker) !important;
+    color: var(--vbr-inverted-text-color) !important;
+  }
+}
+
+.vbr-indoor-4x4-button {
+	background-color: var(--vbr-indoor-4x4-color) !important;
+  border-color: var(--vbr-indoor-4x4-color) !important;
+  color: var(--vbr-inverted-text-color) !important;
+
+  &:hover {
+    filter: var(--vbr-hover-darker) !important;
+    color: var(--vbr-inverted-text-color) !important;
+  }
+}
+
+.vbr-snow-button {
+	background-color: var(--vbr-snow-color) !important;
+  border-color: var(--vbr-snow-color) !important;
+  color: var(--vbr-inverted-text-color) !important;
+
+  &:hover {
+    filter: var(--vbr-hover-darker) !important;
+    color: var(--vbr-inverted-text-color) !important;
+  }
+}
+
+// League rankings
+
+.league-ranking-even {
+  background-color: $light-background;
+}
+
+.league-ranking-odd {
+  background-color: $light-bg-darker-10;
+}
+
+.dark-theme {
+  @include angular-material-theme($darkTheme);
+
+  // Game items
+
+  .game-item-line {
+    &:hover {
+      background-color: var(--accent-lighter-color);
+      color: var(--accent-color);
+      border-color: var(--accent-lighter-color);
+    }
+
+    .game-item-title {
+      color: var(--accent-color);
+    }
+    
+    .game-item-sets {
+      color: var(--accent-color);
+    }
+  
+    .game-item-set {
+      color: $light-text;
+      width: 20px;
+    }
+  }
+  
+  .item-link {
+    color: $light-text;
+
+    &:hover {
+      color: var(--accent-color);
+      text-decoration-color: var(--accent-color);
+    }
+  }
+
+  // Navigation drawer
+
+  .drawer-link {
+    color: $light-text;
+
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+
+  .selected-drawer-link {
+    color: var(--accent-color) !important;
+    background-color: var(--accent-lighter-color);
+  }
+
+  // Buttons
+
+  .vbr-cancel-button {
+    color: $light-text !important;
+    background-color: var(--vbr-cancel-color) !important;
+  
+    &:hover {
+      color: var(--vbr-cancel-color) !important;
+      background-color: $light-background !important;
+      border-color: var(--vbr-inverted-text-color) !important;
+    }
+  }
+
+  // Sackbar
+
+  .vbr-info-snackbar {
+    color: var(--accent-color);
+    background-color: var(--accent-lighter-color);
+  }
+
+  .vbr-info-snackbar .mat-simple-snackbar {
+    justify-content: center;
+  }
+
+  // Tooltip
+
+  .vbr-tooltip {
+    color: var(--accent-color) !important;
+    background-color: var(--accent-lighter-color) !important;
+  }
+
+ // League rankings
+
+  .league-ranking-even {
+    background-color: $dark-background;
+  }
+
+  .league-ranking-odd {
+    background-color: $dark-bg-lighter-10;
+  }
+}

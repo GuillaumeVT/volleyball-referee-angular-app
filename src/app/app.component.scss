@@ -1,0 +1,19 @@
+.drawer-container {
+  min-width: 300px;
+}
+
+.scroll-to-top {
+  position: fixed;
+  top: calc(1.1 * var(--toolbar-height));
+  right: calc(0.5 * var(--toolbar-height));
+  z-index: 5;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar-logo {
+  width: auto;
+  height: 30px;
+}

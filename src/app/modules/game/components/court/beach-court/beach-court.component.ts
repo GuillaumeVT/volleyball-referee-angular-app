@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-beach-court',
   templateUrl: './beach-court.component.html',
-  styleUrls: ['./beach-court.component.css']
+  styleUrls: ['./beach-court.component.scss']
 })
 export class BeachCourtComponent {
 

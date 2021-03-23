@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-game-sanctions',
   templateUrl: './game-sanctions.component.html',
-  styleUrls: ['./game-sanctions.component.css']
+  styleUrls: ['./game-sanctions.component.scss']
 })
 export class GameSanctionsComponent {
 

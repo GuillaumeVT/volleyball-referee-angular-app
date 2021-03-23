@@ -1,7 +1,7 @@
 <mat-card *ngIf="game" style="height: 100%;">
   <mat-card-content>
     <div class="text-center">
-      <div class="vbr-text">
+      <div>
         {{game.scheduledAt | date : 'mediumDate'}}
 
         <div>
@@ -14,7 +14,7 @@
       </div>
 
       <div class="div-summary my-3">
-        <div class="vbr-text text-center team-name">
+        <div class="text-center team-name">
           {{leftTeamName}}
         </div>
 
@@ -28,12 +28,12 @@
           {{rightTeamSets}}
         </span>
 
-        <div class="vbr-text text-center team-name">
+        <div class="text-center team-name">
           {{rightTeamName}}
         </div>
       </div>
 
-      <div class="vbr-text" [innerHtml]="fullScore"></div>
+      <div [innerHtml]="fullScore"></div>
 
     </div>
 

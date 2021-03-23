@@ -10,7 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-user-rules-dialog',
   templateUrl: './user-rules-dialog.component.html',
-  styleUrls: ['./user-rules-dialog.component.css']
+  styleUrls: ['./user-rules-dialog.component.scss']
 })
 export class UserRulesDialogComponent {
 

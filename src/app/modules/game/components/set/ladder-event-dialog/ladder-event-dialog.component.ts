@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-ladder-event-dialog',
   templateUrl: './ladder-event-dialog.component.html',
-  styleUrls: ['./ladder-event-dialog.component.css']
+  styleUrls: ['./ladder-event-dialog.component.scss']
 })
 export class LadderEventDialogComponent {
 
