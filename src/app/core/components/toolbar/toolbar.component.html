@@ -15,10 +15,13 @@
     </button>
     
     <mat-menu #palette="matMenu">
-      <button mat-menu-item (click)="onSelectLightTheme()">
+      <button mat-menu-item (click)="onSelectSystemTheme()" [ngClass]="currentTheme === systemTheme ? 'selected-menu-item' : ''">
+        <span>System theme</span>
+      </button>
+      <button mat-menu-item (click)="onSelectLightTheme()" [ngClass]="currentTheme === lightTheme ? 'selected-menu-item' : ''">
         <span>Light theme</span>
       </button>
-      <button mat-menu-item (click)="onSelectDarkTheme()">
+      <button mat-menu-item (click)="onSelectDarkTheme()" [ngClass]="currentTheme === darkTheme ? 'selected-menu-item' : ''">
         <span>Dark theme</span>
       </button>
     </mat-menu>

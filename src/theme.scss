@@ -409,6 +409,13 @@ $darkTheme: mat-dark-theme($theme-accent, $theme-primary, $theme-warn);
   background-color: $light-bg-darker-10;
 }
 
+// Selected menu item
+
+.selected-menu-item {
+  color: var(--primary-color) !important;
+  background-color: var(--primary-lighter-color);
+}
+
 .dark-theme {
   @include angular-material-theme($darkTheme);
 
@@ -498,5 +505,12 @@ $darkTheme: mat-dark-theme($theme-accent, $theme-primary, $theme-warn);
 
   .league-ranking-odd {
     background-color: $dark-bg-lighter-10;
+  }
+
+  // Selected menu item
+
+  .selected-menu-item {
+    color: var(--accent-color) !important;
+    background-color: var(--accent-lighter-color);
   }
 }

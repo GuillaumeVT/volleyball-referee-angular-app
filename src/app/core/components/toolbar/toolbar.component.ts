@@ -17,17 +17,32 @@ export class ToolbarComponent implements OnChanges {
   @Input() user: UserSummary;
   @Input() sideNav: MatSidenav;
 
+  themeKey: string;
+  currentTheme: string;
+  systemTheme: string;
+  lightTheme: string;
   darkTheme: string;
   numberOfFriendRequests: number;
 
   constructor(private userService: UserService, private router: Router, private renderer: Renderer2, private overlayContainer: OverlayContainer) {
+    this.themeKey = 'theme';
+    this.systemTheme = 'system-theme';
+    this.lightTheme = 'light-theme';
     this.darkTheme = 'dark-theme';
     this.numberOfFriendRequests = 0;
 
-    if (localStorage.getItem(this.darkTheme)) {
-      this.onSelectDarkTheme();
+    this.currentTheme = localStorage.getItem(this.themeKey);
+
+    if (this.currentTheme) {
+      if (this.currentTheme === this.systemTheme) {
+        this.toggleSystemTheme();
+      } else if (this.currentTheme === this.lightTheme) {
+        this.toggleLightTheme();
+      } else if (this.currentTheme === this.darkTheme) {
+        this.toggleDarkTheme();
+      }
     } else {
-      this.onSelectLightTheme();
+      this.onSelectSystemTheme();
     }
   }
 
@@ -59,15 +74,40 @@ export class ToolbarComponent implements OnChanges {
     return '/colleagues';
   }
 
+  onSelectSystemTheme(): void {
+    this.toggleSystemTheme();
+    localStorage.setItem(this.themeKey, this.systemTheme);
+  }
+
   onSelectLightTheme(): void {
-    this.renderer.removeClass(document.body, this.darkTheme);
-    this.overlayContainer.getContainerElement().classList.remove(this.darkTheme);
-    localStorage.removeItem(this.darkTheme);
+    this.toggleLightTheme();
+    localStorage.setItem(this.themeKey, this.lightTheme);
   }
 
   onSelectDarkTheme(): void {
+    this.toggleDarkTheme();
+    localStorage.setItem(this.themeKey, this.darkTheme);
+  }
+
+  toggleSystemTheme(): void {
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (isDark) {
+      this.toggleDarkTheme();
+    } else {
+      this.toggleLightTheme();
+    }
+    this.currentTheme = this.systemTheme;
+  }
+
+  toggleLightTheme(): void {
+    this.renderer.removeClass(document.body, this.darkTheme);
+    this.overlayContainer.getContainerElement().classList.remove(this.darkTheme);
+    this.currentTheme = this.lightTheme;
+  }
+
+  toggleDarkTheme(): void {
     this.renderer.addClass(document.body, this.darkTheme);
     this.overlayContainer.getContainerElement().classList.add(this.darkTheme);
-    localStorage.setItem(this.darkTheme, 'true');
+    this.currentTheme = this.darkTheme;
   }
 }
