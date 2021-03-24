@@ -197,7 +197,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   onAllGamesDeleted(): void {
     this.refreshGames(false);
-    this.snackBarService.showInfo('All games was successfully deleted.');
+    this.snackBarService.showInfo('All games were successfully deleted.');
   }
 
   onGameDeletionError(): void {

@@ -157,10 +157,10 @@ body {
 }
 
 $mat-primary: (
-  main: #1f4294,
-  lighter: #cedaf5,
-  darker: #1f4294,
-  200: #1f4294, // For slide toggle,
+  main: var(--primary-color),
+  lighter: var(--primary-lighter-color),
+  darker: var(--primary-color),
+  200: var(--primary-color), // For slide toggle,
   contrast : (
     main: $light-primary-text,
     lighter: $dark-primary-text,
@@ -179,10 +179,10 @@ body {
 }
 
 $mat-accent: (
-  main: #fac511,
-  lighter: #3f3e38,
-  darker: #fac511,
-  200: #fac511, // For slide toggle,
+  main: var(--accent-color),
+  lighter: var(--accent-lighter-color),
+  darker: var(--accent-color),
+  200: var(--accent-color), // For slide toggle,
   contrast : (
     main: $dark-primary-text,
     lighter: $light-primary-text,
@@ -192,19 +192,19 @@ $mat-accent: (
 $theme-accent: mat-palette($mat-accent, main, lighter, darker);
 
 body {
-  --warn-color: #ff0000;
-  --warn-lighter-color: #ffb3b3;
-  --warn-darker-color: #ff0000;
+  --warn-color: #bc0019;
+  --warn-lighter-color: #ffbcc5;
+  --warn-darker-color: #bc0019;
   --text-warn-color: #{$light-primary-text};
   --text-warn-lighter-color: #{$dark-primary-text};
   --text-warn-darker-color: #{$light-primary-text};
 }
 
 $mat-warn: (
-  main: #ff0000,
-  lighter: #ffb3b3,
-  darker: #ff0000,
-  200: #ff0000, // For slide toggle,
+  main: var(--warn-color),
+  lighter: var(--warn-lighter-color),
+  darker: var(--warn-color),
+  200: var(--warn-color), // For slide toggle,
   contrast : (
     main: $light-primary-text,
     lighter: $dark-primary-text,
@@ -327,8 +327,8 @@ $darkTheme: mat-dark-theme($theme-accent, $theme-primary, $theme-warn);
 }
 
 .vbr-error-snackbar {
-  color: var(--vbr-error-color);
-  background-color: var(--vbr-error-light-color);
+  color: var(--warn-color);
+  background-color: var(--warn-lighter-color);
 }
 
 .vbr-error-snackbar .mat-simple-snackbar {
@@ -358,44 +358,44 @@ $darkTheme: mat-dark-theme($theme-accent, $theme-primary, $theme-warn);
 .vbr-beach-button {
 	background-color: var(--vbr-beach-color) !important;
   border-color: var(--vbr-beach-color) !important;
-  color: var(--vbr-text-color) !important;
+  color: $dark-text !important;
 
   &:hover {
     filter: var(--vbr-hover-brighter) !important;
-    color: var(--vbr-text-color) !important;
+    color: $dark-text !important;
   }
 }
 
 .vbr-indoor-button {
 	background-color: var(--vbr-indoor-color) !important;
   border-color: var(--vbr-indoor-color) !important;
-  color: var(--vbr-inverted-text-color) !important;
+  color: $light-text !important;
 
   &:hover {
     filter: var(--vbr-hover-darker) !important;
-    color: var(--vbr-inverted-text-color) !important;
+    color: $light-text !important;
   }
 }
 
 .vbr-indoor-4x4-button {
 	background-color: var(--vbr-indoor-4x4-color) !important;
   border-color: var(--vbr-indoor-4x4-color) !important;
-  color: var(--vbr-inverted-text-color) !important;
+  color: $light-text !important;
 
   &:hover {
     filter: var(--vbr-hover-darker) !important;
-    color: var(--vbr-inverted-text-color) !important;
+    color: $light-text !important;
   }
 }
 
 .vbr-snow-button {
 	background-color: var(--vbr-snow-color) !important;
   border-color: var(--vbr-snow-color) !important;
-  color: var(--vbr-inverted-text-color) !important;
+  color: $light-text !important;
 
   &:hover {
     filter: var(--vbr-hover-darker) !important;
-    color: var(--vbr-inverted-text-color) !important;
+    color: $light-text !important;
   }
 }
 
@@ -414,6 +414,74 @@ $darkTheme: mat-dark-theme($theme-accent, $theme-primary, $theme-warn);
 .selected-menu-item {
   color: var(--primary-color) !important;
   background-color: var(--primary-lighter-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--vbr-light-unselected-color);
+  border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-lighter-color);
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+/* Date picker */
+
+.cdk-overlay-container {
+  z-index: 9999;
+}
+
+.owl-dt-container {
+  background-color: $light-background;
+  border-radius: 5px;
+
+  .owl-dt-weekday {
+    color: $dark-disabled-text;
+  }
+
+  .owl-dt-calendar-table {
+    .owl-dt-calendar-cell-content {
+      color: $dark-text;
+    }
+    
+    .owl-dt-calendar-cell-selected {
+      color: $light-text;
+      background-color: var(--primary-color);
+    }
+
+    .owl-dt-calendar-cell-disabled {
+      :not(.owl-dt-calendar-cell-selected) {
+        color: $dark-disabled-text;
+      }
+    }
+  }
+
+  .owl-dt-timer-box {
+    color: $dark-disabled-text;
+
+    .owl-dt-timer-input {
+      color: $dark-text;
+      background-color: $light-background;
+    }
+  }
+  
+  .owl-dt-control-button {
+    color: var(--primary-color);
+  }
 }
 
 .dark-theme {
@@ -475,7 +543,7 @@ $darkTheme: mat-dark-theme($theme-accent, $theme-primary, $theme-warn);
     &:hover {
       color: var(--vbr-cancel-color) !important;
       background-color: $light-background !important;
-      border-color: var(--vbr-inverted-text-color) !important;
+      border-color: $light-text !important;
     }
   }
 
@@ -512,5 +580,63 @@ $darkTheme: mat-dark-theme($theme-accent, $theme-primary, $theme-warn);
   .selected-menu-item {
     color: var(--accent-color) !important;
     background-color: var(--accent-lighter-color);
+  }
+
+    /* Track */
+  ::-webkit-scrollbar-track {
+    background: var(--vbr-light-unselected-color);
+    border-radius: 4px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent-lighter-color);
+    border-radius: 4px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+    border-radius: 4px;
+  }
+
+  /* Date picker */
+
+  .owl-dt-container {
+    background-color: $dark-background;
+
+    .owl-dt-weekday {
+      color: $light-disabled-text;
+    }
+
+    .owl-dt-calendar-table {
+      .owl-dt-calendar-cell-content {
+        color: $light-text;
+      }
+
+      .owl-dt-calendar-cell-selected {
+        color: $dark-text;
+        background-color: var(--accent-color);
+      }
+
+      .owl-dt-calendar-cell-disabled {
+        :not(.owl-dt-calendar-cell-selected) {
+          color: $light-disabled-text;
+        }
+      }
+    }
+
+    .owl-dt-timer-box {
+      color: $light-disabled-text;
+
+      .owl-dt-timer-input {
+        color: $light-text;
+        background-color: $dark-bg-lighter-20;
+      }
+    }
+    
+    .owl-dt-control-button {
+      color: var(--accent-color);
+    }
   }
 }
