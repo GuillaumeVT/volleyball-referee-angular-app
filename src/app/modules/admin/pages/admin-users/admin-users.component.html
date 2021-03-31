@@ -1,0 +1,56 @@
+<div class="div-user mt-3">
+
+  <mat-form-field class="mb-3">
+    <mat-label>Filter</mat-label>
+    <input matInput type="text" #textFilter autocomplete="off" (input)="filterUsers(textFilter)"/>
+  </mat-form-field>
+
+  <table class="mb-3 user-subscriptions-table">
+
+    <thead>
+      <tr>
+        <th>Pseudo</th>
+        <th>Email</th>
+        <th>Created</th>
+        <th>Last login</th>
+        <th>Subscription expiry</th>
+        <th>Actions</th>
+        <th>Friends</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let user of users">
+        <td>{{user.pseudo}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.createdAt | date: 'yyyy-MM-dd'}}</td>
+        <td>{{user.lastLoginAt | date: 'yyyy-MM-dd'}}</td>
+        <td>
+          <span *ngIf="user.subscription" [style.color]="(user.subscriptionExpiryAt < today) ? 'red' : ''">{{user.subscriptionExpiryAt | date: 'yyyy-MM-dd'}}</span>
+          <span *ngIf="!user.subscription">Never</span>
+        </td>
+        <td>
+          <div *ngIf="user.subscription">
+            <button mat-button color="primary" type="button" (click)="viewSubscription(user)">
+              <mat-icon class="mr-1">visibility</mat-icon>View subscription
+            </button>
+            <button mat-button color="primary" type="button" (click)="updateUserSubscription(user)">
+              <mat-icon class="mr-1">add_shopping_cart</mat-icon>Edit purchase token
+            </button>
+            <button mat-button color="primary" type="button" (click)="refreshUserSubscription(user)">
+              <mat-icon class="mr-1">refresh</mat-icon>Refresh expiry
+            </button>
+          </div>
+        </td>
+        <td>{{user.friends?.length}}</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <mat-paginator [length]="total" [pageIndex]="page" [pageSize]="size" [pageSizeOptions]="[20, 50, 100]" (page)="onPageChange($event)">
+  </mat-paginator>
+
+</div>

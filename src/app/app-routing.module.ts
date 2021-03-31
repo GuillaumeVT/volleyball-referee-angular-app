@@ -1,7 +1,9 @@
+import { AdminnGuard } from 'src/app/core/guards/admin.guard';
 import { LoginGuard } from 'src/app/core/guards/login.guard';
 import { PublicGuard } from 'src/app/core/guards/public.guard';
 import { PageNotFoundComponent } from 'src/app/core/pages/page-not-found/page-not-found.component';
 import { PrivacyPolicyComponent } from 'src/app/core/pages/privacy-policy/privacy-policy.component';
+import { AdminUsersComponent } from 'src/app/modules/admin/pages/admin-users/admin-users.component';
 import { GameComponent } from 'src/app/modules/game/pages/game/game.component';
 import { LeagueComponent } from 'src/app/modules/league/pages/league/league.component';
 import { SearchComponent } from 'src/app/modules/search/pages/search/search.component';
@@ -36,6 +38,7 @@ const routes: Routes = [
   { path: 'teams', component: UserTeamsComponent, canActivate: [ LoginGuard ] },
   { path: 'games', component: UserGamesComponent, canActivate: [ LoginGuard ] },
   { path: 'games/league/:leagueId', component: UserGamesComponent, canActivate: [ LoginGuard ] },
+  { path: 'admin/users', component: AdminUsersComponent, canActivate: [ AdminnGuard ] },
   { path: '**', component: PageNotFoundComponent }
 ];
 

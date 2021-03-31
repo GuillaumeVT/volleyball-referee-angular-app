@@ -7,7 +7,6 @@ import { PlayerStyleService } from 'src/app/shared/services/player-style.service
 import { PublicService } from 'src/app/shared/services/public.service';
 
 import { DatePipe } from '@angular/common';
-import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({

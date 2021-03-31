@@ -14,7 +14,7 @@ export class PasswordResetComponent implements OnInit {
 
   passwordResetId: string;
   
-  passwordResetFormGroup:  FormGroup;
+  passwordResetFormGroup: FormGroup;
   hidePassword:       boolean;
   passwordVisibility: string;
 

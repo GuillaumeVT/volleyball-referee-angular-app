@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   commonNavItems: NavItem[];
   dataNavItems:   NavItem[];
+  adminNavItems:  NavItem[];
 
   constructor(private userService: UserService, media: MediaMatcher) {
     this.desktopNav = !media.matchMedia('(max-width: 800px)').matches;
@@ -47,9 +48,18 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
           { label: 'Rules', url: '/rules' },
           { label: 'Colleagues', url: '/colleagues' }
         ];
+
+        if (this.user.admin) {
+          this.adminNavItems = [
+            { label: 'Users', url: '/admin/users' }
+          ];
+        } else {
+          this.adminNavItems = [];
+        }
       } else {
         this.user = null;
         this.dataNavItems = [];
+        this.adminNavItems = [];
       }
     });
   }

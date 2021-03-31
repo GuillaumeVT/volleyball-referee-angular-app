@@ -9,6 +9,9 @@
       <mat-divider *ngIf="dataNavItems.length > 0" class="my-2"></mat-divider>
       <div *ngIf="dataNavItems.length > 0" mat-subheader>My data</div>
       <a *ngFor="let dataNavItem of dataNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="dataNavItem.url">{{dataNavItem.label}}</a>
+      <mat-divider *ngIf="adminNavItems.length > 0" class="my-2"></mat-divider>
+      <div *ngIf="adminNavItems.length > 0" mat-subheader>Admin</div>
+      <a *ngFor="let adminNavItem of adminNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="adminNavItem.url">{{adminNavItem.label}}</a>
     </mat-nav-list>
 
   </mat-sidenav>

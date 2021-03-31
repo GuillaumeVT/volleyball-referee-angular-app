@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>User subscription</h2>
+<mat-dialog-content>
+
+  <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" class="my-1">
+
+    <span fxFlex="40">Acknowledged</span>
+    <span fxFlex>{{subscriptionPurchase.acknowledgementState}}</span>
+
+  </div>
+
+  <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" class="my-1">
+
+    <span fxFlex="40">Auto-renewing</span>
+    <span fxFlex>{{subscriptionPurchase.autoRenewing}}</span>
+
+  </div>
+
+  <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" class="my-1">
+
+    <span fxFlex="40">Expiry</span>
+    <span fxFlex>{{subscriptionPurchase.expiryTimeMillis | date: 'yyyy-MM-dd'}}</span>
+
+  </div>
+
+  <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" class="my-1">
+
+    <span fxFlex="40">Country</span>
+    <span fxFlex>{{subscriptionPurchase.countryCode}}</span>
+
+  </div>
+
+  <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" class="my-1">
+
+    <span fxFlex="40">Order ID</span>
+    <span fxFlex>{{subscriptionPurchase.orderId}}</span>
+
+  </div>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

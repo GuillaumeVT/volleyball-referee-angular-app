@@ -1,7 +1,23 @@
+export class User {
+  id:                   string;
+  pseudo:               string;
+  email:                string;
+  admin:                boolean;
+  purchaseToken:        string;
+  subscription:         boolean;
+  subscriptionExpiryAt: number;
+  friends:              Friend[];
+  createdAt:            number;
+  lastLoginAt:          number;
+  enabled:              boolean;
+  failedAuthentication: FailedAuthentication;
+}
+
 export class UserSummary {
   id:     string;
   pseudo: string;
   email:  string;
+  admin:  boolean;
 }
 
 export class Friend {
@@ -53,4 +69,22 @@ export class UserPasswordUpdate {
     this.currentPassword = currentPassword;
     this.newPassword = newPassword;
   }
+}
+
+export class FailedAuthentication {
+  attempts: number;
+  resetsAt: number;
+}
+
+export class SubscriptionPurchase {
+  acknowledgementState: number;
+  autoRenewing: boolean;
+  countryCode: string;
+  expiryTimeMillis: number;
+  kind: string;
+  orderId: string;
+  paymentState: number;
+  priceAmountMicros: number;
+  priceCurrencyCode: string;
+  startTimeMillis: number;
 }
