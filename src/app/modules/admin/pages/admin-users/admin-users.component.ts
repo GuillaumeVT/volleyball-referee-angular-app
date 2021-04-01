@@ -65,7 +65,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   updateUserSubscription(user: User): void {
-    const dialogRef = this.dialog.open(UserSubscriptionTokenDialogComponent, { width: "500px" });
+    const dialogRef = this.dialog.open(UserSubscriptionTokenDialogComponent, { width: "500px", data: user.purchaseToken });
     dialogRef.afterClosed().subscribe(purchaseToken => {
       if (purchaseToken) {
         this.adminService.updateUserSubscription(user.id, purchaseToken).subscribe(
@@ -75,8 +75,6 @@ export class AdminUsersComponent implements OnInit {
           },
           _error => this.snackBarService.showInfo("Failed to updated subscription.")
         );
-      } else {
-        this.snackBarService.showInfo("Failed to update subscription.");
       }
     });
   }

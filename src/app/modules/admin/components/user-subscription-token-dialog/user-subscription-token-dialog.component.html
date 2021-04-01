@@ -5,6 +5,8 @@
       <mat-label>Purchase token</mat-label>
       <input matInput type="text" formControlName="purchaseToken" cdkFocusInitial required>
       <mat-error *ngIf="purchaseTokenFormControl.errors?.required">Purchase token is required</mat-error>
+      <mat-error *ngIf="purchaseTokenFormControl.errors?.minlength">Purchase token must contain at least 144 characters</mat-error>
+      <mat-error *ngIf="purchaseTokenFormControl.errors?.maxlength">Purchase token must contain at most 187 characters</mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-subscription-token-dialog',
@@ -11,9 +11,10 @@ export class UserSubscriptionTokenDialogComponent {
 
   userSubscriptionFormGroup: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<UserSubscriptionTokenDialogComponent>) {
+  constructor(public dialogRef: MatDialogRef<UserSubscriptionTokenDialogComponent>, @Inject(MAT_DIALOG_DATA) public currentPurchaseToken: string) {
+    console.log(currentPurchaseToken)
     this.userSubscriptionFormGroup = new FormGroup({
-      purchaseToken: new FormControl('', [Validators.required])
+      purchaseToken: new FormControl({ value: this.currentPurchaseToken, disabled: false }, [Validators.required, Validators.minLength(144), Validators.maxLength(187)])
     });
   }
 
