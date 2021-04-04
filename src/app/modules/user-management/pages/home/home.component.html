@@ -2,7 +2,7 @@
 
   <mat-card class="div-small-form mt-4" *ngIf="availableGames?.length > 0">
     <mat-card-header>
-      <mat-card-title>My upcoming & live games</mat-card-title>
+      <mat-card-title>{{ 'user.management.dashboard-games' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div *ngFor="let game of availableGames" class="my-3">
@@ -13,7 +13,7 @@
 
   <mat-card class="div-small-form mt-4">
     <mat-card-header>
-      <mat-card-title>My statistics</mat-card-title>
+      <mat-card-title>{{ 'user.management.statistics' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <app-statistics [showUserStatistics]="true"></app-statistics>

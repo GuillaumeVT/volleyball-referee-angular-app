@@ -1,11 +1,14 @@
 <div class="my-3" fxLayout="row wrap" fxLayoutAlign="center center">
   <a href="{{playUrl}}" target="_blank" class="text-center m-1">
-    <button class="btn-android" mat-raised-button type="button"><mat-icon class="mr-1">android</mat-icon><span>Download our Android app</span></button>
+    <button class="btn-android" mat-raised-button type="button"><mat-icon class="mr-1">android</mat-icon><span>{{ 'linkbar.android-app' | translate }}</span></button>
   </a>
   <a href="{{facebookUrl}}" target="_blank" class="text-center m-1">
-    <button class="btn-facebook" mat-raised-button type="button"><mat-icon class="mr-1">facebook</mat-icon><span>Join us on Facebook</span></button>
+    <button class="btn-facebook" mat-raised-button type="button"><mat-icon class="mr-1">facebook</mat-icon><span>{{ 'linkbar.facebook-page' | translate }}</span></button>
   </a>
   <a [routerLink]="getPrivacyPolicyUrl()" target="_blank" class="text-center m-1">
-    <button mat-button color="primary" type="button">Privacy Policy</button>
+    <button mat-button color="primary" type="button">{{ 'linkbar.privacy-policy' | translate }}</button>
   </a>
+  <mat-select [(value)]="currentLanguage" class="text-center m-1" style="max-width: 85px;" (selectionChange)="onSelectionChanged()">
+    <mat-option *ngFor="let language of languages | keyvalue" [value]="language.key">{{language.value}}</mat-option>
+  </mat-select>
 </div>

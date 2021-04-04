@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search',
@@ -23,22 +24,24 @@ export class SearchComponent implements OnInit {
 
   searchTokenControl: FormControl;
   loadSearchResults: boolean;
+  minSearchLength: number;
 
-  constructor(private titleService: Title, private router: Router, private activeRoute: ActivatedRoute, private datePipe: DatePipe) {
+  constructor(private titleService: Title, private router: Router, private activeRoute: ActivatedRoute, private datePipe: DatePipe, private translate: TranslateService) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () { return false; };
 
-    this.titleService.setTitle('VBR - Search Games');
+    this.translate.get('search.title').subscribe(t => this.titleService.setTitle(t));
     this.loadSearchResults = false;
     this.searchType = SearchType.Token;
+    this.minSearchLength = 3;
 
-    this.tokenSearchCriterion = { type: SearchType.Token, typeStr: 'token', value: '', display: 'By team, league or referee' };
-    this.liveSearchCriterion = { type: SearchType.Live, typeStr: 'live', value: null, display: 'Live games' };
-    this.dateSearchCriterion = { type: SearchType.Date, typeStr: 'date', value: new Date(), display: 'By date' };
-    this.todaySearchCriterion = { type: SearchType.Today, typeStr: 'today', value: new Date(), display: 'Today\'s games' };
+    this.tokenSearchCriterion = { type: SearchType.Token, typeStr: 'token', value: '', display: 'search.option.token' };
+    this.liveSearchCriterion = { type: SearchType.Live, typeStr: 'live', value: null, display: 'search.option.live' };
+    this.dateSearchCriterion = { type: SearchType.Date, typeStr: 'date', value: new Date(), display: 'search.option.date' };
+    this.todaySearchCriterion = { type: SearchType.Today, typeStr: 'today', value: new Date(), display: 'search.option.today' };
 
     this.searchCriteria = [ this.tokenSearchCriterion, this.liveSearchCriterion, this.dateSearchCriterion, this.todaySearchCriterion ];
 
-    this.searchTokenControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
+    this.searchTokenControl = new FormControl('', [Validators.required, Validators.minLength(this.minSearchLength)]);
     this.searchTokenControl.valueChanges.subscribe(token => this.tokenSearchCriterion.value = token);
   }
   

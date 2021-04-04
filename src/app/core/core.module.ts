@@ -6,11 +6,17 @@ import { PrivacyPolicyComponent } from 'src/app/core/pages/privacy-policy/privac
 import { MaterialModule } from 'src/app/material/material.module';
 
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -26,6 +32,14 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     HttpClientModule,
     MaterialModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
@@ -39,7 +53,8 @@ import { RouterModule } from '@angular/router';
     ToolbarComponent,
     LinksBarComponent,
     PrivacyPolicyComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TranslateModule
   ]
 })
 export class CoreModule { }

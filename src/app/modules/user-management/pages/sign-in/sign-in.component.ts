@@ -4,6 +4,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +17,7 @@ export class SignInComponent {
   hidePassword:       boolean;
   passwordVisibility: string;
 
-  constructor(private userService: UserService, private snackBarService: SnackBarService) {
+  constructor(private userService: UserService, private snackBarService: SnackBarService, private translate: TranslateService) {
     this.hidePassword = false;
     this.togglePasswordVisibility();
     this.passwordVisibility = 'visibility_off';
@@ -44,7 +45,9 @@ export class SignInComponent {
   private onValidResponse(): void {}
 
   private onInvalidResponse(_error: any): void {
-    this.snackBarService.showError('Email and password do not match.');
+    this.translate.get('user.management.messages.credentials-mismatch-error').subscribe(
+      t => this.snackBarService.showError(t)
+    );
   }
 
   getPasswordLostUrl(): string {

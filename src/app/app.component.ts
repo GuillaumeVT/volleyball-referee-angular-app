@@ -6,6 +6,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatSidenavContent } from '@angular/material/sidenav';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -32,8 +33,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.desktopNav = !media.matchMedia('(max-width: 800px)').matches;
     this.showScrollToTop = false;
     this.commonNavItems = [
-      { label: 'Home', url: '/home' },
-      { label: 'Search games', url: '/search' }
+      { label: 'menu.item.home', url: '/home' },
+      { label: 'menu.item.search', url: '/search' }
     ];
   }
  
@@ -42,16 +43,16 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       if (userToken) {
         this.user = userToken.user;
         this.dataNavItems = [
-          { label: 'Tournaments & Leagues', url: '/leagues' },
-          { label: 'Games', url: '/games' },
-          { label: 'Teams', url: '/teams' },
-          { label: 'Rules', url: '/rules' },
-          { label: 'Colleagues', url: '/colleagues' }
+          { label: 'menu.item.leagues', url: '/leagues' },
+          { label: 'menu.item.games', url: '/games' },
+          { label: 'menu.item.teams', url: '/teams' },
+          { label: 'menu.item.rules', url: '/rules' },
+          { label: 'menu.item.colleagues', url: '/colleagues' }
         ];
 
         if (this.user.admin) {
           this.adminNavItems = [
-            { label: 'Users', url: '/admin/users' }
+            { label: 'menu.item.users', url: '/admin/users' }
           ];
         } else {
           this.adminNavItems = [];

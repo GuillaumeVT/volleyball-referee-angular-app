@@ -1,0 +1,78 @@
+{
+  "app": "Volleyball Referee",
+  "menu": {
+    "group": {
+      "data": "My data",
+      "admin": "Admin"
+    },
+    "item": {
+      "home": "Home",
+      "search": "Search games",
+      "leagues": "Tournaments & Leagues",
+      "games": "Games",
+      "teams": "Teams",
+      "rules": "Rules",
+      "colleagues": "Colleagues",
+      "users": "Users"
+    }
+  },
+  "toolbar": {
+    "theme": {
+      "system": "System theme",
+      "light": "Light theme",
+      "dark": "Dark theme"
+    },
+    "account": "My account",
+    "friend-requests": "{{numberOfFriendRequests}} request(s) received",
+    "sign-out": "Sign out"
+  },
+  "linkbar": {
+    "android-app": "Download our Android app",
+    "facebook-page": "Join us on Facebook",
+    "privacy-policy": "Privacy policy"
+  },
+  "search": {
+    "title": "VBR - Search Games",
+    "start": "Search",
+    "option": {
+      "token": "By team, league or referee",
+      "live": "Live games",
+      "date": "By date",
+      "today": "Today's games"
+    },
+    "messages": {
+      "criterion-invalid-error": "Criterion must contain at least {{min}} characters"
+    }
+  },
+  "user": {
+    "management": {
+      "dashboard-games": "My upcoming & live games",
+      "statistics": "My statistics",
+      "sign-in": "Sign in",
+      "email": "Email",
+      "password": "Password",
+      "lost-password": "Lost my password",
+      "recover": "Send recovery link",
+      "reset-password": "Reset my password",
+      "update-password": "Update my password",
+      "current-password": "Current password",
+      "new-password": "New password",
+      "confirm-new-password": "Confirm new password",
+      "messages": {
+        "create-account": "If you subscribed to the web services package, please create your account in the app to be able to sign in here.",
+        "password-constraints": "The password must contain at least 8 characters, including 1 uppercase character, 1 digit and 1 special character.",
+        "credentials-mismatch-error": "Email and password do not match.",
+        "email-required-error": "Email address is required",
+        "email-invalid-error": "Email address is not valid",
+        "password-required-error": "Password is required",
+        "password-short-error": "Password must contain at least 8 characters",
+        "passwords-mismatch-error": "Passwords do not match.",
+        "recovery-sent": "A recovery link was sent to ${emailAddress}.",
+        "recovery-failed": "${emailAddress} could not be found.",
+        "internal-error": "An error occurred on the server.",
+        "password-updated": "Password was successfully reset.",
+        "password-invalid-error": "Password does not satisfy the aforementioned criteria."
+      }
+    }
+  }
+}

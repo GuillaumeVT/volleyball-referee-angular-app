@@ -3,6 +3,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-password-lost',
@@ -13,7 +14,7 @@ export class PasswordLostComponent {
 
   passwordLostFormGroup: FormGroup;
 
-  constructor(private userService: UserService, private snackBarService: SnackBarService) {
+  constructor(private userService: UserService, private snackBarService: SnackBarService, private translate: TranslateService) {
     this.passwordLostFormGroup = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email])
     });
@@ -27,11 +28,15 @@ export class PasswordLostComponent {
   }
 
   private onValidResponse(emailAddress: string): void {
-    this.snackBarService.showInfo(`A recovery link was sent to ${emailAddress}.`);
+    this.translate.get('user.management.messages.recovery-sent', {emailAddress: emailAddress}).subscribe(
+      t =>  this.snackBarService.showInfo(t)
+    );
   }
 
   private onInvalidResponse(emailAddress: string): void {
-    this.snackBarService.showError(`${emailAddress} could not be found.`);
+    this.translate.get('user.management.messages.recovery-failed', {emailAddress: emailAddress}).subscribe(
+      t =>  this.snackBarService.showError(t)
+    );
   }
 
 }

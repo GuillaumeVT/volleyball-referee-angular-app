@@ -5,13 +5,13 @@
   <mat-sidenav #sideNav [mode]="desktopNav ? 'side' : 'over'" [opened]="desktopNav" class="drawer-container">
 
     <mat-nav-list class="px-3">
-      <a *ngFor="let commonNavItem of commonNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="commonNavItem.url">{{commonNavItem.label}}</a>
+      <a *ngFor="let commonNavItem of commonNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="commonNavItem.url">{{commonNavItem.label | translate}}</a>
       <mat-divider *ngIf="dataNavItems.length > 0" class="my-2"></mat-divider>
-      <div *ngIf="dataNavItems.length > 0" mat-subheader>My data</div>
-      <a *ngFor="let dataNavItem of dataNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="dataNavItem.url">{{dataNavItem.label}}</a>
+      <div *ngIf="dataNavItems.length > 0" mat-subheader>{{ 'menu.group.data' | translate }}</div>
+      <a *ngFor="let dataNavItem of dataNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="dataNavItem.url">{{dataNavItem.label | translate}}</a>
       <mat-divider *ngIf="adminNavItems.length > 0" class="my-2"></mat-divider>
-      <div *ngIf="adminNavItems.length > 0" mat-subheader>Admin</div>
-      <a *ngFor="let adminNavItem of adminNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="adminNavItem.url">{{adminNavItem.label}}</a>
+      <div *ngIf="adminNavItems.length > 0" mat-subheader>{{ 'menu.group.admin' | translate }}</div>
+      <a *ngFor="let adminNavItem of adminNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="adminNavItem.url">{{adminNavItem.label | translate}}</a>
     </mat-nav-list>
 
   </mat-sidenav>

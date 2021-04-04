@@ -4,6 +4,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-password-reset',
@@ -18,7 +19,7 @@ export class PasswordResetComponent implements OnInit {
   hidePassword:       boolean;
   passwordVisibility: string;
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private snackBarService: SnackBarService) {
+  constructor(private route: ActivatedRoute, private userService: UserService, private snackBarService: SnackBarService, private translate: TranslateService) {
     this.hidePassword = false;
     this.togglePasswordVisibility();
 
@@ -55,14 +56,20 @@ export class PasswordResetComponent implements OnInit {
   }
 
   private onValidResponse(): void {
-    this.snackBarService.showInfo('Your password was successfully reset.');
+    this.translate.get('user.management.messages.password-updated').subscribe(
+      t =>  this.snackBarService.showInfo(t)
+    );
   }
 
   private onInvalidResponse(error: any): void {
     if (error.status === 400) {
-      this.snackBarService.showError('Password does not satisfy the aforementioned criteria.');
+      this.translate.get('user.management.messages.password-invalid-error').subscribe(
+        t =>  this.snackBarService.showError(t)
+      );
     } else {
-      this.snackBarService.showError('An error occurred on the server.');
+      this.translate.get('user.management.messages.internal-error').subscribe(
+        t =>  this.snackBarService.showError(t)
+      );
     }
   }
 

@@ -6,43 +6,43 @@
       <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <h3 class="mat-h3">Update my password</h3>
+      <h3 class="mat-h3">{{ 'user.management.update-password' | translate }}</h3>
       <mat-form-field class="m-1" appearance="outline">
-        <mat-label>Current password</mat-label>
+        <mat-label>{{ 'user.management.current-password' | translate }}</mat-label>
         <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="currentPassword" required>
         <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
           <mat-icon>{{passwordVisibility}}</mat-icon>
         </button>
-        <mat-error *ngIf="currentPasswordFormControl.errors?.required">Current password is required</mat-error>
-        <mat-error *ngIf="currentPasswordFormControl.errors?.minlength">Password must contain at least 8 characters</mat-error>
+        <mat-error *ngIf="currentPasswordFormControl.errors?.required">{{ 'user.management.messages.password-required-error' | translate }}</mat-error>
+        <mat-error *ngIf="currentPasswordFormControl.errors?.minlength">{{ 'user.management.messages.password-short-error' | translate }}</mat-error>
       </mat-form-field>
       <p class="mx-1">
-        The password must contain at least 8 characters, including 1 uppercase character, 1 digit, and 1 special character.
+        {{ 'user.management.messages.password-constraints' | translate }}
       </p>
       <mat-form-field class="m-1" appearance="outline">
-        <mat-label>New password</mat-label>
+        <mat-label>{{ 'user.management.new-password' | translate }}</mat-label>
         <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="newPassword" required>
         <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
           <mat-icon>{{passwordVisibility}}</mat-icon>
         </button>
-        <mat-error *ngIf="newPasswordFormControl.errors?.required">New password is required</mat-error>
-        <mat-error *ngIf="newPasswordFormControl.errors?.minlength">Password must contain at least 8 characters</mat-error>
+        <mat-error *ngIf="newPasswordFormControl.errors?.required">{{ 'user.management.messages.password-required-error' | translate }}</mat-error>
+        <mat-error *ngIf="newPasswordFormControl.errors?.minlength">{{ 'user.management.messages.password-short-error' | translate }}</mat-error>
       </mat-form-field>
       <mat-form-field class="m-1" appearance="outline">
-        <mat-label>Confirm new password</mat-label>
+        <mat-label>{{ 'user.management.confirm-new-password' | translate }}</mat-label>
         <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="confirmedPassword" required>
         <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
           <mat-icon>{{passwordVisibility}}</mat-icon>
         </button>
-        <mat-error *ngIf="confirmedPasswordFormControl.errors?.required">New password confirmation is required</mat-error>
-        <mat-error *ngIf="confirmedPasswordFormControl.errors?.minlength">Password must contain at least 8 characters</mat-error>
+        <mat-error *ngIf="confirmedPasswordFormControl.errors?.required">{{ 'user.management.messages.password-required-error' | translate }}</mat-error>
+        <mat-error *ngIf="confirmedPasswordFormControl.errors?.minlength">{{ 'user.management.messages.password-short-error' | translate }}</mat-error>
       </mat-form-field>
       <p class="mx-1" *ngIf="passwordUpdateFormGroup.errors?.mismatch">
-        <mat-error>Passwords do not match.</mat-error>
+        <mat-error>{{ 'user.management.messages.passwords-mismatch-error' | translate }}</mat-error>
       </p>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!passwordUpdateFormGroup.valid">Update password</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!passwordUpdateFormGroup.valid">{{ 'user.management.update-password' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 </form>

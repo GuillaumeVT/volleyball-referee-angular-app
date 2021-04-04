@@ -5,6 +5,7 @@ import { GameSummary } from 'src/app/shared/models/game.model';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +18,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private subscription : Subscription = new Subscription();
 
-  constructor(private titleService: Title, private userService: UserService, private gameService: GameService) {
-    this.titleService.setTitle('Volleyball Referee');
+  constructor(private titleService: Title, private userService: UserService, private gameService: GameService, private translate: TranslateService) {
+    this.translate.get('app').subscribe(t => this.titleService.setTitle(t));
     this.availableGames = [];
   }
 

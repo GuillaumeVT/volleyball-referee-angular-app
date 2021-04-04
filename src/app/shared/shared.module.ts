@@ -1,5 +1,6 @@
 import { FileSaverModule } from 'ngx-filesaver';
 import { MaterialModule } from 'src/app/material/material.module';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { GameListItemComponent } from 'src/app/shared/components/game-list-item/game-list-item.component';
 import { GameListComponent } from 'src/app/shared/components/game-list/game-list.component';
 import { StatisticsComponent } from 'src/app/shared/components/statistics/statistics.component';
@@ -10,9 +11,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
+import { TranslateModule } from '@ngx-translate/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,8 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     GenderPipe,
     StatisticsComponent,
     GameListComponent,
-    GameListItemComponent
+    GameListItemComponent,
+    TranslateModule
   ]
 })
 export class SharedModule { }
