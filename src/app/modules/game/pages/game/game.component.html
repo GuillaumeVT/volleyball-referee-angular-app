@@ -15,9 +15,9 @@
 <div class="div-schedule text-center mt-3" *ngIf="game && game.status === 'SCHEDULED'">
   <div class="mx-1 px-1">
     <h2 class="mat-h2">{{game.homeTeam.name}} - {{game.guestTeam.name}}</h2>
-    <p class="mb-1" *ngIf="game.league">{{game.league.name}} / {{game.league.division}}</p>
-    <p>This game is scheduled to start on <b>{{game.scheduledAt | date : 'dd MMM yyyy'}} at {{game.scheduledAt | date : 'HH:mm'}}</b>
-      <span *ngIf="game.refereeName"> and will be refereed by {{game.refereeName}}</span>.
+    <p *ngIf="game.league">{{game.league.name}} / {{game.league.division}}</p>
+    <p class="mt-3 mat-h2">
+      {{ 'game.messages.scheduled' | translate: {date: game.scheduledAt | date : 'dd MMM yyyy', time: game.scheduledAt | date : 'HH:mm', refereeName: game.refereeName} }}
     </p>
   </div>
 </div>

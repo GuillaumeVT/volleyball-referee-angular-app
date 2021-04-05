@@ -49,6 +49,21 @@
       "found-live": "Found {{total}} live game(s)"
     }
   },
+  "game": {
+    "set": "Set",
+    "title": {
+      "current-line-up": "Current Line-up",
+      "starting-line-up": "Starting Line-up",
+      "timeline": "Timeline",
+      "timeouts": "Timeouts",
+      "substitutions": "Substitutions",
+      "players": "Players",
+      "sanctions": "Sanctions"
+    },
+    "messages": {
+      "scheduled": "This game is scheduled to start on {{date}} at {{time}} and will be refereed by {{refereeName}}."
+    }
+  },
   "user": {
     "management": {
       "dashboard-games": "My upcoming & live games",

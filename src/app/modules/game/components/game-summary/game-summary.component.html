@@ -9,7 +9,7 @@
             {{game.league.name}}
             <span *ngIf="game.league?.division?.length">&nbsp;/&nbsp;{{game.league.division}}</span>
           </span>
-          <span class="ml-1" *ngIf="game.refereeName?.length"><mat-icon inline=true style="vertical-align: middle;"><span class="material-icons">person</span></mat-icon> by {{game.refereeName}}</span>
+          <span class="ml-1" *ngIf="game.refereeName?.length"><mat-icon inline=true style="vertical-align: middle;"><span class="material-icons">person</span></mat-icon> {{ 'common.by' | translate }} {{game.refereeName}}</span>
         </div>
       </div>
 

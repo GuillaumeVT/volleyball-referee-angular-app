@@ -1,7 +1,7 @@
 <mat-card *ngIf="game">
   <mat-card-content>
     <mat-tab-group mat-stretch-tabs animationDuration="0ms" *ngIf="game" mat-align-tabs="center" [selectedIndex]="currentSet.value" (selectedIndexChange)="selectSet($event)">
-      <mat-tab *ngFor="let set of game.sets; let setIndex = index" label="Set {{setIndex + 1}}">
+      <mat-tab *ngFor="let set of game.sets; let setIndex = index" label="{{ 'game.set' | translate }} {{setIndex + 1}}">
 
         <div class="text-center mt-3">
           <span class="text-center"><mat-icon inline=true style="vertical-align: middle;"><span class="material-icons">schedule</span></mat-icon>{{duration}}</span>

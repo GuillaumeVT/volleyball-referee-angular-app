@@ -49,6 +49,21 @@
       "found-live": "Trouvé {{total}} match(s) en cours"
     }
   },
+  "game": {
+    "set": "Set",
+    "title": {
+      "current-line-up": "Positions",
+      "starting-line-up": "Positions de départ",
+      "timeline": "Historique",
+      "timeouts": "Temps morts",
+      "substitutions": "Remplacements",
+      "players": "Joueurs",
+      "sanctions": "Sanctions"
+    },
+    "messages": {
+      "scheduled": "Ce match est programmé pour le {{date}} à {{time}} et sera arbitré par {{refereeName}}."
+    }
+  },
   "user": {
     "management": {
       "dashboard-games": "Mes matchs à venir & en cours",
