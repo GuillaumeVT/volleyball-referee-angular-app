@@ -63,7 +63,7 @@
       </button>
       <mat-autocomplete #homeTeamAuto="matAutocomplete" [displayWith]="displayTeam">
         <mat-option *ngFor="let team of data.gameIngredients?.teams" [value]="team">
-          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender }}
+          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender | translate }}
         </mat-option>
       </mat-autocomplete>
       <mat-error *ngIf="homeTeamFormControl.errors?.required">Home team is required</mat-error>
@@ -81,7 +81,7 @@
       </button>
       <mat-autocomplete #guestTeamAuto="matAutocomplete" [displayWith]="displayTeam">
         <mat-option *ngFor="let team of data.gameIngredients?.teams" [value]="team">
-          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender }}
+          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender | translate }}
         </mat-option>
       </mat-autocomplete>
       <mat-error *ngIf="guestTeamFormControl.errors?.required">Guest team is required</mat-error>

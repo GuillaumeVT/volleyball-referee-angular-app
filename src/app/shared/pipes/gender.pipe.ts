@@ -7,11 +7,11 @@ export class GenderPipe implements PipeTransform {
 
   transform(gender: string): string {
     if (gender === 'MIXED') {
-      return '(Mixed)';
+      return 'user.team.mixed-pipe';
     } else if (gender === 'LADIES') {
-      return '(Ladies)';
+      return 'user.team.ladies-pipe';
     } else {
-      return '(Gents)';
+      return 'user.team.gents-pipe';
     }
   }
 

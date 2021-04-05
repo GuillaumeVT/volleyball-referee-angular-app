@@ -71,7 +71,7 @@
       <span *ngIf="showDivision()">{{gameSummary.divisionName}}</span>
       <div *ngIf="showReferee()">
         <a [routerLink]="getSearchUrl()" [queryParams]="getSearchParams()" class="item-link">
-          <mat-icon inline=true style="vertical-align: middle;"><span class="material-icons">person</span></mat-icon> by {{gameSummary.refereeName}}
+          <mat-icon inline=true style="vertical-align: middle;"><span class="material-icons">person</span></mat-icon> {{ 'common.by' | translate }} {{gameSummary.refereeName}}
         </a>
       </div>
     </div>

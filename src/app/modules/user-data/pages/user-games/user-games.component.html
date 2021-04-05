@@ -89,7 +89,7 @@
   </mat-card>
 
   <div class="div-user text-center my-3" *ngIf="!last">
-    <button type="button" mat-stroked-button color="primary" (click)="refreshGames(true)">Load more games</button>
+    <button type="button" mat-stroked-button color="primary" (click)="refreshGames(true)">{{ 'user.games.load' | translate }}</button>
   </div>
 
 </div>

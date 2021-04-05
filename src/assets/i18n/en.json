@@ -34,6 +34,7 @@
   "search": {
     "title": "VBR - Search Games",
     "start": "Search",
+    "filter": "Filter",
     "option": {
       "token": "By team, league or referee",
       "live": "Live games",
@@ -41,7 +42,11 @@
       "today": "Today's games"
     },
     "messages": {
-      "criterion-invalid-error": "Criterion must contain at least {{min}} characters"
+      "criterion-invalid-error": "Criterion must contain at least {{min}} characters",
+      "found": "Found {{total}} game(s)",
+      "found-token": "Found {{total}} game(s) with {{token}}",
+      "found-date": "Found {{total}} game(s) on {{date}}",
+      "found-live": "Found {{total}} live game(s)"
     }
   },
   "user": {
@@ -73,6 +78,36 @@
         "password-updated": "Password was successfully reset.",
         "password-invalid-error": "Password does not satisfy the aforementioned criteria."
       }
+    },
+    "team": {
+      "mixed-pipe": "(Mixed)",
+      "ladies-pipe": "(Ladies)",
+      "gents-pipe": "(Gents)"
+    },
+    "games": {
+      "load": "Load more games"
     }
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "close": "Close",
+    "by": "by",
+    "live": "Live",
+    "beach": "Beach",
+    "6x6": "6x6",
+    "4x4": "4x4",
+    "snow": "Snow",
+    "mixed": "Mixed",
+    "ladies": "Ladies",
+    "gents": "Gents"
+  },
+  "statistics": {
+    "total-games": "Total games",
+    "total-teams": "Total teams",
+    "indoor-6x6": "Indoor 6x6",
+    "indoor-4x4": "Indoor 4x4",
+    "beach": "Beach",
+    "snow": "Snow"
   }
 }

@@ -34,6 +34,7 @@
   "search": {
     "title": "VBR - Recherche de matchs",
     "start": "Rechercher",
+    "filter": "Filtrer",
     "option": {
       "token": "Par équipe, ligue ou arbitre",
       "live": "Les matchs en cours",
@@ -41,7 +42,11 @@
       "today": "Les matchs d'aujourd'hui"
     },
     "messages": {
-      "criterion-invalid-error": "Le critère doit contenir au moins {{min}} caractères"
+      "criterion-invalid-error": "Le critère doit contenir au moins {{min}} caractères",
+      "found": "Trouvé {{total}} match(s)",
+      "found-token": "Trouvé {{total}} match(s) avec {{token}}",
+      "found-date": "Trouvé {{total}} match(s) le {{date}}",
+      "found-live": "Trouvé {{total}} match(s) en cours"
     }
   },
   "user": {
@@ -73,6 +78,36 @@
         "password-updated": "Le mot de passe a été modifié.",
         "password-invalid-error": "Le mot de passe ne respècte pas les critères mentionnés ci-dessus."
       }
+    },
+    "team": {
+      "mixed-pipe": "(Mixte)",
+      "ladies-pipe": "(Femmes)",
+      "gents-pipe": "(Hommes)"
+    },
+    "games": {
+      "load": "Charger plus de matchs"
     }
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "by": "par",
+    "live": "En cours",
+    "beach": "Beach",
+    "6x6": "6x6",
+    "4x4": "4x4",
+    "snow": "Snow",
+    "mixed": "Mixte",
+    "ladies": "Femmes",
+    "gents": "Hommes"
+  },
+  "statistics": {
+    "total-games": "Nombre de matchs",
+    "total-teams": "Nombre d'équipes",
+    "indoor-6x6": "Salle 6x6",
+    "indoor-4x4": "Salle 4x4",
+    "beach": "Beach",
+    "snow": "Snow"
   }
 }

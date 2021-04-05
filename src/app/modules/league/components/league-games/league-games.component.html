@@ -16,7 +16,7 @@
       <mat-option [value]="allTeams">{{allTeams.name}}</mat-option>
       <mat-optgroup label="Teams">
         <mat-option *ngFor="let team of teams" [value]="team">
-          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender }}
+          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender | translate }}
         </mat-option>
       </mat-optgroup>
     </mat-select>

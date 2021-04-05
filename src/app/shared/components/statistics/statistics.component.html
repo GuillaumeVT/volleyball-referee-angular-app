@@ -3,7 +3,7 @@
     <ngx-charts-advanced-pie-chart
       [scheme]="colorScheme"
       [results]="gameStatisticsData"
-      label="Total games"
+      label="{{ 'statistics.total-games' | translate }}"
       labels="true"
       autoScale="true">
     </ngx-charts-advanced-pie-chart>
@@ -12,7 +12,7 @@
     <ngx-charts-advanced-pie-chart
       [scheme]="colorScheme"
       [results]="teamStatisticsData"
-      label="Total teams"
+      label="{{ 'statistics.total-teams' | translate }}"
       labels="true"
       autoScale="true">
     </ngx-charts-advanced-pie-chart>

@@ -30,7 +30,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxChartsModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    FileSaverModule
+    FileSaverModule,
+    TranslateModule
   ],
   providers: [
     DatePipe,

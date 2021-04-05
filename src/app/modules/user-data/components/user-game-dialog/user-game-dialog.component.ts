@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-game-dialog',
@@ -32,14 +33,20 @@ export class UserGameDialogComponent {
   minScheduleDate: Date;
   divisionsOfSelectedLeague: string[];
 
+  genderTranslations: any;
+
   constructor(public dialogRef: MatDialogRef<UserGameDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: UserGameDialogData,
     private gameService: GameService, private leagueService: LeagueService, private snackBarService: SnackBarService,
-    public datePipe: DatePipe) {        
+    public datePipe: DatePipe, private translate: TranslateService) {        
     this.genderPipe = new GenderPipe();
     const editingDisabled = this.data.crudType === CrudType.View ? true : false;
     this.scheduleDate = new Date(this.data.game.scheduledAt);
     this.minScheduleDate = new Date();
     this.divisionsOfSelectedLeague = [];
+
+    this.translate
+      .get(['user.team.mixed-pipe', 'user.team.ladies-pipe', 'user.team.gents-pipe'])
+      .subscribe(t => this.genderTranslations = t);
 
     this.referee = new FormControl({ value: null, disabled: editingDisabled }, [Validators.required]);
     
@@ -196,7 +203,7 @@ export class UserGameDialogComponent {
   }
 
   displayTeam = (team: Team) => {
-    return team ? `${team.name}  ${this.genderPipe.transform(team.gender)}` : null;
+    return team ? `${team.name}  ${this.genderTranslations[this.genderPipe.transform(team.gender)]}` : null;
   }
 
   displayRules = (rules: Rules) => {

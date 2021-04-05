@@ -1,21 +1,21 @@
 <div>
   <div class="mx-1 mt-3">
-    <span class="game-number-text">Found {{total}} game(s){{searchCriterion}}</span>
+    <span class="game-number-text">{{searchResultMessage}}</span>
   </div>
   <div class="my-3 mx-1 text-left">
     <mat-form-field class="mb-2">
-      <mat-label>Filter</mat-label>
+      <mat-label>{{ 'search.filter' | translate }}</mat-label>
       <input matInput type="text" #textFilter autocomplete="off" (input)="filterFromText(textFilter)"/>
     </mat-form-field>
     <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px">
-      <button class="btn vbr-chip vbr-live-chip my-1" #liveButton (click)="toggleLive(liveButton)"><i class="fa fa-mixcloud mr-2"></i>Live</button>
-      <button class="btn vbr-chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)" *ngIf="!leagueId"><i class="fa fa-sun-o mr-2"></i>Beach</button>
-      <button class="btn vbr-chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)" *ngIf="!leagueId">6x6</button>
-      <button class="btn vbr-chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)" *ngIf="!leagueId">4x4</button>
-      <button class="btn vbr-chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)" *ngIf="!leagueId"><i class="fa fa-snowflake-o mr-2"></i>Snow</button>
-      <button class="btn vbr-chip vbr-mixed-chip my-1" #mixedButton (click)="toggleMixed(mixedButton)"><i class="fa fa-intersex mr-2"></i>Mixed</button>
-      <button class="btn vbr-chip vbr-ladies-chip my-1" #ladiesButton (click)="toggleLadies(ladiesButton)"><i class="fa fa-venus mr-2"></i>Ladies</button>
-      <button class="btn vbr-chip vbr-gents-chip my-1" #gentsButton (click)="toggleGents(gentsButton)"><i class="fa fa-mars mr-2"></i>Gents</button>
+      <button class="btn vbr-chip vbr-live-chip my-1" #liveButton (click)="toggleLive(liveButton)"><i class="fa fa-mixcloud mr-2"></i>{{ 'common.live' | translate }}</button>
+      <button class="btn vbr-chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)" *ngIf="!leagueId"><i class="fa fa-sun-o mr-2"></i>{{ 'common.beach' | translate }}</button>
+      <button class="btn vbr-chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)" *ngIf="!leagueId">{{ 'common.6x6' | translate }}</button>
+      <button class="btn vbr-chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)" *ngIf="!leagueId">{{ 'common.4x4' | translate }}</button>
+      <button class="btn vbr-chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)" *ngIf="!leagueId"><i class="fa fa-snowflake-o mr-2"></i>{{ 'common.snow' | translate }}</button>
+      <button class="btn vbr-chip vbr-mixed-chip my-1" #mixedButton (click)="toggleMixed(mixedButton)"><i class="fa fa-intersex mr-2"></i>{{ 'common.mixed' | translate }}</button>
+      <button class="btn vbr-chip vbr-ladies-chip my-1" #ladiesButton (click)="toggleLadies(ladiesButton)"><i class="fa fa-venus mr-2"></i>{{ 'common.ladies' | translate }}</button>
+      <button class="btn vbr-chip vbr-gents-chip my-1" #gentsButton (click)="toggleGents(gentsButton)"><i class="fa fa-mars mr-2"></i>{{ 'common.gents' | translate }}</button>
     </div>
   </div>
  
@@ -24,6 +24,6 @@
   </div>
 
   <div class="div-user text-center my-3" *ngIf="!last">
-    <button type="button" mat-stroked-button color="primary" (click)="refreshGames(true)">Load more games</button>
+    <button type="button" mat-stroked-button color="primary" (click)="refreshGames(true)">{{ 'user.games.load' | translate }}</button>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { PublicService } from 'src/app/shared/services/public.service';
 import { StatisticsService } from 'src/app/shared/services/statistics.service';
 
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-statistics',
@@ -18,11 +19,17 @@ export class StatisticsComponent implements OnInit {
   teamStatisticsData: any;
   colorScheme: any;
 
-  constructor(private statisticsService: StatisticsService, private publicService: PublicService) {
+  statisticsTranslations: any;
+
+  constructor(private statisticsService: StatisticsService, private publicService: PublicService, private translate: TranslateService) {
     this.colorScheme = { domain: ["#1f4294", "#f2bb1a", "#781fc9", "#2980b9"] };
   }
 
   ngOnInit() {
+    this.translate
+      .get(['statistics.indoor-6x6', 'statistics.indoor-4x4', 'statistics.beach', 'statistics.snow'])
+      .subscribe(t => this.statisticsTranslations = t);
+    
     if (this.showUserStatistics) {
       this.statisticsService.getStatistics().subscribe(statistics => this.buildStatisticsData(statistics));
     } else {
@@ -38,17 +45,17 @@ export class StatisticsComponent implements OnInit {
       this.teamStatisticsData = null;
     } else {
       this.gameStatisticsData = [
-        { "name": "Indoor 6x6", "value": this.findCount("INDOOR", this.statistics.gameStatistics) },
-        { "name": "Beach", "value": this.findCount("BEACH", this.statistics.gameStatistics) },
-        { "name": "Indoor 4x4", "value": this.findCount("INDOOR_4X4", this.statistics.gameStatistics) },
-        { "name": "Snow", "value": this.findCount("SNOW", this.statistics.gameStatistics) }
+        { "name": this.statisticsTranslations['statistics.indoor-6x6'], "value": this.findCount("INDOOR", this.statistics.gameStatistics) },
+        { "name": this.statisticsTranslations['statistics.beach'], "value": this.findCount("BEACH", this.statistics.gameStatistics) },
+        { "name": this.statisticsTranslations['statistics.indoor-4x4'], "value": this.findCount("INDOOR_4X4", this.statistics.gameStatistics) },
+        { "name": this.statisticsTranslations['statistics.snow'], "value": this.findCount("SNOW", this.statistics.gameStatistics) }
       ];
 
       this.teamStatisticsData = [
-        { "name": "Indoor 6x6", "value": this.findCount("INDOOR", this.statistics.teamStatistics) },
-        { "name": "Beach", "value": this.findCount("BEACH", this.statistics.teamStatistics) },
-        { "name": "Indoor 4x4", "value": this.findCount("INDOOR_4X4", this.statistics.teamStatistics) },
-        { "name": "Snow", "value": this.findCount("SNOW", this.statistics.teamStatistics) }
+        { "name": this.statisticsTranslations['statistics.indoor-6x6'], "value": this.findCount("INDOOR", this.statistics.teamStatistics) },
+        { "name": this.statisticsTranslations['statistics.beach'], "value": this.findCount("BEACH", this.statistics.teamStatistics) },
+        { "name": this.statisticsTranslations['statistics.indoor-4x4'], "value": this.findCount("INDOOR_4X4", this.statistics.teamStatistics) },
+        { "name": this.statisticsTranslations['statistics.snow'], "value": this.findCount("SNOW", this.statistics.teamStatistics) }
       ];
     }
   }
