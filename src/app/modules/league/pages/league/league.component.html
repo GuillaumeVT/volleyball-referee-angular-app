@@ -4,15 +4,15 @@
 
 <mat-tab-group animationDuration="0ms" *ngIf="league" mat-align-tabs="center">
 
-  <mat-tab label="Dashboard">
+  <mat-tab label="{{ 'league.title.dashboard' | translate }}">
     <app-league-dashboard [league]="league"></app-league-dashboard>
   </mat-tab>
   
-  <mat-tab label="Rankings">
+  <mat-tab label="{{ 'league.title.rankings' | translate }}">
     <app-division-rankings [league]="league"></app-division-rankings>
   </mat-tab>
 
-  <mat-tab label="Games">
+  <mat-tab label="{{ 'league.title.games' | translate }}">
     <app-league-games [league]="league"></app-league-games>
   </mat-tab>
 

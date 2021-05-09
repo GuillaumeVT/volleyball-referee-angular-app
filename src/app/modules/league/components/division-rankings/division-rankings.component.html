@@ -1,6 +1,6 @@
 <div class="div-select" *ngIf="league">
   <mat-form-field class="mx-1 mt-3" appearance="outline">
-    <mat-select [(ngModel)]="selectedDivision" (change)="onDivisionSelected()">
+    <mat-select [(ngModel)]="selectedDivision" (selectionChange)="onDivisionSelected()">
       <mat-option *ngFor="let division of league.divisions" [value]="division">
         {{division}}
       </mat-option>
@@ -9,64 +9,64 @@
 </div>
 <div class="div-rankings" *ngIf="league">
   <mat-card class="expanded-rankings">
-    <div class="row align-items-center p-1">
-      <div class="col-sm-3 text-center p-0 m-0 title">Teams</div>
-      <div class="col-sm-3 text-center p-0 m-0 title">Matches</div>
-      <div class="col-sm-3 text-center p-0 m-0 title">Sets</div>
-      <div class="col-sm-3 text-center p-0 m-0 title">Points</div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-1">
+      <div fxFlex="25" class="text-center p-0 m-0 title">{{ 'common.teams' | translate }}</div>
+      <div fxFlex="25" class="text-center p-0 m-0 title">{{ 'common.matches' | translate }}</div>
+      <div fxFlex="25" class="text-center p-0 m-0 title">{{ 'common.sets' | translate }}</div>
+      <div fxFlex="25" class="text-center p-0 m-0 title">{{ 'common.points' | translate }}</div>
     </div>
-    <div class="row align-items-center p-1">
-      <div class="col-sm-3 text-center p-0 m-0 title"></div>
-      <div class="col-sm-1 text-right p-0 m-0 title">Played</div>
-      <div class="col-sm-1 text-right p-0 m-0 title">Won</div>
-      <div class="col-sm-1 text-right p-0 m-0 title">Lost</div>
-      <div class="col-sm-1 text-right p-0 m-0 title">Won</div>
-      <div class="col-sm-1 text-right p-0 m-0 title">Lost</div>
-      <div class="col-sm-1 text-right p-0 m-0 title">Diff</div>
-      <div class="col-sm-1 text-right p-0 m-0 title">Won</div>
-      <div class="col-sm-1 text-right p-0 m-0 title">Lost</div>
-      <div class="col-sm-1 text-right p-0 m-0 title">Diff</div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-1">
+      <div fxFlex="25" class="text-center p-0 m-0 title"></div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.played' | translate }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.won' | translate }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.lost' | translate }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.won' | translate }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.lost' | translate }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.diff' | translate }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.won' | translate }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.lost' | translate }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.diff' | translate }}</div>
     </div>
-    <div class="row align-items-center p-1" *ngFor="let ranking of rankings; let index=index" [ngClass]="getLineClass(index)">
-      <div class="col-sm-3 text-left p-0 m-0">
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-1" *ngFor="let ranking of rankings; let index=index" [ngClass]="getLineClass(index)">
+      <div fxFlex="25" class="text-left p-0 m-0">
         <span class="badge text-center player-badge-font" [style.background-color]="ranking.teamColor" [style.color]="playerStyleService.getTextColor(ranking.teamColor)"
           [style.border-color]="playerStyleService.getBorderColor(ranking.teamColor)" [innerHTML]="ranking.teamName"></span>
       </div>
-      <div class="col-sm-1 text-right p-0 m-0">{{ranking.matchesFor + ranking.matchesAgainst}}</div>
-      <div class="col-sm-1 text-right p-0 m-0">{{ranking.matchesFor}}</div>
-      <div class="col-sm-1 text-right p-0 m-0">{{ranking.matchesAgainst}}</div>
-      <div class="col-sm-1 text-right p-0 m-0">{{ranking.setsFor}}</div>
-      <div class="col-sm-1 text-right p-0 m-0">{{ranking.setsAgainst}}</div>
-      <div class="col-sm-1 text-right p-0 m-0">{{getDiff(ranking.setsDiff)}}</div>
-      <div class="col-sm-1 text-right p-0 m-0">{{ranking.pointsFor}}</div>
-      <div class="col-sm-1 text-right p-0 m-0">{{ranking.pointsAgainst}}</div>
-      <div class="col-sm-1 text-right p-0 m-0">{{getDiff(ranking.pointsDiff)}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.matchesFor + ranking.matchesAgainst}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.matchesFor}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.matchesAgainst}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.setsFor}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.setsAgainst}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{getDiff(ranking.setsDiff)}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.pointsFor}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.pointsAgainst}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{getDiff(ranking.pointsDiff)}}</div>
     </div>
   </mat-card>
 
   <mat-card class="collapsed-rankings">
-    <div class="row align-items-center p-1">
-      <div class="col-6 text-center p-0 m-0 title">Teams</div>
-      <div class="col-2 text-right p-0 m-0 title">Matches</div>
-      <div class="col-2 text-right p-0 m-0 title">Sets</div>
-      <div class="col-2 text-right p-0 m-0 title">Points</div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-1">
+      <div fxFlex="50" class="text-center p-0 m-0 title">{{ 'common.teams' | translate }}</div>
+      <div fxFlex="16" class="text-right p-0 m-0 title">{{ 'common.matches' | translate }}</div>
+      <div fxFlex="16" class="text-right p-0 m-0 title">{{ 'common.sets' | translate }}</div>
+      <div fxFlex="16" class="text-right p-0 m-0 title">{{ 'common.points' | translate }}</div>
     </div>
-    <div class="row align-items-center p-1">
-      <div class="col-6 text-center p-0 m-0 title"></div>
-      <div class="col-1 text-right p-0 m-0 title">P.</div>
-      <div class="col-1 text-right p-0 m-0 title">W.</div>
-      <div class="col-2 text-right p-0 m-0 title">Diff</div>
-      <div class="col-2 text-right p-0 m-0 title">Diff</div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-1">
+      <div fxFlex="50" class="text-center p-0 m-0 title"></div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.played-abbr' | translate }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.won-abbr' | translate }}</div>
+      <div fxFlex="16" class="text-right p-0 m-0 title">{{ 'league.rankings.diff' | translate }}</div>
+      <div fxFlex="16" class="text-right p-0 m-0 title">{{ 'league.rankings.diff' | translate }}</div>
     </div>
-    <div class="row align-items-center p-1" *ngFor="let ranking of rankings; let index=index" [ngClass]="getLineClass(index)">
-      <div class="col-6 text-left p-0 m-0">
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-1" *ngFor="let ranking of rankings; let index=index" [ngClass]="getLineClass(index)">
+      <div fxFlex="50" class="text-left p-0 m-0">
         <span class="badge text-center player-badge-font" [style.background-color]="ranking.teamColor" [style.color]="playerStyleService.getTextColor(ranking.teamColor)"
           [style.border-color]="playerStyleService.getBorderColor(ranking.teamColor)" [innerHTML]="ranking.teamName"></span>
       </div>
-      <div class="col-1 text-right p-0 m-0">{{ranking.matchesFor + ranking.matchesAgainst}}</div>
-      <div class="col-1 text-right p-0 m-0">{{ranking.matchesFor}}</div>
-      <div class="col-2 text-right p-0 m-0">{{getDiff(ranking.setsDiff)}}</div>
-      <div class="col-2 text-right p-0 m-0">{{getDiff(ranking.pointsDiff)}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.matchesFor + ranking.matchesAgainst}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.matchesFor}}</div>
+      <div fxFlex="16" class="text-right p-0 m-0">{{getDiff(ranking.setsDiff)}}</div>
+      <div fxFlex="16" class="text-right p-0 m-0">{{getDiff(ranking.pointsDiff)}}</div>
     </div>
   </mat-card>
 </div>

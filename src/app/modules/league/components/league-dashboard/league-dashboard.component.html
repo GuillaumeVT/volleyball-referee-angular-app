@@ -1,8 +1,8 @@
 <div class="div-select" *ngIf="league">
   <mat-form-field class="mx-1 mt-3" appearance="outline">
-    <mat-select [(ngModel)]="selectedDivision" (change)="onDivisionSelected()">
-      <mat-option [value]="allDivisions">{{allDivisions}}</mat-option>
-      <mat-optgroup label="Divisions">
+    <mat-select [(ngModel)]="selectedDivision" (selectionChange)="onDivisionSelected()">
+      <mat-option [value]="allDivisions">{{ 'league.all-divisions' | translate }}</mat-option>
+      <mat-optgroup label="{{ 'league.divisions' | translate }}">
         <mat-option *ngFor="let division of league.divisions" [value]="division">
           {{division}}
         </mat-option>
@@ -15,7 +15,7 @@
 
   <mat-card fxFlex="33" fxFlex.xs="100" class="mb-2" *ngIf="liveGames">
     <mat-card-header>
-      <mat-card-title>Live Games</mat-card-title>
+      <mat-card-title>{{ 'search.option.live' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div *ngFor="let game of liveGames" class="my-3">
@@ -26,7 +26,7 @@
 
   <mat-card fxFlex="33" fxFlex.xs="100" class="mb-2" *ngIf="next10Games">
     <mat-card-header>
-      <mat-card-title>Next 10 Games</mat-card-title>
+      <mat-card-title>{{ 'league.title.next-10' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div *ngFor="let game of next10Games" class="my-3">
@@ -37,7 +37,7 @@
 
   <mat-card fxFlex="33" fxFlex.xs="100" class="mb-2" *ngIf="last10Games">
     <mat-card-header>
-      <mat-card-title>Last 10 Games</mat-card-title>
+      <mat-card-title>{{ 'league.title.last-10' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div *ngFor="let game of last10Games" class="my-3">

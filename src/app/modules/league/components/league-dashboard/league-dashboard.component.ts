@@ -5,6 +5,7 @@ import { League } from 'src/app/shared/models/league.model';
 import { PublicService } from 'src/app/shared/services/public.service';
 
 import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { idAll } from 'src/app/shared/models/variable.model';
 
 @Component({
   selector: 'app-league-dashboard',
@@ -24,7 +25,7 @@ export class LeagueDashboardComponent implements OnDestroy, OnChanges {
   autoRefresh:      boolean;
 
   constructor(private publicService: PublicService) {
-    this.allDivisions = "All pools / divisions";
+    this.allDivisions = idAll;
     this.selectedDivision = this.allDivisions;
     this.liveGames = [];
     this.next10Games = [];

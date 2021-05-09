@@ -27,7 +27,7 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.translate
-      .get(['statistics.indoor-6x6', 'statistics.indoor-4x4', 'statistics.beach', 'statistics.snow'])
+      .get(['common.indoor-6x6', 'common.indoor-4x4', 'common.beach', 'common.snow'])
       .subscribe(t => this.statisticsTranslations = t);
     
     if (this.showUserStatistics) {
@@ -45,17 +45,17 @@ export class StatisticsComponent implements OnInit {
       this.teamStatisticsData = null;
     } else {
       this.gameStatisticsData = [
-        { "name": this.statisticsTranslations['statistics.indoor-6x6'], "value": this.findCount("INDOOR", this.statistics.gameStatistics) },
-        { "name": this.statisticsTranslations['statistics.beach'], "value": this.findCount("BEACH", this.statistics.gameStatistics) },
-        { "name": this.statisticsTranslations['statistics.indoor-4x4'], "value": this.findCount("INDOOR_4X4", this.statistics.gameStatistics) },
-        { "name": this.statisticsTranslations['statistics.snow'], "value": this.findCount("SNOW", this.statistics.gameStatistics) }
+        { "name": this.statisticsTranslations['common.indoor-6x6'], "value": this.findCount("INDOOR", this.statistics.gameStatistics) },
+        { "name": this.statisticsTranslations['common.beach'], "value": this.findCount("BEACH", this.statistics.gameStatistics) },
+        { "name": this.statisticsTranslations['common.indoor-4x4'], "value": this.findCount("INDOOR_4X4", this.statistics.gameStatistics) },
+        { "name": this.statisticsTranslations['common.snow'], "value": this.findCount("SNOW", this.statistics.gameStatistics) }
       ];
 
       this.teamStatisticsData = [
-        { "name": this.statisticsTranslations['statistics.indoor-6x6'], "value": this.findCount("INDOOR", this.statistics.teamStatistics) },
-        { "name": this.statisticsTranslations['statistics.beach'], "value": this.findCount("BEACH", this.statistics.teamStatistics) },
-        { "name": this.statisticsTranslations['statistics.indoor-4x4'], "value": this.findCount("INDOOR_4X4", this.statistics.teamStatistics) },
-        { "name": this.statisticsTranslations['statistics.snow'], "value": this.findCount("SNOW", this.statistics.teamStatistics) }
+        { "name": this.statisticsTranslations['common.indoor-6x6'], "value": this.findCount("INDOOR", this.statistics.teamStatistics) },
+        { "name": this.statisticsTranslations['common.beach'], "value": this.findCount("BEACH", this.statistics.teamStatistics) },
+        { "name": this.statisticsTranslations['common.indoor-4x4'], "value": this.findCount("INDOOR_4X4", this.statistics.teamStatistics) },
+        { "name": this.statisticsTranslations['common.snow'], "value": this.findCount("SNOW", this.statistics.teamStatistics) }
       ];
     }
   }

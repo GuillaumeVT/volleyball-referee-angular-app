@@ -5,6 +5,7 @@ import { PublicService } from 'src/app/shared/services/public.service';
 
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { idAll } from 'src/app/shared/models/variable.model';
 
 @Component({
   selector: 'app-game-list',
@@ -44,7 +45,7 @@ export class GameListComponent extends AbstractGameFilter implements OnChanges {
         page => this.onGamesReceivedDateCriterion(page),
         _error => this.onGamesReceivedDateCriterion(null));
     } else if (this.leagueId && this.teamId) {
-      if (this.teamId === "All teams") {
+      if (this.teamId === idAll) {
         this.publicService.listGamesInLeague(this.leagueId, this.getStatuses(), this.getGenders(), pageToGet, this.size).subscribe(
           page => this.onGamesReceivedNoCriterion(page),
           _error => this.onGamesReceivedNoCriterion(null));

@@ -46,7 +46,8 @@
       "found": "Found {{total}} game(s)",
       "found-token": "Found {{total}} game(s) with {{token}}",
       "found-date": "Found {{total}} game(s) on {{date}}",
-      "found-live": "Found {{total}} live game(s)"
+      "found-live": "Found {{total}} live game(s)",
+      "not-found": "Page not found"
     }
   },
   "game": {
@@ -62,6 +63,26 @@
     },
     "messages": {
       "scheduled": "This game is scheduled to start on {{date}} at {{time}} and will be refereed by {{refereeName}}."
+    }
+  },
+  "league": {
+    "title": {
+      "dashboard": "Dashboard",
+      "rankings": "Rankings",
+      "games": "Games",
+      "next-10": "Next 10 games",
+      "last-10": "Last 10 games"
+    },
+    "all-divisions": "All pools / divisions",
+    "divisions": "Pools / divisions",
+    "all-teams": "All teams",
+    "rankings": {
+      "played": "Played",
+      "won": "Won",
+      "lost": "Lost",
+      "diff": "Diff",
+      "played-abbr": "P.",
+      "won-abbr": "W."
     }
   },
   "user": {
@@ -112,17 +133,19 @@
     "beach": "Beach",
     "6x6": "6x6",
     "4x4": "4x4",
+    "indoor-6x6": "Indoor 6x6",
+    "indoor-4x4": "Indoor 4x4",
     "snow": "Snow",
     "mixed": "Mixed",
     "ladies": "Ladies",
-    "gents": "Gents"
+    "gents": "Gents",
+    "matches": "Matches",
+    "sets": "Sets",
+    "points": "Points",
+    "teams": "Teams"
   },
   "statistics": {
     "total-games": "Total games",
-    "total-teams": "Total teams",
-    "indoor-6x6": "Indoor 6x6",
-    "indoor-4x4": "Indoor 4x4",
-    "beach": "Beach",
-    "snow": "Snow"
+    "total-teams": "Total teams"
   }
 }

@@ -37,16 +37,17 @@
     "filter": "Filtrer",
     "option": {
       "token": "Par équipe, ligue ou arbitre",
-      "live": "Les matchs en cours",
+      "live": "Matchs en cours",
       "date": "Par date",
-      "today": "Les matchs d'aujourd'hui"
+      "today": "Matchs d'aujourd'hui"
     },
     "messages": {
       "criterion-invalid-error": "Le critère doit contenir au moins {{min}} caractères",
       "found": "Trouvé {{total}} match(s)",
       "found-token": "Trouvé {{total}} match(s) avec {{token}}",
       "found-date": "Trouvé {{total}} match(s) le {{date}}",
-      "found-live": "Trouvé {{total}} match(s) en cours"
+      "found-live": "Trouvé {{total}} match(s) en cours",
+      "not-found": "Page non trouvée"
     }
   },
   "game": {
@@ -63,6 +64,26 @@
     "messages": {
       "scheduled": "Ce match est programmé pour le {{date}} à {{time}} et sera arbitré par {{refereeName}}."
     }
+  },
+  "league": {
+    "title": {
+      "dashboard": "Tableau de bord",
+      "rankings": "Classement",
+      "games": "Matchs",
+      "next-10": "Prochains 10 matchs",
+      "last-10": "Derniers 10 matchs"
+    },
+    "all-divisions": "Toutes les poules / divisions",
+    "divisions": "Poules / divisions",
+    "all-teams": "Toutes les équipes",
+    "rankings": {
+      "played": "Joués",
+      "won": "Gagnés",
+      "lost": "Perdus",
+      "diff": "Diff",
+      "played-abbr": "J.",
+      "won-abbr": "G."
+    } 
   },
   "user": {
     "management": {
@@ -112,17 +133,19 @@
     "beach": "Beach",
     "6x6": "6x6",
     "4x4": "4x4",
+    "indoor-6x6": "Salle 6x6",
+    "indoor-4x4": "Salle 4x4",
     "snow": "Snow",
     "mixed": "Mixte",
     "ladies": "Femmes",
-    "gents": "Hommes"
+    "gents": "Hommes",
+    "matches": "Matchs",
+    "sets": "Sets",
+    "points": "Points",
+    "teams": "Équipes"
   },
   "statistics": {
     "total-games": "Nombre de matchs",
-    "total-teams": "Nombre d'équipes",
-    "indoor-6x6": "Salle 6x6",
-    "indoor-4x4": "Salle 4x4",
-    "beach": "Beach",
-    "snow": "Snow"
+    "total-teams": "Nombre d'équipes"
   }
 }

@@ -12,7 +12,6 @@ export class UserSubscriptionTokenDialogComponent {
   userSubscriptionFormGroup: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<UserSubscriptionTokenDialogComponent>, @Inject(MAT_DIALOG_DATA) public currentPurchaseToken: string) {
-    console.log(currentPurchaseToken)
     this.userSubscriptionFormGroup = new FormGroup({
       purchaseToken: new FormControl({ value: this.currentPurchaseToken, disabled: false }, [Validators.required, Validators.minLength(144), Validators.maxLength(187)])
     });

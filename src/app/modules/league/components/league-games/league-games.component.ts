@@ -5,6 +5,7 @@ import { TeamSummary } from 'src/app/shared/models/team.model';
 import { PublicService } from 'src/app/shared/services/public.service';
 
 import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { idAll } from 'src/app/shared/models/variable.model';
 
 @Component({
   selector: 'app-league-games',
@@ -25,10 +26,10 @@ export class LeagueGamesComponent implements OnDestroy, OnChanges {
   @Input() league: League;
 
   constructor(private publicService: PublicService) {
-    this.allDivisions = "All pools / divisions";
+    this.allDivisions = idAll;
     this.selectedDivision = this.allDivisions;
     this.allTeams = new TeamSummary();
-    this.allTeams.id = 'All teams';
+    this.allTeams.id = idAll;
     this.allTeams.name = this.allTeams.id;
     this.teams = [];
     this.selectedTeam = this.allTeams;
