@@ -118,16 +118,88 @@
     "team": {
       "mixed-pipe": "(Mixte)",
       "ladies-pipe": "(Femmes)",
-      "gents-pipe": "(Hommes)"
+      "gents-pipe": "(Hommes)",
+      "select-color": "Sélectionner la couleur des maillots",
+      "names": "Nom des joueurs",
+      "player-number": "Joueur #{{num}}",
+      "load": "Charger plus d'équipes"
     },
-    "games": {
-      "load": "Charger plus de matchs"
+    "game": {
+      "load": "Charger plus de matchs",
+      "create": "Créer un match",
+      "update": "Éditer le match",
+      "view": "Voir le match",
+      "scheduled": "Programmé pour",
+      "public": "Le match est publique",
+      "private": "Le match est privé",
+      "league": "Tournament / League",
+      "division": "Pool / Division",
+      "home-team": "Équipe à domicile",
+      "guest-team": "Équipe à l'extérieur",
+      "referee-1": "Nom de l'arbitre 1",
+      "referee-2": "Nom de l'arbitre 2",
+      "scorer": "Nom du scorer",
+      "of-league": "Matchs de {{league}}",
+      "page": "Page du match »",
+      "page-description": "Naviguer vers la page publique de ce match. Cette URL peut être partagée avec tout le monde.",
+      "sheet": "Feuille",
+      "messages": {
+        "game-creation-error": "Le match n'a pas pu être créé.",
+        "game-update-error": "Le match n'a pas pu être modifié. A-t-il démarré ou est-il terminé?",
+        "schedule-required-error": "La date de début du match est obligatoire",
+        "schedule-past-error": "La date de début du match doit être future",
+        "indexed-tooltip": "Les matchs publiques peuvent être recherchés par tout le monde, à l'inverse des matchs privés.",
+        "league-unknown-error": "La ligue n'existe pas",
+        "division-required-error": "La division est obligatoire",
+        "home-team-required-error": "L'équipe à domicile est obligatoire",
+        "guest-team-required-error": "L'équipe à l'extérieur est obligatoire",
+        "home-team-unknown-error": "L'équipe à domicile n'existe pas",
+        "guest-team-unknown-error": "L'équipe à l'extérieur n'existe pas",
+        "same-teams-error": "L'équipe à domicile et l'équipe à l'extérieur doivent être différentes",
+        "rules-required-error": "Les règles sont obligatoires",
+        "rules-unknown-error": "Les règles n'existent pas"
+      }
+    },
+    "referee": {
+      "referee": "Arbitre",
+      "me": "Moi",
+      "colleagues": "Mes collègues",
+      "update-referee": "Changer l'arbitre",
+      "messages": {
+        "referee-required-error": "L'arbitre est obligatoire",
+        "referee-update-error": "L'arbitre n'a pas pu être modifié."
+      }
+    },
+    "colleague": {
+      "add": "Se connecter à un arbitre",
+      "remove": "Supprimer la relation",
+      "pseudo": "Pseudo",
+      "messages": {
+        "request-received": "{{pseudo}} souhaite se connecter avec vous",
+        "request-sent": "La demande de connexion a été envoyée à {{pseudo}}.",
+        "request-rejected-error": "La demande de connexion de {{pseudo}} n'a pu être rejetée.",
+        "request-failed": "La demande de connection n'a pu être envoyée à {{pseudo}}. Le pseudo est-il correct?",
+        "pseudo-required-error": "Le pseudo est obligatoire",
+        "request-added-error": "{{pseudo}} n'a pu être ajouté à vos collègues.",
+        "remove-question": "Supprimer la relation avec {{pseudo}}?",
+        "removed-error": "{{pseudo}} n'a pu être supprimé de vos collègues."        
+      }
     }
   },
   "common": {
     "ok": "OK",
     "cancel": "Annuler",
     "close": "Fermer",
+    "view": "Voir",
+    "create": "Créer",
+    "update": "Modifier",
+    "edit": "Éditer",
+    "delete": "Supprimer",
+    "delete-all": "Supprimer tout",
+    "send": "Envoyer",
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "remove": "Supprimer",
     "by": "par",
     "live": "En cours",
     "beach": "Beach",
@@ -142,7 +214,9 @@
     "matches": "Matchs",
     "sets": "Sets",
     "points": "Points",
-    "teams": "Équipes"
+    "teams": "Équipes",
+    "rules": "Règles",
+    "last-updated": "Dernière mise à jour le"
   },
   "statistics": {
     "total-games": "Nombre de matchs",

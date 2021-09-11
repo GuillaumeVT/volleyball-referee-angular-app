@@ -1,4 +1,4 @@
-import { FileSaverService } from 'ngx-filesaver';
+import { saveAs } from 'file-saver';
 import { forkJoin, Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
@@ -35,7 +35,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   constructor(private titleService: Title, private route: ActivatedRoute, private datePipe: DatePipe, private userService: UserService,
     private gameService: GameService, private leagueService: LeagueService, private publicService: PublicService, private dialog: MatDialog,
-    private snackBarService: SnackBarService, private fileSaverService: FileSaverService) {
+    private snackBarService: SnackBarService) {
     super(50);
     this.titleService.setTitle('VBR - My Games');
   }
@@ -215,6 +215,6 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   onScoreSheetReceived(blob: Blob, game: GameSummary): void {
     const dateStr = this.datePipe.transform(game.scheduledAt, 'dd_MM_yyyy');
     const filename = game.homeTeamName + '_' + game.guestTeamName + '_' + dateStr + '.html';
-    this.fileSaverService.save(blob, filename);
+    saveAs(blob, filename);
   }
 }

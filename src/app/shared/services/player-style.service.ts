@@ -11,7 +11,6 @@ export class PlayerStyleService {
   constructor() {}
 
   isLibero(game: Game, teamType: TeamType, player: number) : boolean {
-    var result = false;
     var liberos = [];
 
     if (TeamType.Home === teamType) {
@@ -22,11 +21,11 @@ export class PlayerStyleService {
 
     for (let libero of liberos) {
       if (libero.num === player) {
-        result = true;
+        return true;
       }
     }
 
-    return result;
+    return false;
   }
 
   getPlayer(game: Game, teamType: TeamType, player: number): string {

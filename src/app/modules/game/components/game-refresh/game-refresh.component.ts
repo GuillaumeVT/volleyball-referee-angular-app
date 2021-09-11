@@ -1,11 +1,10 @@
-import { FileSaverService } from 'ngx-filesaver';
+import { saveAs } from 'file-saver';
 import { Subscription, timer } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { Game } from 'src/app/shared/models/game.model';
 import { PublicService } from 'src/app/shared/services/public.service';
 
 import { DatePipe } from '@angular/common';
-import { HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -24,7 +23,7 @@ export class GameRefreshComponent implements OnChanges, OnDestroy {
   isLive:       boolean;
   subscription: Subscription;
 
-  constructor(private router: Router, private publicService: PublicService, private fileSaverService: FileSaverService, private datePipe: DatePipe) {
+  constructor(private router: Router, private publicService: PublicService, private datePipe: DatePipe) {
     this.isLive = true;
   }
 
@@ -67,7 +66,7 @@ export class GameRefreshComponent implements OnChanges, OnDestroy {
   onScoreSheetReceived(blob: Blob): void {
     const dateStr = this.datePipe.transform(this.game.scheduledAt, 'dd_MM_yyyy');
     const filename = this.game.homeTeam.name + '_' + this.game.guestTeam.name + '_' + dateStr + '.html';
-    this.fileSaverService.save(blob, filename);
+    saveAs(blob, filename);
   }
 
 }

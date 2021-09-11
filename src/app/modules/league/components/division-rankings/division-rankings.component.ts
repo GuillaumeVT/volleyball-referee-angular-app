@@ -1,4 +1,4 @@
-import { FileSaverService } from 'ngx-filesaver';
+import { saveAs } from 'file-saver';
 import { Subscription, timer } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { League } from 'src/app/shared/models/league.model';
@@ -24,7 +24,7 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() league: League;
 
-  constructor(private publicService: PublicService, private datePipe: DatePipe, public playerStyleService: PlayerStyleService, private fileSaverService: FileSaverService) {
+  constructor(private publicService: PublicService, private datePipe: DatePipe, public playerStyleService: PlayerStyleService) {
     this.rankings = [];
   }
 
@@ -76,7 +76,7 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
   onDivisionExcelReceived(blob: Blob): void {
     const dateStr = this.datePipe.transform(new Date().getTime(), 'dd_MM_yyyy__HH_mm');
     const filename = this.league.name + '_' + this.selectedDivision + '_' + dateStr + '.xlsx';
-    this.fileSaverService.save(blob, filename);
+    saveAs(blob, filename);
   }
 
 }

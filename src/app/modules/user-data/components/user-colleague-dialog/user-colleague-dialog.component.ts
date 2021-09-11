@@ -4,6 +4,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-colleague-dialog',
@@ -14,7 +15,7 @@ export class UserColleagueDialogComponent {
 
   colleagueFormGroup: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<UserColleagueDialogComponent>, private userService: UserService, private snackBarService: SnackBarService) {
+  constructor(public dialogRef: MatDialogRef<UserColleagueDialogComponent>, private userService: UserService, private snackBarService: SnackBarService, private translate: TranslateService) {
     this.colleagueFormGroup = new FormGroup({
       pseudo: new FormControl('', [Validators.required])
     });
@@ -28,7 +29,7 @@ export class UserColleagueDialogComponent {
 
   onAddColleague(): void {
     const pseudo = this.pseudoFormControl.value;
-    this.userService.sendFriendRequest(pseudo).subscribe(success => this.onValidResponse(pseudo), error => this.onInvalidResponse());
+    this.userService.sendFriendRequest(pseudo).subscribe(_success => this.onValidResponse(pseudo), _error => this.onInvalidResponse());
   }
 
   onValidResponse(pseudo: string): void {
@@ -36,6 +37,8 @@ export class UserColleagueDialogComponent {
   }
 
   onInvalidResponse(): void {
-    this.snackBarService.showError(`The request to ${this.pseudoFormControl.value} could not be sent. Is the pseudo valid?`);
+    this.translate.get('user.colleague.messages.request-failed', {pseudo: this.pseudoFormControl.value}).subscribe(
+      t =>  this.snackBarService.showError(t)
+    );
   }
 }

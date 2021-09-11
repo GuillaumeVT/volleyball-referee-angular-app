@@ -1,40 +1,40 @@
 <div class="div-user text-center" *ngIf="user">
 
-  <h2 class="my-3 mat-h2 text-center" *ngIf="selectedLeague">Games of {{selectedLeague.name}}</h2>
+  <h2 class="my-3 mat-h2 text-center" *ngIf="selectedLeague">{{ 'user.game.of-league' | translate: {league: selectedLeague.name}  }}</h2>
 
   <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="center center" fxLayoutGap="8px">
     <button class="vbr-indoor-button my-1" mat-raised-button (click)="createGame('INDOOR')" *ngIf="!selectedLeague || (selectedLeague.kind === 'INDOOR')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>6x6</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.6x6' | translate }}</span>
     </button>
     <button class="vbr-beach-button my-1" mat-raised-button (click)="createGame('BEACH')" *ngIf="!selectedLeague || (selectedLeague.kind === 'BEACH')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>Beach</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.beach' | translate }}</span>
     </button>
     <button class="vbr-indoor-4x4-button my-1" mat-raised-button (click)="createGame('INDOOR_4X4')" *ngIf="!selectedLeague || (selectedLeague.kind === 'INDOOR_4X4')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>4x4</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.4x4' | translate }}</span>
     </button>
     <button class="vbr-snow-button my-1" mat-raised-button (click)="createGame('SNOW')" *ngIf="!selectedLeague || (selectedLeague.kind === 'SNOW')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>Snow</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.snow' | translate }}</span>
     </button>
     <button class="vbr-cancel-button my-1" mat-button (click)="deleteAllGames()">
-      <mat-icon>delete</mat-icon><span class="ml-1">Delete All</span>
+      <mat-icon>delete</mat-icon><span class="ml-1">{{ 'common.delete-all' | translate }}</span>
     </button>
   </div>
 
   <div class="my-3 mx-1 text-left" *ngIf="games">
     
     <mat-form-field class="mb-2">
-      <mat-label>Filter</mat-label>
+      <mat-label>{{ 'search.filter' | translate }}</mat-label>
       <input matInput type="text" #textFilter autocomplete="off" (input)="filterFromText(textFilter)"/>
     </mat-form-field>
     
     <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px">
-      <button class="btn vbr-chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>Beach</button>
-      <button class="btn vbr-chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">6x6</button>
-      <button class="btn vbr-chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">4x4</button>
-      <button class="btn vbr-chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>Snow</button>
-      <button class="btn vbr-chip vbr-mixed-chip my-1" #mixedButton (click)="toggleMixed(mixedButton)"><i class="fa fa-intersex mr-2"></i>Mixed</button>
-      <button class="btn vbr-chip vbr-ladies-chip my-1" #ladiesButton (click)="toggleLadies(ladiesButton)"><i class="fa fa-venus mr-2"></i>Ladies</button>
-      <button class="btn vbr-chip vbr-gents-chip my-1" #gentsButton (click)="toggleGents(gentsButton)"><i class="fa fa-mars mr-2"></i>Gents</button>
+      <button class="btn vbr-chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>{{ 'common.beach' | translate }}</button>
+      <button class="btn vbr-chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">{{ 'common.6x6' | translate }}</button>
+      <button class="btn vbr-chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">{{ 'common.4x4' | translate }}</button>
+      <button class="btn vbr-chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>{{ 'common.snow' | translate }}</button>
+      <button class="btn vbr-chip vbr-mixed-chip my-1" #mixedButton (click)="toggleMixed(mixedButton)"><i class="fa fa-intersex mr-2"></i>{{ 'common.mixed' | translate }}</button>
+      <button class="btn vbr-chip vbr-ladies-chip my-1" #ladiesButton (click)="toggleLadies(ladiesButton)"><i class="fa fa-venus mr-2"></i>{{ 'common.ladies' | translate }}</button>
+      <button class="btn vbr-chip vbr-gents-chip my-1" #gentsButton (click)="toggleGents(gentsButton)"><i class="fa fa-mars mr-2"></i>{{ 'common.gents' | translate }}</button>
     </div>
   
   </div>
@@ -51,7 +51,7 @@
         </div>
         <div class="text-left" fxFlex="10" fxFlex.xs="50">
           <a [routerLink]="getGamePublicUrl(game)" target="_blank">
-            <button mat-stroked-button color="primary" type="button" matTooltip="Navigate to the public page for this game. Share this URL with everyone." matTooltipClass="vbr-tooltip">Game page »</button>
+            <button mat-stroked-button color="primary" type="button" matTooltip="{{ 'user.game.page-description' | translate }}" matTooltipClass="vbr-tooltip">{{ 'user.game.page' | translate }}</button>
           </a>
         </div>
         <div fxFlex="15" fxFlex.xs>
@@ -65,23 +65,23 @@
           <span class="vbr-chip vbr-gents-chip" *ngIf="game.gender === 'GENTS'"><i class="fa fa-mars"></i></span>
         </div>
         <div class="text-left" fxFlex="20" fxFlex.xs="40">
-          <span class="icon-text">Scheduled for&nbsp;</span>{{game.scheduledAt | date : 'dd MMM yyyy, HH:mm'}}
+          <span class="icon-text">{{ 'user.game.scheduled' | translate }}:&nbsp;</span>{{game.scheduledAt | date : 'dd MMM yyyy, HH:mm'}}
         </div>
         <div class="text-right" fxFlex fxFlex.xs>
           <button mat-button color="primary" type="button" (click)="viewGame(game)">
-            <mat-icon>visibility</mat-icon><span class="icon-text ml-1">View</span>
+            <mat-icon>visibility</mat-icon><span class="icon-text ml-1">{{ 'common.view' | translate }}</span>
           </button>
           <button mat-button color="primary" type="button" (click)="updateGame(game)" *ngIf="game.status === 'SCHEDULED'">
-            <mat-icon>edit</mat-icon><span class="icon-text ml-1">Edit</span>
+            <mat-icon>edit</mat-icon><span class="icon-text ml-1">{{ 'common.edit' | translate }}</span>
           </button>
           <button mat-button color="primary" type="button" (click)="updateReferee(game)" *ngIf="game.status === 'LIVE'">
-            <mat-icon>person</mat-icon><span class="icon-text ml-1">Referee</span>
+            <mat-icon>person</mat-icon><span class="icon-text ml-1">{{ 'user.referee.referee' | translate }}</span>
           </button>
           <button mat-button color="primary" type="button" (click)="downloadScoreSheet(game)" *ngIf="game.status === 'COMPLETED'">
-            <mat-icon>cloud_download</mat-icon><span class="icon-text ml-1">Sheet</span>
+            <mat-icon>cloud_download</mat-icon><span class="icon-text ml-1">{{ 'user.game.sheet' | translate }}</span>
           </button>
           <button mat-button color="primary" type="button" (click)="deleteGame(game)">
-            <mat-icon>delete</mat-icon><span class="icon-text ml-1">Delete</span>
+            <mat-icon>delete</mat-icon><span class="icon-text ml-1">{{ 'common.delete' | translate }}</span>
           </button>
         </div>
       </div>
@@ -89,7 +89,7 @@
   </mat-card>
 
   <div class="div-user text-center my-3" *ngIf="!last">
-    <button type="button" mat-stroked-button color="primary" (click)="refreshGames(true)">{{ 'user.games.load' | translate }}</button>
+    <button type="button" mat-stroked-button color="primary" (click)="refreshGames(true)">{{ 'user.game.load' | translate }}</button>
   </div>
 
 </div>

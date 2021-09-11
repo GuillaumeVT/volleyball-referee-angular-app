@@ -7,6 +7,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-game-referee-dialog',
@@ -22,7 +23,7 @@ export class GameRefereeDialogComponent {
   friends: Friend[];
 
   constructor(public dialogRef: MatDialogRef<GameRefereeDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: UserGameRefereeDialogData,
-  private gameService: GameService, private userService: UserService, private snackBarService: SnackBarService) { 
+  private gameService: GameService, private userService: UserService, private snackBarService: SnackBarService, private translate: TranslateService) { 
     
     this.referee = new FormControl(null, [Validators.required]);
     this.refereeFormGroup = new FormGroup({referee: this.referee});
@@ -60,7 +61,9 @@ export class GameRefereeDialogComponent {
   }
 
   onInvalidResponse(): void {
-    this.snackBarService.showError('The referee could not be updated.');
+    this.translate.get('user.referee.messages.referee-update-error').subscribe(
+      t =>  this.snackBarService.showError(t)
+    );
   }
 
   close(): void {

@@ -7,6 +7,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-colleagues',
@@ -17,7 +18,7 @@ export class UserColleaguesComponent implements OnInit {
 
   friendsAndRequests: FriendsAndRequests;
 
-  constructor(private titleService: Title, private userService: UserService, private dialog: MatDialog, private snackBarService: SnackBarService) {
+  constructor(private titleService: Title, private userService: UserService, private dialog: MatDialog, private snackBarService: SnackBarService, private translate: TranslateService) {
     this.titleService.setTitle('VBR - My Colleagues');
   }
 
@@ -39,75 +40,68 @@ export class UserColleaguesComponent implements OnInit {
   }
 
   removeColleague(friend: Friend): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: "500px",
-      data: { title: 'Remove colleague', message: `Do you want to remove ${friend.pseudo}?` }
-    });
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.userService.removeFriend(friend.id).subscribe(_deleted => this.onColleagueRemoved(friend.pseudo), _error => this.onColleagueRemovalError(friend.pseudo));
+    this.translate.get(['user.colleague.remove', 'user.colleague.messages.remove-question'], {pseudo: friend.pseudo}).subscribe(
+      ts => {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          width: "500px",
+          data: { title: ts['user.colleague.remove'], message: ts['user.colleague.messages.remove-question'] }
+        });
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if (dialogResult) {
+            this.userService.removeFriend(friend.id).subscribe(_deleted => this.onColleagueRemoved(friend.pseudo), _error => this.onColleagueRemovalError(friend.pseudo));
+          }
+        });
       }
-    });
+    );
   }
 
   onAddColleagueRequested(receiverPseudo: string): void {
-    this.snackBarService.showInfo(`A request was successfully sent to ${receiverPseudo}.`);
+    this.translate.get('user.colleague.messages.request-sent', {pseudo: receiverPseudo}).subscribe(
+      t =>  this.snackBarService.showError(t)
+    );
   }
 
   onColleagueRemoved(pseudo: string): void {
     this.refreshFriendsAndRequests();
-    this.snackBarService.showInfo(`${pseudo} was successfully removed from your colleagues.`);
   }
 
   onColleagueRemovalError(pseudo: string): void {
-    this.snackBarService.showError(`${pseudo} could not be removed from your colleagues.`);
+    this.translate.get('user.colleague.messages.removed-error', {pseudo: pseudo}).subscribe(
+      t =>  this.snackBarService.showError(t)
+    );
   }
 
   acceptColleague(friendRequest: FriendRequest): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: "500px",
-      data: { title: 'Accept colleague', message: `Do you want to add ${friendRequest.senderPseudo} as colleague?` }
-    });
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.userService.acceptFriendRequest(friendRequest.id).subscribe(
-          _success => this.onColleagueAccepted(friendRequest.senderPseudo),
-          _error => this.onColleagueAcceptanceError(friendRequest.senderPseudo)
-        );
-      }
-    });
+    this.userService.acceptFriendRequest(friendRequest.id).subscribe(
+      _success => this.onColleagueAccepted(friendRequest.senderPseudo),
+      _error => this.onColleagueAcceptanceError(friendRequest.senderPseudo)
+    );
   }
 
   rejectColleague(friendRequest: FriendRequest): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: "500px",
-      data: { title: 'Reject colleague', message: `Do you want to reject ${friendRequest.senderPseudo}'s request?` }
-    });
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.userService.rejectFriendRequest(friendRequest.id).subscribe(
-          _success => this.onColleagueRejected(friendRequest.senderPseudo),
-          _error => this.onColleagueRejectionError(friendRequest.senderPseudo)
-        );
-      }
-    });
+    this.userService.rejectFriendRequest(friendRequest.id).subscribe(
+      _success => this.onColleagueRejected(friendRequest.senderPseudo),
+      _error => this.onColleagueRejectionError(friendRequest.senderPseudo)
+    );
   }
 
   onColleagueAccepted(pseudo: string): void {
     this.refreshFriendsAndRequests();
-    this.snackBarService.showInfo(`${pseudo} was successfully added to your colleagues.`);
   }
 
   onColleagueAcceptanceError(pseudo: string): void {
-    this.snackBarService.showError(`${pseudo} could not be added to your colleagues.`);
+    this.translate.get('user.colleague.messages.request-added-error', {pseudo: pseudo}).subscribe(
+      t =>  this.snackBarService.showError(t)
+    );
   }
 
   onColleagueRejected(pseudo: string): void {
     this.refreshFriendsAndRequests();
-    this.snackBarService.showInfo(`${pseudo}'s request was rejected.`);
   }
 
   onColleagueRejectionError(pseudo: string): void {
-    this.snackBarService.showError(`${pseudo}'s colleague could not be rejected.`);
+    this.translate.get('user.colleague.messages.request-rejected-error', {pseudo: pseudo}).subscribe(
+      t =>  this.snackBarService.showError(t)
+    );
   }
 }

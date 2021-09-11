@@ -8,7 +8,7 @@ import { PlayerStyleService } from 'src/app/shared/services/player-style.service
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 import { Component, Inject } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({

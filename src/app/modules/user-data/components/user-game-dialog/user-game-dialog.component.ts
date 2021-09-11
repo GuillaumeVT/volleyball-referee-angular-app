@@ -260,9 +260,13 @@ export class UserGameDialogComponent {
 
   onInvalidResponse(): void {
     if (this.data.crudType === CrudType.Create) {
-      this.snackBarService.showError('The game could not be created.');
+      this.translate.get('user.game.messages.game-creation-error').subscribe(
+        t =>  this.snackBarService.showError(t)
+      );
     } else if (this.data.crudType === CrudType.Update) {
-      this.snackBarService.showError('The game could not be updated. Is it live or completed?');
+      this.translate.get('user.game.messages.game-update-error').subscribe(
+        t =>  this.snackBarService.showError(t)
+      );
     }
   }
 

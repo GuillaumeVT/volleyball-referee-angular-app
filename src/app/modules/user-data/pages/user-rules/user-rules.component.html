@@ -2,34 +2,34 @@
 
   <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="center center" fxLayoutGap="8px">
     <button class="vbr-indoor-button my-1" mat-raised-button (click)="createRules('INDOOR')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>6x6</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.6x6' | translate }}</span>
     </button>
     <button class="vbr-beach-button my-1" mat-raised-button (click)="createRules('BEACH')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>Beach</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.beach' | translate }}</span>
     </button>
     <button class="vbr-indoor-4x4-button my-1" mat-raised-button (click)="createRules('INDOOR_4X4')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>4x4</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.4x4' | translate }}</span>
     </button>
     <button class="vbr-snow-button my-1" mat-raised-button (click)="createRules('SNOW')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">Create</span><span>Snow</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.snow' | translate }}</span>
     </button>
     <button class="vbr-cancel-button my-1" mat-button (click)="deleteAllRules()">
-      <mat-icon>delete</mat-icon><span class="ml-1">Delete All</span>
+      <mat-icon>delete</mat-icon><span class="ml-1">{{ 'common.delete-all' | translate }}</span>
     </button>
   </div>
 
   <div class="my-3 mx-1 text-left" *ngIf="rules">
     
     <mat-form-field class="mb-2">
-      <mat-label>Filter</mat-label>
+      <mat-label>{{ 'search.filter' | translate }}</mat-label>
       <input matInput type="text" #textFilter autocomplete="off" (input)="filterFromText(textFilter)"/>
     </mat-form-field>
     
     <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px">
-      <button class="btn vbr-chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>Beach</button>
-      <button class="btn vbr-chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">6x6</button>
-      <button class="btn vbr-chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">4x4</button>
-      <button class="btn vbr-chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>Snow</button>
+      <button class="btn vbr-chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>{{ 'common.beach' | translate }}</button>
+      <button class="btn vbr-chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">{{ 'common.6x6' | translate }}</button>
+      <button class="btn vbr-chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">{{ 'common.4x4' | translate }}</button>
+      <button class="btn vbr-chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>{{ 'common.snow' | translate }}</button>
     </div>
   
   </div>
@@ -47,17 +47,17 @@
           <span class="vbr-chip vbr-snow-chip" *ngIf="rules.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
         </div>
         <div class="text-left" fxFlex="20" fxFlex.xs="40">
-          <span class="icon-text">Last updated on&nbsp;</span>{{rules.updatedAt | date : 'dd MMM yyyy, HH:mm:ss'}}
+          <span class="icon-text">{{ 'common.last-updated' | translate }}:&nbsp;</span>{{rules.updatedAt | date : 'dd MMM yyyy, HH:mm:ss'}}
         </div>
         <div class="text-right" fxFlex fxFlex.xs>
           <button mat-button color="primary" type="button" (click)="viewRules(rules)">
-            <mat-icon>visibility</mat-icon><span class="icon-text ml-1">View</span>
+            <mat-icon>visibility</mat-icon><span class="icon-text ml-1">{{ 'common.view' | translate }}</span>
           </button>
           <button mat-button color="primary" type="button" (click)="updateRules(rules)">
-            <mat-icon>edit</mat-icon><span class="icon-text ml-1">Edit</span>
+            <mat-icon>edit</mat-icon><span class="icon-text ml-1">{{ 'common.edit' | translate }}</span>
           </button>
           <button mat-button color="primary" type="button" (click)="deleteRules(rules)">
-            <mat-icon>delete</mat-icon><span class="icon-text ml-1">Delete</span>
+            <mat-icon>delete</mat-icon><span class="icon-text ml-1">{{ 'common.delete' | translate }}</span>
           </button>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
   <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="center center" fxLayoutGap="8px">
     <button class="my-1" mat-raised-button color="primary" (click)="addColleague()">
-      <mat-icon>add</mat-icon><span class="ml-1">Add colleague</span>
+      <mat-icon>add</mat-icon><span class="ml-1">{{ 'user.colleague.add' | translate }}</span>
     </button>
   </div>
 
@@ -12,14 +12,14 @@
       <mat-card-content>
         <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px grid">
           <div class="text-left" fxFlex="50" fxFlex.xs="100">
-            You received a request from {{friendRequest.senderPseudo}}
+            {{ 'user.colleague.messages.request-received' | translate: {pseudo: friendRequest.senderPseudo} }}
           </div>
           <div class="text-right" fxFlex fxFlex.xs fxLayoutGap="8px">
             <button mat-raised-button color="primary" type="button" (click)="acceptColleague(friendRequest)">
-              <mat-icon>check</mat-icon><span class="ml-1">Accept</span>
+              <mat-icon>check</mat-icon><span class="ml-1">{{ 'common.accept' | translate }}</span>
             </button>
             <button mat-raised-button color="warn" type="button" (click)="rejectColleague(friendRequest)">
-              <mat-icon>close</mat-icon><span class="ml-1">Decline</span>
+              <mat-icon>close</mat-icon><span class="ml-1">{{ 'common.decline' | translate }}</span>
             </button>
           </div>
         </div>
@@ -34,7 +34,7 @@
           </div>
           <div class="text-right" fxFlex fxFlex.xs fxLayoutGap="8px">
             <button mat-raised-button color="warn" type="button" (click)="removeColleague(friend)">
-              <mat-icon>delete</mat-icon><span class="ml-1">Remove</span>
+              <mat-icon>delete</mat-icon><span class="ml-1">{{ 'common.remove' | translate }}</span>
             </button>
           </div>
         </div>

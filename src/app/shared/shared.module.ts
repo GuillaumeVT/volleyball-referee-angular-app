@@ -1,4 +1,3 @@
-import { FileSaverModule } from 'ngx-filesaver';
 import { MaterialModule } from 'src/app/material/material.module';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { GameListItemComponent } from 'src/app/shared/components/game-list-item/game-list-item.component';
@@ -30,7 +29,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxChartsModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    FileSaverModule,
     TranslateModule
   ],
   providers: [
@@ -45,7 +43,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MaterialModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    FileSaverModule,
     ConfirmationDialogComponent,
     GenderPipe,
     StatisticsComponent,

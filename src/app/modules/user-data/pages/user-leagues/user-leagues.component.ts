@@ -1,4 +1,4 @@
-import { FileSaverService } from 'ngx-filesaver';
+import { saveAs } from 'file-saver';
 import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
@@ -31,7 +31,7 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   private subscription : Subscription = new Subscription();
 
   constructor(private titleService: Title, private userService: UserService, private leagueService: LeagueService, private gameService: GameService, private publicService: PublicService,
-    private dialog: MatDialog, private snackBarService: SnackBarService, private datePipe: DatePipe, private router: Router, private fileSaverService: FileSaverService) {
+    private dialog: MatDialog, private snackBarService: SnackBarService, private datePipe: DatePipe, private router: Router) {
     super();
     this.titleService.setTitle('VBR - My Leagues');
     this.countsMap = new Map();
@@ -135,6 +135,6 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   onDivisionExcelReceived(blob: Blob, league: LeagueSummary, divisionName: string): void {
     const dateStr = this.datePipe.transform(new Date().getTime(), 'dd_MM_yyyy__HH_mm');
     const filename = league.name + '_' + divisionName + '_' + dateStr + '.xlsx';
-    this.fileSaverService.save(blob, filename);
+    saveAs(blob, filename);
   }
 }

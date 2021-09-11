@@ -70,7 +70,7 @@ export class Rules {
     rules.teamTimeouts = true;
     rules.teamTimeoutsPerSet = 2;
     rules.teamTimeoutDuration = 30;
-    rules.technicalTimeouts = true;
+    rules.technicalTimeouts = false;
     rules.technicalTimeoutDuration = 60;
     rules.gameIntervals = true;
     rules.gameIntervalDuration = 180;

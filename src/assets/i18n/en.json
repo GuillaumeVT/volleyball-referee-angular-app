@@ -108,8 +108,8 @@
         "password-required-error": "Password is required",
         "password-short-error": "Password must contain at least 8 characters",
         "passwords-mismatch-error": "Passwords do not match.",
-        "recovery-sent": "A recovery link was sent to ${emailAddress}.",
-        "recovery-failed": "${emailAddress} could not be found.",
+        "recovery-sent": "A recovery link was sent to {{emailAddress}}.",
+        "recovery-failed": "{{emailAddress}} could not be found.",
         "internal-error": "An error occurred on the server.",
         "password-updated": "Password was successfully reset.",
         "password-invalid-error": "Password does not satisfy the aforementioned criteria."
@@ -118,16 +118,88 @@
     "team": {
       "mixed-pipe": "(Mixed)",
       "ladies-pipe": "(Ladies)",
-      "gents-pipe": "(Gents)"
+      "gents-pipe": "(Gents)",
+      "select-color": "Select shirt color",
+      "names": "Player names",
+      "player-number": "Player #{{num}}",
+      "load": "Load more teams"
     },
-    "games": {
-      "load": "Load more games"
+    "game": {
+      "load": "Load more games",
+      "create": "Create game",
+      "update": "Update game",
+      "view": "View game",
+      "scheduled": "Scheduled at",
+      "public": "Game is public",
+      "private": "Game is private",
+      "league": "Tournament / League",
+      "division": "Pool / Division",
+      "home-team": "Home team",
+      "guest-team": "Guest team",
+      "referee-1": "Referee 1 name",
+      "referee-2": "Referee 2 name",
+      "scorer": "Scorer name",
+      "of-league": "Games of {{league}}",
+      "page": "Game page »",
+      "sheet": "Sheet",
+      "page-description": "Navigate to the public page for this game. Share this URL with everyone.",
+      "messages": {
+        "game-creation-error": "The game could not be created.",
+        "game-update-error": "The game could not be updated. Is it live or completed?",
+        "schedule-required-error": "Schedule date is required",
+        "schedule-past-error": "Game must have a future schedule date",
+        "indexed-tooltip": "Public games will show for everyone during queries. Private games will not.",
+        "league-unknown-error": "League does not exist",
+        "division-required-error": "Division is required",
+        "home-team-required-error": "Home team is required",
+        "guest-team-required-error": "Guest team is required",
+        "home-team-unknown-error": "Home team does not exist",
+        "guest-team-unknown-error": "Guest team does not exist",
+        "same-teams-error": "Home and guest teams must be different",
+        "rules-required-error": "Rules are required",
+        "rules-unknown-error": "Rules do not exist"
+      }
+    },
+    "referee": {
+      "referee": "Referee",
+      "me": "Me",
+      "colleagues": "My colleagues",
+      "update-referee": "Update referee",
+      "messages": {
+        "referee-required-error": "Referee is required",
+        "referee-update-error": "The referee could not be updated."
+      }
+    },
+    "colleague": {
+      "add": "Connect with a referee",
+      "remove": "Delete relationship with referee",
+      "pseudo": "Pseudo",
+      "messages": {
+        "request-received": "{{pseudo}} wishes to connect with you",
+        "request-sent": "A connection request was successfully sent to {{pseudo}}.",
+        "request-rejected-error": "{{pseudo}}'s connection request could not be rejected.",
+        "request-failed": "The connection request to {{pseudo}} could not be sent. Is the pseudo valid?",
+        "pseudo-required-error": "Pseudo is required",
+        "request-added-error": "{{pseudo}} could not be added to your colleagues.",
+        "remove-question": "Do you want to remove {{pseudo}}?",
+        "removed-error": "{{pseudo}} could not be removed from your colleagues."        
+      }
     }
   },
   "common": {
     "ok": "OK",
     "cancel": "Cancel",
     "close": "Close",
+    "create": "Create",
+    "view": "View",
+    "update": "Update",
+    "edit": "Edit",
+    "delete": "Delete",
+    "delete-all": "Delete all",
+    "send": "Send",
+    "accept": "Accept",
+    "decline": "Decline",
+    "remove": "Remove",
     "by": "by",
     "live": "Live",
     "beach": "Beach",
@@ -142,7 +214,9 @@
     "matches": "Matches",
     "sets": "Sets",
     "points": "Points",
-    "teams": "Teams"
+    "teams": "Teams",
+    "rules": "Rules",
+    "last-updated": "Last updated on"
   },
   "statistics": {
     "total-games": "Total games",
