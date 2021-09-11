@@ -2,9 +2,6 @@
   <a href="{{playUrl}}" target="_blank" class="text-center m-1">
     <button class="btn-android" mat-raised-button type="button"><mat-icon class="mr-1">android</mat-icon><span>{{ 'linkbar.android-app' | translate }}</span></button>
   </a>
-  <a href="{{facebookUrl}}" target="_blank" class="text-center m-1">
-    <button class="btn-facebook" mat-raised-button type="button"><mat-icon class="mr-1">facebook</mat-icon><span>{{ 'linkbar.facebook-page' | translate }}</span></button>
-  </a>
   <a [routerLink]="getPrivacyPolicyUrl()" target="_blank" class="text-center m-1">
     <button mat-button color="primary" type="button">{{ 'linkbar.privacy-policy' | translate }}</button>
   </a>

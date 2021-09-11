@@ -11,7 +11,6 @@ export class LinksBarComponent {
   currentLanguage: string;
   languages: Map<string, string>;
 
-  facebookUrl: string;
   playUrl:     string;
 
   constructor(private translate: TranslateService) {
@@ -27,7 +26,6 @@ export class LinksBarComponent {
 
     this.translate.use(this.currentLanguage.match(/en|fr/) ? this.currentLanguage : 'en');
 
-    this.facebookUrl = 'https://www.facebook.com/VolleyballReferee/';
     this.playUrl = 'https://play.google.com/store/apps/details?id=com.tonkar.volleyballreferee';
   }
 
