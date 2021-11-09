@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
   constructor(private titleService: Title, private router: Router, private activeRoute: ActivatedRoute, private datePipe: DatePipe, private translate: TranslateService) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () { return false; };
 
-    this.translate.get('search.title').subscribe(t => this.titleService.setTitle(t));
+    this.translate.get('search.page').subscribe(t => this.titleService.setTitle(t));
     this.loadSearchResults = false;
     this.searchType = SearchType.Token;
     this.minSearchLength = 3;

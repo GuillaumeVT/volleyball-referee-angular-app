@@ -129,10 +129,5 @@
 			}
 		}
 	},
-	"schematics": {
-		"@schematics/angular:component": {
-			"styleext": "scss"
-		}
-	},
 	"defaultProject": "volleyball-referee-angular-app"
 }

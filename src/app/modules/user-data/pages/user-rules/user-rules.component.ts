@@ -12,6 +12,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-rules',
@@ -24,9 +25,10 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
 
   private subscription : Subscription = new Subscription();
 
-  constructor(private titleService: Title, private userService: UserService, private rulesService: RulesService, private dialog: MatDialog, private snackBarService: SnackBarService) {
+  constructor(private titleService: Title, private userService: UserService, private rulesService: RulesService, private dialog: MatDialog,
+    private snackBarService: SnackBarService, private translate: TranslateService) {
     super();
-    this.titleService.setTitle('VBR - My Rules');
+    this.translate.get('user.rules.page').subscribe(t => this.titleService.setTitle(t));
   }
 
   ngOnInit() {
@@ -121,25 +123,21 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
 
   onRulesCreated(): void {
     this.refreshRules();
-    this.snackBarService.showInfo('Rules were successfully created.');
   }
 
   onRulesUpdated(): void {
     this.refreshRules();
-    this.snackBarService.showInfo('Rules were successfully updated.');
   }
 
   onRulesDeleted(): void {
     this.refreshRules();
-    this.snackBarService.showInfo('Rules were successfully deleted.');
   }
 
   onRulesDeletionError(): void {
-    this.snackBarService.showInfo('Rules could not be deleted. Are they used in a scheduled game?.');
+    this.snackBarService.showError('Rules could not be deleted. Are they used in a scheduled game?.');
   }
 
   onAllRulesDeleted(): void {
     this.refreshRules();
-    this.snackBarService.showInfo('All rules were successfully deleted.');
   }
 }

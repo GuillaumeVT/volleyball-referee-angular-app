@@ -42,7 +42,7 @@
         </div>
         <div class="text-left" fxFlex="15" fxFlex.xs="75">
           <a [routerLink]="getLeaguePublicUrl(league)" target="_blank">
-            <button mat-stroked-button color="primary" type="button" matTooltip="Navigate to the public section of the tournament. Share this URL with everyone." matTooltipClass="vbr-tooltip">Public Page »</button>
+            <button mat-stroked-button color="primary" type="button" matTooltip="{{ 'user.league.public-page-description' | translate }}" matTooltipClass="vbr-tooltip">{{ 'user.league.public-page' | translate }}</button>
           </a>
         </div>
         <div fxFlex="10" fxFlex.xs>
@@ -52,14 +52,14 @@
           <span class="vbr-chip vbr-snow-chip" *ngIf="league.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
         </div>
         <div class="text-left" fxFlex="20" fxFlex.xs="40">
-          <span class="icon-text">Created on:&nbsp;</span>{{league.createdAt | date : 'dd MMM yyyy, HH:mm'}}
+          <span class="icon-text">{{ 'common.created-at' | translate }}:&nbsp;</span>{{league.createdAt | date : 'dd MMM yyyy, HH:mm'}}
         </div>
         <div class="text-right" fxFlex fxFlex.xs>
           <button mat-button color="primary" type="button" (click)="viewLeague(league)">
-            <mat-icon>visibility</mat-icon><span class="icon-text mx-1">{{countsMap.get(league.id)}}</span><span class="icon-text">Games</span>
+            <mat-icon>visibility</mat-icon><span class="icon-text mx-1">{{countsMap.get(league.id)}}</span><span class="icon-text">{{ 'league.title.games' | translate }}</span>
           </button>
           <button mat-button color="primary" type="button" [matMenuTriggerFor]="excelMenu">
-            <mat-icon>cloud_download</mat-icon><span class="icon-text ml-1">Excel</span>
+            <mat-icon>cloud_download</mat-icon><span class="icon-text ml-1">{{ 'common.excel' | translate }}</span>
             <mat-menu #excelMenu="matMenu">
               <button mat-menu-item *ngFor="let divisionName of divisionsMap.get(league.id)" (click)="downloadDivisionExcel(league, divisionName)">{{divisionName}}</button>
             </mat-menu>

@@ -19,7 +19,7 @@ export class UserColleaguesComponent implements OnInit {
   friendsAndRequests: FriendsAndRequests;
 
   constructor(private titleService: Title, private userService: UserService, private dialog: MatDialog, private snackBarService: SnackBarService, private translate: TranslateService) {
-    this.titleService.setTitle('VBR - My Colleagues');
+    this.translate.get('user.colleague.page').subscribe(t => this.titleService.setTitle(t));
   }
 
   ngOnInit() {

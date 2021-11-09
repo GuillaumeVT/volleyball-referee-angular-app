@@ -155,3 +155,9 @@ export class GameIngredients {
   teams:        TeamSummary[];
   leagues:      LeagueSummary[];
 }
+
+export class LeagueDashboard {
+  liveGames: GameSummary[];
+  last10Games: GameSummary[];
+  next10Games: GameSummary[];
+}

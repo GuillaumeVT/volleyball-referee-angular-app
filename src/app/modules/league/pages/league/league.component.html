@@ -5,15 +5,21 @@
 <mat-tab-group animationDuration="0ms" *ngIf="league" mat-align-tabs="center">
 
   <mat-tab label="{{ 'league.title.dashboard' | translate }}">
-    <app-league-dashboard [league]="league"></app-league-dashboard>
+    <ng-template matTabContent>
+      <app-league-dashboard [league]="league"></app-league-dashboard>
+    </ng-template>
   </mat-tab>
   
   <mat-tab label="{{ 'league.title.rankings' | translate }}">
-    <app-division-rankings [league]="league"></app-division-rankings>
+    <ng-template matTabContent>
+      <app-division-rankings [league]="league"></app-division-rankings>
+    </ng-template>
   </mat-tab>
 
   <mat-tab label="{{ 'league.title.games' | translate }}">
-    <app-league-games [league]="league"></app-league-games>
+    <ng-template matTabContent>
+      <app-league-games [league]="league"></app-league-games>
+    </ng-template>
   </mat-tab>
 
 </mat-tab-group>

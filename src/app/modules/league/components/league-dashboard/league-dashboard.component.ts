@@ -1,6 +1,6 @@
 import { Subscription, timer } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
-import { GameSummary } from 'src/app/shared/models/game.model';
+import { GameSummary, LeagueDashboard } from 'src/app/shared/models/game.model';
 import { League } from 'src/app/shared/models/league.model';
 import { PublicService } from 'src/app/shared/services/public.service';
 
@@ -18,18 +18,13 @@ export class LeagueDashboardComponent implements OnDestroy, OnChanges {
 
   selectedDivision: string;
   allDivisions:     string;
-  liveGames:        GameSummary[];
-  next10Games:      GameSummary[];
-  last10Games:      GameSummary[];
+  games:            LeagueDashboard;
   subscription:     Subscription;
   autoRefresh:      boolean;
 
   constructor(private publicService: PublicService) {
     this.allDivisions = idAll;
     this.selectedDivision = this.allDivisions;
-    this.liveGames = [];
-    this.next10Games = [];
-    this.last10Games = [];
     this.autoRefresh = true;
   }
 
@@ -51,13 +46,9 @@ export class LeagueDashboardComponent implements OnDestroy, OnChanges {
 
   refreshGames(): void {
     if (this.selectedDivision === this.allDivisions) {
-      this.publicService.listLiveGamesInLeague(this.league.id).subscribe(games => this.liveGames = games, _error => this.liveGames = []);
-      this.publicService.listNext10GamesInLeague(this.league.id).subscribe(games => this.next10Games = games, _error => this.next10Games = []);
-      this.publicService.listLast10GamesInLeague(this.league.id).subscribe(games => this.last10Games = games, _error => this.last10Games = []);
+      this.publicService.getGamesInLeagueGroupedByStatus(this.league.id).subscribe(games => this.games = games, _error => this.games = null);
     } else {
-      this.publicService.listLiveGamesInDivision(this.league.id, this.selectedDivision).subscribe(games => this.liveGames = games, _error => this.liveGames = []);
-      this.publicService.listNext10GamesInDivision(this.league.id, this.selectedDivision).subscribe(games => this.next10Games = games, _error => this.next10Games = []);
-      this.publicService.listLast10GamesInDivision(this.league.id, this.selectedDivision).subscribe(games => this.last10Games = games, _error => this.last10Games = []);
+      this.publicService.getGamesInDivisionGroupedByStatus(this.league.id, this.selectedDivision).subscribe(games => this.games = games, _error => this.games = null);
     }
   }
 

@@ -16,6 +16,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-leagues',
@@ -31,9 +32,9 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   private subscription : Subscription = new Subscription();
 
   constructor(private titleService: Title, private userService: UserService, private leagueService: LeagueService, private gameService: GameService, private publicService: PublicService,
-    private dialog: MatDialog, private snackBarService: SnackBarService, private datePipe: DatePipe, private router: Router) {
+    private dialog: MatDialog, private snackBarService: SnackBarService, private datePipe: DatePipe, private router: Router, private translate: TranslateService) {
     super();
-    this.titleService.setTitle('VBR - My Leagues');
+    this.translate.get('user.league.page').subscribe(t => this.titleService.setTitle(t));
     this.countsMap = new Map();
     this.divisionsMap = new Map();
   }
@@ -82,46 +83,51 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   deleteLeague(league: LeagueSummary): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: "500px",
-      data: { title: 'Delete league', message: `Do you want to delete the league named ${league.name}?` }
-    });
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.leagueService.deleteLeague(league.id).subscribe(_deleted => this.onLeagueDeleted(), _error => this.onLeagueDeletionError());
+    this.translate.get(['user.league.delete', 'user.league.messages.delete-question'], {name: league.name}).subscribe(
+      ts => {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          width: "500px",
+          data: { title: ts['user.league.delete'], message: ts['user.league.messages.delete-question'] }
+        });
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if (dialogResult) {
+            this.leagueService.deleteLeague(league.id).subscribe(_deleted => this.onLeagueDeleted(), _error => this.onLeagueDeletionError());
+          }
+        });
       }
-    });
+    );
   }
 
   deleteAllLeagues(): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: "500px",
-      data: { title: 'Delete ALL leagues', message: 'Do you want to delete ALL the leagues?' }
-    });
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.leagueService.deleteAllLeagues().subscribe(_deleted => this.onAllLeaguesDeleted());
+    this.translate.get(['user.league.delete-all', 'user.league.messages.delete-all-question']).subscribe(
+      ts => {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          width: "500px",
+          data: { title: ts['user.league.delete-all'], message: ts['user.league.messages.delete-all-question'] }
+        });
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if (dialogResult) {
+            this.leagueService.deleteAllLeagues().subscribe(_deleted => this.onAllLeaguesDeleted());
+          }
+        });
       }
-    });
+    );
   }
 
   onLeagueCreated(): void {
     this.refreshLeagues();
-    this.snackBarService.showInfo('League was successfully created.');
   }
 
   onLeagueDeleted(): void {
     this.refreshLeagues();
-    this.snackBarService.showInfo('League was successfully deleted.');
   }
 
   onAllLeaguesDeleted(): void {
     this.refreshLeagues();
-    this.snackBarService.showInfo('All leagues were successfully deleted.');
   }
 
   onLeagueDeletionError(): void {
-    this.snackBarService.showError('League could not be deleted.');
+    this.translate.get('user.league.messages.deleted-error').subscribe(t => this.snackBarService.showError(t));
   }
 
   getLeaguePublicUrl(league: LeagueSummary): string {

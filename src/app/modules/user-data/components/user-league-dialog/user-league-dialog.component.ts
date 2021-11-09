@@ -5,6 +5,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-league-dialog',
@@ -15,7 +16,7 @@ export class UserLeagueDialogComponent {
 
   leagueFormGroup: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<UserLeagueDialogComponent>, @Inject(MAT_DIALOG_DATA) public league: League, private leagueService: LeagueService, private snackBarService: SnackBarService) {
+  constructor(public dialogRef: MatDialogRef<UserLeagueDialogComponent>, @Inject(MAT_DIALOG_DATA) public league: League, private leagueService: LeagueService, private snackBarService: SnackBarService, private translate: TranslateService) {
     this.leagueFormGroup = new FormGroup({
       leagueName: new FormControl('', [Validators.required])
     });
@@ -37,6 +38,8 @@ export class UserLeagueDialogComponent {
   }
 
   onInvalidResponse(_error: any): void {
-    this.snackBarService.showError(`The league ${this.league.name} could not be created. Is the name already taken?`);
+    this.translate.get('user.league.messages.created-error', {pseudo: this.league.name}).subscribe(
+      t =>  this.snackBarService.showError(t)
+    );
   }
 }

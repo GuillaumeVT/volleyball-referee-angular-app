@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
-import { Game, GameSummary } from 'src/app/shared/models/game.model';
+import { Game, GameSummary, LeagueDashboard } from 'src/app/shared/models/game.model';
 import { League } from 'src/app/shared/models/league.model';
 import { Page } from 'src/app/shared/models/page.model';
 import { Ranking } from 'src/app/shared/models/ranking.model';
-import { Statistics } from 'src/app/shared/models/statistics.model';
+import { StatisticsGroup } from 'src/app/shared/models/statistics.model';
 import { TeamSummary } from 'src/app/shared/models/team.model';
 import { environment } from 'src/environments/environment';
 
@@ -22,9 +22,9 @@ export class PublicService {
 
   constructor(private http: HttpClient) { }
 
-  getStatistics(): Observable<Statistics> {
+  getStatistics(): Observable<StatisticsGroup> {
     const url = `${this.publicUrl}/statistics`;
-    return this.http.get<Statistics>(url);
+    return this.http.get<StatisticsGroup>(url);
   }
 
   getGame(id: string): Observable<Game> {
@@ -92,6 +92,11 @@ export class PublicService {
     return this.http.get<Page<GameSummary>>(url, { params: params });
   }
 
+  getGamesInLeagueGroupedByStatus(leagueId: string): Observable<LeagueDashboard> {
+    const url = `${this.gamesUrl}/league/${leagueId}/group`;
+    return this.http.get<LeagueDashboard>(url);
+  }
+
   listLiveGamesInLeague(leagueId: string): Observable<GameSummary[]> {
     const url = `${this.gamesUrl}/league/${leagueId}/live`;
     return this.http.get<GameSummary[]>(url);
@@ -126,6 +131,11 @@ export class PublicService {
       params = params.append("gender", gender);
     }
     return this.http.get<Page<GameSummary>>(url, { params: params });
+  }
+
+  getGamesInDivisionGroupedByStatus(leagueId: string, divisionName: string): Observable<LeagueDashboard> {
+    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/group`;
+    return this.http.get<LeagueDashboard>(url);
   }
 
   listLiveGamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {

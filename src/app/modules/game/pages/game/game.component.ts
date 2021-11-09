@@ -5,6 +5,7 @@ import { TeamType } from 'src/app/shared/models/team-type.model';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-game',
@@ -20,8 +21,8 @@ export class GameComponent implements OnInit {
   rightTeam:  TeamType;
   rate:       number;
 
-  constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService) {
-    this.titleService.setTitle('VBR - View Match');
+  constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService, private translate: TranslateService) {
+    this.translate.get('game.page').subscribe(t => this.titleService.setTitle(t));
     this.currentSet = 0;
     this.leftTeam = TeamType.Home;
     this.rightTeam = TeamType.Guest

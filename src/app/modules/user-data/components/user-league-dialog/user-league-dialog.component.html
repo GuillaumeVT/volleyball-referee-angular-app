@@ -1,14 +1,14 @@
-<h2 mat-dialog-title>Create league</h2>
+<h2 mat-dialog-title>{{ 'user.league.create' | translate }}</h2>
 <mat-dialog-content>
   <form [formGroup]="leagueFormGroup" autocomplete="off" novalidate (ngSubmit)="onCreateLeague()">
     <mat-form-field class="m-1" appearance="outline">
-      <mat-label>League name</mat-label>
+      <mat-label>{{ 'user.league.name' | translate }}</mat-label>
       <input matInput type="text" formControlName="leagueName" cdkFocusInitial required>
-      <mat-error *ngIf="leagueNameFormControl.errors?.required">League name is required</mat-error>
+      <mat-error *ngIf="leagueNameFormControl.errors?.required">{{ 'user.league.messages.name-required-error' | translate }}</mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button (click)="close()">Cancel</button>
-  <button mat-raised-button type="submit" color="primary" (click)="onCreateLeague()" [disabled]="!leagueFormGroup.valid">OK</button>
+  <button mat-button (click)="close()">{{ 'common.cancel' | translate }}</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onCreateLeague()" [disabled]="!leagueFormGroup.valid">{{ 'common.create' | translate }}</button>
 </mat-dialog-actions>

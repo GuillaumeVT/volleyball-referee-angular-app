@@ -13,34 +13,34 @@
 
 <div fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="8px" fxFlexFill>
 
-  <mat-card fxFlex="33" fxFlex.xs="100" class="mb-2" *ngIf="liveGames">
+  <mat-card fxFlex="33" fxFlex.xs="100" class="mb-2" *ngIf="games">
     <mat-card-header>
       <mat-card-title>{{ 'search.option.live' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div *ngFor="let game of liveGames" class="my-3">
+      <div *ngFor="let game of games.liveGames" class="my-3">
         <app-game-list-item [gameSummary]="game" [inLeague]="true"></app-game-list-item>
       </div>
     </mat-card-content>
   </mat-card>
 
-  <mat-card fxFlex="33" fxFlex.xs="100" class="mb-2" *ngIf="next10Games">
+  <mat-card fxFlex="33" fxFlex.xs="100" class="mb-2" *ngIf="games">
     <mat-card-header>
       <mat-card-title>{{ 'league.title.next-10' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div *ngFor="let game of next10Games" class="my-3">
+      <div *ngFor="let game of games.next10Games" class="my-3">
         <app-game-list-item [gameSummary]="game" [inLeague]="true"></app-game-list-item>
       </div>
     </mat-card-content>
   </mat-card>
 
-  <mat-card fxFlex="33" fxFlex.xs="100" class="mb-2" *ngIf="last10Games">
+  <mat-card fxFlex="33" fxFlex.xs="100" class="mb-2" *ngIf="games">
     <mat-card-header>
       <mat-card-title>{{ 'league.title.last-10' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div *ngFor="let game of last10Games" class="my-3">
+      <div *ngFor="let game of games.last10Games" class="my-3">
         <app-game-list-item [gameSummary]="game" [inLeague]="true"></app-game-list-item>
       </div>
     </mat-card-content>

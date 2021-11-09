@@ -31,7 +31,7 @@
     "privacy-policy": "Politique de confidentialité"
   },
   "search": {
-    "title": "VBR - Recherche de matchs",
+    "page": "VBR - Recherche de matchs",
     "start": "Rechercher",
     "filter": "Filtrer",
     "option": {
@@ -50,6 +50,7 @@
     }
   },
   "game": {
+    "page": "VBR - Match",
     "set": "Set",
     "title": {
       "current-line-up": "Positions",
@@ -65,6 +66,7 @@
     }
   },
   "league": {
+    "page": "VBR - Ligue",
     "title": {
       "dashboard": "Tableau de bord",
       "rankings": "Classement",
@@ -115,6 +117,7 @@
       }
     },
     "team": {
+      "page": "VBR - Mes Équipes",
       "mixed-pipe": "(Mixte)",
       "ladies-pipe": "(Femmes)",
       "gents-pipe": "(Hommes)",
@@ -124,10 +127,14 @@
       "load": "Charger plus d'équipes"
     },
     "game": {
+      "page": "VBR - My Games",
       "load": "Charger plus de matchs",
       "create": "Créer un match",
       "update": "Éditer le match",
       "view": "Voir le match",
+      "delete": "Supprimer le match",
+      "delete-all": "Supprimer TOUS les matchs",
+      "delete-all-in": "Supprimer TOUS les matchs de {{league}}",
       "scheduled": "Programmé pour",
       "public": "Le match est publique",
       "private": "Le match est privé",
@@ -139,12 +146,16 @@
       "referee-2": "Nom de l'arbitre 2",
       "scorer": "Nom du scorer",
       "of-league": "Matchs de {{league}}",
-      "page": "Page du match »",
-      "page-description": "Naviguer vers la page publique de ce match. Cette URL peut être partagée avec tout le monde.",
+      "public-page": "Page publique »",
+      "public-page-description": "Naviguer vers la page publique de ce match. Cette URL peut être partagée avec tout le monde.",
       "sheet": "Feuille",
       "messages": {
         "game-creation-error": "Le match n'a pas pu être créé.",
         "game-update-error": "Le match n'a pas pu être modifié. A-t-il démarré ou est-il terminé?",
+        "delete-question": "Supprimer le match {{homeTeam}} - {{guestTeam}}?",
+        "delete-all-question": "Supprimer TOUS les matchs?",
+        "delete-all-in-question": "Supprimer TOUS les matchs de {{league}}?",
+        "deleted-error": "Le match n'a pu être supprimé.",
         "schedule-required-error": "La date de début du match est obligatoire",
         "schedule-past-error": "La date de début du match doit être future",
         "indexed-tooltip": "Les matchs publiques peuvent être recherchés par tout le monde, à l'inverse des matchs privés.",
@@ -159,6 +170,25 @@
         "rules-unknown-error": "Les règles n'existent pas"
       }
     },
+    "rules": {
+      "page": "VBR - Mes Règles"
+    },
+    "league": {
+      "page": "VBR - Mes ligues",
+      "name": "Nom de la ligue",
+      "create": "Créer une ligue",
+      "delete": "Supprimer une ligue",
+      "delete-all": "Supprimer TOUTES les ligues",
+      "public-page": "Page publique »",
+      "public-page-description": "Naviguer vers la section publique du tournoi. Cette adresse peut être partagée avec tout le monde.",
+      "messages": {
+        "delete-question": "Supprimer la ligue {{name}}?",
+        "delete-all-question": "Supprimer TOUTES les ligues?",
+        "created-error": "La ligue {{name}} n'a pu être créée. Le nom est-il déjà utilisé?",
+        "deleted-error": "La ligue n'a pu être supprimée.",
+        "name-required-error": "Le nom de la ligue est obligatoire"
+      }
+    },
     "referee": {
       "referee": "Arbitre",
       "me": "Moi",
@@ -170,6 +200,7 @@
       }
     },
     "colleague": {
+      "page": "VBR - Mes Collègues",
       "add": "Se connecter à un arbitre",
       "remove": "Supprimer la relation",
       "pseudo": "Pseudo",
@@ -215,10 +246,14 @@
     "points": "Points",
     "teams": "Équipes",
     "rules": "Règles",
-    "last-updated": "Dernière mise à jour le"
+    "last-updated": "Dernière mise à jour le",
+    "created-at": "Créé le",
+    "excel": "Excel"
   },
   "statistics": {
-    "total-games": "Nombre de matchs",
-    "total-teams": "Nombre d'équipes"
+    "user-games": "Mes matchs",
+    "user-teams": "Mes équipes",
+    "total-games": "Nombre total de matchs",
+    "total-teams": "Nombre total d'équipes"
   }
 }

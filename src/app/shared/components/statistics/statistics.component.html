@@ -1,17 +1,35 @@
-<div class="text-center" *ngIf="statistics">
-  <div class="my-1 chart-wrapper" *ngIf="gameStatisticsData">
+<div class="text-center" *ngIf="statisticsGroup">
+  <div class="my-1 chart-wrapper" *ngIf="userGameStatisticsData">
     <ngx-charts-advanced-pie-chart
       [scheme]="colorScheme"
-      [results]="gameStatisticsData"
+      [results]="userGameStatisticsData"
+      label="{{ 'statistics.user-games' | translate }}"
+      labels="true"
+      autoScale="true">
+    </ngx-charts-advanced-pie-chart>
+  </div>
+  <div class="my-1 chart-wrapper" *ngIf="globalGameStatisticsData">
+    <ngx-charts-advanced-pie-chart
+      [scheme]="colorScheme"
+      [results]="globalGameStatisticsData"
       label="{{ 'statistics.total-games' | translate }}"
       labels="true"
       autoScale="true">
     </ngx-charts-advanced-pie-chart>
   </div>
-  <div class="my-1 chart-wrapper" *ngIf="teamStatisticsData">
+  <div class="my-1 chart-wrapper" *ngIf="userTeamStatisticsData">
     <ngx-charts-advanced-pie-chart
       [scheme]="colorScheme"
-      [results]="teamStatisticsData"
+      [results]="userTeamStatisticsData"
+      label="{{ 'statistics.user-teams' | translate }}"
+      labels="true"
+      autoScale="true">
+    </ngx-charts-advanced-pie-chart>
+  </div>
+  <div class="my-1 chart-wrapper" *ngIf="globalTeamStatisticsData">
+    <ngx-charts-advanced-pie-chart
+      [scheme]="colorScheme"
+      [results]="globalTeamStatisticsData"
       label="{{ 'statistics.total-teams' | translate }}"
       labels="true"
       autoScale="true">

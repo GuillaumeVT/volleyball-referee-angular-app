@@ -3,7 +3,7 @@
 * https://materialtheme.arcsine.dev
 */
 
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 
@@ -13,19 +13,19 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined&display=block');
 
 $fontConfig: (
-  display-4: mat-typography-level(112px, 112px, 300, 'Roboto', -0.0134em),
-  display-3: mat-typography-level(56px, 56px, 400, 'Roboto', -0.0089em),
-  display-2: mat-typography-level(45px, 48px, 400, 'Roboto', 0.0000em),
-  display-1: mat-typography-level(34px, 40px, 400, 'Roboto', 0.0074em),
-  headline: mat-typography-level(24px, 32px, 400, 'Roboto', 0.0000em),
-  title: mat-typography-level(20px, 32px, 500, 'Roboto', 0.0075em),
-  subheading-2: mat-typography-level(16px, 28px, 400, 'Roboto', 0.0094em),
-  subheading-1: mat-typography-level(15px, 24px, 500, 'Roboto', 0.0067em),
-  body-2: mat-typography-level(14px, 24px, 500, 'Roboto', 0.0179em),
-  body-1: mat-typography-level(14px, 20px, 400, 'Roboto', 0.0179em),
-  button: mat-typography-level(14px, 14px, 500, 'Roboto', 0.0893em),
-  caption: mat-typography-level(12px, 20px, 400, 'Roboto', 0.0333em),
-  input: mat-typography-level(inherit, 1.125, 400, 'Roboto', 1.5px)
+  display-4: mat.define-typography-level(112px, 112px, 300, 'Roboto', -0.0134em),
+  display-3: mat.define-typography-level(56px, 56px, 400, 'Roboto', -0.0089em),
+  display-2: mat.define-typography-level(45px, 48px, 400, 'Roboto', 0.0000em),
+  display-1: mat.define-typography-level(34px, 40px, 400, 'Roboto', 0.0074em),
+  headline: mat.define-typography-level(24px, 32px, 400, 'Roboto', 0.0000em),
+  title: mat.define-typography-level(20px, 32px, 500, 'Roboto', 0.0075em),
+  subheading-2: mat.define-typography-level(16px, 28px, 400, 'Roboto', 0.0094em),
+  subheading-1: mat.define-typography-level(15px, 24px, 500, 'Roboto', 0.0067em),
+  body-2: mat.define-typography-level(14px, 24px, 500, 'Roboto', 0.0179em),
+  body-1: mat.define-typography-level(14px, 20px, 400, 'Roboto', 0.0179em),
+  button: mat.define-typography-level(14px, 14px, 500, 'Roboto', 0.0893em),
+  caption: mat.define-typography-level(12px, 20px, 400, 'Roboto', 0.0333em),
+  input: mat.define-typography-level(inherit, 1.125, 400, 'Roboto', 1.5px)
 );
 
 // Foreground Elements
@@ -143,7 +143,7 @@ $mat-dark-theme-background: (
 );
 
 // Compute font config
-@include mat-core($fontConfig);
+@include mat.core($fontConfig);
 
 // Theme Config
 
@@ -167,7 +167,7 @@ $mat-primary: (
     darker: $light-primary-text,
   )
 );
-$theme-primary: mat-palette($mat-primary, main, lighter, darker);
+$theme-primary: mat.define-palette($mat-primary, main, lighter, darker);
 
 body {
   --accent-color: #fac511;
@@ -189,7 +189,7 @@ $mat-accent: (
     darker: $dark-primary-text,
   )
 );
-$theme-accent: mat-palette($mat-accent, main, lighter, darker);
+$theme-accent: mat.define-palette($mat-accent, main, lighter, darker);
 
 body {
   --warn-color: #bc0019;
@@ -211,13 +211,27 @@ $mat-warn: (
     darker: $light-primary-text,
   )
 );
-$theme-warn: mat-palette($mat-warn, main, lighter, darker);;
+$theme-warn: mat.define-palette($mat-warn, main, lighter, darker);
 
-$lightTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
-$darkTheme: mat-dark-theme($theme-accent, $theme-primary, $theme-warn);
+$lightTheme: (
+  primary: $theme-primary,
+  accent: $theme-accent,
+  warn: $theme-warn,
+  is-dark: false,
+  foreground: $mat-light-theme-foreground,
+  background: $mat-light-theme-background,
+);
+$darkTheme: (
+  primary: $theme-accent,
+  accent: $theme-primary,
+  warn: $theme-warn,
+  is-dark: true,
+  foreground: $mat-dark-theme-foreground,
+  background: $mat-dark-theme-background,
+);
 
 // Theme Init
-@include angular-material-theme($lightTheme);
+@include mat.all-component-themes($lightTheme);
 
 // Specific component overrides, pieces that are not in line with the general theming
 
@@ -485,7 +499,7 @@ $darkTheme: mat-dark-theme($theme-accent, $theme-primary, $theme-warn);
 }
 
 .dark-theme {
-  @include angular-material-theme($darkTheme);
+  @include mat.all-component-themes($darkTheme);
 
   // Game items
 

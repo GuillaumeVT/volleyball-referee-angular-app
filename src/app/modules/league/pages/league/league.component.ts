@@ -4,6 +4,7 @@ import { PublicService } from 'src/app/shared/services/public.service';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-league',
@@ -15,8 +16,8 @@ export class LeagueComponent implements OnInit {
   leagueId: string;
   league:   League;
 
-  constructor(private titleService: Title, private route: ActivatedRoute, private publicService: PublicService) {
-    this.titleService.setTitle('VBR - View League');
+  constructor(private titleService: Title, private route: ActivatedRoute, private publicService: PublicService, private translate: TranslateService) {
+    this.translate.get('league.page').subscribe(t => this.titleService.setTitle(t));
   }
 
   ngOnInit() {

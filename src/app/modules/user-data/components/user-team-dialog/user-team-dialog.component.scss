@@ -1,16 +1,16 @@
 .mixed-gender {
-	background-color: var(--vbr-mixed-color);
-  color: var(--vbr-inverted-text-color);
+	background-color: var(--vbr-mixed-color) !important;
+  color: var(--vbr-inverted-text-color) !important;
 }
 
 .ladies-gender {
-	background-color: var(--vbr-ladies-color);
-  color: var(--vbr-inverted-text-color);
+	background-color: var(--vbr-ladies-color) !important;
+  color: var(--vbr-inverted-text-color) !important;
 }
 
 .gents-gender {
-	background-color: var(--vbr-gents-color);
-  color: var(--vbr-inverted-text-color);
+	background-color: var(--vbr-gents-color) !important;
+  color: var(--vbr-inverted-text-color) !important;
 }
 
 .player-button {

@@ -19,6 +19,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-games',
@@ -35,9 +36,9 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   constructor(private titleService: Title, private route: ActivatedRoute, private datePipe: DatePipe, private userService: UserService,
     private gameService: GameService, private leagueService: LeagueService, private publicService: PublicService, private dialog: MatDialog,
-    private snackBarService: SnackBarService) {
+    private snackBarService: SnackBarService, private translate: TranslateService) {
     super(50);
-    this.titleService.setTitle('VBR - My Games');
+    this.translate.get('user.game.page').subscribe(t => this.titleService.setTitle(t));
   }
 
   ngOnInit() {
@@ -143,15 +144,21 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   }
 
   deleteGame(game: GameSummary): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: "500px",
-      data: { title: 'Delete game', message: `Do you want to delete the game ${game.homeTeamName} - ${game.guestTeamName}?` }
-    });
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.gameService.deleteGame(game.id).subscribe(_deleted => this.onGameDeleted(), _error => this.onGameDeletionError());
+    this.translate.get(['user.game.delete', 'user.game.messages.delete-question'], {homeTeam: game.homeTeamName, guestTeam: game.guestTeamName}).subscribe(
+      ts => {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          width: "500px",
+          data: { title: ts['user.game.delete'], message: ts['user.game.messages.delete-question'] }
+        });
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if (dialogResult) {
+            this.gameService.deleteGame(game.id).subscribe(_deleted => this.onGameDeleted(), _error => this.onGameDeletionError());
+          }
+        });
       }
-    });
+    );
+
+   
   }
 
   deleteAllGames(): void {
@@ -177,31 +184,27 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   onGameCreated(): void {
     this.refreshGames(false);
-    this.snackBarService.showInfo('Game was successfully created.');
   }
 
   onGameUpdated(): void {
     this.refreshGames(false);
-    this.snackBarService.showInfo('Game was successfully updated.');
   }
 
   onRefereeUpdated(): void {
     this.refreshGames(false);
-    this.snackBarService.showInfo('Referee was successfully updated.');
   }
 
   onGameDeleted(): void {
     this.refreshGames(false);
-    this.snackBarService.showInfo('Game was successfully deleted.');
   }
 
   onAllGamesDeleted(): void {
+
     this.refreshGames(false);
-    this.snackBarService.showInfo('All games were successfully deleted.');
   }
 
   onGameDeletionError(): void {
-    this.snackBarService.showError('Game could not be deleted.');
+    this.translate.get('user.game.messages.deleted-error').subscribe(t => this.snackBarService.showError(t));
   }
 
   getGamePublicUrl(game: GameSummary): string {

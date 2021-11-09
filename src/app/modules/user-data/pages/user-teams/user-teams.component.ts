@@ -12,6 +12,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-teams',
@@ -24,9 +25,10 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
 
   private subscription : Subscription = new Subscription();
 
-  constructor(private titleService: Title, private userService: UserService, private teamService: TeamService, private dialog: MatDialog, private snackBarService: SnackBarService) {
+  constructor(private titleService: Title, private userService: UserService, private teamService: TeamService, private dialog: MatDialog,
+    private snackBarService: SnackBarService, private translate: TranslateService) {
     super(50);
-    this.titleService.setTitle('VBR - My Teams');
+    this.translate.get('user.team.page').subscribe(t => this.titleService.setTitle(t));
   }
 
   ngOnInit() {
@@ -123,22 +125,18 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
 
   onTeamCreated(): void {
     this.refreshTeams(false);
-    this.snackBarService.showInfo('Team was successfully created.');
   }
 
   onTeamUpdated(): void {
     this.refreshTeams(false);
-    this.snackBarService.showInfo('Team was successfully updated.');
   }
 
   onTeamDeleted(): void {
     this.refreshTeams(false);
-    this.snackBarService.showInfo('Team was successfully deleted.');
   }
 
   onAllTeamsDeleted(): void {
     this.refreshTeams(false);
-    this.snackBarService.showInfo('All teams were successfully deleted.');
   }
 
   onTeamDeletionError(): void {

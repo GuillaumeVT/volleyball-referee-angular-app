@@ -73,7 +73,7 @@ export class AdminUsersComponent implements OnInit {
             this.snackBarService.showInfo("Successfully updated subscription.");
             this.refreshUsers();
           },
-          _error => this.snackBarService.showInfo("Failed to updated subscription.")
+          _error => this.snackBarService.showError("Failed to updated subscription.")
         );
       }
     });
@@ -85,7 +85,7 @@ export class AdminUsersComponent implements OnInit {
         this.snackBarService.showInfo("Successfully refreshed subscription.");
         this.refreshUsers();
       },
-      _error => this.snackBarService.showInfo("Failed to refresh subscription.")
+      _error => this.snackBarService.showError("Failed to refresh subscription.")
     );
   }
 }

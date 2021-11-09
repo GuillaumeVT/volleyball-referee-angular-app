@@ -31,7 +31,7 @@
     "privacy-policy": "Privacy policy"
   },
   "search": {
-    "title": "VBR - Search Games",
+    "page": "VBR - Search Games",
     "start": "Search",
     "filter": "Filter",
     "option": {
@@ -50,6 +50,7 @@
     }
   },
   "game": {
+    "page": "VBR - View Match",
     "set": "Set",
     "title": {
       "current-line-up": "Current Line-up",
@@ -65,6 +66,7 @@
     }
   },
   "league": {
+    "page": "VBR - View League",
     "title": {
       "dashboard": "Dashboard",
       "rankings": "Rankings",
@@ -115,6 +117,7 @@
       }
     },
     "team": {
+      "page": "VBR - My Teams",
       "mixed-pipe": "(Mixed)",
       "ladies-pipe": "(Ladies)",
       "gents-pipe": "(Gents)",
@@ -124,10 +127,14 @@
       "load": "Load more teams"
     },
     "game": {
+      "page": "VBR - My Games",
       "load": "Load more games",
       "create": "Create game",
       "update": "Update game",
       "view": "View game",
+      "delete": "Delete game",
+      "delete-all": "Delete ALL games",
+      "delete-all-in": "Delete ALL games in {{league}}",
       "scheduled": "Scheduled at",
       "public": "Game is public",
       "private": "Game is private",
@@ -139,12 +146,16 @@
       "referee-2": "Referee 2 name",
       "scorer": "Scorer name",
       "of-league": "Games of {{league}}",
-      "page": "Game page »",
+      "public-page": "Public page »",
+      "public-page-description": "Navigate to the public page for this game. Share this URL with everyone.",
       "sheet": "Sheet",
-      "page-description": "Navigate to the public page for this game. Share this URL with everyone.",
       "messages": {
         "game-creation-error": "The game could not be created.",
         "game-update-error": "The game could not be updated. Is it live or completed?",
+        "delete-question": "Do you want to delete the game {{homeTeam}} - {{guestTeam}}?",
+        "delete-all-question": "Do you want to delete ALL the games?",
+        "delete-all-in-question": "Do you want to delete ALL the games in {{league}}?",
+        "deleted-error": "Game could not be deleted.",
         "schedule-required-error": "Schedule date is required",
         "schedule-past-error": "Game must have a future schedule date",
         "indexed-tooltip": "Public games will show for everyone during queries. Private games will not.",
@@ -159,6 +170,25 @@
         "rules-unknown-error": "Rules do not exist"
       }
     },
+    "rules": {
+      "page": "VBR - My Rules"
+    },
+    "league": {
+      "page": "VBR - My Leagues",
+      "name": "League name",
+      "create": "Create league",
+      "delete": "Delete league",
+      "delete-all": "Delete ALL leagues",
+      "public-page": "Public page »",
+      "public-page-description": "Navigate to the public section of the tournament. Share this URL with everyone.",
+      "messages": {
+        "delete-question": "Do you want to delete the league named {{name}}?",
+        "delete-all-question": "Do you want to delete ALL the leagues?",
+        "created-error": "The league {{name}} could not be created. Is the name already taken?",
+        "deleted-error": "League could not be deleted.",
+        "name-required-error": "League name is required"
+      }
+    },
     "referee": {
       "referee": "Referee",
       "me": "Me",
@@ -170,6 +200,7 @@
       }
     },
     "colleague": {
+      "page": "VBR - My Colleagues",
       "add": "Connect with a referee",
       "remove": "Delete relationship with referee",
       "pseudo": "Pseudo",
@@ -215,9 +246,13 @@
     "points": "Points",
     "teams": "Teams",
     "rules": "Rules",
-    "last-updated": "Last updated on"
+    "last-updated": "Last updated on",
+    "created-at": "Created at",
+    "excel": "Excel"
   },
   "statistics": {
+    "user-games": "My games",
+    "user-teams": "My teams",
     "total-games": "Total games",
     "total-teams": "Total teams"
   }

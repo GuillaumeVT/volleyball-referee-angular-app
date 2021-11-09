@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Statistics } from 'src/app/shared/models/statistics.model';
+import { StatisticsGroup } from 'src/app/shared/models/statistics.model';
 import { environment } from 'src/environments/environment';
 
 import { HttpClient } from '@angular/common/http';
@@ -14,8 +14,8 @@ export class StatisticsService {
 
   constructor(private http: HttpClient) { }
 
-  getStatistics(): Observable<Statistics> {
-    return this.http.get<Statistics>(this.statisticsUrl);
+  getStatistics(): Observable<StatisticsGroup> {
+    return this.http.get<StatisticsGroup>(this.statisticsUrl);
   }
 
 }
