@@ -1,10 +1,14 @@
 import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { UserTeamDialogComponent, UserTeamDialogData } from 'src/app/modules/user-data/components/user-team-dialog/user-team-dialog.component';
+import {
+    UserTeamDialogComponent, UserTeamDialogData
+} from 'src/app/modules/user-data/components/user-team-dialog/user-team-dialog.component';
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { TeamService } from 'src/app/modules/user-data/services/team.service';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import {
+    ConfirmationDialogComponent
+} from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { AbstractTeamFilter } from 'src/app/shared/models/abstract-team-filter.model';
 import { Team, TeamSummary } from 'src/app/shared/models/team.model';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
@@ -67,60 +71,62 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   }
 
   viewTeam(teamSummary: TeamSummary): void {
-    this.teamService.getTeam(teamSummary.id).subscribe(
-      team => {
-        const data: UserTeamDialogData = {
-          crudType: CrudType.View,
-          team: team
-        }
-    
-        const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: "800px", data: data });
-      },
-      _error => this.snackBarService.showError('Team could not be found.')
-    );
+    this.teamService.getTeam(teamSummary.id).subscribe(team => {
+      const data: UserTeamDialogData = {
+        crudType: CrudType.View,
+        team: team
+      }
+
+      const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: "800px", data: data });
+    });
   }
 
   updateTeam(teamSummary: TeamSummary): void {
-    this.teamService.getTeam(teamSummary.id).subscribe(
-      team => {
-        const data: UserTeamDialogData = {
-          crudType: CrudType.Update,
-          team: team
+    this.teamService.getTeam(teamSummary.id).subscribe(team => {
+      const data: UserTeamDialogData = {
+        crudType: CrudType.Update,
+        team: team
+      }
+
+      const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: "800px", data: data });
+      dialogRef.afterClosed().subscribe(dialogResult => {
+        if (dialogResult) {
+          this.onTeamUpdated();
         }
-    
-        const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: "800px", data: data });
-        dialogRef.afterClosed().subscribe(dialogResult => {
-          if (dialogResult) {
-            this.onTeamUpdated();
-          }
-        });
-      },
-      _error => this.snackBarService.showError('Team could not be found.')
-    );
+      });
+    });
   }
 
   deleteTeam(teamSummary: TeamSummary): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: "500px",
-      data: { title: 'Delete team', message: `Do you want to delete the team named ${teamSummary.name}?` }
-    });
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.teamService.deleteTeam(teamSummary.id).subscribe(_deleted => this.onTeamDeleted(), _error => this.onTeamDeletionError());
+    this.translate.get(['user.team.delete', 'user.team.messages.delete-question'], { name: teamSummary.name }).subscribe(
+      ts => {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          width: "500px",
+          data: { title: ts['user.team.delete'], message: ts['user.team.messages.delete-question'] }
+        });
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if (dialogResult) {
+            this.teamService.deleteTeam(teamSummary.id).subscribe(_deleted => this.onTeamDeleted(), _error => this.onTeamDeletionError());
+          }
+        });
       }
-    });
+    );
   }
 
   deleteAllTeams(): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: "500px",
-      data: { title: 'Delete ALL teams', message: 'Do you want to delete ALL the teams?' }
-    });
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.teamService.deleteAllTeams().subscribe(_deleted => this.onAllTeamsDeleted());
+    this.translate.get(['user.team.delete', 'user.team.messages.delete-all-question']).subscribe(
+      ts => {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          width: "500px",
+          data: { title: ts['user.team.delete'], message: ts['user.team.messages.delete-all-question'] }
+        });
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if (dialogResult) {
+            this.teamService.deleteAllTeams().subscribe(_deleted => this.onAllTeamsDeleted());
+          }
+        });
       }
-    });
+    );
   }
 
   onTeamCreated(): void {
@@ -140,6 +146,6 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   }
 
   onTeamDeletionError(): void {
-    this.snackBarService.showError('Team could not be deleted. Is it used in a scheduled game?');
+    this.translate.get('user.team.messages.deleted-error').subscribe(t => this.snackBarService.showError(t));
   }
 }

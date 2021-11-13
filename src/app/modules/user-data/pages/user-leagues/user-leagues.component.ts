@@ -99,11 +99,11 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   deleteAllLeagues(): void {
-    this.translate.get(['user.league.delete-all', 'user.league.messages.delete-all-question']).subscribe(
+    this.translate.get(['user.league.delete', 'user.league.messages.delete-all-question']).subscribe(
       ts => {
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
           width: "500px",
-          data: { title: ts['user.league.delete-all'], message: ts['user.league.messages.delete-all-question'] }
+          data: { title: ts['user.league.delete'], message: ts['user.league.messages.delete-all-question'] }
         });
         dialogRef.afterClosed().subscribe(dialogResult => {
           if (dialogResult) {

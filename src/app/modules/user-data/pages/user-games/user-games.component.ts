@@ -156,30 +156,39 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
           }
         });
       }
-    );
-
-   
+    );  
   }
 
   deleteAllGames(): void {
-    let data;
-
     if (this.selectedLeagueId) {
-      data = { title: `Delete ALL games in ${this.selectedLeague.name}`, message: `Do you want to delete ALL the games in ${this.selectedLeague.name}?` };
-    } else {
-      data = { title: 'Delete ALL games', message: 'Do you want to delete ALL the games?' };
-    }
-
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, { width: "500px", data: data });
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        if (this.selectedLeagueId) {
-          this.gameService.deleteAllGamesInLeague(this.selectedLeagueId).subscribe(_deleted => this.onAllGamesDeleted());
-        } else {
-          this.gameService.deleteAllGames().subscribe(_deleted => this.onAllGamesDeleted());
+      this.translate.get(['user.game.delete', 'user.game.messages.delete-all-in-question'], { league: this.selectedLeague.name }).subscribe(
+        ts => {
+          const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            width: "500px",
+            data: { title: ts['user.game.delete'], message: ts['user.game.messages.delete-all-in-question'] }
+          });
+          dialogRef.afterClosed().subscribe(dialogResult => {
+            if (dialogResult) {
+              this.gameService.deleteAllGamesInLeague(this.selectedLeagueId).subscribe(_deleted => this.onAllGamesDeleted());
+            }
+          });
         }
-      }
-    });
+      );
+    } else {
+      this.translate.get(['user.game.delete', 'user.game.messages.delete-all-question']).subscribe(
+        ts => {
+          const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            width: "500px",
+            data: { title: ts['user.game.delete'], message: ts['user.game.messages.delete-all-question'] }
+          });
+          dialogRef.afterClosed().subscribe(dialogResult => {
+            if (dialogResult) {
+              this.gameService.deleteAllGames().subscribe(_deleted => this.onAllGamesDeleted());
+            }
+          });
+        }
+      );
+    }
   }
 
   onGameCreated(): void {
@@ -199,7 +208,6 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   }
 
   onAllGamesDeleted(): void {
-
     this.refreshGames(false);
   }
 

@@ -14,8 +14,9 @@
 }
 
 .player-button {
-  width: 50px;
-  height: 45px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
 
   &:hover {
     filter: var(--vbr-hover-brighter);

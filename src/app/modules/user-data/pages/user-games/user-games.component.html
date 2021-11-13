@@ -1,6 +1,6 @@
 <div class="div-user text-center" *ngIf="user">
 
-  <h2 class="my-3 mat-h2 text-center" *ngIf="selectedLeague">{{ 'user.game.of-league' | translate: {league: selectedLeague.name}  }}</h2>
+  <h2 class="my-3 mat-h2 text-center" *ngIf="selectedLeague">{{ 'user.game.of-league' | translate: {league: selectedLeague.name} }}</h2>
 
   <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="center center" fxLayoutGap="8px">
     <button class="vbr-indoor-button my-1" mat-raised-button (click)="createGame('INDOOR')" *ngIf="!selectedLeague || (selectedLeague.kind === 'INDOOR')">
