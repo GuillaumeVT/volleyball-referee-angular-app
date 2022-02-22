@@ -12,15 +12,14 @@ import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@
 @Component({
   selector: 'app-division-rankings',
   templateUrl: './division-rankings.component.html',
-  styleUrls: ['./division-rankings.component.scss']
+  styleUrls: ['./division-rankings.component.scss'],
 })
 export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
-
   rankings: Ranking[];
 
   selectedDivision: string;
-  subscription:     Subscription;
-  autoRefresh:      boolean;
+  subscription: Subscription;
+  autoRefresh: boolean;
 
   @Input() league: League;
 
@@ -40,7 +39,9 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
       if (this.subscription) {
         this.subscription.unsubscribe();
       }
-      this.subscription = timer(0, 120000).pipe(takeWhile(() => this.autoRefresh)).subscribe(() => this.refreshRankings());
+      this.subscription = timer(0, 120000)
+        .pipe(takeWhile(() => this.autoRefresh))
+        .subscribe(() => this.refreshRankings());
     }
   }
 
@@ -53,7 +54,10 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
 
   refreshRankings(): void {
     if (this.selectedDivision) {
-      this.publicService.listRankingsInDivision(this.league.id, this.selectedDivision).subscribe(ranking => this.rankings = ranking, _error => this.rankings = []);
+      this.publicService.listRankingsInDivision(this.league.id, this.selectedDivision).subscribe(
+        (ranking) => (this.rankings = ranking),
+        (_error) => (this.rankings = []),
+      );
     }
   }
 
@@ -66,11 +70,14 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   getLineClass(index: number): string {
-    return (index % 2) === 0 ? 'league-ranking-even': 'league-ranking-odd';
+    return index % 2 === 0 ? 'league-ranking-even' : 'league-ranking-odd';
   }
 
   downloadDivisionExcel(): void {
-    this.publicService.listGamesInDivisionExcel(this.league.id, this.selectedDivision).subscribe((blob: Blob) => this.onDivisionExcelReceived(blob), _error => this.onDivisionExcelReceived(null));
+    this.publicService.listGamesInDivisionExcel(this.league.id, this.selectedDivision).subscribe(
+      (blob: Blob) => this.onDivisionExcelReceived(blob),
+      (_error) => this.onDivisionExcelReceived(null),
+    );
   }
 
   onDivisionExcelReceived(blob: Blob): void {
@@ -78,5 +85,4 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
     const filename = this.league.name + '_' + this.selectedDivision + '_' + dateStr + '.xlsx';
     saveAs(blob, filename);
   }
-
 }

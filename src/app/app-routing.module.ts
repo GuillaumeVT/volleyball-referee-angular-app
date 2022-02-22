@@ -24,26 +24,26 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
-  { path: 'sign-in', component: SignInComponent, canActivate: [ PublicGuard ] },
-  { path: 'password-lost', component: PasswordLostComponent, canActivate: [ PublicGuard ] },
-  { path: 'password-reset', component: PasswordResetComponent, canActivate: [ PublicGuard ] },
-  { path: 'home', component: HomeComponent, canActivate: [ LoginGuard ] },
-  { path: 'account', component: AccountComponent, canActivate: [ LoginGuard ] },
+  { path: 'sign-in', component: SignInComponent, canActivate: [PublicGuard] },
+  { path: 'password-lost', component: PasswordLostComponent, canActivate: [PublicGuard] },
+  { path: 'password-reset', component: PasswordResetComponent, canActivate: [PublicGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [LoginGuard] },
+  { path: 'account', component: AccountComponent, canActivate: [LoginGuard] },
   { path: 'search', component: SearchComponent },
   { path: 'view/game/:gameId', component: GameComponent },
   { path: 'view/league/:leagueId', component: LeagueComponent },
-  { path: 'colleagues', component: UserColleaguesComponent, canActivate: [ LoginGuard ] },
-  { path: 'leagues', component: UserLeaguesComponent, canActivate: [ LoginGuard ] },
-  { path: 'rules', component: UserRulesComponent, canActivate: [ LoginGuard ] },
-  { path: 'teams', component: UserTeamsComponent, canActivate: [ LoginGuard ] },
-  { path: 'games', component: UserGamesComponent, canActivate: [ LoginGuard ] },
-  { path: 'games/league/:leagueId', component: UserGamesComponent, canActivate: [ LoginGuard ] },
-  { path: 'admin/users', component: AdminUsersComponent, canActivate: [ AdminnGuard ] },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'colleagues', component: UserColleaguesComponent, canActivate: [LoginGuard] },
+  { path: 'leagues', component: UserLeaguesComponent, canActivate: [LoginGuard] },
+  { path: 'rules', component: UserRulesComponent, canActivate: [LoginGuard] },
+  { path: 'teams', component: UserTeamsComponent, canActivate: [LoginGuard] },
+  { path: 'games', component: UserGamesComponent, canActivate: [LoginGuard] },
+  { path: 'games/league/:leagueId', component: UserGamesComponent, canActivate: [LoginGuard] },
+  { path: 'admin/users', component: AdminUsersComponent, canActivate: [AdminnGuard] },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

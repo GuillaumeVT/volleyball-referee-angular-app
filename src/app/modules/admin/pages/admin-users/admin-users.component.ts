@@ -11,13 +11,12 @@ import { PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
-  styleUrls: ['./admin-users.component.scss']
+  styleUrls: ['./admin-users.component.scss'],
 })
 export class AdminUsersComponent implements OnInit {
-
-  page:   number;
-  size:   number;
-  total:  number;
+  page: number;
+  size: number;
+  total: number;
   filter: string;
 
   users: User[];
@@ -38,15 +37,16 @@ export class AdminUsersComponent implements OnInit {
 
   refreshUsers(): void {
     this.adminService.listUsers(this.filter, this.page, this.size).subscribe(
-      page => {
+      (page) => {
         this.total = page.totalElements;
         this.users = page.content;
       },
-      _error => {
+      (_error) => {
         this.page = 0;
         this.total = 0;
         this.users = [];
-      });
+      },
+    );
   }
 
   filterUsers(textFilter: HTMLInputElement): void {
@@ -61,19 +61,23 @@ export class AdminUsersComponent implements OnInit {
   }
 
   viewSubscription(user: User): void {
-    this.adminService.getUserSubscription(user.id).subscribe(subscriptionPurchase => this.dialog.open(UserSubscriptionDialogComponent, { width: "800px", data: subscriptionPurchase }));
+    this.adminService
+      .getUserSubscription(user.id)
+      .subscribe((subscriptionPurchase) =>
+        this.dialog.open(UserSubscriptionDialogComponent, { width: '800px', data: subscriptionPurchase }),
+      );
   }
 
   updateUserSubscription(user: User): void {
-    const dialogRef = this.dialog.open(UserSubscriptionTokenDialogComponent, { width: "500px", data: user.purchaseToken });
-    dialogRef.afterClosed().subscribe(purchaseToken => {
+    const dialogRef = this.dialog.open(UserSubscriptionTokenDialogComponent, { width: '500px', data: user.purchaseToken });
+    dialogRef.afterClosed().subscribe((purchaseToken) => {
       if (purchaseToken) {
         this.adminService.updateUserSubscription(user.id, purchaseToken).subscribe(
-          _success => {
-            this.snackBarService.showInfo("Successfully updated subscription.");
+          (_success) => {
+            this.snackBarService.showInfo('Successfully updated subscription.');
             this.refreshUsers();
           },
-          _error => this.snackBarService.showError("Failed to updated subscription.")
+          (_error) => this.snackBarService.showError('Failed to updated subscription.'),
         );
       }
     });
@@ -81,11 +85,11 @@ export class AdminUsersComponent implements OnInit {
 
   refreshUserSubscription(user: User): void {
     this.adminService.refreshUserSubscription(user.id).subscribe(
-      _success => {
-        this.snackBarService.showInfo("Successfully refreshed subscription.");
+      (_success) => {
+        this.snackBarService.showInfo('Successfully refreshed subscription.');
         this.refreshUsers();
       },
-      _error => this.snackBarService.showError("Failed to refresh subscription.")
+      (_error) => this.snackBarService.showError('Failed to refresh subscription.'),
     );
   }
 }

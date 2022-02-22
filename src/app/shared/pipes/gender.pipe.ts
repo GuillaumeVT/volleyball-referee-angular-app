@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'gender'
+  name: 'gender',
 })
 export class GenderPipe implements PipeTransform {
-
   transform(gender: string): string {
     if (gender === 'MIXED') {
       return 'user.team.mixed-pipe';
@@ -14,5 +13,4 @@ export class GenderPipe implements PipeTransform {
       return 'user.team.gents-pipe';
     }
   }
-
 }

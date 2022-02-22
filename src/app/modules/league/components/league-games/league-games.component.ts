@@ -10,18 +10,17 @@ import { idAll } from 'src/app/shared/models/variable.model';
 @Component({
   selector: 'app-league-games',
   templateUrl: './league-games.component.html',
-  styleUrls: ['./league-games.component.scss']
+  styleUrls: ['./league-games.component.scss'],
 })
 export class LeagueGamesComponent implements OnDestroy, OnChanges {
-
   selectedDivision: string;
-  allDivisions:     string;
-  selectedTeam:     TeamSummary;
-  allTeams:         TeamSummary;
-  teams:            TeamSummary[];
+  allDivisions: string;
+  selectedTeam: TeamSummary;
+  allTeams: TeamSummary;
+  teams: TeamSummary[];
 
-  subscription:     Subscription;
-  autoRefresh:      boolean;
+  subscription: Subscription;
+  autoRefresh: boolean;
 
   @Input() league: League;
 
@@ -41,7 +40,9 @@ export class LeagueGamesComponent implements OnDestroy, OnChanges {
       if (this.subscription) {
         this.subscription.unsubscribe();
       }
-      this.subscription = timer(0, 120000).pipe(takeWhile(() => this.autoRefresh)).subscribe(() => this.refreshTeams());
+      this.subscription = timer(0, 120000)
+        .pipe(takeWhile(() => this.autoRefresh))
+        .subscribe(() => this.refreshTeams());
     }
   }
 
@@ -54,14 +55,19 @@ export class LeagueGamesComponent implements OnDestroy, OnChanges {
 
   refreshTeams(): void {
     if (this.selectedDivision === this.allDivisions) {
-      this.publicService.listTeamsOfLeague(this.league.id).subscribe(teams => this.teams = teams, _error => this.teams = []);
+      this.publicService.listTeamsOfLeague(this.league.id).subscribe(
+        (teams) => (this.teams = teams),
+        (_error) => (this.teams = []),
+      );
     } else {
-      this.publicService.listTeamsOfDivision(this.league.id, this.selectedDivision).subscribe(teams => this.teams = teams, _error => this.teams = []);
+      this.publicService.listTeamsOfDivision(this.league.id, this.selectedDivision).subscribe(
+        (teams) => (this.teams = teams),
+        (_error) => (this.teams = []),
+      );
     }
   }
 
   onDivisionSelected(): void {
     this.refreshTeams();
   }
-
 }

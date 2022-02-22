@@ -5,28 +5,27 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PublicGuard implements CanActivate {
-
   isSignedIn: boolean;
 
   constructor(private userService: UserService, private router: Router) {
     this.isSignedIn = false;
-    this.userService.authState.subscribe(auth => {
-      this.isSignedIn = (auth != null);
+    this.userService.authState.subscribe((auth) => {
+      this.isSignedIn = auth != null;
     });
   }
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.isSignedIn) {
-        this.router.navigateByUrl('/home');
-        return false;
-      } else {
-        return true;
-      }
+    state: RouterStateSnapshot,
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (this.isSignedIn) {
+      this.router.navigateByUrl('/home');
+      return false;
+    } else {
+      return true;
+    }
   }
-
 }

@@ -9,15 +9,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
   private usersUrl = environment.api + '/users';
   private publicUsersUrl = environment.api + '/public/users';
 
   private _authState: BehaviorSubject<UserToken>;
-  private userToken:  UserToken;
+  private userToken: UserToken;
   private redirectUrlAfterLogin: string;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -25,7 +24,7 @@ export class UserService {
     if (this.userToken) {
       // Check that the token is not expired
       const now = new Date();
-      const nowMillis = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const nowMillis = now.getTime() + now.getTimezoneOffset() * 60000;
       if (nowMillis > this.userToken.tokenExpiry) {
         localStorage.removeItem('vbrUserToken');
         this.userToken = null;
@@ -55,7 +54,7 @@ export class UserService {
 
   signIn(emailCredentials: EmailCredentials): Observable<UserToken> {
     const url = `${this.publicUsersUrl}/token`;
-    return this.http.post<UserToken>(url, emailCredentials).pipe(map(userToken => this.interceptUserToken(userToken)));
+    return this.http.post<UserToken>(url, emailCredentials).pipe(map((userToken) => this.interceptUserToken(userToken)));
   }
 
   signOut() {
@@ -72,12 +71,12 @@ export class UserService {
 
   resetPassword(passwordResetId: string, userPassword: string): Observable<UserToken> {
     const url = `${this.publicUsersUrl}/password/reset/${passwordResetId}`;
-    return this.http.post<UserToken>(url, { userPassword: userPassword }).pipe(map(userToken => this.interceptUserToken(userToken)));
+    return this.http.post<UserToken>(url, { userPassword: userPassword }).pipe(map((userToken) => this.interceptUserToken(userToken)));
   }
 
   updateUserPassword(userPasswordUpdate: UserPasswordUpdate): Observable<UserToken> {
     const url = `${this.usersUrl}/password`;
-    return this.http.patch<UserToken>(url, userPasswordUpdate).pipe(map(userToken => this.interceptUserToken(userToken)));
+    return this.http.patch<UserToken>(url, userPasswordUpdate).pipe(map((userToken) => this.interceptUserToken(userToken)));
   }
 
   listFriendRequestsSentBy(): Observable<FriendRequest[]> {
@@ -123,5 +122,4 @@ export class UserService {
   setRedirectUrlAfterLogin(url: string): void {
     this.redirectUrlAfterLogin = url;
   }
-
 }

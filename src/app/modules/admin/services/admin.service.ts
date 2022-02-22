@@ -7,18 +7,18 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminService {
   private adminUrl = environment.api + '/admin';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   listUsers(filter: string, page: number, size: number): Observable<Page<User>> {
     const url = `${this.adminUrl}/users`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     if (filter && filter.length > 0) {
-      params = params.append("filter", filter);
+      params = params.append('filter', filter);
     }
     return this.http.get<Page<User>>(url, { params: params });
   }

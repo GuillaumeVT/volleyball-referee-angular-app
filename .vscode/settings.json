@@ -1,6 +1,25 @@
 {
   "editor.tabSize": 2,
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "maxLineLength",
-  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 1000
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "eslint.validate": ["javascript", "typescript", "html"],
+  "eslint.options": {
+    "extensions": [".js", ".ts", ".html"]
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll": true,
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "html.format.wrapAttributes": "force-expand-multiline",
+  "html.format.indentHandlebars": true,
+  "eslint.format.enable": true,
+  "editor.formatOnType": true
 }

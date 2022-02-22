@@ -1,13 +1,11 @@
 <h2 mat-dialog-title>{{ 'user.team.names' | translate }}</h2>
 <mat-dialog-content>
-
   <div fxLayout="column" fxFill>
     <mat-form-field *ngFor="let player of data.players" class="m-1" appearance="outline">
-      <mat-label>{{ 'user.team.player-number' | translate: {num: player.num} }}</mat-label>
-      <input matInput type="text" [(ngModel)]="player.name">
+      <mat-label>{{ 'user.team.player-number' | translate: { num: player.num } }}</mat-label>
+      <input matInput type="text" [(ngModel)]="player.name" />
     </mat-form-field>
   </div>
-  
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button type="submit" color="primary" (click)="close()">{{ 'common.update' | translate }}</button>

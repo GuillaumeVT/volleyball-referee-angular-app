@@ -1,9 +1,9 @@
 .btn-android {
-	color: var(--vbr-inverted-text-color);
-	background-color: var(--android-color);
-	border-color: var(--android-color);
+  color: var(--vbr-inverted-text-color);
+  background-color: var(--android-color);
+  border-color: var(--android-color);
 
-	&:hover {
-		filter: var(--vbr-hover-darker);
-	}
+  &:hover {
+    filter: var(--vbr-hover-darker);
+  }
 }

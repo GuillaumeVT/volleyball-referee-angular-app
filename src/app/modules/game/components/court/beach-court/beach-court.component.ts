@@ -1,23 +1,21 @@
+import { Component, Input } from '@angular/core';
 import { Game } from 'src/app/shared/models/game.model';
 import { Court } from 'src/app/shared/models/set.model';
 import { TeamType } from 'src/app/shared/models/team-type.model';
 import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
 
-import { Component, Input } from '@angular/core';
-
 @Component({
   selector: 'app-beach-court',
   templateUrl: './beach-court.component.html',
-  styleUrls: ['./beach-court.component.scss']
+  styleUrls: ['./beach-court.component.scss'],
 })
 export class BeachCourtComponent {
-
-  @Input() game:      Game;
-  @Input() setIndex:  number;
-  @Input() leftTeam:  TeamType;
+  @Input() game: Game;
+  @Input() setIndex: number;
+  @Input() leftTeam: TeamType;
   @Input() rightTeam: TeamType;
 
-  constructor(public playerStyleService: PlayerStyleService) { }
+  constructor(public playerStyleService: PlayerStyleService) {}
 
   getServeVisibility(playerNumber: number, teamType: TeamType) {
     const set = this.game.sets[this.setIndex];
@@ -39,7 +37,7 @@ export class BeachCourtComponent {
       if (players.p1 === playerNumber) {
         visibility = 'visible';
       } else {
-          visibility = 'hidden';
+        visibility = 'hidden';
       }
     } else {
       visibility = 'hidden';
@@ -47,5 +45,4 @@ export class BeachCourtComponent {
 
     return visibility;
   }
-
 }

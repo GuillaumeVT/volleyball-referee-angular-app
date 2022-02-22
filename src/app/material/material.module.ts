@@ -50,7 +50,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSlideToggleModule,
     MatAutocompleteModule,
     MatRadioModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -77,10 +77,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSlideToggleModule,
     MatAutocompleteModule,
     MatRadioModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
-  providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
-  ]
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
 })
-export class MaterialModule { }
+export class MaterialModule {}

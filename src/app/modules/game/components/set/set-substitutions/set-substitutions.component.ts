@@ -8,16 +8,15 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-set-substitutions',
   templateUrl: './set-substitutions.component.html',
-  styleUrls: ['./set-substitutions.component.scss']
+  styleUrls: ['./set-substitutions.component.scss'],
 })
 export class SetSubstitutionsComponent {
-
-  @Input() game:      Game;
-  @Input() setIndex:  number;
-  @Input() leftTeam:  TeamType;
+  @Input() game: Game;
+  @Input() setIndex: number;
+  @Input() leftTeam: TeamType;
   @Input() rightTeam: TeamType;
 
-  constructor(public playerStyleService: PlayerStyleService) { }
+  constructor(public playerStyleService: PlayerStyleService) {}
 
   getSubstitutions(teamType: TeamType): Substitution[] {
     if (TeamType.Home === teamType) {
@@ -34,5 +33,4 @@ export class SetSubstitutionsComponent {
       return substitution.guestPoints + '-' + substitution.homePoints;
     }
   }
-
 }

@@ -2,23 +2,22 @@ import { GameSummary } from 'src/app/shared/models/game.model';
 import { Page } from 'src/app/shared/models/page.model';
 
 export abstract class AbstractGameFilter {
-
-  textFilter:         string;
-  isLiveChecked:      boolean;
-  isBeachChecked:     boolean;
-  isIndoorChecked:    boolean;
+  textFilter: string;
+  isLiveChecked: boolean;
+  isBeachChecked: boolean;
+  isIndoorChecked: boolean;
   isIndoor4x4Checked: boolean;
-  isSnowChecked:      boolean;
-  isMixedChecked:     boolean;
-  isLadiesChecked:    boolean;
-  isGentsChecked:     boolean;
+  isSnowChecked: boolean;
+  isMixedChecked: boolean;
+  isLadiesChecked: boolean;
+  isGentsChecked: boolean;
 
-  page:  number;
-  size:  number;
+  page: number;
+  size: number;
   total: number;
-  last:  boolean;
+  last: boolean;
 
-  games:         GameSummary[];
+  games: GameSummary[];
   filteredGames: GameSummary[];
 
   constructor(size: number) {
@@ -105,11 +104,13 @@ export abstract class AbstractGameFilter {
       var mustAdd = false;
 
       if (this.textFilter.trim()) {
-        if ((game.guestTeamName.toLowerCase().indexOf(this.textFilter) >= 0)
-          || (game.homeTeamName.toLowerCase().indexOf(this.textFilter) >= 0)
-          || (game.leagueName && game.leagueName.toLowerCase().indexOf(this.textFilter) >= 0)
-          || (game.divisionName && game.divisionName.toLowerCase().indexOf(this.textFilter) >= 0)) {
-            mustAdd = true;
+        if (
+          game.guestTeamName.toLowerCase().indexOf(this.textFilter) >= 0 ||
+          game.homeTeamName.toLowerCase().indexOf(this.textFilter) >= 0 ||
+          (game.leagueName && game.leagueName.toLowerCase().indexOf(this.textFilter) >= 0) ||
+          (game.divisionName && game.divisionName.toLowerCase().indexOf(this.textFilter) >= 0)
+        ) {
+          mustAdd = true;
         }
       } else {
         mustAdd = true;

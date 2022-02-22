@@ -6,19 +6,18 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RulesService {
-
   private rulesUrl = environment.api + '/rules';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   listRules(kinds: string[]): Observable<RulesSummary[]> {
     const url = `${this.rulesUrl}`;
     let params = new HttpParams();
     for (let kind of kinds) {
-      params = params.append("kind", kind);
+      params = params.append('kind', kind);
     }
     return this.http.get<RulesSummary[]>(url, { params: params });
   }

@@ -6,34 +6,53 @@
 
     <div class="div-court">
       <div class="position-1-l">
-        <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)"
-          [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)">1</span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)"
+          [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)"
+          [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+          >1</span
+        >
       </div>
       <div class="position-2-l">
-        <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)"
-          [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)">2</span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)"
+          [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)"
+          [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+          >2</span
+        >
       </div>
       <div class="position-1-r">
-        <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)"
-          [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)">1</span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)"
+          [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)"
+          [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+          >1</span
+        >
       </div>
       <div class="position-2-r">
-        <span class="badge player-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)"
-          [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)">2</span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)"
+          [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)"
+          [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+          >2</span
+        >
       </div>
       <div class="serve-1-l" [style.visibility]="getServeVisibility(1, leftTeam)">
-        <img class="serve" src="assets/ic_volley_ball.png" alt="serve">
+        <img class="serve" src="assets/ic_volley_ball.png" alt="serve" />
       </div>
       <div class="serve-2-l" [style.visibility]="getServeVisibility(2, leftTeam)">
-        <img class="serve" src="assets/ic_volley_ball.png" alt="serve">
+        <img class="serve" src="assets/ic_volley_ball.png" alt="serve" />
       </div>
       <div class="serve-1-r" [style.visibility]="getServeVisibility(1, rightTeam)">
-        <img class="serve" src="assets/ic_volley_ball.png" alt="serve">
+        <img class="serve" src="assets/ic_volley_ball.png" alt="serve" />
       </div>
       <div class="serve-2-r" [style.visibility]="getServeVisibility(2, rightTeam)">
-        <img class="serve" src="assets/ic_volley_ball.png" alt="serve">
+        <img class="serve" src="assets/ic_volley_ball.png" alt="serve" />
       </div>
     </div>
-
   </mat-card-content>
 </mat-card>

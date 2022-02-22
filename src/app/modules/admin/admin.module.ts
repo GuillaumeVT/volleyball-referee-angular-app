@@ -9,10 +9,6 @@ import { CoreModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [AdminUsersComponent, UserSubscriptionDialogComponent, UserSubscriptionTokenDialogComponent],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    CoreModule
-  ]
+  imports: [CommonModule, MaterialModule, CoreModule],
 })
-export class AdminModule { }
+export class AdminModule {}

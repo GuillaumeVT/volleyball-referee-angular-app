@@ -1,17 +1,20 @@
 <div class="div-user text-center" *ngIf="user">
-
   <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="center center" fxLayoutGap="8px">
     <button class="vbr-indoor-button my-1" mat-raised-button (click)="createRules('INDOOR')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.6x6' | translate }}</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span
+      ><span>{{ 'common.6x6' | translate }}</span>
     </button>
     <button class="vbr-beach-button my-1" mat-raised-button (click)="createRules('BEACH')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.beach' | translate }}</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span
+      ><span>{{ 'common.beach' | translate }}</span>
     </button>
     <button class="vbr-indoor-4x4-button my-1" mat-raised-button (click)="createRules('INDOOR_4X4')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.4x4' | translate }}</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span
+      ><span>{{ 'common.4x4' | translate }}</span>
     </button>
     <button class="vbr-snow-button my-1" mat-raised-button (click)="createRules('SNOW')">
-      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span><span>{{ 'common.snow' | translate }}</span>
+      <mat-icon>add</mat-icon><span class="icon-text mx-1">{{ 'common.create' | translate }}</span
+      ><span>{{ 'common.snow' | translate }}</span>
     </button>
     <button class="vbr-cancel-button my-1" mat-button (click)="deleteAllRules()">
       <mat-icon>delete</mat-icon><span class="ml-1">{{ 'common.delete-all' | translate }}</span>
@@ -19,26 +22,32 @@
   </div>
 
   <div class="my-3 mx-1 text-left" *ngIf="rules">
-    
     <mat-form-field class="mb-2">
       <mat-label>{{ 'search.filter' | translate }}</mat-label>
-      <input matInput type="text" #textFilter autocomplete="off" (input)="filterFromText(textFilter)"/>
+      <input matInput type="text" #textFilter autocomplete="off" (input)="filterFromText(textFilter)" />
     </mat-form-field>
-    
+
     <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px">
-      <button class="btn vbr-chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)"><i class="fa fa-sun-o mr-2"></i>{{ 'common.beach' | translate }}</button>
-      <button class="btn vbr-chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">{{ 'common.6x6' | translate }}</button>
-      <button class="btn vbr-chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">{{ 'common.4x4' | translate }}</button>
-      <button class="btn vbr-chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)"><i class="fa fa-snowflake-o mr-2"></i>{{ 'common.snow' | translate }}</button>
+      <button class="btn vbr-chip vbr-beach-chip my-1" #beachButton (click)="toggleBeach(beachButton)">
+        <i class="fa fa-sun-o mr-2"></i>{{ 'common.beach' | translate }}
+      </button>
+      <button class="btn vbr-chip vbr-indoor-chip my-1" #indoorButton (click)="toggleIndoor(indoorButton)">
+        {{ 'common.6x6' | translate }}
+      </button>
+      <button class="btn vbr-chip vbr-indoor-4x4-chip my-1" #indoor4x4Button (click)="toggleIndoor4x4(indoor4x4Button)">
+        {{ 'common.4x4' | translate }}
+      </button>
+      <button class="btn vbr-chip vbr-snow-chip my-1" #snowButton (click)="toggleSnow(snowButton)">
+        <i class="fa fa-snowflake-o mr-2"></i>{{ 'common.snow' | translate }}
+      </button>
     </div>
-  
   </div>
 
   <mat-card *ngFor="let rules of filteredRules" class="my-3">
     <mat-card-content>
       <div class="my-3" fxLayout="row wrap" fxFill fxLayoutAlign="start center" fxLayoutGap="8px grid">
         <div class="text-left" fxFlex="25" fxFlex.xs="65">
-          {{rules.name}}
+          {{ rules.name }}
         </div>
         <div fxFlex="15" fxFlex.xs>
           <span class="vbr-chip vbr-beach-chip" *ngIf="rules.kind === 'BEACH'"><i class="fa fa-sun-o"></i></span>
@@ -47,7 +56,7 @@
           <span class="vbr-chip vbr-snow-chip" *ngIf="rules.kind === 'SNOW'"><i class="fa fa-snowflake-o"></i></span>
         </div>
         <div class="text-left" fxFlex="20" fxFlex.xs="40">
-          <span class="icon-text">{{ 'common.last-updated' | translate }}:&nbsp;</span>{{rules.updatedAt | date : 'dd MMM yyyy, HH:mm:ss'}}
+          <span class="icon-text">{{ 'common.last-updated' | translate }}:&nbsp;</span>{{ rules.updatedAt | date: 'dd MMM yyyy, HH:mm:ss' }}
         </div>
         <div class="text-right" fxFlex fxFlex.xs>
           <button mat-button color="primary" type="button" (click)="viewRules(rules)">
@@ -63,5 +72,4 @@
       </div>
     </mat-card-content>
   </mat-card>
-
 </div>

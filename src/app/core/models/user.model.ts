@@ -1,23 +1,23 @@
 export class User {
-  id:                   string;
-  pseudo:               string;
-  email:                string;
-  admin:                boolean;
-  purchaseToken:        string;
-  subscription:         boolean;
+  id: string;
+  pseudo: string;
+  email: string;
+  admin: boolean;
+  purchaseToken: string;
+  subscription: boolean;
   subscriptionExpiryAt: number;
-  friends:              Friend[];
-  createdAt:            number;
-  lastLoginAt:          number;
-  enabled:              boolean;
+  friends: Friend[];
+  createdAt: number;
+  lastLoginAt: number;
+  enabled: boolean;
   failedAuthentication: FailedAuthentication;
 }
 
 export class UserSummary {
-  id:     string;
+  id: string;
   pseudo: string;
-  email:  string;
-  admin:  boolean;
+  email: string;
+  admin: boolean;
 }
 
 export class Friend {
@@ -31,22 +31,21 @@ export class Friend {
 }
 
 export class FriendRequest {
-  id:             string;
-  senderId:       string;
-  receiverId:     string;
-  senderPseudo:   string;
+  id: string;
+  senderId: string;
+  receiverId: string;
+  senderPseudo: string;
   receiverPseudo: string;
 }
 
 export class FriendsAndRequests {
-  friends:                Friend[];
+  friends: Friend[];
   receivedFriendRequests: FriendRequest[];
-  sentFriendRequests:     FriendRequest[];
+  sentFriendRequests: FriendRequest[];
 }
 
-
 export class EmailCredentials {
-  userEmail:    string;
+  userEmail: string;
   userPassword: string;
 
   constructor(userEmail: string, userPassword: string) {
@@ -56,14 +55,14 @@ export class EmailCredentials {
 }
 
 export class UserToken {
-  user:        UserSummary;
-  token:       string;
+  user: UserSummary;
+  token: string;
   tokenExpiry: number;
 }
 
 export class UserPasswordUpdate {
   currentPassword: string;
-  newPassword:     string;
+  newPassword: string;
 
   constructor(currentPassword: string, newPassword: string) {
     this.currentPassword = currentPassword;

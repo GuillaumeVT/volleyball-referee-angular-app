@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-indoor-set-lineups',
   templateUrl: './indoor-set-lineups.component.html',
-  styleUrls: ['./indoor-set-lineups.component.scss']
+  styleUrls: ['./indoor-set-lineups.component.scss'],
 })
-export class IndoorSetLineupsComponent extends AbstractSetLineupsComponent { }
+export class IndoorSetLineupsComponent extends AbstractSetLineupsComponent {}

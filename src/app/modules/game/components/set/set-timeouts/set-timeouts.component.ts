@@ -8,16 +8,15 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-set-timeouts',
   templateUrl: './set-timeouts.component.html',
-  styleUrls: ['./set-timeouts.component.scss']
+  styleUrls: ['./set-timeouts.component.scss'],
 })
 export class SetTimeoutsComponent {
-
-  @Input() game:      Game;
-  @Input() setIndex:  number;
-  @Input() leftTeam:  TeamType;
+  @Input() game: Game;
+  @Input() setIndex: number;
+  @Input() leftTeam: TeamType;
   @Input() rightTeam: TeamType;
 
-  constructor(public playerStyleService: PlayerStyleService) { }
+  constructor(public playerStyleService: PlayerStyleService) {}
 
   getTimeouts(teamType: TeamType): Timeout[] {
     if (TeamType.Home === teamType) {

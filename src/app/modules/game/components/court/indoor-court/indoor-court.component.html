@@ -1,4 +1,4 @@
-<mat-card *ngIf="game && (game.usage === 'NORMAL')">
+<mat-card *ngIf="game && game.usage === 'NORMAL'">
   <mat-card-content>
     <div>
       <h3 fxFlex class="mat-h3">{{ 'game.title.current-line-up' | translate }}</h3>
@@ -6,48 +6,119 @@
 
     <div class="div-court">
       <div class="position-1-l">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(1, leftTeam)" [style.color]="getPlayerForegroundColor(1, leftTeam)" [style.border-color]="getPlayerBorderColor(1, leftTeam)" [innerHTML]="getPlayerText(1, leftTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(1, leftTeam)"
+          [style.color]="getPlayerForegroundColor(1, leftTeam)"
+          [style.border-color]="getPlayerBorderColor(1, leftTeam)"
+          [innerHTML]="getPlayerText(1, leftTeam)"
+        ></span>
       </div>
       <div class="position-2-l">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(2, leftTeam)" [style.color]="getPlayerForegroundColor(2, leftTeam)" [style.border-color]="getPlayerBorderColor(2, leftTeam)" [innerHTML]="getPlayerText(2, leftTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(2, leftTeam)"
+          [style.color]="getPlayerForegroundColor(2, leftTeam)"
+          [style.border-color]="getPlayerBorderColor(2, leftTeam)"
+          [innerHTML]="getPlayerText(2, leftTeam)"
+        ></span>
       </div>
       <div class="position-3-l">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(3, leftTeam)" [style.color]="getPlayerForegroundColor(3, leftTeam)" [style.border-color]="getPlayerBorderColor(3, leftTeam)" [innerHTML]="getPlayerText(3, leftTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(3, leftTeam)"
+          [style.color]="getPlayerForegroundColor(3, leftTeam)"
+          [style.border-color]="getPlayerBorderColor(3, leftTeam)"
+          [innerHTML]="getPlayerText(3, leftTeam)"
+        ></span>
       </div>
       <div class="position-4-l">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(4, leftTeam)" [style.color]="getPlayerForegroundColor(4, leftTeam)" [style.border-color]="getPlayerBorderColor(4, leftTeam)" [innerHTML]="getPlayerText(4, leftTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(4, leftTeam)"
+          [style.color]="getPlayerForegroundColor(4, leftTeam)"
+          [style.border-color]="getPlayerBorderColor(4, leftTeam)"
+          [innerHTML]="getPlayerText(4, leftTeam)"
+        ></span>
       </div>
       <div class="position-5-l">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(5, leftTeam)" [style.color]="getPlayerForegroundColor(5, leftTeam)" [style.border-color]="getPlayerBorderColor(5, leftTeam)" [innerHTML]="getPlayerText(5, leftTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(5, leftTeam)"
+          [style.color]="getPlayerForegroundColor(5, leftTeam)"
+          [style.border-color]="getPlayerBorderColor(5, leftTeam)"
+          [innerHTML]="getPlayerText(5, leftTeam)"
+        ></span>
       </div>
       <div class="position-6-l">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(6, leftTeam)" [style.color]="getPlayerForegroundColor(6, leftTeam)" [style.border-color]="getPlayerBorderColor(6, leftTeam)" [innerHTML]="getPlayerText(6, leftTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(6, leftTeam)"
+          [style.color]="getPlayerForegroundColor(6, leftTeam)"
+          [style.border-color]="getPlayerBorderColor(6, leftTeam)"
+          [innerHTML]="getPlayerText(6, leftTeam)"
+        ></span>
       </div>
       <div class="position-1-r">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(1, rightTeam)" [style.color]="getPlayerForegroundColor(1, rightTeam)" [style.border-color]="getPlayerBorderColor(1, rightTeam)" [innerHTML]="getPlayerText(1, rightTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(1, rightTeam)"
+          [style.color]="getPlayerForegroundColor(1, rightTeam)"
+          [style.border-color]="getPlayerBorderColor(1, rightTeam)"
+          [innerHTML]="getPlayerText(1, rightTeam)"
+        ></span>
       </div>
       <div class="position-2-r">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(2, rightTeam)" [style.color]="getPlayerForegroundColor(2, rightTeam)" [style.border-color]="getPlayerBorderColor(2, rightTeam)" [innerHTML]="getPlayerText(2, rightTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(2, rightTeam)"
+          [style.color]="getPlayerForegroundColor(2, rightTeam)"
+          [style.border-color]="getPlayerBorderColor(2, rightTeam)"
+          [innerHTML]="getPlayerText(2, rightTeam)"
+        ></span>
       </div>
       <div class="position-3-r">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(3, rightTeam)" [style.color]="getPlayerForegroundColor(3, rightTeam)" [style.border-color]="getPlayerBorderColor(3, rightTeam)" [innerHTML]="getPlayerText(3, rightTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(3, rightTeam)"
+          [style.color]="getPlayerForegroundColor(3, rightTeam)"
+          [style.border-color]="getPlayerBorderColor(3, rightTeam)"
+          [innerHTML]="getPlayerText(3, rightTeam)"
+        ></span>
       </div>
       <div class="position-4-r">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(4, rightTeam)" [style.color]="getPlayerForegroundColor(4, rightTeam)" [style.border-color]="getPlayerBorderColor(4, rightTeam)" [innerHTML]="getPlayerText(4, rightTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(4, rightTeam)"
+          [style.color]="getPlayerForegroundColor(4, rightTeam)"
+          [style.border-color]="getPlayerBorderColor(4, rightTeam)"
+          [innerHTML]="getPlayerText(4, rightTeam)"
+        ></span>
       </div>
       <div class="position-5-r">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(5, rightTeam)" [style.color]="getPlayerForegroundColor(5, rightTeam)" [style.border-color]="getPlayerBorderColor(5, rightTeam)" [innerHTML]="getPlayerText(5, rightTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(5, rightTeam)"
+          [style.color]="getPlayerForegroundColor(5, rightTeam)"
+          [style.border-color]="getPlayerBorderColor(5, rightTeam)"
+          [innerHTML]="getPlayerText(5, rightTeam)"
+        ></span>
       </div>
       <div class="position-6-r">
-        <span class="badge player-badge" [style.background-color]="getPlayerBackgroundColor(6, rightTeam)" [style.color]="getPlayerForegroundColor(6, rightTeam)" [style.border-color]="getPlayerBorderColor(6, rightTeam)" [innerHTML]="getPlayerText(6, rightTeam)"></span>
+        <span
+          class="badge player-badge"
+          [style.background-color]="getPlayerBackgroundColor(6, rightTeam)"
+          [style.color]="getPlayerForegroundColor(6, rightTeam)"
+          [style.border-color]="getPlayerBorderColor(6, rightTeam)"
+          [innerHTML]="getPlayerText(6, rightTeam)"
+        ></span>
       </div>
       <div class="serve-1-l" [style.visibility]="getServeVisibility(leftTeam)">
-        <img class="serve" src="assets/ic_volley_ball.png" alt="serve">
+        <img class="serve" src="assets/ic_volley_ball.png" alt="serve" />
       </div>
       <div class="serve-1-r" [style.visibility]="getServeVisibility(rightTeam)">
-        <img class="serve" src="assets/ic_volley_ball.png" alt="serve">
+        <img class="serve" src="assets/ic_volley_ball.png" alt="serve" />
       </div>
     </div>
-
   </mat-card-content>
 </mat-card>

@@ -1,14 +1,13 @@
 import { RulesSummary } from 'src/app/shared/models/rules.model';
 
 export abstract class AbstractRulesFilter {
-
-  textFilter:         string;
-  isBeachChecked:     boolean;
-  isIndoorChecked:    boolean;
+  textFilter: string;
+  isBeachChecked: boolean;
+  isIndoorChecked: boolean;
   isIndoor4x4Checked: boolean;
-  isSnowChecked:      boolean;
+  isSnowChecked: boolean;
 
-  rules:         RulesSummary[];
+  rules: RulesSummary[];
   filteredRules: RulesSummary[];
 
   constructor() {
@@ -51,7 +50,7 @@ export abstract class AbstractRulesFilter {
 
       if (this.textFilter.trim()) {
         if (rules.name.toLowerCase().indexOf(this.textFilter) === -1) {
-            mustAdd = false;
+          mustAdd = false;
         }
       }
 

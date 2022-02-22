@@ -7,33 +7,55 @@
     <div class="h-scroll">
       <table>
         <tbody>
-  
           <tr>
             <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
-              <img class="ladder-icon-item" [src]="getIcon(ladderItem, topTeam)" alt="event" placement="top" (click)="showEvents(ladderItem, topTeam)" *ngIf="ladderItem.hasEvent(topTeam)">
+              <img
+                class="ladder-icon-item"
+                [src]="getIcon(ladderItem, topTeam)"
+                alt="event"
+                placement="top"
+                (click)="showEvents(ladderItem, topTeam)"
+                *ngIf="ladderItem.hasEvent(topTeam)"
+              />
             </td>
           </tr>
-          
+
           <tr>
             <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
-              <span class="ladder-item badge point-badge" [style.background-color]="getTeamBackgroundColor(ladderItem, topTeam)" [style.color]="getTeamTextColor(ladderItem, topTeam)"
-                [style.border-color]="getTeamBorderColor(ladderItem, topTeam)" [innerHTML]="getTeamScore(ladderItem, topTeam)"></span>
+              <span
+                class="ladder-item badge point-badge"
+                [style.background-color]="getTeamBackgroundColor(ladderItem, topTeam)"
+                [style.color]="getTeamTextColor(ladderItem, topTeam)"
+                [style.border-color]="getTeamBorderColor(ladderItem, topTeam)"
+                [innerHTML]="getTeamScore(ladderItem, topTeam)"
+              ></span>
             </td>
           </tr>
-          
+
           <tr>
             <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
-              <span class="ladder-item badge point-badge" [style.background-color]="getTeamBackgroundColor(ladderItem, bottomTeam)" [style.color]="getTeamTextColor(ladderItem, bottomTeam)"
-                [style.border-color]="getTeamBorderColor(ladderItem, bottomTeam)" [innerHTML]="getTeamScore(ladderItem, bottomTeam)"></span>
+              <span
+                class="ladder-item badge point-badge"
+                [style.background-color]="getTeamBackgroundColor(ladderItem, bottomTeam)"
+                [style.color]="getTeamTextColor(ladderItem, bottomTeam)"
+                [style.border-color]="getTeamBorderColor(ladderItem, bottomTeam)"
+                [innerHTML]="getTeamScore(ladderItem, bottomTeam)"
+              ></span>
             </td>
           </tr>
-  
+
           <tr>
             <td class="mx-1 text-center" *ngFor="let ladderItem of ladder">
-              <img class="ladder-icon-item" [src]="getIcon(ladderItem, bottomTeam)" alt="event" placement="bottom" (click)="showEvents(ladderItem, bottomTeam)" *ngIf="ladderItem.hasEvent(bottomTeam)">
+              <img
+                class="ladder-icon-item"
+                [src]="getIcon(ladderItem, bottomTeam)"
+                alt="event"
+                placement="bottom"
+                (click)="showEvents(ladderItem, bottomTeam)"
+                *ngIf="ladderItem.hasEvent(bottomTeam)"
+              />
             </td>
           </tr>
-  
         </tbody>
       </table>
     </div>

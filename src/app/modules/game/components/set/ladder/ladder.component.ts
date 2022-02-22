@@ -1,4 +1,7 @@
-import { LadderEventDialogComponent, LadderEventDialogData } from 'src/app/modules/game/components/set/ladder-event-dialog/ladder-event-dialog.component';
+import {
+  LadderEventDialogComponent,
+  LadderEventDialogData,
+} from 'src/app/modules/game/components/set/ladder-event-dialog/ladder-event-dialog.component';
 import { LadderItem } from 'src/app/modules/game/components/set/ladder/ladder-item.model';
 import { Game, Sanction } from 'src/app/shared/models/game.model';
 import { Substitution, Timeout } from 'src/app/shared/models/set.model';
@@ -11,18 +14,17 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-ladder',
   templateUrl: './ladder.component.html',
-  styleUrls: ['./ladder.component.scss']
+  styleUrls: ['./ladder.component.scss'],
 })
 export class LadderComponent implements OnChanges {
-
-  @Input() game:       Game;
-  @Input() setIndex:   number;
-  @Input() topTeam:    TeamType;
+  @Input() game: Game;
+  @Input() setIndex: number;
+  @Input() topTeam: TeamType;
   @Input() bottomTeam: TeamType;
 
   ladder: LadderItem[];
 
-  constructor(public playerStyleService: PlayerStyleService, private dialog: MatDialog) { }
+  constructor(public playerStyleService: PlayerStyleService, private dialog: MatDialog) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.game && this.game.sets) {
@@ -61,7 +63,7 @@ export class LadderComponent implements OnChanges {
       var guestPoints = substitution.guestPoints;
 
       for (let item of this.ladder) {
-        if  (item.teamType === TeamType.Home) {
+        if (item.teamType === TeamType.Home) {
           if (homePoints === item.score && guestPoints === item.oScore) {
             item.addSubstitution(teamType, substitution);
           }
@@ -80,7 +82,7 @@ export class LadderComponent implements OnChanges {
       var guestPoints = timeout.guestPoints;
 
       for (let item of this.ladder) {
-        if  (item.teamType === TeamType.Home) {
+        if (item.teamType === TeamType.Home) {
           if (homePoints === item.score && guestPoints === item.oScore) {
             item.addTimeout(teamType, timeout);
           }
@@ -100,7 +102,7 @@ export class LadderComponent implements OnChanges {
         var guestPoints = sanction.guestPoints;
 
         for (let item of this.ladder) {
-          if  (item.teamType === TeamType.Home) {
+          if (item.teamType === TeamType.Home) {
             if (homePoints === item.score && guestPoints === item.oScore) {
               item.addSanction(teamType, sanction);
             }
@@ -152,7 +154,7 @@ export class LadderComponent implements OnChanges {
     if (ladderItem.hasSeveralEvents(teamType)) {
       icon = 'assets/ic_list.png';
     } else if (ladderItem.hasSubstitutionEvents(teamType)) {
-      icon = 'assets/ic_sub.png'
+      icon = 'assets/ic_sub.png';
     } else if (ladderItem.hasTimeoutEvents(teamType)) {
       icon = 'assets/ic_timer.png';
     } else if (ladderItem.hasSanctionEvents(teamType)) {
@@ -161,13 +163,13 @@ export class LadderComponent implements OnChanges {
 
     return icon;
   }
-  
+
   showEvents(ladderItem: LadderItem, teamType: TeamType): void {
     const data: LadderEventDialogData = {
       game: this.game,
       ladderItem: ladderItem,
-      teamType: teamType
-    }
+      teamType: teamType,
+    };
 
     const dialogRef = this.dialog.open(LadderEventDialogComponent, { data: data });
   }

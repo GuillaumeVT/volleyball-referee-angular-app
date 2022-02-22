@@ -21,31 +21,42 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-user-leagues',
   templateUrl: './user-leagues.component.html',
-  styleUrls: ['./user-leagues.component.scss']
+  styleUrls: ['./user-leagues.component.scss'],
 })
 export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit, OnDestroy {
+  user: UserSummary;
+  countsMap: Map<string, number>;
+  divisionsMap: Map<string, string[]>;
 
-  user:         UserSummary;
-  countsMap:    Map<string,number>;
-  divisionsMap: Map<string,string[]>;
+  private subscription: Subscription = new Subscription();
 
-  private subscription : Subscription = new Subscription();
-
-  constructor(private titleService: Title, private userService: UserService, private leagueService: LeagueService, private gameService: GameService, private publicService: PublicService,
-    private dialog: MatDialog, private snackBarService: SnackBarService, private datePipe: DatePipe, private router: Router, private translate: TranslateService) {
+  constructor(
+    private titleService: Title,
+    private userService: UserService,
+    private leagueService: LeagueService,
+    private gameService: GameService,
+    private publicService: PublicService,
+    private dialog: MatDialog,
+    private snackBarService: SnackBarService,
+    private datePipe: DatePipe,
+    private router: Router,
+    private translate: TranslateService,
+  ) {
     super();
-    this.translate.get('user.league.page').subscribe(t => this.titleService.setTitle(t));
+    this.translate.get('user.league.page').subscribe((t) => this.titleService.setTitle(t));
     this.countsMap = new Map();
     this.divisionsMap = new Map();
   }
 
   ngOnInit() {
-    this.subscription.add(this.userService.authState.subscribe(userToken => {
-      this.user = userToken.user;
-      if (this.user) {
-        this.refreshLeagues();
-      }
-    }));
+    this.subscription.add(
+      this.userService.authState.subscribe((userToken) => {
+        this.user = userToken.user;
+        if (this.user) {
+          this.refreshLeagues();
+        }
+      }),
+    );
   }
 
   ngOnDestroy() {
@@ -53,7 +64,10 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   refreshLeagues(): void {
-    this.leagueService.listLeagues(this.getKinds()).subscribe(leagues => this.onLeaguesRefreshed(leagues), _error => this.onLeaguesRefreshed([]));
+    this.leagueService.listLeagues(this.getKinds()).subscribe(
+      (leagues) => this.onLeaguesRefreshed(leagues),
+      (_error) => this.onLeaguesRefreshed([]),
+    );
   }
 
   onLeaguesRefreshed(leagues: LeagueSummary[]): void {
@@ -62,16 +76,20 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
     for (let league of this.leagues) {
       this.countsMap.set(league.id, 0);
       this.gameService.getNumberOfGamesInLeague(league.id).subscribe(
-        count => this.countsMap.set(league.id, count.count), _error => this.countsMap.set(league.id, 0));
+        (count) => this.countsMap.set(league.id, count.count),
+        (_error) => this.countsMap.set(league.id, 0),
+      );
       this.leagueService.getLeague(league.id).subscribe(
-        league => this.divisionsMap.set(league.id, league.divisions), _error => this.divisionsMap.set(league.id, []));
+        (league) => this.divisionsMap.set(league.id, league.divisions),
+        (_error) => this.divisionsMap.set(league.id, []),
+      );
     }
   }
 
   createLeague(kind: string): void {
     const league = League.createLeague(this.user, kind);
-    const dialogRef = this.dialog.open(UserLeagueDialogComponent, { width: "500px", data: league });
-    dialogRef.afterClosed().subscribe(dialogResult => {
+    const dialogRef = this.dialog.open(UserLeagueDialogComponent, { width: '500px', data: league });
+    dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.onLeagueCreated();
       }
@@ -83,35 +101,34 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   deleteLeague(league: LeagueSummary): void {
-    this.translate.get(['user.league.delete', 'user.league.messages.delete-question'], {name: league.name}).subscribe(
-      ts => {
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-          width: "500px",
-          data: { title: ts['user.league.delete'], message: ts['user.league.messages.delete-question'] }
-        });
-        dialogRef.afterClosed().subscribe(dialogResult => {
-          if (dialogResult) {
-            this.leagueService.deleteLeague(league.id).subscribe(_deleted => this.onLeagueDeleted(), _error => this.onLeagueDeletionError());
-          }
-        });
-      }
-    );
+    this.translate.get(['user.league.delete', 'user.league.messages.delete-question'], { name: league.name }).subscribe((ts) => {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        width: '500px',
+        data: { title: ts['user.league.delete'], message: ts['user.league.messages.delete-question'] },
+      });
+      dialogRef.afterClosed().subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.leagueService.deleteLeague(league.id).subscribe(
+            (_deleted) => this.onLeagueDeleted(),
+            (_error) => this.onLeagueDeletionError(),
+          );
+        }
+      });
+    });
   }
 
   deleteAllLeagues(): void {
-    this.translate.get(['user.league.delete', 'user.league.messages.delete-all-question']).subscribe(
-      ts => {
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-          width: "500px",
-          data: { title: ts['user.league.delete'], message: ts['user.league.messages.delete-all-question'] }
-        });
-        dialogRef.afterClosed().subscribe(dialogResult => {
-          if (dialogResult) {
-            this.leagueService.deleteAllLeagues().subscribe(_deleted => this.onAllLeaguesDeleted());
-          }
-        });
-      }
-    );
+    this.translate.get(['user.league.delete', 'user.league.messages.delete-all-question']).subscribe((ts) => {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        width: '500px',
+        data: { title: ts['user.league.delete'], message: ts['user.league.messages.delete-all-question'] },
+      });
+      dialogRef.afterClosed().subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.leagueService.deleteAllLeagues().subscribe((_deleted) => this.onAllLeaguesDeleted());
+        }
+      });
+    });
   }
 
   onLeagueCreated(): void {
@@ -127,7 +144,7 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   onLeagueDeletionError(): void {
-    this.translate.get('user.league.messages.deleted-error').subscribe(t => this.snackBarService.showError(t));
+    this.translate.get('user.league.messages.deleted-error').subscribe((t) => this.snackBarService.showError(t));
   }
 
   getLeaguePublicUrl(league: LeagueSummary): string {
@@ -135,7 +152,10 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   downloadDivisionExcel(league: LeagueSummary, divisionName: string): void {
-    this.publicService.listGamesInDivisionExcel(league.id, divisionName).subscribe((blob: Blob) => this.onDivisionExcelReceived(blob, league, divisionName), _error => this.onDivisionExcelReceived(null, league, divisionName));
+    this.publicService.listGamesInDivisionExcel(league.id, divisionName).subscribe(
+      (blob: Blob) => this.onDivisionExcelReceived(blob, league, divisionName),
+      (_error) => this.onDivisionExcelReceived(null, league, divisionName),
+    );
   }
 
   onDivisionExcelReceived(blob: Blob, league: LeagueSummary, divisionName: string): void {

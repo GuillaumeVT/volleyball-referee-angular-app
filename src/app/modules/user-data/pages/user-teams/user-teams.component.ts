@@ -2,13 +2,12 @@ import { Subscription } from 'rxjs';
 import { UserSummary } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
 import {
-    UserTeamDialogComponent, UserTeamDialogData
+  UserTeamDialogComponent,
+  UserTeamDialogData,
 } from 'src/app/modules/user-data/components/user-team-dialog/user-team-dialog.component';
 import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
 import { TeamService } from 'src/app/modules/user-data/services/team.service';
-import {
-    ConfirmationDialogComponent
-} from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { AbstractTeamFilter } from 'src/app/shared/models/abstract-team-filter.model';
 import { Team, TeamSummary } from 'src/app/shared/models/team.model';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
@@ -21,27 +20,34 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-user-teams',
   templateUrl: './user-teams.component.html',
-  styleUrls: ['./user-teams.component.scss']
+  styleUrls: ['./user-teams.component.scss'],
 })
 export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, OnDestroy {
-
   user: UserSummary;
 
-  private subscription : Subscription = new Subscription();
+  private subscription: Subscription = new Subscription();
 
-  constructor(private titleService: Title, private userService: UserService, private teamService: TeamService, private dialog: MatDialog,
-    private snackBarService: SnackBarService, private translate: TranslateService) {
+  constructor(
+    private titleService: Title,
+    private userService: UserService,
+    private teamService: TeamService,
+    private dialog: MatDialog,
+    private snackBarService: SnackBarService,
+    private translate: TranslateService,
+  ) {
     super(50);
-    this.translate.get('user.team.page').subscribe(t => this.titleService.setTitle(t));
+    this.translate.get('user.team.page').subscribe((t) => this.titleService.setTitle(t));
   }
 
   ngOnInit() {
-    this.subscription.add(this.userService.authState.subscribe(userToken => {
-      this.user = userToken.user;
-      if (this.user) {
-        this.refreshTeams(false);
-      }
-    }));
+    this.subscription.add(
+      this.userService.authState.subscribe((userToken) => {
+        this.user = userToken.user;
+        if (this.user) {
+          this.refreshTeams(false);
+        }
+      }),
+    );
   }
 
   ngOnDestroy() {
@@ -49,9 +55,10 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   }
 
   refreshTeams(append: boolean): void {
-    this.teamService.listTeams(this.getKinds(), this.getGenders(), (append ? this.page : 0), this.size).subscribe(
-      page => this.onTeamsReceived(page),
-      _error => this.onTeamsReceived(null));
+    this.teamService.listTeams(this.getKinds(), this.getGenders(), append ? this.page : 0, this.size).subscribe(
+      (page) => this.onTeamsReceived(page),
+      (_error) => this.onTeamsReceived(null),
+    );
   }
 
   createTeam(kind: string): void {
@@ -59,11 +66,11 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
 
     const data: UserTeamDialogData = {
       crudType: CrudType.Create,
-      team: team
-    }
+      team: team,
+    };
 
-    const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: "800px", data: data });
-    dialogRef.afterClosed().subscribe(dialogResult => {
+    const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: '800px', data: data });
+    dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.onTeamCreated();
       }
@@ -71,25 +78,25 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   }
 
   viewTeam(teamSummary: TeamSummary): void {
-    this.teamService.getTeam(teamSummary.id).subscribe(team => {
+    this.teamService.getTeam(teamSummary.id).subscribe((team) => {
       const data: UserTeamDialogData = {
         crudType: CrudType.View,
-        team: team
-      }
+        team: team,
+      };
 
-      const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: "800px", data: data });
+      const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: '800px', data: data });
     });
   }
 
   updateTeam(teamSummary: TeamSummary): void {
-    this.teamService.getTeam(teamSummary.id).subscribe(team => {
+    this.teamService.getTeam(teamSummary.id).subscribe((team) => {
       const data: UserTeamDialogData = {
         crudType: CrudType.Update,
-        team: team
-      }
+        team: team,
+      };
 
-      const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: "800px", data: data });
-      dialogRef.afterClosed().subscribe(dialogResult => {
+      const dialogRef = this.dialog.open(UserTeamDialogComponent, { width: '800px', data: data });
+      dialogRef.afterClosed().subscribe((dialogResult) => {
         if (dialogResult) {
           this.onTeamUpdated();
         }
@@ -98,35 +105,34 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   }
 
   deleteTeam(teamSummary: TeamSummary): void {
-    this.translate.get(['user.team.delete', 'user.team.messages.delete-question'], { name: teamSummary.name }).subscribe(
-      ts => {
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-          width: "500px",
-          data: { title: ts['user.team.delete'], message: ts['user.team.messages.delete-question'] }
-        });
-        dialogRef.afterClosed().subscribe(dialogResult => {
-          if (dialogResult) {
-            this.teamService.deleteTeam(teamSummary.id).subscribe(_deleted => this.onTeamDeleted(), _error => this.onTeamDeletionError());
-          }
-        });
-      }
-    );
+    this.translate.get(['user.team.delete', 'user.team.messages.delete-question'], { name: teamSummary.name }).subscribe((ts) => {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        width: '500px',
+        data: { title: ts['user.team.delete'], message: ts['user.team.messages.delete-question'] },
+      });
+      dialogRef.afterClosed().subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.teamService.deleteTeam(teamSummary.id).subscribe(
+            (_deleted) => this.onTeamDeleted(),
+            (_error) => this.onTeamDeletionError(),
+          );
+        }
+      });
+    });
   }
 
   deleteAllTeams(): void {
-    this.translate.get(['user.team.delete', 'user.team.messages.delete-all-question']).subscribe(
-      ts => {
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-          width: "500px",
-          data: { title: ts['user.team.delete'], message: ts['user.team.messages.delete-all-question'] }
-        });
-        dialogRef.afterClosed().subscribe(dialogResult => {
-          if (dialogResult) {
-            this.teamService.deleteAllTeams().subscribe(_deleted => this.onAllTeamsDeleted());
-          }
-        });
-      }
-    );
+    this.translate.get(['user.team.delete', 'user.team.messages.delete-all-question']).subscribe((ts) => {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        width: '500px',
+        data: { title: ts['user.team.delete'], message: ts['user.team.messages.delete-all-question'] },
+      });
+      dialogRef.afterClosed().subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.teamService.deleteAllTeams().subscribe((_deleted) => this.onAllTeamsDeleted());
+        }
+      });
+    });
   }
 
   onTeamCreated(): void {
@@ -146,6 +152,6 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   }
 
   onTeamDeletionError(): void {
-    this.translate.get('user.team.messages.deleted-error').subscribe(t => this.snackBarService.showError(t));
+    this.translate.get('user.team.messages.deleted-error').subscribe((t) => this.snackBarService.showError(t));
   }
 }

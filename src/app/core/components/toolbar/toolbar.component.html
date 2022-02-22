@@ -1,11 +1,10 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-   
     <button mat-icon-button>
       <mat-icon (click)="sideNav.toggle()">menu</mat-icon>
     </button>
 
-    <img class="desktop toolbar-logo mx-2" src="favicon.ico" alt="VBR">
+    <img class="desktop toolbar-logo mx-2" src="favicon.ico" alt="VBR" />
     <span class="desktop">{{ 'app' | translate }}</span>
 
     <span class="toolbar-spacer"></span>
@@ -13,7 +12,7 @@
     <button mat-button [matMenuTriggerFor]="palette">
       <mat-icon>palette</mat-icon>
     </button>
-    
+
     <mat-menu #palette="matMenu">
       <button mat-menu-item (click)="onSelectSystemTheme()" [ngClass]="currentTheme === systemTheme ? 'selected-menu-item' : ''">
         <span>{{ 'toolbar.theme.system' | translate }}</span>
@@ -27,8 +26,10 @@
     </mat-menu>
 
     <button *ngIf="user" mat-button [matMenuTriggerFor]="auth">
-      <mat-icon matBadge="{{numberOfFriendRequests}}" matBadgeColor="accent" [matBadgeHidden]="numberOfFriendRequests === 0">person</mat-icon>
-      <span class="ml-2 icon-text">{{user.pseudo}}</span>
+      <mat-icon matBadge="{{ numberOfFriendRequests }}" matBadgeColor="accent" [matBadgeHidden]="numberOfFriendRequests === 0"
+        >person</mat-icon
+      >
+      <span class="ml-2 icon-text">{{ user.pseudo }}</span>
     </button>
 
     <mat-menu #auth="matMenu">
@@ -38,7 +39,7 @@
       </button>
       <button *ngIf="numberOfFriendRequests > 0" mat-menu-item [routerLink]="getUserColleaguesUrl()">
         <mat-icon>person_add</mat-icon>
-        <span>{{ 'toolbar.friend-requests' | translate: {numberOfFriendRequests: numberOfFriendRequests} }}</span>
+        <span>{{ 'toolbar.friend-requests' | translate: { numberOfFriendRequests: numberOfFriendRequests } }}</span>
       </button>
       <mat-divider></mat-divider>
       <button mat-menu-item (click)="signOut()">
@@ -46,6 +47,5 @@
         <span>{{ 'toolbar.sign-out' | translate }}</span>
       </button>
     </mat-menu>
-
   </mat-toolbar-row>
 </mat-toolbar>

@@ -8,11 +8,10 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-
   userToken: UserToken;
 
   constructor(private userService: UserService) {
-    this.userService.authState.subscribe(userToken => {
+    this.userService.authState.subscribe((userToken) => {
       if (userToken && userToken.token) {
         this.userToken = userToken;
       } else {
@@ -25,25 +24,30 @@ export class TokenInterceptor implements HttpInterceptor {
     if (this.userToken) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.userToken.token}`
-        }
+          Authorization: `Bearer ${this.userToken.token}`,
+        },
       });
     }
-    return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
-      if (event instanceof HttpResponse) {
-        // do stuff with response if you want+
-      }
-    }, (err: any) => {
-      if (err instanceof HttpErrorResponse) {
-        if (err.status === 401 && this.userToken) {
-          // Check that the token is not expired
-          const now = new Date();
-          const nowMillis = now.getTime() + (now.getTimezoneOffset() * 60000);
-          if (nowMillis > this.userToken.tokenExpiry) {
-            this.userService.signOut();
+    return next.handle(request).pipe(
+      tap(
+        (event: HttpEvent<any>) => {
+          if (event instanceof HttpResponse) {
+            // do stuff with response if you want+
           }
-        }
-      }
-    }));
+        },
+        (err: any) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401 && this.userToken) {
+              // Check that the token is not expired
+              const now = new Date();
+              const nowMillis = now.getTime() + now.getTimezoneOffset() * 60000;
+              if (nowMillis > this.userToken.tokenExpiry) {
+                this.userService.signOut();
+              }
+            }
+          }
+        },
+      ),
+    );
   }
 }

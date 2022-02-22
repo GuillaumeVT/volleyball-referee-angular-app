@@ -11,14 +11,13 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-
   user: UserSummary;
-  
+
   @ViewChild('sideNavContent') sideNavContent: MatSidenavContent;
-  scrollSubscription: Subscription;  
+  scrollSubscription: Subscription;
   showScrollToTop: boolean;
 
   @ViewChild('scrollToTopButton') scrollToTopButton: MatButton;
@@ -26,20 +25,20 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   desktopNav: boolean;
 
   commonNavItems: NavItem[];
-  dataNavItems:   NavItem[];
-  adminNavItems:  NavItem[];
+  dataNavItems: NavItem[];
+  adminNavItems: NavItem[];
 
   constructor(private userService: UserService, media: MediaMatcher) {
     this.desktopNav = !media.matchMedia('(max-width: 800px)').matches;
     this.showScrollToTop = false;
     this.commonNavItems = [
       { label: 'menu.item.home', url: '/home' },
-      { label: 'menu.item.search', url: '/search' }
+      { label: 'menu.item.search', url: '/search' },
     ];
   }
- 
+
   ngOnInit(): void {
-    this.userService.authState.subscribe(userToken => {
+    this.userService.authState.subscribe((userToken) => {
       if (userToken) {
         this.user = userToken.user;
         this.dataNavItems = [
@@ -47,13 +46,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
           { label: 'menu.item.games', url: '/games' },
           { label: 'menu.item.teams', url: '/teams' },
           { label: 'menu.item.rules', url: '/rules' },
-          { label: 'menu.item.colleagues', url: '/colleagues' }
+          { label: 'menu.item.colleagues', url: '/colleagues' },
         ];
 
         if (this.user.admin) {
-          this.adminNavItems = [
-            { label: 'menu.item.users', url: '/admin/users' }
-          ];
+          this.adminNavItems = [{ label: 'menu.item.users', url: '/admin/users' }];
         } else {
           this.adminNavItems = [];
         }
@@ -67,11 +64,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.computeScrollToTop();
-    
+
     if (this.scrollSubscription) {
       this.scrollSubscription.unsubscribe();
     }
-    this.scrollSubscription = this.sideNavContent.elementScrolled().subscribe(event => this.computeScrollToTop());
+    this.scrollSubscription = this.sideNavContent.elementScrolled().subscribe((event) => this.computeScrollToTop());
   }
 
   ngOnDestroy(): void {
@@ -81,7 +78,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   computeScrollToTop() {
-    this.scrollToTopButton._elementRef.nativeElement.style.visibility = (this.sideNavContent.measureScrollOffset('top') > 100) ? 'visible' : 'hidden';
+    this.scrollToTopButton._elementRef.nativeElement.style.visibility =
+      this.sideNavContent.measureScrollOffset('top') > 100 ? 'visible' : 'hidden';
   }
 
   scrollToTop(): void {

@@ -6,19 +6,18 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LeagueService {
-
   private leaguesUrl = environment.api + '/leagues';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   listLeagues(kinds: string[]): Observable<LeagueSummary[]> {
     const url = `${this.leaguesUrl}`;
     let params = new HttpParams();
     for (let kind of kinds) {
-      params = params.append("kind", kind);
+      params = params.append('kind', kind);
     }
     return this.http.get<LeagueSummary[]>(url, { params: params });
   }

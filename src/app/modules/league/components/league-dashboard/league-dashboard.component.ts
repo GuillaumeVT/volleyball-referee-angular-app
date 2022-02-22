@@ -10,17 +10,16 @@ import { idAll } from 'src/app/shared/models/variable.model';
 @Component({
   selector: 'app-league-dashboard',
   templateUrl: './league-dashboard.component.html',
-  styleUrls: ['./league-dashboard.component.scss']
+  styleUrls: ['./league-dashboard.component.scss'],
 })
 export class LeagueDashboardComponent implements OnDestroy, OnChanges {
-
   @Input() league: League;
 
   selectedDivision: string;
-  allDivisions:     string;
-  games:            LeagueDashboard;
-  subscription:     Subscription;
-  autoRefresh:      boolean;
+  allDivisions: string;
+  games: LeagueDashboard;
+  subscription: Subscription;
+  autoRefresh: boolean;
 
   constructor(private publicService: PublicService) {
     this.allDivisions = idAll;
@@ -33,7 +32,9 @@ export class LeagueDashboardComponent implements OnDestroy, OnChanges {
       if (this.subscription) {
         this.subscription.unsubscribe();
       }
-      this.subscription = timer(0, 120000).pipe(takeWhile(() => this.autoRefresh)).subscribe(() => this.refreshGames());
+      this.subscription = timer(0, 120000)
+        .pipe(takeWhile(() => this.autoRefresh))
+        .subscribe(() => this.refreshGames());
     }
   }
 
@@ -46,14 +47,19 @@ export class LeagueDashboardComponent implements OnDestroy, OnChanges {
 
   refreshGames(): void {
     if (this.selectedDivision === this.allDivisions) {
-      this.publicService.getGamesInLeagueGroupedByStatus(this.league.id).subscribe(games => this.games = games, _error => this.games = null);
+      this.publicService.getGamesInLeagueGroupedByStatus(this.league.id).subscribe(
+        (games) => (this.games = games),
+        (_error) => (this.games = null),
+      );
     } else {
-      this.publicService.getGamesInDivisionGroupedByStatus(this.league.id, this.selectedDivision).subscribe(games => this.games = games, _error => this.games = null);
+      this.publicService.getGamesInDivisionGroupedByStatus(this.league.id, this.selectedDivision).subscribe(
+        (games) => (this.games = games),
+        (_error) => (this.games = null),
+      );
     }
   }
 
   onDivisionSelected(): void {
     this.refreshGames();
   }
-
 }

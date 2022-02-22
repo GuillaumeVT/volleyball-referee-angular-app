@@ -1,2 +1,22 @@
-<button *ngIf="game && game.status === 'LIVE'" class="bottom-right-fab" mat-fab type="button" color="accent" aria-label="Refresh" (click)="updateGame()"><mat-icon>refresh</mat-icon></button>
-<button *ngIf="game && game.status === 'COMPLETED'" class="bottom-right-fab" mat-fab type="button" color="accent" aria-label="Score sheet" (click)="downloadScoreSheet()"><mat-icon>cloud_download</mat-icon></button>
+<button
+  *ngIf="game && game.status === 'LIVE'"
+  class="bottom-right-fab"
+  mat-fab
+  type="button"
+  color="accent"
+  aria-label="Refresh"
+  (click)="updateGame()"
+>
+  <mat-icon>refresh</mat-icon>
+</button>
+<button
+  *ngIf="game && game.status === 'COMPLETED'"
+  class="bottom-right-fab"
+  mat-fab
+  type="button"
+  color="accent"
+  aria-label="Score sheet"
+  (click)="downloadScoreSheet()"
+>
+  <mat-icon>cloud_download</mat-icon>
+</button>

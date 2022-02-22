@@ -3,12 +3,14 @@
   <form [formGroup]="colleagueFormGroup" autocomplete="off" novalidate (ngSubmit)="onAddColleague()">
     <mat-form-field class="m-1" appearance="outline">
       <mat-label>{{ 'user.colleague.pseudo' | translate }}</mat-label>
-      <input matInput type="text" formControlName="pseudo" cdkFocusInitial required>
+      <input matInput type="text" formControlName="pseudo" cdkFocusInitial required />
       <mat-error *ngIf="pseudoFormControl.errors?.required">{{ 'user.colleague.messages.pseudo-required-error' | translate }}</mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()">{{ 'common.cancel' | translate }}</button>
-  <button mat-raised-button type="submit" color="primary" (click)="onAddColleague()" [disabled]="!colleagueFormGroup.valid">{{ 'common.send' | translate }}</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onAddColleague()" [disabled]="!colleagueFormGroup.valid">
+    {{ 'common.send' | translate }}
+  </button>
 </mat-dialog-actions>

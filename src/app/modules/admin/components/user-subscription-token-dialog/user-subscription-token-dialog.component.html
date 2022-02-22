@@ -3,7 +3,7 @@
   <form [formGroup]="userSubscriptionFormGroup" autocomplete="off" novalidate (ngSubmit)="onUpdateUserSubscription()">
     <mat-form-field class="m-1" appearance="outline">
       <mat-label>Purchase token</mat-label>
-      <input matInput type="text" formControlName="purchaseToken" cdkFocusInitial required>
+      <input matInput type="text" formControlName="purchaseToken" cdkFocusInitial required />
       <mat-error *ngIf="purchaseTokenFormControl.errors?.required">Purchase token is required</mat-error>
       <mat-error *ngIf="purchaseTokenFormControl.errors?.minlength">Purchase token must contain at least 144 characters</mat-error>
       <mat-error *ngIf="purchaseTokenFormControl.errors?.maxlength">Purchase token must contain at most 187 characters</mat-error>
@@ -12,5 +12,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()">Cancel</button>
-  <button mat-raised-button type="submit" color="primary" (click)="onUpdateUserSubscription()" [disabled]="!purchaseTokenFormControl.valid">OK</button>
+  <button mat-raised-button type="submit" color="primary" (click)="onUpdateUserSubscription()" [disabled]="!purchaseTokenFormControl.valid">
+    OK
+  </button>
 </mat-dialog-actions>

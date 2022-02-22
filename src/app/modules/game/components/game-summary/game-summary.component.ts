@@ -8,12 +8,11 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 @Component({
   selector: 'app-game-summary',
   templateUrl: './game-summary.component.html',
-  styleUrls: ['./game-summary.component.scss']
+  styleUrls: ['./game-summary.component.scss'],
 })
 export class GameSummaryComponent implements OnChanges {
-
-  @Input() game:      Game;
-  @Input() leftTeam:  TeamType;
+  @Input() game: Game;
+  @Input() leftTeam: TeamType;
   @Input() rightTeam: TeamType;
 
   @Output() teamsSwapped = new EventEmitter();
@@ -44,7 +43,9 @@ export class GameSummaryComponent implements OnChanges {
     this.leftTeamSets = this.getTeamSets(this.leftTeam);
     this.rightTeamSets = this.getTeamSets(this.rightTeam);
 
-    this.fullScore = this.game.sets.map(set => `${this.getScore(set, this.leftTeam)}-${this.getScore(set, this.rightTeam)}`).join('&emsp;');
+    this.fullScore = this.game.sets
+      .map((set) => `${this.getScore(set, this.leftTeam)}-${this.getScore(set, this.rightTeam)}`)
+      .join('&emsp;');
   }
 
   private getScore(set: Set, teamType: TeamType): number {

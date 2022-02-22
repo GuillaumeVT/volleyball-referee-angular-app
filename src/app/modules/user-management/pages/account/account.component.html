@@ -1,48 +1,62 @@
 <form [formGroup]="passwordUpdateFormGroup" autocomplete="off" novalidate (ngSubmit)="onUpdateUserPassword()" *ngIf="user" class="mt-4">
   <mat-card class="div-small-form">
     <mat-card-header>
-      <img mat-card-avatar src="favicon.ico"/>
-      <mat-card-title>{{user.pseudo}}</mat-card-title>
-      <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+      <img mat-card-avatar src="favicon.ico" />
+      <mat-card-title>{{ user.pseudo }}</mat-card-title>
+      <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <h3 class="mat-h3">{{ 'user.management.update-password' | translate }}</h3>
       <mat-form-field class="m-1" appearance="outline">
         <mat-label>{{ 'user.management.current-password' | translate }}</mat-label>
-        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="currentPassword" required>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="currentPassword" required />
         <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
-          <mat-icon>{{passwordVisibility}}</mat-icon>
+          <mat-icon>{{ passwordVisibility }}</mat-icon>
         </button>
-        <mat-error *ngIf="currentPasswordFormControl.errors?.required">{{ 'user.management.messages.password-required-error' | translate }}</mat-error>
-        <mat-error *ngIf="currentPasswordFormControl.errors?.minlength">{{ 'user.management.messages.password-short-error' | translate }}</mat-error>
+        <mat-error *ngIf="currentPasswordFormControl.errors?.required">{{
+          'user.management.messages.password-required-error' | translate
+        }}</mat-error>
+        <mat-error *ngIf="currentPasswordFormControl.errors?.minlength">{{
+          'user.management.messages.password-short-error' | translate
+        }}</mat-error>
       </mat-form-field>
       <p class="mx-1">
         {{ 'user.management.messages.password-constraints' | translate }}
       </p>
       <mat-form-field class="m-1" appearance="outline">
         <mat-label>{{ 'user.management.new-password' | translate }}</mat-label>
-        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="newPassword" required>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="newPassword" required />
         <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
-          <mat-icon>{{passwordVisibility}}</mat-icon>
+          <mat-icon>{{ passwordVisibility }}</mat-icon>
         </button>
-        <mat-error *ngIf="newPasswordFormControl.errors?.required">{{ 'user.management.messages.password-required-error' | translate }}</mat-error>
-        <mat-error *ngIf="newPasswordFormControl.errors?.minlength">{{ 'user.management.messages.password-short-error' | translate }}</mat-error>
+        <mat-error *ngIf="newPasswordFormControl.errors?.required">{{
+          'user.management.messages.password-required-error' | translate
+        }}</mat-error>
+        <mat-error *ngIf="newPasswordFormControl.errors?.minlength">{{
+          'user.management.messages.password-short-error' | translate
+        }}</mat-error>
       </mat-form-field>
       <mat-form-field class="m-1" appearance="outline">
         <mat-label>{{ 'user.management.confirm-new-password' | translate }}</mat-label>
-        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="confirmedPassword" required>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="confirmedPassword" required />
         <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
-          <mat-icon>{{passwordVisibility}}</mat-icon>
+          <mat-icon>{{ passwordVisibility }}</mat-icon>
         </button>
-        <mat-error *ngIf="confirmedPasswordFormControl.errors?.required">{{ 'user.management.messages.password-required-error' | translate }}</mat-error>
-        <mat-error *ngIf="confirmedPasswordFormControl.errors?.minlength">{{ 'user.management.messages.password-short-error' | translate }}</mat-error>
+        <mat-error *ngIf="confirmedPasswordFormControl.errors?.required">{{
+          'user.management.messages.password-required-error' | translate
+        }}</mat-error>
+        <mat-error *ngIf="confirmedPasswordFormControl.errors?.minlength">{{
+          'user.management.messages.password-short-error' | translate
+        }}</mat-error>
       </mat-form-field>
       <p class="mx-1" *ngIf="passwordUpdateFormGroup.errors?.mismatch">
         <mat-error>{{ 'user.management.messages.passwords-mismatch-error' | translate }}</mat-error>
       </p>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!passwordUpdateFormGroup.valid">{{ 'user.management.update-password' | translate }}</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!passwordUpdateFormGroup.valid">
+        {{ 'user.management.update-password' | translate }}
+      </button>
     </mat-card-actions>
   </mat-card>
 </form>

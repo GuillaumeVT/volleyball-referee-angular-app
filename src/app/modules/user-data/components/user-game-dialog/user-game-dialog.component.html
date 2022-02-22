@@ -3,32 +3,56 @@
 <h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.View">{{ 'user.game.view' | translate }}</h2>
 <mat-dialog-content>
   <form [formGroup]="gameFormGroup" autocomplete="off" novalidate (ngSubmit)="onSubmitForm()">
-
     <mat-form-field class="my-1" appearance="outline">
       <mat-label>{{ 'user.game.scheduled' | translate }}</mat-label>
-      <input matInput type="text" formControlName="scheduledAt" [owlDateTime]="dtp" [owlDateTimeTrigger]="dtp" [min]="minScheduleDate" (keydown)="$event.preventDefault()" readonly required>
+      <input
+        matInput
+        type="text"
+        formControlName="scheduledAt"
+        [owlDateTime]="dtp"
+        [owlDateTimeTrigger]="dtp"
+        [min]="minScheduleDate"
+        (keydown)="$event.preventDefault()"
+        readonly
+        required
+      />
       <button mat-button matSuffix mat-icon-button [owlDateTimeTrigger]="dtp" (click)="$event.preventDefault()">
         <mat-icon>today</mat-icon>
       </button>
       <owl-date-time #dtp></owl-date-time>
       <mat-error *ngIf="scheduledAtFormControl.errors?.required">{{ 'user.game.messages.schedule-required-error' | translate }}</mat-error>
-      <mat-error *ngIf="scheduledAtFormControl.errors?.owlDateTimeMin">{{ 'user.game.messages.schedule-past-error' | translate }}</mat-error>
+      <mat-error *ngIf="scheduledAtFormControl.errors?.owlDateTimeMin">{{
+        'user.game.messages.schedule-past-error' | translate
+      }}</mat-error>
     </mat-form-field>
 
-    <mat-radio-group formControlName="indexed" color="primary" fxLayout="column" matTooltip="{{ 'user.game.messages.indexed-tooltip' | translate }}" matTooltipClass="vbr-tooltip">
+    <mat-radio-group
+      formControlName="indexed"
+      color="primary"
+      fxLayout="column"
+      matTooltip="{{ 'user.game.messages.indexed-tooltip' | translate }}"
+      matTooltipClass="vbr-tooltip"
+    >
       <mat-radio-button [value]="true">{{ 'user.game.public' | translate }}</mat-radio-button>
       <mat-radio-button [value]="false">{{ 'user.game.private' | translate }}</mat-radio-button>
     </mat-radio-group>
 
     <mat-form-field class="mb-1 mt-3" appearance="outline">
       <mat-label>{{ 'user.game.league' | translate }}</mat-label>
-      <input matInput type="text" formControlName="league" [matAutocomplete]="leagueAuto">
-      <button mat-button *ngIf="leagueFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="leagueFormControl.setValue(null)">
+      <input matInput type="text" formControlName="league" [matAutocomplete]="leagueAuto" />
+      <button
+        mat-button
+        *ngIf="leagueFormControl.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="leagueFormControl.setValue(null)"
+      >
         <mat-icon>close</mat-icon>
       </button>
       <mat-autocomplete #leagueAuto="matAutocomplete" [displayWith]="displayLeague">
         <mat-option *ngFor="let league of data.gameIngredients?.leagues" [value]="league">
-          {{league.name}}
+          {{ league.name }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
@@ -39,13 +63,20 @@
 
     <mat-form-field class="my-1" appearance="outline" *ngIf="leagueFormControl.value && !gameFormGroup.errors?.undefinedLeague">
       <mat-label>{{ 'user.game.division' | translate }}</mat-label>
-      <input matInput type="text" formControlName="division" [matAutocomplete]="divisionAuto">
-      <button mat-button *ngIf="divisionFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="divisionFormControl.setValue(null)">
+      <input matInput type="text" formControlName="division" [matAutocomplete]="divisionAuto" />
+      <button
+        mat-button
+        *ngIf="divisionFormControl.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="divisionFormControl.setValue(null)"
+      >
         <mat-icon>close</mat-icon>
       </button>
       <mat-autocomplete #divisionAuto="matAutocomplete">
         <mat-option *ngFor="let division of divisionsOfSelectedLeague" [value]="division">
-          {{division}}
+          {{ division }}
         </mat-option>
       </mat-autocomplete>
       <mat-error *ngIf="divisionFormControl.errors?.required">{{ 'user.game.messages.division-required-error' | translate }}</mat-error>
@@ -55,13 +86,20 @@
 
     <mat-form-field class="my-1" appearance="outline">
       <mat-label>{{ 'user.game.home-team' | translate }}</mat-label>
-      <input matInput type="text" formControlName="homeTeam" [matAutocomplete]="homeTeamAuto" required>
-      <button mat-button *ngIf="homeTeamFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="homeTeamFormControl.setValue(null)">
+      <input matInput type="text" formControlName="homeTeam" [matAutocomplete]="homeTeamAuto" required />
+      <button
+        mat-button
+        *ngIf="homeTeamFormControl.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="homeTeamFormControl.setValue(null)"
+      >
         <mat-icon>close</mat-icon>
       </button>
       <mat-autocomplete #homeTeamAuto="matAutocomplete" [displayWith]="displayTeam">
         <mat-option *ngFor="let team of data.gameIngredients?.teams" [value]="team">
-          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender | translate }}
+          {{ team.name }}&nbsp;&nbsp;{{ team.gender | gender | translate }}
         </mat-option>
       </mat-autocomplete>
       <mat-error *ngIf="homeTeamFormControl.errors?.required">{{ 'user.game.messages.home-team-required-error' | translate }}</mat-error>
@@ -73,13 +111,20 @@
 
     <mat-form-field class="my-1" appearance="outline">
       <mat-label>{{ 'user.game.guest-team' | translate }}</mat-label>
-      <input matInput type="text" formControlName="guestTeam" [matAutocomplete]="guestTeamAuto" required>
-      <button mat-button *ngIf="guestTeamFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="guestTeamFormControl.setValue(null)">
+      <input matInput type="text" formControlName="guestTeam" [matAutocomplete]="guestTeamAuto" required />
+      <button
+        mat-button
+        *ngIf="guestTeamFormControl.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="guestTeamFormControl.setValue(null)"
+      >
         <mat-icon>close</mat-icon>
       </button>
       <mat-autocomplete #guestTeamAuto="matAutocomplete" [displayWith]="displayTeam">
         <mat-option *ngFor="let team of data.gameIngredients?.teams" [value]="team">
-          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender | translate }}
+          {{ team.name }}&nbsp;&nbsp;{{ team.gender | gender | translate }}
         </mat-option>
       </mat-autocomplete>
       <mat-error *ngIf="guestTeamFormControl.errors?.required">{{ 'user.game.messages.guest-team-required-error' | translate }}</mat-error>
@@ -97,19 +142,26 @@
 
     <mat-form-field class="my-1" appearance="outline">
       <mat-label>{{ 'common.rules' | translate }}</mat-label>
-      <input matInput type="text" formControlName="rules" [matAutocomplete]="rulesAuto" required>
-      <button mat-button *ngIf="rulesFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="rulesFormControl.setValue(null)">
+      <input matInput type="text" formControlName="rules" [matAutocomplete]="rulesAuto" required />
+      <button
+        mat-button
+        *ngIf="rulesFormControl.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="rulesFormControl.setValue(null)"
+      >
         <mat-icon>close</mat-icon>
       </button>
       <mat-autocomplete #rulesAuto="matAutocomplete" [displayWith]="displayRules">
         <mat-optgroup label="Default Rules">
           <mat-option [value]="data.gameIngredients.defaultRules">
-            {{data.gameIngredients.defaultRules.name}}
+            {{ data.gameIngredients.defaultRules.name }}
           </mat-option>
         </mat-optgroup>
         <mat-optgroup label="My Rules">
           <mat-option *ngFor="let rules of data.gameIngredients?.rules" [value]="rules">
-            {{rules.name}}
+            {{ rules.name }}
           </mat-option>
         </mat-optgroup>
       </mat-autocomplete>
@@ -119,7 +171,7 @@
     <p *ngIf="gameFormGroup.errors?.undefinedRules">
       <mat-error>{{ 'user.game.messages.rules-unknown-error' | translate }}</mat-error>
     </p>
-    
+
     <h3 class="mat-h3">{{ 'user.referee.referee' | translate }}</h3>
 
     <mat-form-field class="my-1" appearance="outline">
@@ -127,12 +179,12 @@
       <mat-select autoActiveFirstOption [formControl]="referee">
         <mat-optgroup label="{{ 'user.referee.me' | translate }}" *ngIf="me">
           <mat-option [value]="me">
-            {{me.pseudo}}
+            {{ me.pseudo }}
           </mat-option>
         </mat-optgroup>
         <mat-optgroup label="{{ 'user.referee.colleagues' | translate }}">
           <mat-option *ngFor="let friend of data.gameIngredients?.friends" [value]="friend">
-            {{friend.pseudo}}
+            {{ friend.pseudo }}
           </mat-option>
         </mat-optgroup>
       </mat-select>
@@ -141,24 +193,41 @@
 
     <mat-form-field class="my-1" appearance="outline">
       <mat-label>{{ 'user.game.referee-1' | translate }}</mat-label>
-      <input matInput type="text" formControlName="referee1Name">
+      <input matInput type="text" formControlName="referee1Name" />
     </mat-form-field>
 
     <mat-form-field class="my-1" appearance="outline">
       <mat-label>{{ 'user.game.referee-2' | translate }}</mat-label>
-      <input matInput type="text" formControlName="referee2Name">
+      <input matInput type="text" formControlName="referee2Name" />
     </mat-form-field>
 
     <mat-form-field class="my-1" appearance="outline">
       <mat-label>{{ 'user.game.scorer' | translate }}</mat-label>
-      <input matInput type="text" formControlName="scorerName">
+      <input matInput type="text" formControlName="scorerName" />
     </mat-form-field>
-
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()" *ngIf="data.crudType === crudTypeEnum.View">{{ 'common.close' | translate }}</button>
   <button mat-button (click)="close()" *ngIf="data.crudType !== crudTypeEnum.View">{{ 'common.cancel' | translate }}</button>
-  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!gameFormGroup.valid" *ngIf="data.crudType === crudTypeEnum.Create">{{ 'common.create' | translate }}</button>
-  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!gameFormGroup.valid" *ngIf="data.crudType === crudTypeEnum.Update">{{ 'common.update' | translate }}</button>
+  <button
+    mat-raised-button
+    type="submit"
+    color="primary"
+    (click)="onSubmitForm()"
+    [disabled]="!gameFormGroup.valid"
+    *ngIf="data.crudType === crudTypeEnum.Create"
+  >
+    {{ 'common.create' | translate }}
+  </button>
+  <button
+    mat-raised-button
+    type="submit"
+    color="primary"
+    (click)="onSubmitForm()"
+    [disabled]="!gameFormGroup.valid"
+    *ngIf="data.crudType === crudTypeEnum.Update"
+  >
+    {{ 'common.update' | translate }}
+  </button>
 </mat-dialog-actions>

@@ -14,24 +14,29 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 @Component({
   selector: 'app-user-team-dialog',
   templateUrl: './user-team-dialog.component.html',
-  styleUrls: ['./user-team-dialog.component.scss']
+  styleUrls: ['./user-team-dialog.component.scss'],
 })
 export class UserTeamDialogComponent {
-
   crudTypeEnum: typeof CrudType = CrudType;
 
   teamFormGroup: FormGroup;
   captain: FormControl;
 
   editingDisabled: boolean;
-  players:          InputPlayerItem[];
-  liberos:          InputPlayerItem[];
-  moreNumbers:      boolean;
-  minPlayers:       number;
-  selectedPlayers:  number[];
+  players: InputPlayerItem[];
+  liberos: InputPlayerItem[];
+  moreNumbers: boolean;
+  minPlayers: number;
+  selectedPlayers: number[];
 
-  constructor(public dialogRef: MatDialogRef<UserTeamDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: UserTeamDialogData, private teamService: TeamService,
-  public playerStyleService: PlayerStyleService, private dialog: MatDialog, private snackBarService: SnackBarService) {
+  constructor(
+    public dialogRef: MatDialogRef<UserTeamDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: UserTeamDialogData,
+    private teamService: TeamService,
+    public playerStyleService: PlayerStyleService,
+    private dialog: MatDialog,
+    private snackBarService: SnackBarService,
+  ) {
     this.editingDisabled = this.data.crudType === CrudType.View ? true : false;
     this.moreNumbers = false;
     this.players = [];
@@ -40,10 +45,10 @@ export class UserTeamDialogComponent {
     for (let index = 0; index <= 99; index++) {
       this.players.push(new InputPlayerItem(index, '#ffffff', '#000000', '#000000', false, '#1f1f1f', '#d6d7d7', '#d6d7d7'));
     }
-    
+
     this.selectedPlayers = [];
 
-    switch  (this.data.team.kind) {
+    switch (this.data.team.kind) {
       case 'INDOOR':
         this.minPlayers = 6;
         break;
@@ -58,16 +63,21 @@ export class UserTeamDialogComponent {
         break;
     }
 
-    this.captain = new FormControl({ value: this.data.team.captain, disabled: this.editingDisabled }, [Validators.required, Validators.min(0)]);
-    
+    this.captain = new FormControl({ value: this.data.team.captain, disabled: this.editingDisabled }, [
+      Validators.required,
+      Validators.min(0),
+    ]);
+
     this.teamFormGroup = new FormGroup({
       name: new FormControl({ value: this.data.team.name, disabled: this.editingDisabled }, [Validators.required]),
       gender: new FormControl({ value: this.data.team.gender, disabled: this.editingDisabled }, [Validators.required]),
       color: new FormControl({ value: this.data.team.color, disabled: this.editingDisabled }, [Validators.required]),
       liberoColor: new FormControl({ value: this.data.team.liberoColor, disabled: this.editingDisabled }, [Validators.required]),
       captain: this.captain,
-      numberOfPlayers: new FormControl({ value: this.data.team.players.length, disabled: this.editingDisabled }, [Validators.min(this.minPlayers)]),
-      coachName: new FormControl({ value: this.data.team.coach, disabled: this.editingDisabled })
+      numberOfPlayers: new FormControl({ value: this.data.team.players.length, disabled: this.editingDisabled }, [
+        Validators.min(this.minPlayers),
+      ]),
+      coachName: new FormControl({ value: this.data.team.coach, disabled: this.editingDisabled }),
     });
 
     this.onShirtColorChanged(this.colorFormControl.value);
@@ -75,13 +85,27 @@ export class UserTeamDialogComponent {
     this.initPlayersAndLiberos();
   }
 
-  get nameFormControl() { return this.teamFormGroup.get('name'); }
-  get genderFormControl() { return this.teamFormGroup.get('gender'); }
-  get colorFormControl() { return this.teamFormGroup.get('color'); }
-  get liberoColorFormControl() { return this.teamFormGroup.get('liberoColor'); }
-  get captainFormControl() { return this.teamFormGroup.get('captain'); }
-  get numberOfPlayersFormControl() { return this.teamFormGroup.get('numberOfPlayers'); }
-  get coachNameFormControl() { return this.teamFormGroup.get('coachName'); }
+  get nameFormControl() {
+    return this.teamFormGroup.get('name');
+  }
+  get genderFormControl() {
+    return this.teamFormGroup.get('gender');
+  }
+  get colorFormControl() {
+    return this.teamFormGroup.get('color');
+  }
+  get liberoColorFormControl() {
+    return this.teamFormGroup.get('liberoColor');
+  }
+  get captainFormControl() {
+    return this.teamFormGroup.get('captain');
+  }
+  get numberOfPlayersFormControl() {
+    return this.teamFormGroup.get('numberOfPlayers');
+  }
+  get coachNameFormControl() {
+    return this.teamFormGroup.get('coachName');
+  }
 
   getGenderIcon(): string {
     if (this.genderFormControl.value === 'MIXED') {
@@ -124,7 +148,7 @@ export class UserTeamDialogComponent {
   }
 
   onChangeShirtColor(): void {
-    const dialogRef = this.dialog.open(ColorPickerDialogComponent, { width: "800px", data: this.colorFormControl.value });
+    const dialogRef = this.dialog.open(ColorPickerDialogComponent, { width: '800px', data: this.colorFormControl.value });
     dialogRef.afterClosed().subscribe((color: string) => {
       if (color) {
         this.onShirtColorChanged(color);
@@ -144,7 +168,7 @@ export class UserTeamDialogComponent {
   }
 
   onChangeLiberoShirtColor(): void {
-    const dialogRef = this.dialog.open(ColorPickerDialogComponent, { width: "800px", data: this.liberoColorFormControl.value });
+    const dialogRef = this.dialog.open(ColorPickerDialogComponent, { width: '800px', data: this.liberoColorFormControl.value });
     dialogRef.afterClosed().subscribe((color: string) => {
       if (color) {
         this.onLiberoShirtColorChanged(color);
@@ -163,7 +187,7 @@ export class UserTeamDialogComponent {
     }
   }
 
-  onPlayerSelected(player: number, andUpdateModel : boolean) {
+  onPlayerSelected(player: number, andUpdateModel: boolean) {
     const playerItem = this.players[player];
     playerItem.selected = !playerItem.selected;
 
@@ -203,12 +227,12 @@ export class UserTeamDialogComponent {
     this.numberOfPlayersFormControl.setValue(this.selectedPlayers.length);
   }
 
-  onLiberoSelected(player: number, andUpdateModel : boolean) {
+  onLiberoSelected(player: number, andUpdateModel: boolean) {
     if (this.numberOfPlayers() > this.minPlayers) {
       const numberOfLiberos = this.numberOfLiberos();
       for (let liberoItem of this.liberos) {
         if (liberoItem.shirtNumber === player) {
-          if (liberoItem.selected || (numberOfLiberos < 2)) {
+          if (liberoItem.selected || numberOfLiberos < 2) {
             liberoItem.selected = !liberoItem.selected;
           }
           if (andUpdateModel) {
@@ -244,7 +268,7 @@ export class UserTeamDialogComponent {
   }
 
   addPlayer(player: number): void {
-    this.data.team.players.push(new Player(player, ""));
+    this.data.team.players.push(new Player(player, ''));
   }
 
   removePlayer(player: number): void {
@@ -285,7 +309,7 @@ export class UserTeamDialogComponent {
 
   onEditPlayerNames(): void {
     this.data.team.players = this.data.team.players.sort((p1, p2) => p1.num - p2.num);
-    const dialogRef = this.dialog.open(PlayerNamesDialogComponent, { width: "800px", data: this.data.team });
+    const dialogRef = this.dialog.open(PlayerNamesDialogComponent, { width: '800px', data: this.data.team });
   }
 
   onSubmitForm(): void {
@@ -299,9 +323,15 @@ export class UserTeamDialogComponent {
     team.coach = this.coachNameFormControl.value;
 
     if (this.data.crudType === CrudType.Create) {
-      this.teamService.createTeam(team).subscribe(_team => this.onValidResponse(), _error => this.onInvalidResponse());
+      this.teamService.createTeam(team).subscribe(
+        (_team) => this.onValidResponse(),
+        (_error) => this.onInvalidResponse(),
+      );
     } else if (this.data.crudType === CrudType.Update) {
-      this.teamService.updateTeam(team).subscribe(_team => this.onValidResponse(), _error => this.onInvalidResponse());
+      this.teamService.updateTeam(team).subscribe(
+        (_team) => this.onValidResponse(),
+        (_error) => this.onInvalidResponse(),
+      );
     }
   }
 
@@ -321,7 +351,7 @@ export class UserTeamDialogComponent {
     this.dialogRef.close(false);
   }
 
-  onEdit():void {
+  onEdit(): void {
     this.data.crudType = CrudType.Update;
     this.editingDisabled = false;
     this.teamFormGroup.enable({ onlySelf: false, emitEvent: true });

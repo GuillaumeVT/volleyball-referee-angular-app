@@ -9,6 +9,6 @@ export class Statistics {
 }
 
 export class Count {
-  kind:  string;
+  kind: string;
   count: number;
 }

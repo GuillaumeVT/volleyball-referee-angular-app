@@ -6,63 +6,63 @@ import { Set } from 'src/app/shared/models/set.model';
 import { Team, TeamSummary } from 'src/app/shared/models/team.model';
 
 export class Game {
-  id:          string;
-  createdBy:   string;
-  createdAt:   number;
-  updatedAt:   number;
+  id: string;
+  createdBy: string;
+  createdAt: number;
+  updatedAt: number;
   scheduledAt: number;
-  refereedBy:  string;
+  refereedBy: string;
   refereeName: string;
-  kind:        string;
-  gender:      string;
-  usage:       string;
-  status:      string;
-  indexed:     boolean;
-  league:      SelectedLeague;
-  homeTeam:    Team;
-  guestTeam:   Team;
-  homeSets:    number;
-  guestSets:   number;
-  sets:        Set[];
-  homeCards:   Sanction[];
-  guestCards:  Sanction[];
-  rules:       Rules;
-  score:       string;
-  startTime:   number;
-  endTime:     number;
-  referee1:    string;
-  referee2:    string;
-  scorer:      string;
+  kind: string;
+  gender: string;
+  usage: string;
+  status: string;
+  indexed: boolean;
+  league: SelectedLeague;
+  homeTeam: Team;
+  guestTeam: Team;
+  homeSets: number;
+  guestSets: number;
+  sets: Set[];
+  homeCards: Sanction[];
+  guestCards: Sanction[];
+  rules: Rules;
+  score: string;
+  startTime: number;
+  endTime: number;
+  referee1: string;
+  referee2: string;
+  scorer: string;
 }
 
 export class GameSummary {
-  id:            string;
-  createdBy:     string;
-  createdAt:     number;
-  updatedAt:     number;
-  scheduledAt:   number;
-  refereedBy:    string;
-  refereeName:   string;
-  kind:          string;
-  gender:        string;
-  usage:         string;
-  status:        string;
-  indexed:       boolean;
-  leagueId:      string;
-  leagueName:    string;
-  divisionName:  string;
-  homeTeamId:    string;
-  homeTeamName:  string;
-  guestTeamId:   string;
+  id: string;
+  createdBy: string;
+  createdAt: number;
+  updatedAt: number;
+  scheduledAt: number;
+  refereedBy: string;
+  refereeName: string;
+  kind: string;
+  gender: string;
+  usage: string;
+  status: string;
+  indexed: boolean;
+  leagueId: string;
+  leagueName: string;
+  divisionName: string;
+  homeTeamId: string;
+  homeTeamName: string;
+  guestTeamId: string;
   guestTeamName: string;
-  homeSets:      number;
-  guestSets:     number;
-  rulesId:       string;
-  rulesName:     string;
-  score:         string;
-  referee1Name:  string;
-  referee2Name:  string;
-  scorerName:    string;
+  homeSets: number;
+  guestSets: number;
+  rulesId: string;
+  rulesName: string;
+  score: string;
+  referee1Name: string;
+  referee2Name: string;
+  scorerName: string;
 
   public static createGame(user: UserSummary, kind: string, league: LeagueSummary): GameSummary {
     const game = new GameSummary();
@@ -70,8 +70,8 @@ export class GameSummary {
 
     game.id = UUID.UUID();
     game.createdBy = user.id;
-    game.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
-    game.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    game.createdAt = now.getTime() + now.getTimezoneOffset() * 60000;
+    game.updatedAt = now.getTime() + now.getTimezoneOffset() * 60000;
     game.scheduledAt = now.getTime();
     game.refereedBy = user.id;
     game.refereeName = user.pseudo;
@@ -140,20 +140,20 @@ export class GameSummary {
 }
 
 export class Sanction {
-  card:        string;
-  num:         number;
-  set:         number;
-  homePoints:  number;
+  card: string;
+  num: number;
+  set: number;
+  homePoints: number;
   guestPoints: number;
 }
 
 export class GameIngredients {
-  kind:         string;
-  friends:      Friend[];
+  kind: string;
+  friends: Friend[];
   defaultRules: RulesSummary;
-  rules:        RulesSummary[];
-  teams:        TeamSummary[];
-  leagues:      LeagueSummary[];
+  rules: RulesSummary[];
+  teams: TeamSummary[];
+  leagues: LeagueSummary[];
 }
 
 export class LeagueDashboard {

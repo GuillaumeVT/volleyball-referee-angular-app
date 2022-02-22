@@ -8,15 +8,14 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-game-sanctions',
   templateUrl: './game-sanctions.component.html',
-  styleUrls: ['./game-sanctions.component.scss']
+  styleUrls: ['./game-sanctions.component.scss'],
 })
 export class GameSanctionsComponent {
-
-  @Input() game:      Game;
-  @Input() leftTeam:  TeamType;
+  @Input() game: Game;
+  @Input() leftTeam: TeamType;
   @Input() rightTeam: TeamType;
 
-  constructor(public sanctionService: SanctionService, public playerStyleService: PlayerStyleService) { }
+  constructor(public sanctionService: SanctionService, public playerStyleService: PlayerStyleService) {}
 
   getSanctions(teamType: TeamType): Sanction[] {
     if (TeamType.Home === teamType) {
@@ -34,5 +33,4 @@ export class GameSanctionsComponent {
       return set + sanction.guestPoints + '-' + sanction.homePoints;
     }
   }
-
 }

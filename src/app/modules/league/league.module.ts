@@ -8,18 +8,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-  declarations: [
-    LeagueComponent,
-    DivisionRankingsComponent,
-    LeagueDashboardComponent,
-    LeagueGamesComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedModule
-  ],
-  exports: [
-    LeagueComponent
-  ]
+  declarations: [LeagueComponent, DivisionRankingsComponent, LeagueDashboardComponent, LeagueGamesComponent],
+  imports: [CommonModule, SharedModule],
+  exports: [LeagueComponent],
 })
-export class LeagueModule { }
+export class LeagueModule {}

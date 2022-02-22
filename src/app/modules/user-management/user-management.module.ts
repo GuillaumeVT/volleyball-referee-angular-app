@@ -10,24 +10,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-  declarations: [
-    AccountComponent,
-    HomeComponent,
-    PasswordLostComponent,
-    PasswordResetComponent,
-    SignInComponent
-  ],
-  imports: [
-    MaterialModule,
-    SharedModule,
-    UserDataModule
-  ],
-  exports: [
-    AccountComponent,
-    HomeComponent,
-    PasswordLostComponent,
-    PasswordResetComponent,
-    SignInComponent
-  ]
+  declarations: [AccountComponent, HomeComponent, PasswordLostComponent, PasswordResetComponent, SignInComponent],
+  imports: [MaterialModule, SharedModule, UserDataModule],
+  exports: [AccountComponent, HomeComponent, PasswordLostComponent, PasswordResetComponent, SignInComponent],
 })
-export class UserManagementModule { }
+export class UserManagementModule {}

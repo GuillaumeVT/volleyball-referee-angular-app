@@ -1,4 +1,4 @@
-@import "~@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
+@import '~@danielmoncada/angular-datetime-picker/assets/style/picker.min.css';
 
 :root {
   --vbr-body-color: #f1f1f1;
@@ -45,8 +45,8 @@
 }
 
 .div-user {
-	max-width: 1500px;
-	margin: 0 auto;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 .div-small-form {
@@ -59,55 +59,55 @@
 /* Chip */
 
 .vbr-chip {
-   display: inline-block;
-   color: var(--vbr-text-color);
-   padding: 0 var(--vbr-chip-padding);
-   height: calc(var(--vbr-chip-padding) * 2);
-   line-height: calc(var(--vbr-chip-padding) * 2);
-   border-radius: var(--vbr-chip-padding);
-   border-color: var(--vbr-light-unselected-color);
-   background-color: var(--vbr-light-unselected-color);
- }
+  display: inline-block;
+  color: var(--vbr-text-color);
+  padding: 0 var(--vbr-chip-padding);
+  height: calc(var(--vbr-chip-padding) * 2);
+  line-height: calc(var(--vbr-chip-padding) * 2);
+  border-radius: var(--vbr-chip-padding);
+  border-color: var(--vbr-light-unselected-color);
+  background-color: var(--vbr-light-unselected-color);
+}
 
- .vbr-live-chip {
-   border-color: var(--vbr-live-light-color) !important;
-   background-color: var(--vbr-live-light-color) !important;
- }
+.vbr-live-chip {
+  border-color: var(--vbr-live-light-color) !important;
+  background-color: var(--vbr-live-light-color) !important;
+}
 
- .vbr-indoor-chip {
-   border-color: var(--vbr-indoor-light-color) !important;
-   background-color: var(--vbr-indoor-light-color) !important;
- }
+.vbr-indoor-chip {
+  border-color: var(--vbr-indoor-light-color) !important;
+  background-color: var(--vbr-indoor-light-color) !important;
+}
 
- .vbr-indoor-4x4-chip {
-   border-color: var(--vbr-indoor-4x4-light-color) !important;
-   background-color: var(--vbr-indoor-4x4-light-color) !important;
- }
+.vbr-indoor-4x4-chip {
+  border-color: var(--vbr-indoor-4x4-light-color) !important;
+  background-color: var(--vbr-indoor-4x4-light-color) !important;
+}
 
- .vbr-beach-chip {
-   border-color: var(--vbr-beach-light-color) !important;
-   background-color: var(--vbr-beach-light-color) !important;
- }
+.vbr-beach-chip {
+  border-color: var(--vbr-beach-light-color) !important;
+  background-color: var(--vbr-beach-light-color) !important;
+}
 
- .vbr-snow-chip {
-   border-color: var(--vbr-snow-light-color) !important;
-   background-color: var(--vbr-snow-light-color) !important;
- }
+.vbr-snow-chip {
+  border-color: var(--vbr-snow-light-color) !important;
+  background-color: var(--vbr-snow-light-color) !important;
+}
 
- .vbr-mixed-chip {
-   border-color: var(--vbr-mixed-light-color) !important;
-   background-color: var(--vbr-mixed-light-color) !important;
- }
+.vbr-mixed-chip {
+  border-color: var(--vbr-mixed-light-color) !important;
+  background-color: var(--vbr-mixed-light-color) !important;
+}
 
- .vbr-ladies-chip {
-   border-color: var(--vbr-ladies-light-color) !important;
-   background-color: var(--vbr-ladies-light-color) !important;
- }
+.vbr-ladies-chip {
+  border-color: var(--vbr-ladies-light-color) !important;
+  background-color: var(--vbr-ladies-light-color) !important;
+}
 
- .vbr-gents-chip {
-   border-color: var(--vbr-gents-light-color) !important;
-   background-color: var(--vbr-gents-light-color) !important;
- }
+.vbr-gents-chip {
+  border-color: var(--vbr-gents-light-color) !important;
+  background-color: var(--vbr-gents-light-color) !important;
+}
 
 .player-badge {
   font-weight: normal;
@@ -120,7 +120,8 @@
   font-size: 1.3rem;
 }
 
-.btn:focus, .btn:active {
+.btn:focus,
+.btn:active {
   outline: none !important;
   box-shadow: none !important;
 }
@@ -138,7 +139,7 @@
 }
 
 .btn:after {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   width: 100%;
@@ -151,12 +152,12 @@
   background-position: 50%;
   transform: scale(10, 10);
   opacity: 0;
-  transition: transform .4s, opacity 1s;
+  transition: transform 0.4s, opacity 1s;
 }
 
 .btn:active:after {
   transform: scale(0, 0);
-  opacity: .3;
+  opacity: 0.3;
   transition: 0s;
 }
 

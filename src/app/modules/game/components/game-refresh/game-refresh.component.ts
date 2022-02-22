@@ -11,16 +11,15 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-game-refresh',
   templateUrl: './game-refresh.component.html',
-  styleUrls: ['./game-refresh.component.scss']
+  styleUrls: ['./game-refresh.component.scss'],
 })
 export class GameRefreshComponent implements OnChanges, OnDestroy {
-
   @Input() gameId: string;
-  @Input() rate:   number;
+  @Input() rate: number;
   @Output() currentGameUpdated = new EventEmitter();
 
-  game:         Game;
-  isLive:       boolean;
+  game: Game;
+  isLive: boolean;
   subscription: Subscription;
 
   constructor(private router: Router, private publicService: PublicService, private datePipe: DatePipe) {
@@ -32,7 +31,9 @@ export class GameRefreshComponent implements OnChanges, OnDestroy {
       if (this.subscription) {
         this.subscription.unsubscribe();
       }
-      this.subscription = timer(0, this.rate).pipe(takeWhile(() => this.isLive)).subscribe(() => this.updateGame());
+      this.subscription = timer(0, this.rate)
+        .pipe(takeWhile(() => this.isLive))
+        .subscribe(() => this.updateGame());
     }
   }
 
@@ -43,7 +44,10 @@ export class GameRefreshComponent implements OnChanges, OnDestroy {
   }
 
   updateGame(): void {
-    this.publicService.getGame(this.gameId).subscribe(game => this.onGameReceived(game), _error => this.onGameReceived(null));
+    this.publicService.getGame(this.gameId).subscribe(
+      (game) => this.onGameReceived(game),
+      (_error) => this.onGameReceived(null),
+    );
   }
 
   onGameReceived(game: Game): void {
@@ -51,16 +55,19 @@ export class GameRefreshComponent implements OnChanges, OnDestroy {
       this.router.navigateByUrl('not-found');
     } else {
       this.game = game;
-      this.isLive = (game.status === 'LIVE');
+      this.isLive = game.status === 'LIVE';
       if (this.game.homeTeam.color === this.game.guestTeam.color) {
-        this.game.guestTeam.color = "#d6d7d7";
+        this.game.guestTeam.color = '#d6d7d7';
       }
       this.currentGameUpdated.emit(game);
     }
   }
 
   downloadScoreSheet(): void {
-    this.publicService.getScoreSheet(this.gameId).subscribe((blob: Blob) => this.onScoreSheetReceived(blob), _error => this.onScoreSheetReceived(null));
+    this.publicService.getScoreSheet(this.gameId).subscribe(
+      (blob: Blob) => this.onScoreSheetReceived(blob),
+      (_error) => this.onScoreSheetReceived(null),
+    );
   }
 
   onScoreSheetReceived(blob: Blob): void {
@@ -68,5 +75,4 @@ export class GameRefreshComponent implements OnChanges, OnDestroy {
     const filename = this.game.homeTeam.name + '_' + this.game.guestTeam.name + '_' + dateStr + '.html';
     saveAs(blob, filename);
   }
-
 }

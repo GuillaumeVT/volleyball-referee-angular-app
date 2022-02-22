@@ -5,17 +5,16 @@ import { Directive, EventEmitter, Input, Output } from '@angular/core';
 
 @Directive()
 export abstract class AbstractGameComponent {
-
-  @Input() gameId:     string;
-  @Input() game:       Game;
+  @Input() gameId: string;
+  @Input() game: Game;
   @Input() currentSet: number;
-  @Input() leftTeam:   TeamType;
-  @Input() rightTeam:  TeamType;
+  @Input() leftTeam: TeamType;
+  @Input() rightTeam: TeamType;
 
   @Output() teamsSwapped = new EventEmitter();
   @Output() currentSetUpdated = new EventEmitter(true);
 
-  constructor() { }
+  constructor() {}
 
   onCurrentSetUpdated(setIndex: number): void {
     this.currentSetUpdated.emit(setIndex);
@@ -24,5 +23,4 @@ export abstract class AbstractGameComponent {
   onTeamsSwapped(): void {
     this.teamsSwapped.emit();
   }
-
 }

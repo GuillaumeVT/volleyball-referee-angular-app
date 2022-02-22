@@ -1,41 +1,52 @@
-<mat-card *ngIf="game" style="height: 100%;">
+<mat-card *ngIf="game" style="height: 100%">
   <mat-card-content>
     <div class="text-center">
       <div>
-        {{game.scheduledAt | date : 'mediumDate'}}
+        {{ game.scheduledAt | date: 'mediumDate' }}
 
         <div>
           <span *ngIf="game.league?.name?.length">
-            {{game.league.name}}
-            <span *ngIf="game.league?.division?.length">&nbsp;/&nbsp;{{game.league.division}}</span>
+            {{ game.league.name }}
+            <span *ngIf="game.league?.division?.length">&nbsp;/&nbsp;{{ game.league.division }}</span>
           </span>
-          <span class="ml-1" *ngIf="game.refereeName?.length"><mat-icon inline=true style="vertical-align: middle;"><span class="material-icons">person</span></mat-icon> {{ 'common.by' | translate }} {{game.refereeName}}</span>
+          <span class="ml-1" *ngIf="game.refereeName?.length"
+            ><mat-icon inline="true" style="vertical-align: middle"><span class="material-icons">person</span></mat-icon>
+            {{ 'common.by' | translate }} {{ game.refereeName }}</span
+          >
         </div>
       </div>
 
       <div class="div-summary my-3">
         <div class="text-center team-name">
-          {{leftTeamName}}
+          {{ leftTeamName }}
         </div>
 
-        <span class="badge text-center set-badge mx-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)" [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)">
-          {{leftTeamSets}}
+        <span
+          class="badge text-center set-badge mx-1"
+          [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)"
+          [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+          [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)"
+        >
+          {{ leftTeamSets }}
         </span>
 
         <button mat-mini-fab type="button" color="primary" aria-label="Swap" (click)="swapTeams()"><mat-icon>swap_horiz</mat-icon></button>
 
-        <span class="badge text-center set-badge mx-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)" [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)">
-          {{rightTeamSets}}
+        <span
+          class="badge text-center set-badge mx-1"
+          [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)"
+          [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+          [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)"
+        >
+          {{ rightTeamSets }}
         </span>
 
         <div class="text-center team-name">
-          {{rightTeamName}}
+          {{ rightTeamName }}
         </div>
       </div>
 
       <div [innerHtml]="fullScore"></div>
-
     </div>
-
   </mat-card-content>
 </mat-card>

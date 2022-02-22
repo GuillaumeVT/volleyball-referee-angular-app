@@ -9,20 +9,19 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 @Component({
   selector: 'app-indoor-court',
   templateUrl: './indoor-court.component.html',
-  styleUrls: ['./indoor-court.component.scss']
+  styleUrls: ['./indoor-court.component.scss'],
 })
 export class IndoorCourtComponent implements OnChanges {
-
-  @Input() game:      Game;
-  @Input() setIndex:  number;
-  @Input() leftTeam:  TeamType;
+  @Input() game: Game;
+  @Input() setIndex: number;
+  @Input() leftTeam: TeamType;
   @Input() rightTeam: TeamType;
   @Input() positions: number;
 
   hPlayerItems: IndoorPlayerItem[];
   gPlayerItems: IndoorPlayerItem[];
 
-  constructor(private playerStyleService: PlayerStyleService) { }
+  constructor(private playerStyleService: PlayerStyleService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.game && this.game.sets) {
@@ -41,14 +40,13 @@ export class IndoorCourtComponent implements OnChanges {
     for (let index = 0; index < this.positions; index++) {
       var position = index + 1;
       var player = this.getPlayerAt(position, teamType);
-      var color : string, backgroundColor : string, borderColor : string;
+      var color: string, backgroundColor: string, borderColor: string;
 
       if (this.playerStyleService.isLibero(this.game, teamType, player)) {
         color = this.playerStyleService.getLiberoTextColor(this.game, teamType);
         backgroundColor = this.playerStyleService.getLiberoBackgroundColor(this.game, teamType);
         borderColor = this.playerStyleService.getBorderColor(backgroundColor);
-      }
-      else {
+      } else {
         color = this.playerStyleService.getTeamTextColor(this.game, teamType);
         backgroundColor = this.playerStyleService.getTeamBackgroundColor(this.game, teamType);
         borderColor = this.playerStyleService.getBorderColor(backgroundColor);
@@ -63,7 +61,7 @@ export class IndoorCourtComponent implements OnChanges {
         actingCaptain = set.guestCaptain;
       }
 
-      var playerItem = new IndoorPlayerItem(player, color, backgroundColor, borderColor, (actingCaptain >= 0 && actingCaptain === player));
+      var playerItem = new IndoorPlayerItem(player, color, backgroundColor, borderColor, actingCaptain >= 0 && actingCaptain === player);
       playerItems.push(playerItem);
     }
     return playerItems;
@@ -122,23 +120,23 @@ export class IndoorCourtComponent implements OnChanges {
 
     switch (position) {
       case 1:
-      playerNumber = players.p1;
-      break;
+        playerNumber = players.p1;
+        break;
       case 2:
-      playerNumber = players.p2;
-      break;
+        playerNumber = players.p2;
+        break;
       case 3:
-      playerNumber = players.p3;
-      break;
+        playerNumber = players.p3;
+        break;
       case 4:
-      playerNumber = players.p4;
-      break;
+        playerNumber = players.p4;
+        break;
       case 5:
-      playerNumber = players.p5;
-      break;
+        playerNumber = players.p5;
+        break;
       case 6:
-      playerNumber = players.p6;
-      break;
+        playerNumber = players.p6;
+        break;
     }
 
     return playerNumber;
@@ -165,5 +163,4 @@ export class IndoorCourtComponent implements OnChanges {
 
     return visibility;
   }
-
 }

@@ -7,22 +7,21 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TeamService {
-
   private teamsUrl = environment.api + '/teams';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   listTeams(kinds: string[], genders: string[], page: number, size: number): Observable<Page<TeamSummary>> {
     const url = `${this.teamsUrl}`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let kind of kinds) {
-      params = params.append("kind", kind);
+      params = params.append('kind', kind);
     }
     for (let gender of genders) {
-      params = params.append("gender", gender);
+      params = params.append('gender', gender);
     }
     return this.http.get<Page<TeamSummary>>(url, { params: params });
   }

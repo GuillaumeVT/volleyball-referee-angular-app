@@ -30,18 +30,9 @@ import { NgModule } from '@angular/core';
     ColorPickerDialogComponent,
     PlayerNamesDialogComponent,
     UserTeamDialogComponent,
-    UserRulesDialogComponent
+    UserRulesDialogComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule
-  ],
-  exports: [
-    UserColleaguesComponent,
-    UserLeaguesComponent,
-    UserRulesComponent,
-    UserTeamsComponent,
-    UserGamesComponent
-  ]
+  imports: [CommonModule, SharedModule],
+  exports: [UserColleaguesComponent, UserLeaguesComponent, UserRulesComponent, UserTeamsComponent, UserGamesComponent],
 })
-export class UserDataModule { }
+export class UserDataModule {}

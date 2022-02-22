@@ -1,12 +1,11 @@
 <h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.Create">{{ 'user.team.create' | translate }}</h2>
-<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.Update">{{ 'user.team.update' | translate: {name: data.team.name} }}</h2>
-<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.View">{{ 'user.team.view' | translate: {name: data.team.name} }}</h2>
+<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.Update">{{ 'user.team.update' | translate: { name: data.team.name } }}</h2>
+<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.View">{{ 'user.team.view' | translate: { name: data.team.name } }}</h2>
 <mat-dialog-content>
   <form [formGroup]="teamFormGroup" autocomplete="off" novalidate (ngSubmit)="onSubmitForm()">
-
     <mat-form-field class="my-2" appearance="outline">
       <mat-label>{{ 'user.team.name' | translate }}</mat-label>
-      <input matInput type="text" formControlName="name">
+      <input matInput type="text" formControlName="name" />
       <mat-error *ngIf="nameFormControl.errors?.required">{{ 'user.team.messages.name-required-error' | translate }}</mat-error>
     </mat-form-field>
 
@@ -18,54 +17,93 @@
           <i class="p-1" [ngClass]="getGenderIcon()"></i>
         </button>
       </div>
-     
     </div>
 
     <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.crudType !== crudTypeEnum.View">
       <span fxFlex="40">{{ 'user.team.shirt-color' | translate }}</span>
 
       <div fxFlex>
-        <button mat-fab type="button" [style.background-color]="colorFormControl.value" [style.color]="playerStyleService.getTextColor(colorFormControl.value)" (click)="onChangeShirtColor()" [disabled]="editingDisabled ? true : null">
+        <button
+          mat-fab
+          type="button"
+          [style.background-color]="colorFormControl.value"
+          [style.color]="playerStyleService.getTextColor(colorFormControl.value)"
+          (click)="onChangeShirtColor()"
+          [disabled]="editingDisabled ? true : null"
+        >
           <mat-icon>brush</mat-icon>
         </button>
       </div>
-     
     </div>
 
     <div class="my-2" *ngIf="data.team.kind === 'INDOOR' || data.team.kind === 'INDOOR_4X4'">
       <div class="mb-3">
         {{ 'user.team.player-numbers' | translate }}
-        <mat-error *ngIf="numberOfPlayersFormControl.errors?.min">{{ 'user.team.messages.min-players-required-error' | translate: {minPlayers: minPlayers} }}</mat-error>
+        <mat-error *ngIf="numberOfPlayersFormControl.errors?.min">{{
+          'user.team.messages.min-players-required-error' | translate: { minPlayers: minPlayers }
+        }}</mat-error>
       </div>
 
       <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" *ngIf="!moreNumbers">
-        <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:0:25;" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
-          [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
-          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"></button>
-        
-          <button type="button" mat-button color="primary" (click)="showMoreNumbers()" [hidden]="data.crudType === crudTypeEnum.View">{{ 'user.team.more' | translate }}</button>
+        <button
+          type="button"
+          class="btn player-button m-1"
+          *ngFor="let playerItem of players | slice: 0:25"
+          (click)="onPlayerSelected(playerItem.shirtNumber, true)"
+          [style.background-color]="playerItem.getBackgroundColor()"
+          [style.color]="playerItem.getColor()"
+          [style.border-color]="playerItem.getBorderColor()"
+          [innerHTML]="playerItem.player"
+          [attr.disabled]="editingDisabled ? true : null"
+          [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"
+        ></button>
+
+        <button type="button" mat-button color="primary" (click)="showMoreNumbers()" [hidden]="data.crudType === crudTypeEnum.View">
+          {{ 'user.team.more' | translate }}
+        </button>
       </div>
-      
+
       <div fxLayout="row wrap" fxFill fxLayoutAlign="start center" *ngIf="moreNumbers">
-        <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
-          [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
-          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"></button>
-        
-        <button type="button" mat-button color="primary" (click)="showLessNumbers()" [hidden]="data.crudType === crudTypeEnum.View">{{ 'user.team.less' | translate }}</button>
+        <button
+          type="button"
+          class="btn player-button m-1"
+          *ngFor="let playerItem of players"
+          (click)="onPlayerSelected(playerItem.shirtNumber, true)"
+          [style.background-color]="playerItem.getBackgroundColor()"
+          [style.color]="playerItem.getColor()"
+          [style.border-color]="playerItem.getBorderColor()"
+          [innerHTML]="playerItem.player"
+          [attr.disabled]="editingDisabled ? true : null"
+          [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"
+        ></button>
+
+        <button type="button" mat-button color="primary" (click)="showLessNumbers()" [hidden]="data.crudType === crudTypeEnum.View">
+          {{ 'user.team.less' | translate }}
+        </button>
       </div>
-      
     </div>
 
     <div class="my-2" *ngIf="data.team.kind === 'SNOW'">
       <div class="mb-3">
         {{ 'user.team.player-numbers' | translate }}
-        <mat-error *ngIf="numberOfPlayersFormControl.errors?.min">{{ 'user.team.messages.min-players-required-error' | translate: {minPlayers: minPlayers} }}</mat-error>
+        <mat-error *ngIf="numberOfPlayersFormControl.errors?.min">{{
+          'user.team.messages.min-players-required-error' | translate: { minPlayers: minPlayers }
+        }}</mat-error>
       </div>
 
       <div fxLayout="row wrap" fxFill fxLayoutAlign="start center">
-        <button type="button" class="btn player-button m-1" *ngFor="let playerItem of players | slice:1:5;" (click)="onPlayerSelected(playerItem.shirtNumber, true)"
-          [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
-          [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"></button>
+        <button
+          type="button"
+          class="btn player-button m-1"
+          *ngFor="let playerItem of players | slice: 1:5"
+          (click)="onPlayerSelected(playerItem.shirtNumber, true)"
+          [style.background-color]="playerItem.getBackgroundColor()"
+          [style.color]="playerItem.getColor()"
+          [style.border-color]="playerItem.getBorderColor()"
+          [innerHTML]="playerItem.player"
+          [attr.disabled]="editingDisabled ? true : null"
+          [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"
+        ></button>
       </div>
     </div>
 
@@ -73,56 +111,103 @@
       <mat-label>{{ 'user.team.captain' | translate }}</mat-label>
       <mat-select autoActiveFirstOption [formControl]="captain">
         <mat-option *ngFor="let playerNumber of selectedPlayers" [value]="playerNumber">
-          {{playerNumber}}
+          {{ playerNumber }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="captainFormControl.errors?.required || captainFormControl.errors?.min">{{ 'user.team.messages.captain-required-error' | translate }}</mat-error>
+      <mat-error *ngIf="captainFormControl.errors?.required || captainFormControl.errors?.min">{{
+        'user.team.messages.captain-required-error' | translate
+      }}</mat-error>
     </mat-form-field>
 
     <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.crudType !== crudTypeEnum.View">
       <span fxFlex="40">{{ 'user.team.player-names' | translate }}</span>
 
       <div fxFlex>
-        <button mat-fab type="button" [style.background-color]="colorFormControl.value" [style.color]="playerStyleService.getTextColor(colorFormControl.value)" (click)="onEditPlayerNames()" [disabled]="editingDisabled ? true : null">
+        <button
+          mat-fab
+          type="button"
+          [style.background-color]="colorFormControl.value"
+          [style.color]="playerStyleService.getTextColor(colorFormControl.value)"
+          (click)="onEditPlayerNames()"
+          [disabled]="editingDisabled ? true : null"
+        >
           <mat-icon>badge</mat-icon>
         </button>
       </div>
-     
     </div>
 
-    <div class="my-2" fxLayout="row" fxFill fxLayoutAlign="start center" *ngIf="data.team.kind === 'INDOOR' && data.crudType !== crudTypeEnum.View">
+    <div
+      class="my-2"
+      fxLayout="row"
+      fxFill
+      fxLayoutAlign="start center"
+      *ngIf="data.team.kind === 'INDOOR' && data.crudType !== crudTypeEnum.View"
+    >
       <span fxFlex="40">{{ 'user.team.libero-shirt-color' | translate }}</span>
 
       <div fxFlex>
-        <button mat-fab type="button" [style.background-color]="liberoColorFormControl.value" [style.color]="playerStyleService.getTextColor(liberoColorFormControl.value)" (click)="onChangeLiberoShirtColor()" [disabled]="editingDisabled ? true : null">
+        <button
+          mat-fab
+          type="button"
+          [style.background-color]="liberoColorFormControl.value"
+          [style.color]="playerStyleService.getTextColor(liberoColorFormControl.value)"
+          (click)="onChangeLiberoShirtColor()"
+          [disabled]="editingDisabled ? true : null"
+        >
           <mat-icon>brush</mat-icon>
         </button>
       </div>
-     
     </div>
 
     <div class="my-2" *ngIf="data.team.kind === 'INDOOR' && selectedPlayers.length > 6">
       <div class="mb-3">{{ 'user.team.libero-numbers' | translate }}</div>
 
       <div fxLayout="row wrap" fxFill fxLayoutAlign="start center">
-        <button type="button" class="btn player-button m-1" *ngFor="let playerItem of liberos" (click)="onLiberoSelected(playerItem.shirtNumber, true)"
-            [style.background-color]="playerItem.getBackgroundColor()" [style.color]="playerItem.getColor()" [style.border-color]="playerItem.getBorderColor()"
-            [innerHTML]="playerItem.player" [attr.disabled]="editingDisabled ? true : null" [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"></button>
+        <button
+          type="button"
+          class="btn player-button m-1"
+          *ngFor="let playerItem of liberos"
+          (click)="onLiberoSelected(playerItem.shirtNumber, true)"
+          [style.background-color]="playerItem.getBackgroundColor()"
+          [style.color]="playerItem.getColor()"
+          [style.border-color]="playerItem.getBorderColor()"
+          [innerHTML]="playerItem.player"
+          [attr.disabled]="editingDisabled ? true : null"
+          [hidden]="data.crudType === crudTypeEnum.View && !playerItem.selected"
+        ></button>
       </div>
-      
     </div>
 
     <mat-form-field class="my-2" appearance="outline">
       <mat-label>{{ 'user.team.coach-name' | translate }}</mat-label>
-      <input matInput type="text" formControlName="coachName">
+      <input matInput type="text" formControlName="coachName" />
     </mat-form-field>
-
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()" *ngIf="data.crudType === crudTypeEnum.View">{{ 'common.close' | translate }}</button>
   <button mat-button (click)="close()" *ngIf="data.crudType !== crudTypeEnum.View">{{ 'common.cancel' | translate }}</button>
-  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!teamFormGroup.valid" *ngIf="data.crudType === crudTypeEnum.Create">{{ 'common.create' | translate }}</button>
-  <button mat-raised-button type="submit" color="primary" (click)="onSubmitForm()" [disabled]="!teamFormGroup.valid" *ngIf="data.crudType === crudTypeEnum.Update">{{ 'common.update' | translate }}</button>
-  <button mat-raised-button type="button" color="primary" (click)="onEdit()" *ngIf="data.crudType === crudTypeEnum.View">{{ 'common.edit' | translate }}</button>
+  <button
+    mat-raised-button
+    type="submit"
+    color="primary"
+    (click)="onSubmitForm()"
+    [disabled]="!teamFormGroup.valid"
+    *ngIf="data.crudType === crudTypeEnum.Create"
+  >
+    {{ 'common.create' | translate }}
+  </button>
+  <button
+    mat-raised-button
+    type="submit"
+    color="primary"
+    (click)="onSubmitForm()"
+    [disabled]="!teamFormGroup.valid"
+    *ngIf="data.crudType === crudTypeEnum.Update"
+  >
+    {{ 'common.update' | translate }}
+  </button>
+  <button mat-raised-button type="button" color="primary" (click)="onEdit()" *ngIf="data.crudType === crudTypeEnum.View">
+    {{ 'common.edit' | translate }}
+  </button>
 </mat-dialog-actions>

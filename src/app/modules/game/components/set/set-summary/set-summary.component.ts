@@ -8,22 +8,21 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-set-summary',
   templateUrl: './set-summary.component.html',
-  styleUrls: ['./set-summary.component.scss']
+  styleUrls: ['./set-summary.component.scss'],
 })
 export class SetSummaryComponent implements OnChanges {
-
-  @Input() game:      Game;
-  @Input() leftTeam:  TeamType;
+  @Input() game: Game;
+  @Input() leftTeam: TeamType;
   @Input() rightTeam: TeamType;
-  
+
   @Output() currentSetUpdated = new EventEmitter(true);
 
   currentSet: FormControl;
 
-  homePoints:    number;
-  guestPoints:   number;
-  duration:      string;
-  homeTimeouts:  number[];
+  homePoints: number;
+  guestPoints: number;
+  duration: string;
+  homeTimeouts: number[];
   guestTimeouts: number[];
 
   constructor(public playerStyleService: PlayerStyleService) {
@@ -37,7 +36,7 @@ export class SetSummaryComponent implements OnChanges {
   private init(): void {
     if (this.game && this.game.sets) {
       if (this.currentSet.value < 0) {
-        this.selectSet(this.game.sets.length -1);
+        this.selectSet(this.game.sets.length - 1);
       }
 
       const setIndex = this.currentSet.value;
@@ -86,5 +85,4 @@ export class SetSummaryComponent implements OnChanges {
 
     return timeouts;
   }
-
 }

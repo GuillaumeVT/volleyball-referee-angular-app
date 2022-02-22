@@ -5,17 +5,27 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="center start">
-      
       <div fxFlex="50">
-        <span class="badge text-center player-badge-font mr-1 mb-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)" [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
-        [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)" [innerHTML]="getScore(leftTeam, timeout)" *ngFor="let timeout of getTimeouts(leftTeam)"></span>
+        <span
+          class="badge text-center player-badge-font mr-1 mb-1"
+          [style.background-color]="playerStyleService.getTeamBackgroundColor(game, leftTeam)"
+          [style.color]="playerStyleService.getTeamTextColor(game, leftTeam)"
+          [style.border-color]="playerStyleService.getTeamBorderColor(game, leftTeam)"
+          [innerHTML]="getScore(leftTeam, timeout)"
+          *ngFor="let timeout of getTimeouts(leftTeam)"
+        ></span>
       </div>
 
       <div fxFlex="50">
-        <span class="badge text-center player-badge-font mr-1 mb-1" [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)" [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
-        [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)" [innerHTML]="getScore(rightTeam, timeout)" *ngFor="let timeout of getTimeouts(rightTeam)"></span>
+        <span
+          class="badge text-center player-badge-font mr-1 mb-1"
+          [style.background-color]="playerStyleService.getTeamBackgroundColor(game, rightTeam)"
+          [style.color]="playerStyleService.getTeamTextColor(game, rightTeam)"
+          [style.border-color]="playerStyleService.getTeamBorderColor(game, rightTeam)"
+          [innerHTML]="getScore(rightTeam, timeout)"
+          *ngFor="let timeout of getTimeouts(rightTeam)"
+        ></span>
       </div>
-
     </div>
   </mat-card-content>
 </mat-card>

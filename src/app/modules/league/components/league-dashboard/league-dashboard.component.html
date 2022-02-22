@@ -4,7 +4,7 @@
       <mat-option [value]="allDivisions">{{ 'league.all-divisions' | translate }}</mat-option>
       <mat-optgroup label="{{ 'league.divisions' | translate }}">
         <mat-option *ngFor="let division of league.divisions" [value]="division">
-          {{division}}
+          {{ division }}
         </mat-option>
       </mat-optgroup>
     </mat-select>
@@ -12,7 +12,6 @@
 </div>
 
 <div fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="8px" fxFlexFill>
-
   <mat-card fxFlex="33" fxFlex.xs="100" class="mb-2" *ngIf="games">
     <mat-card-header>
       <mat-card-title>{{ 'search.option.live' | translate }}</mat-card-title>
@@ -45,5 +44,4 @@
       </div>
     </mat-card-content>
   </mat-card>
-  
 </div>

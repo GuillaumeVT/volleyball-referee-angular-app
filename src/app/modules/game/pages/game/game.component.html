@@ -1,23 +1,59 @@
 <app-game-refresh [gameId]="gameId" [rate]="rate" (currentGameUpdated)="onCurrentGameUpdated($event)"></app-game-refresh>
 <div *ngIf="game && game.status !== 'SCHEDULED'" [ngSwitch]="game.kind">
-  <app-beach-game *ngSwitchCase="'BEACH'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
-    (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-beach-game>
+  <app-beach-game
+    *ngSwitchCase="'BEACH'"
+    [gameId]="gameId"
+    [game]="game"
+    [currentSet]="currentSet"
+    [leftTeam]="leftTeam"
+    [rightTeam]="rightTeam"
+    (teamsSwapped)="onTeamsSwapped()"
+    (currentSetUpdated)="onCurrentSetUpdated($event)"
+  ></app-beach-game>
 
-  <app-indoor-game *ngSwitchCase="'INDOOR'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
-    (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-indoor-game>
+  <app-indoor-game
+    *ngSwitchCase="'INDOOR'"
+    [gameId]="gameId"
+    [game]="game"
+    [currentSet]="currentSet"
+    [leftTeam]="leftTeam"
+    [rightTeam]="rightTeam"
+    (teamsSwapped)="onTeamsSwapped()"
+    (currentSetUpdated)="onCurrentSetUpdated($event)"
+  ></app-indoor-game>
 
-  <app-indoor4x4-game *ngSwitchCase="'INDOOR_4X4'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
-    (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-indoor4x4-game>
+  <app-indoor4x4-game
+    *ngSwitchCase="'INDOOR_4X4'"
+    [gameId]="gameId"
+    [game]="game"
+    [currentSet]="currentSet"
+    [leftTeam]="leftTeam"
+    [rightTeam]="rightTeam"
+    (teamsSwapped)="onTeamsSwapped()"
+    (currentSetUpdated)="onCurrentSetUpdated($event)"
+  ></app-indoor4x4-game>
 
-    <app-snow-game *ngSwitchCase="'SNOW'" [gameId]="gameId" [game]="game" [currentSet]="currentSet" [leftTeam]="leftTeam" [rightTeam]="rightTeam"
-      (teamsSwapped)="onTeamsSwapped()" (currentSetUpdated)="onCurrentSetUpdated($event)"></app-snow-game>
+  <app-snow-game
+    *ngSwitchCase="'SNOW'"
+    [gameId]="gameId"
+    [game]="game"
+    [currentSet]="currentSet"
+    [leftTeam]="leftTeam"
+    [rightTeam]="rightTeam"
+    (teamsSwapped)="onTeamsSwapped()"
+    (currentSetUpdated)="onCurrentSetUpdated($event)"
+  ></app-snow-game>
 </div>
 <div class="div-schedule text-center mt-3" *ngIf="game && game.status === 'SCHEDULED'">
   <div class="mx-1 px-1">
-    <h2 class="mat-h2">{{game.homeTeam.name}} - {{game.guestTeam.name}}</h2>
-    <p *ngIf="game.league">{{game.league.name}} / {{game.league.division}}</p>
+    <h2 class="mat-h2">{{ game.homeTeam.name }} - {{ game.guestTeam.name }}</h2>
+    <p *ngIf="game.league">{{ game.league.name }} / {{ game.league.division }}</p>
     <p class="mt-3 mat-h2">
-      {{ 'game.messages.scheduled' | translate: {date: game.scheduledAt | date : 'dd MMM yyyy', time: game.scheduledAt | date : 'HH:mm', refereeName: game.refereeName} }}
+      {{
+        'game.messages.scheduled'
+          | translate
+            : { date: game.scheduledAt | date: 'dd MMM yyyy', time: game.scheduledAt | date: 'HH:mm', refereeName: game.refereeName }
+      }}
     </p>
   </div>
 </div>

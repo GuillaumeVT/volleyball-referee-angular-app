@@ -8,15 +8,14 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-game-players',
   templateUrl: './game-players.component.html',
-  styleUrls: ['./game-players.component.scss']
+  styleUrls: ['./game-players.component.scss'],
 })
 export class GamePlayersComponent {
-
-  @Input() game:      Game;
-  @Input() leftTeam:  TeamType;
+  @Input() game: Game;
+  @Input() leftTeam: TeamType;
   @Input() rightTeam: TeamType;
 
-  constructor(public playerStyleService: PlayerStyleService) { }
+  constructor(public playerStyleService: PlayerStyleService) {}
 
   getPlayers(teamType: TeamType): Player[] {
     if (TeamType.Home === teamType) {
@@ -33,5 +32,4 @@ export class GamePlayersComponent {
       return this.game.guestTeam.liberos;
     }
   }
-
 }

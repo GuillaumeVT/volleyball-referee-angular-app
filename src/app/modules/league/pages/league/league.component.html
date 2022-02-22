@@ -1,15 +1,14 @@
 <div class="my-3 text-center" *ngIf="league">
-  <span class="h2">{{league.name}}</span>
+  <span class="h2">{{ league.name }}</span>
 </div>
 
 <mat-tab-group animationDuration="0ms" *ngIf="league" mat-align-tabs="center">
-
   <mat-tab label="{{ 'league.title.dashboard' | translate }}">
     <ng-template matTabContent>
       <app-league-dashboard [league]="league"></app-league-dashboard>
     </ng-template>
   </mat-tab>
-  
+
   <mat-tab label="{{ 'league.title.rankings' | translate }}">
     <ng-template matTabContent>
       <app-division-rankings [league]="league"></app-division-rankings>
@@ -21,5 +20,4 @@
       <app-league-games [league]="league"></app-league-games>
     </ng-template>
   </mat-tab>
-
 </mat-tab-group>

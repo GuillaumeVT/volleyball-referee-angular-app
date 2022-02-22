@@ -1,15 +1,22 @@
 import { IndoorPlayerItem } from 'src/app/modules/game/models/indoor-player-item.model';
 
 export class InputPlayerItem extends IndoorPlayerItem {
-
-  shirtNumber:               number;
-  selected:                  boolean;
-  unselectedColor:           string;
+  shirtNumber: number;
+  selected: boolean;
+  unselectedColor: string;
   unselectedBackgroundColor: string;
-  unselectedBorderColor:     string;
+  unselectedBorderColor: string;
 
-  constructor(player: number, color: string, backgroundColor: string, borderColor: string,
-    captain: boolean, unselectedColor: string, unselectedBackgroundColor: string, unselectedBorderColor: string) {
+  constructor(
+    player: number,
+    color: string,
+    backgroundColor: string,
+    borderColor: string,
+    captain: boolean,
+    unselectedColor: string,
+    unselectedBackgroundColor: string,
+    unselectedBorderColor: string,
+  ) {
     super(player, color, backgroundColor, borderColor, captain);
     this.shirtNumber = player;
     this.selected = false;
@@ -21,8 +28,7 @@ export class InputPlayerItem extends IndoorPlayerItem {
   getColor(): string {
     if (this.selected) {
       return this.color;
-    }
-    else {
+    } else {
       return this.unselectedColor;
     }
   }
@@ -30,8 +36,7 @@ export class InputPlayerItem extends IndoorPlayerItem {
   getBackgroundColor(): string {
     if (this.selected) {
       return this.backgroundColor;
-    }
-    else {
+    } else {
       return this.unselectedBackgroundColor;
     }
   }
@@ -39,8 +44,7 @@ export class InputPlayerItem extends IndoorPlayerItem {
   getBorderColor(): string {
     if (this.selected) {
       return this.borderColor;
-    }
-    else {
+    } else {
       return this.unselectedBorderColor;
     }
   }

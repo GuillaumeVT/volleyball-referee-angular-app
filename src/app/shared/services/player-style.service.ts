@@ -4,13 +4,12 @@ import { TeamType } from 'src/app/shared/models/team-type.model';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PlayerStyleService {
-
   constructor() {}
 
-  isLibero(game: Game, teamType: TeamType, player: number) : boolean {
+  isLibero(game: Game, teamType: TeamType, player: number): boolean {
     var liberos = [];
 
     if (TeamType.Home === teamType) {
@@ -130,7 +129,7 @@ export class PlayerStyleService {
     const green = parseInt(hexColor.substr(2, 2), 16);
     const blue = parseInt(hexColor.substr(4, 2), 16);
 
-    const a = 1 - ( 0.299 * red + 0.587 * green + 0.114 * blue) / 255;
+    const a = 1 - (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
 
     var color: string;
 

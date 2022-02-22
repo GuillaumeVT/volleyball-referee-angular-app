@@ -1,9 +1,9 @@
 export class IndoorPlayerItem {
-  player:          string;
-  color:           string;
+  player: string;
+  color: string;
   backgroundColor: string;
-  borderColor:     string;
-  captain:         boolean;
+  borderColor: string;
+  captain: boolean;
 
   constructor(player: number, color: string, backgroundColor: string, borderColor: string, captain: boolean) {
     this.captain = captain;

@@ -11,11 +11,15 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-ladder-event-dialog',
   templateUrl: './ladder-event-dialog.component.html',
-  styleUrls: ['./ladder-event-dialog.component.scss']
+  styleUrls: ['./ladder-event-dialog.component.scss'],
 })
 export class LadderEventDialogComponent {
-
-  constructor(public dialogRef: MatDialogRef<LadderEventDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: LadderEventDialogData, public sanctionService: SanctionService, public playerStyleService: PlayerStyleService) { }
+  constructor(
+    public dialogRef: MatDialogRef<LadderEventDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: LadderEventDialogData,
+    public sanctionService: SanctionService,
+    public playerStyleService: PlayerStyleService,
+  ) {}
 
   getSubstitutions(): Substitution[] {
     if (this.data.ladderItem.teamType === this.data.teamType) {
@@ -40,11 +44,10 @@ export class LadderEventDialogComponent {
       return this.data.ladderItem.oSanctions;
     }
   }
-
 }
 
 export interface LadderEventDialogData {
-  game: Game,
+  game: Game;
   ladderItem: LadderItem;
   teamType: TeamType;
 }

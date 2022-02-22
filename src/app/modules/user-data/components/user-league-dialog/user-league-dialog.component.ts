@@ -10,19 +10,26 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-user-league-dialog',
   templateUrl: './user-league-dialog.component.html',
-  styleUrls: ['./user-league-dialog.component.scss']
+  styleUrls: ['./user-league-dialog.component.scss'],
 })
 export class UserLeagueDialogComponent {
-
   leagueFormGroup: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<UserLeagueDialogComponent>, @Inject(MAT_DIALOG_DATA) public league: League, private leagueService: LeagueService, private snackBarService: SnackBarService, private translate: TranslateService) {
+  constructor(
+    public dialogRef: MatDialogRef<UserLeagueDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public league: League,
+    private leagueService: LeagueService,
+    private snackBarService: SnackBarService,
+    private translate: TranslateService,
+  ) {
     this.leagueFormGroup = new FormGroup({
-      leagueName: new FormControl('', [Validators.required])
+      leagueName: new FormControl('', [Validators.required]),
     });
   }
 
-  get leagueNameFormControl() { return this.leagueFormGroup.get('leagueName'); }
+  get leagueNameFormControl() {
+    return this.leagueFormGroup.get('leagueName');
+  }
 
   close(): void {
     this.dialogRef.close(false);
@@ -30,7 +37,10 @@ export class UserLeagueDialogComponent {
 
   onCreateLeague(): void {
     this.league.name = this.leagueNameFormControl.value;
-    this.leagueService.createLeague(this.league).subscribe(_league => this.onValidResponse(), error => this.onInvalidResponse(error));
+    this.leagueService.createLeague(this.league).subscribe(
+      (_league) => this.onValidResponse(),
+      (error) => this.onInvalidResponse(error),
+    );
   }
 
   onValidResponse(): void {
@@ -38,8 +48,8 @@ export class UserLeagueDialogComponent {
   }
 
   onInvalidResponse(_error: any): void {
-    this.translate.get('user.league.messages.created-error', {pseudo: this.league.name}).subscribe(
-      t =>  this.snackBarService.showError(t)
-    );
+    this.translate
+      .get('user.league.messages.created-error', { pseudo: this.league.name })
+      .subscribe((t) => this.snackBarService.showError(t));
   }
 }

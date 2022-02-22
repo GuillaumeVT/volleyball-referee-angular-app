@@ -10,28 +10,32 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-
-  gameId:     string;
-  game:       Game;
+  gameId: string;
+  game: Game;
   currentSet: number;
-  leftTeam:   TeamType;
-  rightTeam:  TeamType;
-  rate:       number;
+  leftTeam: TeamType;
+  rightTeam: TeamType;
+  rate: number;
 
-  constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService, private translate: TranslateService) {
-    this.translate.get('game.page').subscribe(t => this.titleService.setTitle(t));
+  constructor(
+    private titleService: Title,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private translate: TranslateService,
+  ) {
+    this.translate.get('game.page').subscribe((t) => this.titleService.setTitle(t));
     this.currentSet = 0;
     this.leftTeam = TeamType.Home;
-    this.rightTeam = TeamType.Guest
+    this.rightTeam = TeamType.Guest;
     this.rate = 60000;
   }
 
   ngOnInit() {
     this.gameId = this.route.snapshot.paramMap.get('gameId');
-    this.userService.authState.subscribe(userToken => {
+    this.userService.authState.subscribe((userToken) => {
       if (userToken) {
         this.rate = 10000;
       } else {
@@ -57,5 +61,4 @@ export class GameComponent implements OnInit {
       this.rightTeam = TeamType.Guest;
     }
   }
-
 }

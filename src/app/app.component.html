@@ -1,23 +1,41 @@
-
-
 <mat-sidenav-container [hasBackdrop]="!desktopNav" fullscreen>
-
   <mat-sidenav #sideNav [mode]="desktopNav ? 'side' : 'over'" [opened]="desktopNav" class="drawer-container">
-
     <mat-nav-list class="px-3">
-      <a *ngFor="let commonNavItem of commonNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="commonNavItem.url">{{commonNavItem.label | translate}}</a>
+      <a
+        *ngFor="let commonNavItem of commonNavItems"
+        mat-list-item
+        class="mx-1"
+        class="drawer-link"
+        routerLinkActive="selected-drawer-link"
+        [routerLink]="commonNavItem.url"
+        >{{ commonNavItem.label | translate }}</a
+      >
       <mat-divider *ngIf="dataNavItems.length > 0" class="my-2"></mat-divider>
       <div *ngIf="dataNavItems.length > 0" mat-subheader>{{ 'menu.group.data' | translate }}</div>
-      <a *ngFor="let dataNavItem of dataNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="dataNavItem.url">{{dataNavItem.label | translate}}</a>
+      <a
+        *ngFor="let dataNavItem of dataNavItems"
+        mat-list-item
+        class="mx-1"
+        class="drawer-link"
+        routerLinkActive="selected-drawer-link"
+        [routerLink]="dataNavItem.url"
+        >{{ dataNavItem.label | translate }}</a
+      >
       <mat-divider *ngIf="adminNavItems.length > 0" class="my-2"></mat-divider>
       <div *ngIf="adminNavItems.length > 0" mat-subheader>{{ 'menu.group.admin' | translate }}</div>
-      <a *ngFor="let adminNavItem of adminNavItems" mat-list-item class="mx-1" class="drawer-link" routerLinkActive="selected-drawer-link" [routerLink]="adminNavItem.url">{{adminNavItem.label | translate}}</a>
+      <a
+        *ngFor="let adminNavItem of adminNavItems"
+        mat-list-item
+        class="mx-1"
+        class="drawer-link"
+        routerLinkActive="selected-drawer-link"
+        [routerLink]="adminNavItem.url"
+        >{{ adminNavItem.label | translate }}</a
+      >
     </mat-nav-list>
-
   </mat-sidenav>
 
   <mat-sidenav-content #sideNavContent>
-
     <div fxLayout="column" fxFlexFill>
       <app-toolbar [user]="user" [sideNav]="sideNav"></app-toolbar>
       <div fxFlex class="mobile-screen-border-spacing">
@@ -26,8 +44,16 @@
       <app-links-bar></app-links-bar>
     </div>
 
-    <button #scrollToTopButton class="scroll-to-top" mat-mini-fab type="button" color="accent" aria-label="Scroll to top" (click)="scrollToTop()"><mat-icon>arrow_upward</mat-icon></button>
-
+    <button
+      #scrollToTopButton
+      class="scroll-to-top"
+      mat-mini-fab
+      type="button"
+      color="accent"
+      aria-label="Scroll to top"
+      (click)="scrollToTop()"
+    >
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
   </mat-sidenav-content>
-
 </mat-sidenav-container>

@@ -2,7 +2,7 @@
   <mat-form-field class="mx-1 mt-3" appearance="outline">
     <mat-select [(ngModel)]="selectedDivision" (selectionChange)="onDivisionSelected()">
       <mat-option *ngFor="let division of league.divisions" [value]="division">
-        {{division}}
+        {{ division }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -27,20 +27,31 @@
       <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.lost' | translate }}</div>
       <div fxFlex="8" class="text-right p-0 m-0 title">{{ 'league.rankings.diff' | translate }}</div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" class="p-1" *ngFor="let ranking of rankings; let index=index" [ngClass]="getLineClass(index)">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      class="p-1"
+      *ngFor="let ranking of rankings; let index = index"
+      [ngClass]="getLineClass(index)"
+    >
       <div fxFlex="25" class="text-left p-0 m-0">
-        <span class="badge text-center player-badge-font" [style.background-color]="ranking.teamColor" [style.color]="playerStyleService.getTextColor(ranking.teamColor)"
-          [style.border-color]="playerStyleService.getBorderColor(ranking.teamColor)" [innerHTML]="ranking.teamName"></span>
+        <span
+          class="badge text-center player-badge-font"
+          [style.background-color]="ranking.teamColor"
+          [style.color]="playerStyleService.getTextColor(ranking.teamColor)"
+          [style.border-color]="playerStyleService.getBorderColor(ranking.teamColor)"
+          [innerHTML]="ranking.teamName"
+        ></span>
       </div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.matchesFor + ranking.matchesAgainst}}</div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.matchesFor}}</div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.matchesAgainst}}</div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.setsFor}}</div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.setsAgainst}}</div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{getDiff(ranking.setsDiff)}}</div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.pointsFor}}</div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.pointsAgainst}}</div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{getDiff(ranking.pointsDiff)}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ ranking.matchesFor + ranking.matchesAgainst }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ ranking.matchesFor }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ ranking.matchesAgainst }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ ranking.setsFor }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ ranking.setsAgainst }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ getDiff(ranking.setsDiff) }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ ranking.pointsFor }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ ranking.pointsAgainst }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ getDiff(ranking.pointsDiff) }}</div>
     </div>
   </mat-card>
 
@@ -58,17 +69,39 @@
       <div fxFlex="16" class="text-right p-0 m-0 title">{{ 'league.rankings.diff' | translate }}</div>
       <div fxFlex="16" class="text-right p-0 m-0 title">{{ 'league.rankings.diff' | translate }}</div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" class="p-1" *ngFor="let ranking of rankings; let index=index" [ngClass]="getLineClass(index)">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      class="p-1"
+      *ngFor="let ranking of rankings; let index = index"
+      [ngClass]="getLineClass(index)"
+    >
       <div fxFlex="50" class="text-left p-0 m-0">
-        <span class="badge text-center player-badge-font" [style.background-color]="ranking.teamColor" [style.color]="playerStyleService.getTextColor(ranking.teamColor)"
-          [style.border-color]="playerStyleService.getBorderColor(ranking.teamColor)" [innerHTML]="ranking.teamName"></span>
+        <span
+          class="badge text-center player-badge-font"
+          [style.background-color]="ranking.teamColor"
+          [style.color]="playerStyleService.getTextColor(ranking.teamColor)"
+          [style.border-color]="playerStyleService.getBorderColor(ranking.teamColor)"
+          [innerHTML]="ranking.teamName"
+        ></span>
       </div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.matchesFor + ranking.matchesAgainst}}</div>
-      <div fxFlex="8" class="text-right p-0 m-0">{{ranking.matchesFor}}</div>
-      <div fxFlex="16" class="text-right p-0 m-0">{{getDiff(ranking.setsDiff)}}</div>
-      <div fxFlex="16" class="text-right p-0 m-0">{{getDiff(ranking.pointsDiff)}}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ ranking.matchesFor + ranking.matchesAgainst }}</div>
+      <div fxFlex="8" class="text-right p-0 m-0">{{ ranking.matchesFor }}</div>
+      <div fxFlex="16" class="text-right p-0 m-0">{{ getDiff(ranking.setsDiff) }}</div>
+      <div fxFlex="16" class="text-right p-0 m-0">{{ getDiff(ranking.pointsDiff) }}</div>
     </div>
   </mat-card>
 </div>
 
-<button *ngIf="league" type="button" class="bottom-right-fab" mat-fab type="button" color="accent" aria-label="Rankings" (click)="downloadDivisionExcel()"><mat-icon>cloud_download</mat-icon></button>
+<button
+  *ngIf="league"
+  type="button"
+  class="bottom-right-fab"
+  mat-fab
+  type="button"
+  color="accent"
+  aria-label="Rankings"
+  (click)="downloadDivisionExcel()"
+>
+  <mat-icon>cloud_download</mat-icon>
+</button>

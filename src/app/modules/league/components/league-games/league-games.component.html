@@ -1,11 +1,10 @@
 <div class="div-search" *ngIf="league">
-
   <mat-form-field class="mx-1 mt-3" appearance="outline">
     <mat-select [(ngModel)]="selectedDivision" (selectionChange)="onDivisionSelected()">
       <mat-option [value]="allDivisions">{{ 'league.all-divisions' | translate }}</mat-option>
       <mat-optgroup label="{{ 'league.divisions' | translate }}">
         <mat-option *ngFor="let division of league.divisions" [value]="division">
-          {{division}}
+          {{ division }}
         </mat-option>
       </mat-optgroup>
     </mat-select>
@@ -16,12 +15,11 @@
       <mat-option [value]="allTeams">{{ 'league.all-teams' | translate }}</mat-option>
       <mat-optgroup label="{{ 'common.teams' | translate }}">
         <mat-option *ngFor="let team of teams" [value]="team">
-          {{team.name}}&nbsp;&nbsp;{{ team.gender | gender | translate }}
+          {{ team.name }}&nbsp;&nbsp;{{ team.gender | gender | translate }}
         </mat-option>
       </mat-optgroup>
     </mat-select>
   </mat-form-field>
 
   <app-game-list *ngIf="league && selectedTeam" [leagueId]="league.id" [teamId]="selectedTeam.id"></app-game-list>
-
 </div>

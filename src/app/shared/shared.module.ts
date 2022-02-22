@@ -14,13 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
-  declarations: [
-    ConfirmationDialogComponent,
-    StatisticsComponent,
-    GameListComponent,
-    GameListItemComponent,
-    GenderPipe
-  ],
+  declarations: [ConfirmationDialogComponent, StatisticsComponent, GameListComponent, GameListItemComponent, GenderPipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -29,13 +23,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxChartsModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    TranslateModule
+    TranslateModule,
   ],
-  providers: [
-    DatePipe,
-    GenderPipe,
-    { provide: OWL_DATE_TIME_LOCALE, useValue: 'en-GB' }
-  ],
+  providers: [DatePipe, GenderPipe, { provide: OWL_DATE_TIME_LOCALE, useValue: 'en-GB' }],
   exports: [
     CommonModule,
     FormsModule,
@@ -48,7 +38,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     StatisticsComponent,
     GameListComponent,
     GameListItemComponent,
-    TranslateModule
-  ]
+    TranslateModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

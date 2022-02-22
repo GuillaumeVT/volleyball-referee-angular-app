@@ -8,25 +8,24 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GameService {
-
   private gamesUrl = environment.api + '/games';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   listGames(statuses: string[], kinds: string[], genders: string[], page: number, size: number): Observable<Page<GameSummary>> {
     const url = `${this.gamesUrl}`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
-      params = params.append("status", status);
+      params = params.append('status', status);
     }
     for (let kind of kinds) {
-      params = params.append("kind", kind);
+      params = params.append('kind', kind);
     }
     for (let gender of genders) {
-      params = params.append("gender", gender);
+      params = params.append('gender', gender);
     }
     return this.http.get<Page<GameSummary>>(url, { params: params });
   }
@@ -38,12 +37,12 @@ export class GameService {
 
   listGamesInLeague(leagueId: string, statuses: string[], genders: string[], page: number, size: number): Observable<Page<GameSummary>> {
     const url = `${this.gamesUrl}/league/${leagueId}`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
-      params = params.append("status", status);
+      params = params.append('status', status);
     }
     for (let gender of genders) {
-      params = params.append("gender", gender);
+      params = params.append('gender', gender);
     }
     return this.http.get<Page<GameSummary>>(url, { params: params });
   }
@@ -92,5 +91,4 @@ export class GameService {
     const url = `${this.gamesUrl}/league/${leagueId}`;
     return this.http.delete(url);
   }
-
 }

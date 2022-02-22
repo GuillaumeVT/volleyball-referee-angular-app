@@ -19,12 +19,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [
-    ToolbarComponent,
-    LinksBarComponent,
-    PageNotFoundComponent,
-    PrivacyPolicyComponent
-  ],
+  declarations: [ToolbarComponent, LinksBarComponent, PageNotFoundComponent, PrivacyPolicyComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -35,15 +30,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-      }
-  })
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
-  ],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   exports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -54,7 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LinksBarComponent,
     PrivacyPolicyComponent,
     PageNotFoundComponent,
-    TranslateModule
-  ]
+    TranslateModule,
+  ],
 })
-export class CoreModule { }
+export class CoreModule {}

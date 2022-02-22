@@ -2,21 +2,20 @@ import { Page } from 'src/app/shared/models/page.model';
 import { TeamSummary } from 'src/app/shared/models/team.model';
 
 export abstract class AbstractTeamFilter {
-
-  textFilter:         string;
-  isBeachChecked:     boolean;
-  isIndoorChecked:    boolean;
+  textFilter: string;
+  isBeachChecked: boolean;
+  isIndoorChecked: boolean;
   isIndoor4x4Checked: boolean;
-  isSnowChecked:      boolean;
-  isMixedChecked:     boolean;
-  isLadiesChecked:    boolean;
-  isGentsChecked:     boolean;
+  isSnowChecked: boolean;
+  isMixedChecked: boolean;
+  isLadiesChecked: boolean;
+  isGentsChecked: boolean;
 
   page: number;
   size: number;
   last: boolean;
 
-  teams:         TeamSummary[];
+  teams: TeamSummary[];
   filteredTeams: TeamSummary[];
 
   constructor(size: number) {
@@ -91,7 +90,7 @@ export abstract class AbstractTeamFilter {
 
       if (this.textFilter.trim()) {
         if (team.name.toLowerCase().indexOf(this.textFilter) === -1) {
-            mustAdd = false;
+          mustAdd = false;
         }
       }
 

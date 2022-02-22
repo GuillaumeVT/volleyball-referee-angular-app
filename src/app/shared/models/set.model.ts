@@ -1,25 +1,25 @@
 export class Set {
-  duration:             number;
-  startTime:            number;
-  endTime:              number;
-  homePoints:           number;
-  guestPoints:          number;
-  homeTimeouts:         number;
-  guestTimeouts:        number;
-  ladder:               string[];
-  serving:              string;
-  firstServing:         string;
-  homeCurrentPlayers:   Court;
-  guestCurrentPlayers:  Court;
-  homeStartingPlayers:  Court;
+  duration: number;
+  startTime: number;
+  endTime: number;
+  homePoints: number;
+  guestPoints: number;
+  homeTimeouts: number;
+  guestTimeouts: number;
+  ladder: string[];
+  serving: string;
+  firstServing: string;
+  homeCurrentPlayers: Court;
+  guestCurrentPlayers: Court;
+  homeStartingPlayers: Court;
   guestStartingPlayers: Court;
-  homeSubstitutions:    Substitution[];
-  guestSubstitutions:   Substitution[];
-  homeCaptain:          number;
-  guestCaptain:         number;
-  homeCalledTimeouts:   Timeout[];
-  guestCalledTimeouts:  Timeout[];
-  remainingTime:        number;
+  homeSubstitutions: Substitution[];
+  guestSubstitutions: Substitution[];
+  homeCaptain: number;
+  guestCaptain: number;
+  homeCalledTimeouts: Timeout[];
+  guestCalledTimeouts: Timeout[];
+  remainingTime: number;
 }
 
 export class Court {
@@ -32,13 +32,13 @@ export class Court {
 }
 
 export class Substitution {
-  playerIn:     number;
-  playerOut:    number;
-  homePoints:   number;
-  guestPoints:  number;
+  playerIn: number;
+  playerOut: number;
+  homePoints: number;
+  guestPoints: number;
 }
 
 export class Timeout {
-  homePoints:  number;
+  homePoints: number;
   guestPoints: number;
 }

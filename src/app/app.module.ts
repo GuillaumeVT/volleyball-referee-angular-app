@@ -13,9 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     CoreModule,
@@ -26,9 +24,9 @@ import { NgModule } from '@angular/core';
     LeagueModule,
     UserDataModule,
     UserManagementModule,
-    AdminModule
+    AdminModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

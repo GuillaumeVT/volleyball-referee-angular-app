@@ -1,17 +1,27 @@
 <mat-dialog-content>
   <div class="text-center">
-    <img class="ladder-icon-item" *ngFor="let timeout of getTimeouts()" src="assets/ic_timer.png" alt="timeout">
+    <img class="ladder-icon-item" *ngFor="let timeout of getTimeouts()" src="assets/ic_timer.png" alt="timeout" />
     <table *ngIf="getSubstitutions().length">
       <tbody>
         <tr *ngFor="let substitution of getSubstitutions()">
           <td class="mx-1 text-center">
-            <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(data.game, data.teamType)" [style.color]="playerStyleService.getTeamTextColor(data.game, data.teamType)"
-              [style.border-color]="playerStyleService.getTeamBorderColor(data.game, data.teamType)" [innerHTML]="playerStyleService.getPlayer(data.game, data.teamType, substitution.playerIn)"></span>
+            <span
+              class="ladder-item badge point-badge"
+              [style.background-color]="playerStyleService.getTeamBackgroundColor(data.game, data.teamType)"
+              [style.color]="playerStyleService.getTeamTextColor(data.game, data.teamType)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(data.game, data.teamType)"
+              [innerHTML]="playerStyleService.getPlayer(data.game, data.teamType, substitution.playerIn)"
+            ></span>
           </td>
-          <td><img class="ladder-icon-item" src="assets/ic_sub.png" alt="sub"></td>
+          <td><img class="ladder-icon-item" src="assets/ic_sub.png" alt="sub" /></td>
           <td class="mx-1 text-center">
-            <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getTeamBackgroundColor(data.game, data.teamType)" [style.color]="playerStyleService.getTeamTextColor(data.game, data.teamType)"
-              [style.border-color]="playerStyleService.getTeamBorderColor(data.game, data.teamType)" [innerHTML]="playerStyleService.getPlayer(data.game, data.teamType, substitution.playerOut)"></span>
+            <span
+              class="ladder-item badge point-badge"
+              [style.background-color]="playerStyleService.getTeamBackgroundColor(data.game, data.teamType)"
+              [style.color]="playerStyleService.getTeamTextColor(data.game, data.teamType)"
+              [style.border-color]="playerStyleService.getTeamBorderColor(data.game, data.teamType)"
+              [innerHTML]="playerStyleService.getPlayer(data.game, data.teamType, substitution.playerOut)"
+            ></span>
           </td>
         </tr>
       </tbody>
@@ -19,10 +29,15 @@
     <table *ngIf="getSanctions().length">
       <tbody>
         <tr *ngFor="let sanction of getSanctions()">
-          <td><img class="ladder-icon-item" [src]="sanctionService.getSanctionIcon(sanction)" alt="card"></td>
+          <td><img class="ladder-icon-item" [src]="sanctionService.getSanctionIcon(sanction)" alt="card" /></td>
           <td class="mx-1 text-center">
-            <span class="ladder-item badge point-badge" [style.background-color]="playerStyleService.getPlayerBackgroundColor(data.game, data.teamType, sanction.num)" [style.color]="playerStyleService.getPlayerTextColor(data.game, data.teamType, sanction.num)"
-              [style.border-color]="playerStyleService.getPlayerBorderColor(data.game, data.teamType, sanction.num)" [innerHTML]="sanctionService.getPlayerForSanction(data.game, data.teamType, sanction.num)"></span>
+            <span
+              class="ladder-item badge point-badge"
+              [style.background-color]="playerStyleService.getPlayerBackgroundColor(data.game, data.teamType, sanction.num)"
+              [style.color]="playerStyleService.getPlayerTextColor(data.game, data.teamType, sanction.num)"
+              [style.border-color]="playerStyleService.getPlayerBorderColor(data.game, data.teamType, sanction.num)"
+              [innerHTML]="sanctionService.getPlayerForSanction(data.game, data.teamType, sanction.num)"
+            ></span>
           </td>
         </tr>
       </tbody>

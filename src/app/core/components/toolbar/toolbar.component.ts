@@ -10,10 +10,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss']
+  styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent implements OnChanges {
-
   @Input() user: UserSummary;
   @Input() sideNav: MatSidenav;
 
@@ -24,7 +23,12 @@ export class ToolbarComponent implements OnChanges {
   darkTheme: string;
   numberOfFriendRequests: number;
 
-  constructor(private userService: UserService, private router: Router, private renderer: Renderer2, private overlayContainer: OverlayContainer) {
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private renderer: Renderer2,
+    private overlayContainer: OverlayContainer,
+  ) {
     this.themeKey = 'theme';
     this.systemTheme = 'system-theme';
     this.lightTheme = 'light-theme';
@@ -56,8 +60,8 @@ export class ToolbarComponent implements OnChanges {
 
   refreshNotifications(): void {
     this.userService.getNumberOfFriendRequestsReceivedBy().subscribe(
-      (count: Count) => this.numberOfFriendRequests = count.count,
-      _error => this.numberOfFriendRequests = 0
+      (count: Count) => (this.numberOfFriendRequests = count.count),
+      (_error) => (this.numberOfFriendRequests = 0),
     );
   }
 

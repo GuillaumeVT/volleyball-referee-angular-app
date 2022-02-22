@@ -9,12 +9,11 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent {
-
-  signInFormGroup:         FormGroup;
-  hidePassword:       boolean;
+  signInFormGroup: FormGroup;
+  hidePassword: boolean;
   passwordVisibility: string;
 
   constructor(private userService: UserService, private snackBarService: SnackBarService, private translate: TranslateService) {
@@ -24,13 +23,17 @@ export class SignInComponent {
 
     this.signInFormGroup = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required])
+      password: new FormControl('', [Validators.required]),
     });
   }
 
-  get emailFormControl() { return this.signInFormGroup.get('email'); }
+  get emailFormControl() {
+    return this.signInFormGroup.get('email');
+  }
 
-  get passwordFormControl() { return this.signInFormGroup.get('password'); }
+  get passwordFormControl() {
+    return this.signInFormGroup.get('password');
+  }
 
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
@@ -39,19 +42,19 @@ export class SignInComponent {
 
   onSignIn(): void {
     const emailCredentials = new EmailCredentials(this.emailFormControl.value, this.passwordFormControl.value);
-    this.userService.signIn(emailCredentials).subscribe(userToken => this.onValidResponse(), error => this.onInvalidResponse(error));
+    this.userService.signIn(emailCredentials).subscribe(
+      (userToken) => this.onValidResponse(),
+      (error) => this.onInvalidResponse(error),
+    );
   }
 
   private onValidResponse(): void {}
 
   private onInvalidResponse(_error: any): void {
-    this.translate.get('user.management.messages.credentials-mismatch-error').subscribe(
-      t => this.snackBarService.showError(t)
-    );
+    this.translate.get('user.management.messages.credentials-mismatch-error').subscribe((t) => this.snackBarService.showError(t));
   }
 
   getPasswordLostUrl(): string {
     return '/password-lost';
   }
-
 }

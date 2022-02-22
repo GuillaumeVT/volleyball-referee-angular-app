@@ -11,16 +11,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PublicService {
-
-  private publicUrl  = environment.api + '/public';
-  private gamesUrl   = this.publicUrl + '/games';
-  private teamsUrl   = this.publicUrl + '/teams';
+  private publicUrl = environment.api + '/public';
+  private gamesUrl = this.publicUrl + '/games';
+  private teamsUrl = this.publicUrl + '/teams';
   private leaguesUrl = this.publicUrl + '/leagues';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getStatistics(): Observable<StatisticsGroup> {
     const url = `${this.publicUrl}/statistics`;
@@ -34,60 +33,74 @@ export class PublicService {
 
   getScoreSheet(id: string): Observable<any> {
     const url = `${this.gamesUrl}/${id}/score-sheet`;
-    const options = {headers: { 'Content-Type': 'application/json', 'Accept': 'text/html'}, responseType: 'blob' as 'json'};
+    const options = { headers: { 'Content-Type': 'application/json', Accept: 'text/html' }, responseType: 'blob' as 'json' };
     return this.http.get<any>(url, options);
   }
 
   listLiveGames(kinds: string[], genders: string[], page: number, size: number): Observable<Page<GameSummary>> {
     const url = `${this.gamesUrl}/live`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let kind of kinds) {
-      params = params.append("kind", kind);
+      params = params.append('kind', kind);
     }
     for (let gender of genders) {
-      params = params.append("gender", gender);
+      params = params.append('gender', gender);
     }
     return this.http.get<Page<GameSummary>>(url, { params: params });
   }
 
-  listGamesMatchingToken(token: string, statuses: string[], kinds: string[], genders: string[], page: number, size: number): Observable<Page<GameSummary>> {
+  listGamesMatchingToken(
+    token: string,
+    statuses: string[],
+    kinds: string[],
+    genders: string[],
+    page: number,
+    size: number,
+  ): Observable<Page<GameSummary>> {
     const url = `${this.gamesUrl}/token/${token}`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
-      params = params.append("status", status);
+      params = params.append('status', status);
     }
     for (let kind of kinds) {
-      params = params.append("kind", kind);
+      params = params.append('kind', kind);
     }
     for (let gender of genders) {
-      params = params.append("gender", gender);
+      params = params.append('gender', gender);
     }
     return this.http.get<Page<GameSummary>>(url, { params: params });
   }
 
-  listGamesWithScheduleDate(date: string, statuses: string[], kinds: string[], genders: string[], page: number, size: number): Observable<Page<GameSummary>> {
+  listGamesWithScheduleDate(
+    date: string,
+    statuses: string[],
+    kinds: string[],
+    genders: string[],
+    page: number,
+    size: number,
+  ): Observable<Page<GameSummary>> {
     const url = `${this.gamesUrl}/date/${date}`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
-      params = params.append("status", status);
+      params = params.append('status', status);
     }
     for (let kind of kinds) {
-      params = params.append("kind", kind);
+      params = params.append('kind', kind);
     }
     for (let gender of genders) {
-      params = params.append("gender", gender);
+      params = params.append('gender', gender);
     }
     return this.http.get<Page<GameSummary>>(url, { params: params });
   }
 
   listGamesInLeague(leagueId: string, statuses: string[], genders: string[], page: number, size: number): Observable<Page<GameSummary>> {
     const url = `${this.gamesUrl}/league/${leagueId}`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
-      params = params.append("status", status);
+      params = params.append('status', status);
     }
     for (let gender of genders) {
-      params = params.append("gender", gender);
+      params = params.append('gender', gender);
     }
     return this.http.get<Page<GameSummary>>(url, { params: params });
   }
@@ -114,21 +127,28 @@ export class PublicService {
 
   listGamesOfTeamInLeague(leagueId: string, teamId: string, statuses: string[], page: number, size: number): Observable<Page<GameSummary>> {
     const url = `${this.gamesUrl}/league/${leagueId}/team/${teamId}`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
-      params = params.append("status", status);
+      params = params.append('status', status);
     }
     return this.http.get<Page<GameSummary>>(url, { params: params });
   }
 
-  listGamesInDivision(leagueId: string, divisionName: string, statuses: string[], genders: string[], page: number, size: number): Observable<Page<GameSummary>> {
+  listGamesInDivision(
+    leagueId: string,
+    divisionName: string,
+    statuses: string[],
+    genders: string[],
+    page: number,
+    size: number,
+  ): Observable<Page<GameSummary>> {
     const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
-      params = params.append("status", status);
+      params = params.append('status', status);
     }
     for (let gender of genders) {
-      params = params.append("gender", gender);
+      params = params.append('gender', gender);
     }
     return this.http.get<Page<GameSummary>>(url, { params: params });
   }
@@ -153,18 +173,28 @@ export class PublicService {
     return this.http.get<GameSummary[]>(url);
   }
 
-  listGamesOfTeamInDivision(leagueId: string, divisionName: string, teamId: string, statuses: string[], page: number, size: number): Observable<Page<GameSummary>> {
+  listGamesOfTeamInDivision(
+    leagueId: string,
+    divisionName: string,
+    teamId: string,
+    statuses: string[],
+    page: number,
+    size: number,
+  ): Observable<Page<GameSummary>> {
     const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/team/${teamId}`;
-    let params = new HttpParams().set("page", String(page)).set("size", String(size));
+    let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
-      params = params.append("status", status);
+      params = params.append('status', status);
     }
     return this.http.get<Page<GameSummary>>(url, { params: params });
   }
 
   listGamesInDivisionExcel(leagueId: string, divisionName: string): Observable<any> {
     const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/excel`;
-    return this.http.get<any>(url, { headers: { 'Content-Type': 'application/json', 'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}, responseType: 'blob' as 'json' });
+    return this.http.get<any>(url, {
+      headers: { 'Content-Type': 'application/json', Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' },
+      responseType: 'blob' as 'json',
+    });
   }
 
   listRankingsInDivision(leagueId: string, divisionName: string): Observable<Ranking[]> {
@@ -186,5 +216,4 @@ export class PublicService {
     const url = `${this.leaguesUrl}/${leagueId}`;
     return this.http.get<League>(url);
   }
-
 }

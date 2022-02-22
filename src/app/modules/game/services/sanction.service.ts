@@ -5,25 +5,24 @@ import { PlayerStyleService } from 'src/app/shared/services/player-style.service
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SanctionService {
-
-  constructor(private playerStyleService: PlayerStyleService) { }
+  constructor(private playerStyleService: PlayerStyleService) {}
 
   getSanctionIcon(sanction: Sanction): string {
     switch (sanction.card) {
-      case "Y":
+      case 'Y':
         return '/assets/ic_yellow_card.png';
-      case "R":
+      case 'R':
         return '/assets/ic_red_card.png';
-      case "RE":
+      case 'RE':
         return '/assets/ic_expulsion_card.png';
-      case "RD":
+      case 'RD':
         return '/assets/ic_disqualification_card.png';
-      case "DW":
+      case 'DW':
         return '/assets/ic_delay_warning.png';
-      case "DP":
+      case 'DP':
         return '/assets/ic_delay_penalty.png';
       default:
         return '';

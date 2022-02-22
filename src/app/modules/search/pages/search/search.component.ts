@@ -8,10 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-
   searchType: SearchType;
 
   tokenSearchCriterion: SearchCriterion;
@@ -26,10 +25,18 @@ export class SearchComponent implements OnInit {
   loadSearchResults: boolean;
   minSearchLength: number;
 
-  constructor(private titleService: Title, private router: Router, private activeRoute: ActivatedRoute, private datePipe: DatePipe, private translate: TranslateService) {
-    this.router.routeReuseStrategy.shouldReuseRoute = function () { return false; };
+  constructor(
+    private titleService: Title,
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private datePipe: DatePipe,
+    private translate: TranslateService,
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
 
-    this.translate.get('search.page').subscribe(t => this.titleService.setTitle(t));
+    this.translate.get('search.page').subscribe((t) => this.titleService.setTitle(t));
     this.loadSearchResults = false;
     this.searchType = SearchType.Token;
     this.minSearchLength = 3;
@@ -39,22 +46,22 @@ export class SearchComponent implements OnInit {
     this.dateSearchCriterion = { type: SearchType.Date, typeStr: 'date', value: new Date(), display: 'search.option.date' };
     this.todaySearchCriterion = { type: SearchType.Today, typeStr: 'today', value: new Date(), display: 'search.option.today' };
 
-    this.searchCriteria = [ this.tokenSearchCriterion, this.liveSearchCriterion, this.dateSearchCriterion, this.todaySearchCriterion ];
+    this.searchCriteria = [this.tokenSearchCriterion, this.liveSearchCriterion, this.dateSearchCriterion, this.todaySearchCriterion];
 
     this.searchTokenControl = new FormControl('', [Validators.required, Validators.minLength(this.minSearchLength)]);
-    this.searchTokenControl.valueChanges.subscribe(token => this.tokenSearchCriterion.value = token);
+    this.searchTokenControl.valueChanges.subscribe((token) => (this.tokenSearchCriterion.value = token));
   }
-  
+
   ngOnInit(): void {
-    this.activeRoute.params.subscribe(_routeParams => this.loadSearch());
+    this.activeRoute.params.subscribe((_routeParams) => this.loadSearch());
   }
 
   loadSearch(): void {
-    const searchTypeParam = this.activeRoute.snapshot.queryParamMap.get("type");
-    const valueParam = this.activeRoute.snapshot.queryParamMap.get("value");
+    const searchTypeParam = this.activeRoute.snapshot.queryParamMap.get('type');
+    const valueParam = this.activeRoute.snapshot.queryParamMap.get('value');
 
     if (searchTypeParam) {
-      const searchCriterion : SearchCriterion = this.searchCriteria.find(searchCriterion => searchCriterion.typeStr === searchTypeParam);
+      const searchCriterion: SearchCriterion = this.searchCriteria.find((searchCriterion) => searchCriterion.typeStr === searchTypeParam);
 
       if (searchCriterion) {
         this.searchType = searchCriterion.type;
@@ -82,7 +89,7 @@ export class SearchComponent implements OnInit {
           default:
             this.loadSearchResults = false;
             break;
-        }       
+        }
       }
     } else {
       this.searchType = SearchType.Token;
@@ -106,16 +113,23 @@ export class SearchComponent implements OnInit {
   onSearch(): void {
     switch (this.searchType) {
       case SearchType.Token:
-        this.router.navigate(['/search'], { queryParams: { 'type': this.tokenSearchCriterion.typeStr, 'value': this.tokenSearchCriterion.value } });
+        this.router.navigate(['/search'], {
+          queryParams: { type: this.tokenSearchCriterion.typeStr, value: this.tokenSearchCriterion.value },
+        });
         break;
       case SearchType.Live:
-        this.router.navigate(['/search'], { queryParams: { 'type': this.liveSearchCriterion.typeStr } });
+        this.router.navigate(['/search'], { queryParams: { type: this.liveSearchCriterion.typeStr } });
         break;
       case SearchType.Date:
-        this.router.navigate(['/search'], { queryParams: { 'type': this.dateSearchCriterion.typeStr, 'value': this.datePipe.transform(this.dateSearchCriterion.value, 'yyyy-MM-dd') } });
+        this.router.navigate(['/search'], {
+          queryParams: {
+            type: this.dateSearchCriterion.typeStr,
+            value: this.datePipe.transform(this.dateSearchCriterion.value, 'yyyy-MM-dd'),
+          },
+        });
         break;
       case SearchType.Today:
-        this.router.navigate(['/search'], { queryParams: { 'type': this.todaySearchCriterion.typeStr } });
+        this.router.navigate(['/search'], { queryParams: { type: this.todaySearchCriterion.typeStr } });
         break;
       default:
         break;
@@ -125,14 +139,13 @@ export class SearchComponent implements OnInit {
   onSelectionChanged(): void {
     this.loadSearchResults = false;
   }
- 
 }
 
 export enum SearchType {
-    Token = 1,
-    Live  = 2,
-    Date  = 3,
-    Today = 4
+  Token = 1,
+  Live = 2,
+  Date = 3,
+  Today = 4,
 }
 
 export interface SearchCriterion {

@@ -1,14 +1,13 @@
 import { LeagueSummary } from 'src/app/shared/models/league.model';
 
 export abstract class AbstractLeagueFilter {
-
-  textFilter:         string;
-  isBeachChecked:     boolean;
-  isIndoorChecked:    boolean;
+  textFilter: string;
+  isBeachChecked: boolean;
+  isIndoorChecked: boolean;
   isIndoor4x4Checked: boolean;
-  isSnowChecked:      boolean;
+  isSnowChecked: boolean;
 
-  leagues:         LeagueSummary[];
+  leagues: LeagueSummary[];
   filteredLeagues: LeagueSummary[];
 
   constructor() {
@@ -39,7 +38,7 @@ export abstract class AbstractLeagueFilter {
   }
 
   onLeaguesReceived(leagues: LeagueSummary[]): void {
-    this.leagues =  leagues;
+    this.leagues = leagues;
     this.filterLeagues();
   }
 
@@ -51,7 +50,7 @@ export abstract class AbstractLeagueFilter {
 
       if (this.textFilter.trim()) {
         if (league.name.toLowerCase().indexOf(this.textFilter) === -1) {
-            mustAdd = false;
+          mustAdd = false;
         }
       }
 
@@ -96,5 +95,4 @@ export abstract class AbstractLeagueFilter {
     }
     this.refreshLeagues();
   }
-
 }

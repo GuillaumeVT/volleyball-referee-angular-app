@@ -2,49 +2,49 @@ import { UUID } from 'angular2-uuid';
 import { UserSummary } from 'src/app/core/models/user.model';
 
 export class Rules {
-  id:                               string;
-  createdBy:                        string;
-  createdAt:                        number;
-  updatedAt:                        number;
-  name:                             string;
-  kind:                             string;
-  setsPerGame:                      number;
-  pointsPerSet:                     number;
-  tieBreakInLastSet:                boolean;
-  pointsInTieBreak:                 number;
-  twoPointsDifference:              boolean;
-  sanctions:                        boolean;
-  matchTermination:                 number;
-  teamTimeouts:                     boolean;
-  teamTimeoutsPerSet:               number;
-  teamTimeoutDuration:              number;
-  technicalTimeouts:                boolean;
-  technicalTimeoutDuration:         number;
-  gameIntervals:                    boolean;
-  gameIntervalDuration:             number;
-  substitutionsLimitation:          number;
-  teamSubstitutionsPerSet:          number;
-  beachCourtSwitches:               boolean;
-  beachCourtSwitchFreq:             number;
-  beachCourtSwitchFreqTieBreak:     number;
+  id: string;
+  createdBy: string;
+  createdAt: number;
+  updatedAt: number;
+  name: string;
+  kind: string;
+  setsPerGame: number;
+  pointsPerSet: number;
+  tieBreakInLastSet: boolean;
+  pointsInTieBreak: number;
+  twoPointsDifference: boolean;
+  sanctions: boolean;
+  matchTermination: number;
+  teamTimeouts: boolean;
+  teamTimeoutsPerSet: number;
+  teamTimeoutDuration: number;
+  technicalTimeouts: boolean;
+  technicalTimeoutDuration: number;
+  gameIntervals: boolean;
+  gameIntervalDuration: number;
+  substitutionsLimitation: number;
+  teamSubstitutionsPerSet: number;
+  beachCourtSwitches: boolean;
+  beachCourtSwitchFreq: number;
+  beachCourtSwitchFreqTieBreak: number;
   customConsecutiveServesPerPlayer: number;
 
   public static createRules(user: UserSummary, kind: string): Rules {
     var rules: Rules;
 
     switch (kind) {
-      case "INDOOR":
-      rules = Rules.createIndoorRules(user);
-      break;
-      case "BEACH":
-      rules = Rules.createBeachRules(user);
-      break;
-      case "INDOOR_4X4":
-      rules = Rules.createIndoor4x4Rules(user);
-      break;
-      case "SNOW":
-      rules = Rules.createSnowRules(user);
-      break;
+      case 'INDOOR':
+        rules = Rules.createIndoorRules(user);
+        break;
+      case 'BEACH':
+        rules = Rules.createBeachRules(user);
+        break;
+      case 'INDOOR_4X4':
+        rules = Rules.createIndoor4x4Rules(user);
+        break;
+      case 'SNOW':
+        rules = Rules.createSnowRules(user);
+        break;
     }
 
     return rules;
@@ -56,8 +56,8 @@ export class Rules {
 
     rules.id = UUID.UUID();
     rules.createdBy = user.id;
-    rules.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
-    rules.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    rules.createdAt = now.getTime() + now.getTimezoneOffset() * 60000;
+    rules.updatedAt = now.getTime() + now.getTimezoneOffset() * 60000;
     rules.name = '';
     rules.kind = 'INDOOR';
     rules.setsPerGame = 5;
@@ -90,8 +90,8 @@ export class Rules {
 
     rules.id = UUID.UUID();
     rules.createdBy = user.id;
-    rules.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
-    rules.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    rules.createdAt = now.getTime() + now.getTimezoneOffset() * 60000;
+    rules.updatedAt = now.getTime() + now.getTimezoneOffset() * 60000;
     rules.name = '';
     rules.kind = 'BEACH';
     rules.setsPerGame = 3;
@@ -124,8 +124,8 @@ export class Rules {
 
     rules.id = UUID.UUID();
     rules.createdBy = user.id;
-    rules.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
-    rules.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    rules.createdAt = now.getTime() + now.getTimezoneOffset() * 60000;
+    rules.updatedAt = now.getTime() + now.getTimezoneOffset() * 60000;
     rules.name = '';
     rules.kind = 'INDOOR_4X4';
     rules.setsPerGame = 5;
@@ -158,8 +158,8 @@ export class Rules {
 
     rules.id = UUID.UUID();
     rules.createdBy = user.id;
-    rules.createdAt = now.getTime() + (now.getTimezoneOffset() * 60000);
-    rules.updatedAt = now.getTime() + (now.getTimezoneOffset() * 60000);
+    rules.createdAt = now.getTime() + now.getTimezoneOffset() * 60000;
+    rules.updatedAt = now.getTime() + now.getTimezoneOffset() * 60000;
     rules.name = '';
     rules.kind = 'SNOW';
     rules.setsPerGame = 3;
@@ -185,14 +185,13 @@ export class Rules {
 
     return rules;
   }
-
 }
 
 export class RulesSummary {
-  id:           string;
-  createdBy:    string;
-  createdAt:    number;
-  updatedAt:    number;
-  name:         string;
-  kind:         string;
+  id: string;
+  createdBy: string;
+  createdAt: number;
+  updatedAt: number;
+  name: string;
+  kind: string;
 }

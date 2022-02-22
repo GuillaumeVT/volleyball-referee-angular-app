@@ -46,14 +46,9 @@ import { NgModule } from '@angular/core';
     SetSubstitutionsComponent,
     SetSummaryComponent,
     SetTimeoutsComponent,
-    LadderEventDialogComponent
+    LadderEventDialogComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule
-  ],
-  exports: [
-    GameComponent
-  ]
+  imports: [CommonModule, SharedModule],
+  exports: [GameComponent],
 })
-export class GameModule { }
+export class GameModule {}

@@ -3,6 +3,17 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@core/*": ["src/app/core/*"],
+      "@material/*": ["src/app/material/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@admin/*": ["src/app/modules/admin/*"],
+      "@game/*": ["src/app/modules/game/*"],
+      "@league/*": ["src/app/modules/league/*"],
+      "@search/*": ["src/app/modules/search/*"],
+      "@user-data/*": ["src/app/modules/user-data/*"],
+      "@user-management/*": ["src/app/modules/user-management/*"]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -17,10 +28,7 @@
     "strictNullChecks": false,
     "target": "es2015",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

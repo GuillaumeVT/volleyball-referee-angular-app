@@ -2,7 +2,7 @@
   <form class="div-small-form mt-4" [formGroup]="signInFormGroup" autocomplete="off" novalidate (ngSubmit)="onSignIn()">
     <mat-card>
       <mat-card-header>
-        <img mat-card-avatar src="favicon.ico"/>
+        <img mat-card-avatar src="favicon.ico" />
         <mat-card-title>{{ 'user.management.sign-in' | translate }}</mat-card-title>
         <mat-card-subtitle>{{ 'app' | translate }}</mat-card-subtitle>
       </mat-card-header>
@@ -14,26 +14,34 @@
           <div fxFlex class="m-1">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'user.management.email' | translate }}</mat-label>
-              <input matInput type="email" formControlName="email" cdkFocusInitial required>
-              <mat-error *ngIf="emailFormControl.errors?.required">{{ 'user.management.messages.email-required-error' | translate }}</mat-error>
+              <input matInput type="email" formControlName="email" cdkFocusInitial required />
+              <mat-error *ngIf="emailFormControl.errors?.required">{{
+                'user.management.messages.email-required-error' | translate
+              }}</mat-error>
               <mat-error *ngIf="emailFormControl.errors?.email">{{ 'user.management.messages.email-invalid-error' | translate }}</mat-error>
             </mat-form-field>
           </div>
           <div fxFlex class="m-1">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'user.management.password' | translate }}</mat-label>
-              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required />
               <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
-                <mat-icon>{{passwordVisibility}}</mat-icon>
+                <mat-icon>{{ passwordVisibility }}</mat-icon>
               </button>
-              <mat-error *ngIf="passwordFormControl.errors?.required">{{ 'user.management.messages.password-required-error' | translate }}</mat-error>
+              <mat-error *ngIf="passwordFormControl.errors?.required">{{
+                'user.management.messages.password-required-error' | translate
+              }}</mat-error>
             </mat-form-field>
           </div>
         </div>
       </mat-card-content>
       <mat-card-actions align="end">
-        <a [routerLink]="getPasswordLostUrl()"><button mat-button color="primary" type="button">{{ 'user.management.lost-password' | translate }}</button></a>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!signInFormGroup.valid">{{ 'user.management.sign-in' | translate }}</button>
+        <a [routerLink]="getPasswordLostUrl()"
+          ><button mat-button color="primary" type="button">{{ 'user.management.lost-password' | translate }}</button></a
+        >
+        <button mat-raised-button color="primary" type="submit" [disabled]="!signInFormGroup.valid">
+          {{ 'user.management.sign-in' | translate }}
+        </button>
       </mat-card-actions>
     </mat-card>
   </form>
