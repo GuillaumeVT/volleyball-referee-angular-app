@@ -1,12 +1,11 @@
-import { saveAs } from 'file-saver';
-import { Subscription, timer } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
-import { Game } from 'src/app/shared/models/game.model';
-import { PublicService } from 'src/app/shared/services/public.service';
-
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { Game } from '@shared/models/game.model';
+import { PublicService } from '@shared/services/public.service';
+import { saveAs } from 'file-saver';
+import { Subscription, timer } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-game-refresh',

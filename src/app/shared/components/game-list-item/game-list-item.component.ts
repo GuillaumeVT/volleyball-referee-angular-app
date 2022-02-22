@@ -1,6 +1,5 @@
-import { GameSummary } from 'src/app/shared/models/game.model';
-
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { GameSummary } from '@shared/models/game.model';
 
 @Component({
   selector: 'app-game-list-item',

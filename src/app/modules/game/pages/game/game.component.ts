@@ -1,11 +1,10 @@
-import { UserService } from 'src/app/core/services/user.service';
-import { Game } from 'src/app/shared/models/game.model';
-import { TeamType } from 'src/app/shared/models/team-type.model';
-
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Game } from '@shared/models/game.model';
+import { TeamType } from '@shared/models/team-type.model';
 
 @Component({
   selector: 'app-game',

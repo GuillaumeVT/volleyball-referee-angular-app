@@ -1,14 +1,13 @@
-import { Observable } from 'rxjs';
-import { Game, GameSummary, LeagueDashboard } from 'src/app/shared/models/game.model';
-import { League } from 'src/app/shared/models/league.model';
-import { Page } from 'src/app/shared/models/page.model';
-import { Ranking } from 'src/app/shared/models/ranking.model';
-import { StatisticsGroup } from 'src/app/shared/models/statistics.model';
-import { TeamSummary } from 'src/app/shared/models/team.model';
-import { environment } from 'src/environments/environment';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Game, GameSummary, LeagueDashboard } from '@shared/models/game.model';
+import { League } from '@shared/models/league.model';
+import { Page } from '@shared/models/page.model';
+import { Ranking } from '@shared/models/ranking.model';
+import { StatisticsGroup } from '@shared/models/statistics.model';
+import { TeamSummary } from '@shared/models/team.model';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

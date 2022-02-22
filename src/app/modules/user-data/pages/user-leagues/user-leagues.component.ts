@@ -1,22 +1,21 @@
-import { saveAs } from 'file-saver';
-import { Subscription } from 'rxjs';
-import { UserSummary } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
-import { UserLeagueDialogComponent } from 'src/app/modules/user-data/components/user-league-dialog/user-league-dialog.component';
-import { GameService } from 'src/app/modules/user-data/services/game.service';
-import { LeagueService } from 'src/app/modules/user-data/services/league.service';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
-import { AbstractLeagueFilter } from 'src/app/shared/models/abstract-league-filter.model';
-import { League, LeagueSummary } from 'src/app/shared/models/league.model';
-import { PublicService } from 'src/app/shared/services/public.service';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { UserSummary } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
+import { AbstractLeagueFilter } from '@shared/models/abstract-league-filter.model';
+import { League, LeagueSummary } from '@shared/models/league.model';
+import { PublicService } from '@shared/services/public.service';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { UserLeagueDialogComponent } from '@user-data/components/user-league-dialog/user-league-dialog.component';
+import { GameService } from '@user-data/services/game.service';
+import { LeagueService } from '@user-data/services/league.service';
+import { saveAs } from 'file-saver';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-leagues',

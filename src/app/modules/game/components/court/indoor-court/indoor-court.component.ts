@@ -1,10 +1,9 @@
-import { IndoorPlayerItem } from 'src/app/modules/game/models/indoor-player-item.model';
-import { Game } from 'src/app/shared/models/game.model';
-import { Court } from 'src/app/shared/models/set.model';
-import { TeamType } from 'src/app/shared/models/team-type.model';
-import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
-
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { IndoorPlayerItem } from '@game/models/indoor-player-item.model';
+import { Game } from '@shared/models/game.model';
+import { Court } from '@shared/models/set.model';
+import { TeamType } from '@shared/models/team-type.model';
+import { PlayerStyleService } from '@shared/services/player-style.service';
 
 @Component({
   selector: 'app-indoor-court',

@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Game } from 'src/app/shared/models/game.model';
-import { Court } from 'src/app/shared/models/set.model';
-import { TeamType } from 'src/app/shared/models/team-type.model';
-import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
+import { Game } from '@shared/models/game.model';
+import { Court } from '@shared/models/set.model';
+import { TeamType } from '@shared/models/team-type.model';
+import { PlayerStyleService } from '@shared/services/player-style.service';
 
 @Component({
   selector: 'app-beach-court',

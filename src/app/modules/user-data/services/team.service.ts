@@ -1,10 +1,9 @@
-import { Observable } from 'rxjs';
-import { Page } from 'src/app/shared/models/page.model';
-import { Team, TeamSummary } from 'src/app/shared/models/team.model';
-import { environment } from 'src/environments/environment';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Page } from '@shared/models/page.model';
+import { Team, TeamSummary } from '@shared/models/team.model';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

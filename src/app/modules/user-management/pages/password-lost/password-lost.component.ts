@@ -1,9 +1,8 @@
-import { UserService } from 'src/app/core/services/user.service';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SnackBarService } from '@shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-password-lost',

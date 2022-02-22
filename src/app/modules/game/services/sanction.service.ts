@@ -1,8 +1,7 @@
-import { Game, Sanction } from 'src/app/shared/models/game.model';
-import { TeamType } from 'src/app/shared/models/team-type.model';
-import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
-
 import { Injectable } from '@angular/core';
+import { Game, Sanction } from '@shared/models/game.model';
+import { TeamType } from '@shared/models/team-type.model';
+import { PlayerStyleService } from '@shared/services/player-style.service';
 
 @Injectable({
   providedIn: 'root',

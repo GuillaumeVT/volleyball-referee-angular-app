@@ -1,12 +1,11 @@
-import { User } from 'src/app/core/models/user.model';
-import { UserSubscriptionDialogComponent } from 'src/app/modules/admin/components/user-subscription-dialog/user-subscription-dialog.component';
-import { UserSubscriptionTokenDialogComponent } from 'src/app/modules/admin/components/user-subscription-token-dialog/user-subscription-token-dialog.component';
-import { AdminService } from 'src/app/modules/admin/services/admin.service';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
+import { UserSubscriptionDialogComponent } from '@admin/components/user-subscription-dialog/user-subscription-dialog.component';
+import { UserSubscriptionTokenDialogComponent } from '@admin/components/user-subscription-token-dialog/user-subscription-token-dialog.component';
+import { AdminService } from '@admin/services/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { User } from '@core/models/user.model';
+import { SnackBarService } from '@shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-admin-users',

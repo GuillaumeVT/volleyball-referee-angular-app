@@ -1,12 +1,11 @@
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { EmailCredentials, FriendRequest, FriendsAndRequests, UserPasswordUpdate, UserToken } from 'src/app/core/models/user.model';
-import { Count } from 'src/app/shared/models/count.model';
-import { environment } from 'src/environments/environment';
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmailCredentials, FriendRequest, FriendsAndRequests, UserPasswordUpdate, UserToken } from '@core/models/user.model';
+import { Count } from '@shared/models/count.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

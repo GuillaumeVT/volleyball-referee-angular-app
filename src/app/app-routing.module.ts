@@ -1,25 +1,24 @@
-import { AdminnGuard } from 'src/app/core/guards/admin.guard';
-import { LoginGuard } from 'src/app/core/guards/login.guard';
-import { PublicGuard } from 'src/app/core/guards/public.guard';
-import { PageNotFoundComponent } from 'src/app/core/pages/page-not-found/page-not-found.component';
-import { PrivacyPolicyComponent } from 'src/app/core/pages/privacy-policy/privacy-policy.component';
-import { AdminUsersComponent } from 'src/app/modules/admin/pages/admin-users/admin-users.component';
-import { GameComponent } from 'src/app/modules/game/pages/game/game.component';
-import { LeagueComponent } from 'src/app/modules/league/pages/league/league.component';
-import { SearchComponent } from 'src/app/modules/search/pages/search/search.component';
-import { UserColleaguesComponent } from 'src/app/modules/user-data/pages/user-colleagues/user-colleagues.component';
-import { UserGamesComponent } from 'src/app/modules/user-data/pages/user-games/user-games.component';
-import { UserLeaguesComponent } from 'src/app/modules/user-data/pages/user-leagues/user-leagues.component';
-import { UserRulesComponent } from 'src/app/modules/user-data/pages/user-rules/user-rules.component';
-import { UserTeamsComponent } from 'src/app/modules/user-data/pages/user-teams/user-teams.component';
-import { AccountComponent } from 'src/app/modules/user-management/pages/account/account.component';
-import { HomeComponent } from 'src/app/modules/user-management/pages/home/home.component';
-import { PasswordLostComponent } from 'src/app/modules/user-management/pages/password-lost/password-lost.component';
-import { PasswordResetComponent } from 'src/app/modules/user-management/pages/password-reset/password-reset.component';
-import { SignInComponent } from 'src/app/modules/user-management/pages/sign-in/sign-in.component';
-
+import { AdminUsersComponent } from '@admin/pages/admin-users/admin-users.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminnGuard } from '@core/guards/admin.guard';
+import { LoginGuard } from '@core/guards/login.guard';
+import { PublicGuard } from '@core/guards/public.guard';
+import { PageNotFoundComponent } from '@core/pages/page-not-found/page-not-found.component';
+import { PrivacyPolicyComponent } from '@core/pages/privacy-policy/privacy-policy.component';
+import { GameComponent } from '@game/pages/game/game.component';
+import { LeagueComponent } from '@league/pages/league/league.component';
+import { SearchComponent } from '@search/pages/search/search.component';
+import { UserColleaguesComponent } from '@user-data/pages/user-colleagues/user-colleagues.component';
+import { UserGamesComponent } from '@user-data/pages/user-games/user-games.component';
+import { UserLeaguesComponent } from '@user-data/pages/user-leagues/user-leagues.component';
+import { UserRulesComponent } from '@user-data/pages/user-rules/user-rules.component';
+import { UserTeamsComponent } from '@user-data/pages/user-teams/user-teams.component';
+import { AccountComponent } from '@user-management/pages/account/account.component';
+import { HomeComponent } from '@user-management/pages/home/home.component';
+import { PasswordLostComponent } from '@user-management/pages/password-lost/password-lost.component';
+import { PasswordResetComponent } from '@user-management/pages/password-reset/password-reset.component';
+import { SignInComponent } from '@user-management/pages/sign-in/sign-in.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },

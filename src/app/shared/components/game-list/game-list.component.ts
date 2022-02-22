@@ -1,11 +1,10 @@
-import { AbstractGameFilter } from 'src/app/shared/models/abstract-game-filter.model';
-import { GameSummary } from 'src/app/shared/models/game.model';
-import { Page } from 'src/app/shared/models/page.model';
-import { PublicService } from 'src/app/shared/services/public.service';
-
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { idAll } from 'src/app/shared/models/variable.model';
+import { AbstractGameFilter } from '@shared/models/abstract-game-filter.model';
+import { GameSummary } from '@shared/models/game.model';
+import { Page } from '@shared/models/page.model';
+import { idAll } from '@shared/models/variable.model';
+import { PublicService } from '@shared/services/public.service';
 
 @Component({
   selector: 'app-game-list',

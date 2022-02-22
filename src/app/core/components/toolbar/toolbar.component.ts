@@ -1,11 +1,10 @@
-import { UserSummary } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
-import { Count } from 'src/app/shared/models/count.model';
-
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { UserSummary } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
+import { Count } from '@shared/models/count.model';
 
 @Component({
   selector: 'app-toolbar',

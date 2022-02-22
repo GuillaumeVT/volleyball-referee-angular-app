@@ -1,16 +1,15 @@
-import { LinksBarComponent } from 'src/app/core/components/links-bar/links-bar.component';
-import { ToolbarComponent } from 'src/app/core/components/toolbar/toolbar.component';
-import { TokenInterceptor } from 'src/app/core/interceptors/token.interceptor';
-import { PageNotFoundComponent } from 'src/app/core/pages/page-not-found/page-not-found.component';
-import { PrivacyPolicyComponent } from 'src/app/core/pages/privacy-policy/privacy-policy.component';
-import { MaterialModule } from 'src/app/material/material.module';
-
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { LinksBarComponent } from '@core/components/links-bar/links-bar.component';
+import { ToolbarComponent } from '@core/components/toolbar/toolbar.component';
+import { TokenInterceptor } from '@core/interceptors/token.interceptor';
+import { PageNotFoundComponent } from '@core/pages/page-not-found/page-not-found.component';
+import { PrivacyPolicyComponent } from '@core/pages/privacy-policy/privacy-policy.component';
+import { MaterialModule } from '@material/material.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 

@@ -1,11 +1,10 @@
+import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { League } from '@shared/models/league.model';
+import { TeamSummary } from '@shared/models/team.model';
+import { idAll } from '@shared/models/variable.model';
+import { PublicService } from '@shared/services/public.service';
 import { Subscription, timer } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
-import { League } from 'src/app/shared/models/league.model';
-import { TeamSummary } from 'src/app/shared/models/team.model';
-import { PublicService } from 'src/app/shared/services/public.service';
-
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-import { idAll } from 'src/app/shared/models/variable.model';
 
 @Component({
   selector: 'app-league-games',

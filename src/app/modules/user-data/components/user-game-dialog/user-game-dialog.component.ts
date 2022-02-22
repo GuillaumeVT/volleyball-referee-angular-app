@@ -1,19 +1,18 @@
-import { Friend, UserSummary } from 'src/app/core/models/user.model';
-import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
-import { GameService } from 'src/app/modules/user-data/services/game.service';
-import { LeagueService } from 'src/app/modules/user-data/services/league.service';
-import { GameIngredients, GameSummary } from 'src/app/shared/models/game.model';
-import { League } from 'src/app/shared/models/league.model';
-import { Rules } from 'src/app/shared/models/rules.model';
-import { Team } from 'src/app/shared/models/team.model';
-import { GenderPipe } from 'src/app/shared/pipes/gender.pipe';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { DatePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Friend, UserSummary } from '@core/models/user.model';
 import { TranslateService } from '@ngx-translate/core';
+import { GameIngredients, GameSummary } from '@shared/models/game.model';
+import { League } from '@shared/models/league.model';
+import { Rules } from '@shared/models/rules.model';
+import { Team } from '@shared/models/team.model';
+import { GenderPipe } from '@shared/pipes/gender.pipe';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { CrudType } from '@user-data/models/crud-type.model';
+import { GameService } from '@user-data/services/game.service';
+import { LeagueService } from '@user-data/services/league.service';
 
 @Component({
   selector: 'app-user-game-dialog',

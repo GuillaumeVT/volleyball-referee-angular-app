@@ -1,9 +1,9 @@
+import { Friend, UserSummary } from '@core/models/user.model';
+import { LeagueSummary, SelectedLeague } from '@shared/models/league.model';
+import { Rules, RulesSummary } from '@shared/models/rules.model';
+import { Set } from '@shared/models/set.model';
+import { Team, TeamSummary } from '@shared/models/team.model';
 import { UUID } from 'angular2-uuid';
-import { Friend, UserSummary } from 'src/app/core/models/user.model';
-import { LeagueSummary, SelectedLeague } from 'src/app/shared/models/league.model';
-import { Rules, RulesSummary } from 'src/app/shared/models/rules.model';
-import { Set } from 'src/app/shared/models/set.model';
-import { Team, TeamSummary } from 'src/app/shared/models/team.model';
 
 export class Game {
   id: string;

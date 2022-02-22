@@ -1,13 +1,12 @@
+import { DatePipe } from '@angular/common';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { League } from '@shared/models/league.model';
+import { Ranking } from '@shared/models/ranking.model';
+import { PlayerStyleService } from '@shared/services/player-style.service';
+import { PublicService } from '@shared/services/public.service';
 import { saveAs } from 'file-saver';
 import { Subscription, timer } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
-import { League } from 'src/app/shared/models/league.model';
-import { Ranking } from 'src/app/shared/models/ranking.model';
-import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
-import { PublicService } from 'src/app/shared/services/public.service';
-
-import { DatePipe } from '@angular/common';
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-division-rankings',

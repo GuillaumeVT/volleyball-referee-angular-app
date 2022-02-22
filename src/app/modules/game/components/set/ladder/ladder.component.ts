@@ -1,15 +1,11 @@
-import {
-  LadderEventDialogComponent,
-  LadderEventDialogData,
-} from 'src/app/modules/game/components/set/ladder-event-dialog/ladder-event-dialog.component';
-import { LadderItem } from 'src/app/modules/game/components/set/ladder/ladder-item.model';
-import { Game, Sanction } from 'src/app/shared/models/game.model';
-import { Substitution, Timeout } from 'src/app/shared/models/set.model';
-import { TeamType } from 'src/app/shared/models/team-type.model';
-import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
-
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { LadderEventDialogComponent, LadderEventDialogData } from '@game/components/set/ladder-event-dialog/ladder-event-dialog.component';
+import { LadderItem } from '@game/components/set/ladder/ladder-item.model';
+import { Game, Sanction } from '@shared/models/game.model';
+import { Substitution, Timeout } from '@shared/models/set.model';
+import { TeamType } from '@shared/models/team-type.model';
+import { PlayerStyleService } from '@shared/services/player-style.service';
 
 @Component({
   selector: 'app-ladder',

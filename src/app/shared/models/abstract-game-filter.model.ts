@@ -1,5 +1,5 @@
-import { GameSummary } from 'src/app/shared/models/game.model';
-import { Page } from 'src/app/shared/models/page.model';
+import { GameSummary } from '@shared/models/game.model';
+import { Page } from '@shared/models/page.model';
 
 export abstract class AbstractGameFilter {
   textFilter: string;

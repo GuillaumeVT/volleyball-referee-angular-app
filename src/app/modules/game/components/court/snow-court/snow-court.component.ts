@@ -1,6 +1,5 @@
-import { IndoorCourtComponent } from 'src/app/modules/game/components/court/indoor-court/indoor-court.component';
-
 import { Component } from '@angular/core';
+import { IndoorCourtComponent } from '@game/components/court/indoor-court/indoor-court.component';
 
 @Component({
   selector: 'app-snow-court',

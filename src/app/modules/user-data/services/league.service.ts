@@ -1,9 +1,8 @@
-import { Observable } from 'rxjs';
-import { League, LeagueSummary } from 'src/app/shared/models/league.model';
-import { environment } from 'src/environments/environment';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { League, LeagueSummary } from '@shared/models/league.model';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

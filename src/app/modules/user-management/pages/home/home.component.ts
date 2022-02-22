@@ -1,11 +1,10 @@
-import { Subscription } from 'rxjs';
-import { UserService } from 'src/app/core/services/user.service';
-import { GameService } from 'src/app/modules/user-data/services/game.service';
-import { GameSummary } from 'src/app/shared/models/game.model';
-
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { GameSummary } from '@shared/models/game.model';
+import { GameService } from '@user-data/services/game.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',

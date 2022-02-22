@@ -1,11 +1,10 @@
-import { LeagueService } from 'src/app/modules/user-data/services/league.service';
-import { League } from 'src/app/shared/models/league.model';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
+import { League } from '@shared/models/league.model';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { LeagueService } from '@user-data/services/league.service';
 
 @Component({
   selector: 'app-user-league-dialog',

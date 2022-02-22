@@ -1,21 +1,17 @@
-import { Subscription } from 'rxjs';
-import { UserSummary } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
-import {
-  UserTeamDialogComponent,
-  UserTeamDialogData,
-} from 'src/app/modules/user-data/components/user-team-dialog/user-team-dialog.component';
-import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
-import { TeamService } from 'src/app/modules/user-data/services/team.service';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
-import { AbstractTeamFilter } from 'src/app/shared/models/abstract-team-filter.model';
-import { Team, TeamSummary } from 'src/app/shared/models/team.model';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
+import { UserSummary } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
+import { AbstractTeamFilter } from '@shared/models/abstract-team-filter.model';
+import { Team, TeamSummary } from '@shared/models/team.model';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { UserTeamDialogComponent, UserTeamDialogData } from '@user-data/components/user-team-dialog/user-team-dialog.component';
+import { CrudType } from '@user-data/models/crud-type.model';
+import { TeamService } from '@user-data/services/team.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-teams',

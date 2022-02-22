@@ -1,31 +1,27 @@
-import { saveAs } from 'file-saver';
-import { forkJoin, Subscription } from 'rxjs';
-import { UserSummary } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
-import {
-  GameRefereeDialogComponent,
-  UserGameRefereeDialogData,
-} from 'src/app/modules/user-data/components/game-referee-dialog/game-referee-dialog.component';
-import {
-  UserGameDialogComponent,
-  UserGameDialogData,
-} from 'src/app/modules/user-data/components/user-game-dialog/user-game-dialog.component';
-import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
-import { GameService } from 'src/app/modules/user-data/services/game.service';
-import { LeagueService } from 'src/app/modules/user-data/services/league.service';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
-import { AbstractGameFilter } from 'src/app/shared/models/abstract-game-filter.model';
-import { GameIngredients, GameSummary } from 'src/app/shared/models/game.model';
-import { LeagueSummary } from 'src/app/shared/models/league.model';
-import { PublicService } from 'src/app/shared/services/public.service';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { UserSummary } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
+import { AbstractGameFilter } from '@shared/models/abstract-game-filter.model';
+import { GameIngredients, GameSummary } from '@shared/models/game.model';
+import { LeagueSummary } from '@shared/models/league.model';
+import { PublicService } from '@shared/services/public.service';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import {
+  GameRefereeDialogComponent,
+  UserGameRefereeDialogData,
+} from '@user-data/components/game-referee-dialog/game-referee-dialog.component';
+import { UserGameDialogComponent, UserGameDialogData } from '@user-data/components/user-game-dialog/user-game-dialog.component';
+import { CrudType } from '@user-data/models/crud-type.model';
+import { GameService } from '@user-data/services/game.service';
+import { LeagueService } from '@user-data/services/league.service';
+import { saveAs } from 'file-saver';
+import { forkJoin, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-games',

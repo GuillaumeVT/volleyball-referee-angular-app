@@ -1,13 +1,12 @@
-import { Friend, FriendRequest, FriendsAndRequests } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
-import { UserColleagueDialogComponent } from 'src/app/modules/user-data/components/user-colleague-dialog/user-colleague-dialog.component';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
+import { Friend, FriendRequest, FriendsAndRequests } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { UserColleagueDialogComponent } from '@user-data/components/user-colleague-dialog/user-colleague-dialog.component';
 
 @Component({
   selector: 'app-user-colleagues',

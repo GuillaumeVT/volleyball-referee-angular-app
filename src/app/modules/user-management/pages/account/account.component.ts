@@ -1,10 +1,9 @@
-import { UserPasswordUpdate, UserSummary } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserPasswordUpdate, UserSummary } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SnackBarService } from '@shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-account',

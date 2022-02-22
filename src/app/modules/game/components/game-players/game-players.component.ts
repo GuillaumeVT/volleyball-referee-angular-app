@@ -1,9 +1,8 @@
-import { Game } from 'src/app/shared/models/game.model';
-import { TeamType } from 'src/app/shared/models/team-type.model';
-import { Player } from 'src/app/shared/models/team.model';
-import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
-
 import { Component, Input } from '@angular/core';
+import { Game } from '@shared/models/game.model';
+import { TeamType } from '@shared/models/team-type.model';
+import { Player } from '@shared/models/team.model';
+import { PlayerStyleService } from '@shared/services/player-style.service';
 
 @Component({
   selector: 'app-game-players',

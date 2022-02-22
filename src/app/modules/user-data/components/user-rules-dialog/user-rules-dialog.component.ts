@@ -1,11 +1,10 @@
-import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
-import { RulesService } from 'src/app/modules/user-data/services/rules.service';
-import { Rules } from 'src/app/shared/models/rules.model';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Rules } from '@shared/models/rules.model';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { CrudType } from '@user-data/models/crud-type.model';
+import { RulesService } from '@user-data/services/rules.service';
 
 @Component({
   selector: 'app-user-rules-dialog',

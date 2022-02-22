@@ -1,15 +1,14 @@
-import { ColorPickerDialogComponent } from 'src/app/modules/user-data/components/color-picker-dialog/color-picker-dialog.component';
-import { PlayerNamesDialogComponent } from 'src/app/modules/user-data/components/player-names-dialog/player-names-dialog.component';
-import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
-import { InputPlayerItem } from 'src/app/modules/user-data/models/input-player-item.model';
-import { TeamService } from 'src/app/modules/user-data/services/team.service';
-import { Player, Team } from 'src/app/shared/models/team.model';
-import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Player, Team } from '@shared/models/team.model';
+import { PlayerStyleService } from '@shared/services/player-style.service';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { ColorPickerDialogComponent } from '@user-data/components/color-picker-dialog/color-picker-dialog.component';
+import { PlayerNamesDialogComponent } from '@user-data/components/player-names-dialog/player-names-dialog.component';
+import { CrudType } from '@user-data/models/crud-type.model';
+import { InputPlayerItem } from '@user-data/models/input-player-item.model';
+import { TeamService } from '@user-data/services/team.service';
 
 @Component({
   selector: 'app-user-team-dialog',

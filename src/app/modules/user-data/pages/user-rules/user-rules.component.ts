@@ -1,21 +1,17 @@
-import { Subscription } from 'rxjs';
-import { UserSummary } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
-import {
-  UserRulesDialogComponent,
-  UserRulesDialogData,
-} from 'src/app/modules/user-data/components/user-rules-dialog/user-rules-dialog.component';
-import { CrudType } from 'src/app/modules/user-data/models/crud-type.model';
-import { RulesService } from 'src/app/modules/user-data/services/rules.service';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
-import { AbstractRulesFilter } from 'src/app/shared/models/abstract-rules-filter.model';
-import { Rules, RulesSummary } from 'src/app/shared/models/rules.model';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
+import { UserSummary } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
+import { AbstractRulesFilter } from '@shared/models/abstract-rules-filter.model';
+import { Rules, RulesSummary } from '@shared/models/rules.model';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { UserRulesDialogComponent, UserRulesDialogData } from '@user-data/components/user-rules-dialog/user-rules-dialog.component';
+import { CrudType } from '@user-data/models/crud-type.model';
+import { RulesService } from '@user-data/services/rules.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-rules',

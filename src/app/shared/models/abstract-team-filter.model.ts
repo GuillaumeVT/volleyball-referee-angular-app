@@ -1,5 +1,5 @@
-import { Page } from 'src/app/shared/models/page.model';
-import { TeamSummary } from 'src/app/shared/models/team.model';
+import { Page } from '@shared/models/page.model';
+import { TeamSummary } from '@shared/models/team.model';
 
 export abstract class AbstractTeamFilter {
   textFilter: string;

@@ -1,4 +1,4 @@
-import { RulesSummary } from 'src/app/shared/models/rules.model';
+import { RulesSummary } from '@shared/models/rules.model';
 
 export abstract class AbstractRulesFilter {
   textFilter: string;

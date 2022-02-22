@@ -1,10 +1,9 @@
-import { League } from 'src/app/shared/models/league.model';
-import { PublicService } from 'src/app/shared/services/public.service';
-
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { League } from '@shared/models/league.model';
+import { PublicService } from '@shared/services/public.service';
 
 @Component({
   selector: 'app-league',

@@ -1,11 +1,10 @@
+import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { LeagueDashboard } from '@shared/models/game.model';
+import { League } from '@shared/models/league.model';
+import { idAll } from '@shared/models/variable.model';
+import { PublicService } from '@shared/services/public.service';
 import { Subscription, timer } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
-import { GameSummary, LeagueDashboard } from 'src/app/shared/models/game.model';
-import { League } from 'src/app/shared/models/league.model';
-import { PublicService } from 'src/app/shared/services/public.service';
-
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-import { idAll } from 'src/app/shared/models/variable.model';
 
 @Component({
   selector: 'app-league-dashboard',

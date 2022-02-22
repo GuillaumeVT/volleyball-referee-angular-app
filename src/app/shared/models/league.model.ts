@@ -1,5 +1,5 @@
+import { UserSummary } from '@core/models/user.model';
 import { UUID } from 'angular2-uuid';
-import { UserSummary } from 'src/app/core/models/user.model';
 
 export class League {
   id: string;

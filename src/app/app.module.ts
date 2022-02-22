@@ -1,16 +1,15 @@
+import { AdminModule } from '@admin/admin.module';
+import { NgModule } from '@angular/core';
+import { CoreModule } from '@core/core.module';
+import { GameModule } from '@game/game.module';
+import { LeagueModule } from '@league/league.module';
+import { MaterialModule } from '@material/material.module';
+import { SearchModule } from '@search/search.module';
+import { SharedModule } from '@shared/shared.module';
+import { UserDataModule } from '@user-data/user-data.module';
+import { UserManagementModule } from '@user-management/user-management.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
-import { CoreModule } from 'src/app/core/core.module';
-import { MaterialModule } from 'src/app/material/material.module';
-import { AdminModule } from 'src/app/modules/admin/admin.module';
-import { GameModule } from 'src/app/modules/game/game.module';
-import { LeagueModule } from 'src/app/modules/league/league.module';
-import { SearchModule } from 'src/app/modules/search/search.module';
-import { UserDataModule } from 'src/app/modules/user-data/user-data.module';
-import { UserManagementModule } from 'src/app/modules/user-management/user-management.module';
-import { SharedModule } from 'src/app/shared/shared.module';
-
-import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [AppComponent],

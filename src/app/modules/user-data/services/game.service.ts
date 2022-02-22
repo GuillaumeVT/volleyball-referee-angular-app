@@ -1,11 +1,10 @@
-import { Observable } from 'rxjs';
-import { Count } from 'src/app/shared/models/count.model';
-import { Game, GameIngredients, GameSummary } from 'src/app/shared/models/game.model';
-import { Page } from 'src/app/shared/models/page.model';
-import { environment } from 'src/environments/environment';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Count } from '@shared/models/count.model';
+import { Game, GameIngredients, GameSummary } from '@shared/models/game.model';
+import { Page } from '@shared/models/page.model';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

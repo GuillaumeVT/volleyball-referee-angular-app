@@ -1,6 +1,6 @@
-import { Sanction } from 'src/app/shared/models/game.model';
-import { Substitution, Timeout } from 'src/app/shared/models/set.model';
-import { TeamType } from 'src/app/shared/models/team-type.model';
+import { Sanction } from '@shared/models/game.model';
+import { Substitution, Timeout } from '@shared/models/set.model';
+import { TeamType } from '@shared/models/team-type.model';
 
 export class LadderItem {
   teamType: TeamType;

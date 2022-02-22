@@ -1,9 +1,8 @@
-import { Count, Statistics, StatisticsGroup } from 'src/app/shared/models/statistics.model';
-import { PublicService } from 'src/app/shared/services/public.service';
-import { StatisticsService } from 'src/app/shared/services/statistics.service';
-
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Count, StatisticsGroup } from '@shared/models/statistics.model';
+import { PublicService } from '@shared/services/public.service';
+import { StatisticsService } from '@shared/services/statistics.service';
 
 @Component({
   selector: 'app-statistics',

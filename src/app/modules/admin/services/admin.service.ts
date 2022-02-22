@@ -1,10 +1,9 @@
-import { Observable } from 'rxjs';
-import { SubscriptionPurchase, User } from 'src/app/core/models/user.model';
-import { Page } from 'src/app/shared/models/page.model';
-import { environment } from 'src/environments/environment';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SubscriptionPurchase, User } from '@core/models/user.model';
+import { Page } from '@shared/models/page.model';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

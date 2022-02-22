@@ -1,13 +1,12 @@
-import { MaterialModule } from 'src/app/material/material.module';
-import { UserDataModule } from 'src/app/modules/user-data/user-data.module';
-import { AccountComponent } from 'src/app/modules/user-management/pages/account/account.component';
-import { HomeComponent } from 'src/app/modules/user-management/pages/home/home.component';
-import { PasswordLostComponent } from 'src/app/modules/user-management/pages/password-lost/password-lost.component';
-import { PasswordResetComponent } from 'src/app/modules/user-management/pages/password-reset/password-reset.component';
-import { SignInComponent } from 'src/app/modules/user-management/pages/sign-in/sign-in.component';
-import { SharedModule } from 'src/app/shared/shared.module';
-
 import { NgModule } from '@angular/core';
+import { MaterialModule } from '@material/material.module';
+import { SharedModule } from '@shared/shared.module';
+import { UserDataModule } from '@user-data/user-data.module';
+import { AccountComponent } from '@user-management/pages/account/account.component';
+import { HomeComponent } from '@user-management/pages/home/home.component';
+import { PasswordLostComponent } from '@user-management/pages/password-lost/password-lost.component';
+import { PasswordResetComponent } from '@user-management/pages/password-reset/password-reset.component';
+import { SignInComponent } from '@user-management/pages/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [AccountComponent, HomeComponent, PasswordLostComponent, PasswordResetComponent, SignInComponent],

@@ -1,7 +1,6 @@
-import { Team } from 'src/app/shared/models/team.model';
-
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Team } from '@shared/models/team.model';
 
 @Component({
   selector: 'app-player-names-dialog',

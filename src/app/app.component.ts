@@ -1,12 +1,10 @@
-import { Subscription } from 'rxjs';
-import { UserSummary } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
-
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatSidenavContent } from '@angular/material/sidenav';
-import { TranslateService } from '@ngx-translate/core';
+import { UserSummary } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',

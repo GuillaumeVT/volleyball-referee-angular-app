@@ -1,9 +1,8 @@
-import { SanctionService } from 'src/app/modules/game/services/sanction.service';
-import { Game, Sanction } from 'src/app/shared/models/game.model';
-import { TeamType } from 'src/app/shared/models/team-type.model';
-import { PlayerStyleService } from 'src/app/shared/services/player-style.service';
-
 import { Component, Input } from '@angular/core';
+import { SanctionService } from '@game/services/sanction.service';
+import { Game, Sanction } from '@shared/models/game.model';
+import { TeamType } from '@shared/models/team-type.model';
+import { PlayerStyleService } from '@shared/services/player-style.service';
 
 @Component({
   selector: 'app-game-sanctions',

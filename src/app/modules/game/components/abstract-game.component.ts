@@ -1,7 +1,6 @@
-import { Game } from 'src/app/shared/models/game.model';
-import { TeamType } from 'src/app/shared/models/team-type.model';
-
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
+import { Game } from '@shared/models/game.model';
+import { TeamType } from '@shared/models/team-type.model';
 
 @Directive()
 export abstract class AbstractGameComponent {

@@ -1,9 +1,8 @@
-import { Observable } from 'rxjs';
-import { StatisticsGroup } from 'src/app/shared/models/statistics.model';
-import { environment } from 'src/environments/environment';
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { StatisticsGroup } from '@shared/models/statistics.model';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

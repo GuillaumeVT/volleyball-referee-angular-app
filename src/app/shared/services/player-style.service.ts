@@ -1,7 +1,6 @@
-import { Game } from 'src/app/shared/models/game.model';
-import { TeamType } from 'src/app/shared/models/team-type.model';
-
 import { Injectable } from '@angular/core';
+import { Game } from '@shared/models/game.model';
+import { TeamType } from '@shared/models/team-type.model';
 
 @Injectable({
   providedIn: 'root',

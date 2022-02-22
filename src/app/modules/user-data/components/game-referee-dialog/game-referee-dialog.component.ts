@@ -1,13 +1,12 @@
-import { Friend, UserSummary } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
-import { GameService } from 'src/app/modules/user-data/services/game.service';
-import { GameSummary } from 'src/app/shared/models/game.model';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Friend, UserSummary } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { GameSummary } from '@shared/models/game.model';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { GameService } from '@user-data/services/game.service';
 
 @Component({
   selector: 'app-game-referee-dialog',

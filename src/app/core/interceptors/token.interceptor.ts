@@ -1,10 +1,9 @@
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { UserToken } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
-
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UserToken } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

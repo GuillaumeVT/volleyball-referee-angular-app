@@ -1,4 +1,4 @@
-import { IndoorPlayerItem } from 'src/app/modules/game/models/indoor-player-item.model';
+import { IndoorPlayerItem } from '@game/models/indoor-player-item.model';
 
 export class InputPlayerItem extends IndoorPlayerItem {
   shirtNumber: number;

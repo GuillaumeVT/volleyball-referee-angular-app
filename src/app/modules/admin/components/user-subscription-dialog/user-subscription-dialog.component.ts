@@ -1,7 +1,6 @@
-import { SubscriptionPurchase } from 'src/app/core/models/user.model';
-
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SubscriptionPurchase } from '@core/models/user.model';
 
 @Component({
   selector: 'app-user-subscription-dialog',

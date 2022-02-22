@@ -1,4 +1,4 @@
-import { LeagueSummary } from 'src/app/shared/models/league.model';
+import { LeagueSummary } from '@shared/models/league.model';
 
 export abstract class AbstractLeagueFilter {
   textFilter: string;
