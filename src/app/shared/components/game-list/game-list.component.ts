@@ -37,34 +37,34 @@ export class GameListComponent extends AbstractGameFilter implements OnChanges {
     if (this.token && this.token.length) {
       this.publicService
         .listGamesMatchingToken(this.token, this.getStatuses(), this.getKinds(), this.getGenders(), pageToGet, this.size)
-        .subscribe(
-          (page) => this.onGamesReceivedTokenCriterion(page),
-          (_error) => this.onGamesReceivedTokenCriterion(null),
-        );
+        .subscribe({
+          next: (page) => this.onGamesReceivedTokenCriterion(page),
+          error: (_) => this.onGamesReceivedTokenCriterion(null),
+        });
     } else if (this.date && this.date.length) {
       this.publicService
         .listGamesWithScheduleDate(this.date, this.getStatuses(), this.getKinds(), this.getGenders(), pageToGet, this.size)
-        .subscribe(
-          (page) => this.onGamesReceivedDateCriterion(page),
-          (_error) => this.onGamesReceivedDateCriterion(null),
-        );
+        .subscribe({
+          next: (page) => this.onGamesReceivedDateCriterion(page),
+          error: (_) => this.onGamesReceivedDateCriterion(null),
+        });
     } else if (this.leagueId && this.teamId) {
       if (this.teamId === idAll) {
-        this.publicService.listGamesInLeague(this.leagueId, this.getStatuses(), this.getGenders(), pageToGet, this.size).subscribe(
-          (page) => this.onGamesReceivedNoCriterion(page),
-          (_error) => this.onGamesReceivedNoCriterion(null),
-        );
+        this.publicService.listGamesInLeague(this.leagueId, this.getStatuses(), this.getGenders(), pageToGet, this.size).subscribe({
+          next: (page) => this.onGamesReceivedNoCriterion(page),
+          error: (_) => this.onGamesReceivedNoCriterion(null),
+        });
       } else {
-        this.publicService.listGamesOfTeamInLeague(this.leagueId, this.teamId, this.getStatuses(), pageToGet, this.size).subscribe(
-          (page) => this.onGamesReceivedNoCriterion(page),
-          (_error) => this.onGamesReceivedNoCriterion(null),
-        );
+        this.publicService.listGamesOfTeamInLeague(this.leagueId, this.teamId, this.getStatuses(), pageToGet, this.size).subscribe({
+          next: (page) => this.onGamesReceivedNoCriterion(page),
+          error: (_) => this.onGamesReceivedNoCriterion(null),
+        });
       }
     } else if (this.live) {
-      this.publicService.listLiveGames(this.getKinds(), this.getGenders(), pageToGet, this.size).subscribe(
-        (page) => this.onGamesReceivedLiveCriterion(page),
-        (_error) => this.onGamesReceivedLiveCriterion(null),
-      );
+      this.publicService.listLiveGames(this.getKinds(), this.getGenders(), pageToGet, this.size).subscribe({
+        next: (page) => this.onGamesReceivedLiveCriterion(page),
+        error: (_) => this.onGamesReceivedLiveCriterion(null),
+      });
     }
   }
 

@@ -31,10 +31,10 @@ export class UserColleaguesComponent implements OnInit {
   }
 
   refreshFriendsAndRequests(): void {
-    this.userService.listFriendsAndRequests().subscribe(
-      (friendsAndRequests) => (this.friendsAndRequests = friendsAndRequests),
-      (_error) => (this.friendsAndRequests = null),
-    );
+    this.userService.listFriendsAndRequests().subscribe({
+      next: (friendsAndRequests) => (this.friendsAndRequests = friendsAndRequests),
+      error: (_) => (this.friendsAndRequests = null),
+    });
   }
 
   addColleague(): void {
@@ -54,10 +54,10 @@ export class UserColleaguesComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((dialogResult) => {
         if (dialogResult) {
-          this.userService.removeFriend(friend.id).subscribe(
-            (_deleted) => this.onColleagueRemoved(friend.pseudo),
-            (_error) => this.onColleagueRemovalError(friend.pseudo),
-          );
+          this.userService.removeFriend(friend.id).subscribe({
+            next: (_deleted) => this.onColleagueRemoved(friend.pseudo),
+            error: (_) => this.onColleagueRemovalError(friend.pseudo),
+          });
         }
       });
     });
@@ -78,17 +78,17 @@ export class UserColleaguesComponent implements OnInit {
   }
 
   acceptColleague(friendRequest: FriendRequest): void {
-    this.userService.acceptFriendRequest(friendRequest.id).subscribe(
-      (_success) => this.onColleagueAccepted(friendRequest.senderPseudo),
-      (_error) => this.onColleagueAcceptanceError(friendRequest.senderPseudo),
-    );
+    this.userService.acceptFriendRequest(friendRequest.id).subscribe({
+      next: (_success) => this.onColleagueAccepted(friendRequest.senderPseudo),
+      error: (_) => this.onColleagueAcceptanceError(friendRequest.senderPseudo),
+    });
   }
 
   rejectColleague(friendRequest: FriendRequest): void {
-    this.userService.rejectFriendRequest(friendRequest.id).subscribe(
-      (_success) => this.onColleagueRejected(friendRequest.senderPseudo),
-      (_error) => this.onColleagueRejectionError(friendRequest.senderPseudo),
-    );
+    this.userService.rejectFriendRequest(friendRequest.id).subscribe({
+      next: (_success) => this.onColleagueRejected(friendRequest.senderPseudo),
+      error: (_) => this.onColleagueRejectionError(friendRequest.senderPseudo),
+    });
   }
 
   onColleagueAccepted(pseudo: string): void {

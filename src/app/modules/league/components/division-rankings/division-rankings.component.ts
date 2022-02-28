@@ -53,10 +53,10 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
 
   refreshRankings(): void {
     if (this.selectedDivision) {
-      this.publicService.listRankingsInDivision(this.league.id, this.selectedDivision).subscribe(
-        (ranking) => (this.rankings = ranking),
-        (_error) => (this.rankings = []),
-      );
+      this.publicService.listRankingsInDivision(this.league.id, this.selectedDivision).subscribe({
+        next: (ranking) => (this.rankings = ranking),
+        error: (_) => (this.rankings = []),
+      });
     }
   }
 
@@ -73,10 +73,10 @@ export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   downloadDivisionExcel(): void {
-    this.publicService.listGamesInDivisionExcel(this.league.id, this.selectedDivision).subscribe(
-      (blob: Blob) => this.onDivisionExcelReceived(blob),
-      (_error) => this.onDivisionExcelReceived(null),
-    );
+    this.publicService.listGamesInDivisionExcel(this.league.id, this.selectedDivision).subscribe({
+      next: (blob: Blob) => this.onDivisionExcelReceived(blob),
+      error: (_) => this.onDivisionExcelReceived(null),
+    });
   }
 
   onDivisionExcelReceived(blob: Blob): void {

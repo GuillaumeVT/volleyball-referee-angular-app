@@ -43,10 +43,10 @@ export class GameRefreshComponent implements OnChanges, OnDestroy {
   }
 
   updateGame(): void {
-    this.publicService.getGame(this.gameId).subscribe(
-      (game) => this.onGameReceived(game),
-      (_error) => this.onGameReceived(null),
-    );
+    this.publicService.getGame(this.gameId).subscribe({
+      next: (game) => this.onGameReceived(game),
+      error: (_) => this.onGameReceived(null),
+    });
   }
 
   onGameReceived(game: Game): void {
@@ -63,10 +63,10 @@ export class GameRefreshComponent implements OnChanges, OnDestroy {
   }
 
   downloadScoreSheet(): void {
-    this.publicService.getScoreSheet(this.gameId).subscribe(
-      (blob: Blob) => this.onScoreSheetReceived(blob),
-      (_error) => this.onScoreSheetReceived(null),
-    );
+    this.publicService.getScoreSheet(this.gameId).subscribe({
+      next: (blob: Blob) => this.onScoreSheetReceived(blob),
+      error: (_) => this.onScoreSheetReceived(null),
+    });
   }
 
   onScoreSheetReceived(blob: Blob): void {

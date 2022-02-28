@@ -63,10 +63,10 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   refreshLeagues(): void {
-    this.leagueService.listLeagues(this.getKinds()).subscribe(
-      (leagues) => this.onLeaguesRefreshed(leagues),
-      (_error) => this.onLeaguesRefreshed([]),
-    );
+    this.leagueService.listLeagues(this.getKinds()).subscribe({
+      next: (leagues) => this.onLeaguesRefreshed(leagues),
+      error: (_) => this.onLeaguesRefreshed([]),
+    });
   }
 
   onLeaguesRefreshed(leagues: LeagueSummary[]): void {
@@ -74,14 +74,14 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
 
     for (let league of this.leagues) {
       this.countsMap.set(league.id, 0);
-      this.gameService.getNumberOfGamesInLeague(league.id).subscribe(
-        (count) => this.countsMap.set(league.id, count.count),
-        (_error) => this.countsMap.set(league.id, 0),
-      );
-      this.leagueService.getLeague(league.id).subscribe(
-        (league) => this.divisionsMap.set(league.id, league.divisions),
-        (_error) => this.divisionsMap.set(league.id, []),
-      );
+      this.gameService.getNumberOfGamesInLeague(league.id).subscribe({
+        next: (count) => this.countsMap.set(league.id, count.count),
+        error: (_) => this.countsMap.set(league.id, 0),
+      });
+      this.leagueService.getLeague(league.id).subscribe({
+        next: (league) => this.divisionsMap.set(league.id, league.divisions),
+        error: (_) => this.divisionsMap.set(league.id, []),
+      });
     }
   }
 
@@ -107,10 +107,10 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
       });
       dialogRef.afterClosed().subscribe((dialogResult) => {
         if (dialogResult) {
-          this.leagueService.deleteLeague(league.id).subscribe(
-            (_deleted) => this.onLeagueDeleted(),
-            (_error) => this.onLeagueDeletionError(),
-          );
+          this.leagueService.deleteLeague(league.id).subscribe({
+            next: (_deleted) => this.onLeagueDeleted(),
+            error: (_) => this.onLeagueDeletionError(),
+          });
         }
       });
     });
@@ -151,10 +151,10 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   downloadDivisionExcel(league: LeagueSummary, divisionName: string): void {
-    this.publicService.listGamesInDivisionExcel(league.id, divisionName).subscribe(
-      (blob: Blob) => this.onDivisionExcelReceived(blob, league, divisionName),
-      (_error) => this.onDivisionExcelReceived(null, league, divisionName),
-    );
+    this.publicService.listGamesInDivisionExcel(league.id, divisionName).subscribe({
+      next: (blob: Blob) => this.onDivisionExcelReceived(blob, league, divisionName),
+      error: (_) => this.onDivisionExcelReceived(null, league, divisionName),
+    });
   }
 
   onDivisionExcelReceived(blob: Blob, league: LeagueSummary, divisionName: string): void {

@@ -250,10 +250,10 @@ export class UserGameDialogComponent {
 
   refreshDivisionsOfSelectedLeague(): void {
     if (this.leagueFormControl.value) {
-      this.leagueService.getLeague(this.leagueFormControl.value.id).subscribe(
-        (league) => (this.divisionsOfSelectedLeague = league.divisions),
-        (_error) => (this.divisionsOfSelectedLeague = []),
-      );
+      this.leagueService.getLeague(this.leagueFormControl.value.id).subscribe({
+        next: (league) => (this.divisionsOfSelectedLeague = league.divisions),
+        error: (_) => (this.divisionsOfSelectedLeague = []),
+      });
     } else {
       this.divisionsOfSelectedLeague = [];
     }
@@ -288,15 +288,15 @@ export class UserGameDialogComponent {
     game.scorerName = this.scorerNameFormControl.value;
 
     if (this.data.crudType === CrudType.Create) {
-      this.gameService.createGame(game).subscribe(
-        (_game) => this.onValidResponse(),
-        (_error) => this.onInvalidResponse(),
-      );
+      this.gameService.createGame(game).subscribe({
+        next: (_game) => this.onValidResponse(),
+        error: (_) => this.onInvalidResponse(),
+      });
     } else if (this.data.crudType === CrudType.Update) {
-      this.gameService.updateGame(game).subscribe(
-        (_game) => this.onValidResponse(),
-        (_error) => this.onInvalidResponse(),
-      );
+      this.gameService.updateGame(game).subscribe({
+        next: (_game) => this.onValidResponse(),
+        error: (_) => this.onInvalidResponse(),
+      });
     }
   }
 

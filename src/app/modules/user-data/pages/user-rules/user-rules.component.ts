@@ -51,10 +51,10 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
   }
 
   refreshRules(): void {
-    this.rulesService.listRules(this.getKinds()).subscribe(
-      (rules) => this.onRulesReceived(rules),
-      (_error) => this.onRulesReceived([]),
-    );
+    this.rulesService.listRules(this.getKinds()).subscribe({
+      next: (rules) => this.onRulesReceived(rules),
+      error: (_) => this.onRulesReceived([]),
+    });
   }
 
   createRules(kind: string): void {
@@ -74,8 +74,8 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
   }
 
   viewRules(rulesSummary: RulesSummary): void {
-    this.rulesService.getRules(rulesSummary.id).subscribe(
-      (rules) => {
+    this.rulesService.getRules(rulesSummary.id).subscribe({
+      next: (rules) => {
         const data: UserRulesDialogData = {
           crudType: CrudType.View,
           rules: rules,
@@ -83,13 +83,13 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
 
         const dialogRef = this.dialog.open(UserRulesDialogComponent, { width: '800px', data: data });
       },
-      (_error) => this.snackBarService.showError('Rules could not be found.'),
-    );
+      error: (_) => this.snackBarService.showError('Rules could not be found.'),
+    });
   }
 
   updateRules(rulesSummary: RulesSummary): void {
-    this.rulesService.getRules(rulesSummary.id).subscribe(
-      (rules) => {
+    this.rulesService.getRules(rulesSummary.id).subscribe({
+      next: (rules) => {
         const data: UserRulesDialogData = {
           crudType: CrudType.Update,
           rules: rules,
@@ -102,8 +102,8 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
           }
         });
       },
-      (_error) => this.snackBarService.showError('Rules could not be found.'),
-    );
+      error: (_) => this.snackBarService.showError('Rules could not be found.'),
+    });
   }
 
   deleteRules(rulesSummary: RulesSummary): void {
@@ -113,10 +113,10 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
     });
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
-        this.rulesService.deleteRules(rulesSummary.id).subscribe(
-          (_deleted) => this.onRulesDeleted(),
-          (_error) => this.onRulesDeletionError(),
-        );
+        this.rulesService.deleteRules(rulesSummary.id).subscribe({
+          next: (_deleted) => this.onRulesDeleted(),
+          error: (_) => this.onRulesDeletionError(),
+        });
       }
     });
   }

@@ -58,10 +58,10 @@ export class ToolbarComponent implements OnChanges {
   }
 
   refreshNotifications(): void {
-    this.userService.getNumberOfFriendRequestsReceivedBy().subscribe(
-      (count: Count) => (this.numberOfFriendRequests = count.count),
-      (_error) => (this.numberOfFriendRequests = 0),
-    );
+    this.userService.getNumberOfFriendRequestsReceivedBy().subscribe({
+      next: (count: Count) => (this.numberOfFriendRequests = count.count),
+      error: (_) => (this.numberOfFriendRequests = 0),
+    });
   }
 
   signOut(): void {

@@ -236,15 +236,15 @@ export class UserRulesDialogComponent {
     rules.customConsecutiveServesPerPlayer = this.customConsecutiveServesPerPlayer.value;
 
     if (this.data.crudType === CrudType.Create) {
-      this.rulesService.createRules(rules).subscribe(
-        (_rules) => this.onValidResponse(),
-        (_error) => this.onInvalidResponse(),
-      );
+      this.rulesService.createRules(rules).subscribe({
+        next: (_rules) => this.onValidResponse(),
+        error: (_) => this.onInvalidResponse(),
+      });
     } else if (this.data.crudType === CrudType.Update) {
-      this.rulesService.updateRules(rules).subscribe(
-        (_rules) => this.onValidResponse(),
-        (_error) => this.onInvalidResponse(),
-      );
+      this.rulesService.updateRules(rules).subscribe({
+        next: (_rules) => this.onValidResponse(),
+        error: (_) => this.onInvalidResponse(),
+      });
     }
   }
 

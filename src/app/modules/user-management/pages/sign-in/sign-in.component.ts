@@ -41,15 +41,15 @@ export class SignInComponent {
 
   onSignIn(): void {
     const emailCredentials = new EmailCredentials(this.emailFormControl.value, this.passwordFormControl.value);
-    this.userService.signIn(emailCredentials).subscribe(
-      (userToken) => this.onValidResponse(),
-      (error) => this.onInvalidResponse(error),
-    );
+    this.userService.signIn(emailCredentials).subscribe({
+      next: (_) => this.onValidResponse(),
+      error: (_) => this.onInvalidResponse(),
+    });
   }
 
   private onValidResponse(): void {}
 
-  private onInvalidResponse(_error: any): void {
+  private onInvalidResponse(): void {
     this.translate.get('user.management.messages.credentials-mismatch-error').subscribe((t) => this.snackBarService.showError(t));
   }
 

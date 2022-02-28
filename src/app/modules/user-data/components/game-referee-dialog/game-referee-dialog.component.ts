@@ -33,8 +33,8 @@ export class GameRefereeDialogComponent {
 
     this.me = new Friend(this.data.user.id, this.data.user.pseudo);
 
-    this.userService.listFriendsAndRequests().subscribe(
-      (friendsAndRequests) => {
+    this.userService.listFriendsAndRequests().subscribe({
+      next: (friendsAndRequests) => {
         this.friends = friendsAndRequests.friends;
 
         if (this.data.game.refereedBy === this.me.id) {
@@ -47,11 +47,11 @@ export class GameRefereeDialogComponent {
           }
         }
       },
-      (_error) => {
+      error: (_) => {
         this.friends = [];
         this.referee.setValue(this.me);
       },
-    );
+    });
   }
 
   get refereeFormControl() {
@@ -59,10 +59,10 @@ export class GameRefereeDialogComponent {
   }
 
   onUpdateReferee(): void {
-    this.gameService.updateReferee(this.data.game.id, this.refereeFormControl.value.id).subscribe(
-      (success) => this.onValidResponse(),
-      (error) => this.onInvalidResponse(),
-    );
+    this.gameService.updateReferee(this.data.game.id, this.refereeFormControl.value.id).subscribe({
+      next: (success) => this.onValidResponse(),
+      error: (_) => this.onInvalidResponse(),
+    });
   }
 
   onValidResponse(): void {

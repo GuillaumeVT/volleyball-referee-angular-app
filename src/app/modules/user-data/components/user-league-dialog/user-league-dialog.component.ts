@@ -36,17 +36,17 @@ export class UserLeagueDialogComponent {
 
   onCreateLeague(): void {
     this.league.name = this.leagueNameFormControl.value;
-    this.leagueService.createLeague(this.league).subscribe(
-      (_league) => this.onValidResponse(),
-      (error) => this.onInvalidResponse(error),
-    );
+    this.leagueService.createLeague(this.league).subscribe({
+      next: (_league) => this.onValidResponse(),
+      error: (_) => this.onInvalidResponse(),
+    });
   }
 
   onValidResponse(): void {
     this.dialogRef.close(true);
   }
 
-  onInvalidResponse(_error: any): void {
+  onInvalidResponse(): void {
     this.translate
       .get('user.league.messages.created-error', { pseudo: this.league.name })
       .subscribe((t) => this.snackBarService.showError(t));

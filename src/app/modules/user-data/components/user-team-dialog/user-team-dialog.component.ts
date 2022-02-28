@@ -322,15 +322,15 @@ export class UserTeamDialogComponent {
     team.coach = this.coachNameFormControl.value;
 
     if (this.data.crudType === CrudType.Create) {
-      this.teamService.createTeam(team).subscribe(
-        (_team) => this.onValidResponse(),
-        (_error) => this.onInvalidResponse(),
-      );
+      this.teamService.createTeam(team).subscribe({
+        next: (_team) => this.onValidResponse(),
+        error: (_) => this.onInvalidResponse(),
+      });
     } else if (this.data.crudType === CrudType.Update) {
-      this.teamService.updateTeam(team).subscribe(
-        (_team) => this.onValidResponse(),
-        (_error) => this.onInvalidResponse(),
-      );
+      this.teamService.updateTeam(team).subscribe({
+        next: (_team) => this.onValidResponse(),
+        error: (_) => this.onInvalidResponse(),
+      });
     }
   }
 

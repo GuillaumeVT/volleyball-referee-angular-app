@@ -77,10 +77,10 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
         this.onGamesReceived(page);
       });
     } else {
-      this.gameService.listGames(this.getStatuses(), this.getKinds(), this.getGenders(), append ? this.page : 0, this.size).subscribe(
-        (page) => this.onGamesReceived(page),
-        (_error) => this.onGamesReceived(null),
-      );
+      this.gameService.listGames(this.getStatuses(), this.getKinds(), this.getGenders(), append ? this.page : 0, this.size).subscribe({
+        next: (page) => this.onGamesReceived(page),
+        error: (_) => this.onGamesReceived(null),
+      });
     }
   }
 
@@ -165,10 +165,10 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
         });
         dialogRef.afterClosed().subscribe((dialogResult) => {
           if (dialogResult) {
-            this.gameService.deleteGame(game.id).subscribe(
-              (_deleted) => this.onGameDeleted(),
-              (_error) => this.onGameDeletionError(),
-            );
+            this.gameService.deleteGame(game.id).subscribe({
+              next: (_deleted) => this.onGameDeleted(),
+              error: (_) => this.onGameDeletionError(),
+            });
           }
         });
       });
@@ -233,10 +233,10 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   }
 
   downloadScoreSheet(game: GameSummary): void {
-    this.publicService.getScoreSheet(game.id).subscribe(
-      (blob: Blob) => this.onScoreSheetReceived(blob, game),
-      (error) => this.onScoreSheetReceived(null, game),
-    );
+    this.publicService.getScoreSheet(game.id).subscribe({
+      next: (blob: Blob) => this.onScoreSheetReceived(blob, game),
+      error: (_) => this.onScoreSheetReceived(null, game),
+    });
   }
 
   onScoreSheetReceived(blob: Blob, game: GameSummary): void {

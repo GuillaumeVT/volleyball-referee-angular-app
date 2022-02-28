@@ -54,15 +54,15 @@ export class LeagueGamesComponent implements OnDestroy, OnChanges {
 
   refreshTeams(): void {
     if (this.selectedDivision === this.allDivisions) {
-      this.publicService.listTeamsOfLeague(this.league.id).subscribe(
-        (teams) => (this.teams = teams),
-        (_error) => (this.teams = []),
-      );
+      this.publicService.listTeamsOfLeague(this.league.id).subscribe({
+        next: (teams) => (this.teams = teams),
+        error: (_) => (this.teams = []),
+      });
     } else {
-      this.publicService.listTeamsOfDivision(this.league.id, this.selectedDivision).subscribe(
-        (teams) => (this.teams = teams),
-        (_error) => (this.teams = []),
-      );
+      this.publicService.listTeamsOfDivision(this.league.id, this.selectedDivision).subscribe({
+        next: (teams) => (this.teams = teams),
+        error: (_) => (this.teams = []),
+      });
     }
   }
 

@@ -51,10 +51,10 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   }
 
   refreshTeams(append: boolean): void {
-    this.teamService.listTeams(this.getKinds(), this.getGenders(), append ? this.page : 0, this.size).subscribe(
-      (page) => this.onTeamsReceived(page),
-      (_error) => this.onTeamsReceived(null),
-    );
+    this.teamService.listTeams(this.getKinds(), this.getGenders(), append ? this.page : 0, this.size).subscribe({
+      next: (page) => this.onTeamsReceived(page),
+      error: (_) => this.onTeamsReceived(null),
+    });
   }
 
   createTeam(kind: string): void {
@@ -108,10 +108,10 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
       });
       dialogRef.afterClosed().subscribe((dialogResult) => {
         if (dialogResult) {
-          this.teamService.deleteTeam(teamSummary.id).subscribe(
-            (_deleted) => this.onTeamDeleted(),
-            (_error) => this.onTeamDeletionError(),
-          );
+          this.teamService.deleteTeam(teamSummary.id).subscribe({
+            next: (_deleted) => this.onTeamDeleted(),
+            error: (_) => this.onTeamDeletionError(),
+          });
         }
       });
     });

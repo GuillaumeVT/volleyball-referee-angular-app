@@ -46,15 +46,15 @@ export class LeagueDashboardComponent implements OnDestroy, OnChanges {
 
   refreshGames(): void {
     if (this.selectedDivision === this.allDivisions) {
-      this.publicService.getGamesInLeagueGroupedByStatus(this.league.id).subscribe(
-        (games) => (this.games = games),
-        (_error) => (this.games = null),
-      );
+      this.publicService.getGamesInLeagueGroupedByStatus(this.league.id).subscribe({
+        next: (games) => (this.games = games),
+        error: (_) => (this.games = null),
+      });
     } else {
-      this.publicService.getGamesInDivisionGroupedByStatus(this.league.id, this.selectedDivision).subscribe(
-        (games) => (this.games = games),
-        (_error) => (this.games = null),
-      );
+      this.publicService.getGamesInDivisionGroupedByStatus(this.league.id, this.selectedDivision).subscribe({
+        next: (games) => (this.games = games),
+        error: (_) => (this.games = null),
+      });
     }
   }
 

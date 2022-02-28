@@ -66,10 +66,10 @@ export class AccountComponent implements OnInit {
 
   onUpdateUserPassword(): void {
     const userPasswordUpdate = new UserPasswordUpdate(this.currentPasswordFormControl.value, this.newPasswordFormControl.value);
-    this.userService.updateUserPassword(userPasswordUpdate).subscribe(
-      (tokenRequestResult) => this.onValidResponse(),
-      (error) => this.onInvalidResponse(error),
-    );
+    this.userService.updateUserPassword(userPasswordUpdate).subscribe({
+      next: (tokenRequestResult) => this.onValidResponse(),
+      error: (error) => this.onInvalidResponse(error),
+    });
   }
 
   private onValidResponse(): void {

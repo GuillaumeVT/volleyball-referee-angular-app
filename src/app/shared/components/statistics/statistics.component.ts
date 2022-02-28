@@ -31,9 +31,9 @@ export class StatisticsComponent implements OnInit {
       .subscribe((t) => (this.statisticsTranslations = t));
 
     if (this.showUserStatistics) {
-      this.statisticsService.getStatistics().subscribe((statistics) => this.buildStatisticsData(statistics));
+      this.statisticsService.getStatistics().subscribe({ next: (statistics) => this.buildStatisticsData(statistics) });
     } else {
-      this.publicService.getStatistics().subscribe((statistics) => this.buildStatisticsData(statistics));
+      this.publicService.getStatistics().subscribe({ next: (statistics) => this.buildStatisticsData(statistics) });
     }
   }
 

@@ -30,10 +30,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.userService.authState.subscribe((userToken) => {
         if (userToken) {
-          this.gameService.listAvailableGames().subscribe(
-            (games) => (this.availableGames = games),
-            (_error) => (this.availableGames = []),
-          );
+          this.gameService.listAvailableGames().subscribe({
+            next: (games) => (this.availableGames = games),
+            error: (_) => (this.availableGames = []),
+          });
         }
       }),
     );

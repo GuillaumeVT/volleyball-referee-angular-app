@@ -34,10 +34,10 @@ export class UserColleagueDialogComponent {
 
   onAddColleague(): void {
     const pseudo = this.pseudoFormControl.value;
-    this.userService.sendFriendRequest(pseudo).subscribe(
-      (_success) => this.onValidResponse(pseudo),
-      (_error) => this.onInvalidResponse(),
-    );
+    this.userService.sendFriendRequest(pseudo).subscribe({
+      next: (_success) => this.onValidResponse(pseudo),
+      error: (_) => this.onInvalidResponse(),
+    });
   }
 
   onValidResponse(pseudo: string): void {

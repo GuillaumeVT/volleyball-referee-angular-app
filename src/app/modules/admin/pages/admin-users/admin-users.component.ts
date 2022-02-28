@@ -35,17 +35,17 @@ export class AdminUsersComponent implements OnInit {
   }
 
   refreshUsers(): void {
-    this.adminService.listUsers(this.filter, this.page, this.size).subscribe(
-      (page) => {
+    this.adminService.listUsers(this.filter, this.page, this.size).subscribe({
+      next: (page) => {
         this.total = page.totalElements;
         this.users = page.content;
       },
-      (_error) => {
+      error: (_) => {
         this.page = 0;
         this.total = 0;
         this.users = [];
       },
-    );
+    });
   }
 
   filterUsers(textFilter: HTMLInputElement): void {
@@ -71,24 +71,24 @@ export class AdminUsersComponent implements OnInit {
     const dialogRef = this.dialog.open(UserSubscriptionTokenDialogComponent, { width: '500px', data: user.purchaseToken });
     dialogRef.afterClosed().subscribe((purchaseToken) => {
       if (purchaseToken) {
-        this.adminService.updateUserSubscription(user.id, purchaseToken).subscribe(
-          (_success) => {
+        this.adminService.updateUserSubscription(user.id, purchaseToken).subscribe({
+          next: (_success) => {
             this.snackBarService.showInfo('Successfully updated subscription.');
             this.refreshUsers();
           },
-          (_error) => this.snackBarService.showError('Failed to updated subscription.'),
-        );
+          error: (_) => this.snackBarService.showError('Failed to updated subscription.'),
+        });
       }
     });
   }
 
   refreshUserSubscription(user: User): void {
-    this.adminService.refreshUserSubscription(user.id).subscribe(
-      (_success) => {
+    this.adminService.refreshUserSubscription(user.id).subscribe({
+      next: (_success) => {
         this.snackBarService.showInfo('Successfully refreshed subscription.');
         this.refreshUsers();
       },
-      (_error) => this.snackBarService.showError('Failed to refresh subscription.'),
-    );
+      error: (_) => this.snackBarService.showError('Failed to refresh subscription.'),
+    });
   }
 }

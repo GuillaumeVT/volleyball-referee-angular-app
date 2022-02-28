@@ -24,10 +24,10 @@ export class PasswordLostComponent {
 
   onInitiatePasswordReset(): void {
     const emailAddress = this.emailFormControl.value;
-    this.userService.initiatePasswordReset(emailAddress).subscribe(
-      (success) => this.onValidResponse(emailAddress),
-      (_error) => this.onInvalidResponse(emailAddress),
-    );
+    this.userService.initiatePasswordReset(emailAddress).subscribe({
+      next: (_) => this.onValidResponse(emailAddress),
+      error: (_) => this.onInvalidResponse(emailAddress),
+    });
   }
 
   private onValidResponse(emailAddress: string): void {

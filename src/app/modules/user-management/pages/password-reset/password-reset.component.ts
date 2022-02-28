@@ -65,10 +65,10 @@ export class PasswordResetComponent implements OnInit {
   }
 
   onResetPassword(): void {
-    this.userService.resetPassword(this.passwordResetId, this.newPasswordFormControl.value).subscribe(
-      (tokenRequestResult) => this.onValidResponse(),
-      (error) => this.onInvalidResponse(error),
-    );
+    this.userService.resetPassword(this.passwordResetId, this.newPasswordFormControl.value).subscribe({
+      next: (_) => this.onValidResponse(),
+      error: (error) => this.onInvalidResponse(error),
+    });
   }
 
   private onValidResponse(): void {
