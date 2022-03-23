@@ -119,6 +119,18 @@ export class UserRulesDialogComponent {
         this.teamSubstitutionsPerSet.setValue(6);
       }
     });
+
+    this.setsPerGame.valueChanges.subscribe((setsPerGame) => {
+      if (setsPerGame % 2 === 0) {
+        this.matchTermination.setValue(2);
+      }
+    });
+
+    this.matchTermination.valueChanges.subscribe((_) => {
+      if (this.setsPerGame.value % 2 === 0) {
+        this.matchTermination.setValue(2);
+      }
+    });
   }
 
   get nameFormControl() {
@@ -149,7 +161,9 @@ export class UserRulesDialogComponent {
   private createOptions(): void {
     this.setsPerGameOptions = [
       { value: 5, label: 'Game of 5 sets' },
+      { value: 4, label: 'Game of 4 sets' },
       { value: 3, label: 'Game of 3 sets' },
+      { value: 2, label: 'Game of 2 sets' },
       { value: 1, label: 'Game of 1 set' },
     ];
 
