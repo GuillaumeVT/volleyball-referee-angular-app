@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AbstractGameFilter } from '@shared/models/abstract-game-filter.model';
 import { GameSummary } from '@shared/models/game.model';
-import { Page } from '@shared/models/page.model';
+import { FetchBehaviour, Page, Paging } from '@shared/models/page.model';
 import { idAll } from '@shared/models/variable.model';
 import { PublicService } from '@shared/services/public.service';
 
@@ -21,6 +21,8 @@ export class GameListComponent extends AbstractGameFilter implements OnChanges {
   searchResultMessage: string;
   inLeague: boolean;
 
+  fetchBehaviour = FetchBehaviour;
+
   constructor(private publicService: PublicService, private translate: TranslateService) {
     super(20);
     this.searchResultMessage = '';
@@ -28,40 +30,38 @@ export class GameListComponent extends AbstractGameFilter implements OnChanges {
 
   ngOnChanges(_changes: SimpleChanges) {
     this.inLeague = this.leagueId !== undefined && this.leagueId !== null;
-    this.refreshGames(false);
+    this.requestRefreshGames(FetchBehaviour.LOAD);
   }
 
-  refreshGames(append: boolean): void {
-    const pageToGet: number = append ? this.page : 0;
-
+  public refreshGames(paging: Paging): void {
     if (this.token && this.token.length) {
       this.publicService
-        .listGamesMatchingToken(this.token, this.getStatuses(), this.getKinds(), this.getGenders(), pageToGet, this.size)
+        .listGamesMatchingToken(this.token, this.getStatuses(), this.getKinds(), this.getGenders(), paging.page, paging.size)
         .subscribe({
           next: (page) => this.onGamesReceivedTokenCriterion(page),
           error: (_) => this.onGamesReceivedTokenCriterion(null),
         });
     } else if (this.date && this.date.length) {
       this.publicService
-        .listGamesWithScheduleDate(this.date, this.getStatuses(), this.getKinds(), this.getGenders(), pageToGet, this.size)
+        .listGamesWithScheduleDate(this.date, this.getStatuses(), this.getKinds(), this.getGenders(), paging.page, paging.size)
         .subscribe({
           next: (page) => this.onGamesReceivedDateCriterion(page),
           error: (_) => this.onGamesReceivedDateCriterion(null),
         });
     } else if (this.leagueId && this.teamId) {
       if (this.teamId === idAll) {
-        this.publicService.listGamesInLeague(this.leagueId, this.getStatuses(), this.getGenders(), pageToGet, this.size).subscribe({
+        this.publicService.listGamesInLeague(this.leagueId, this.getStatuses(), this.getGenders(), paging.page, paging.size).subscribe({
           next: (page) => this.onGamesReceivedNoCriterion(page),
           error: (_) => this.onGamesReceivedNoCriterion(null),
         });
       } else {
-        this.publicService.listGamesOfTeamInLeague(this.leagueId, this.teamId, this.getStatuses(), pageToGet, this.size).subscribe({
+        this.publicService.listGamesOfTeamInLeague(this.leagueId, this.teamId, this.getStatuses(), paging.page, paging.size).subscribe({
           next: (page) => this.onGamesReceivedNoCriterion(page),
           error: (_) => this.onGamesReceivedNoCriterion(null),
         });
       }
     } else if (this.live) {
-      this.publicService.listLiveGames(this.getKinds(), this.getGenders(), pageToGet, this.size).subscribe({
+      this.publicService.listLiveGames(this.getKinds(), this.getGenders(), paging.page, paging.size).subscribe({
         next: (page) => this.onGamesReceivedLiveCriterion(page),
         error: (_) => this.onGamesReceivedLiveCriterion(null),
       });

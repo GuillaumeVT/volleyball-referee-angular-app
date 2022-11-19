@@ -26,7 +26,7 @@ export class League {
   }
 }
 
-export class LeagueSummary {
+export interface LeagueSummary {
   id: string;
   createdBy: string;
   createdAt: number;
@@ -35,7 +35,7 @@ export class LeagueSummary {
   kind: string;
 }
 
-export class SelectedLeague {
+export interface SelectedLeague {
   id: string;
   createdBy: string;
   createdAt: number;

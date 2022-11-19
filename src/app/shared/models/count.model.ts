@@ -1,3 +1,3 @@
-export class Count {
+export interface Count {
   count: number;
 }

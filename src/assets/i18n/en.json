@@ -192,7 +192,16 @@
       }
     },
     "rules": {
-      "page": "VBR - My Rules"
+      "page": "VBR - My Rules",
+      "create": "Rules creation",
+      "update": "Rules editing",
+      "view": "Rules viewing",
+      "delete": "Rules deletion",
+      "messages": {
+        "delete-question": "Do you want to delete the rules named {{name}}?",
+        "delete-all-question": "Do you want to delete ALL the rules?",
+        "deleted-error": "Rules could not be deleted. Are they used in a scheduled game?"
+      }
     },
     "league": {
       "page": "VBR - My Leagues",
@@ -232,7 +241,7 @@
         "pseudo-required-error": "Pseudo is required",
         "request-added-error": "{{pseudo}} could not be added to your colleagues.",
         "remove-question": "Do you want to remove {{pseudo}}?",
-        "removed-error": "{{pseudo}} could not be removed from your colleagues."        
+        "removed-error": "{{pseudo}} could not be removed from your colleagues."
       }
     }
   },

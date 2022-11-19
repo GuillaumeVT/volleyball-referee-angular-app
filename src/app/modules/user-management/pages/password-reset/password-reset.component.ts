@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { SnackBarService } from '@shared/services/snack-bar.service';
 export class PasswordResetComponent implements OnInit {
   passwordResetId: string;
 
-  passwordResetFormGroup: FormGroup;
+  passwordResetFormGroup: UntypedFormGroup;
   hidePassword: boolean;
   passwordVisibility: string;
 
@@ -26,10 +26,10 @@ export class PasswordResetComponent implements OnInit {
     this.hidePassword = false;
     this.togglePasswordVisibility();
 
-    this.passwordResetFormGroup = new FormGroup(
+    this.passwordResetFormGroup = new UntypedFormGroup(
       {
-        newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
-        confirmedPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+        newPassword: new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
+        confirmedPassword: new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
       },
       this.passwordsMustMatchValidator,
     );

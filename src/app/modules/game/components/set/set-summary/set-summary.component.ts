@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Game } from '@shared/models/game.model';
 import { TeamType } from '@shared/models/team-type.model';
 import { PlayerStyleService } from '@shared/services/player-style.service';
@@ -16,7 +16,7 @@ export class SetSummaryComponent implements OnChanges {
 
   @Output() currentSetUpdated = new EventEmitter(true);
 
-  currentSet: FormControl;
+  currentSet: UntypedFormControl;
 
   homePoints: number;
   guestPoints: number;
@@ -25,7 +25,7 @@ export class SetSummaryComponent implements OnChanges {
   guestTimeouts: number[];
 
   constructor(public playerStyleService: PlayerStyleService) {
-    this.currentSet = new FormControl(-1);
+    this.currentSet = new UntypedFormControl(-1);
   }
 
   ngOnChanges(changes: SimpleChanges) {

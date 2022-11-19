@@ -86,6 +86,8 @@
   </mat-card>
 
   <div class="div-user text-center my-3" *ngIf="!last">
-    <button type="button" mat-stroked-button color="primary" (click)="refreshTeams(true)">{{ 'user.team.load' | translate }}</button>
+    <button type="button" mat-stroked-button color="primary" (click)="requestRefreshTeams(fetchBehaviour.APPEND)">
+      {{ 'user.team.load' | translate }}
+    </button>
   </div>
 </div>

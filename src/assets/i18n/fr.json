@@ -84,7 +84,7 @@
       "diff": "Diff",
       "played-abbr": "J.",
       "won-abbr": "G."
-    } 
+    }
   },
   "user": {
     "management": {
@@ -192,7 +192,16 @@
       }
     },
     "rules": {
-      "page": "VBR - Mes Règles"
+      "page": "VBR - Mes Règles",
+      "create": "Création de règles",
+      "update": "Édition des règles {{name}}",
+      "view": "Visualisation des règles {{name}}",
+      "delete": "Suppression de règles",
+      "messages": {
+        "delete-question": "Supprimer les règles {{name}}?",
+        "delete-all-question": "Supprimer TOUTES les règles?",
+        "deleted-error": "Les règles n'ont pas pu être supprimées. Sont-elles utilisées pour un match programmé?"
+      }
     },
     "league": {
       "page": "VBR - Mes ligues",
@@ -232,7 +241,7 @@
         "pseudo-required-error": "Le pseudo est obligatoire",
         "request-added-error": "{{pseudo}} n'a pu être ajouté à vos collègues.",
         "remove-question": "Supprimer la relation avec {{pseudo}}?",
-        "removed-error": "{{pseudo}} n'a pu être supprimé de vos collègues."        
+        "removed-error": "{{pseudo}} n'a pu être supprimé de vos collègues."
       }
     }
   },

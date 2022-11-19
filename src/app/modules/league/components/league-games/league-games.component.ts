@@ -26,9 +26,7 @@ export class LeagueGamesComponent implements OnDestroy, OnChanges {
   constructor(private publicService: PublicService) {
     this.allDivisions = idAll;
     this.selectedDivision = this.allDivisions;
-    this.allTeams = new TeamSummary();
-    this.allTeams.id = idAll;
-    this.allTeams.name = this.allTeams.id;
+    this.allTeams = { id: idAll, name: idAll, kind: null, gender: null, createdBy: null, createdAt: null, updatedAt: null };
     this.teams = [];
     this.selectedTeam = this.allTeams;
     this.autoRefresh = true;

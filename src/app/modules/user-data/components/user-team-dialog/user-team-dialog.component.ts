@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Player, Team } from '@shared/models/team.model';
 import { PlayerStyleService } from '@shared/services/player-style.service';
@@ -18,8 +18,8 @@ import { TeamService } from '@user-data/services/team.service';
 export class UserTeamDialogComponent {
   crudTypeEnum: typeof CrudType = CrudType;
 
-  teamFormGroup: FormGroup;
-  captain: FormControl;
+  teamFormGroup: UntypedFormGroup;
+  captain: UntypedFormControl;
 
   editingDisabled: boolean;
   players: InputPlayerItem[];
@@ -62,21 +62,21 @@ export class UserTeamDialogComponent {
         break;
     }
 
-    this.captain = new FormControl({ value: this.data.team.captain, disabled: this.editingDisabled }, [
+    this.captain = new UntypedFormControl({ value: this.data.team.captain, disabled: this.editingDisabled }, [
       Validators.required,
       Validators.min(0),
     ]);
 
-    this.teamFormGroup = new FormGroup({
-      name: new FormControl({ value: this.data.team.name, disabled: this.editingDisabled }, [Validators.required]),
-      gender: new FormControl({ value: this.data.team.gender, disabled: this.editingDisabled }, [Validators.required]),
-      color: new FormControl({ value: this.data.team.color, disabled: this.editingDisabled }, [Validators.required]),
-      liberoColor: new FormControl({ value: this.data.team.liberoColor, disabled: this.editingDisabled }, [Validators.required]),
+    this.teamFormGroup = new UntypedFormGroup({
+      name: new UntypedFormControl({ value: this.data.team.name, disabled: this.editingDisabled }, [Validators.required]),
+      gender: new UntypedFormControl({ value: this.data.team.gender, disabled: this.editingDisabled }, [Validators.required]),
+      color: new UntypedFormControl({ value: this.data.team.color, disabled: this.editingDisabled }, [Validators.required]),
+      liberoColor: new UntypedFormControl({ value: this.data.team.liberoColor, disabled: this.editingDisabled }, [Validators.required]),
       captain: this.captain,
-      numberOfPlayers: new FormControl({ value: this.data.team.players.length, disabled: this.editingDisabled }, [
+      numberOfPlayers: new UntypedFormControl({ value: this.data.team.players.length, disabled: this.editingDisabled }, [
         Validators.min(this.minPlayers),
       ]),
-      coachName: new FormControl({ value: this.data.team.coach, disabled: this.editingDisabled }),
+      coachName: new UntypedFormControl({ value: this.data.team.coach, disabled: this.editingDisabled }),
     });
 
     this.onShirtColorChanged(this.colorFormControl.value);

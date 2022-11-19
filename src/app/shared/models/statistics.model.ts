@@ -1,14 +1,14 @@
-export class StatisticsGroup {
+export interface StatisticsGroup {
   globalStatistics: Statistics;
   userStatistics: Statistics;
 }
 
-export class Statistics {
+export interface Statistics {
   gameStatistics: Count[];
   teamStatistics: Count[];
 }
 
-export class Count {
+export interface Count {
   kind: string;
   count: number;
 }

@@ -187,7 +187,7 @@ export class Rules {
   }
 }
 
-export class RulesSummary {
+export interface RulesSummary {
   id: string;
   createdBy: string;
   createdAt: number;

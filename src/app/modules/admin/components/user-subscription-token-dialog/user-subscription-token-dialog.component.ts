@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -8,14 +8,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./user-subscription-token-dialog.component.scss'],
 })
 export class UserSubscriptionTokenDialogComponent {
-  userSubscriptionFormGroup: FormGroup;
+  userSubscriptionFormGroup: UntypedFormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<UserSubscriptionTokenDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public currentPurchaseToken: string,
   ) {
-    this.userSubscriptionFormGroup = new FormGroup({
-      purchaseToken: new FormControl({ value: this.currentPurchaseToken, disabled: false }, [
+    this.userSubscriptionFormGroup = new UntypedFormGroup({
+      purchaseToken: new UntypedFormControl({ value: this.currentPurchaseToken, disabled: false }, [
         Validators.required,
         Validators.minLength(144),
         Validators.maxLength(187),

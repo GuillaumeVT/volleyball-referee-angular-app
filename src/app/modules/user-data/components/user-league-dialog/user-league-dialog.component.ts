@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { League } from '@shared/models/league.model';
@@ -12,7 +12,7 @@ import { LeagueService } from '@user-data/services/league.service';
   styleUrls: ['./user-league-dialog.component.scss'],
 })
 export class UserLeagueDialogComponent {
-  leagueFormGroup: FormGroup;
+  leagueFormGroup: UntypedFormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<UserLeagueDialogComponent>,
@@ -21,8 +21,8 @@ export class UserLeagueDialogComponent {
     private snackBarService: SnackBarService,
     private translate: TranslateService,
   ) {
-    this.leagueFormGroup = new FormGroup({
-      leagueName: new FormControl('', [Validators.required]),
+    this.leagueFormGroup = new UntypedFormGroup({
+      leagueName: new UntypedFormControl('', [Validators.required]),
     });
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserPasswordUpdate, UserSummary } from '@core/models/user.model';
 import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { SnackBarService } from '@shared/services/snack-bar.service';
 export class AccountComponent implements OnInit {
   user: UserSummary;
 
-  passwordUpdateFormGroup: FormGroup;
+  passwordUpdateFormGroup: UntypedFormGroup;
   hidePassword: boolean;
   passwordVisibility: string;
 
@@ -21,11 +21,11 @@ export class AccountComponent implements OnInit {
     this.hidePassword = false;
     this.togglePasswordVisibility();
 
-    this.passwordUpdateFormGroup = new FormGroup(
+    this.passwordUpdateFormGroup = new UntypedFormGroup(
       {
-        currentPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
-        newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
-        confirmedPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+        currentPassword: new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
+        newPassword: new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
+        confirmedPassword: new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
       },
       this.passwordsMustMatchValidator,
     );

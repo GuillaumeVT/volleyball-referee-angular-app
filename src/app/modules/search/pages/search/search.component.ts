@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
   searchTypeEnum: typeof SearchType = SearchType;
   searchCriteria: SearchCriterion[];
 
-  searchTokenControl: FormControl;
+  searchTokenControl: UntypedFormControl;
   loadSearchResults: boolean;
   minSearchLength: number;
 
@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit {
 
     this.searchCriteria = [this.tokenSearchCriterion, this.liveSearchCriterion, this.dateSearchCriterion, this.todaySearchCriterion];
 
-    this.searchTokenControl = new FormControl('', [Validators.required, Validators.minLength(this.minSearchLength)]);
+    this.searchTokenControl = new UntypedFormControl('', [Validators.required, Validators.minLength(this.minSearchLength)]);
     this.searchTokenControl.valueChanges.subscribe((token) => (this.tokenSearchCriterion.value = token));
   }
 

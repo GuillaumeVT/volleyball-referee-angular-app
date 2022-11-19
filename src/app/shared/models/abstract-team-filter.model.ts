@@ -1,71 +1,94 @@
-import { Page } from '@shared/models/page.model';
+import { FetchBehaviour, Page, Paging } from '@shared/models/page.model';
 import { TeamSummary } from '@shared/models/team.model';
 
 export abstract class AbstractTeamFilter {
-  textFilter: string;
-  isBeachChecked: boolean;
-  isIndoorChecked: boolean;
-  isIndoor4x4Checked: boolean;
-  isSnowChecked: boolean;
-  isMixedChecked: boolean;
-  isLadiesChecked: boolean;
-  isGentsChecked: boolean;
+  private _textFilter: string;
+  private _isBeachChecked: boolean;
+  private _isIndoorChecked: boolean;
+  private _isIndoor4x4Checked: boolean;
+  private _isSnowChecked: boolean;
+  private _isMixedChecked: boolean;
+  private _isLadiesChecked: boolean;
+  private _isGentsChecked: boolean;
 
-  page: number;
-  size: number;
-  last: boolean;
+  private _defaultSize: number;
+  private _currentFetchBehaviour: FetchBehaviour;
 
-  teams: TeamSummary[];
-  filteredTeams: TeamSummary[];
+  public nextPage: number;
+  public size: number;
+  public total: number;
+  public last: boolean;
+
+  public teams: TeamSummary[];
+  public filteredTeams: TeamSummary[];
 
   constructor(size: number) {
-    this.textFilter = '';
-    this.isBeachChecked = true;
-    this.isIndoorChecked = true;
-    this.isIndoor4x4Checked = true;
-    this.isSnowChecked = true;
-    this.isMixedChecked = true;
-    this.isLadiesChecked = true;
-    this.isGentsChecked = true;
-    this.page = 0;
+    this._textFilter = '';
+    this._isBeachChecked = true;
+    this._isIndoorChecked = true;
+    this._isIndoor4x4Checked = true;
+    this._isSnowChecked = true;
+    this._isMixedChecked = true;
+    this._isLadiesChecked = true;
+    this._isGentsChecked = true;
+    this.nextPage = 0;
+    this._defaultSize = size;
     this.size = size;
+    this.total = 0;
     this.last = true;
+    this._currentFetchBehaviour = FetchBehaviour.LOAD;
   }
 
-  abstract refreshTeams(append: boolean): void;
+  protected requestRefreshTeams(fetchBehaviour: FetchBehaviour): void {
+    this._currentFetchBehaviour = fetchBehaviour;
+    this.refreshTeams(this.computePaging(fetchBehaviour));
+  }
 
-  getKinds(): string[] {
+  abstract refreshTeams(paging: Paging): void;
+
+  private computePaging(fetchBehaviour: FetchBehaviour): Paging {
+    switch (fetchBehaviour) {
+      case FetchBehaviour.LOAD:
+        return { page: 0, size: this.size };
+      case FetchBehaviour.APPEND:
+        return { page: this.nextPage, size: this.size };
+      case FetchBehaviour.REFRESH:
+        return { page: 0, size: this.nextPage * this.size };
+    }
+  }
+
+  protected getKinds(): string[] {
     const kinds: string[] = [];
-    if (this.isBeachChecked) {
+    if (this._isBeachChecked) {
       kinds.push('BEACH');
     }
-    if (this.isIndoorChecked) {
+    if (this._isIndoorChecked) {
       kinds.push('INDOOR');
     }
-    if (this.isIndoor4x4Checked) {
+    if (this._isIndoor4x4Checked) {
       kinds.push('INDOOR_4X4');
     }
-    if (this.isSnowChecked) {
+    if (this._isSnowChecked) {
       kinds.push('SNOW');
     }
     return kinds;
   }
 
-  getGenders(): string[] {
+  protected getGenders(): string[] {
     const genders: string[] = [];
-    if (this.isMixedChecked) {
+    if (this._isMixedChecked) {
       genders.push('MIXED');
     }
-    if (this.isLadiesChecked) {
+    if (this._isLadiesChecked) {
       genders.push('LADIES');
     }
-    if (this.isGentsChecked) {
+    if (this._isGentsChecked) {
       genders.push('GENTS');
     }
     return genders;
   }
 
-  onTeamsReceived(page: Page<TeamSummary>): void {
+  protected onTeamsReceived(page: Page<TeamSummary>): void {
     if (page === null) {
       this.teams = [];
     } else {
@@ -75,21 +98,31 @@ export abstract class AbstractTeamFilter {
         this.teams = this.teams.concat(page.content);
       }
 
-      this.page = this.page + 1;
+      switch (this._currentFetchBehaviour) {
+        case FetchBehaviour.LOAD:
+        case FetchBehaviour.APPEND:
+          this.nextPage = page.number + 1;
+          break;
+        case FetchBehaviour.REFRESH:
+          this.nextPage = page.numberOfElements / this._defaultSize;
+          break;
+      }
+
+      this.total = page.totalElements;
       this.last = page.last;
 
       this.filterTeams();
     }
   }
 
-  filterTeams(): void {
+  protected filterTeams(): void {
     var tempList = [];
 
     for (let team of this.teams) {
       var mustAdd = true;
 
-      if (this.textFilter.trim()) {
-        if (team.name.toLowerCase().indexOf(this.textFilter) === -1) {
+      if (this._textFilter.trim()) {
+        if (team.name.toLowerCase().indexOf(this._textFilter) === -1) {
           mustAdd = false;
         }
       }
@@ -102,52 +135,52 @@ export abstract class AbstractTeamFilter {
     this.filteredTeams = tempList;
   }
 
-  filterFromText(textFilter: HTMLInputElement): void {
-    this.textFilter = textFilter.value.toLowerCase();
+  public filterFromText(textFilter: HTMLInputElement): void {
+    this._textFilter = textFilter.value.toLowerCase();
     this.filterTeams();
   }
 
-  toggleBeach(button: HTMLElement): void {
-    this.isBeachChecked = !this.isBeachChecked;
-    this.toggleButton(button, this.isBeachChecked, 'vbr-beach-chip');
+  public toggleBeach(button: HTMLElement): void {
+    this._isBeachChecked = !this._isBeachChecked;
+    this.toggleButton(button, this._isBeachChecked, 'vbr-beach-chip');
   }
 
-  toggleIndoor(button: HTMLElement): void {
-    this.isIndoorChecked = !this.isIndoorChecked;
-    this.toggleButton(button, this.isIndoorChecked, 'vbr-indoor-chip');
+  public toggleIndoor(button: HTMLElement): void {
+    this._isIndoorChecked = !this._isIndoorChecked;
+    this.toggleButton(button, this._isIndoorChecked, 'vbr-indoor-chip');
   }
 
-  toggleIndoor4x4(button: HTMLElement): void {
-    this.isIndoor4x4Checked = !this.isIndoor4x4Checked;
-    this.toggleButton(button, this.isIndoor4x4Checked, 'vbr-indoor-4x4-chip');
+  public toggleIndoor4x4(button: HTMLElement): void {
+    this._isIndoor4x4Checked = !this._isIndoor4x4Checked;
+    this.toggleButton(button, this._isIndoor4x4Checked, 'vbr-indoor-4x4-chip');
   }
 
-  toggleSnow(button: HTMLElement): void {
-    this.isSnowChecked = !this.isSnowChecked;
-    this.toggleButton(button, this.isSnowChecked, 'vbr-snow-chip');
+  public toggleSnow(button: HTMLElement): void {
+    this._isSnowChecked = !this._isSnowChecked;
+    this.toggleButton(button, this._isSnowChecked, 'vbr-snow-chip');
   }
 
-  toggleMixed(button: HTMLElement): void {
-    this.isMixedChecked = !this.isMixedChecked;
-    this.toggleButton(button, this.isMixedChecked, 'vbr-mixed-chip');
+  public toggleMixed(button: HTMLElement): void {
+    this._isMixedChecked = !this._isMixedChecked;
+    this.toggleButton(button, this._isMixedChecked, 'vbr-mixed-chip');
   }
 
-  toggleLadies(button: HTMLElement): void {
-    this.isLadiesChecked = !this.isLadiesChecked;
-    this.toggleButton(button, this.isLadiesChecked, 'vbr-ladies-chip');
+  public toggleLadies(button: HTMLElement): void {
+    this._isLadiesChecked = !this._isLadiesChecked;
+    this.toggleButton(button, this._isLadiesChecked, 'vbr-ladies-chip');
   }
 
-  toggleGents(button: HTMLElement): void {
-    this.isGentsChecked = !this.isGentsChecked;
-    this.toggleButton(button, this.isGentsChecked, 'vbr-gents-chip');
+  public toggleGents(button: HTMLElement): void {
+    this._isGentsChecked = !this._isGentsChecked;
+    this.toggleButton(button, this._isGentsChecked, 'vbr-gents-chip');
   }
 
-  toggleButton(button: HTMLElement, selected: boolean, clazz: string): void {
+  private toggleButton(button: HTMLElement, selected: boolean, clazz: string): void {
     if (selected) {
       button.classList.add(clazz);
     } else {
       button.classList.remove(clazz);
     }
-    this.refreshTeams(false);
+    this.requestRefreshTeams(FetchBehaviour.LOAD);
   }
 }

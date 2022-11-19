@@ -1,4 +1,4 @@
-export class Ranking {
+export interface Ranking {
   teamName: string;
   teamColor: string;
   matchesFor: number;

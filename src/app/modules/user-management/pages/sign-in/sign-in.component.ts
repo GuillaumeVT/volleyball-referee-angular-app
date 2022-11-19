@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
 import { EmailCredentials } from '@core/models/user.model';
 import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,7 +20,7 @@ export class SignInComponent {
     this.togglePasswordVisibility();
     this.passwordVisibility = 'visibility_off';
 
-    this.signInFormGroup = new FormGroup({
+    this.signInFormGroup = new UntypedFormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });

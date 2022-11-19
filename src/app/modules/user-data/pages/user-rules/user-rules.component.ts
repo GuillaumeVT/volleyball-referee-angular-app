@@ -24,20 +24,20 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
   private subscription: Subscription = new Subscription();
 
   constructor(
-    private titleService: Title,
-    private userService: UserService,
-    private rulesService: RulesService,
-    private dialog: MatDialog,
-    private snackBarService: SnackBarService,
-    private translate: TranslateService,
+    private _titleService: Title,
+    private _userService: UserService,
+    private _rulesService: RulesService,
+    private _dialog: MatDialog,
+    private _snackBarService: SnackBarService,
+    private _translate: TranslateService,
   ) {
     super();
-    this.translate.get('user.rules.page').subscribe((t) => this.titleService.setTitle(t));
+    this._translate.get('user.rules.page').subscribe((t) => this._titleService.setTitle(t));
   }
 
   ngOnInit() {
     this.subscription.add(
-      this.userService.authState.subscribe((userToken) => {
+      this._userService.authState.subscribe((userToken) => {
         this.user = userToken.user;
         if (this.user) {
           this.refreshRules();
@@ -51,7 +51,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
   }
 
   refreshRules(): void {
-    this.rulesService.listRules(this.getKinds()).subscribe({
+    this._rulesService.listRules(this.getKinds()).subscribe({
       next: (rules) => this.onRulesReceived(rules),
       error: (_) => this.onRulesReceived([]),
     });
@@ -65,7 +65,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
       rules: rules,
     };
 
-    const dialogRef = this.dialog.open(UserRulesDialogComponent, { width: '800px', data: data });
+    const dialogRef = this._dialog.open(UserRulesDialogComponent, { width: '800px', data: data });
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.onRulesCreated();
@@ -74,62 +74,60 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
   }
 
   viewRules(rulesSummary: RulesSummary): void {
-    this.rulesService.getRules(rulesSummary.id).subscribe({
-      next: (rules) => {
-        const data: UserRulesDialogData = {
-          crudType: CrudType.View,
-          rules: rules,
-        };
+    this._rulesService.getRules(rulesSummary.id).subscribe((rules) => {
+      const data: UserRulesDialogData = {
+        crudType: CrudType.View,
+        rules: rules,
+      };
 
-        const dialogRef = this.dialog.open(UserRulesDialogComponent, { width: '800px', data: data });
-      },
-      error: (_) => this.snackBarService.showError('Rules could not be found.'),
+      const dialogRef = this._dialog.open(UserRulesDialogComponent, { width: '800px', data: data });
     });
   }
 
   updateRules(rulesSummary: RulesSummary): void {
-    this.rulesService.getRules(rulesSummary.id).subscribe({
-      next: (rules) => {
-        const data: UserRulesDialogData = {
-          crudType: CrudType.Update,
-          rules: rules,
-        };
+    this._rulesService.getRules(rulesSummary.id).subscribe((rules) => {
+      const data: UserRulesDialogData = {
+        crudType: CrudType.Update,
+        rules: rules,
+      };
 
-        const dialogRef = this.dialog.open(UserRulesDialogComponent, { width: '800px', data: data });
-        dialogRef.afterClosed().subscribe((dialogResult) => {
-          if (dialogResult) {
-            this.onRulesUpdated();
-          }
-        });
-      },
-      error: (_) => this.snackBarService.showError('Rules could not be found.'),
+      const dialogRef = this._dialog.open(UserRulesDialogComponent, { width: '800px', data: data });
+      dialogRef.afterClosed().subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.onRulesUpdated();
+        }
+      });
     });
   }
 
   deleteRules(rulesSummary: RulesSummary): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: '500px',
-      data: { title: 'Delete rules', message: `Do you want to delete the rules named ${rulesSummary.name}?` },
-    });
-    dialogRef.afterClosed().subscribe((dialogResult) => {
-      if (dialogResult) {
-        this.rulesService.deleteRules(rulesSummary.id).subscribe({
-          next: (_deleted) => this.onRulesDeleted(),
-          error: (_) => this.onRulesDeletionError(),
-        });
-      }
+    this._translate.get(['user.team.delete', 'user.rules.messages.delete-question'], { name: rulesSummary.name }).subscribe((ts) => {
+      const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
+        width: '500px',
+        data: { title: ts['user.rules.delete'], message: ts['user.rules.messages.delete-question'] },
+      });
+      dialogRef.afterClosed().subscribe((dialogResult) => {
+        if (dialogResult) {
+          this._rulesService.deleteRules(rulesSummary.id).subscribe({
+            next: (_deleted) => this.onRulesDeleted(),
+            error: (_) => this.onRulesDeletionError(),
+          });
+        }
+      });
     });
   }
 
   deleteAllRules(): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: '500px',
-      data: { title: 'Delete ALL rules', message: 'Do you want to delete ALL the rules?' },
-    });
-    dialogRef.afterClosed().subscribe((dialogResult) => {
-      if (dialogResult) {
-        this.rulesService.deleteAllRules().subscribe((_deleted) => this.onAllRulesDeleted());
-      }
+    this._translate.get(['user.rules.delete', 'user.rules.messages.delete-all-question']).subscribe((ts) => {
+      const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
+        width: '500px',
+        data: { title: ts['user.rules.delete'], message: ts['user.rules.messages.delete-all-question'] },
+      });
+      dialogRef.afterClosed().subscribe((dialogResult) => {
+        if (dialogResult) {
+          this._rulesService.deleteAllRules().subscribe((_deleted) => this.onAllRulesDeleted());
+        }
+      });
     });
   }
 
@@ -146,7 +144,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
   }
 
   onRulesDeletionError(): void {
-    this.snackBarService.showError('Rules could not be deleted. Are they used in a scheduled game?.');
+    this._translate.get('user.rules.messages.deleted-error').subscribe((t) => this._snackBarService.showError(t));
   }
 
   onAllRulesDeleted(): void {

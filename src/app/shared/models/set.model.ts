@@ -1,4 +1,4 @@
-export class Set {
+export interface Set {
   duration: number;
   startTime: number;
   endTime: number;
@@ -22,7 +22,7 @@ export class Set {
   remainingTime: number;
 }
 
-export class Court {
+export interface Court {
   p1: number;
   p2: number;
   p3: number;
@@ -31,14 +31,14 @@ export class Court {
   p6: number;
 }
 
-export class Substitution {
+export interface Substitution {
   playerIn: number;
   playerOut: number;
   homePoints: number;
   guestPoints: number;
 }
 
-export class Timeout {
+export interface Timeout {
   homePoints: number;
   guestPoints: number;
 }

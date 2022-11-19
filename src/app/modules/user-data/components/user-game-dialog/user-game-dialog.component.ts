@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Friend, UserSummary } from '@core/models/user.model';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,8 +22,8 @@ import { LeagueService } from '@user-data/services/league.service';
 export class UserGameDialogComponent {
   crudTypeEnum: typeof CrudType = CrudType;
 
-  gameFormGroup: FormGroup;
-  referee: FormControl;
+  gameFormGroup: UntypedFormGroup;
+  referee: UntypedFormControl;
   genderPipe: GenderPipe;
 
   me: Friend;
@@ -52,21 +52,21 @@ export class UserGameDialogComponent {
       .get(['user.team.mixed-pipe', 'user.team.ladies-pipe', 'user.team.gents-pipe'])
       .subscribe((t) => (this.genderTranslations = t));
 
-    this.referee = new FormControl({ value: null, disabled: editingDisabled }, [Validators.required]);
+    this.referee = new UntypedFormControl({ value: null, disabled: editingDisabled }, [Validators.required]);
 
-    this.gameFormGroup = new FormGroup(
+    this.gameFormGroup = new UntypedFormGroup(
       {
-        scheduledAt: new FormControl({ value: this.scheduleDate, disabled: editingDisabled }),
-        indexed: new FormControl({ value: this.data.game.indexed, disabled: editingDisabled }),
-        league: new FormControl({ value: null, disabled: editingDisabled }),
-        division: new FormControl({ value: this.data.game.divisionName, disabled: editingDisabled }),
-        homeTeam: new FormControl({ value: null, disabled: editingDisabled }, [Validators.required]),
-        guestTeam: new FormControl({ value: null, disabled: editingDisabled }, [Validators.required]),
-        rules: new FormControl({ value: null, disabled: editingDisabled }, [Validators.required]),
+        scheduledAt: new UntypedFormControl({ value: this.scheduleDate, disabled: editingDisabled }),
+        indexed: new UntypedFormControl({ value: this.data.game.indexed, disabled: editingDisabled }),
+        league: new UntypedFormControl({ value: null, disabled: editingDisabled }),
+        division: new UntypedFormControl({ value: this.data.game.divisionName, disabled: editingDisabled }),
+        homeTeam: new UntypedFormControl({ value: null, disabled: editingDisabled }, [Validators.required]),
+        guestTeam: new UntypedFormControl({ value: null, disabled: editingDisabled }, [Validators.required]),
+        rules: new UntypedFormControl({ value: null, disabled: editingDisabled }, [Validators.required]),
         referee: this.referee,
-        referee1Name: new FormControl({ value: data.game.referee1Name, disabled: editingDisabled }),
-        referee2Name: new FormControl({ value: data.game.referee2Name, disabled: editingDisabled }),
-        scorerName: new FormControl({ value: data.game.scorerName, disabled: editingDisabled }),
+        referee1Name: new UntypedFormControl({ value: data.game.referee1Name, disabled: editingDisabled }),
+        referee2Name: new UntypedFormControl({ value: data.game.referee2Name, disabled: editingDisabled }),
+        scorerName: new UntypedFormControl({ value: data.game.scorerName, disabled: editingDisabled }),
       },
       [
         this.teamsMustBeDifferentValidator,

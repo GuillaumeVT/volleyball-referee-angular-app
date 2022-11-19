@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Rules } from '@shared/models/rules.model';
 import { SnackBarService } from '@shared/services/snack-bar.service';
@@ -15,20 +15,20 @@ export class UserRulesDialogComponent {
   crudTypeEnum: typeof CrudType = CrudType;
 
   editingDisabled: boolean;
-  rulesFormGroup: FormGroup;
-  setsPerGame: FormControl;
-  pointsPerSet: FormControl;
-  pointsInTieBreak: FormControl;
-  matchTermination: FormControl;
-  teamTimeoutsPerSet: FormControl;
-  teamTimeoutDuration: FormControl;
-  technicalTimeoutDuration: FormControl;
-  gameIntervalDuration: FormControl;
-  beachCourtSwitchFreq: FormControl;
-  beachCourtSwitchFreqTieBreak: FormControl;
-  substitutionsLimitation: FormControl;
-  teamSubstitutionsPerSet: FormControl;
-  customConsecutiveServesPerPlayer: FormControl;
+  rulesFormGroup: UntypedFormGroup;
+  setsPerGame: UntypedFormControl;
+  pointsPerSet: UntypedFormControl;
+  pointsInTieBreak: UntypedFormControl;
+  matchTermination: UntypedFormControl;
+  teamTimeoutsPerSet: UntypedFormControl;
+  teamTimeoutDuration: UntypedFormControl;
+  technicalTimeoutDuration: UntypedFormControl;
+  gameIntervalDuration: UntypedFormControl;
+  beachCourtSwitchFreq: UntypedFormControl;
+  beachCourtSwitchFreqTieBreak: UntypedFormControl;
+  substitutionsLimitation: UntypedFormControl;
+  teamSubstitutionsPerSet: UntypedFormControl;
+  customConsecutiveServesPerPlayer: UntypedFormControl;
 
   setsPerGameOptions: RulesOption[] = [];
   pointsPerSetOptions: RulesOption[] = [];
@@ -52,61 +52,61 @@ export class UserRulesDialogComponent {
 
     this.createOptions();
 
-    this.setsPerGame = new FormControl({ value: this.data.rules.setsPerGame, disabled: this.editingDisabled }, [Validators.required]);
-    this.pointsPerSet = new FormControl({ value: this.data.rules.pointsPerSet, disabled: this.editingDisabled }, [Validators.required]);
-    this.pointsInTieBreak = new FormControl({ value: this.data.rules.pointsInTieBreak, disabled: this.editingDisabled }, [
+    this.setsPerGame = new UntypedFormControl({ value: this.data.rules.setsPerGame, disabled: this.editingDisabled }, [Validators.required]);
+    this.pointsPerSet = new UntypedFormControl({ value: this.data.rules.pointsPerSet, disabled: this.editingDisabled }, [Validators.required]);
+    this.pointsInTieBreak = new UntypedFormControl({ value: this.data.rules.pointsInTieBreak, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
-    this.matchTermination = new FormControl({ value: this.data.rules.matchTermination, disabled: this.editingDisabled }, [
+    this.matchTermination = new UntypedFormControl({ value: this.data.rules.matchTermination, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
-    this.teamTimeoutsPerSet = new FormControl({ value: this.data.rules.teamTimeoutsPerSet, disabled: this.editingDisabled }, [
+    this.teamTimeoutsPerSet = new UntypedFormControl({ value: this.data.rules.teamTimeoutsPerSet, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
-    this.teamTimeoutDuration = new FormControl({ value: this.data.rules.teamTimeoutDuration, disabled: this.editingDisabled }, [
+    this.teamTimeoutDuration = new UntypedFormControl({ value: this.data.rules.teamTimeoutDuration, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
-    this.technicalTimeoutDuration = new FormControl({ value: this.data.rules.technicalTimeoutDuration, disabled: this.editingDisabled }, [
+    this.technicalTimeoutDuration = new UntypedFormControl({ value: this.data.rules.technicalTimeoutDuration, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
-    this.gameIntervalDuration = new FormControl({ value: this.data.rules.gameIntervalDuration, disabled: this.editingDisabled }, [
+    this.gameIntervalDuration = new UntypedFormControl({ value: this.data.rules.gameIntervalDuration, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
-    this.beachCourtSwitchFreq = new FormControl({ value: this.data.rules.beachCourtSwitchFreq, disabled: this.editingDisabled }, [
+    this.beachCourtSwitchFreq = new UntypedFormControl({ value: this.data.rules.beachCourtSwitchFreq, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
-    this.beachCourtSwitchFreqTieBreak = new FormControl(
+    this.beachCourtSwitchFreqTieBreak = new UntypedFormControl(
       { value: this.data.rules.beachCourtSwitchFreqTieBreak, disabled: this.editingDisabled },
       [Validators.required],
     );
-    this.substitutionsLimitation = new FormControl({ value: this.data.rules.substitutionsLimitation, disabled: this.editingDisabled }, [
+    this.substitutionsLimitation = new UntypedFormControl({ value: this.data.rules.substitutionsLimitation, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
-    this.teamSubstitutionsPerSet = new FormControl({ value: this.data.rules.teamSubstitutionsPerSet, disabled: this.editingDisabled }, [
+    this.teamSubstitutionsPerSet = new UntypedFormControl({ value: this.data.rules.teamSubstitutionsPerSet, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
-    this.customConsecutiveServesPerPlayer = new FormControl(
+    this.customConsecutiveServesPerPlayer = new UntypedFormControl(
       { value: this.data.rules.customConsecutiveServesPerPlayer, disabled: this.editingDisabled },
       [Validators.required],
     );
 
-    this.rulesFormGroup = new FormGroup({
-      name: new FormControl({ value: this.data.rules.name, disabled: this.editingDisabled }, [Validators.required]),
+    this.rulesFormGroup = new UntypedFormGroup({
+      name: new UntypedFormControl({ value: this.data.rules.name, disabled: this.editingDisabled }, [Validators.required]),
       setsPerGame: this.setsPerGame,
       pointsPerSet: this.pointsPerSet,
-      tieBreakInLastSet: new FormControl({ value: this.data.rules.tieBreakInLastSet, disabled: this.editingDisabled }),
+      tieBreakInLastSet: new UntypedFormControl({ value: this.data.rules.tieBreakInLastSet, disabled: this.editingDisabled }),
       pointsInTieBreak: this.pointsInTieBreak,
-      twoPointsDifference: new FormControl({ value: this.data.rules.twoPointsDifference, disabled: this.editingDisabled }),
-      sanctions: new FormControl({ value: this.data.rules.sanctions, disabled: this.editingDisabled }),
+      twoPointsDifference: new UntypedFormControl({ value: this.data.rules.twoPointsDifference, disabled: this.editingDisabled }),
+      sanctions: new UntypedFormControl({ value: this.data.rules.sanctions, disabled: this.editingDisabled }),
       matchTermination: this.matchTermination,
-      teamTimeouts: new FormControl({ value: this.data.rules.teamTimeouts, disabled: this.editingDisabled }),
-      technicalTimeouts: new FormControl({ value: this.data.rules.technicalTimeouts, disabled: this.editingDisabled }),
-      gameIntervals: new FormControl({ value: this.data.rules.gameIntervals, disabled: this.editingDisabled }),
+      teamTimeouts: new UntypedFormControl({ value: this.data.rules.teamTimeouts, disabled: this.editingDisabled }),
+      technicalTimeouts: new UntypedFormControl({ value: this.data.rules.technicalTimeouts, disabled: this.editingDisabled }),
+      gameIntervals: new UntypedFormControl({ value: this.data.rules.gameIntervals, disabled: this.editingDisabled }),
       teamTimeoutsPerSet: this.teamTimeoutsPerSet,
       teamTimeoutDuration: this.teamTimeoutDuration,
       technicalTimeoutDuration: this.technicalTimeoutDuration,
       gameIntervalDuration: this.gameIntervalDuration,
-      beachCourtSwitches: new FormControl({ value: this.data.rules.beachCourtSwitches, disabled: this.editingDisabled }),
+      beachCourtSwitches: new UntypedFormControl({ value: this.data.rules.beachCourtSwitches, disabled: this.editingDisabled }),
       beachCourtSwitchFreq: this.beachCourtSwitchFreq,
       beachCourtSwitchFreqTieBreak: this.beachCourtSwitchFreqTieBreak,
       substitutionsLimitation: this.substitutionsLimitation,

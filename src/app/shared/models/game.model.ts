@@ -5,7 +5,7 @@ import { Set } from '@shared/models/set.model';
 import { Team, TeamSummary } from '@shared/models/team.model';
 import { UUID } from 'angular2-uuid';
 
-export class Game {
+export interface Game {
   id: string;
   createdBy: string;
   createdAt: number;
@@ -139,7 +139,7 @@ export class GameSummary {
   }
 }
 
-export class Sanction {
+export interface Sanction {
   card: string;
   num: number;
   set: number;
@@ -147,7 +147,7 @@ export class Sanction {
   guestPoints: number;
 }
 
-export class GameIngredients {
+export interface GameIngredients {
   kind: string;
   friends: Friend[];
   defaultRules: RulesSummary;
@@ -156,7 +156,7 @@ export class GameIngredients {
   leagues: LeagueSummary[];
 }
 
-export class LeagueDashboard {
+export interface LeagueDashboard {
   liveGames: GameSummary[];
   last10Games: GameSummary[];
   next10Games: GameSummary[];

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Friend, UserSummary } from '@core/models/user.model';
 import { UserService } from '@core/services/user.service';
@@ -14,8 +14,8 @@ import { GameService } from '@user-data/services/game.service';
   styleUrls: ['./game-referee-dialog.component.scss'],
 })
 export class GameRefereeDialogComponent {
-  refereeFormGroup: FormGroup;
-  referee: FormControl;
+  refereeFormGroup: UntypedFormGroup;
+  referee: UntypedFormControl;
 
   me: Friend;
   friends: Friend[];
@@ -28,8 +28,8 @@ export class GameRefereeDialogComponent {
     private snackBarService: SnackBarService,
     private translate: TranslateService,
   ) {
-    this.referee = new FormControl(null, [Validators.required]);
-    this.refereeFormGroup = new FormGroup({ referee: this.referee });
+    this.referee = new UntypedFormControl(null, [Validators.required]);
+    this.refereeFormGroup = new UntypedFormGroup({ referee: this.referee });
 
     this.me = new Friend(this.data.user.id, this.data.user.pseudo);
 

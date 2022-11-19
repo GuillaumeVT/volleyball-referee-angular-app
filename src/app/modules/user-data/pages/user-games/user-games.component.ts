@@ -10,6 +10,7 @@ import { ConfirmationDialogComponent } from '@shared/components/confirmation-dia
 import { AbstractGameFilter } from '@shared/models/abstract-game-filter.model';
 import { GameIngredients, GameSummary } from '@shared/models/game.model';
 import { LeagueSummary } from '@shared/models/league.model';
+import { FetchBehaviour, Paging } from '@shared/models/page.model';
 import { PublicService } from '@shared/services/public.service';
 import { SnackBarService } from '@shared/services/snack-bar.service';
 import {
@@ -29,67 +30,69 @@ import { forkJoin, Subscription } from 'rxjs';
   styleUrls: ['./user-games.component.scss'],
 })
 export class UserGamesComponent extends AbstractGameFilter implements OnInit, OnDestroy {
-  user: UserSummary;
-  selectedLeagueId: string;
-  selectedLeague: LeagueSummary;
+  public user: UserSummary;
+  private _selectedLeagueId: string;
+  public selectedLeague: LeagueSummary;
 
-  private subscription: Subscription = new Subscription();
+  private _subscription: Subscription = new Subscription();
+
+  fetchBehaviour = FetchBehaviour;
 
   constructor(
-    private titleService: Title,
-    private route: ActivatedRoute,
-    private datePipe: DatePipe,
-    private userService: UserService,
-    private gameService: GameService,
-    private leagueService: LeagueService,
-    private publicService: PublicService,
-    private dialog: MatDialog,
-    private snackBarService: SnackBarService,
-    private translate: TranslateService,
+    private _titleService: Title,
+    private _route: ActivatedRoute,
+    private _datePipe: DatePipe,
+    private _userService: UserService,
+    private _gameService: GameService,
+    private _leagueService: LeagueService,
+    private _publicService: PublicService,
+    private _dialog: MatDialog,
+    private _snackBarService: SnackBarService,
+    private _translate: TranslateService,
   ) {
     super(50);
-    this.translate.get('user.game.page').subscribe((t) => this.titleService.setTitle(t));
+    this._translate.get('user.game.page').subscribe((t) => this._titleService.setTitle(t));
   }
 
-  ngOnInit() {
-    this.subscription.add(
-      this.userService.authState.subscribe((userToken) => {
+  ngOnInit(): void {
+    this._subscription.add(
+      this._userService.authState.subscribe((userToken) => {
         this.user = userToken.user;
         if (this.user) {
-          this.selectedLeagueId = this.route.snapshot.paramMap.get('leagueId');
-          this.refreshGames(false);
+          this._selectedLeagueId = this._route.snapshot.paramMap.get('leagueId');
+          this.requestRefreshGames(FetchBehaviour.LOAD);
         }
       }),
     );
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 
-  refreshGames(append: boolean): void {
-    if (this.selectedLeagueId) {
+  public refreshGames(paging: Paging): void {
+    if (this._selectedLeagueId) {
       forkJoin([
-        this.leagueService.getLeague(this.selectedLeagueId),
-        this.gameService.listGamesInLeague(this.selectedLeagueId, this.getStatuses(), this.getGenders(), append ? this.page : 0, this.size),
+        this._leagueService.getLeague(this._selectedLeagueId),
+        this._gameService.listGamesInLeague(this._selectedLeagueId, this.getStatuses(), this.getGenders(), paging.page, paging.size),
       ]).subscribe(([league, page]) => {
         this.selectedLeague = league;
         this.onGamesReceived(page);
       });
     } else {
-      this.gameService.listGames(this.getStatuses(), this.getKinds(), this.getGenders(), append ? this.page : 0, this.size).subscribe({
+      this._gameService.listGames(this.getStatuses(), this.getKinds(), this.getGenders(), paging.page, paging.size).subscribe({
         next: (page) => this.onGamesReceived(page),
         error: (_) => this.onGamesReceived(null),
       });
     }
   }
 
-  createGame(kind: string): void {
+  public createGame(kind: string): void {
     const game = GameSummary.createGame(this.user, kind, this.selectedLeague);
-    this.gameService.getGameIngredientsOfKind(game.kind).subscribe((gameIngredients) => this.launchCreateGame(game, gameIngredients));
+    this._gameService.getGameIngredientsOfKind(game.kind).subscribe((gameIngredients) => this.launchCreateGame(game, gameIngredients));
   }
 
-  launchCreateGame(game: GameSummary, gameIngredients: GameIngredients): void {
+  private launchCreateGame(game: GameSummary, gameIngredients: GameIngredients): void {
     const data: UserGameDialogData = {
       crudType: CrudType.Create,
       game: game,
@@ -97,7 +100,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
       user: this.user,
     };
 
-    const dialogRef = this.dialog.open(UserGameDialogComponent, { width: '800px', data: data });
+    const dialogRef = this._dialog.open(UserGameDialogComponent, { width: '800px', data: data });
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.onGameCreated();
@@ -105,11 +108,11 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
     });
   }
 
-  viewGame(game: GameSummary): void {
-    this.gameService.getGameIngredientsOfKind(game.kind).subscribe((gameIngredients) => this.launchViewGame(game, gameIngredients));
+  public viewGame(game: GameSummary): void {
+    this._gameService.getGameIngredientsOfKind(game.kind).subscribe((gameIngredients) => this.launchViewGame(game, gameIngredients));
   }
 
-  launchViewGame(game: GameSummary, gameIngredients: GameIngredients): void {
+  private launchViewGame(game: GameSummary, gameIngredients: GameIngredients): void {
     const data: UserGameDialogData = {
       crudType: CrudType.View,
       game: game,
@@ -117,15 +120,15 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
       user: this.user,
     };
 
-    const dialogRef = this.dialog.open(UserGameDialogComponent, { width: '800px', data: data });
+    const dialogRef = this._dialog.open(UserGameDialogComponent, { width: '800px', data: data });
   }
 
-  updateGame(game: GameSummary): void {
+  public updateGame(game: GameSummary): void {
     const copy = GameSummary.copyGame(game);
-    this.gameService.getGameIngredientsOfKind(game.kind).subscribe((gameIngredients) => this.launchUpdateGame(copy, gameIngredients));
+    this._gameService.getGameIngredientsOfKind(game.kind).subscribe((gameIngredients) => this.launchUpdateGame(copy, gameIngredients));
   }
 
-  launchUpdateGame(game: GameSummary, gameIngredients: GameIngredients): void {
+  private launchUpdateGame(game: GameSummary, gameIngredients: GameIngredients): void {
     const data: UserGameDialogData = {
       crudType: CrudType.Update,
       game: game,
@@ -133,7 +136,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
       user: this.user,
     };
 
-    const dialogRef = this.dialog.open(UserGameDialogComponent, { width: '800px', data: data });
+    const dialogRef = this._dialog.open(UserGameDialogComponent, { width: '800px', data: data });
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.onGameUpdated();
@@ -141,13 +144,13 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
     });
   }
 
-  updateReferee(game: GameSummary): void {
+  public updateReferee(game: GameSummary): void {
     const data: UserGameRefereeDialogData = {
       game: game,
       user: this.user,
     };
 
-    const dialogRef = this.dialog.open(GameRefereeDialogComponent, { width: '800px', data: data });
+    const dialogRef = this._dialog.open(GameRefereeDialogComponent, { width: '800px', data: data });
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.onRefereeUpdated();
@@ -155,17 +158,17 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
     });
   }
 
-  deleteGame(game: GameSummary): void {
-    this.translate
+  public deleteGame(game: GameSummary): void {
+    this._translate
       .get(['user.game.delete', 'user.game.messages.delete-question'], { homeTeam: game.homeTeamName, guestTeam: game.guestTeamName })
       .subscribe((ts) => {
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
           width: '500px',
           data: { title: ts['user.game.delete'], message: ts['user.game.messages.delete-question'] },
         });
         dialogRef.afterClosed().subscribe((dialogResult) => {
           if (dialogResult) {
-            this.gameService.deleteGame(game.id).subscribe({
+            this._gameService.deleteGame(game.id).subscribe({
               next: (_deleted) => this.onGameDeleted(),
               error: (_) => this.onGameDeletionError(),
             });
@@ -174,73 +177,73 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
       });
   }
 
-  deleteAllGames(): void {
-    if (this.selectedLeagueId) {
-      this.translate
+  public deleteAllGames(): void {
+    if (this._selectedLeagueId) {
+      this._translate
         .get(['user.game.delete', 'user.game.messages.delete-all-in-question'], { league: this.selectedLeague.name })
         .subscribe((ts) => {
-          const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
             width: '500px',
             data: { title: ts['user.game.delete'], message: ts['user.game.messages.delete-all-in-question'] },
           });
           dialogRef.afterClosed().subscribe((dialogResult) => {
             if (dialogResult) {
-              this.gameService.deleteAllGamesInLeague(this.selectedLeagueId).subscribe((_deleted) => this.onAllGamesDeleted());
+              this._gameService.deleteAllGamesInLeague(this._selectedLeagueId).subscribe((_deleted) => this.onAllGamesDeleted());
             }
           });
         });
     } else {
-      this.translate.get(['user.game.delete', 'user.game.messages.delete-all-question']).subscribe((ts) => {
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      this._translate.get(['user.game.delete', 'user.game.messages.delete-all-question']).subscribe((ts) => {
+        const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
           width: '500px',
           data: { title: ts['user.game.delete'], message: ts['user.game.messages.delete-all-question'] },
         });
         dialogRef.afterClosed().subscribe((dialogResult) => {
           if (dialogResult) {
-            this.gameService.deleteAllGames().subscribe((_deleted) => this.onAllGamesDeleted());
+            this._gameService.deleteAllGames().subscribe((_deleted) => this.onAllGamesDeleted());
           }
         });
       });
     }
   }
 
-  onGameCreated(): void {
-    this.refreshGames(false);
+  private onGameCreated(): void {
+    this.requestRefreshGames(FetchBehaviour.LOAD);
   }
 
-  onGameUpdated(): void {
-    this.refreshGames(false);
+  private onGameUpdated(): void {
+    this.requestRefreshGames(FetchBehaviour.REFRESH);
   }
 
-  onRefereeUpdated(): void {
-    this.refreshGames(false);
+  private onRefereeUpdated(): void {
+    this.requestRefreshGames(FetchBehaviour.REFRESH);
   }
 
-  onGameDeleted(): void {
-    this.refreshGames(false);
+  private onGameDeleted(): void {
+    this.requestRefreshGames(FetchBehaviour.REFRESH);
   }
 
-  onAllGamesDeleted(): void {
-    this.refreshGames(false);
+  private onAllGamesDeleted(): void {
+    this.requestRefreshGames(FetchBehaviour.LOAD);
   }
 
-  onGameDeletionError(): void {
-    this.translate.get('user.game.messages.deleted-error').subscribe((t) => this.snackBarService.showError(t));
+  private onGameDeletionError(): void {
+    this._translate.get('user.game.messages.deleted-error').subscribe((t) => this._snackBarService.showError(t));
   }
 
-  getGamePublicUrl(game: GameSummary): string {
+  public getGamePublicUrl(game: GameSummary): string {
     return `/view/game/${game.id}`;
   }
 
-  downloadScoreSheet(game: GameSummary): void {
-    this.publicService.getScoreSheet(game.id).subscribe({
+  public downloadScoreSheet(game: GameSummary): void {
+    this._publicService.getScoreSheet(game.id).subscribe({
       next: (blob: Blob) => this.onScoreSheetReceived(blob, game),
       error: (_) => this.onScoreSheetReceived(null, game),
     });
   }
 
-  onScoreSheetReceived(blob: Blob, game: GameSummary): void {
-    const dateStr = this.datePipe.transform(game.scheduledAt, 'dd_MM_yyyy');
+  private onScoreSheetReceived(blob: Blob, game: GameSummary): void {
+    const dateStr = this._datePipe.transform(game.scheduledAt, 'dd_MM_yyyy');
     const filename = game.homeTeamName + '_' + game.guestTeamName + '_' + dateStr + '.html';
     saveAs(blob, filename);
   }

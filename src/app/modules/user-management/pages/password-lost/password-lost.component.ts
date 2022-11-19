@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '@shared/services/snack-bar.service';
@@ -10,11 +10,11 @@ import { SnackBarService } from '@shared/services/snack-bar.service';
   styleUrls: ['./password-lost.component.scss'],
 })
 export class PasswordLostComponent {
-  passwordLostFormGroup: FormGroup;
+  passwordLostFormGroup: UntypedFormGroup;
 
   constructor(private userService: UserService, private snackBarService: SnackBarService, private translate: TranslateService) {
-    this.passwordLostFormGroup = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+    this.passwordLostFormGroup = new UntypedFormGroup({
+      email: new UntypedFormControl('', [Validators.required, Validators.email]),
     });
   }
 

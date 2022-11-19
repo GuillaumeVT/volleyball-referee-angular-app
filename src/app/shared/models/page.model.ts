@@ -9,3 +9,14 @@ export class Page<T> {
   totalElements: number;
   totalPages: number;
 }
+
+export interface Paging {
+  page: number;
+  size: number;
+}
+
+export enum FetchBehaviour {
+  LOAD,
+  APPEND,
+  REFRESH,
+}

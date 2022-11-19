@@ -49,7 +49,7 @@ export class Team {
   }
 }
 
-export class TeamSummary {
+export interface TeamSummary {
   id: string;
   createdBy: string;
   createdAt: number;

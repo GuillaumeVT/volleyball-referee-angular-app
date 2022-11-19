@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from '@core/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,7 +11,7 @@ import { SnackBarService } from '@shared/services/snack-bar.service';
   styleUrls: ['./user-colleague-dialog.component.scss'],
 })
 export class UserColleagueDialogComponent {
-  colleagueFormGroup: FormGroup;
+  colleagueFormGroup: UntypedFormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<UserColleagueDialogComponent>,
@@ -19,8 +19,8 @@ export class UserColleagueDialogComponent {
     private snackBarService: SnackBarService,
     private translate: TranslateService,
   ) {
-    this.colleagueFormGroup = new FormGroup({
-      pseudo: new FormControl('', [Validators.required]),
+    this.colleagueFormGroup = new UntypedFormGroup({
+      pseudo: new UntypedFormControl('', [Validators.required]),
     });
   }
 
