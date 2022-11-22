@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 import { Rules } from '@shared/models/rules.model';
 import { SnackBarService } from '@shared/services/snack-bar.service';
 import { CrudType } from '@user-data/models/crud-type.model';
@@ -47,13 +48,18 @@ export class UserRulesDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: UserRulesDialogData,
     private rulesService: RulesService,
     private snackBarService: SnackBarService,
+    private _translateService: TranslateService,
   ) {
     this.editingDisabled = this.data.crudType === CrudType.View ? true : false;
 
     this.createOptions();
 
-    this.setsPerGame = new UntypedFormControl({ value: this.data.rules.setsPerGame, disabled: this.editingDisabled }, [Validators.required]);
-    this.pointsPerSet = new UntypedFormControl({ value: this.data.rules.pointsPerSet, disabled: this.editingDisabled }, [Validators.required]);
+    this.setsPerGame = new UntypedFormControl({ value: this.data.rules.setsPerGame, disabled: this.editingDisabled }, [
+      Validators.required,
+    ]);
+    this.pointsPerSet = new UntypedFormControl({ value: this.data.rules.pointsPerSet, disabled: this.editingDisabled }, [
+      Validators.required,
+    ]);
     this.pointsInTieBreak = new UntypedFormControl({ value: this.data.rules.pointsInTieBreak, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
@@ -66,9 +72,10 @@ export class UserRulesDialogComponent {
     this.teamTimeoutDuration = new UntypedFormControl({ value: this.data.rules.teamTimeoutDuration, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
-    this.technicalTimeoutDuration = new UntypedFormControl({ value: this.data.rules.technicalTimeoutDuration, disabled: this.editingDisabled }, [
-      Validators.required,
-    ]);
+    this.technicalTimeoutDuration = new UntypedFormControl(
+      { value: this.data.rules.technicalTimeoutDuration, disabled: this.editingDisabled },
+      [Validators.required],
+    );
     this.gameIntervalDuration = new UntypedFormControl({ value: this.data.rules.gameIntervalDuration, disabled: this.editingDisabled }, [
       Validators.required,
     ]);
@@ -79,12 +86,14 @@ export class UserRulesDialogComponent {
       { value: this.data.rules.beachCourtSwitchFreqTieBreak, disabled: this.editingDisabled },
       [Validators.required],
     );
-    this.substitutionsLimitation = new UntypedFormControl({ value: this.data.rules.substitutionsLimitation, disabled: this.editingDisabled }, [
-      Validators.required,
-    ]);
-    this.teamSubstitutionsPerSet = new UntypedFormControl({ value: this.data.rules.teamSubstitutionsPerSet, disabled: this.editingDisabled }, [
-      Validators.required,
-    ]);
+    this.substitutionsLimitation = new UntypedFormControl(
+      { value: this.data.rules.substitutionsLimitation, disabled: this.editingDisabled },
+      [Validators.required],
+    );
+    this.teamSubstitutionsPerSet = new UntypedFormControl(
+      { value: this.data.rules.teamSubstitutionsPerSet, disabled: this.editingDisabled },
+      [Validators.required],
+    );
     this.customConsecutiveServesPerPlayer = new UntypedFormControl(
       { value: this.data.rules.customConsecutiveServesPerPlayer, disabled: this.editingDisabled },
       [Validators.required],

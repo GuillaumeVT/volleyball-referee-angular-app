@@ -1,102 +1,110 @@
-<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.Create">Create rules</h2>
-<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.Update">Update rules {{ data.rules.name }}</h2>
-<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.View">View rules {{ data.rules.name }}</h2>
+<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.Create">{{ 'user.rules.create' | translate }}</h2>
+<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.Update">{{ 'user.rules.update' | translate: { name: data.rules.name } }}</h2>
+<h2 mat-dialog-title *ngIf="data.crudType === crudTypeEnum.View">{{ 'user.rules.view' | translate: { name: data.rules.name } }}</h2>
 <mat-dialog-content>
   <form [formGroup]="rulesFormGroup" autocomplete="off" novalidate (ngSubmit)="onSubmitForm()">
     <mat-form-field class="my-2" appearance="outline">
-      <mat-label>Rules name</mat-label>
+      <mat-label>{{ 'user.rules.name' | translate }}</mat-label>
       <input matInput type="text" formControlName="name" />
-      <mat-error *ngIf="nameFormControl.errors?.required">Rules name is required</mat-error>
+      <mat-error *ngIf="nameFormControl.errors?.required">{{ 'user.rules.messages.name-required-error' | translate }}</mat-error>
     </mat-form-field>
 
-    <h3 class="mat-h3 mt-3">General</h3>
+    <h3 class="mat-h3 mt-3">{{ 'user.rules.general' | translate }}</h3>
 
     <mat-form-field class="mt-2" appearance="outline">
-      <mat-label>Number of sets per game</mat-label>
+      <mat-label>{{ 'user.rules.sets-per-game' | translate }}</mat-label>
       <mat-select [formControl]="setsPerGame">
         <mat-option *ngFor="let option of setsPerGameOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="mt-2" appearance="outline">
-      <mat-label>Number of points per set</mat-label>
+      <mat-label>{{ 'user.rules.points-per-set' | translate }}</mat-label>
       <mat-select [formControl]="pointsPerSet">
         <mat-option *ngFor="let option of pointsPerSetOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <div class="mb-3">
-      <mat-slide-toggle formControlName="tieBreakInLastSet" color="primary">Tie break in last set</mat-slide-toggle>
+      <mat-slide-toggle formControlName="tieBreakInLastSet" color="primary">{{ 'user.rules.tie-break' | translate }}</mat-slide-toggle>
     </div>
 
     <mat-form-field class="mt-2" appearance="outline" *ngIf="tieBreakInLastSetFormControl.value">
-      <mat-label>Number of points per set</mat-label>
+      <mat-label>{{ 'user.rules.points-per-tie-break' | translate }}</mat-label>
       <mat-select [formControl]="pointsInTieBreak">
         <mat-option *ngFor="let option of pointsInTieBreakOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <div class="mb-3">
-      <mat-slide-toggle formControlName="twoPointsDifference" color="primary">Two points difference to win set</mat-slide-toggle>
+      <mat-slide-toggle formControlName="twoPointsDifference" color="primary">{{
+        'user.rules.two-points-difference' | translate
+      }}</mat-slide-toggle>
     </div>
 
     <div class="mb-3">
-      <mat-slide-toggle formControlName="sanctions" color="primary">Sanctions</mat-slide-toggle>
+      <mat-slide-toggle formControlName="sanctions" color="primary">{{ 'user.rules.sanctions' | translate }}</mat-slide-toggle>
     </div>
 
     <mat-form-field class="mt-2" appearance="outline">
-      <mat-label>Termination of match</mat-label>
+      <mat-label>{{ 'user.rules.match-termination' | translate }}</mat-label>
       <mat-select [formControl]="matchTermination">
         <mat-option *ngFor="let option of matchTerminationOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <h3 class="mat-h3 mt-3">Timeouts</h3>
+    <h3 class="mat-h3 mt-3">{{ 'game.title.timeouts' | translate }}</h3>
 
     <div class="mb-3">
-      <mat-slide-toggle formControlName="teamTimeouts" color="primary">Team timeouts</mat-slide-toggle>
+      <mat-slide-toggle formControlName="teamTimeouts" color="primary">{{ 'user.rules.team-timeouts' | translate }}</mat-slide-toggle>
     </div>
 
     <mat-form-field class="mt-2" appearance="outline" *ngIf="teamTimeoutsFormControl.value">
-      <mat-label>Number of team timeouts per set</mat-label>
+      <mat-label>{{ 'user.rules.team-timeouts-per-set' | translate }}</mat-label>
       <mat-select [formControl]="teamTimeoutsPerSet">
         <mat-option *ngFor="let option of teamTimeoutsPerSetOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="mt-2" appearance="outline" *ngIf="teamTimeoutsFormControl.value">
-      <mat-label>Duration of a team timeout</mat-label>
+      <mat-label>{{ 'user.rules.team-timeout-duration' | translate }}</mat-label>
       <mat-select [formControl]="teamTimeoutDuration">
         <mat-option *ngFor="let option of timeoutDurationOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <div class="mb-3" *ngIf="data.rules.kind !== 'SNOW'">
-      <mat-slide-toggle formControlName="technicalTimeouts" color="primary">Technical timeouts</mat-slide-toggle>
+      <mat-slide-toggle formControlName="technicalTimeouts" color="primary">{{
+        'user.rules.technical-timeouts' | translate
+      }}</mat-slide-toggle>
     </div>
 
     <mat-form-field class="mt-2" appearance="outline" *ngIf="technicalTimeoutsFormControl.value && data.rules.kind !== 'SNOW'">
-      <mat-label>Duration of a technical timeout</mat-label>
+      <mat-label>{{ 'user.rules.technical-timeout-duration' | translate }}</mat-label>
       <mat-select [formControl]="technicalTimeoutDuration">
         <mat-option *ngFor="let option of timeoutDurationOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <div class="mb-3">
-      <mat-slide-toggle formControlName="gameIntervals" color="primary">Game intervals</mat-slide-toggle>
+      <mat-slide-toggle formControlName="gameIntervals" color="primary">{{ 'user.rules.game-intervals' | translate }}</mat-slide-toggle>
     </div>
 
     <mat-form-field class="mt-2" appearance="outline" *ngIf="gameIntervalsFormControl.value">
-      <mat-label>Duration of a game interval</mat-label>
+      <mat-label>{{ 'user.rules.game-interval-duration' | translate }}</mat-label>
       <mat-select [formControl]="gameIntervalDuration">
         <mat-option *ngFor="let option of gameIntervalDurationOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <h3 class="mat-h3 mt-3" *ngIf="data.rules.kind === 'BEACH' || data.rules.kind === 'SNOW'">Court switches</h3>
+    <h3 class="mat-h3 mt-3" *ngIf="data.rules.kind === 'BEACH' || data.rules.kind === 'SNOW'">
+      {{ 'user.rules.court-switches' | translate }}
+    </h3>
 
     <div class="mb-3" *ngIf="data.rules.kind === 'BEACH' || data.rules.kind === 'SNOW'">
-      <mat-slide-toggle formControlName="beachCourtSwitches" color="primary">Court switches</mat-slide-toggle>
+      <mat-slide-toggle formControlName="beachCourtSwitches" color="primary">{{
+        'user.rules.court-switches' | translate
+      }}</mat-slide-toggle>
     </div>
 
     <mat-form-field
@@ -104,7 +112,7 @@
       appearance="outline"
       *ngIf="(data.rules.kind === 'BEACH' || data.rules.kind === 'SNOW') && beachCourtSwitchesFormControl.value"
     >
-      <mat-label>Court switch period in normal set</mat-label>
+      <mat-label>{{ 'user.rules.court-switch-frequency' | translate }}</mat-label>
       <mat-select [formControl]="beachCourtSwitchFreq">
         <mat-option *ngFor="let option of beachCourtSwitchOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
@@ -119,16 +127,18 @@
         tieBreakInLastSetFormControl.value
       "
     >
-      <mat-label>Court switch period in tie break</mat-label>
+      <mat-label>{{ 'user.rules.court-switch-frequency-tie-break' | translate }}</mat-label>
       <mat-select [formControl]="beachCourtSwitchFreqTieBreak">
         <mat-option *ngFor="let option of beachCourtSwitchOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <h3 class="mat-h3 mt-3" *ngIf="data.rules.kind === 'INDOOR' || data.rules.kind === 'INDOOR_4X4'">Substitutions</h3>
+    <h3 class="mat-h3 mt-3" *ngIf="data.rules.kind === 'INDOOR' || data.rules.kind === 'INDOOR_4X4'">
+      {{ 'game.title.substitutions' | translate }}
+    </h3>
 
     <mat-form-field class="mt-2" appearance="outline" *ngIf="data.rules.kind === 'INDOOR' || data.rules.kind === 'INDOOR_4X4'">
-      <mat-label>Substitutions limitation</mat-label>
+      <mat-label>{{ 'user.rules.substitutions-limitation' | translate }}</mat-label>
       <mat-select [formControl]="substitutionsLimitation">
         <mat-option *ngFor="let option of substitutionsLimitationOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
@@ -136,54 +146,29 @@
 
     <div class="mb-4" fxLayout="row" fxLayoutAlign="start center" *ngIf="data.rules.kind === 'INDOOR' || data.rules.kind === 'INDOOR_4X4'">
       <mat-icon class="mx-2">info</mat-icon>
-      <div *ngIf="substitutionsLimitation.value === 1">
-        <div class="mb-2">
-          A player of the starting line-up may leave the game, but only once in a set, and re-enter, but only once in a set, and only to
-          his/her previous position in the line-up.
-        </div>
-        <div>
-          A substitute player may enter the game in place of a player of the starting line-up, but only once per set, and he/she can only be
-          substituted by the same starting player.
-        </div>
+      <div *ngIf="substitutionsLimitation.value === 1" class="substitutions-limitation-block">
+        {{ 'user.rules.substitutions-limitation-1' | translate }}
       </div>
-      <div *ngIf="substitutionsLimitation.value === 2">
-        <div class="mb-2">
-          A player of the starting line-up may leave the game, several times in a set, and re-enter, an unlimited amount of times per set
-          within the number of allowed team substitutions, and only to his/her previous position in the line-up.
-        </div>
-        <div>
-          A substitute player may enter the game in place of a player of the starting line-up, an unlimited amount of times per set within
-          the number of allowed team substitutions, and he/she can only be substituted by the same starting player.
-        </div>
+      <div *ngIf="substitutionsLimitation.value === 2" class="substitutions-limitation-block">
+        {{ 'user.rules.substitutions-limitation-2' | translate }}
       </div>
-      <div *ngIf="substitutionsLimitation.value === 3">
-        <div class="mb-2">
-          A player of the starting line-up may leave the game, several times in a set, and re-enter, an unlimited amount of times per set
-          within the number of allowed team substitutions, and only to his/her previous position in the line-up.
-        </div>
-        <div class="mb-2">
-          A substitute player may enter the game in place of a player of the starting line-up, an unlimited amount of times per set within
-          the number of allowed team substitutions.
-        </div>
-        <div>More than one substitute may enter the set in each position.</div>
+      <div *ngIf="substitutionsLimitation.value === 3" class="substitutions-limitation-block">
+        {{ 'user.rules.substitutions-limitation-3' | translate }}
       </div>
-      <div *ngIf="substitutionsLimitation.value === 4">
-        <div>
-          Players can leave and re-enter the game on any position, an unlimited amount of times per set within the number of allowed team
-          substitutions.
-        </div>
+      <div *ngIf="substitutionsLimitation.value === 4" class="substitutions-limitation-block">
+        {{ 'user.rules.substitutions-limitation-4' | translate }}
       </div>
     </div>
 
     <mat-form-field class="mt-2" appearance="outline" *ngIf="data.rules.kind === 'INDOOR' || data.rules.kind === 'INDOOR_4X4'">
-      <mat-label>Number of team substitutions per set</mat-label>
+      <mat-label>{{ 'user.rules.team-substitutions-per-set' | translate }}</mat-label>
       <mat-select [formControl]="teamSubstitutionsPerSet">
         <mat-option *ngFor="let option of teamSubstitutionsPerSetOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="mt-2" appearance="outline" *ngIf="data.rules.kind === 'INDOOR' || data.rules.kind === 'INDOOR_4X4'">
-      <mat-label>Limit of consecutive serves per player</mat-label>
+      <mat-label>{{ 'user.rules.consecutive-serves-per-player' | translate }}</mat-label>
       <mat-select [formControl]="customConsecutiveServesPerPlayer">
         <mat-option *ngFor="let option of customConsecutiveServesPerPlayerOptions" [value]="option.value">{{ option.label }}</mat-option>
       </mat-select>
@@ -191,8 +176,8 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button (click)="close()" *ngIf="data.crudType === crudTypeEnum.View">Close</button>
-  <button mat-button (click)="close()" *ngIf="data.crudType !== crudTypeEnum.View">Cancel</button>
+  <button mat-button (click)="close()" *ngIf="data.crudType === crudTypeEnum.View">{{ 'common.close' | translate }}</button>
+  <button mat-button (click)="close()" *ngIf="data.crudType !== crudTypeEnum.View">{{ 'common.cancel' | translate }}</button>
   <button
     mat-raised-button
     type="submit"
@@ -201,7 +186,7 @@
     [disabled]="!rulesFormGroup.valid"
     *ngIf="data.crudType === crudTypeEnum.Create"
   >
-    Create
+    {{ 'common.create' | translate }}
   </button>
   <button
     mat-raised-button
@@ -211,7 +196,9 @@
     [disabled]="!rulesFormGroup.valid"
     *ngIf="data.crudType === crudTypeEnum.Update"
   >
-    Update
+    {{ 'common.update' | translate }}
   </button>
-  <button mat-raised-button type="button" color="primary" (click)="onEdit()" *ngIf="data.crudType === crudTypeEnum.View">Edit</button>
+  <button mat-raised-button type="button" color="primary" (click)="onEdit()" *ngIf="data.crudType === crudTypeEnum.View">
+    {{ 'common.edit' | translate }}
+  </button>
 </mat-dialog-actions>

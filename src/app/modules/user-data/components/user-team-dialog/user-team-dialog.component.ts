@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 import { Player, Team } from '@shared/models/team.model';
 import { PlayerStyleService } from '@shared/services/player-style.service';
 import { SnackBarService } from '@shared/services/snack-bar.service';
@@ -35,6 +36,7 @@ export class UserTeamDialogComponent {
     public playerStyleService: PlayerStyleService,
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
+    private _translate: TranslateService,
   ) {
     this.editingDisabled = this.data.crudType === CrudType.View ? true : false;
     this.moreNumbers = false;
@@ -340,9 +342,13 @@ export class UserTeamDialogComponent {
 
   onInvalidResponse(): void {
     if (this.data.crudType === CrudType.Create) {
-      this.snackBarService.showError(`The team ${this.nameFormControl.value} could not be created. Is the name already used?`);
+      this._translate
+        .get('user.team.messages.creation-error', { name: this.nameFormControl.value })
+        .subscribe((t) => this.snackBarService.showError(t));
     } else if (this.data.crudType === CrudType.Update) {
-      this.snackBarService.showError(`The team ${this.nameFormControl.value} could not be updated. Is the name already used?`);
+      this._translate
+        .get('user.team.messages.update-error', { name: this.nameFormControl.value })
+        .subscribe((t) => this.snackBarService.showError(t));
     }
   }
 
