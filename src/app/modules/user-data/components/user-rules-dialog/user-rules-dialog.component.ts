@@ -168,69 +168,81 @@ export class UserRulesDialogComponent {
   }
 
   private createOptions(): void {
-    this.setsPerGameOptions = [
-      { value: 5, label: 'Game of 5 sets' },
-      { value: 4, label: 'Game of 4 sets' },
-      { value: 3, label: 'Game of 3 sets' },
-      { value: 2, label: 'Game of 2 sets' },
-      { value: 1, label: 'Game of 1 set' },
-    ];
+    this._translateService.get('user.rules.sets-per-game-options').subscribe((t) => {
+      for (let index = 5; index >= 1; index--) {
+        this.setsPerGameOptions.push({ value: index, label: t[`${index}`] });
+      }
+    });
 
-    for (let index = 40; index >= 9; index--) {
-      this.pointsPerSetOptions.push({ value: index, label: `Set of ${index} points` });
+    for (let points = 40; points >= 9; points--) {
+      this.pointsPerSetOptions.push({
+        value: points,
+        label: this._translateService.instant('user.rules.points-per-set-options', { points: points }),
+      });
     }
 
-    for (let index = 40; index >= 9; index--) {
-      this.pointsInTieBreakOptions.push({ value: index, label: `Tie break of ${index} points` });
+    for (let points = 40; points >= 9; points--) {
+      this.pointsInTieBreakOptions.push({
+        value: points,
+        label: this._translateService.instant('user.rules.points-per-tie-break-options', { points: points }),
+      });
     }
 
-    this.matchTerminationOptions = [
-      { value: 1, label: 'Finish the match when a team wins' },
-      { value: 2, label: 'Finish the match when all the sets have been played' },
-    ];
+    this._translateService.get('user.rules.match-termination-options').subscribe((t) => {
+      this.matchTerminationOptions = [
+        { value: 1, label: t['normal'] },
+        { value: 2, label: t['play-all'] },
+      ];
+    });
 
-    this.teamTimeoutsPerSetOptions = [
-      { value: 3, label: '3 team timeouts per set' },
-      { value: 2, label: '2 team timeouts per set' },
-      { value: 1, label: '1 team timeout per set' },
-      { value: 0, label: 'No team timeout per set' },
-    ];
+    this._translateService.get('user.rules.team-timeouts-per-set-options').subscribe((t) => {
+      for (let timeouts = 3; timeouts >= 0; timeouts--) {
+        this.teamTimeoutsPerSetOptions.push({ value: timeouts, label: t[`${timeouts}`] });
+      }
+    });
 
-    for (let durations of [60, 45, 30]) {
-      this.timeoutDurationOptions.push({ value: durations, label: `${durations} seconds` });
+    for (let duration of [60, 45, 30]) {
+      this.timeoutDurationOptions.push({
+        value: duration,
+        label: this._translateService.instant('user.rules.timeouts-duration-options', { seconds: duration }),
+      });
     }
 
-    this.gameIntervalDurationOptions = [
-      { value: 180, label: '3 minutes' },
-      { value: 120, label: '2 minutes' },
-      { value: 60, label: '1 minute' },
-    ];
+    this._translateService.get('user.rules.game-interval-duration-options').subscribe((t) => {
+      for (let interval of [180, 120, 60]) {
+        this.gameIntervalDurationOptions.push({ value: interval, label: t[`${interval}`] });
+      }
+    });
 
-    for (let index = 10; index >= 5; index--) {
-      this.beachCourtSwitchOptions.push({ value: index, label: `Switch court every ${index} points` });
+    for (let points = 10; points >= 5; points--) {
+      this.beachCourtSwitchOptions.push({
+        value: points,
+        label: this._translateService.instant('user.rules.court-switch-frequency-options', { points: points }),
+      });
     }
 
-    this.customConsecutiveServesPerPlayerOptions = [
-      { value: 9999, label: 'Unlimited' },
-      { value: 5, label: '5 serves' },
-      { value: 4, label: '4 serves' },
-      { value: 3, label: '3 serves' },
-      { value: 2, label: '2 serves' },
-    ];
+    this._translateService.get('user.rules.consecutive-serves-per-player-options').subscribe((t) => {
+      for (let serves of [9999, 5, 4, 3, 2]) {
+        this.customConsecutiveServesPerPlayerOptions.push({ value: serves, label: t[`${serves}`] });
+      }
+    });
 
-    this.substitutionsLimitationOptions = [
-      { value: 1, label: 'FIVB limitation' },
-      { value: 2, label: 'Alternative limitation 1' },
-      { value: 3, label: 'Alternative limitation 2' },
-      { value: 4, label: 'No limitation' },
-    ];
+    this._translateService.get('user.rules.substitutions-limitation-options').subscribe((t) => {
+      for (let limitation of [1, 2, 3, 4]) {
+        this.substitutionsLimitationOptions.push({ value: limitation, label: t[`${limitation}`] });
+      }
+    });
 
-    for (let substitions of [18, 15, 12, 6, 5, 4, 3, 2]) {
-      this.teamSubstitutionsPerSetOptions.push({ value: substitions, label: `${substitions} substitutions per set` });
+    for (let substitutions of [18, 15, 12, 6, 5, 4, 3, 2]) {
+      this.teamSubstitutionsPerSetOptions.push({
+        value: substitutions,
+        label: this._translateService.instant('user.rules.substitutions-per-set-options', { substitutions: substitutions }),
+      });
     }
 
-    this.teamSubstitutionsPerSetOptions[0].label += ' (according to substitutions limitation)';
-    this.teamSubstitutionsPerSetOptions[1].label += ' (according to substitutions limitation)';
+    const limitationComment = this._translateService.instant('user.rules.substitutions-limitation-options-comment');
+    this.teamSubstitutionsPerSetOptions[0].label += ` ${limitationComment}`;
+    this.teamSubstitutionsPerSetOptions[1].label += ` ${limitationComment}`;
   }
 
   onSubmitForm(): void {
@@ -277,9 +289,13 @@ export class UserRulesDialogComponent {
 
   onInvalidResponse(): void {
     if (this.data.crudType === CrudType.Create) {
-      this.snackBarService.showError(`The rules ${this.nameFormControl.value} could not be created. Is the name already used?`);
+      this._translateService
+        .get('user.rules.messages.creation-error', { name: this.nameFormControl.value })
+        .subscribe((t) => this.snackBarService.showError(t));
     } else if (this.data.crudType === CrudType.Update) {
-      this.snackBarService.showError(`The rules ${this.nameFormControl.value} could not be updated. Is the name already used?`);
+      this._translateService
+        .get('user.rules.messages.update-error', { name: this.nameFormControl.value })
+        .subscribe((t) => this.snackBarService.showError(t));
     }
   }
 

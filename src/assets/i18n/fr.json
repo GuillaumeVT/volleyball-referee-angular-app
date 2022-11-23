@@ -141,7 +141,7 @@
       "more": "Plus de numéros",
       "less": "Moins de numéros",
       "messages": {
-        "reation-error": "L'équipe {{name}} n'a pas pu être créée. Le nom est-il déjà utilisé?",
+        "creation-error": "L'équipe {{name}} n'a pas pu être créée. Le nom est-il déjà utilisé?",
         "update-error": "L'équipe {{name}} n'a pas pu être modifiée. Le nom est-il déjà utilisé?",
         "delete-question": "Supprimer l'équipe {{name}}?",
         "delete-all-question": "Supprimer TOUTES les équipes?",
@@ -215,17 +215,60 @@
       "technical-timeout-duration": "Durée d'un temps mort technique",
       "game-intervals": "Pauses entre les sets",
       "game-interval-duration": "Durée de la pause entre les sets",
-      "substitutions-limitation": "Limitation des remplacements",
+      "substitutions-limitation": "Restriction des remplacements",
       "team-substitutions-per-set": "Nombre de remplacements par set",
       "consecutive-serves-per-player": "Limite de services consécutifs par joueur",
       "court-switches": "Changements de côtés",
       "court-switch-frequency": "Fréquence des changements de côté dans un set normal",
       "court-switch-frequency-tie-break": "Fréquence des changements de côté dans le tie break",
-      "substitutions-limitation-1": "Un joueur de la formation de départ peut sortir du jeu mais une fois par set et n’y retourner qu’une seule fois par set et uniquement à la place qu’il occupait précédemment dans la formation de départ.\n\nUn joueur remplaçant peut entrer en jeu à la place d’un joueur de la formation de départ mais une fois par set et ne peut être remplacé que par le même joueur de la formation de départ.",
-      "substitutions-limitation-2": "Un joueur de la formation de départ peut sortir du jeu, un nombre illimité de fois par set, et y retourner, un nombre illimité de fois par set (dans la limite du nombre de remplacements), et uniquement à la place qu’il occupait précédemment dans la formation de départ.\n\nUn joueur remplaçant peut entrer en jeu à la place d’un joueur de la formation de départ, un nombre illimité de fois par set (dans la limite du nombre de remplacements), et ne peut être remplacé que par le même joueur de la formation de départ.",
-      "substitutions-limitation-3": "Un joueur de la formation de départ peut sortir du jeu, un nombre illimité de fois par set, et y retourner, un nombre illimité de fois par set (dans la limite du nombre de remplacements), et uniquement à la place qu’il occupait précédemment dans la formation de départ.\n\nUn joueur remplaçant peut entrer en jeu à la place d’un joueur de la formation de départ, un nombre illimité de fois par set (dans la limite du nombre de remplacements).\n\nPlusieurs remplaçants peuvent entrer sur la même position au cours d'un set.",
-      "substitutions-limitation-4": "Les joueurs peuvent sortir du jeu et y retourner sur n'importe quelle position, un nombre illimité de fois par set (dans la limite du nombre de remplacements).",
+      "substitutions-limitation-fivb": "Un joueur de la formation de départ peut sortir du jeu mais une fois par set et n’y retourner qu’une seule fois par set et uniquement à la place qu’il occupait précédemment dans la formation de départ.\n\nUn joueur remplaçant peut entrer en jeu à la place d’un joueur de la formation de départ mais une fois par set et ne peut être remplacé que par le même joueur de la formation de départ.",
+      "substitutions-limitation-alt-1": "Un joueur de la formation de départ peut sortir du jeu, un nombre illimité de fois par set, et y retourner, un nombre illimité de fois par set (dans la limite du nombre de remplacements), et uniquement à la place qu’il occupait précédemment dans la formation de départ.\n\nUn joueur remplaçant peut entrer en jeu à la place d’un joueur de la formation de départ, un nombre illimité de fois par set (dans la limite du nombre de remplacements), et ne peut être remplacé que par le même joueur de la formation de départ.",
+      "substitutions-limitation-alt-2": "Un joueur de la formation de départ peut sortir du jeu, un nombre illimité de fois par set, et y retourner, un nombre illimité de fois par set (dans la limite du nombre de remplacements), et uniquement à la place qu’il occupait précédemment dans la formation de départ.\n\nUn joueur remplaçant peut entrer en jeu à la place d’un joueur de la formation de départ, un nombre illimité de fois par set (dans la limite du nombre de remplacements).\n\nPlusieurs remplaçants peuvent entrer sur la même position au cours d'un set.",
+      "substitutions-limitation-none": "Les joueurs peuvent sortir du jeu et y retourner sur n'importe quelle position, un nombre illimité de fois par set (dans la limite du nombre de remplacements).",
+      "sets-per-game-options": {
+        "5": "Match en 5 sets",
+        "4": "Match en 4 sets",
+        "3": "Match en 3 sets",
+        "2": "Match en 2 sets",
+        "1": "Match en 1 set"
+      },
+      "points-per-set-options": "Set de {{points}} points",
+      "points-per-tie-break-options": "Tie break de {{points}} points",
+      "match-termination-options": {
+        "normal": "Terminer le match dès qu'une équipe le remporte",
+        "play-all": "Terminer le match quand tous les sets ont été joués"
+      },
+      "team-timeouts-per-set-options": {
+        "3": "3 temps morts d'équipe par set",
+        "2": "2 temps morts d'équipe par set",
+        "1": "1 temps mort d'équipe par set",
+        "0": "Aucun temps mort d'équipe par set"
+      },
+      "timeouts-duration-options": "{{seconds}} secondes",
+      "game-interval-duration-options": {
+        "180": "3 minutes",
+        "120": "2 minutes",
+        "60": "1 minute"
+      },
+      "court-switch-frequency-options": "Changement de côté tous les {{points}} points",
+      "consecutive-serves-per-player-options": {
+        "9999": "Illimités",
+        "5": "5 services",
+        "4": "4 services",
+        "3": "3 services",
+        "2": "2 services"
+      },
+      "substitutions-limitation-options": {
+        "1": "Restrictions FIVB",
+        "2": "Autres restrictions type 1",
+        "3": "Autres restrictions type 2",
+        "4": "Pas de restriction"
+      },
+      "substitutions-limitation-options-comment": "(en fonction des restrictions de remplacements)",
+      "substitutions-per-set-options": "{{substitutions}} remplacements par set",
       "messages": {
+        "creation-error": "Les règles {{name}} n'ont pas pu être créées. Le nom est-il déjà utilisé?",
+        "update-error": "Les règles {{name}} n'ont pas pu être modifiées. Le nom est-il déjà utilisé?",
         "delete-question": "Supprimer les règles {{name}}?",
         "delete-all-question": "Supprimer TOUTES les règles?",
         "deleted-error": "Les règles n'ont pas pu être supprimées. Sont-elles utilisées pour un match programmé?",

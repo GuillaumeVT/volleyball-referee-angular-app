@@ -147,16 +147,16 @@
     <div class="mb-4" fxLayout="row" fxLayoutAlign="start center" *ngIf="data.rules.kind === 'INDOOR' || data.rules.kind === 'INDOOR_4X4'">
       <mat-icon class="mx-2">info</mat-icon>
       <div *ngIf="substitutionsLimitation.value === 1" class="substitutions-limitation-block">
-        {{ 'user.rules.substitutions-limitation-1' | translate }}
+        {{ 'user.rules.substitutions-limitation-fivb' | translate }}
       </div>
       <div *ngIf="substitutionsLimitation.value === 2" class="substitutions-limitation-block">
-        {{ 'user.rules.substitutions-limitation-2' | translate }}
+        {{ 'user.rules.substitutions-limitation-alt-1' | translate }}
       </div>
       <div *ngIf="substitutionsLimitation.value === 3" class="substitutions-limitation-block">
-        {{ 'user.rules.substitutions-limitation-3' | translate }}
+        {{ 'user.rules.substitutions-limitation-alt-2' | translate }}
       </div>
       <div *ngIf="substitutionsLimitation.value === 4" class="substitutions-limitation-block">
-        {{ 'user.rules.substitutions-limitation-4' | translate }}
+        {{ 'user.rules.substitutions-limitation-none' | translate }}
       </div>
     </div>
 
