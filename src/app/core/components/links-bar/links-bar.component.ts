@@ -7,12 +7,12 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./links-bar.component.scss'],
 })
 export class LinksBarComponent {
-  currentLanguage: string;
-  languages: Map<string, string>;
+  public currentLanguage: string;
+  public languages: Map<string, string>;
 
-  playUrl: string;
+  public playUrl: string;
 
-  constructor(private translate: TranslateService) {
+  constructor(private _translateService: TranslateService) {
     this.languages = new Map();
     this.languages.set('en', 'English');
     this.languages.set('fr', 'Français');
@@ -20,20 +20,20 @@ export class LinksBarComponent {
     this.currentLanguage = localStorage.getItem('language');
 
     if (!this.currentLanguage) {
-      this.currentLanguage = this.translate.getBrowserLang();
+      this.currentLanguage = this._translateService.getBrowserLang();
     }
 
-    this.translate.use(this.currentLanguage.match(/en|fr/) ? this.currentLanguage : 'en');
+    this._translateService.use(this.currentLanguage.match(/en|fr/) ? this.currentLanguage : 'en');
 
     this.playUrl = 'https://play.google.com/store/apps/details?id=com.tonkar.volleyballreferee';
   }
 
-  getPrivacyPolicyUrl(): string {
+  public getPrivacyPolicyUrl(): string {
     return '/privacy-policy';
   }
 
-  onSelectionChanged(): void {
+  public onSelectionChanged(): void {
     localStorage.setItem('language', this.currentLanguage);
-    this.translate.use(this.currentLanguage);
+    this._translateService.use(this.currentLanguage);
   }
 }

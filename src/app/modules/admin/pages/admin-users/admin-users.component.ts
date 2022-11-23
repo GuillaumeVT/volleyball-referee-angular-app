@@ -13,16 +13,16 @@ import { SnackBarService } from '@shared/services/snack-bar.service';
   styleUrls: ['./admin-users.component.scss'],
 })
 export class AdminUsersComponent implements OnInit {
-  page: number;
-  size: number;
-  total: number;
-  filter: string;
+  public page: number;
+  public size: number;
+  public total: number;
+  private _filter: string;
 
-  users: User[];
+  public users: User[];
 
-  today: number;
+  public today: number;
 
-  constructor(public adminService: AdminService, private dialog: MatDialog, private snackBarService: SnackBarService) {
+  constructor(private _adminService: AdminService, private _dialog: MatDialog, private _snackBarService: SnackBarService) {
     this.page = 0;
     this.size = 50;
     this.total = 0;
@@ -30,12 +30,12 @@ export class AdminUsersComponent implements OnInit {
     this.today = new Date().getTime();
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.refreshUsers();
   }
 
-  refreshUsers(): void {
-    this.adminService.listUsers(this.filter, this.page, this.size).subscribe({
+  private refreshUsers(): void {
+    this._adminService.listUsers(this._filter, this.page, this.size).subscribe({
       next: (page) => {
         this.total = page.totalElements;
         this.users = page.content;
@@ -48,47 +48,47 @@ export class AdminUsersComponent implements OnInit {
     });
   }
 
-  filterUsers(textFilter: HTMLInputElement): void {
-    this.filter = textFilter.value;
+  public filterUsers(textFilter: HTMLInputElement): void {
+    this._filter = textFilter.value;
     this.refreshUsers();
   }
 
-  onPageChange(event: PageEvent): void {
+  public onPageChange(event: PageEvent): void {
     this.size = event.pageSize;
     this.page = event.pageIndex;
     this.refreshUsers();
   }
 
-  viewSubscription(user: User): void {
-    this.adminService
+  public viewSubscription(user: User): void {
+    this._adminService
       .getUserSubscription(user.id)
       .subscribe((subscriptionPurchase) =>
-        this.dialog.open(UserSubscriptionDialogComponent, { width: '800px', data: subscriptionPurchase }),
+        this._dialog.open(UserSubscriptionDialogComponent, { width: '800px', data: subscriptionPurchase }),
       );
   }
 
-  updateUserSubscription(user: User): void {
-    const dialogRef = this.dialog.open(UserSubscriptionTokenDialogComponent, { width: '500px', data: user.purchaseToken });
+  public updateUserSubscription(user: User): void {
+    const dialogRef = this._dialog.open(UserSubscriptionTokenDialogComponent, { width: '500px', data: user.purchaseToken });
     dialogRef.afterClosed().subscribe((purchaseToken) => {
       if (purchaseToken) {
-        this.adminService.updateUserSubscription(user.id, purchaseToken).subscribe({
+        this._adminService.updateUserSubscription(user.id, purchaseToken).subscribe({
           next: (_success) => {
-            this.snackBarService.showInfo('Successfully updated subscription.');
+            this._snackBarService.showInfo('Successfully updated subscription.');
             this.refreshUsers();
           },
-          error: (_) => this.snackBarService.showError('Failed to updated subscription.'),
+          error: (_) => this._snackBarService.showError('Failed to updated subscription.'),
         });
       }
     });
   }
 
-  refreshUserSubscription(user: User): void {
-    this.adminService.refreshUserSubscription(user.id).subscribe({
+  public refreshUserSubscription(user: User): void {
+    this._adminService.refreshUserSubscription(user.id).subscribe({
       next: (_success) => {
-        this.snackBarService.showInfo('Successfully refreshed subscription.');
+        this._snackBarService.showInfo('Successfully refreshed subscription.');
         this.refreshUsers();
       },
-      error: (_) => this.snackBarService.showError('Failed to refresh subscription.'),
+      error: (_) => this._snackBarService.showError('Failed to refresh subscription.'),
     });
   }
 }

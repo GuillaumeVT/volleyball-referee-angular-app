@@ -1,4 +1,4 @@
-export class User {
+export interface User {
   id: string;
   pseudo: string;
   email: string;
@@ -13,7 +13,7 @@ export class User {
   failedAuthentication: FailedAuthentication;
 }
 
-export class UserSummary {
+export interface UserSummary {
   id: string;
   pseudo: string;
   email: string;
@@ -30,7 +30,7 @@ export class Friend {
   }
 }
 
-export class FriendRequest {
+export interface FriendRequest {
   id: string;
   senderId: string;
   receiverId: string;
@@ -38,7 +38,7 @@ export class FriendRequest {
   receiverPseudo: string;
 }
 
-export class FriendsAndRequests {
+export interface FriendsAndRequests {
   friends: Friend[];
   receivedFriendRequests: FriendRequest[];
   sentFriendRequests: FriendRequest[];
@@ -54,7 +54,7 @@ export class EmailCredentials {
   }
 }
 
-export class UserToken {
+export interface UserToken {
   user: UserSummary;
   token: string;
   tokenExpiry: number;
@@ -70,12 +70,12 @@ export class UserPasswordUpdate {
   }
 }
 
-export class FailedAuthentication {
+export interface FailedAuthentication {
   attempts: number;
   resetsAt: number;
 }
 
-export class SubscriptionPurchase {
+export interface SubscriptionPurchase {
   acknowledgementState: number;
   autoRenewing: boolean;
   countryCode: string;

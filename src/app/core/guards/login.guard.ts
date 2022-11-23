@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginGuard implements CanActivate {
-  isSignedIn: boolean;
+  private _isSignedIn: boolean;
 
-  constructor(private userService: UserService, private router: Router) {
-    this.isSignedIn = false;
-    this.userService.authState.subscribe((auth) => {
-      this.isSignedIn = auth != null;
+  constructor(private _userService: UserService, private _router: Router) {
+    this._isSignedIn = false;
+    this._userService.authState.subscribe((auth) => {
+      this._isSignedIn = auth != null;
     });
   }
 
@@ -20,11 +20,11 @@ export class LoginGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.isSignedIn) {
+    if (this._isSignedIn) {
       return true;
     } else {
-      this.userService.setRedirectUrlAfterLogin(state.url);
-      this.router.navigateByUrl('/sign-in');
+      this._userService.setRedirectUrlAfterLogin(state.url);
+      this._router.navigateByUrl('/sign-in');
       return false;
     }
   }

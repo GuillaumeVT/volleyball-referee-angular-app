@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-subscription-token-dialog',
@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./user-subscription-token-dialog.component.scss'],
 })
 export class UserSubscriptionTokenDialogComponent {
-  userSubscriptionFormGroup: UntypedFormGroup;
+  public userSubscriptionFormGroup: UntypedFormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<UserSubscriptionTokenDialogComponent>,
@@ -27,11 +27,11 @@ export class UserSubscriptionTokenDialogComponent {
     return this.userSubscriptionFormGroup.get('purchaseToken');
   }
 
-  close(): void {
+  public close(): void {
     this.dialogRef.close(null);
   }
 
-  onUpdateUserSubscription(): void {
+  public onUpdateUserSubscription(): void {
     this.dialogRef.close(this.purchaseTokenFormControl.value);
   }
 }

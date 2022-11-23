@@ -12,29 +12,29 @@ import { Count } from '@shared/models/count.model';
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent implements OnChanges {
-  @Input() user: UserSummary;
-  @Input() sideNav: MatSidenav;
+  @Input() public user: UserSummary;
+  @Input() public sideNav: MatSidenav;
 
-  themeKey: string;
-  currentTheme: string;
-  systemTheme: string;
-  lightTheme: string;
-  darkTheme: string;
-  numberOfFriendRequests: number;
+  private _themeKey: string;
+  public currentTheme: string;
+  public systemTheme: string;
+  public lightTheme: string;
+  public darkTheme: string;
+  public numberOfFriendRequests: number;
 
   constructor(
-    private userService: UserService,
-    private router: Router,
-    private renderer: Renderer2,
-    private overlayContainer: OverlayContainer,
+    private _userService: UserService,
+    private _router: Router,
+    private _renderer: Renderer2,
+    private _overlayContainer: OverlayContainer,
   ) {
-    this.themeKey = 'theme';
+    this._themeKey = 'theme';
     this.systemTheme = 'system-theme';
     this.lightTheme = 'light-theme';
     this.darkTheme = 'dark-theme';
     this.numberOfFriendRequests = 0;
 
-    this.currentTheme = localStorage.getItem(this.themeKey);
+    this.currentTheme = localStorage.getItem(this._themeKey);
 
     if (this.currentTheme) {
       if (this.currentTheme === this.systemTheme) {
@@ -49,7 +49,7 @@ export class ToolbarComponent implements OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (this.user) {
       this.refreshNotifications();
     } else {
@@ -57,42 +57,42 @@ export class ToolbarComponent implements OnChanges {
     }
   }
 
-  refreshNotifications(): void {
-    this.userService.getNumberOfFriendRequestsReceivedBy().subscribe({
+  private refreshNotifications(): void {
+    this._userService.getNumberOfFriendRequestsReceivedBy().subscribe({
       next: (count: Count) => (this.numberOfFriendRequests = count.count),
       error: (_) => (this.numberOfFriendRequests = 0),
     });
   }
 
-  signOut(): void {
-    this.userService.signOut();
-    this.router.navigateByUrl('home');
+  public signOut(): void {
+    this._userService.signOut();
+    this._router.navigateByUrl('home');
   }
 
-  getUserAccountUrl(): string {
+  public getUserAccountUrl(): string {
     return '/account';
   }
 
-  getUserColleaguesUrl(): string {
+  public getUserColleaguesUrl(): string {
     return '/colleagues';
   }
 
-  onSelectSystemTheme(): void {
+  public onSelectSystemTheme(): void {
     this.toggleSystemTheme();
-    localStorage.setItem(this.themeKey, this.systemTheme);
+    localStorage.setItem(this._themeKey, this.systemTheme);
   }
 
-  onSelectLightTheme(): void {
+  public onSelectLightTheme(): void {
     this.toggleLightTheme();
-    localStorage.setItem(this.themeKey, this.lightTheme);
+    localStorage.setItem(this._themeKey, this.lightTheme);
   }
 
-  onSelectDarkTheme(): void {
+  public onSelectDarkTheme(): void {
     this.toggleDarkTheme();
-    localStorage.setItem(this.themeKey, this.darkTheme);
+    localStorage.setItem(this._themeKey, this.darkTheme);
   }
 
-  toggleSystemTheme(): void {
+  private toggleSystemTheme(): void {
     const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (isDark) {
       this.toggleDarkTheme();
@@ -102,15 +102,15 @@ export class ToolbarComponent implements OnChanges {
     this.currentTheme = this.systemTheme;
   }
 
-  toggleLightTheme(): void {
-    this.renderer.removeClass(document.body, this.darkTheme);
-    this.overlayContainer.getContainerElement().classList.remove(this.darkTheme);
+  private toggleLightTheme(): void {
+    this._renderer.removeClass(document.body, this.darkTheme);
+    this._overlayContainer.getContainerElement().classList.remove(this.darkTheme);
     this.currentTheme = this.lightTheme;
   }
 
-  toggleDarkTheme(): void {
-    this.renderer.addClass(document.body, this.darkTheme);
-    this.overlayContainer.getContainerElement().classList.add(this.darkTheme);
+  private toggleDarkTheme(): void {
+    this._renderer.addClass(document.body, this.darkTheme);
+    this._overlayContainer.getContainerElement().classList.add(this.darkTheme);
     this.currentTheme = this.darkTheme;
   }
 }

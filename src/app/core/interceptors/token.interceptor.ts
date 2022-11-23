@@ -7,23 +7,23 @@ import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  userToken: UserToken;
+  private _userToken: UserToken;
 
-  constructor(private userService: UserService) {
-    this.userService.authState.subscribe((userToken) => {
+  constructor(private _userService: UserService) {
+    this._userService.authState.subscribe((userToken) => {
       if (userToken && userToken.token) {
-        this.userToken = userToken;
+        this._userToken = userToken;
       } else {
-        this.userToken = null;
+        this._userToken = null;
       }
     });
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.userToken) {
+    if (this._userToken) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.userToken.token}`,
+          Authorization: `Bearer ${this._userToken.token}`,
         },
       });
     }
@@ -36,12 +36,12 @@ export class TokenInterceptor implements HttpInterceptor {
         },
         (err: any) => {
           if (err instanceof HttpErrorResponse) {
-            if (err.status === 401 && this.userToken) {
+            if (err.status === 401 && this._userToken) {
               // Check that the token is not expired
               const now = new Date();
               const nowMillis = now.getTime() + now.getTimezoneOffset() * 60000;
-              if (nowMillis > this.userToken.tokenExpiry) {
-                this.userService.signOut();
+              if (nowMillis > this._userToken.tokenExpiry) {
+                this._userService.signOut();
               }
             }
           }

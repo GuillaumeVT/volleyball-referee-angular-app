@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PublicGuard implements CanActivate {
-  isSignedIn: boolean;
+  private _isSignedIn: boolean;
 
-  constructor(private userService: UserService, private router: Router) {
-    this.isSignedIn = false;
-    this.userService.authState.subscribe((auth) => {
-      this.isSignedIn = auth != null;
+  constructor(private _userService: UserService, private _router: Router) {
+    this._isSignedIn = false;
+    this._userService.authState.subscribe((auth) => {
+      this._isSignedIn = auth != null;
     });
   }
 
@@ -20,8 +20,8 @@ export class PublicGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.isSignedIn) {
-      this.router.navigateByUrl('/home');
+    if (this._isSignedIn) {
+      this._router.navigateByUrl('/home');
       return false;
     } else {
       return true;

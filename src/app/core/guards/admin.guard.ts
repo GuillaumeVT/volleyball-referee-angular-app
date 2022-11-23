@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AdminnGuard implements CanActivate {
-  isAdmin: boolean;
+  private _isAdmin: boolean;
 
-  constructor(private userService: UserService, private router: Router) {
-    this.isAdmin = false;
-    this.userService.authState.subscribe((auth) => {
-      this.isAdmin = auth != null && auth.user.admin === true;
+  constructor(private _userService: UserService, private _router: Router) {
+    this._isAdmin = false;
+    this._userService.authState.subscribe((auth) => {
+      this._isAdmin = auth != null && auth.user.admin === true;
     });
   }
 
@@ -20,11 +20,11 @@ export class AdminnGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.isAdmin) {
+    if (this._isAdmin) {
       return true;
     } else {
-      this.userService.setRedirectUrlAfterLogin(state.url);
-      this.router.navigateByUrl('/home');
+      this._userService.setRedirectUrlAfterLogin(state.url);
+      this._router.navigateByUrl('/home');
       return false;
     }
   }
