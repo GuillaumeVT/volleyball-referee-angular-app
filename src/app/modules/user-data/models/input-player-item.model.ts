@@ -25,7 +25,7 @@ export class InputPlayerItem extends IndoorPlayerItem {
     this.unselectedBorderColor = unselectedBorderColor;
   }
 
-  getColor(): string {
+  public getColor(): string {
     if (this.selected) {
       return this.color;
     } else {
@@ -33,7 +33,7 @@ export class InputPlayerItem extends IndoorPlayerItem {
     }
   }
 
-  getBackgroundColor(): string {
+  public getBackgroundColor(): string {
     if (this.selected) {
       return this.backgroundColor;
     } else {
@@ -41,7 +41,7 @@ export class InputPlayerItem extends IndoorPlayerItem {
     }
   }
 
-  getBorderColor(): string {
+  public getBorderColor(): string {
     if (this.selected) {
       return this.borderColor;
     } else {

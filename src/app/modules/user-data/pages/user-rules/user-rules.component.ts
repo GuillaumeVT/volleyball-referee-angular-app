@@ -19,9 +19,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./user-rules.component.scss'],
 })
 export class UserRulesComponent extends AbstractRulesFilter implements OnInit, OnDestroy {
-  user: UserSummary;
+  public user: UserSummary;
 
-  private subscription: Subscription = new Subscription();
+  private _subscription: Subscription = new Subscription();
 
   constructor(
     private _titleService: Title,
@@ -35,8 +35,8 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
     this._translateService.get('user.rules.page').subscribe((t) => this._titleService.setTitle(t));
   }
 
-  ngOnInit() {
-    this.subscription.add(
+  public ngOnInit(): void {
+    this._subscription.add(
       this._userService.authState.subscribe((userToken) => {
         this.user = userToken.user;
         if (this.user) {
@@ -46,18 +46,18 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
     );
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  public ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 
-  refreshRules(): void {
+  public refreshRules(): void {
     this._rulesService.listRules(this.getKinds()).subscribe({
       next: (rules) => this.onRulesReceived(rules),
       error: (_) => this.onRulesReceived([]),
     });
   }
 
-  createRules(kind: string): void {
+  public createRules(kind: string): void {
     const rules = Rules.createRules(this.user, kind);
 
     const data: UserRulesDialogData = {
@@ -73,7 +73,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
     });
   }
 
-  viewRules(rulesSummary: RulesSummary): void {
+  public viewRules(rulesSummary: RulesSummary): void {
     this._rulesService.getRules(rulesSummary.id).subscribe((rules) => {
       const data: UserRulesDialogData = {
         crudType: CrudType.View,
@@ -84,7 +84,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
     });
   }
 
-  updateRules(rulesSummary: RulesSummary): void {
+  public updateRules(rulesSummary: RulesSummary): void {
     this._rulesService.getRules(rulesSummary.id).subscribe((rules) => {
       const data: UserRulesDialogData = {
         crudType: CrudType.Update,
@@ -100,7 +100,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
     });
   }
 
-  deleteRules(rulesSummary: RulesSummary): void {
+  public deleteRules(rulesSummary: RulesSummary): void {
     this._translateService.get(['user.team.delete', 'user.rules.messages.delete-question'], { name: rulesSummary.name }).subscribe((ts) => {
       const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
         width: '500px',
@@ -117,7 +117,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
     });
   }
 
-  deleteAllRules(): void {
+  public deleteAllRules(): void {
     this._translateService.get(['user.rules.delete', 'user.rules.messages.delete-all-question']).subscribe((ts) => {
       const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
         width: '500px',
@@ -131,23 +131,23 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
     });
   }
 
-  onRulesCreated(): void {
+  private onRulesCreated(): void {
     this.refreshRules();
   }
 
-  onRulesUpdated(): void {
+  private onRulesUpdated(): void {
     this.refreshRules();
   }
 
-  onRulesDeleted(): void {
+  private onRulesDeleted(): void {
     this.refreshRules();
   }
 
-  onRulesDeletionError(): void {
+  private onRulesDeletionError(): void {
     this._translateService.get('user.rules.messages.deleted-error').subscribe((t) => this._snackBarService.showError(t));
   }
 
-  onAllRulesDeleted(): void {
+  private onAllRulesDeleted(): void {
     this.refreshRules();
   }
 }

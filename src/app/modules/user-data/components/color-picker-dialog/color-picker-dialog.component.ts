@@ -8,8 +8,8 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
   styleUrls: ['./color-picker-dialog.component.scss'],
 })
 export class ColorPickerDialogComponent {
-  selectedColor: string;
-  colors: string[];
+  public selectedColor: string;
+  public colors: string[];
 
   constructor(
     private _dialogRef: MatDialogRef<ColorPickerDialogComponent>,
@@ -34,15 +34,15 @@ export class ColorPickerDialogComponent {
     ];
   }
 
-  onSelectColor(color: string): void {
+  public onSelectColor(color: string): void {
     this.selectedColor = color;
   }
 
-  close(): void {
+  public close(): void {
     this._dialogRef.close(null);
   }
 
-  onApplyColor() {
+  public onApplyColor() {
     this._dialogRef.close(this.selectedColor);
   }
 }

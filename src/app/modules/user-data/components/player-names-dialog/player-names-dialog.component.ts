@@ -10,7 +10,7 @@ import { Team } from '@shared/models/team.model';
 export class PlayerNamesDialogComponent {
   constructor(private _dialogRef: MatDialogRef<PlayerNamesDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: Team) {}
 
-  close(): void {
+  public close(): void {
     this._dialogRef.close();
   }
 }

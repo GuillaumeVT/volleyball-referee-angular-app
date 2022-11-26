@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -22,16 +21,15 @@ import { LeagueService } from '@user-data/services/league.service';
 export class UserGameDialogComponent {
   crudTypeEnum: typeof CrudType = CrudType;
 
-  gameFormGroup: UntypedFormGroup;
-  referee: UntypedFormControl;
-  genderPipe: GenderPipe;
+  public gameFormGroup: UntypedFormGroup;
+  public referee: UntypedFormControl;
 
-  me: Friend;
-  scheduleDate: Date;
-  minScheduleDate: Date;
-  divisionsOfSelectedLeague: string[];
+  public me: Friend;
+  private _scheduleDate: Date;
+  public minScheduleDate: Date;
+  public divisionsOfSelectedLeague: string[];
 
-  genderTranslations: any;
+  private _genderTranslations: any;
 
   constructor(
     private _dialogRef: MatDialogRef<UserGameDialogComponent>,
@@ -39,24 +37,23 @@ export class UserGameDialogComponent {
     private _gameService: GameService,
     private _leagueService: LeagueService,
     private _snackBarService: SnackBarService,
-    public datePipe: DatePipe,
     private _translateService: TranslateService,
+    private _genderPipe: GenderPipe,
   ) {
-    this.genderPipe = new GenderPipe();
     const editingDisabled = this.data.crudType === CrudType.View ? true : false;
-    this.scheduleDate = new Date(this.data.game.scheduledAt);
+    this._scheduleDate = new Date(this.data.game.scheduledAt);
     this.minScheduleDate = new Date();
     this.divisionsOfSelectedLeague = [];
 
     this._translateService
       .get(['user.team.mixed-pipe', 'user.team.ladies-pipe', 'user.team.gents-pipe'])
-      .subscribe((t) => (this.genderTranslations = t));
+      .subscribe((t) => (this._genderTranslations = t));
 
     this.referee = new UntypedFormControl({ value: null, disabled: editingDisabled }, [Validators.required]);
 
     this.gameFormGroup = new UntypedFormGroup(
       {
-        scheduledAt: new UntypedFormControl({ value: this.scheduleDate, disabled: editingDisabled }),
+        scheduledAt: new UntypedFormControl({ value: this._scheduleDate, disabled: editingDisabled }),
         indexed: new UntypedFormControl({ value: this.data.game.indexed, disabled: editingDisabled }),
         league: new UntypedFormControl({ value: null, disabled: editingDisabled }),
         division: new UntypedFormControl({ value: this.data.game.divisionName, disabled: editingDisabled }),
@@ -236,19 +233,19 @@ export class UserGameDialogComponent {
     }
   }
 
-  displayLeague = (league: League) => {
+  public displayLeague = (league: League) => {
     return league ? league.name : null;
   };
 
-  displayTeam = (team: Team) => {
-    return team ? `${team.name}  ${this.genderTranslations[this.genderPipe.transform(team.gender)]}` : null;
+  public displayTeam = (team: Team) => {
+    return team ? `${team.name}  ${this._genderTranslations[this._genderPipe.transform(team.gender)]}` : null;
   };
 
-  displayRules = (rules: Rules) => {
+  public displayRules = (rules: Rules) => {
     return rules ? rules.name : null;
   };
 
-  refreshDivisionsOfSelectedLeague(): void {
+  private refreshDivisionsOfSelectedLeague(): void {
     if (this.leagueFormControl.value) {
       this._leagueService.getLeague(this.leagueFormControl.value.id).subscribe({
         next: (league) => (this.divisionsOfSelectedLeague = league.divisions),
@@ -259,7 +256,7 @@ export class UserGameDialogComponent {
     }
   }
 
-  onSubmitForm(): void {
+  public onSubmitForm(): void {
     const game: GameSummary = this.data.game;
     game.scheduledAt = this.scheduledAtFormControl.value.getTime();
 
@@ -300,11 +297,11 @@ export class UserGameDialogComponent {
     }
   }
 
-  onValidResponse(): void {
+  private onValidResponse(): void {
     this._dialogRef.close(true);
   }
 
-  onInvalidResponse(): void {
+  private onInvalidResponse(): void {
     if (this.data.crudType === CrudType.Create) {
       this._translateService.get('user.game.messages.game-creation-error').subscribe((t) => this._snackBarService.showError(t));
     } else if (this.data.crudType === CrudType.Update) {
@@ -312,7 +309,7 @@ export class UserGameDialogComponent {
     }
   }
 
-  close(): void {
+  public close(): void {
     this._dialogRef.close(false);
   }
 }

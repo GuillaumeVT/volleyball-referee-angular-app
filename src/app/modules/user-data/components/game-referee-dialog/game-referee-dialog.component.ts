@@ -14,11 +14,11 @@ import { GameService } from '@user-data/services/game.service';
   styleUrls: ['./game-referee-dialog.component.scss'],
 })
 export class GameRefereeDialogComponent {
-  refereeFormGroup: UntypedFormGroup;
-  referee: UntypedFormControl;
+  public refereeFormGroup: UntypedFormGroup;
+  public referee: UntypedFormControl;
 
-  me: Friend;
-  friends: Friend[];
+  public me: Friend;
+  public friends: Friend[];
 
   constructor(
     private _dialogRef: MatDialogRef<GameRefereeDialogComponent>,
@@ -58,22 +58,22 @@ export class GameRefereeDialogComponent {
     return this.refereeFormGroup.get('referee');
   }
 
-  onUpdateReferee(): void {
+  public onUpdateReferee(): void {
     this._gameService.updateReferee(this.data.game.id, this.refereeFormControl.value.id).subscribe({
       next: (success) => this.onValidResponse(),
       error: (_) => this.onInvalidResponse(),
     });
   }
 
-  onValidResponse(): void {
+  private onValidResponse(): void {
     this._dialogRef.close(true);
   }
 
-  onInvalidResponse(): void {
+  private onInvalidResponse(): void {
     this._translateService.get('user.referee.messages.referee-update-error').subscribe((t) => this._snackBarService.showError(t));
   }
 
-  close(): void {
+  public close(): void {
     this._dialogRef.close(false);
   }
 }

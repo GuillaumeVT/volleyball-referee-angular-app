@@ -30,11 +30,11 @@ export class UserLeagueDialogComponent {
     return this.leagueFormGroup.get('leagueName');
   }
 
-  close(): void {
+  public close(): void {
     this._dialogRef.close(false);
   }
 
-  onCreateLeague(): void {
+  public onCreateLeague(): void {
     this.league.name = this.leagueNameFormControl.value;
     this._leagueService.createLeague(this.league).subscribe({
       next: (_league) => this.onValidResponse(),
@@ -42,11 +42,11 @@ export class UserLeagueDialogComponent {
     });
   }
 
-  onValidResponse(): void {
+  private onValidResponse(): void {
     this._dialogRef.close(true);
   }
 
-  onInvalidResponse(): void {
+  private onInvalidResponse(): void {
     this._translateService
       .get('user.league.messages.created-error', { pseudo: this.league.name })
       .subscribe((t) => this._snackBarService.showError(t));

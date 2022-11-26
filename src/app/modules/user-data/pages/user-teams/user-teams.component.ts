@@ -38,7 +38,7 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
     this._translateService.get('user.team.page').subscribe((t) => this._titleService.setTitle(t));
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this._subscription.add(
       this._userService.authState.subscribe((userToken) => {
         this.user = userToken.user;
@@ -49,7 +49,7 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
     );
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._subscription.unsubscribe();
   }
 
