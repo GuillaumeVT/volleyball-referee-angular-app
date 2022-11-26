@@ -34,13 +34,13 @@ export class UserGameDialogComponent {
   genderTranslations: any;
 
   constructor(
-    public dialogRef: MatDialogRef<UserGameDialogComponent>,
+    private _dialogRef: MatDialogRef<UserGameDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserGameDialogData,
-    private gameService: GameService,
-    private leagueService: LeagueService,
-    private snackBarService: SnackBarService,
+    private _gameService: GameService,
+    private _leagueService: LeagueService,
+    private _snackBarService: SnackBarService,
     public datePipe: DatePipe,
-    private translate: TranslateService,
+    private _translateService: TranslateService,
   ) {
     this.genderPipe = new GenderPipe();
     const editingDisabled = this.data.crudType === CrudType.View ? true : false;
@@ -48,7 +48,7 @@ export class UserGameDialogComponent {
     this.minScheduleDate = new Date();
     this.divisionsOfSelectedLeague = [];
 
-    this.translate
+    this._translateService
       .get(['user.team.mixed-pipe', 'user.team.ladies-pipe', 'user.team.gents-pipe'])
       .subscribe((t) => (this.genderTranslations = t));
 
@@ -250,7 +250,7 @@ export class UserGameDialogComponent {
 
   refreshDivisionsOfSelectedLeague(): void {
     if (this.leagueFormControl.value) {
-      this.leagueService.getLeague(this.leagueFormControl.value.id).subscribe({
+      this._leagueService.getLeague(this.leagueFormControl.value.id).subscribe({
         next: (league) => (this.divisionsOfSelectedLeague = league.divisions),
         error: (_) => (this.divisionsOfSelectedLeague = []),
       });
@@ -288,12 +288,12 @@ export class UserGameDialogComponent {
     game.scorerName = this.scorerNameFormControl.value;
 
     if (this.data.crudType === CrudType.Create) {
-      this.gameService.createGame(game).subscribe({
+      this._gameService.createGame(game).subscribe({
         next: (_game) => this.onValidResponse(),
         error: (_) => this.onInvalidResponse(),
       });
     } else if (this.data.crudType === CrudType.Update) {
-      this.gameService.updateGame(game).subscribe({
+      this._gameService.updateGame(game).subscribe({
         next: (_game) => this.onValidResponse(),
         error: (_) => this.onInvalidResponse(),
       });
@@ -301,19 +301,19 @@ export class UserGameDialogComponent {
   }
 
   onValidResponse(): void {
-    this.dialogRef.close(true);
+    this._dialogRef.close(true);
   }
 
   onInvalidResponse(): void {
     if (this.data.crudType === CrudType.Create) {
-      this.translate.get('user.game.messages.game-creation-error').subscribe((t) => this.snackBarService.showError(t));
+      this._translateService.get('user.game.messages.game-creation-error').subscribe((t) => this._snackBarService.showError(t));
     } else if (this.data.crudType === CrudType.Update) {
-      this.translate.get('user.game.messages.game-update-error').subscribe((t) => this.snackBarService.showError(t));
+      this._translateService.get('user.game.messages.game-update-error').subscribe((t) => this._snackBarService.showError(t));
     }
   }
 
   close(): void {
-    this.dialogRef.close(false);
+    this._dialogRef.close(false);
   }
 }
 

@@ -10,14 +10,14 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
   styleUrls: ['./set-timeouts.component.scss'],
 })
 export class SetTimeoutsComponent {
-  @Input() game: Game;
-  @Input() setIndex: number;
-  @Input() leftTeam: TeamType;
-  @Input() rightTeam: TeamType;
+  @Input() public game: Game;
+  @Input() public setIndex: number;
+  @Input() public leftTeam: TeamType;
+  @Input() public rightTeam: TeamType;
 
   constructor(public playerStyleService: PlayerStyleService) {}
 
-  getTimeouts(teamType: TeamType): Timeout[] {
+  public getTimeouts(teamType: TeamType): Timeout[] {
     if (TeamType.Home === teamType) {
       return this.game.sets[this.setIndex].homeCalledTimeouts;
     } else {
@@ -25,7 +25,7 @@ export class SetTimeoutsComponent {
     }
   }
 
-  getScore(teamType: TeamType, timeout: Timeout): string {
+  public getScore(teamType: TeamType, timeout: Timeout): string {
     if (TeamType.Home === teamType) {
       return timeout.homePoints + '-' + timeout.guestPoints;
     } else {

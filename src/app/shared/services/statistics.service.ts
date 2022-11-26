@@ -8,11 +8,11 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class StatisticsService {
-  private statisticsUrl = environment.api + '/statistics';
+  private _statisticsUrl = environment.api + '/statistics';
 
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
-  getStatistics(): Observable<StatisticsGroup> {
-    return this.http.get<StatisticsGroup>(this.statisticsUrl);
+  public getStatistics(): Observable<StatisticsGroup> {
+    return this._http.get<StatisticsGroup>(this._statisticsUrl);
   }
 }

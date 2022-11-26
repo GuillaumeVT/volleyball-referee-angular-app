@@ -11,44 +11,44 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
   styleUrls: ['./indoor-court.component.scss'],
 })
 export class IndoorCourtComponent implements OnChanges {
-  @Input() game: Game;
-  @Input() setIndex: number;
-  @Input() leftTeam: TeamType;
-  @Input() rightTeam: TeamType;
-  @Input() positions: number;
+  @Input() public game: Game;
+  @Input() public setIndex: number;
+  @Input() public leftTeam: TeamType;
+  @Input() public rightTeam: TeamType;
+  @Input() public positions: number;
 
-  hPlayerItems: IndoorPlayerItem[];
-  gPlayerItems: IndoorPlayerItem[];
+  private _hPlayerItems: IndoorPlayerItem[];
+  private _gPlayerItems: IndoorPlayerItem[];
 
-  constructor(private playerStyleService: PlayerStyleService) {}
+  constructor(private _playerStyleService: PlayerStyleService) {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(_changes: SimpleChanges): void {
     if (this.game && this.game.sets) {
       this.updatePlayerItems();
     }
   }
 
-  updatePlayerItems(): void {
-    this.hPlayerItems = this.computePlayerItems(TeamType.Home);
-    this.gPlayerItems = this.computePlayerItems(TeamType.Guest);
+  private updatePlayerItems(): void {
+    this._hPlayerItems = this.computePlayerItems(TeamType.Home);
+    this._gPlayerItems = this.computePlayerItems(TeamType.Guest);
   }
 
-  computePlayerItems(teamType: TeamType): IndoorPlayerItem[] {
-    var playerItems = [];
+  private computePlayerItems(teamType: TeamType): IndoorPlayerItem[] {
+    const playerItems = [];
 
     for (let index = 0; index < this.positions; index++) {
-      var position = index + 1;
-      var player = this.getPlayerAt(position, teamType);
+      const position = index + 1;
+      const player = this.getPlayerAt(position, teamType);
       var color: string, backgroundColor: string, borderColor: string;
 
-      if (this.playerStyleService.isLibero(this.game, teamType, player)) {
-        color = this.playerStyleService.getLiberoTextColor(this.game, teamType);
-        backgroundColor = this.playerStyleService.getLiberoBackgroundColor(this.game, teamType);
-        borderColor = this.playerStyleService.getBorderColor(backgroundColor);
+      if (this._playerStyleService.isLibero(this.game, teamType, player)) {
+        color = this._playerStyleService.getLiberoTextColor(this.game, teamType);
+        backgroundColor = this._playerStyleService.getLiberoBackgroundColor(this.game, teamType);
+        borderColor = this._playerStyleService.getBorderColor(backgroundColor);
       } else {
-        color = this.playerStyleService.getTeamTextColor(this.game, teamType);
-        backgroundColor = this.playerStyleService.getTeamBackgroundColor(this.game, teamType);
-        borderColor = this.playerStyleService.getBorderColor(backgroundColor);
+        color = this._playerStyleService.getTeamTextColor(this.game, teamType);
+        backgroundColor = this._playerStyleService.getTeamBackgroundColor(this.game, teamType);
+        borderColor = this._playerStyleService.getBorderColor(backgroundColor);
       }
 
       var actingCaptain: number;
@@ -60,26 +60,26 @@ export class IndoorCourtComponent implements OnChanges {
         actingCaptain = set.guestCaptain;
       }
 
-      var playerItem = new IndoorPlayerItem(player, color, backgroundColor, borderColor, actingCaptain >= 0 && actingCaptain === player);
+      const playerItem = new IndoorPlayerItem(player, color, backgroundColor, borderColor, actingCaptain >= 0 && actingCaptain === player);
       playerItems.push(playerItem);
     }
     return playerItems;
   }
 
-  getPlayerItem(position: number, teamType: TeamType): IndoorPlayerItem {
+  private getPlayerItem(position: number, teamType: TeamType): IndoorPlayerItem {
     var index = position - 1;
     var playerItem: IndoorPlayerItem;
 
     if (TeamType.Home === teamType) {
-      playerItem = this.hPlayerItems[index];
+      playerItem = this._hPlayerItems[index];
     } else {
-      playerItem = this.gPlayerItems[index];
+      playerItem = this._gPlayerItems[index];
     }
 
     return playerItem;
   }
 
-  getPlayerText(position: number, teamType: TeamType): string {
+  public getPlayerText(position: number, teamType: TeamType): string {
     var player: string = this.getPlayerItem(position, teamType).player;
 
     if (player === '-1') {
@@ -89,19 +89,19 @@ export class IndoorCourtComponent implements OnChanges {
     return player;
   }
 
-  getPlayerForegroundColor(position: number, teamType: TeamType): string {
+  public getPlayerForegroundColor(position: number, teamType: TeamType): string {
     return this.getPlayerItem(position, teamType).color;
   }
 
-  getPlayerBackgroundColor(position: number, teamType: TeamType): string {
+  public getPlayerBackgroundColor(position: number, teamType: TeamType): string {
     return this.getPlayerItem(position, teamType).backgroundColor;
   }
 
-  getPlayerBorderColor(position: number, teamType: TeamType): string {
+  public getPlayerBorderColor(position: number, teamType: TeamType): string {
     return this.getPlayerItem(position, teamType).borderColor;
   }
 
-  getPlayerAt(position: number, teamType: TeamType) {
+  private getPlayerAt(position: number, teamType: TeamType) {
     const set = this.game.sets[this.setIndex];
 
     var players: Court;
@@ -141,7 +141,7 @@ export class IndoorCourtComponent implements OnChanges {
     return playerNumber;
   }
 
-  getServeVisibility(teamType: TeamType) {
+  public getServeVisibility(teamType: TeamType) {
     const set = this.game.sets[this.setIndex];
 
     var servingTeam: TeamType;

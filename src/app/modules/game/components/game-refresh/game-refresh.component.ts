@@ -13,48 +13,48 @@ import { takeWhile } from 'rxjs/operators';
   styleUrls: ['./game-refresh.component.scss'],
 })
 export class GameRefreshComponent implements OnChanges, OnDestroy {
-  @Input() gameId: string;
-  @Input() rate: number;
-  @Output() currentGameUpdated = new EventEmitter();
+  @Input() public gameId: string;
+  @Input() public rate: number;
+  @Output() public currentGameUpdated = new EventEmitter();
 
-  game: Game;
-  isLive: boolean;
-  subscription: Subscription;
+  public game: Game;
+  private _isLive: boolean;
+  private _subscription: Subscription;
 
-  constructor(private router: Router, private publicService: PublicService, private datePipe: DatePipe) {
-    this.isLive = true;
+  constructor(private _router: Router, private _publicService: PublicService, private _datePipe: DatePipe) {
+    this._isLive = true;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(_changes: SimpleChanges): void {
     if (this.gameId && this.rate) {
-      if (this.subscription) {
-        this.subscription.unsubscribe();
+      if (this._subscription) {
+        this._subscription.unsubscribe();
       }
-      this.subscription = timer(0, this.rate)
-        .pipe(takeWhile(() => this.isLive))
+      this._subscription = timer(0, this.rate)
+        .pipe(takeWhile(() => this._isLive))
         .subscribe(() => this.updateGame());
     }
   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  public ngOnDestroy(): void {
+    if (this._subscription) {
+      this._subscription.unsubscribe();
     }
   }
 
-  updateGame(): void {
-    this.publicService.getGame(this.gameId).subscribe({
+  public updateGame(): void {
+    this._publicService.getGame(this.gameId).subscribe({
       next: (game) => this.onGameReceived(game),
       error: (_) => this.onGameReceived(null),
     });
   }
 
-  onGameReceived(game: Game): void {
+  private onGameReceived(game: Game): void {
     if (game === null) {
-      this.router.navigateByUrl('not-found');
+      this._router.navigateByUrl('not-found');
     } else {
       this.game = game;
-      this.isLive = game.status === 'LIVE';
+      this._isLive = game.status === 'LIVE';
       if (this.game.homeTeam.color === this.game.guestTeam.color) {
         this.game.guestTeam.color = '#d6d7d7';
       }
@@ -62,15 +62,15 @@ export class GameRefreshComponent implements OnChanges, OnDestroy {
     }
   }
 
-  downloadScoreSheet(): void {
-    this.publicService.getScoreSheet(this.gameId).subscribe({
+  public downloadScoreSheet(): void {
+    this._publicService.getScoreSheet(this.gameId).subscribe({
       next: (blob: Blob) => this.onScoreSheetReceived(blob),
       error: (_) => this.onScoreSheetReceived(null),
     });
   }
 
-  onScoreSheetReceived(blob: Blob): void {
-    const dateStr = this.datePipe.transform(this.game.scheduledAt, 'dd_MM_yyyy');
+  private onScoreSheetReceived(blob: Blob): void {
+    const dateStr = this._datePipe.transform(this.game.scheduledAt, 'dd_MM_yyyy');
     const filename = this.game.homeTeam.name + '_' + this.game.guestTeam.name + '_' + dateStr + '.html';
     saveAs(blob, filename);
   }

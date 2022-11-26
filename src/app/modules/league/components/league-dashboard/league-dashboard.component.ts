@@ -12,53 +12,53 @@ import { takeWhile } from 'rxjs/operators';
   styleUrls: ['./league-dashboard.component.scss'],
 })
 export class LeagueDashboardComponent implements OnDestroy, OnChanges {
-  @Input() league: League;
+  @Input() public league: League;
 
-  selectedDivision: string;
-  allDivisions: string;
-  games: LeagueDashboard;
-  subscription: Subscription;
-  autoRefresh: boolean;
+  public selectedDivision: string;
+  public allDivisions: string;
+  public games: LeagueDashboard;
+  private _subscription: Subscription;
+  private _autoRefresh: boolean;
 
-  constructor(private publicService: PublicService) {
+  constructor(private _publicService: PublicService) {
     this.allDivisions = idAll;
     this.selectedDivision = this.allDivisions;
-    this.autoRefresh = true;
+    this._autoRefresh = true;
   }
 
-  ngOnChanges(_changes: SimpleChanges) {
+  public ngOnChanges(_changes: SimpleChanges): void {
     if (this.league) {
-      if (this.subscription) {
-        this.subscription.unsubscribe();
+      if (this._subscription) {
+        this._subscription.unsubscribe();
       }
-      this.subscription = timer(0, 120000)
-        .pipe(takeWhile(() => this.autoRefresh))
+      this._subscription = timer(0, 120000)
+        .pipe(takeWhile(() => this._autoRefresh))
         .subscribe(() => this.refreshGames());
     }
   }
 
-  ngOnDestroy() {
-    this.autoRefresh = false;
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  public ngOnDestroy(): void {
+    this._autoRefresh = false;
+    if (this._subscription) {
+      this._subscription.unsubscribe();
     }
   }
 
-  refreshGames(): void {
+  private refreshGames(): void {
     if (this.selectedDivision === this.allDivisions) {
-      this.publicService.getGamesInLeagueGroupedByStatus(this.league.id).subscribe({
+      this._publicService.getGamesInLeagueGroupedByStatus(this.league.id).subscribe({
         next: (games) => (this.games = games),
         error: (_) => (this.games = null),
       });
     } else {
-      this.publicService.getGamesInDivisionGroupedByStatus(this.league.id, this.selectedDivision).subscribe({
+      this._publicService.getGamesInDivisionGroupedByStatus(this.league.id, this.selectedDivision).subscribe({
         next: (games) => (this.games = games),
         error: (_) => (this.games = null),
       });
     }
   }
 
-  onDivisionSelected(): void {
+  public onDivisionSelected(): void {
     this.refreshGames();
   }
 }

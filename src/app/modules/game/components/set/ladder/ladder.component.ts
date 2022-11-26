@@ -13,16 +13,16 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
   styleUrls: ['./ladder.component.scss'],
 })
 export class LadderComponent implements OnChanges {
-  @Input() game: Game;
-  @Input() setIndex: number;
-  @Input() topTeam: TeamType;
-  @Input() bottomTeam: TeamType;
+  @Input() public game: Game;
+  @Input() public setIndex: number;
+  @Input() public topTeam: TeamType;
+  @Input() public bottomTeam: TeamType;
 
-  ladder: LadderItem[];
+  public ladder: LadderItem[];
 
-  constructor(public playerStyleService: PlayerStyleService, private dialog: MatDialog) {}
+  constructor(public playerStyleService: PlayerStyleService, private _dialog: MatDialog) {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(_changes: SimpleChanges): void {
     if (this.game && this.game.sets) {
       this.updateLadder();
       this.addSubstitutions(this.game.sets[this.setIndex].homeSubstitutions, TeamType.Home);
@@ -34,7 +34,7 @@ export class LadderComponent implements OnChanges {
     }
   }
 
-  updateLadder(): void {
+  private updateLadder(): void {
     this.ladder = [];
     var homePoints = 0;
     var guestPoints = 0;
@@ -53,7 +53,7 @@ export class LadderComponent implements OnChanges {
     }
   }
 
-  addSubstitutions(substitutions: Substitution[], teamType: TeamType): void {
+  private addSubstitutions(substitutions: Substitution[], teamType: TeamType): void {
     for (let substitution of substitutions) {
       var homePoints = substitution.homePoints;
       var guestPoints = substitution.guestPoints;
@@ -72,7 +72,7 @@ export class LadderComponent implements OnChanges {
     }
   }
 
-  addTimeouts(timeouts: Timeout[], teamType: TeamType): void {
+  private addTimeouts(timeouts: Timeout[], teamType: TeamType): void {
     for (let timeout of timeouts) {
       var homePoints = timeout.homePoints;
       var guestPoints = timeout.guestPoints;
@@ -91,7 +91,7 @@ export class LadderComponent implements OnChanges {
     }
   }
 
-  addSanctions(sanctions: Sanction[], teamType: TeamType): void {
+  private addSanctions(sanctions: Sanction[], teamType: TeamType): void {
     for (let sanction of sanctions) {
       if (this.setIndex === sanction.set) {
         var homePoints = sanction.homePoints;
@@ -112,7 +112,7 @@ export class LadderComponent implements OnChanges {
     }
   }
 
-  getTeamScore(ladderItem: LadderItem, teamType: TeamType) {
+  public getTeamScore(ladderItem: LadderItem, teamType: TeamType) {
     if (ladderItem.teamType === teamType) {
       return ladderItem.score;
     } else {
@@ -120,7 +120,7 @@ export class LadderComponent implements OnChanges {
     }
   }
 
-  getTeamTextColor(ladderItem: LadderItem, teamType: TeamType) {
+  public getTeamTextColor(ladderItem: LadderItem, teamType: TeamType) {
     if (ladderItem.teamType === teamType) {
       return this.playerStyleService.getTeamTextColor(this.game, teamType);
     } else {
@@ -128,7 +128,7 @@ export class LadderComponent implements OnChanges {
     }
   }
 
-  getTeamBackgroundColor(ladderItem: LadderItem, teamType: TeamType) {
+  public getTeamBackgroundColor(ladderItem: LadderItem, teamType: TeamType) {
     if (ladderItem.teamType === teamType) {
       return this.playerStyleService.getTeamBackgroundColor(this.game, teamType);
     } else {
@@ -136,7 +136,7 @@ export class LadderComponent implements OnChanges {
     }
   }
 
-  getTeamBorderColor(ladderItem: LadderItem, teamType: TeamType) {
+  public getTeamBorderColor(ladderItem: LadderItem, teamType: TeamType) {
     if (ladderItem.teamType === teamType) {
       return this.playerStyleService.getTeamBorderColor(this.game, teamType);
     } else {
@@ -144,7 +144,7 @@ export class LadderComponent implements OnChanges {
     }
   }
 
-  getIcon(ladderItem: LadderItem, teamType: TeamType): string {
+  public getIcon(ladderItem: LadderItem, teamType: TeamType): string {
     var icon = '';
 
     if (ladderItem.hasSeveralEvents(teamType)) {
@@ -160,13 +160,13 @@ export class LadderComponent implements OnChanges {
     return icon;
   }
 
-  showEvents(ladderItem: LadderItem, teamType: TeamType): void {
+  public showEvents(ladderItem: LadderItem, teamType: TeamType): void {
     const data: LadderEventDialogData = {
       game: this.game,
       ladderItem: ladderItem,
       teamType: teamType,
     };
 
-    const dialogRef = this.dialog.open(LadderEventDialogComponent, { data: data });
+    const dialogRef = this._dialog.open(LadderEventDialogComponent, { data: data });
   }
 }

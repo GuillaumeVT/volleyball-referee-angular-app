@@ -44,7 +44,7 @@ export class UserRulesDialogComponent {
   teamSubstitutionsPerSetOptions: RulesOption[] = [];
 
   constructor(
-    public dialogRef: MatDialogRef<UserRulesDialogComponent>,
+    private _dialogRef: MatDialogRef<UserRulesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserRulesDialogData,
     private rulesService: RulesService,
     private snackBarService: SnackBarService,
@@ -284,7 +284,7 @@ export class UserRulesDialogComponent {
   }
 
   onValidResponse(): void {
-    this.dialogRef.close(true);
+    this._dialogRef.close(true);
   }
 
   onInvalidResponse(): void {
@@ -300,7 +300,7 @@ export class UserRulesDialogComponent {
   }
 
   close(): void {
-    this.dialogRef.close(false);
+    this._dialogRef.close(false);
   }
 
   onEdit(): void {

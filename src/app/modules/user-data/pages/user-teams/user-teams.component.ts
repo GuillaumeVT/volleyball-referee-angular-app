@@ -32,10 +32,10 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
     private _teamService: TeamService,
     private _dialog: MatDialog,
     private _snackBarService: SnackBarService,
-    private _translate: TranslateService,
+    private _translateService: TranslateService,
   ) {
     super(50);
-    this._translate.get('user.team.page').subscribe((t) => this._titleService.setTitle(t));
+    this._translateService.get('user.team.page').subscribe((t) => this._titleService.setTitle(t));
   }
 
   ngOnInit(): void {
@@ -104,7 +104,7 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   }
 
   public deleteTeam(teamSummary: TeamSummary): void {
-    this._translate.get(['user.team.delete', 'user.team.messages.delete-question'], { name: teamSummary.name }).subscribe((ts) => {
+    this._translateService.get(['user.team.delete', 'user.team.messages.delete-question'], { name: teamSummary.name }).subscribe((ts) => {
       const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
         width: '500px',
         data: { title: ts['user.team.delete'], message: ts['user.team.messages.delete-question'] },
@@ -121,7 +121,7 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   }
 
   public deleteAllTeams(): void {
-    this._translate.get(['user.team.delete', 'user.team.messages.delete-all-question']).subscribe((ts) => {
+    this._translateService.get(['user.team.delete', 'user.team.messages.delete-all-question']).subscribe((ts) => {
       const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
         width: '500px',
         data: { title: ts['user.team.delete'], message: ts['user.team.messages.delete-all-question'] },
@@ -151,6 +151,6 @@ export class UserTeamsComponent extends AbstractTeamFilter implements OnInit, On
   }
 
   private onTeamDeletionError(): void {
-    this._translate.get('user.team.messages.deleted-error').subscribe((t) => this._snackBarService.showError(t));
+    this._translateService.get('user.team.messages.deleted-error').subscribe((t) => this._snackBarService.showError(t));
   }
 }

@@ -10,17 +10,17 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
   styleUrls: ['./game-summary.component.scss'],
 })
 export class GameSummaryComponent implements OnChanges {
-  @Input() game: Game;
-  @Input() leftTeam: TeamType;
-  @Input() rightTeam: TeamType;
+  @Input() public game: Game;
+  @Input() public leftTeam: TeamType;
+  @Input() public rightTeam: TeamType;
 
-  @Output() teamsSwapped = new EventEmitter();
+  @Output() public teamsSwapped = new EventEmitter();
 
-  leftTeamName: string;
-  rightTeamName: string;
-  leftTeamSets: number;
-  rightTeamSets: number;
-  fullScore: string;
+  public leftTeamName: string;
+  public rightTeamName: string;
+  public leftTeamSets: number;
+  public rightTeamSets: number;
+  public fullScore: string;
 
   constructor(public playerStyleService: PlayerStyleService) {
     this.leftTeamName = '';
@@ -30,13 +30,13 @@ export class GameSummaryComponent implements OnChanges {
     this.fullScore = '';
   }
 
-  ngOnChanges(_changes: SimpleChanges): void {
+  public ngOnChanges(_changes: SimpleChanges): void {
     if (this.game) {
       this.init();
     }
   }
 
-  init(): void {
+  private init(): void {
     this.leftTeamName = this.getTeamName(this.leftTeam);
     this.rightTeamName = this.getTeamName(this.rightTeam);
     this.leftTeamSets = this.getTeamSets(this.leftTeam);
@@ -59,7 +59,7 @@ export class GameSummaryComponent implements OnChanges {
     return score;
   }
 
-  getTeamName(teamType: TeamType): string {
+  private getTeamName(teamType: TeamType): string {
     var name: string;
 
     if (TeamType.Home === teamType) {
@@ -71,7 +71,7 @@ export class GameSummaryComponent implements OnChanges {
     return name;
   }
 
-  getTeamSets(teamType: TeamType): number {
+  private getTeamSets(teamType: TeamType): number {
     var sets: number;
 
     if (TeamType.Home === teamType) {
@@ -83,7 +83,7 @@ export class GameSummaryComponent implements OnChanges {
     return sets;
   }
 
-  swapTeams(): void {
+  public swapTeams(): void {
     this.teamsSwapped.emit();
   }
 }

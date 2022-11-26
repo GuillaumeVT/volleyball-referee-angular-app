@@ -11,13 +11,13 @@ import { SnackBarService } from '@shared/services/snack-bar.service';
   styleUrls: ['./user-colleague-dialog.component.scss'],
 })
 export class UserColleagueDialogComponent {
-  colleagueFormGroup: UntypedFormGroup;
+  public colleagueFormGroup: UntypedFormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<UserColleagueDialogComponent>,
-    private userService: UserService,
-    private snackBarService: SnackBarService,
-    private translate: TranslateService,
+    private _dialogRef: MatDialogRef<UserColleagueDialogComponent>,
+    private _userService: UserService,
+    private _snackBarService: SnackBarService,
+    private _translateService: TranslateService,
   ) {
     this.colleagueFormGroup = new UntypedFormGroup({
       pseudo: new UntypedFormControl('', [Validators.required]),
@@ -28,25 +28,25 @@ export class UserColleagueDialogComponent {
     return this.colleagueFormGroup.get('pseudo');
   }
 
-  close(): void {
-    this.dialogRef.close(null);
+  public close(): void {
+    this._dialogRef.close(null);
   }
 
-  onAddColleague(): void {
+  public onAddColleague(): void {
     const pseudo = this.pseudoFormControl.value;
-    this.userService.sendFriendRequest(pseudo).subscribe({
+    this._userService.sendFriendRequest(pseudo).subscribe({
       next: (_success) => this.onValidResponse(pseudo),
       error: (_) => this.onInvalidResponse(),
     });
   }
 
-  onValidResponse(pseudo: string): void {
-    this.dialogRef.close(pseudo);
+  private onValidResponse(pseudo: string): void {
+    this._dialogRef.close(pseudo);
   }
 
-  onInvalidResponse(): void {
-    this.translate
+  private onInvalidResponse(): void {
+    this._translateService
       .get('user.colleague.messages.request-failed', { pseudo: this.pseudoFormControl.value })
-      .subscribe((t) => this.snackBarService.showError(t));
+      .subscribe((t) => this._snackBarService.showError(t));
   }
 }

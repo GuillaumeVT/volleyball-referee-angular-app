@@ -10,28 +10,32 @@ import { StatisticsService } from '@shared/services/statistics.service';
   styleUrls: ['./statistics.component.scss'],
 })
 export class StatisticsComponent implements OnInit {
-  @Input() showUserStatistics: boolean;
+  @Input() public showUserStatistics: boolean;
 
-  statisticsGroup: StatisticsGroup;
-  globalGameStatisticsData: any;
-  globalTeamStatisticsData: any;
-  userGameStatisticsData: any;
-  userTeamStatisticsData: any;
-  colorScheme: any;
+  public statisticsGroup: StatisticsGroup;
+  public globalGameStatisticsData: any;
+  public globalTeamStatisticsData: any;
+  public userGameStatisticsData: any;
+  public userTeamStatisticsData: any;
+  public colorScheme: any;
 
-  constructor(private statisticsService: StatisticsService, private publicService: PublicService, private translate: TranslateService) {
+  constructor(
+    private _statisticsService: StatisticsService,
+    private _publicService: PublicService,
+    private _translateService: TranslateService,
+  ) {
     this.colorScheme = { domain: ['#1f4294', '#f2bb1a', '#781fc9', '#2980b9'] };
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     if (this.showUserStatistics) {
-      this.statisticsService.getStatistics().subscribe({ next: (statistics) => this.buildStatisticsData(statistics) });
+      this._statisticsService.getStatistics().subscribe({ next: (statistics) => this.buildStatisticsData(statistics) });
     } else {
-      this.publicService.getStatistics().subscribe({ next: (statistics) => this.buildStatisticsData(statistics) });
+      this._publicService.getStatistics().subscribe({ next: (statistics) => this.buildStatisticsData(statistics) });
     }
   }
 
-  buildStatisticsData(statisticsGroup: StatisticsGroup) {
+  private buildStatisticsData(statisticsGroup: StatisticsGroup) {
     this.statisticsGroup = statisticsGroup;
 
     if (this.statisticsGroup === null) {
@@ -40,7 +44,7 @@ export class StatisticsComponent implements OnInit {
       this.userGameStatisticsData = null;
       this.userTeamStatisticsData = null;
     } else {
-      this.translate.get(['common.indoor-6x6', 'common.indoor-4x4', 'common.beach', 'common.snow']).subscribe((t) => {
+      this._translateService.get(['common.indoor-6x6', 'common.indoor-4x4', 'common.beach', 'common.snow']).subscribe((t) => {
         this.globalGameStatisticsData = [
           {
             name: t['common.indoor-6x6'],
@@ -122,7 +126,7 @@ export class StatisticsComponent implements OnInit {
     }
   }
 
-  findCount(kind: string, counts: Count[]): number {
+  private findCount(kind: string, counts: Count[]): number {
     var value = 0;
 
     for (let count of counts) {

@@ -12,14 +12,14 @@ import { LeagueService } from '@user-data/services/league.service';
   styleUrls: ['./user-league-dialog.component.scss'],
 })
 export class UserLeagueDialogComponent {
-  leagueFormGroup: UntypedFormGroup;
+  public leagueFormGroup: UntypedFormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<UserLeagueDialogComponent>,
+    private _dialogRef: MatDialogRef<UserLeagueDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public league: League,
-    private leagueService: LeagueService,
-    private snackBarService: SnackBarService,
-    private translate: TranslateService,
+    private _leagueService: LeagueService,
+    private _snackBarService: SnackBarService,
+    private _translateService: TranslateService,
   ) {
     this.leagueFormGroup = new UntypedFormGroup({
       leagueName: new UntypedFormControl('', [Validators.required]),
@@ -31,24 +31,24 @@ export class UserLeagueDialogComponent {
   }
 
   close(): void {
-    this.dialogRef.close(false);
+    this._dialogRef.close(false);
   }
 
   onCreateLeague(): void {
     this.league.name = this.leagueNameFormControl.value;
-    this.leagueService.createLeague(this.league).subscribe({
+    this._leagueService.createLeague(this.league).subscribe({
       next: (_league) => this.onValidResponse(),
       error: (_) => this.onInvalidResponse(),
     });
   }
 
   onValidResponse(): void {
-    this.dialogRef.close(true);
+    this._dialogRef.close(true);
   }
 
   onInvalidResponse(): void {
-    this.translate
+    this._translateService
       .get('user.league.messages.created-error', { pseudo: this.league.name })
-      .subscribe((t) => this.snackBarService.showError(t));
+      .subscribe((t) => this._snackBarService.showError(t));
   }
 }

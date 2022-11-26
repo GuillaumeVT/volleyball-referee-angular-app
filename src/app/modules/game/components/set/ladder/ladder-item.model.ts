@@ -25,7 +25,7 @@ export class LadderItem {
     this.oSanctions = [];
   }
 
-  addSubstitution(teamType: TeamType, substitution: Substitution): void {
+  public addSubstitution(teamType: TeamType, substitution: Substitution): void {
     if (teamType === this.teamType) {
       this.substitutions.push(substitution);
     } else {
@@ -33,7 +33,7 @@ export class LadderItem {
     }
   }
 
-  addTimeout(teamType: TeamType, timeout: Timeout): void {
+  public addTimeout(teamType: TeamType, timeout: Timeout): void {
     if (teamType === this.teamType) {
       this.timeouts.push(timeout);
     } else {
@@ -41,7 +41,7 @@ export class LadderItem {
     }
   }
 
-  addSanction(teamType: TeamType, sanction: Sanction): void {
+  public addSanction(teamType: TeamType, sanction: Sanction): void {
     if (teamType === this.teamType) {
       this.sanctions.push(sanction);
     } else {
@@ -49,7 +49,7 @@ export class LadderItem {
     }
   }
 
-  hasSubstitutionEvents(teamType: TeamType): boolean {
+  public hasSubstitutionEvents(teamType: TeamType): boolean {
     if (teamType === this.teamType) {
       return this.substitutions.length > 0;
     } else {
@@ -57,7 +57,7 @@ export class LadderItem {
     }
   }
 
-  hasTimeoutEvents(teamType: TeamType): boolean {
+  public hasTimeoutEvents(teamType: TeamType): boolean {
     if (teamType === this.teamType) {
       return this.timeouts.length > 0;
     } else {
@@ -65,7 +65,7 @@ export class LadderItem {
     }
   }
 
-  hasSanctionEvents(teamType: TeamType): boolean {
+  public hasSanctionEvents(teamType: TeamType): boolean {
     if (teamType === this.teamType) {
       return this.sanctions.length > 0;
     } else {
@@ -73,11 +73,11 @@ export class LadderItem {
     }
   }
 
-  hasEvent(teamType: TeamType): boolean {
+  public hasEvent(teamType: TeamType): boolean {
     return this.hasSubstitutionEvents(teamType) || this.hasTimeoutEvents(teamType) || this.hasSanctionEvents(teamType);
   }
 
-  hasSeveralEvents(teamType: TeamType): boolean {
+  public hasSeveralEvents(teamType: TeamType): boolean {
     var count = 0;
 
     if (this.hasSubstitutionEvents(teamType)) {

@@ -30,13 +30,13 @@ export class UserTeamDialogComponent {
   selectedPlayers: number[];
 
   constructor(
-    public dialogRef: MatDialogRef<UserTeamDialogComponent>,
+    private _dialogRef: MatDialogRef<UserTeamDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserTeamDialogData,
-    private teamService: TeamService,
+    private _teamService: TeamService,
     public playerStyleService: PlayerStyleService,
-    private dialog: MatDialog,
-    private snackBarService: SnackBarService,
-    private _translate: TranslateService,
+    private _dialog: MatDialog,
+    private _snackBarService: SnackBarService,
+    private _translateService: TranslateService,
   ) {
     this.editingDisabled = this.data.crudType === CrudType.View ? true : false;
     this.moreNumbers = false;
@@ -149,7 +149,7 @@ export class UserTeamDialogComponent {
   }
 
   onChangeShirtColor(): void {
-    const dialogRef = this.dialog.open(ColorPickerDialogComponent, { width: '800px', data: this.colorFormControl.value });
+    const dialogRef = this._dialog.open(ColorPickerDialogComponent, { width: '800px', data: this.colorFormControl.value });
     dialogRef.afterClosed().subscribe((color: string) => {
       if (color) {
         this.onShirtColorChanged(color);
@@ -169,7 +169,7 @@ export class UserTeamDialogComponent {
   }
 
   onChangeLiberoShirtColor(): void {
-    const dialogRef = this.dialog.open(ColorPickerDialogComponent, { width: '800px', data: this.liberoColorFormControl.value });
+    const dialogRef = this._dialog.open(ColorPickerDialogComponent, { width: '800px', data: this.liberoColorFormControl.value });
     dialogRef.afterClosed().subscribe((color: string) => {
       if (color) {
         this.onLiberoShirtColorChanged(color);
@@ -310,7 +310,7 @@ export class UserTeamDialogComponent {
 
   onEditPlayerNames(): void {
     this.data.team.players = this.data.team.players.sort((p1, p2) => p1.num - p2.num);
-    const dialogRef = this.dialog.open(PlayerNamesDialogComponent, { width: '800px', data: this.data.team });
+    const dialogRef = this._dialog.open(PlayerNamesDialogComponent, { width: '800px', data: this.data.team });
   }
 
   onSubmitForm(): void {
@@ -324,12 +324,12 @@ export class UserTeamDialogComponent {
     team.coach = this.coachNameFormControl.value;
 
     if (this.data.crudType === CrudType.Create) {
-      this.teamService.createTeam(team).subscribe({
+      this._teamService.createTeam(team).subscribe({
         next: (_team) => this.onValidResponse(),
         error: (_) => this.onInvalidResponse(),
       });
     } else if (this.data.crudType === CrudType.Update) {
-      this.teamService.updateTeam(team).subscribe({
+      this._teamService.updateTeam(team).subscribe({
         next: (_team) => this.onValidResponse(),
         error: (_) => this.onInvalidResponse(),
       });
@@ -337,23 +337,23 @@ export class UserTeamDialogComponent {
   }
 
   onValidResponse(): void {
-    this.dialogRef.close(true);
+    this._dialogRef.close(true);
   }
 
   onInvalidResponse(): void {
     if (this.data.crudType === CrudType.Create) {
-      this._translate
+      this._translateService
         .get('user.team.messages.creation-error', { name: this.nameFormControl.value })
-        .subscribe((t) => this.snackBarService.showError(t));
+        .subscribe((t) => this._snackBarService.showError(t));
     } else if (this.data.crudType === CrudType.Update) {
-      this._translate
+      this._translateService
         .get('user.team.messages.update-error', { name: this.nameFormControl.value })
-        .subscribe((t) => this.snackBarService.showError(t));
+        .subscribe((t) => this._snackBarService.showError(t));
     }
   }
 
   close(): void {
-    this.dialogRef.close(false);
+    this._dialogRef.close(false);
   }
 
   onEdit(): void {

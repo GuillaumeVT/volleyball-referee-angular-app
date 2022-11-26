@@ -10,13 +10,13 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
   styleUrls: ['./game-players.component.scss'],
 })
 export class GamePlayersComponent {
-  @Input() game: Game;
-  @Input() leftTeam: TeamType;
-  @Input() rightTeam: TeamType;
+  @Input() public game: Game;
+  @Input() public leftTeam: TeamType;
+  @Input() public rightTeam: TeamType;
 
   constructor(public playerStyleService: PlayerStyleService) {}
 
-  getPlayers(teamType: TeamType): Player[] {
+  public getPlayers(teamType: TeamType): Player[] {
     if (TeamType.Home === teamType) {
       return this.game.homeTeam.players;
     } else {
@@ -24,7 +24,7 @@ export class GamePlayersComponent {
     }
   }
 
-  getLiberos(teamType: TeamType): Player[] {
+  public getLiberos(teamType: TeamType): Player[] {
     if (TeamType.Home === teamType) {
       return this.game.homeTeam.liberos;
     } else {

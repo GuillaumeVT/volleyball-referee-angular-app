@@ -10,14 +10,14 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
   styleUrls: ['./beach-court.component.scss'],
 })
 export class BeachCourtComponent {
-  @Input() game: Game;
-  @Input() setIndex: number;
-  @Input() leftTeam: TeamType;
-  @Input() rightTeam: TeamType;
+  @Input() public game: Game;
+  @Input() public setIndex: number;
+  @Input() public leftTeam: TeamType;
+  @Input() public rightTeam: TeamType;
 
   constructor(public playerStyleService: PlayerStyleService) {}
 
-  getServeVisibility(playerNumber: number, teamType: TeamType) {
+  public getServeVisibility(playerNumber: number, teamType: TeamType): string {
     const set = this.game.sets[this.setIndex];
 
     var servingTeam: TeamType;

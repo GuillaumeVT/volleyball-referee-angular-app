@@ -12,7 +12,7 @@ export class ColorPickerDialogComponent {
   colors: string[];
 
   constructor(
-    public dialogRef: MatDialogRef<ColorPickerDialogComponent>,
+    private _dialogRef: MatDialogRef<ColorPickerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string,
     public playerStyleService: PlayerStyleService,
   ) {
@@ -39,10 +39,10 @@ export class ColorPickerDialogComponent {
   }
 
   close(): void {
-    this.dialogRef.close(null);
+    this._dialogRef.close(null);
   }
 
   onApplyColor() {
-    this.dialogRef.close(this.selectedColor);
+    this._dialogRef.close(this.selectedColor);
   }
 }

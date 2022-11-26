@@ -17,13 +17,13 @@ export class UserColleaguesComponent implements OnInit {
   friendsAndRequests: FriendsAndRequests;
 
   constructor(
-    private titleService: Title,
-    private userService: UserService,
-    private dialog: MatDialog,
-    private snackBarService: SnackBarService,
-    private translate: TranslateService,
+    private _titleService: Title,
+    private _userService: UserService,
+    private _dialog: MatDialog,
+    private _snackBarService: SnackBarService,
+    private _translateService: TranslateService,
   ) {
-    this.translate.get('user.colleague.page').subscribe((t) => this.titleService.setTitle(t));
+    this._translateService.get('user.colleague.page').subscribe((t) => this._titleService.setTitle(t));
   }
 
   ngOnInit() {
@@ -31,14 +31,14 @@ export class UserColleaguesComponent implements OnInit {
   }
 
   refreshFriendsAndRequests(): void {
-    this.userService.listFriendsAndRequests().subscribe({
+    this._userService.listFriendsAndRequests().subscribe({
       next: (friendsAndRequests) => (this.friendsAndRequests = friendsAndRequests),
       error: (_) => (this.friendsAndRequests = null),
     });
   }
 
   addColleague(): void {
-    const dialogRef = this.dialog.open(UserColleagueDialogComponent, { width: '500px' });
+    const dialogRef = this._dialog.open(UserColleagueDialogComponent, { width: '500px' });
     dialogRef.afterClosed().subscribe((pseudo) => {
       if (pseudo) {
         this.onAddColleagueRequested(pseudo);
@@ -47,26 +47,28 @@ export class UserColleaguesComponent implements OnInit {
   }
 
   removeColleague(friend: Friend): void {
-    this.translate.get(['user.colleague.remove', 'user.colleague.messages.remove-question'], { pseudo: friend.pseudo }).subscribe((ts) => {
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-        width: '500px',
-        data: { title: ts['user.colleague.remove'], message: ts['user.colleague.messages.remove-question'] },
+    this._translateService
+      .get(['user.colleague.remove', 'user.colleague.messages.remove-question'], { pseudo: friend.pseudo })
+      .subscribe((ts) => {
+        const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
+          width: '500px',
+          data: { title: ts['user.colleague.remove'], message: ts['user.colleague.messages.remove-question'] },
+        });
+        dialogRef.afterClosed().subscribe((dialogResult) => {
+          if (dialogResult) {
+            this._userService.removeFriend(friend.id).subscribe({
+              next: (_deleted) => this.onColleagueRemoved(friend.pseudo),
+              error: (_) => this.onColleagueRemovalError(friend.pseudo),
+            });
+          }
+        });
       });
-      dialogRef.afterClosed().subscribe((dialogResult) => {
-        if (dialogResult) {
-          this.userService.removeFriend(friend.id).subscribe({
-            next: (_deleted) => this.onColleagueRemoved(friend.pseudo),
-            error: (_) => this.onColleagueRemovalError(friend.pseudo),
-          });
-        }
-      });
-    });
   }
 
   onAddColleagueRequested(receiverPseudo: string): void {
-    this.translate
+    this._translateService
       .get('user.colleague.messages.request-sent', { pseudo: receiverPseudo })
-      .subscribe((t) => this.snackBarService.showError(t));
+      .subscribe((t) => this._snackBarService.showError(t));
   }
 
   onColleagueRemoved(pseudo: string): void {
@@ -74,18 +76,20 @@ export class UserColleaguesComponent implements OnInit {
   }
 
   onColleagueRemovalError(pseudo: string): void {
-    this.translate.get('user.colleague.messages.removed-error', { pseudo: pseudo }).subscribe((t) => this.snackBarService.showError(t));
+    this._translateService
+      .get('user.colleague.messages.removed-error', { pseudo: pseudo })
+      .subscribe((t) => this._snackBarService.showError(t));
   }
 
   acceptColleague(friendRequest: FriendRequest): void {
-    this.userService.acceptFriendRequest(friendRequest.id).subscribe({
+    this._userService.acceptFriendRequest(friendRequest.id).subscribe({
       next: (_success) => this.onColleagueAccepted(friendRequest.senderPseudo),
       error: (_) => this.onColleagueAcceptanceError(friendRequest.senderPseudo),
     });
   }
 
   rejectColleague(friendRequest: FriendRequest): void {
-    this.userService.rejectFriendRequest(friendRequest.id).subscribe({
+    this._userService.rejectFriendRequest(friendRequest.id).subscribe({
       next: (_success) => this.onColleagueRejected(friendRequest.senderPseudo),
       error: (_) => this.onColleagueRejectionError(friendRequest.senderPseudo),
     });
@@ -96,9 +100,9 @@ export class UserColleaguesComponent implements OnInit {
   }
 
   onColleagueAcceptanceError(pseudo: string): void {
-    this.translate
+    this._translateService
       .get('user.colleague.messages.request-added-error', { pseudo: pseudo })
-      .subscribe((t) => this.snackBarService.showError(t));
+      .subscribe((t) => this._snackBarService.showError(t));
   }
 
   onColleagueRejected(pseudo: string): void {
@@ -106,8 +110,8 @@ export class UserColleaguesComponent implements OnInit {
   }
 
   onColleagueRejectionError(pseudo: string): void {
-    this.translate
+    this._translateService
       .get('user.colleague.messages.request-rejected-error', { pseudo: pseudo })
-      .subscribe((t) => this.snackBarService.showError(t));
+      .subscribe((t) => this._snackBarService.showError(t));
   }
 }

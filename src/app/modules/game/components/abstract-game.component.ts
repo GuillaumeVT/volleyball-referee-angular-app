@@ -4,22 +4,22 @@ import { TeamType } from '@shared/models/team-type.model';
 
 @Directive()
 export abstract class AbstractGameComponent {
-  @Input() gameId: string;
-  @Input() game: Game;
-  @Input() currentSet: number;
-  @Input() leftTeam: TeamType;
-  @Input() rightTeam: TeamType;
+  @Input() public gameId: string;
+  @Input() public game: Game;
+  @Input() public currentSet: number;
+  @Input() public leftTeam: TeamType;
+  @Input() public rightTeam: TeamType;
 
-  @Output() teamsSwapped = new EventEmitter();
-  @Output() currentSetUpdated = new EventEmitter(true);
+  @Output() public teamsSwapped = new EventEmitter();
+  @Output() public currentSetUpdated = new EventEmitter(true);
 
   constructor() {}
 
-  onCurrentSetUpdated(setIndex: number): void {
+  public onCurrentSetUpdated(setIndex: number): void {
     this.currentSetUpdated.emit(setIndex);
   }
 
-  onTeamsSwapped(): void {
+  public onTeamsSwapped(): void {
     this.teamsSwapped.emit();
   }
 }

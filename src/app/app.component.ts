@@ -12,31 +12,29 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-  user: UserSummary;
+  public user: UserSummary;
 
-  @ViewChild('sideNavContent') sideNavContent: MatSidenavContent;
-  scrollSubscription: Subscription;
-  showScrollToTop: boolean;
+  @ViewChild('sideNavContent') private _sideNavContent: MatSidenavContent;
+  private _scrollSubscription: Subscription;
 
-  @ViewChild('scrollToTopButton') scrollToTopButton: MatButton;
+  @ViewChild('scrollToTopButton') private _scrollToTopButton: MatButton;
 
-  desktopNav: boolean;
+  public desktopNav: boolean;
 
-  commonNavItems: NavItem[];
-  dataNavItems: NavItem[];
-  adminNavItems: NavItem[];
+  public commonNavItems: NavItem[];
+  public dataNavItems: NavItem[];
+  public adminNavItems: NavItem[];
 
-  constructor(private userService: UserService, media: MediaMatcher) {
-    this.desktopNav = !media.matchMedia('(max-width: 800px)').matches;
-    this.showScrollToTop = false;
+  constructor(private _userService: UserService, private _mediaMatcher: MediaMatcher) {
+    this.desktopNav = !_mediaMatcher.matchMedia('(max-width: 800px)').matches;
     this.commonNavItems = [
       { label: 'menu.item.home', url: '/home' },
       { label: 'menu.item.search', url: '/search' },
     ];
   }
 
-  ngOnInit(): void {
-    this.userService.authState.subscribe((userToken) => {
+  public ngOnInit(): void {
+    this._userService.authState.subscribe((userToken) => {
       if (userToken) {
         this.user = userToken.user;
         this.dataNavItems = [
@@ -60,28 +58,28 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.computeScrollToTop();
 
-    if (this.scrollSubscription) {
-      this.scrollSubscription.unsubscribe();
+    if (this._scrollSubscription) {
+      this._scrollSubscription.unsubscribe();
     }
-    this.scrollSubscription = this.sideNavContent.elementScrolled().subscribe((event) => this.computeScrollToTop());
+    this._scrollSubscription = this._sideNavContent.elementScrolled().subscribe((event) => this.computeScrollToTop());
   }
 
-  ngOnDestroy(): void {
-    if (this.scrollSubscription) {
-      this.scrollSubscription.unsubscribe();
+  public ngOnDestroy(): void {
+    if (this._scrollSubscription) {
+      this._scrollSubscription.unsubscribe();
     }
   }
 
-  computeScrollToTop() {
-    this.scrollToTopButton._elementRef.nativeElement.style.visibility =
-      this.sideNavContent.measureScrollOffset('top') > 100 ? 'visible' : 'hidden';
+  private computeScrollToTop() {
+    this._scrollToTopButton._elementRef.nativeElement.style.visibility =
+      this._sideNavContent.measureScrollOffset('top') > 100 ? 'visible' : 'hidden';
   }
 
-  scrollToTop(): void {
-    this.sideNavContent.scrollTo({ top: 0 });
+  public scrollToTop(): void {
+    this._sideNavContent.scrollTo({ top: 0 });
   }
 }
 

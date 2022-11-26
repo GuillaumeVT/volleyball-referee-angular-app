@@ -6,14 +6,14 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
 
 @Directive()
 export abstract class AbstractSetLineupsComponent {
-  @Input() game: Game;
-  @Input() setIndex: number;
-  @Input() leftTeam: TeamType;
-  @Input() rightTeam: TeamType;
+  @Input() public game: Game;
+  @Input() public setIndex: number;
+  @Input() public leftTeam: TeamType;
+  @Input() public rightTeam: TeamType;
 
   constructor(public playerStyleService: PlayerStyleService) {}
 
-  getPlayerAt(teamType: TeamType, position: number): string {
+  public getPlayerAt(teamType: TeamType, position: number): string {
     const set = this.game.sets[this.setIndex];
 
     var players: Court;

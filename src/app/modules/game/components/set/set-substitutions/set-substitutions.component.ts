@@ -10,14 +10,14 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
   styleUrls: ['./set-substitutions.component.scss'],
 })
 export class SetSubstitutionsComponent {
-  @Input() game: Game;
-  @Input() setIndex: number;
-  @Input() leftTeam: TeamType;
-  @Input() rightTeam: TeamType;
+  @Input() public game: Game;
+  @Input() public setIndex: number;
+  @Input() public leftTeam: TeamType;
+  @Input() public rightTeam: TeamType;
 
   constructor(public playerStyleService: PlayerStyleService) {}
 
-  getSubstitutions(teamType: TeamType): Substitution[] {
+  public getSubstitutions(teamType: TeamType): Substitution[] {
     if (TeamType.Home === teamType) {
       return this.game.sets[this.setIndex].homeSubstitutions;
     } else {
@@ -25,7 +25,7 @@ export class SetSubstitutionsComponent {
     }
   }
 
-  getScore(teamType: TeamType, substitution: Substitution): string {
+  public getScore(teamType: TeamType, substitution: Substitution): string {
     if (TeamType.Home === teamType) {
       return substitution.homePoints + '-' + substitution.guestPoints;
     } else {

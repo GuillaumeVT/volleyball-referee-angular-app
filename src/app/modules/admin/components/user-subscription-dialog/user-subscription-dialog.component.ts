@@ -9,11 +9,11 @@ import { SubscriptionPurchase } from '@core/models/user.model';
 })
 export class UserSubscriptionDialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<UserSubscriptionDialogComponent>,
+    private _dialogRef: MatDialogRef<UserSubscriptionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public subscriptionPurchase: SubscriptionPurchase,
   ) {}
 
   close(): void {
-    this.dialogRef.close(false);
+    this._dialogRef.close(false);
   }
 }

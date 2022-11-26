@@ -10,9 +10,9 @@ import { SnackBarService } from '@shared/services/snack-bar.service';
   styleUrls: ['./password-lost.component.scss'],
 })
 export class PasswordLostComponent {
-  passwordLostFormGroup: UntypedFormGroup;
+  public passwordLostFormGroup: UntypedFormGroup;
 
-  constructor(private userService: UserService, private snackBarService: SnackBarService, private translate: TranslateService) {
+  constructor(private _userService: UserService, private _snackBarService: SnackBarService, private _translateService: TranslateService) {
     this.passwordLostFormGroup = new UntypedFormGroup({
       email: new UntypedFormControl('', [Validators.required, Validators.email]),
     });
@@ -22,23 +22,23 @@ export class PasswordLostComponent {
     return this.passwordLostFormGroup.get('email');
   }
 
-  onInitiatePasswordReset(): void {
+  public onInitiatePasswordReset(): void {
     const emailAddress = this.emailFormControl.value;
-    this.userService.initiatePasswordReset(emailAddress).subscribe({
+    this._userService.initiatePasswordReset(emailAddress).subscribe({
       next: (_) => this.onValidResponse(emailAddress),
       error: (_) => this.onInvalidResponse(emailAddress),
     });
   }
 
   private onValidResponse(emailAddress: string): void {
-    this.translate
+    this._translateService
       .get('user.management.messages.recovery-sent', { emailAddress: emailAddress })
-      .subscribe((t) => this.snackBarService.showInfo(t));
+      .subscribe((t) => this._snackBarService.showInfo(t));
   }
 
   private onInvalidResponse(emailAddress: string): void {
-    this.translate
+    this._translateService
       .get('user.management.messages.recovery-failed', { emailAddress: emailAddress })
-      .subscribe((t) => this.snackBarService.showError(t));
+      .subscribe((t) => this._snackBarService.showError(t));
   }
 }

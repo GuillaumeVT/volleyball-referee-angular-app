@@ -7,9 +7,9 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
   providedIn: 'root',
 })
 export class SanctionService {
-  constructor(private playerStyleService: PlayerStyleService) {}
+  constructor(private _playerStyleService: PlayerStyleService) {}
 
-  getSanctionIcon(sanction: Sanction): string {
+  public getSanctionIcon(sanction: Sanction): string {
     switch (sanction.card) {
       case 'Y':
         return '/assets/ic_yellow_card.png';
@@ -28,7 +28,7 @@ export class SanctionService {
     }
   }
 
-  getPlayerForSanction(game: Game, teamType: TeamType, player: number): string {
+  public getPlayerForSanction(game: Game, teamType: TeamType, player: number): string {
     switch (player) {
       case 100:
         // coach
@@ -37,7 +37,7 @@ export class SanctionService {
         // team
         return 'T.';
       default:
-        return this.playerStyleService.getPlayer(game, teamType, player);
+        return this._playerStyleService.getPlayer(game, teamType, player);
     }
   }
 }

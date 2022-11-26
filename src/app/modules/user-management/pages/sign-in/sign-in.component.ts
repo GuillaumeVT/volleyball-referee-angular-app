@@ -11,11 +11,11 @@ import { SnackBarService } from '@shared/services/snack-bar.service';
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent {
-  signInFormGroup: FormGroup;
-  hidePassword: boolean;
-  passwordVisibility: string;
+  public signInFormGroup: FormGroup;
+  public hidePassword: boolean;
+  public passwordVisibility: string;
 
-  constructor(private userService: UserService, private snackBarService: SnackBarService, private translate: TranslateService) {
+  constructor(private _userService: UserService, private _snackBarService: SnackBarService, private _translateService: TranslateService) {
     this.hidePassword = false;
     this.togglePasswordVisibility();
     this.passwordVisibility = 'visibility_off';
@@ -34,14 +34,14 @@ export class SignInComponent {
     return this.signInFormGroup.get('password');
   }
 
-  togglePasswordVisibility(): void {
+  public togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
     this.passwordVisibility = this.hidePassword ? 'visibility_off' : 'visibility';
   }
 
-  onSignIn(): void {
+  public onSignIn(): void {
     const emailCredentials = new EmailCredentials(this.emailFormControl.value, this.passwordFormControl.value);
-    this.userService.signIn(emailCredentials).subscribe({
+    this._userService.signIn(emailCredentials).subscribe({
       next: (_) => this.onValidResponse(),
       error: (_) => this.onInvalidResponse(),
     });
@@ -50,10 +50,10 @@ export class SignInComponent {
   private onValidResponse(): void {}
 
   private onInvalidResponse(): void {
-    this.translate.get('user.management.messages.credentials-mismatch-error').subscribe((t) => this.snackBarService.showError(t));
+    this._translateService.get('user.management.messages.credentials-mismatch-error').subscribe((t) => this._snackBarService.showError(t));
   }
 
-  getPasswordLostUrl(): string {
+  public getPasswordLostUrl(): string {
     return '/password-lost';
   }
 }

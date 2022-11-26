@@ -21,19 +21,19 @@ export class GameRefereeDialogComponent {
   friends: Friend[];
 
   constructor(
-    public dialogRef: MatDialogRef<GameRefereeDialogComponent>,
+    private _dialogRef: MatDialogRef<GameRefereeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserGameRefereeDialogData,
-    private gameService: GameService,
-    private userService: UserService,
-    private snackBarService: SnackBarService,
-    private translate: TranslateService,
+    private _gameService: GameService,
+    private _userService: UserService,
+    private _snackBarService: SnackBarService,
+    private _translateService: TranslateService,
   ) {
     this.referee = new UntypedFormControl(null, [Validators.required]);
     this.refereeFormGroup = new UntypedFormGroup({ referee: this.referee });
 
     this.me = new Friend(this.data.user.id, this.data.user.pseudo);
 
-    this.userService.listFriendsAndRequests().subscribe({
+    this._userService.listFriendsAndRequests().subscribe({
       next: (friendsAndRequests) => {
         this.friends = friendsAndRequests.friends;
 
@@ -59,22 +59,22 @@ export class GameRefereeDialogComponent {
   }
 
   onUpdateReferee(): void {
-    this.gameService.updateReferee(this.data.game.id, this.refereeFormControl.value.id).subscribe({
+    this._gameService.updateReferee(this.data.game.id, this.refereeFormControl.value.id).subscribe({
       next: (success) => this.onValidResponse(),
       error: (_) => this.onInvalidResponse(),
     });
   }
 
   onValidResponse(): void {
-    this.dialogRef.close(true);
+    this._dialogRef.close(true);
   }
 
   onInvalidResponse(): void {
-    this.translate.get('user.referee.messages.referee-update-error').subscribe((t) => this.snackBarService.showError(t));
+    this._translateService.get('user.referee.messages.referee-update-error').subscribe((t) => this._snackBarService.showError(t));
   }
 
   close(): void {
-    this.dialogRef.close(false);
+    this._dialogRef.close(false);
   }
 }
 

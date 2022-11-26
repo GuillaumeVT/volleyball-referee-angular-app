@@ -7,15 +7,15 @@ import { GameSummary } from '@shared/models/game.model';
   styleUrls: ['./game-list-item.component.scss'],
 })
 export class GameListItemComponent implements OnChanges {
-  @Input() gameSummary: GameSummary;
-  @Input() inLeague: boolean;
+  @Input() public gameSummary: GameSummary;
+  @Input() public inLeague: boolean;
 
-  homeScores: number[];
-  guestScores: number[];
+  public homeScores: number[];
+  public guestScores: number[];
 
   constructor() {}
 
-  ngOnChanges(_changes: SimpleChanges) {
+  public ngOnChanges(_changes: SimpleChanges): void {
     this.homeScores = [];
     this.guestScores = [];
 
@@ -29,31 +29,31 @@ export class GameListItemComponent implements OnChanges {
     }
   }
 
-  getMatchUrl(): string {
+  public getMatchUrl(): string {
     return `/view/game/${this.gameSummary.id}`;
   }
 
-  getLeagueUrl(): string {
+  public getLeagueUrl(): string {
     return `/view/league/${this.gameSummary.leagueId}`;
   }
 
-  getSearchUrl(): string {
+  public getSearchUrl(): string {
     return '/search';
   }
 
-  getSearchParams() {
+  public getSearchParams() {
     return { type: 'token', value: this.gameSummary.refereeName };
   }
 
-  showLeague(): boolean {
+  public showLeague(): boolean {
     return !this.inLeague && this.gameSummary.leagueId && this.gameSummary.leagueId.length > 0;
   }
 
-  showDivision(): boolean {
+  public showDivision(): boolean {
     return this.gameSummary.divisionName && this.gameSummary.divisionName.length > 0;
   }
 
-  showReferee(): boolean {
+  public showReferee(): boolean {
     return this.gameSummary.refereeName && this.gameSummary.refereeName.length > 0;
   }
 }

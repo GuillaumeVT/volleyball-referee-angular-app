@@ -11,17 +11,17 @@ import { SnackBarService } from '@shared/services/snack-bar.service';
   styleUrls: ['./password-reset.component.scss'],
 })
 export class PasswordResetComponent implements OnInit {
-  passwordResetId: string;
+  private _passwordResetId: string;
 
-  passwordResetFormGroup: UntypedFormGroup;
-  hidePassword: boolean;
-  passwordVisibility: string;
+  public passwordResetFormGroup: UntypedFormGroup;
+  public hidePassword: boolean;
+  public passwordVisibility: string;
 
   constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private snackBarService: SnackBarService,
-    private translate: TranslateService,
+    private _activatedRoute: ActivatedRoute,
+    private _userService: UserService,
+    private _snackBarService: SnackBarService,
+    private _translateService: TranslateService,
   ) {
     this.hidePassword = false;
     this.togglePasswordVisibility();
@@ -35,8 +35,8 @@ export class PasswordResetComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    this.route.queryParams.subscribe((params) => (this.passwordResetId = params['passwordResetId']));
+  public ngOnInit(): void {
+    this._activatedRoute.queryParams.subscribe((params) => (this._passwordResetId = params['passwordResetId']));
   }
 
   get newPasswordFormControl() {
@@ -59,27 +59,27 @@ export class PasswordResetComponent implements OnInit {
     }
   }
 
-  togglePasswordVisibility(): void {
+  public togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
     this.passwordVisibility = this.hidePassword ? 'visibility_off' : 'visibility';
   }
 
-  onResetPassword(): void {
-    this.userService.resetPassword(this.passwordResetId, this.newPasswordFormControl.value).subscribe({
+  public onResetPassword(): void {
+    this._userService.resetPassword(this._passwordResetId, this.newPasswordFormControl.value).subscribe({
       next: (_) => this.onValidResponse(),
       error: (error) => this.onInvalidResponse(error),
     });
   }
 
   private onValidResponse(): void {
-    this.translate.get('user.management.messages.password-updated').subscribe((t) => this.snackBarService.showInfo(t));
+    this._translateService.get('user.management.messages.password-updated').subscribe((t) => this._snackBarService.showInfo(t));
   }
 
   private onInvalidResponse(error: any): void {
     if (error.status === 400) {
-      this.translate.get('user.management.messages.password-invalid-error').subscribe((t) => this.snackBarService.showError(t));
+      this._translateService.get('user.management.messages.password-invalid-error').subscribe((t) => this._snackBarService.showError(t));
     } else {
-      this.translate.get('user.management.messages.internal-error').subscribe((t) => this.snackBarService.showError(t));
+      this._translateService.get('user.management.messages.internal-error').subscribe((t) => this._snackBarService.showError(t));
     }
   }
 }

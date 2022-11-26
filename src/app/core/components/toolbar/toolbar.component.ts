@@ -49,7 +49,7 @@ export class ToolbarComponent implements OnChanges {
     }
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(_changes: SimpleChanges): void {
     if (this.user) {
       this.refreshNotifications();
     } else {

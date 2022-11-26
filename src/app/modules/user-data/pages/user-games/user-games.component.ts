@@ -40,7 +40,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   constructor(
     private _titleService: Title,
-    private _route: ActivatedRoute,
+    private _activatedRoute: ActivatedRoute,
     private _datePipe: DatePipe,
     private _userService: UserService,
     private _gameService: GameService,
@@ -48,10 +48,10 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
     private _publicService: PublicService,
     private _dialog: MatDialog,
     private _snackBarService: SnackBarService,
-    private _translate: TranslateService,
+    private _translateService: TranslateService,
   ) {
     super(50);
-    this._translate.get('user.game.page').subscribe((t) => this._titleService.setTitle(t));
+    this._translateService.get('user.game.page').subscribe((t) => this._titleService.setTitle(t));
   }
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
       this._userService.authState.subscribe((userToken) => {
         this.user = userToken.user;
         if (this.user) {
-          this._selectedLeagueId = this._route.snapshot.paramMap.get('leagueId');
+          this._selectedLeagueId = this._activatedRoute.snapshot.paramMap.get('leagueId');
           this.requestRefreshGames(FetchBehaviour.LOAD);
         }
       }),
@@ -159,7 +159,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   }
 
   public deleteGame(game: GameSummary): void {
-    this._translate
+    this._translateService
       .get(['user.game.delete', 'user.game.messages.delete-question'], { homeTeam: game.homeTeamName, guestTeam: game.guestTeamName })
       .subscribe((ts) => {
         const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
@@ -179,7 +179,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
 
   public deleteAllGames(): void {
     if (this._selectedLeagueId) {
-      this._translate
+      this._translateService
         .get(['user.game.delete', 'user.game.messages.delete-all-in-question'], { league: this.selectedLeague.name })
         .subscribe((ts) => {
           const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
@@ -193,7 +193,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
           });
         });
     } else {
-      this._translate.get(['user.game.delete', 'user.game.messages.delete-all-question']).subscribe((ts) => {
+      this._translateService.get(['user.game.delete', 'user.game.messages.delete-all-question']).subscribe((ts) => {
         const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
           width: '500px',
           data: { title: ts['user.game.delete'], message: ts['user.game.messages.delete-all-question'] },
@@ -228,7 +228,7 @@ export class UserGamesComponent extends AbstractGameFilter implements OnInit, On
   }
 
   private onGameDeletionError(): void {
-    this._translate.get('user.game.messages.deleted-error').subscribe((t) => this._snackBarService.showError(t));
+    this._translateService.get('user.game.messages.deleted-error').subscribe((t) => this._snackBarService.showError(t));
   }
 
   public getGamePublicUrl(game: GameSummary): string {

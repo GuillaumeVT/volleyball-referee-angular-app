@@ -29,10 +29,10 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
     private _rulesService: RulesService,
     private _dialog: MatDialog,
     private _snackBarService: SnackBarService,
-    private _translate: TranslateService,
+    private _translateService: TranslateService,
   ) {
     super();
-    this._translate.get('user.rules.page').subscribe((t) => this._titleService.setTitle(t));
+    this._translateService.get('user.rules.page').subscribe((t) => this._titleService.setTitle(t));
   }
 
   ngOnInit() {
@@ -101,7 +101,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
   }
 
   deleteRules(rulesSummary: RulesSummary): void {
-    this._translate.get(['user.team.delete', 'user.rules.messages.delete-question'], { name: rulesSummary.name }).subscribe((ts) => {
+    this._translateService.get(['user.team.delete', 'user.rules.messages.delete-question'], { name: rulesSummary.name }).subscribe((ts) => {
       const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
         width: '500px',
         data: { title: ts['user.rules.delete'], message: ts['user.rules.messages.delete-question'] },
@@ -118,7 +118,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
   }
 
   deleteAllRules(): void {
-    this._translate.get(['user.rules.delete', 'user.rules.messages.delete-all-question']).subscribe((ts) => {
+    this._translateService.get(['user.rules.delete', 'user.rules.messages.delete-all-question']).subscribe((ts) => {
       const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
         width: '500px',
         data: { title: ts['user.rules.delete'], message: ts['user.rules.messages.delete-all-question'] },
@@ -144,7 +144,7 @@ export class UserRulesComponent extends AbstractRulesFilter implements OnInit, O
   }
 
   onRulesDeletionError(): void {
-    this._translate.get('user.rules.messages.deleted-error').subscribe((t) => this._snackBarService.showError(t));
+    this._translateService.get('user.rules.messages.deleted-error').subscribe((t) => this._snackBarService.showError(t));
   }
 
   onAllRulesDeleted(): void {

@@ -13,31 +13,31 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class PublicService {
-  private publicUrl = environment.api + '/public';
-  private gamesUrl = this.publicUrl + '/games';
-  private teamsUrl = this.publicUrl + '/teams';
-  private leaguesUrl = this.publicUrl + '/leagues';
+  private _publicUrl = environment.api + '/public';
+  private _gamesUrl = this._publicUrl + '/games';
+  private _teamsUrl = this._publicUrl + '/teams';
+  private _leaguesUrl = this._publicUrl + '/leagues';
 
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
-  getStatistics(): Observable<StatisticsGroup> {
-    const url = `${this.publicUrl}/statistics`;
-    return this.http.get<StatisticsGroup>(url);
+  public getStatistics(): Observable<StatisticsGroup> {
+    const url = `${this._publicUrl}/statistics`;
+    return this._http.get<StatisticsGroup>(url);
   }
 
-  getGame(id: string): Observable<Game> {
-    const url = `${this.gamesUrl}/${id}`;
-    return this.http.get<Game>(url);
+  public getGame(id: string): Observable<Game> {
+    const url = `${this._gamesUrl}/${id}`;
+    return this._http.get<Game>(url);
   }
 
-  getScoreSheet(id: string): Observable<any> {
-    const url = `${this.gamesUrl}/${id}/score-sheet`;
+  public getScoreSheet(id: string): Observable<any> {
+    const url = `${this._gamesUrl}/${id}/score-sheet`;
     const options = { headers: { 'Content-Type': 'application/json', Accept: 'text/html' }, responseType: 'blob' as 'json' };
-    return this.http.get<any>(url, options);
+    return this._http.get<any>(url, options);
   }
 
-  listLiveGames(kinds: string[], genders: string[], page: number, size: number): Observable<Page<GameSummary>> {
-    const url = `${this.gamesUrl}/live`;
+  public listLiveGames(kinds: string[], genders: string[], page: number, size: number): Observable<Page<GameSummary>> {
+    const url = `${this._gamesUrl}/live`;
     let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let kind of kinds) {
       params = params.append('kind', kind);
@@ -45,10 +45,10 @@ export class PublicService {
     for (let gender of genders) {
       params = params.append('gender', gender);
     }
-    return this.http.get<Page<GameSummary>>(url, { params: params });
+    return this._http.get<Page<GameSummary>>(url, { params: params });
   }
 
-  listGamesMatchingToken(
+  public listGamesMatchingToken(
     token: string,
     statuses: string[],
     kinds: string[],
@@ -56,7 +56,7 @@ export class PublicService {
     page: number,
     size: number,
   ): Observable<Page<GameSummary>> {
-    const url = `${this.gamesUrl}/token/${token}`;
+    const url = `${this._gamesUrl}/token/${token}`;
     let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
       params = params.append('status', status);
@@ -67,10 +67,10 @@ export class PublicService {
     for (let gender of genders) {
       params = params.append('gender', gender);
     }
-    return this.http.get<Page<GameSummary>>(url, { params: params });
+    return this._http.get<Page<GameSummary>>(url, { params: params });
   }
 
-  listGamesWithScheduleDate(
+  public listGamesWithScheduleDate(
     date: string,
     statuses: string[],
     kinds: string[],
@@ -78,7 +78,7 @@ export class PublicService {
     page: number,
     size: number,
   ): Observable<Page<GameSummary>> {
-    const url = `${this.gamesUrl}/date/${date}`;
+    const url = `${this._gamesUrl}/date/${date}`;
     let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
       params = params.append('status', status);
@@ -89,11 +89,17 @@ export class PublicService {
     for (let gender of genders) {
       params = params.append('gender', gender);
     }
-    return this.http.get<Page<GameSummary>>(url, { params: params });
+    return this._http.get<Page<GameSummary>>(url, { params: params });
   }
 
-  listGamesInLeague(leagueId: string, statuses: string[], genders: string[], page: number, size: number): Observable<Page<GameSummary>> {
-    const url = `${this.gamesUrl}/league/${leagueId}`;
+  public listGamesInLeague(
+    leagueId: string,
+    statuses: string[],
+    genders: string[],
+    page: number,
+    size: number,
+  ): Observable<Page<GameSummary>> {
+    const url = `${this._gamesUrl}/league/${leagueId}`;
     let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
       params = params.append('status', status);
@@ -101,39 +107,45 @@ export class PublicService {
     for (let gender of genders) {
       params = params.append('gender', gender);
     }
-    return this.http.get<Page<GameSummary>>(url, { params: params });
+    return this._http.get<Page<GameSummary>>(url, { params: params });
   }
 
-  getGamesInLeagueGroupedByStatus(leagueId: string): Observable<LeagueDashboard> {
-    const url = `${this.gamesUrl}/league/${leagueId}/group`;
-    return this.http.get<LeagueDashboard>(url);
+  public getGamesInLeagueGroupedByStatus(leagueId: string): Observable<LeagueDashboard> {
+    const url = `${this._gamesUrl}/league/${leagueId}/group`;
+    return this._http.get<LeagueDashboard>(url);
   }
 
-  listLiveGamesInLeague(leagueId: string): Observable<GameSummary[]> {
-    const url = `${this.gamesUrl}/league/${leagueId}/live`;
-    return this.http.get<GameSummary[]>(url);
+  public listLiveGamesInLeague(leagueId: string): Observable<GameSummary[]> {
+    const url = `${this._gamesUrl}/league/${leagueId}/live`;
+    return this._http.get<GameSummary[]>(url);
   }
 
-  listNext10GamesInLeague(leagueId: string): Observable<GameSummary[]> {
-    const url = `${this.gamesUrl}/league/${leagueId}/next-10`;
-    return this.http.get<GameSummary[]>(url);
+  public listNext10GamesInLeague(leagueId: string): Observable<GameSummary[]> {
+    const url = `${this._gamesUrl}/league/${leagueId}/next-10`;
+    return this._http.get<GameSummary[]>(url);
   }
 
-  listLast10GamesInLeague(leagueId: string): Observable<GameSummary[]> {
-    const url = `${this.gamesUrl}/league/${leagueId}/last-10`;
-    return this.http.get<GameSummary[]>(url);
+  public listLast10GamesInLeague(leagueId: string): Observable<GameSummary[]> {
+    const url = `${this._gamesUrl}/league/${leagueId}/last-10`;
+    return this._http.get<GameSummary[]>(url);
   }
 
-  listGamesOfTeamInLeague(leagueId: string, teamId: string, statuses: string[], page: number, size: number): Observable<Page<GameSummary>> {
-    const url = `${this.gamesUrl}/league/${leagueId}/team/${teamId}`;
+  public listGamesOfTeamInLeague(
+    leagueId: string,
+    teamId: string,
+    statuses: string[],
+    page: number,
+    size: number,
+  ): Observable<Page<GameSummary>> {
+    const url = `${this._gamesUrl}/league/${leagueId}/team/${teamId}`;
     let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
       params = params.append('status', status);
     }
-    return this.http.get<Page<GameSummary>>(url, { params: params });
+    return this._http.get<Page<GameSummary>>(url, { params: params });
   }
 
-  listGamesInDivision(
+  public listGamesInDivision(
     leagueId: string,
     divisionName: string,
     statuses: string[],
@@ -141,7 +153,7 @@ export class PublicService {
     page: number,
     size: number,
   ): Observable<Page<GameSummary>> {
-    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}`;
+    const url = `${this._gamesUrl}/league/${leagueId}/division/${divisionName}`;
     let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
       params = params.append('status', status);
@@ -149,30 +161,30 @@ export class PublicService {
     for (let gender of genders) {
       params = params.append('gender', gender);
     }
-    return this.http.get<Page<GameSummary>>(url, { params: params });
+    return this._http.get<Page<GameSummary>>(url, { params: params });
   }
 
-  getGamesInDivisionGroupedByStatus(leagueId: string, divisionName: string): Observable<LeagueDashboard> {
-    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/group`;
-    return this.http.get<LeagueDashboard>(url);
+  public getGamesInDivisionGroupedByStatus(leagueId: string, divisionName: string): Observable<LeagueDashboard> {
+    const url = `${this._gamesUrl}/league/${leagueId}/division/${divisionName}/group`;
+    return this._http.get<LeagueDashboard>(url);
   }
 
-  listLiveGamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {
-    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/live`;
-    return this.http.get<GameSummary[]>(url);
+  public listLiveGamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {
+    const url = `${this._gamesUrl}/league/${leagueId}/division/${divisionName}/live`;
+    return this._http.get<GameSummary[]>(url);
   }
 
-  listNext10GamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {
-    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/next-10`;
-    return this.http.get<GameSummary[]>(url);
+  public listNext10GamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {
+    const url = `${this._gamesUrl}/league/${leagueId}/division/${divisionName}/next-10`;
+    return this._http.get<GameSummary[]>(url);
   }
 
-  listLast10GamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {
-    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/last-10`;
-    return this.http.get<GameSummary[]>(url);
+  public listLast10GamesInDivision(leagueId: string, divisionName: string): Observable<GameSummary[]> {
+    const url = `${this._gamesUrl}/league/${leagueId}/division/${divisionName}/last-10`;
+    return this._http.get<GameSummary[]>(url);
   }
 
-  listGamesOfTeamInDivision(
+  public listGamesOfTeamInDivision(
     leagueId: string,
     divisionName: string,
     teamId: string,
@@ -180,39 +192,39 @@ export class PublicService {
     page: number,
     size: number,
   ): Observable<Page<GameSummary>> {
-    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/team/${teamId}`;
+    const url = `${this._gamesUrl}/league/${leagueId}/division/${divisionName}/team/${teamId}`;
     let params = new HttpParams().set('page', String(page)).set('size', String(size));
     for (let status of statuses) {
       params = params.append('status', status);
     }
-    return this.http.get<Page<GameSummary>>(url, { params: params });
+    return this._http.get<Page<GameSummary>>(url, { params: params });
   }
 
-  listGamesInDivisionExcel(leagueId: string, divisionName: string): Observable<any> {
-    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/excel`;
-    return this.http.get<any>(url, {
+  public listGamesInDivisionExcel(leagueId: string, divisionName: string): Observable<any> {
+    const url = `${this._gamesUrl}/league/${leagueId}/division/${divisionName}/excel`;
+    return this._http.get<any>(url, {
       headers: { 'Content-Type': 'application/json', Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' },
       responseType: 'blob' as 'json',
     });
   }
 
-  listRankingsInDivision(leagueId: string, divisionName: string): Observable<Ranking[]> {
-    const url = `${this.gamesUrl}/league/${leagueId}/division/${divisionName}/rankings`;
-    return this.http.get<Ranking[]>(url);
+  public listRankingsInDivision(leagueId: string, divisionName: string): Observable<Ranking[]> {
+    const url = `${this._gamesUrl}/league/${leagueId}/division/${divisionName}/rankings`;
+    return this._http.get<Ranking[]>(url);
   }
 
-  listTeamsOfLeague(leagueId: string): Observable<TeamSummary[]> {
-    const url = `${this.teamsUrl}/league/${leagueId}`;
-    return this.http.get<TeamSummary[]>(url);
+  public listTeamsOfLeague(leagueId: string): Observable<TeamSummary[]> {
+    const url = `${this._teamsUrl}/league/${leagueId}`;
+    return this._http.get<TeamSummary[]>(url);
   }
 
-  listTeamsOfDivision(leagueId: string, divisionName: string): Observable<TeamSummary[]> {
-    const url = `${this.teamsUrl}/league/${leagueId}/division/${divisionName}`;
-    return this.http.get<TeamSummary[]>(url);
+  public listTeamsOfDivision(leagueId: string, divisionName: string): Observable<TeamSummary[]> {
+    const url = `${this._teamsUrl}/league/${leagueId}/division/${divisionName}`;
+    return this._http.get<TeamSummary[]>(url);
   }
 
-  getLeague(leagueId: string): Observable<League> {
-    const url = `${this.leaguesUrl}/${leagueId}`;
-    return this.http.get<League>(url);
+  public getLeague(leagueId: string): Observable<League> {
+    const url = `${this._leaguesUrl}/${leagueId}`;
+    return this._http.get<League>(url);
   }
 }

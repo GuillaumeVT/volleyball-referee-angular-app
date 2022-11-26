@@ -14,73 +14,73 @@ import { takeWhile } from 'rxjs/operators';
   styleUrls: ['./division-rankings.component.scss'],
 })
 export class DivisionRankingsComponent implements OnInit, OnDestroy, OnChanges {
-  rankings: Ranking[];
+  public rankings: Ranking[];
 
-  selectedDivision: string;
-  subscription: Subscription;
-  autoRefresh: boolean;
+  public selectedDivision: string;
+  private _subscription: Subscription;
+  private _autoRefresh: boolean;
 
-  @Input() league: League;
+  @Input() public league: League;
 
-  constructor(private publicService: PublicService, private datePipe: DatePipe, public playerStyleService: PlayerStyleService) {
+  constructor(private _publicService: PublicService, private _datePipe: DatePipe, public playerStyleService: PlayerStyleService) {
     this.rankings = [];
   }
 
-  ngOnInit() {
-    this.autoRefresh = true;
+  public ngOnInit(): void {
+    this._autoRefresh = true;
   }
 
-  ngOnChanges(_changes: SimpleChanges) {
+  public ngOnChanges(_changes: SimpleChanges): void {
     if (this.league) {
       if (!this.selectedDivision) {
         this.selectedDivision = this.league.divisions[0];
       }
-      if (this.subscription) {
-        this.subscription.unsubscribe();
+      if (this._subscription) {
+        this._subscription.unsubscribe();
       }
-      this.subscription = timer(0, 120000)
-        .pipe(takeWhile(() => this.autoRefresh))
+      this._subscription = timer(0, 120000)
+        .pipe(takeWhile(() => this._autoRefresh))
         .subscribe(() => this.refreshRankings());
     }
   }
 
-  ngOnDestroy() {
-    this.autoRefresh = false;
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  public ngOnDestroy(): void {
+    this._autoRefresh = false;
+    if (this._subscription) {
+      this._subscription.unsubscribe();
     }
   }
 
-  refreshRankings(): void {
+  private refreshRankings(): void {
     if (this.selectedDivision) {
-      this.publicService.listRankingsInDivision(this.league.id, this.selectedDivision).subscribe({
+      this._publicService.listRankingsInDivision(this.league.id, this.selectedDivision).subscribe({
         next: (ranking) => (this.rankings = ranking),
         error: (_) => (this.rankings = []),
       });
     }
   }
 
-  onDivisionSelected(): void {
+  public onDivisionSelected(): void {
     this.refreshRankings();
   }
 
-  getDiff(diff: number): string {
+  public getDiff(diff: number): string {
     return diff > 0 ? `+${diff}` : `${diff}`;
   }
 
-  getLineClass(index: number): string {
+  public getLineClass(index: number): string {
     return index % 2 === 0 ? 'league-ranking-even' : 'league-ranking-odd';
   }
 
-  downloadDivisionExcel(): void {
-    this.publicService.listGamesInDivisionExcel(this.league.id, this.selectedDivision).subscribe({
+  public downloadDivisionExcel(): void {
+    this._publicService.listGamesInDivisionExcel(this.league.id, this.selectedDivision).subscribe({
       next: (blob: Blob) => this.onDivisionExcelReceived(blob),
       error: (_) => this.onDivisionExcelReceived(null),
     });
   }
 
-  onDivisionExcelReceived(blob: Blob): void {
-    const dateStr = this.datePipe.transform(new Date().getTime(), 'dd_MM_yyyy__HH_mm');
+  private onDivisionExcelReceived(blob: Blob): void {
+    const dateStr = this._datePipe.transform(new Date().getTime(), 'dd_MM_yyyy__HH_mm');
     const filename = this.league.name + '_' + this.selectedDivision + '_' + dateStr + '.xlsx';
     saveAs(blob, filename);
   }

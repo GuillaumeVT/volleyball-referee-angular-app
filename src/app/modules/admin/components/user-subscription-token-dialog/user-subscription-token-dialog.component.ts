@@ -11,7 +11,7 @@ export class UserSubscriptionTokenDialogComponent {
   public userSubscriptionFormGroup: UntypedFormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<UserSubscriptionTokenDialogComponent>,
+    private _dialogRef: MatDialogRef<UserSubscriptionTokenDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public currentPurchaseToken: string,
   ) {
     this.userSubscriptionFormGroup = new UntypedFormGroup({
@@ -28,10 +28,10 @@ export class UserSubscriptionTokenDialogComponent {
   }
 
   public close(): void {
-    this.dialogRef.close(null);
+    this._dialogRef.close(null);
   }
 
   public onUpdateUserSubscription(): void {
-    this.dialogRef.close(this.purchaseTokenFormControl.value);
+    this._dialogRef.close(this.purchaseTokenFormControl.value);
   }
 }

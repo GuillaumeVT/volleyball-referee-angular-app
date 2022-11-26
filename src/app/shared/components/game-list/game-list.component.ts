@@ -12,37 +12,37 @@ import { PublicService } from '@shared/services/public.service';
   styleUrls: ['./game-list.component.scss'],
 })
 export class GameListComponent extends AbstractGameFilter implements OnChanges {
-  @Input() token: string;
-  @Input() date: string;
-  @Input() leagueId: string;
-  @Input() teamId: string;
-  @Input() live: boolean;
+  @Input() public token: string;
+  @Input() public date: string;
+  @Input() public leagueId: string;
+  @Input() public teamId: string;
+  @Input() public live: boolean;
 
-  searchResultMessage: string;
-  inLeague: boolean;
+  public searchResultMessage: string;
+  public inLeague: boolean;
 
   fetchBehaviour = FetchBehaviour;
 
-  constructor(private publicService: PublicService, private translate: TranslateService) {
+  constructor(private _publicService: PublicService, private _translateService: TranslateService) {
     super(20);
     this.searchResultMessage = '';
   }
 
-  ngOnChanges(_changes: SimpleChanges) {
+  public ngOnChanges(_changes: SimpleChanges): void {
     this.inLeague = this.leagueId !== undefined && this.leagueId !== null;
     this.requestRefreshGames(FetchBehaviour.LOAD);
   }
 
   public refreshGames(paging: Paging): void {
     if (this.token && this.token.length) {
-      this.publicService
+      this._publicService
         .listGamesMatchingToken(this.token, this.getStatuses(), this.getKinds(), this.getGenders(), paging.page, paging.size)
         .subscribe({
           next: (page) => this.onGamesReceivedTokenCriterion(page),
           error: (_) => this.onGamesReceivedTokenCriterion(null),
         });
     } else if (this.date && this.date.length) {
-      this.publicService
+      this._publicService
         .listGamesWithScheduleDate(this.date, this.getStatuses(), this.getKinds(), this.getGenders(), paging.page, paging.size)
         .subscribe({
           next: (page) => this.onGamesReceivedDateCriterion(page),
@@ -50,45 +50,45 @@ export class GameListComponent extends AbstractGameFilter implements OnChanges {
         });
     } else if (this.leagueId && this.teamId) {
       if (this.teamId === idAll) {
-        this.publicService.listGamesInLeague(this.leagueId, this.getStatuses(), this.getGenders(), paging.page, paging.size).subscribe({
+        this._publicService.listGamesInLeague(this.leagueId, this.getStatuses(), this.getGenders(), paging.page, paging.size).subscribe({
           next: (page) => this.onGamesReceivedNoCriterion(page),
           error: (_) => this.onGamesReceivedNoCriterion(null),
         });
       } else {
-        this.publicService.listGamesOfTeamInLeague(this.leagueId, this.teamId, this.getStatuses(), paging.page, paging.size).subscribe({
+        this._publicService.listGamesOfTeamInLeague(this.leagueId, this.teamId, this.getStatuses(), paging.page, paging.size).subscribe({
           next: (page) => this.onGamesReceivedNoCriterion(page),
           error: (_) => this.onGamesReceivedNoCriterion(null),
         });
       }
     } else if (this.live) {
-      this.publicService.listLiveGames(this.getKinds(), this.getGenders(), paging.page, paging.size).subscribe({
+      this._publicService.listLiveGames(this.getKinds(), this.getGenders(), paging.page, paging.size).subscribe({
         next: (page) => this.onGamesReceivedLiveCriterion(page),
         error: (_) => this.onGamesReceivedLiveCriterion(null),
       });
     }
   }
 
-  onGamesReceivedNoCriterion(page: Page<GameSummary>): void {
+  private onGamesReceivedNoCriterion(page: Page<GameSummary>): void {
     this.onGamesReceived(page);
-    this.translate.get('search.messages.found', { total: this.total }).subscribe((t) => (this.searchResultMessage = t));
+    this._translateService.get('search.messages.found', { total: this.total }).subscribe((t) => (this.searchResultMessage = t));
   }
 
-  onGamesReceivedTokenCriterion(page: Page<GameSummary>): void {
+  private onGamesReceivedTokenCriterion(page: Page<GameSummary>): void {
     this.onGamesReceived(page);
-    this.translate
+    this._translateService
       .get('search.messages.found-token', { total: this.total, token: this.token })
       .subscribe((t) => (this.searchResultMessage = t));
   }
 
-  onGamesReceivedDateCriterion(page: Page<GameSummary>): void {
+  private onGamesReceivedDateCriterion(page: Page<GameSummary>): void {
     this.onGamesReceived(page);
-    this.translate
+    this._translateService
       .get('search.messages.found-date', { total: this.total, date: this.date })
       .subscribe((t) => (this.searchResultMessage = t));
   }
 
-  onGamesReceivedLiveCriterion(page: Page<GameSummary>): void {
+  private onGamesReceivedLiveCriterion(page: Page<GameSummary>): void {
     this.onGamesReceived(page);
-    this.translate.get('search.messages.found-live', { total: this.total }).subscribe((t) => (this.searchResultMessage = t));
+    this._translateService.get('search.messages.found-live', { total: this.total }).subscribe((t) => (this.searchResultMessage = t));
   }
 }

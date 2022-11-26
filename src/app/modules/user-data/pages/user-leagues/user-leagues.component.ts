@@ -30,26 +30,26 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   private subscription: Subscription = new Subscription();
 
   constructor(
-    private titleService: Title,
-    private userService: UserService,
-    private leagueService: LeagueService,
-    private gameService: GameService,
-    private publicService: PublicService,
-    private dialog: MatDialog,
-    private snackBarService: SnackBarService,
-    private datePipe: DatePipe,
-    private router: Router,
-    private translate: TranslateService,
+    private _titleService: Title,
+    private _userService: UserService,
+    private _leagueService: LeagueService,
+    private _gameService: GameService,
+    private _publicService: PublicService,
+    private _dialog: MatDialog,
+    private _snackBarService: SnackBarService,
+    private _datePipe: DatePipe,
+    private _router: Router,
+    private _translateService: TranslateService,
   ) {
     super();
-    this.translate.get('user.league.page').subscribe((t) => this.titleService.setTitle(t));
+    this._translateService.get('user.league.page').subscribe((t) => this._titleService.setTitle(t));
     this.countsMap = new Map();
     this.divisionsMap = new Map();
   }
 
   ngOnInit() {
     this.subscription.add(
-      this.userService.authState.subscribe((userToken) => {
+      this._userService.authState.subscribe((userToken) => {
         this.user = userToken.user;
         if (this.user) {
           this.refreshLeagues();
@@ -63,7 +63,7 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   refreshLeagues(): void {
-    this.leagueService.listLeagues(this.getKinds()).subscribe({
+    this._leagueService.listLeagues(this.getKinds()).subscribe({
       next: (leagues) => this.onLeaguesRefreshed(leagues),
       error: (_) => this.onLeaguesRefreshed([]),
     });
@@ -74,11 +74,11 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
 
     for (let league of this.leagues) {
       this.countsMap.set(league.id, 0);
-      this.gameService.getNumberOfGamesInLeague(league.id).subscribe({
+      this._gameService.getNumberOfGamesInLeague(league.id).subscribe({
         next: (count) => this.countsMap.set(league.id, count.count),
         error: (_) => this.countsMap.set(league.id, 0),
       });
-      this.leagueService.getLeague(league.id).subscribe({
+      this._leagueService.getLeague(league.id).subscribe({
         next: (league) => this.divisionsMap.set(league.id, league.divisions),
         error: (_) => this.divisionsMap.set(league.id, []),
       });
@@ -87,7 +87,7 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
 
   createLeague(kind: string): void {
     const league = League.createLeague(this.user, kind);
-    const dialogRef = this.dialog.open(UserLeagueDialogComponent, { width: '500px', data: league });
+    const dialogRef = this._dialog.open(UserLeagueDialogComponent, { width: '500px', data: league });
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.onLeagueCreated();
@@ -96,18 +96,18 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   viewLeague(league: LeagueSummary): void {
-    this.router.navigateByUrl(`games/league/${league.id}`);
+    this._router.navigateByUrl(`games/league/${league.id}`);
   }
 
   deleteLeague(league: LeagueSummary): void {
-    this.translate.get(['user.league.delete', 'user.league.messages.delete-question'], { name: league.name }).subscribe((ts) => {
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    this._translateService.get(['user.league.delete', 'user.league.messages.delete-question'], { name: league.name }).subscribe((ts) => {
+      const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
         width: '500px',
         data: { title: ts['user.league.delete'], message: ts['user.league.messages.delete-question'] },
       });
       dialogRef.afterClosed().subscribe((dialogResult) => {
         if (dialogResult) {
-          this.leagueService.deleteLeague(league.id).subscribe({
+          this._leagueService.deleteLeague(league.id).subscribe({
             next: (_deleted) => this.onLeagueDeleted(),
             error: (_) => this.onLeagueDeletionError(),
           });
@@ -117,14 +117,14 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   deleteAllLeagues(): void {
-    this.translate.get(['user.league.delete', 'user.league.messages.delete-all-question']).subscribe((ts) => {
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    this._translateService.get(['user.league.delete', 'user.league.messages.delete-all-question']).subscribe((ts) => {
+      const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
         width: '500px',
         data: { title: ts['user.league.delete'], message: ts['user.league.messages.delete-all-question'] },
       });
       dialogRef.afterClosed().subscribe((dialogResult) => {
         if (dialogResult) {
-          this.leagueService.deleteAllLeagues().subscribe((_deleted) => this.onAllLeaguesDeleted());
+          this._leagueService.deleteAllLeagues().subscribe((_deleted) => this.onAllLeaguesDeleted());
         }
       });
     });
@@ -143,7 +143,7 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   onLeagueDeletionError(): void {
-    this.translate.get('user.league.messages.deleted-error').subscribe((t) => this.snackBarService.showError(t));
+    this._translateService.get('user.league.messages.deleted-error').subscribe((t) => this._snackBarService.showError(t));
   }
 
   getLeaguePublicUrl(league: LeagueSummary): string {
@@ -151,14 +151,14 @@ export class UserLeaguesComponent extends AbstractLeagueFilter implements OnInit
   }
 
   downloadDivisionExcel(league: LeagueSummary, divisionName: string): void {
-    this.publicService.listGamesInDivisionExcel(league.id, divisionName).subscribe({
+    this._publicService.listGamesInDivisionExcel(league.id, divisionName).subscribe({
       next: (blob: Blob) => this.onDivisionExcelReceived(blob, league, divisionName),
       error: (_) => this.onDivisionExcelReceived(null, league, divisionName),
     });
   }
 
   onDivisionExcelReceived(blob: Blob, league: LeagueSummary, divisionName: string): void {
-    const dateStr = this.datePipe.transform(new Date().getTime(), 'dd_MM_yyyy__HH_mm');
+    const dateStr = this._datePipe.transform(new Date().getTime(), 'dd_MM_yyyy__HH_mm');
     const filename = league.name + '_' + divisionName + '_' + dateStr + '.xlsx';
     saveAs(blob, filename);
   }

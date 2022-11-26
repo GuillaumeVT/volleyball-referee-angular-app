@@ -8,9 +8,9 @@ import { Team } from '@shared/models/team.model';
   styleUrls: ['./player-names-dialog.component.scss'],
 })
 export class PlayerNamesDialogComponent {
-  constructor(public dialogRef: MatDialogRef<PlayerNamesDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: Team) {}
+  constructor(private _dialogRef: MatDialogRef<PlayerNamesDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: Team) {}
 
   close(): void {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
 }

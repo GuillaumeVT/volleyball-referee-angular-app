@@ -12,25 +12,26 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  availableGames: GameSummary[];
+  public availableGames: GameSummary[];
 
-  private subscription: Subscription = new Subscription();
+  private _subscription: Subscription;
 
   constructor(
-    private titleService: Title,
-    private userService: UserService,
-    private gameService: GameService,
-    private translate: TranslateService,
+    private _titleService: Title,
+    private _userService: UserService,
+    private _gameService: GameService,
+    private _translateService: TranslateService,
   ) {
-    this.translate.get('app').subscribe((t) => this.titleService.setTitle(t));
+    this._translateService.get('app').subscribe((t) => this._titleService.setTitle(t));
     this.availableGames = [];
+    this._subscription = new Subscription();
   }
 
-  ngOnInit() {
-    this.subscription.add(
-      this.userService.authState.subscribe((userToken) => {
+  public ngOnInit(): void {
+    this._subscription.add(
+      this._userService.authState.subscribe((userToken) => {
         if (userToken) {
-          this.gameService.listAvailableGames().subscribe({
+          this._gameService.listAvailableGames().subscribe({
             next: (games) => (this.availableGames = games),
             error: (_) => (this.availableGames = []),
           });
@@ -39,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  public ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 }

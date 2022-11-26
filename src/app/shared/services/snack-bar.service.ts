@@ -5,10 +5,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root',
 })
 export class SnackBarService {
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private _snackBar: MatSnackBar) {}
 
-  showInfo(message: string): void {
-    this.snackBar.open(message, '', {
+  public showInfo(message: string): void {
+    this._snackBar.open(message, '', {
       panelClass: ['vbr-info-snackbar'],
       duration: 2500,
       horizontalPosition: 'center',
@@ -16,8 +16,8 @@ export class SnackBarService {
     });
   }
 
-  showError(message: string): void {
-    this.snackBar.open(message, '', {
+  public showError(message: string): void {
+    this._snackBar.open(message, '', {
       panelClass: ['vbr-error-snackbar'],
       duration: 5000,
       horizontalPosition: 'center',

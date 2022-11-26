@@ -10,13 +10,13 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
   styleUrls: ['./game-sanctions.component.scss'],
 })
 export class GameSanctionsComponent {
-  @Input() game: Game;
-  @Input() leftTeam: TeamType;
-  @Input() rightTeam: TeamType;
+  @Input() public game: Game;
+  @Input() public leftTeam: TeamType;
+  @Input() public rightTeam: TeamType;
 
   constructor(public sanctionService: SanctionService, public playerStyleService: PlayerStyleService) {}
 
-  getSanctions(teamType: TeamType): Sanction[] {
+  public getSanctions(teamType: TeamType): Sanction[] {
     if (TeamType.Home === teamType) {
       return this.game.homeCards;
     } else {
@@ -24,7 +24,7 @@ export class GameSanctionsComponent {
     }
   }
 
-  getScore(teamType: TeamType, sanction: Sanction): string {
+  public getScore(teamType: TeamType, sanction: Sanction): string {
     const set = 'Set ' + (sanction.set + 1) + '&nbsp;&nbsp';
     if (TeamType.Home === teamType) {
       return set + sanction.homePoints + '-' + sanction.guestPoints;

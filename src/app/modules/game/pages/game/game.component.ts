@@ -12,29 +12,29 @@ import { TeamType } from '@shared/models/team-type.model';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  gameId: string;
-  game: Game;
-  currentSet: number;
-  leftTeam: TeamType;
-  rightTeam: TeamType;
-  rate: number;
+  public gameId: string;
+  public game: Game;
+  public currentSet: number;
+  public leftTeam: TeamType;
+  public rightTeam: TeamType;
+  public rate: number;
 
   constructor(
-    private titleService: Title,
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private translate: TranslateService,
+    private _titleService: Title,
+    private _activatedRoute: ActivatedRoute,
+    private _userService: UserService,
+    private _translateService: TranslateService,
   ) {
-    this.translate.get('game.page').subscribe((t) => this.titleService.setTitle(t));
+    this._translateService.get('game.page').subscribe((t) => this._titleService.setTitle(t));
     this.currentSet = 0;
     this.leftTeam = TeamType.Home;
     this.rightTeam = TeamType.Guest;
     this.rate = 60000;
   }
 
-  ngOnInit() {
-    this.gameId = this.route.snapshot.paramMap.get('gameId');
-    this.userService.authState.subscribe((userToken) => {
+  public ngOnInit(): void {
+    this.gameId = this._activatedRoute.snapshot.paramMap.get('gameId');
+    this._userService.authState.subscribe((userToken) => {
       if (userToken) {
         this.rate = 10000;
       } else {
@@ -43,15 +43,15 @@ export class GameComponent implements OnInit {
     });
   }
 
-  onCurrentGameUpdated(game: Game): void {
+  public onCurrentGameUpdated(game: Game): void {
     this.game = game;
   }
 
-  onCurrentSetUpdated(setIndex: number): void {
+  public onCurrentSetUpdated(setIndex: number): void {
     this.currentSet = setIndex;
   }
 
-  onTeamsSwapped(): void {
+  public onTeamsSwapped(): void {
     if (TeamType.Home === this.leftTeam) {
       this.leftTeam = TeamType.Guest;
       this.rightTeam = TeamType.Home;

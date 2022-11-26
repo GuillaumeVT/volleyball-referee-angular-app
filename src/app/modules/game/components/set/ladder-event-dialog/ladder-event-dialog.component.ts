@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LadderItem } from '@game/components/set/ladder/ladder-item.model';
 import { SanctionService } from '@game/services/sanction.service';
 import { Game, Sanction } from '@shared/models/game.model';
@@ -14,13 +14,12 @@ import { PlayerStyleService } from '@shared/services/player-style.service';
 })
 export class LadderEventDialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<LadderEventDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: LadderEventDialogData,
     public sanctionService: SanctionService,
     public playerStyleService: PlayerStyleService,
   ) {}
 
-  getSubstitutions(): Substitution[] {
+  public getSubstitutions(): Substitution[] {
     if (this.data.ladderItem.teamType === this.data.teamType) {
       return this.data.ladderItem.substitutions;
     } else {
@@ -28,7 +27,7 @@ export class LadderEventDialogComponent {
     }
   }
 
-  getTimeouts(): Timeout[] {
+  public getTimeouts(): Timeout[] {
     if (this.data.ladderItem.teamType === this.data.teamType) {
       return this.data.ladderItem.timeouts;
     } else {
@@ -36,7 +35,7 @@ export class LadderEventDialogComponent {
     }
   }
 
-  getSanctions(): Sanction[] {
+  public getSanctions(): Sanction[] {
     if (this.data.ladderItem.teamType === this.data.teamType) {
       return this.data.ladderItem.sanctions;
     } else {
