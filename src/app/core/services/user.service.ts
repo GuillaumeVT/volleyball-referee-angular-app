@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmailCredentials, FriendRequest, FriendsAndRequests, UserPasswordUpdate, UserToken } from '@core/models/user.model';
+import { EmailCredentials, FriendRequest, FriendsAndRequests, UserPasswordUpdate, UserSummary, UserToken } from '@core/models/user.model';
 import { Count } from '@shared/models/count.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -18,14 +18,16 @@ export class UserService {
   private _userToken: UserToken;
   private _redirectUrlAfterLogin: string;
 
+  private _userTokenStorageKey = 'vbrUserToken';
+
   constructor(private _http: HttpClient, private _router: Router) {
-    this._userToken = JSON.parse(localStorage.getItem('vbrUserToken'));
+    this._userToken = JSON.parse(localStorage.getItem(this._userTokenStorageKey));
     if (this._userToken) {
       // Check that the token is not expired
       const now = new Date();
       const nowMillis = now.getTime() + now.getTimezoneOffset() * 60000;
       if (nowMillis > this._userToken.tokenExpiry) {
-        localStorage.removeItem('vbrUserToken');
+        localStorage.removeItem(this._userTokenStorageKey);
         this._userToken = null;
       }
     }
@@ -39,7 +41,7 @@ export class UserService {
   private interceptUserToken(userToken: UserToken): UserToken {
     if (userToken && userToken.token && userToken.user) {
       this._userToken = userToken;
-      localStorage.setItem('vbrUserToken', JSON.stringify(this._userToken));
+      localStorage.setItem(this._userTokenStorageKey, JSON.stringify(this._userToken));
       this._authState.next(this._userToken);
       if (this._redirectUrlAfterLogin) {
         this._router.navigateByUrl(this._redirectUrlAfterLogin);
@@ -57,10 +59,18 @@ export class UserService {
   }
 
   public signOut() {
-    localStorage.removeItem('vbrUserToken');
+    localStorage.removeItem(this._userTokenStorageKey);
     this._userToken = null;
     this._authState.next(null);
     setTimeout(() => this._router.navigateByUrl('/sign-in'));
+  }
+
+  private updateUserSummary(userSummary: UserSummary): void {
+    if (this._userToken) {
+      this._userToken.user = userSummary;
+      localStorage.setItem(this._userTokenStorageKey, JSON.stringify(this._userToken));
+      this._authState.next(this._userToken);
+    }
   }
 
   public initiatePasswordReset(userEmail: string): Observable<Object> {
@@ -76,6 +86,11 @@ export class UserService {
   public updateUserPassword(userPasswordUpdate: UserPasswordUpdate): Observable<UserToken> {
     const url = `${this._usersUrl}/password`;
     return this._http.patch<UserToken>(url, userPasswordUpdate).pipe(map((userToken) => this.interceptUserToken(userToken)));
+  }
+
+  public updateUserPseudo(userPseudo: string): Observable<UserSummary> {
+    const url = `${this._usersUrl}/pseudo`;
+    return this._http.patch<UserSummary>(url, { userPseudo: userPseudo }).pipe(tap((userSummary) => this.updateUserSummary(userSummary)));
   }
 
   public listFriendRequestsSentBy(): Observable<FriendRequest[]> {

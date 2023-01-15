@@ -100,6 +100,7 @@
       "current-password": "Mot de passe courant",
       "new-password": "Nouveau mot de passe",
       "confirm-new-password": "Confirmation du nouveau mot de passe",
+      "update-pseudo": "Modifier mon pseudo",
       "messages": {
         "create-account": "Si vous êtes abonnés aux services web, merci de créer votre compte dans l'application afin de pouvoir vous connecter ici.",
         "password-constraints": "Le mot de passe doit contenir au moins 8 caractères, dont 1 majuscule, 1 chiffre et 1 caractère spécial.",
@@ -113,7 +114,11 @@
         "recovery-failed": "{{emailAddress}} n'a pas pu être trouvée.",
         "internal-error": "Une erreur est survenue dans le serveur.",
         "password-updated": "Le mot de passe a été modifié.",
-        "password-invalid-error": "Le mot de passe ne respècte pas les critères mentionnés ci-dessus."
+        "password-invalid-error": "Le mot de passe ne respècte pas les critères mentionnés ci-dessus.",
+        "pseudo-required-error": "Le pseudo est obligatoir",
+        "pseudo-updated": "Le pseudo a été modifié.",
+        "pseudo-conflict-error": "Ce pseudo semble est déjà utilisé.",
+        "pseudo-invalid-error": "Le pseudo est invalide. Il doit comporter au moins 3 lettres."
       }
     },
     "team": {

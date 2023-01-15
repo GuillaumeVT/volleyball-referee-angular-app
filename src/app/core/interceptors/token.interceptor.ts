@@ -28,13 +28,13 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
     return next.handle(request).pipe(
-      tap(
-        (event: HttpEvent<any>) => {
+      tap({
+        next: (event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
             // do stuff with response if you want+
           }
         },
-        (err: any) => {
+        error: (err: any) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401 && this._userToken) {
               // Check that the token is not expired
@@ -46,7 +46,7 @@ export class TokenInterceptor implements HttpInterceptor {
             }
           }
         },
-      ),
+      }),
     );
   }
 }
