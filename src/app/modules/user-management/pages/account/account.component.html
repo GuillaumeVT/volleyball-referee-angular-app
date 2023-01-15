@@ -1,10 +1,33 @@
-<form [formGroup]="passwordUpdateFormGroup" autocomplete="off" novalidate (ngSubmit)="onUpdateUserPassword()" *ngIf="user" class="mt-4">
+<form [formGroup]="pseudoUpdateFormGroup" autocomplete="off" novalidate (ngSubmit)="onUpdateUserPseudo()" *ngIf="user" class="mt-4">
   <mat-card class="div-small-form">
     <mat-card-header>
       <img mat-card-avatar src="favicon.ico" />
       <mat-card-title>{{ user.pseudo }}</mat-card-title>
       <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
     </mat-card-header>
+    <mat-card-content>
+      <h3 class="mat-h3">{{ 'user.management.update-pseudo' | translate }}</h3>
+      <mat-form-field class="m-1" appearance="outline">
+        <mat-label>{{ user.pseudo }}</mat-label>
+        <input matInput type="text" formControlName="newPseudo" required />
+        <mat-error *ngIf="newPseudoFormControl.errors?.required">{{
+          'user.management.messages.pseudo-required-error' | translate
+        }}</mat-error>
+        <mat-error *ngIf="newPseudoFormControl.errors?.minlength">{{
+          'user.management.messages.pseudo-invalid-error' | translate
+        }}</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!pseudoUpdateFormGroup.valid">
+        {{ 'user.management.update-pseudo' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+<form [formGroup]="passwordUpdateFormGroup" autocomplete="off" novalidate (ngSubmit)="onUpdateUserPassword()" *ngIf="user" class="mt-4">
+  <mat-card class="div-small-form">
     <mat-card-content>
       <h3 class="mat-h3">{{ 'user.management.update-password' | translate }}</h3>
       <mat-form-field class="m-1" appearance="outline">

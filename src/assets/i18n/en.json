@@ -100,6 +100,7 @@
       "current-password": "Current password",
       "new-password": "New password",
       "confirm-new-password": "Confirm new password",
+      "update-pseudo": "Update my pseudo",
       "messages": {
         "create-account": "If you subscribed to the web services package, please create your account in the app to be able to sign in here.",
         "password-constraints": "The password must contain at least 8 characters, including 1 uppercase character, 1 digit and 1 special character.",
@@ -113,7 +114,11 @@
         "recovery-failed": "{{emailAddress}} could not be found.",
         "internal-error": "An error occurred on the server.",
         "password-updated": "Password was successfully reset.",
-        "password-invalid-error": "Password does not satisfy the aforementioned criteria."
+        "password-invalid-error": "Password does not satisfy the aforementioned criteria.",
+        "pseudo-required-error": "Pseudo is required",
+        "pseudo-updated": "Pseudo was successfully updated.",
+        "pseudo-conflict-error": "Pseudo seems to be used already.",
+        "pseudo-invalid-error": "Pseudo is invalid. It must contain at least 3 characters."
       }
     },
     "team": {
