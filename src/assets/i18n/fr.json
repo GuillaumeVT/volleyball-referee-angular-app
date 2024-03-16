@@ -101,8 +101,10 @@
       "new-password": "Nouveau mot de passe",
       "confirm-new-password": "Confirmation du nouveau mot de passe",
       "update-pseudo": "Modifier mon pseudo",
+      "delete-account": "Supprimer mon compte",
       "messages": {
         "create-account": "Si vous êtes abonnés aux services web, merci de créer votre compte dans l'application afin de pouvoir vous connecter ici.",
+        "delete-account": "Saisissez votre peudo pour confirmer. L'abonnement sera immédiatement annulé, and toutes les données seront immédiatement supprimées.",
         "password-constraints": "Le mot de passe doit contenir au moins 8 caractères, dont 1 majuscule, 1 chiffre et 1 caractère spécial.",
         "credentials-mismatch-error": "E-mail ou mot de passe incorrecte.",
         "email-required-error": "L'adresse e-mail est obligatoire",

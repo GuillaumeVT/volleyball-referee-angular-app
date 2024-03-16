@@ -93,6 +93,10 @@ export class UserService {
     return this._http.patch<UserSummary>(url, { userPseudo: userPseudo }).pipe(tap((userSummary) => this.updateUserSummary(userSummary)));
   }
 
+  public deleteUser(): Observable<Object> {
+    return this._http.delete(this._usersUrl);
+  }
+
   public listFriendRequestsSentBy(): Observable<FriendRequest[]> {
     const url = `${this._usersUrl}/friends/requested`;
     return this._http.get<FriendRequest[]>(url);

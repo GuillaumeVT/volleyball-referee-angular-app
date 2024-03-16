@@ -16,24 +16,34 @@ export class AccountComponent implements OnInit {
 
   public passwordUpdateFormGroup: UntypedFormGroup;
   public pseudoUpdateFormGroup: UntypedFormGroup;
+  public userSuppressionFormGroup: UntypedFormGroup;
   public hidePassword: boolean;
   public passwordVisibility: string;
 
+  private _pseudoMinLength: number;
+
   constructor(private _userService: UserService, private _snackBarService: SnackBarService, private _translateService: TranslateService) {
+    this._pseudoMinLength = 3;
     this.hidePassword = false;
     this.togglePasswordVisibility();
 
     this.passwordUpdateFormGroup = new UntypedFormGroup(
       {
-        currentPassword: new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
-        newPassword: new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
-        confirmedPassword: new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
+        currentPassword: new UntypedFormControl(null, [Validators.required, Validators.minLength(8)]),
+        newPassword: new UntypedFormControl(null, [Validators.required, Validators.minLength(8)]),
+        confirmedPassword: new UntypedFormControl(null, [Validators.required, Validators.minLength(8)]),
       },
       this.passwordsMustMatchValidator,
     );
     this.pseudoUpdateFormGroup = new UntypedFormGroup({
-      newPseudo: new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      newPseudo: new UntypedFormControl(null, [Validators.required, Validators.minLength(this._pseudoMinLength)]),
     });
+    this.userSuppressionFormGroup = new UntypedFormGroup(
+      {
+        pseudo: new UntypedFormControl(null, [Validators.required, Validators.minLength(this._pseudoMinLength)]),
+      },
+      this.pseudoMustMatchValidator.bind(this),
+    );
   }
 
   public ngOnInit(): void {
@@ -56,12 +66,24 @@ export class AccountComponent implements OnInit {
     return this.pseudoUpdateFormGroup.get('newPseudo');
   }
 
+  get pseudoFormControl() {
+    return this.userSuppressionFormGroup.get('pseudo');
+  }
+
   private passwordsMustMatchValidator(abstractControl: AbstractControl): { mismatch: boolean } {
     if (
       abstractControl.get('newPassword').value &&
       abstractControl.get('confirmedPassword').value &&
       abstractControl.get('newPassword').value !== abstractControl.get('confirmedPassword').value
     ) {
+      return { mismatch: true };
+    } else {
+      return null;
+    }
+  }
+
+  private pseudoMustMatchValidator(abstractControl: AbstractControl): { mismatch: boolean } {
+    if (this.user && abstractControl.get('pseudo').value && abstractControl.get('pseudo').value !== this.user.pseudo) {
       return { mismatch: true };
     } else {
       return null;
@@ -86,7 +108,7 @@ export class AccountComponent implements OnInit {
   }
 
   private onInvalidPasswordUpdateResponse(error: any): void {
-    if (error.status === 400) {
+    if (error.status === HttpStatusCode.BadRequest) {
       this._translateService.get('user.management.messages.password-invalid-error').subscribe((t) => this._snackBarService.showError(t));
     } else {
       this._translateService.get('user.management.messages.internal-error').subscribe((t) => this._snackBarService.showError(t));
@@ -112,5 +134,13 @@ export class AccountComponent implements OnInit {
     } else {
       this._translateService.get('user.management.messages.internal-error').subscribe((t) => this._snackBarService.showError(t));
     }
+  }
+
+  public onDeleteUser(): void {
+    this._userService.deleteUser().subscribe({
+      next: (_) => this._userService.signOut(),
+      error: (_) =>
+        this._translateService.get('user.management.messages.internal-error').subscribe((t) => this._snackBarService.showError(t)),
+    });
   }
 }

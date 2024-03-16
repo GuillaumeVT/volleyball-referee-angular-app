@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -76,7 +77,7 @@ export class PasswordResetComponent implements OnInit {
   }
 
   private onInvalidResponse(error: any): void {
-    if (error.status === 400) {
+    if (error.status === HttpStatusCode.BadRequest) {
       this._translateService.get('user.management.messages.password-invalid-error').subscribe((t) => this._snackBarService.showError(t));
     } else {
       this._translateService.get('user.management.messages.internal-error').subscribe((t) => this._snackBarService.showError(t));

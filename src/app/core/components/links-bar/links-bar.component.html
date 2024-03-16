@@ -5,10 +5,7 @@
     </button>
   </a>
   <a [routerLink]="getPrivacyPolicyUrl()" target="_blank" class="text-center m-1">
-    <button mat-button color="primary" type="button">{{ 'linkbar.privacy-policy' | translate }}
-
-
-    </button>
+    <button mat-button color="primary" type="button">{{ 'linkbar.privacy-policy' | translate }}</button>
   </a>
   <mat-select [(value)]="currentLanguage" class="text-center m-1" style="max-width: 85px" (selectionChange)="onSelectionChanged()">
     <mat-option *ngFor="let language of languages | keyvalue" [value]="language.key">{{ language.value }}</mat-option>

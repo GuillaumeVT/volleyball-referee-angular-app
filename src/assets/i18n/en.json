@@ -101,8 +101,10 @@
       "new-password": "New password",
       "confirm-new-password": "Confirm new password",
       "update-pseudo": "Update my pseudo",
+      "delete-account": "Delete my account",
       "messages": {
         "create-account": "If you subscribed to the web services package, please create your account in the app to be able to sign in here.",
+        "delete-account": "Enter your pseudo for confirmation. The subscription will be immediately canceled, and all the data will be immediately deleted.",
         "password-constraints": "The password must contain at least 8 characters, including 1 uppercase character, 1 digit and 1 special character.",
         "credentials-mismatch-error": "Email and password do not match.",
         "email-required-error": "Email address is required",

@@ -19,10 +19,12 @@ import { HomeComponent } from '@user-management/pages/home/home.component';
 import { PasswordLostComponent } from '@user-management/pages/password-lost/password-lost.component';
 import { PasswordResetComponent } from '@user-management/pages/password-reset/password-reset.component';
 import { SignInComponent } from '@user-management/pages/sign-in/sign-in.component';
+import { UnsubscriptionComponent } from '@user-management/pages/unsubscription/unsubscription.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'unsubscription', component: UnsubscriptionComponent },
   { path: 'sign-in', component: SignInComponent, canActivate: [PublicGuard] },
   { path: 'password-lost', component: PasswordLostComponent, canActivate: [PublicGuard] },
   { path: 'password-reset', component: PasswordResetComponent, canActivate: [PublicGuard] },

@@ -1,4 +1,12 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+  HttpResponse,
+  HttpStatusCode,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserToken } from '@core/models/user.model';
 import { UserService } from '@core/services/user.service';
@@ -36,7 +44,7 @@ export class TokenInterceptor implements HttpInterceptor {
         },
         error: (err: any) => {
           if (err instanceof HttpErrorResponse) {
-            if (err.status === 401 && this._userToken) {
+            if (err.status === HttpStatusCode.Unauthorized && this._userToken) {
               // Check that the token is not expired
               const now = new Date();
               const nowMillis = now.getTime() + now.getTimezoneOffset() * 60000;

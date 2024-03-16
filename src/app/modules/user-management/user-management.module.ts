@@ -7,10 +7,11 @@ import { HomeComponent } from '@user-management/pages/home/home.component';
 import { PasswordLostComponent } from '@user-management/pages/password-lost/password-lost.component';
 import { PasswordResetComponent } from '@user-management/pages/password-reset/password-reset.component';
 import { SignInComponent } from '@user-management/pages/sign-in/sign-in.component';
+import { UnsubscriptionComponent } from '@user-management/pages/unsubscription/unsubscription.component';
 
 @NgModule({
-  declarations: [AccountComponent, HomeComponent, PasswordLostComponent, PasswordResetComponent, SignInComponent],
+  declarations: [AccountComponent, HomeComponent, PasswordLostComponent, PasswordResetComponent, SignInComponent, UnsubscriptionComponent],
   imports: [MaterialModule, SharedModule, UserDataModule],
-  exports: [AccountComponent, HomeComponent, PasswordLostComponent, PasswordResetComponent, SignInComponent],
+  exports: [AccountComponent, HomeComponent, PasswordLostComponent, PasswordResetComponent, SignInComponent, UnsubscriptionComponent],
 })
 export class UserManagementModule {}
